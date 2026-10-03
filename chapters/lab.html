@@ -43,14 +43,30 @@
   }
   .lab-out .sim-view .hint { top: 6px; bottom: auto; right: 10px; }
   @media (max-width: 520px) { .lab-out .sim-view .hint { display: none; } }
-  .lab-panel details { border-bottom: 1px solid var(--border); }
-  .lab-panel details:last-child { border-bottom: 0; }
+  :root { --kid: #7c4ddb; --gift: #0e8fa8; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --kid: #b39cff; --gift: #4fd0e8; } }
+  :root[data-theme="dark"] { --kid: #b39cff; --gift: #4fd0e8; }
+  .lab-panel > details { border-bottom: 1px solid var(--border); }
+  .lab-panel > details:last-child { border-bottom: 0; }
   .lab-panel summary { list-style: none; cursor: pointer; padding: 11px 16px; display: flex; gap: 10px; align-items: center; }
   .lab-panel summary::-webkit-details-marker { display: none; }
   .lab-panel summary::before { content: ""; flex: none; width: 7px; height: 7px; border-right: 2px solid var(--text-dim); border-bottom: 2px solid var(--text-dim); transform: rotate(-45deg); transition: transform .15s; }
-  .lab-panel details[open] summary::before { transform: rotate(45deg); }
+  .lab-panel details[open] > summary::before { transform: rotate(45deg); }
   .lab-panel summary b { font-size: 15px; white-space: nowrap; }
   .lab-panel summary .sum { margin-left: auto; font-size: 12.5px; color: var(--text-dim); text-align: right; line-height: 1.4; }
+  .ev-add { display: flex; flex-wrap: wrap; gap: 6px; grid-column: 1 / -1; }
+  .ev-add .btn { padding: 4px 9px; font-size: 12.5px; }
+  .ev-list { display: grid; gap: 8px; grid-column: 1 / -1; }
+  .ev-list:empty::before { content: "아직 이벤트가 없다. 위 버튼으로 카드를 더한다."; font-size: 13px; color: var(--text-faint); }
+  .ev-card { border: 1px solid var(--border); border-left: 4px solid var(--ev, var(--warn)); border-radius: var(--radius-sm); background: var(--bg-elev); }
+  .ev-card > summary { padding: 8px 8px 8px 10px; gap: 8px; }
+  .ev-card > summary::before { width: 6px; height: 6px; }
+  .ev-card > summary b { font-size: 14px; }
+  .ev-card > summary .sum { font-size: 12px; }
+  .ev-x { flex: none; width: 26px; height: 26px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--text-dim); font: inherit; font-size: 16px; line-height: 1; cursor: pointer; }
+  .ev-x:hover { color: var(--bad); border-color: var(--bad); }
+  .ev-bd { display: grid; gap: 10px; padding: 2px 12px 12px; }
+  .ev-info { font-size: 12.5px; color: var(--text-dim); line-height: 1.5; margin: 0; }
   .lab-panel .grp { padding: 2px 16px 16px; display: grid; gap: 12px; }
   @media (min-width: 560px) and (max-width: 859px) { .lab-panel .grp { grid-template-columns: 1fr 1fr; } }
   .lab-panel .sub { font-size: 12.5px; color: var(--text-faint); font-weight: 700; margin-top: 4px; grid-column: 1 / -1; }
@@ -160,9 +176,10 @@
     <h3>사용법</h3>
     <ol>
       <li>위쪽의 <b>프리셋</b>에서 출발점을 고른다. '한결 기본'은 앞 장들에서 한결이 내린 결정을 모아 둔 값이다.</li>
-      <li>입력 묶음(소득, 지출, 주거, 저축·투자, 연금, 이벤트, 물가)을 펼쳐 숫자를 바꾼다. 넓은 화면에서는 왼쪽, 휴대폰에서는 그래프 아래에 있다. 묶음마다 관련 장 링크가 있다.</li>
+      <li>입력 묶음(소득, 지출, 주거, 저축·투자, 연금, 인생 이벤트, 물가)을 펼쳐 숫자를 바꾼다. 이미 집이 있거나 모아 둔 자산이 있다면 주거 경로 '이미 보유'와 시작 투자 자산부터 넣는다. 넓은 화면에서는 왼쪽, 휴대폰에서는 그래프 아래에 있다. 묶음마다 관련 장 링크가 있다.</li>
       <li>그래프 위를 끌면 <b>나이 커서</b>가 움직이고, 아래에 그해의 재무상태표 도넛이 나온다.</li>
-      <li>그래프 아래 띠의 표식(은퇴, 연금, 전세, 결혼…)을 좌우로 끌면 그 일이 일어나는 나이가 바뀐다.</li>
+      <li>'인생 이벤트'에서 <b>카드</b>를 더한다. 자녀, 결혼·맞벌이, 증여 받기, 상속 받기, 집 줄이기, 차, 실직, 큰 지출이 있다. 자녀는 한 명에 카드 하나씩, 각자의 출산 나이와 양육비, 대학 비용, 독립 자금을 따로 넣는다.</li>
+      <li>그래프 아래 띠의 표식(은퇴, 연금, 전세, 첫째, 둘째, 상속…)을 좌우로 끌면 그 일이 일어나는 나이가 바뀐다. 자녀 표식에 붙은 가는 선은 독립(22세)까지의 기간이고, 선 위의 점은 독립 자금을 증여하는 해다.</li>
       <li><b>결정론 / 몬테카를로</b>, <b>오늘 돈 / 명목</b>을 바꿔 본다. 설정은 주소(URL)에 저장되므로 '링크 복사'로 다른 사람과 나눌 수 있다.</li>
     </ol>
     <div class="callout warn">
@@ -176,7 +193,7 @@
     <p>먼저 아무것도 바꾸지 말고 '한결 기본'을 본다. 그래프의 색 띠는 그해 말 자산의 구성이다. 파란색이 현금(비상금), 녹색이 투자 계좌, 금색이 연금 계좌(연금저축·IRP·퇴직연금 DC), 회색이 집과 보증금이다. 0 아래 붉은 띠는 부채이고, 굵은 선이 순자산(자산 − 부채)이다. 은퇴 뒤 구간은 옅게 칠해져 있다.</p>
 
     <div class="sim" id="sim-life">
-      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>인생 시뮬레이터: 한 사람의 돈 63년</h3><span class="m-count" id="m-count-top">미션 0/7</span></div>
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>인생 시뮬레이터: 한 사람의 돈 63년</h3><span class="m-count" id="m-count-top">미션 0/9</span></div>
       <div class="lab-bar">
         <span class="lab-lbl">프리셋</span>
         <div class="btn-row" id="lab-presets">
@@ -184,6 +201,9 @@
           <button class="btn sm" data-p="buy">일찍 매수</button>
           <button class="btn sm" data-p="fire">FIRE</button>
           <button class="btn sm" data-p="zero">저축 0</button>
+          <button class="btn sm" data-p="family">맞벌이 세 자녀</button>
+          <button class="btn sm" data-p="gangnam">강남 자가</button>
+          <button class="btn sm" data-p="heir">상속 받는 집</button>
         </div>
         <span class="grow"></span>
         <div class="seg" id="lab-mode"><button data-value="det" class="on">결정론</button><button data-value="mc">몬테카를로</button></div>
@@ -201,6 +221,9 @@
             <div class="stat"><span class="k">성공 확률(몬테카를로)</span><span class="lv" id="r-succ">—</span></div>
             <div class="stat"><span class="k">생애 소득세(지방세 포함)</span><span class="lv" id="r-tax">—</span></div>
             <div class="stat"><span class="k">생애 이자</span><span class="lv" id="r-int">—</span></div>
+            <div class="stat"><span class="k">자녀에게 쓴 돈(증여 포함)</span><span class="lv" id="r-kid">—</span></div>
+            <div class="stat"><span class="k">받은 증여·상속(세후)</span><span class="lv" id="r-wf">—</span></div>
+            <div class="stat"><span class="k" id="r-leg-k">물려줄 재산(상속세 뒤)</span><span class="lv" id="r-leg">—</span></div>
           </div>
           <div class="lab-flags" id="lab-flags"></div>
           <div class="lab-cap">해마다의 현금흐름(위: 들어온 돈, 아래: 나간 돈)</div>
@@ -217,7 +240,7 @@
             <summary><b>소득</b><span class="sum" id="sum-inc"></span></summary>
             <div class="grp">
               <label class="ctrl"><span>시작 나이 <output id="l-start-out"></output></span><input type="range" id="l-start" min="20" max="50" step="1" value="27"></label>
-              <label class="ctrl"><span>연봉(세전, 오늘 돈) <output id="l-salary-out"></output></span><input type="range" id="l-salary" min="15000000" max="150000000" step="1000000" value="36000000"></label>
+              <label class="ctrl"><span>연봉(세전, 오늘 돈) <output id="l-salary-out"></output></span><input type="range" id="l-salary" value="36000000"></label>
               <label class="ctrl"><span>연봉 인상률(명목) <output id="l-raise-out"></output></span><input type="range" id="l-raise" min="0" max="0.07" step="0.005" value="0.03"></label>
               <label class="ctrl"><span>은퇴 나이 <output id="l-retire-out"></output></span><input type="range" id="l-retire" min="40" max="75" step="1" value="60"></label>
               <label class="ctrl"><span>경력 공백 <output id="l-gap-out"></output></span><input type="range" id="l-gap" min="0" max="5" step="1" value="0"></label>
@@ -228,9 +251,9 @@
           <details>
             <summary><b>지출</b><span class="sum" id="sum-sp"></span></summary>
             <div class="grp">
-              <label class="ctrl"><span>월 생활비(주거 제외) <output id="l-living-out"></output></span><input type="range" id="l-living" min="300000" max="4000000" step="10000" value="940000"></label>
+              <label class="ctrl"><span>월 생활비(주거 제외) <output id="l-living-out"></output></span><input type="range" id="l-living" value="940000"></label>
               <label class="ctrl"><span>라이프스타일 인플레이션 <output id="l-life-out"></output></span><input type="range" id="l-life" min="-0.01" max="0.04" step="0.0025" value="0.01"></label>
-              <label class="ctrl"><span>은퇴 후 월 생활비(주거 제외) <output id="l-retLiving-out"></output></span><input type="range" id="l-retLiving" min="1000000" max="6000000" step="50000" value="2500000"></label>
+              <label class="ctrl"><span>은퇴 후 월 생활비(주거 제외) <output id="l-retLiving-out"></output></span><input type="range" id="l-retLiving" value="2500000"></label>
               <div class="ctrl"><span>남는 돈은</span><div class="seg" id="l-left"><button data-value="cash" class="on">현금으로</button><button data-value="invest">투자로</button><button data-value="spend">써 버림</button></div></div>
               <p class="rel">라이프스타일 인플레이션은 물가 위에 더해 씀씀이가 해마다 커지는 비율이다. 관련: <a href="budget.html">7장 예산</a> · <a href="inflation.html">3장 물가</a></p>
             </div>
@@ -238,30 +261,33 @@
           <details>
             <summary><b>주거·대출</b><span class="sum" id="sum-house"></span></summary>
             <div class="grp">
-              <div class="ctrl"><span>주거 경로</span><div class="seg" id="l-house"><button data-value="rent">월세 유지</button><button data-value="jeonse" class="on">전세 전환</button><button data-value="buy">매수</button></div></div>
-              <label class="ctrl"><span>월세(보증금 1,000만원) <output id="l-rent-out"></output></span><input type="range" id="l-rent" min="200000" max="2000000" step="10000" value="600000"></label>
-              <div class="sub" id="g-j-h">전세</div>
-              <label class="ctrl" data-g="j"><span>전세 전환 나이 <output id="l-jAge-out"></output></span><input type="range" id="l-jAge" min="27" max="65" step="1" value="30"></label>
-              <label class="ctrl" data-g="j"><span>전세 보증금 <output id="l-jAmt-out"></output></span><input type="range" id="l-jAmt" min="50000000" max="600000000" step="10000000" value="200000000"></label>
+              <div class="ctrl"><span>주거 경로</span><div class="seg" id="l-house"><button data-value="rent">월세</button><button data-value="jeonse" class="on">전세</button><button data-value="buy">매수</button><button data-value="own">이미 보유</button></div></div>
+              <label class="ctrl" data-g="r"><span>월세(보증금 1,000만원) <output id="l-rent-out"></output></span><input type="range" id="l-rent" value="600000"></label>
+              <div class="sub" data-g="j">전세</div>
+              <label class="ctrl" data-g="j"><span>전세 전환 나이 <output id="l-jAge-out"></output></span><input type="range" id="l-jAge" min="20" max="65" step="1" value="30"></label>
+              <label class="ctrl" data-g="j"><span>전세 보증금 <output id="l-jAmt-out"></output></span><input type="range" id="l-jAmt" value="200000000"></label>
               <label class="ctrl" data-g="j"><span>전세대출 <output id="l-jLoan-out"></output></span><input type="range" id="l-jLoan" min="0" max="500000000" step="10000000" value="160000000"></label>
               <label class="ctrl" data-g="j"><span>전세대출 금리 <output id="l-jRate-out"></output></span><input type="range" id="l-jRate" min="0.02" max="0.08" step="0.0025" value="0.04"></label>
-              <div class="sub" data-g="b">매수</div>
-              <label class="ctrl" data-g="b"><span>매수 나이 <output id="l-bAge-out"></output></span><input type="range" id="l-bAge" min="28" max="70" step="1" value="40"></label>
-              <label class="ctrl" data-g="b"><span>집값(오늘 돈) <output id="l-price-out"></output></span><input type="range" id="l-price" min="100000000" max="2000000000" step="10000000" value="600000000"></label>
+              <div class="sub" data-g="bo" id="g-b-h">매수</div>
+              <label class="ctrl" data-g="b"><span>매수 나이 <output id="l-bAge-out"></output></span><input type="range" id="l-bAge" min="21" max="75" step="1" value="40"></label>
+              <label class="ctrl" data-g="bo"><span><span id="l-price-k">집값(오늘 돈)</span> <output id="l-price-out"></output></span><input type="range" id="l-price" value="600000000"></label>
               <label class="ctrl" data-g="b"><span>대출 비율(LTV) <output id="l-ltv-out"></output></span><input type="range" id="l-ltv" min="0" max="0.8" step="0.05" value="0.5"></label>
-              <label class="ctrl" data-g="b"><span>주택담보대출 금리(고정) <output id="l-mRate-out"></output></span><input type="range" id="l-mRate" min="0.02" max="0.08" step="0.0025" value="0.045"></label>
-              <label class="ctrl" data-g="b"><span>대출 기간 <output id="l-term-out"></output></span><input type="range" id="l-term" min="10" max="40" step="5" value="30"></label>
-              <label class="ctrl" data-g="b"><span>집값 상승률(명목) <output id="l-hg-out"></output></span><input type="range" id="l-hg" min="0" max="0.06" step="0.005" value="0.03"></label>
+              <label class="ctrl" data-g="o"><span>남은 주택담보대출 <output id="l-oLoan-out"></output></span><input type="range" id="l-oLoan" value="0"></label>
+              <label class="ctrl" data-g="bo"><span>주택담보대출 금리(고정) <output id="l-mRate-out"></output></span><input type="range" id="l-mRate" min="0.02" max="0.08" step="0.0025" value="0.045"></label>
+              <label class="ctrl" data-g="bo"><span><span id="l-term-k">대출 기간</span> <output id="l-term-out"></output></span><input type="range" id="l-term" min="5" max="40" step="5" value="30"></label>
+              <label class="ctrl" data-g="bo"><span>집값 상승률(명목) <output id="l-hg-out"></output></span><input type="range" id="l-hg" min="0" max="0.08" step="0.005" value="0.03"></label>
               <label class="check"><input type="checkbox" id="l-student" checked> 학자금 대출 1,200만원(연 1.7%, 10년 원리금균등)</label>
-              <p class="rel">매수 경로에서 전세 나이가 매수 나이보다 이르면 그 사이는 전세로 산다. 집을 살 때 취득세·중개비 등으로 집값의 2%, 해마다 보유세·수선비로 집값의 0.5%를 쓴다고 가정했다. 관련: <a href="housing.html">11장 집</a> · <a href="loan.html">10장 대출</a> · <a href="credit.html">9장 신용</a></p>
+              <p class="rel">매수 경로에서 전세 나이가 매수 나이보다 이르면 그 사이는 전세로 산다. '이미 보유'는 시작 나이에 그 집을 갖고 있고 남은 대출을 남은 기간 동안 갚는다. 집을 살 때 취득세·중개비 등으로 집값의 2%, 해마다 보유세·수선비로 집값의 0.5%를 쓴다고 가정했다. 서울 강남 아파트는 2026년 40억원을 넘는 곳이 흔하다. 관련: <a href="housing.html">11장 집</a> · <a href="loan.html">10장 대출</a> · <a href="credit.html">9장 신용</a></p>
             </div>
           </details>
           <details>
             <summary><b>저축·투자</b><span class="sum" id="sum-inv"></span></summary>
             <div class="grp">
-              <label class="ctrl"><span>시작 현금 <output id="l-cash0-out"></output></span><input type="range" id="l-cash0" min="0" max="100000000" step="1000000" value="3000000"></label>
+              <label class="ctrl"><span>시작 현금 <output id="l-cash0-out"></output></span><input type="range" id="l-cash0" value="3000000"></label>
+              <label class="ctrl"><span>시작 투자 자산 <output id="l-inv0-out"></output></span><input type="range" id="l-inv0" value="0"></label>
+              <label class="ctrl"><span>시작 연금 계좌 <output id="l-pen0-out"></output></span><input type="range" id="l-pen0" value="0"></label>
               <label class="ctrl"><span>비상금 목표(지출 개월 수) <output id="l-emerg-out"></output></span><input type="range" id="l-emerg" min="0" max="12" step="1" value="4"></label>
-              <label class="ctrl"><span>월 투자 자동이체(첫해) <output id="l-save-out"></output></span><input type="range" id="l-save" min="0" max="3000000" step="10000" value="500000"></label>
+              <label class="ctrl"><span>월 투자 자동이체(첫해) <output id="l-save-out"></output></span><input type="range" id="l-save" value="500000"></label>
               <label class="ctrl"><span>주식 비중 <output id="l-stock-out"></output></span><input type="range" id="l-stock" min="0" max="100" step="5" value="70"></label>
               <label class="ctrl"><span>채권 비중(나머지는 현금성) <output id="l-bond-out"></output></span><input type="range" id="l-bond" min="0" max="100" step="5" value="30"></label>
               <label class="ctrl"><span>펀드·ETF 보수(연) <output id="l-fee-out"></output></span><input type="range" id="l-fee" min="0" max="0.02" step="0.001" value="0.001"></label>
@@ -273,6 +299,7 @@
             <summary><b>연금</b><span class="sum" id="sum-pen"></span></summary>
             <div class="grp">
               <label class="ctrl"><span>국민연금 수령 나이 <output id="l-npsAge-out"></output></span><input type="range" id="l-npsAge" min="60" max="70" step="1" value="65"></label>
+              <label class="ctrl"><span>시작 전 국민연금 가입 기간 <output id="l-npsPrev-out"></output></span><input type="range" id="l-npsPrev" min="0" max="35" step="1" value="0"></label>
               <label class="ctrl"><span>연금저축·IRP 연 납입(오늘 돈) <output id="l-pc-out"></output></span><input type="range" id="l-pc" min="0" max="18000000" step="500000" value="6000000"></label>
               <label class="check"><input type="checkbox" id="l-dc" checked> 퇴직연금 DC(회사가 연봉의 1/12을 적립)</label>
               <p class="rel" id="pen-note"></p>
@@ -280,18 +307,11 @@
             </div>
           </details>
           <details>
-            <summary><b>이벤트</b><span class="sum" id="sum-ev"></span></summary>
+            <summary><b>인생 이벤트</b><span class="sum" id="sum-ev"></span></summary>
             <div class="grp">
-              <label class="check"><input type="checkbox" id="l-evMarry"> 결혼(비용 3,000만원)</label>
-              <label class="ctrl"><span>결혼 나이 <output id="l-aMarry-out"></output></span><input type="range" id="l-aMarry" min="25" max="60" step="1" value="32"></label>
-              <label class="check"><input type="checkbox" id="l-evChild"> 자녀 1명(22년간 양육·교육비)</label>
-              <label class="ctrl"><span>자녀가 태어나는 나이 <output id="l-aChild-out"></output></span><input type="range" id="l-aChild" min="25" max="50" step="1" value="34"></label>
-              <label class="ctrl"><span>자녀 1명 월 비용 <output id="l-childCost-out"></output></span><input type="range" id="l-childCost" min="300000" max="2000000" step="50000" value="1000000"></label>
-              <label class="check"><input type="checkbox" id="l-evCar"> 차 구입(3,000만원 + 10년간 유지비 연 300만원)</label>
-              <label class="ctrl"><span>차 구입 나이 <output id="l-aCar-out"></output></span><input type="range" id="l-aCar" min="25" max="70" step="1" value="35"></label>
-              <label class="check"><input type="checkbox" id="l-evJob"> 실직 1년(실업급여 약 6개월)</label>
-              <label class="ctrl"><span>실직 나이 <output id="l-aJob-out"></output></span><input type="range" id="l-aJob" min="25" max="64" step="1" value="40"></label>
-              <p class="rel">켜진 이벤트는 그래프 아래 띠에 표식으로 나타나고, 표식을 끌어 나이를 바꿀 수 있다. 관련: <a href="insurance.html">19장 보험</a> · <a href="saving.html">8장 비상금</a> · <a href="behavior.html">17장 심리</a></p>
+              <div class="ev-add" id="ev-add"></div>
+              <div class="ev-list" id="ev-list"></div>
+              <p class="rel">카드 하나가 이벤트 하나다. 자녀는 여섯 명까지 따로 넣는다. 카드마다 그래프 아래 띠에 표식이 생기고, 표식을 끌면 나이가 바뀐다. 자녀 표식 옆의 가는 선은 독립(22세)까지의 기간이다. 증여세·상속세는 2026년 세율(10~50%)과 공제로 계산한다. 관련: <a href="tax.html">18장 세금</a> · <a href="insurance.html">19장 보험</a> · <a href="saving.html">8장 비상금</a></p>
             </div>
           </details>
           <details>
@@ -304,7 +324,7 @@
           </details>
         </div>
       </div>
-      <div class="sim-note">해볼 것: ① '오늘 돈'과 '명목'을 오가며 60세 순자산이 몇 배로 달라 보이는지 본다. ② '몬테카를로'로 바꿔 같은 계획의 미래가 얼마나 넓게 퍼지는지 본다. ③ 은퇴 표식을 끌어 55세, 65세로 옮겨 본다. ④ '저축 0' 프리셋에서 빚이 눈덩이처럼 커지는 모습을 본다. (가정: 연 단위 계산, 세율 구간·보험 상한은 물가 연동, 투자 수익에 대한 세금과 은퇴 후 건강보험료는 생략, 집은 팔지 않는다. 교육용 모델이며 투자 권유가 아니다.)</div>
+      <div class="sim-note">해볼 것: ① '오늘 돈'과 '명목'을 오가며 60세 순자산이 몇 배로 달라 보이는지 본다. ② '몬테카를로'로 바꿔 같은 계획의 미래가 얼마나 넓게 퍼지는지 본다. ③ 은퇴 표식을 끌어 55세, 65세로 옮겨 본다. ④ '저축 0' 프리셋에서 빚이 눈덩이처럼 커지는 모습을 본다. ⑤ '맞벌이 세 자녀'에서 자녀 표식을 끌어 터울을 바꿔 본다. (가정: 연 단위 계산, 세율 구간·보험 상한은 물가 연동, 투자 수익에 대한 세금과 은퇴 후 건강보험료는 생략, 집은 '집 줄이기' 카드가 있을 때만 판다. 교육용 모델이며 투자 권유가 아니다.)</div>
     </div>
 
     <p>한결 기본값으로 돌린 결과를 읽어 보자. 결정론 모드는 해마다 정확히 기대수익만큼 번다고 가정한다. 이때 한결의 60세 순자산은 오늘 돈으로 약 <b>9억 3,233만원</b>이고, 그중 약 8억 1,349만원이 현금·투자·연금 계좌처럼 꺼내 쓸 수 있는 자산이다. 나머지는 전세 보증금이다. 33년 동안 국민연금에 가입해(기준소득월액 평균 약 305만원, 오늘 돈) 65세부터 받는 국민연금은 월 약 <b>111만원</b>이다. 결정론으로는 90세까지 한 번도 바닥나지 않는다.</p>
@@ -314,9 +334,39 @@
     <p>'명목'으로 바꾸면 같은 60세 순자산이 약 21억원으로 보인다. 33년 동안 물가가 연 2.5%씩 오르면 돈의 단위가 약 2.26배로 늘어나기 때문이다. 먼 미래의 큰 숫자를 볼 때는 늘 '오늘 돈으로 얼마인가'를 먼저 묻는다(<a href="inflation.html">3장</a>).</p>
   </section>
 
+  <section id="family">
+    <h2>아이, 맞벌이, 증여와 상속</h2>
+    <p>인생의 돈을 가장 크게 흔드는 사건은 대개 가족에서 온다. 아이가 몇 명인지, 둘이 버는지, 부모에게서 무엇을 받고 아이에게 무엇을 넘기는지에 따라 같은 연봉도 전혀 다른 그래프가 된다. 시뮬레이터는 이것들을 카드로 받는다.</p>
+    <ul>
+      <li><b>자녀 카드</b>는 아이 한 명이다. 0~18세에는 월 양육비, 19~22세에는 대학 연 비용이 나간다. 0세에 부모급여 월 100만원, 1세에 월 50만원, 8세 미만에 아동수당 월 10만원이 들어오고, 20세 미만 자녀마다 인적공제 150만원, 8세 이상 자녀에게는 자녀 세액공제가 붙는다. 독립 자금을 넣으면 그해 부모의 투자 계좌에서 빠져나가고, 자녀가 낼 증여세가 따로 계산된다.</li>
+      <li><b>결혼·맞벌이 카드</b>는 결혼 비용과 늘어나는 생활비, 그리고 배우자 연봉을 받는다. 배우자 연봉을 넣으면 배우자의 실수령이 가계 소득에 더해지고, 배우자 국민연금도 같은 수령 나이부터 들어온다.</li>
+      <li><b>증여 받기·상속 받기 카드</b>는 세금을 뗀 금액이 투자 계좌로 들어온다. <b>집 줄이기 카드</b>는 집을 팔아 대출을 갚고 더 작은 집으로 옮긴 뒤 남는 돈을 투자 계좌로 옮긴다.</li>
+    </ul>
+    <p>증여세와 상속세는 같은 세율표를 쓴다. 과세표준 1억원까지 10%, 5억원까지 20%, 10억원까지 30%, 30억원까지 40%, 그 위는 50%다. 차이는 누구에게 매기느냐다. <span class="term">증여세</span><span class="en">(Gift tax)</span>는 받는 사람이 받은 만큼에 대해 낸다. 성인 자녀는 부모에게서 10년 동안 합쳐 5,000만원까지 세금 없이 받고, 결혼이나 출산 때는 평생 1억원을 더 공제받는다. <span class="term">상속세</span><span class="en">(Inheritance tax)</span>는 돌아가신 분이 남긴 재산 전체에 매긴 뒤 나눈다. 보통 일괄공제 5억원(배우자가 있으면 배우자공제 5억원 이상이 더 붙는다)과 금융재산공제를 빼고, 돌아가시기 전 10년 안에 상속인에게 증여한 재산은 다시 더한다(<a href="tax.html">18장</a>).</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>예</th><th class="num">과세표준</th><th class="num">낼 세금(신고세액공제 3% 뒤)</th></tr></thead>
+      <tbody>
+        <tr><td>결혼할 때 부모에게 3억원 증여(5,000만 + 혼인 1억 공제)</td><td class="num">1억 5,000만</td><td class="num">약 1,940만</td></tr>
+        <tr><td>재산 50억원 상속, 자녀 2명(일괄공제 5억)</td><td class="num">45억</td><td class="num">약 17억 3,630만</td></tr>
+        <tr><td>재산 114억원 상속, 자녀 2명('강남 자가' 90세)</td><td class="num">약 109억</td><td class="num">약 47억 5,192만</td></tr>
+      </tbody>
+    </table></div>
+    <p>세 가지 프리셋으로 숫자를 읽어 보자. 모두 결정론, 오늘 돈 기준이다.</p>
+    <h3>맞벌이 세 자녀: 아이 셋보다 큰 것은 두 번째 월급</h3>
+    <p>한결 기본에 31세 결혼(배우자 연봉 4,000만원), 33·35·38세에 아이 셋을 더했다. 세 아이에게 드는 돈은 합쳐 약 8억원이다. 그런데 60세 순자산은 약 11억 2,014만원으로 혼자일 때(9억 3,233만원)보다 오히려 많고, 성공 확률은 100%다. 같은 아이 셋을 배우자 소득 없이 키우면 아이가 태어난 뒤 마이너스 통장이 눈덩이가 되어 60세에 이미 바닥난다. 한결 혼자 아이 한 명만 키워도 성공 확률은 약 26%로 떨어진다. 아이의 수보다 가계에 월급이 몇 개인지가 먼저다. 여기에 세 아이에게 2억원씩 독립 자금을 주면 성공 확률이 약 54%로 내려간다(미션 8).</p>
+    <h3>강남 자가: 순자산 72억, 그러나 대부분 집</h3>
+    <p>45세 부부가 강남 아파트(시세 40억원, 남은 대출 6억원)에 살며 둘이 합쳐 연 2억 8,000만원을 번다. 투자 자산 5억원과 연금 계좌 1억 5,000만원이 있고, 아이 둘의 사교육비로 월 250만원씩 쓴다. 60세 순자산은 약 72억원이지만 도넛을 보면 3분의 2가 집이다. 72세에 집을 절반 크기로 줄이면 수십억원이 투자 계좌로 옮겨진다. 90세에 남는 약 114억원을 그대로 물려주면 상속세가 약 47억 5,000만원이고, 두 자녀가 1인당 약 33억원을 받는다. 자녀가 30세일 때 5억원씩 미리 증여하면 가족 전체 세금이 약 37억 7,000만원으로 약 20% 준다. 증여한 뒤 10년이 지나면 상속 재산에 다시 더해지지 않기 때문이다. 그 대신 부모의 현금이 그만큼 일찍 빠져나가, 집을 줄이기 전에 돈이 바닥날 수 있다. 미션 9에서 그 균형을 찾는다.</p>
+    <h3>상속 받는 집: 받는 돈보다 세금이 먼저 보인다</h3>
+    <p>35세 부부가 결혼하며 부모에게 3억원을 받고(증여세 약 1,940만원), 62세에 부모의 재산 50억원을 형제와 둘이 나눠 받는다. 상속세는 재산 전체에 약 17억 3,600만원이 붙어 내 몫은 세후 약 16억 3,200만원이다. 받은 돈은 세후 합계 약 19억 1,000만원, 그 과정에서 낸 세금은 약 8억 9,000만원이다. 상속은 은퇴 뒤의 성공 확률을 100%로 만들지만, 그 시점과 금액은 내가 정할 수 없다. 상속을 계획의 바닥에 깔기보다는, 상속이 없어도 버티는 계획 위에 얹어 보는 것이 안전하다.</p>
+    <div class="callout warn">
+      <strong>세금 계산은 단순화했다</strong>
+      <p>상속은 끝 나이에 한 번 일어나고, 배우자가 먼저 떠났다고 보아 배우자공제를 넣지 않았다. 동거주택 상속공제, 가업·영농 공제, 부동산의 시가 평가 차이, 양도소득세(1세대 1주택 비과세 포함), 취득세 세부 구간은 넣지 않았다. 세율과 공제는 2026년 값이며 자주 바뀐다. 큰 증여나 상속을 앞두고는 세무 전문가와 상의한다.</p>
+    </div>
+  </section>
+
   <section id="missions">
     <h2>미션</h2>
-    <p>아래 미션은 위 시뮬레이터의 지금 설정을 그대로 채점한다. 조건을 만족하면 동그라미가 채워진다. '설정 불러오기'는 미션의 출발점을 시뮬레이터에 넣어 준다. 그다음 무엇을 바꿔야 미션을 통과하는지는 직접 찾는다. 정답은 하나가 아니다. <span class="m-count" id="m-count">미션 0/7</span></p>
+    <p>아래 미션은 위 시뮬레이터의 지금 설정을 그대로 채점한다. 조건을 만족하면 동그라미가 채워진다. '설정 불러오기'는 미션의 출발점을 시뮬레이터에 넣어 준다. 그다음 무엇을 바꿔야 미션을 통과하는지는 직접 찾는다. 정답은 하나가 아니다. <span class="m-count" id="m-count">미션 0/9</span></p>
     <div class="missions" id="mission-list"></div>
     <div class="callout tip">
       <strong>미션을 풀 때의 요령</strong>
@@ -357,6 +407,9 @@
         <tr><td>일찍 매수(35세, 3억원 집)</td><td class="num">8억 9,739만</td><td class="num">7억 2,989만</td><td class="num">없음</td><td class="num">55.7%</td><td class="num">1억 6,126만</td></tr>
         <tr><td>FIRE(45세 은퇴)</td><td class="num">8억 3,473만</td><td class="num">11억 6,517만</td><td class="num">없음</td><td class="num">53.7%</td><td class="num">99만</td></tr>
         <tr><td>저축 0</td><td class="num">3억 3,093만</td><td class="num">−7억 1,729만</td><td class="num">66세</td><td class="num">1.3%</td><td class="num">7억 5,807만</td></tr>
+        <tr><td>맞벌이 세 자녀</td><td class="num">11억 2,014만</td><td class="num">18억 9,484만</td><td class="num">없음</td><td class="num">100%</td><td class="num">2억 375만</td></tr>
+        <tr><td>강남 자가(45세 시작)</td><td class="num">72억 2,161만</td><td class="num">114억 1,778만</td><td class="num">없음</td><td class="num">100%</td><td class="num">3억 313만</td></tr>
+        <tr><td>상속 받는 집(35세 시작)</td><td class="num">22억 8,521만</td><td class="num">66억 2,212만</td><td class="num">없음</td><td class="num">100%</td><td class="num">2억 4,365만</td></tr>
       </tbody>
     </table></div>
     <h3>한결 기본: 전세 이자가 생애 이자의 거의 전부</h3>
@@ -380,10 +433,10 @@
     <h2>이 모델이 모르는 것</h2>
     <p>모든 모델은 틀린다. 쓸모 있는 모델은 어디서 틀리는지를 알고 쓰는 모델이다. 이 시뮬레이터가 단순화한 것을 적어 둔다.</p>
     <ul>
-      <li><b>집은 팔지 않는다.</b> 주택연금, 집을 줄여 옮기기, 상속은 넣지 않았다. 매수 경로의 은퇴 성공 확률은 그만큼 보수적이다.</li>
+      <li><b>집은 '집 줄이기' 카드가 있을 때만 판다.</b> 주택연금은 넣지 않았다. 카드가 없는 매수 경로의 은퇴 성공 확률은 그만큼 보수적이다.</li>
       <li><b>투자 수익에는 세금을 매기지 않았다.</b> 실제로는 일반 계좌의 배당·이자에 세금이 붙고, ISA와 연금 계좌는 과세를 줄이거나 미룬다(<a href="tax.html">18장</a>). 연금 계좌 인출은 4.4%로 단순화했다.</li>
       <li><b>은퇴 뒤의 건강보험료, 의료비, 간병비</b>는 '은퇴 후 생활비' 안에 뭉뚱그렸다. 큰 병원비는 따로 오지 않는다.</li>
-      <li><b>배우자의 소득과 연금</b>은 없다. 결혼과 자녀는 비용으로만 들어간다. 맞벌이라면 결과가 크게 달라진다.</li>
+      <li><b>배우자는 나와 나이가 같다고 본다.</b> 배우자가 결혼 전에 모은 돈, 배우자의 실직·경력 공백·연금 계좌는 넣지 않았다. 자녀 양육비는 나이와 상관없이 같은 금액이고, 자녀 세액공제는 내 쪽에서 받는다고 본다.</li>
       <li><b>수익률·물가는 해마다 독립적</b>이고 정규분포 근사를 따른다. 실제 시장의 긴 침체, 금리와 물가의 연동, 폭락의 꼬리는 더 거칠다(<a href="economy.html">5장</a>).</li>
       <li><b>물가를 바꿔도 명목 수익률과 연봉 인상률은 그대로다.</b> 그래서 물가 슬라이더를 올리면 실질 수익률과 실질 인상률을 함께 깎은 것과 같다. 실제로는 물가가 높은 시기에 금리와 임금도 함께 오르는 경향이 있다.</li>
       <li><b>제도는 바뀐다.</b> 국민연금 산식과 요율, 세율 구간, 세액공제 한도는 2026년 값으로 고정했다. 실제로는 63년 동안 여러 번 바뀐다.</li>
@@ -446,8 +499,8 @@
       <h4>순자산 100만원에서 60세 9억 3,233만원(오늘 돈)까지, 그리고 72%</h4>
       <p>한결의 결정을 모두 넣고 27세부터 90세까지 돌렸다. 연봉 3,600만원에서 연 3%씩 오르고, 월 생활비 94만원(주거 제외)으로 시작해 매달 투자 자동이체 50만원과 연금저축·IRP 연 600만원을 넣는다. 첫해 세액공제는 계산상 99만원이지만 결정세액 약 86.5만원을 넘지 못해 86.5만원만 돌아온다(<a href="tax.html">18장</a>의 결론 그대로). 30세에 전세 2억원으로 옮기고, 투자는 주식 70 · 채권 30에 보수 0.1%다.</p>
       <p>결정론으로 60세 순자산은 오늘 돈 약 9억 3,233만원, 그중 꺼내 쓸 수 있는 자산은 약 8억 1,349만원이다. 65세부터 국민연금 월 약 111만원이 들어온다. 결정론으로는 90세까지 바닥나지 않지만, 300개의 미래 중 약 72%만 끝까지 버틴다. <a href="retire.html">21장</a>에서 예상한 확률보다 조금 낮은데, 이 장은 은퇴 뒤에도 전세대출 이자와 오르는 보증금을 계속 내고, 국민연금 가입을 은퇴 나이까지 33년으로 계산했기 때문이다.</p>
-      <p>한결은 미션을 풀며 세 가지를 확인했다. 은퇴를 62세로 2년 미루면 성공 확률이 약 84%가 된다. 보수를 1.5%로 두었다면 같은 80%를 위해 66세까지 일해야 했다. 40세에 1년 실직하면 성공 확률이 약 64%로 내려가므로, 비상금 목표를 넉넉히 두고 그런 해에는 은퇴 계획을 다시 본다. 반대로 아이를 키우는 비용(월 100만원, 22년)을 넣으면 60세 은퇴는 성공 확률이 약 20%로 무너진다. 가족이 생기면 이 그래프를 다시 그려야 한다.</p>
-      <div class="clue"><div><b>이 장에서 정한 것</b>60세 은퇴 목표는 '노력 목표', 62세는 '안전 목표'로 둔다. 해마다 1월 리밸런싱할 때 이 시뮬레이터를 다시 돌려 숫자를 고친다.</div><div><b>아직 남은 문제</b>결혼, 맞벌이 소득, 내 집 마련 시기, 주택연금은 아직 정하지 않았다. 모두 입력 하나로 결과가 크게 바뀐다.</div><div><b>다음 단계</b>23장 용어집과 종합 퀴즈로 책 전체의 개념을 점검한다. 그다음은 자기 숫자를 넣을 차례다.</div></div>
+      <p>한결은 미션을 풀며 세 가지를 확인했다. 은퇴를 62세로 2년 미루면 성공 확률이 약 84%가 된다. 보수를 1.5%로 두었다면 같은 80%를 위해 66세까지 일해야 했다. 40세에 1년 실직하면 성공 확률이 약 64%로 내려가므로, 비상금 목표를 넉넉히 두고 그런 해에는 은퇴 계획을 다시 본다. 반대로 혼자 벌며 아이 한 명(월 양육비 100만원, 대학 연 1,000만원)을 키우면 60세 은퇴는 성공 확률이 약 26%로 무너진다. 같은 아이를 연봉 3,600만원의 배우자와 함께 키우면 100%가 된다. 가족이 생기면 이 그래프를 다시 그려야 한다.</p>
+      <div class="clue"><div><b>이 장에서 정한 것</b>60세 은퇴 목표는 '노력 목표', 62세는 '안전 목표'로 둔다. 해마다 1월 리밸런싱할 때 이 시뮬레이터를 다시 돌려 숫자를 고친다.</div><div><b>아직 남은 문제</b>결혼과 맞벌이, 아이의 수와 터울, 내 집 마련 시기는 아직 정하지 않았다. 모두 입력 하나로 결과가 크게 바뀐다.</div><div><b>다음 단계</b>23장 용어집과 종합 퀴즈로 책 전체의 개념을 점검한다. 그다음은 자기 숫자를 넣을 차례다.</div></div>
     </div>
     <div class="callout tip">
       <strong>자기 숫자를 넣는 순서</strong>
@@ -519,86 +572,144 @@
   "use strict";
   /*core*/
   const DEF = {
-    start: 27, salary: 36e6, raise: 0.03, retire: 60, gap: 0, gapAge: 35,
+    start: 27, salary: 36e6, raise: 0.03, retire: 60, gap: 0, gapAge: 35, npsPrev: 0,
     living: 940000, life: 0.01, retLiving: 2.5e6, left: "cash",
     house: "jeonse", rent: 600000, rentDep: 1e7, jAge: 30, jAmt: 2e8, jLoan: 1.6e8, jRate: 0.04,
-    bAge: 40, price: 6e8, ltv: 0.5, mRate: 0.045, term: 30, hg: 0.03, student: 1,
-    cash0: 3e6, emerg: 4, save: 500000, stock: 70, bond: 30, fee: 0.001, rebal: 1,
+    bAge: 40, price: 6e8, ltv: 0.5, oLoan: 0, mRate: 0.045, term: 30, hg: 0.03, student: 1,
+    cash0: 3e6, inv0: 0, pen0: 0, emerg: 4, save: 500000, stock: 70, bond: 30, fee: 0.001, rebal: 1,
     npsAge: 65, pc: 6e6, dc: 1,
-    evMarry: 0, aMarry: 32, evChild: 0, aChild: 34, childCost: 1e6, evCar: 0, aCar: 35, evJob: 0, aJob: 40,
-    inf: 0.025, end: 90,
+    inf: 0.025, end: 90, ev: [],
   };
-  const K = { marry: 3e7, car: 3e7, carUp: 3e6, carYears: 10, childYears: 22, buyCost: 0.02, hold: 0.005, debtR: 0.06, penTax: 0.044, penAge: 55, uiCap: 1.98e6, uiMonths: 6, student: 1.2e7 };
+  const K = { buyCost: 0.02, sellCost: 0.01, hold: 0.005, debtR: 0.06, penTax: 0.044, penAge: 55, uiCap: 1.98e6, uiMonths: 6, student: 1.2e7, carYears: 10, kidCare: 19, kidEnd: 23 };
+  /* 이벤트 카드. f의 키 순서가 주소(URL)에 저장하는 순서다. 금액은 모두 오늘 돈. */
+  const EV = {
+    child:   { code: "c", name: "자녀",        max: 6, f: { age: 34, care: 1e6, uni: 1e7, gift: 0, gAge: 30, wed: 1 } },
+    marry:   { code: "m", name: "결혼·맞벌이", max: 1, f: { age: 32, cost: 3e7, live: 5e5, sp: 0, spRet: 60 } },
+    gift:    { code: "g", name: "증여 받기",   max: 4, f: { age: 35, amt: 1e8, wed: 0 } },
+    inherit: { code: "h", name: "상속 받기",   max: 3, f: { age: 60, est: 2e9, heirs: 2 } },
+    car:     { code: "v", name: "차",          max: 4, f: { age: 35, cost: 3e7, up: 3e6 } },
+    job:     { code: "j", name: "실직",        max: 3, f: { age: 40, yrs: 1 } },
+    spend:   { code: "s", name: "큰 지출",     max: 4, f: { age: 50, amt: 5e7 } },
+    sell:    { code: "d", name: "집 줄이기",   max: 1, f: { age: 70, keep: 0.5 } },
+  };
+  const newEv = (t, o) => Object.assign({ t }, EV[t].f, o);
+  const kidsOf = (c) => (c.ev || []).filter((e) => e.t === "child").sort((a, b) => a.age - b.age);
 
   function plan(c) {
-    const N = Math.max(1, c.end - c.start), yrs = [];
+    const N = Math.max(1, c.end - c.start), yrs = [], ev = c.ev || [];
     const pw = (r, n) => Math.pow(1 + r, n);
-    const jAge = Math.max(c.start, c.jAge), bAge = Math.max(c.start, c.bAge);
-    const buyT = c.house === "buy" ? bAge - c.start : Infinity;
+    const own = c.house === "own", jAge = Math.max(c.start, c.jAge), bAge = Math.max(c.start, c.bAge);
+    const buyT = own ? 0 : c.house === "buy" ? bAge - c.start : Infinity;
     const jT = c.house === "jeonse" || (c.house === "buy" && jAge < bAge) ? jAge - c.start : Infinity;
     const jAmtN = c.jAmt * pw(c.inf, jT === Infinity ? 0 : jT), jLoanN = Math.min(c.jLoan, c.jAmt) * pw(c.inf, jT === Infinity ? 0 : jT);
-    const price = buyT < Infinity ? c.price * pw(c.hg, buyT) : 0, mLoan = price * c.ltv;
+    const price = own ? c.price : buyT < Infinity ? c.price * pw(c.hg, buyT) : 0, mLoan = own ? Math.min(c.oLoan, c.price) : price * c.ltv;
     const mort = buyT < N && mLoan > 0 ? MN.loan(mLoan, c.mRate, c.term * 12) : null;
     const stu = c.student ? MN.loan(K.student, 0.017, 120) : null;
     const sumRows = (L, t0, t) => { let pay = 0, int = 0, bal = null; if (!L) return { pay, int, bal: 0 }; for (let m = (t - t0) * 12 + 1; m <= (t - t0) * 12 + 12; m++) { const r = L.rows[m - 1]; if (r) { pay += r.pay; int += r.interest; bal = r.balance; } } return { pay, int, bal: bal == null ? 0 : bal }; };
     const w = [c.stock / 100, c.bond / 100, Math.max(0, 1 - c.stock / 100 - c.bond / 100)];
-    let sNom = c.salary, ny = 0, bsum = 0, dep = c.rentDep, dsr = 0;
+    const sell = buyT < N ? ev.find((e) => e.t === "sell" && e.age - c.start > buyT && e.age - c.start < N) : null, sellT = sell ? sell.age - c.start : Infinity;
+    const kids = kidsOf(c), mar = ev.find((e) => e.t === "marry"), sp = mar && mar.sp > 0 ? mar : null;
+    const gifts = ev.filter((e) => e.t === "gift").sort((a, b) => a.age - b.age), recv = [];
+    gifts.forEach((g, i) => {
+      const prev = gifts.slice(0, i).filter((p) => g.age - p.age < 10), pc = recv.slice(0, i).filter((r, j) => g.age - gifts[j].age < 10);
+      const r = MN.giftTax(g.amt, { prior: prev.reduce((s, p) => s + p.amt, 0), priorTax: pc.reduce((s, p) => s + p.calc, 0), wed: prev.concat(g).filter((p) => p.wed).reduce((s, p) => s + p.amt, 0) });
+      recv.push({ e: g, age: g.age, net: g.amt - r.tax, tax: r.tax, calc: r.calc });
+    });
+    ev.filter((e) => e.t === "inherit").forEach((e) => {
+      const r = MN.inheritTax(e.est, { kids: e.heirs }), h = Math.max(1, e.heirs);
+      recv.push({ e, age: e.age, net: (e.est - r.tax) / h, tax: r.tax / h });
+    });
+    const kidGifts = kids.filter((k) => k.gift > 0 && k.age + k.gAge >= c.start && k.age + k.gAge < c.start + N)
+      .map((k) => Object.assign({ e: k, age: k.age + k.gAge, amt: k.gift }, MN.giftTax(k.gift, { wed: k.wed ? k.gift : 0 })));
+    const B = (s) => Math.min(Math.max(s / 12 - 200000, MN.KR.npsFloor), MN.KR.npsCap);
+    let sNom = c.salary, spNom = sp ? sp.sp : 0, ny = c.npsPrev, bsum = c.npsPrev * B(c.salary), sny = sp ? c.npsPrev : 0, sbsum = sp ? c.npsPrev * B(sp.sp) : 0;
+    let dep = own ? 0 : c.rentDep, dsr = 0;
     for (let t = 0; t < N; t++) {
       const age = c.start + t, F = pw(c.inf, t), retired = age >= c.retire;
       const inGap = c.gap > 0 && age >= c.gapAge && age < c.gapAge + c.gap;
-      const jobLoss = !!c.evJob && age === c.aJob && !retired && !inGap;
+      const jobs = ev.filter((e) => e.t === "job" && age >= e.age && age < e.age + e.yrs);
+      const jobLoss = jobs.length > 0 && !retired && !inGap;
       const working = !retired && !inGap && !jobLoss;
-      const y = { age, F, net: 0, tax: 0, credit: 0, benefit: 0, nps: 0, living: 0, house: 0, event: 0, loanPay: 0, loanInt: 0, inv: 0, pen: 0, dc: 0, cap: 0, retired, working };
+      const y = { age, F, net: 0, tax: 0, credit: 0, benefit: 0, nps: 0, living: 0, house: 0, event: 0, kid: 0, giftOut: 0, big: 0, wf: 0, wfTax: 0, sale: 0, capH: 0, loanPay: 0, loanInt: 0, inv: 0, pen: 0, dc: 0, spNet: 0, retired, working };
+      const ka = kids.map((k) => age - k.age), n8 = ka.filter((a) => a >= 8 && a < 20).length;
+      const fam = 1 + ka.filter((a) => a >= 0 && a < 20).length, kc = n8 === 0 ? 0 : n8 === 1 ? 25e4 : 55e4 + 4e5 * (n8 - 2);
       if (working) {
-        const sReal = sNom / F, p = MN.payroll(sReal), owed = p.annual.finalTax + p.annual.local;
+        const sReal = sNom / F, p = MN.payroll(sReal, { family: fam, extraCredit: kc }), owed = p.annual.finalTax + p.annual.local;
         y.net = p.annual.net * F; y.tax = owed * F; y.gross = sNom;
         if (c.pc > 0) y.credit = Math.min(MN.pensionCredit(c.pc, p.annual.taxable), owed) * F;
         y.tax -= y.credit;
-        if (age < 60) { ny++; bsum += Math.min(Math.max(sReal / 12 - 200000, MN.KR.npsFloor), MN.KR.npsCap); }
+        if (age < 60) { ny++; bsum += B(sReal); }
         y.inv = c.save * 12 * (sNom / c.salary); y.pen = c.pc * F; y.dc = c.dc ? sNom / 12 : 0;
-      } else if (jobLoss) y.benefit = Math.min(0.6 * sNom / F / 12, K.uiCap) * K.uiMonths * F;
-      y.living = (retired ? c.retLiving : c.living * pw(c.life, t)) * 12 * F;
-      if (c.evMarry && age === c.aMarry) y.event += K.marry * F;
-      if (c.evChild && age >= c.aChild && age < c.aChild + K.childYears) y.event += c.childCost * 12 * F;
-      if (c.evCar && age === c.aCar) y.event += K.car * F;
-      if (c.evCar && age >= c.aCar && age < c.aCar + K.carYears) y.event += K.carUp * F;
+      } else if (jobLoss && jobs.some((e) => e.age === age)) y.benefit = Math.min(0.6 * sNom / F / 12, K.uiCap) * K.uiMonths * F;
+      if (sp && age < sp.spRet) {
+        const sr = spNom / F;
+        if (age >= sp.age) { const q = MN.payroll(sr); y.spNet = q.annual.net * F; y.net += y.spNet; y.tax += (q.annual.finalTax + q.annual.local) * F; }
+        if (age < 60) { sny++; sbsum += B(sr); }
+        spNom *= 1 + c.raise;
+      }
+      y.living = (retired ? c.retLiving : c.living * pw(c.life, t) + (mar && age >= mar.age ? mar.live : 0)) * 12 * F;
+      ev.forEach((e) => {
+        if (e.t === "marry" && age === e.age) y.event += e.cost * F;
+        else if (e.t === "car") { if (age === e.age) y.event += e.cost * F; if (age >= e.age && age < e.age + K.carYears) y.event += e.up * F; }
+        else if (e.t === "spend" && age === e.age) y.big += e.amt * F;
+      });
+      kids.forEach((k, i) => {
+        const a = ka[i];
+        if (a >= 0 && a < K.kidCare) y.kid += k.care * 12 * F;
+        else if (a >= K.kidCare && a < K.kidEnd) y.kid += k.uni * F;
+        if (a === 0) y.benefit += 12e6 * F; else if (a === 1) y.benefit += 6e6 * F;
+        if (a >= 0 && a < 8) y.benefit += 1.2e6 * F;
+      });
+      kidGifts.forEach((g) => { if (g.age === age) y.giftOut += g.amt * F; });
+      recv.forEach((r) => { if (r.age === age) { y.wf += r.net * F; y.wfTax += r.tax * F; } });
       let tgt;
       if (t >= buyT) {
-        if (t === buyT) { y.cap += dep - (jT < buyT ? jLoanN : 0) - price * (1 - c.ltv) - price * K.buyCost; dep = 0; if (y.gross) dsr = (mort ? (mort.rows.slice(0, 12).reduce((s, r) => s + r.pay, 0)) : 0) / y.gross; }
-        y.houseVal = price * pw(c.hg, t + 1 - buyT); y.house = price * pw(c.hg, t - buyT) * K.hold;
-        const m = sumRows(mort, buyT, t); y.loanPay += m.pay; y.loanInt += m.int; y.mort = m.bal; y.jl = 0; tgt = 0;
+        if (t === buyT && !own) { y.capH += dep - (jT < buyT ? jLoanN : 0) - price * (1 - c.ltv) - price * K.buyCost; dep = 0; if (y.gross) dsr = (mort ? (mort.rows.slice(0, 12).reduce((s, r) => s + r.pay, 0)) : 0) / y.gross; }
+        if (t === sellT) {
+          const vs = price * pw(c.hg, t - buyT), net = vs * (1 - K.sellCost) - vs * sell.keep * (1 + K.buyCost) - sumRows(mort, buyT, t - 1).bal;
+          if (net >= 0) y.sale = net; else y.capH += net;
+        }
+        const sold = t >= sellT, base = sold ? price * pw(c.hg, sellT - buyT) * sell.keep : price, t0 = sold ? sellT : buyT;
+        y.houseVal = base * pw(c.hg, t + 1 - t0); y.house = base * pw(c.hg, t - t0) * K.hold;
+        if (sold) y.mort = 0;
+        else { const m = sumRows(mort, buyT, t); y.loanPay += m.pay; y.loanInt += m.int; y.mort = m.bal; }
+        y.jl = 0; tgt = 0;
       } else if (t >= jT) {
-        if (t === jT) y.cap += jLoanN;
+        if (t === jT) y.capH += jLoanN;
         tgt = jAmtN * pw(c.inf, t - jT); y.loanPay += jLoanN * c.jRate; y.loanInt += jLoanN * c.jRate; y.jl = jLoanN; y.houseVal = 0; y.mort = 0;
       } else { tgt = c.rentDep * F; y.house = c.rent * 12 * F; y.jl = 0; y.houseVal = 0; y.mort = 0; }
-      y.cap -= tgt - dep; dep = tgt; y.dep = dep;
+      y.capH -= tgt - dep; dep = tgt; y.dep = dep;
       const s = sumRows(stu, 0, t); y.loanPay += s.pay; y.loanInt += s.int; y.stu = s.bal;
       yrs.push(y);
       if (working) sNom *= 1 + c.raise;
     }
-    const npsM = ny ? MN.nps(bsum / ny, ny) * MN.npsAgeFactor(clampN(c.npsAge - 65, -5, 5)) : 0;
+    const fac = MN.npsAgeFactor(clampN(c.npsAge - 65, -5, 5));
+    const npsM = ny ? MN.nps(bsum / ny, ny) * fac : 0, spNpsM = sny ? MN.nps(sbsum / sny, sny) * fac : 0;
     yrs.forEach((y) => {
-      if (y.age >= c.npsAge) y.nps = npsM * 12 * y.F;
-      y.cash = y.net + y.benefit + y.credit + y.nps - y.living - y.house - y.event - y.loanPay - y.inv - y.pen + y.cap;
+      if (y.age >= c.npsAge) y.nps = (npsM + (sp && y.age >= sp.age ? spNpsM : 0)) * 12 * y.F;
+      y.cap = y.capH - y.giftOut - y.big; y.toInv = y.wf + y.sale;
+      y.cash = y.net + y.benefit + y.credit + y.nps - y.living - y.house - y.event - y.kid - y.loanPay - y.inv - y.pen + y.cap;
     });
-    return { c, N, yrs, w, npsM, npsYears: ny, npsB: ny ? bsum / ny : 0, price, mLoan, dsr, buyT, jT };
+    const init = { dep: own ? 0 : c.rentDep, hv: own ? c.price : 0, mort: own ? mLoan : 0, stu: c.student ? K.student : 0 };
+    return { c, N, yrs, w, npsM, spNpsM, npsYears: ny, npsB: ny ? bsum / ny : 0, price, mLoan, dsr, buyT, jT, sellT, kids, kidGifts, recv, init };
   }
   function clampN(x, a, b) { return Math.min(b, Math.max(a, x)); }
 
   function run(P, ret) {
     const c = P.c, w = P.w, fee = c.fee, A = MN.ASSETS;
-    let workWd = 0, cash = c.cash0, inv = [0, 0, 0], pen = [0, 0, 0], dead = null, workDebt = false, minCash = Infinity, interest = 0, taxW = 0;
-    const st = [snap(0, P.yrs[0], true)], flow = [];
+    let workWd = 0, cash = c.cash0, inv = w.map((x) => x * c.inv0), pen = w.map((x) => x * c.pen0), dead = null, workDebt = false, minCash = Infinity, interest = 0, taxW = 0;
+    const st = [snap(0, null)], flow = [];
     function sum(b) { return b[0] + b[1] + b[2]; }
     function take(b, x) { const s = sum(b); if (s <= 0) return 0; const k = Math.min(1, x / s); for (let i = 0; i < 3; i++) b[i] -= b[i] * k; return s * k; }
-    function snap(t, y, first) {
-      const dep = first ? c.rentDep : y.dep, hv = first ? 0 : y.houseVal, mort = first ? 0 : y.mort, stu = first ? (c.student ? K.student : 0) : y.stu, jl = first ? 0 : y.jl;
+    function snap(t, y) {
+      const I = P.init, dep = y ? y.dep : I.dep, hv = y ? y.houseVal : I.hv, mort = y ? y.mort : I.mort, stu = y ? y.stu : I.stu, jl = y ? y.jl : 0;
       const cpos = Math.max(0, cash), cneg = Math.max(0, -cash), iv = sum(inv), pv = sum(pen);
       return { age: c.start + t, cash: cpos, inv: iv, pen: pv, home: dep + hv, debt: mort + stu + jl + cneg, short: cneg, nw: cpos + iv + pv + dep + hv - mort - stu - jl - cneg };
     }
     for (let t = 0; t < P.N; t++) {
       const y = P.yrs[t], age = y.age;
       let wd = 0, wdTax = 0, sweep = 0, spent = 0;
+      for (let i = 0; i < 3; i++) inv[i] += y.toInv * w[i];
       if (y.cap < 0) { const a = take(inv, -y.cap); cash += a; wd += a; }
       cash += y.cash;
       for (let i = 0; i < 3; i++) { inv[i] += y.inv * w[i]; pen[i] += (y.pen + y.dc) * w[i]; }
@@ -630,10 +741,19 @@
     for (let t = 0; t < N; t++) { const z1 = g(), z2 = rho * z1 + q * g(); rs.push([Math.exp(ls + A.stock.sigma * z1) - 1, Math.exp(lb + A.bond.sigma * z2) - 1, A.cash.mu]); }
     return (t) => rs[t];
   }
+  /** 끝 나이에 남은 순자산을 물려줄 때: 상속세, 자녀 1인당 몫, 자녀 증여세까지 합한 가족 전체 세금(오늘 돈) */
+  function legacy(P, R) {
+    const c = P.c, i = R.st.length - 1, s = R.st[i], F = Math.pow(1 + c.inf, i), endAge = c.start + i;
+    const est = Math.max(0, s.nw / F), fin = Math.max(0, (s.cash + s.inv + s.pen - s.short) / F);
+    const pri = P.kidGifts.filter((g) => endAge - g.age < 10);
+    const r = MN.inheritTax(est, { kids: P.kids.length, fin, prior: pri.reduce((a, g) => a + g.amt, 0), priorTax: pri.reduce((a, g) => a + g.calc, 0) });
+    const giftTax = P.kidGifts.reduce((a, g) => a + g.tax, 0), net = est - r.tax;
+    return { est, tax: r.tax, net, per: P.kids.length ? net / P.kids.length : net, giftTax, family: giftTax + r.tax };
+  }
   function simulate(c) {
     const P = plan(c), R = run(P, detRet());
     const taxY = P.yrs.map((y, i) => y.tax + R.flow[i].wdTax), intY = P.yrs.map((y, i) => y.loanInt + R.flow[i].debtInt);
-    return { P, R, taxY, intY, at: (age) => R.st[clampN(age - c.start, 0, R.st.length - 1)] };
+    return { P, R, taxY, intY, leg: legacy(P, R), at: (age) => R.st[clampN(age - c.start, 0, R.st.length - 1)] };
   }
   function monteCarlo(c, n) {
     const P = plan(c), paths = [], deadAt = [];
@@ -650,33 +770,58 @@
   /*core*/
 
   const $ = (id) => document.getElementById(id);
-  const cfg = Object.assign({}, DEF);
+  const cfg = Object.assign({}, DEF, { ev: [] });
   const PRESETS = {
     hg: {},
     buy: { house: "buy", jAge: 30, bAge: 35, price: 3e8, ltv: 0.6, save: 2e5, pc: 3e6 },
     fire: { salary: 5e7, save: 1.5e6, living: 8e5, life: 0, retire: 45, stock: 80, bond: 20, retLiving: 2e6, house: "rent" },
     zero: { save: 0, pc: 0, life: 0.02, left: "spend" },
+    family: { ev: [newEv("marry", { age: 31, sp: 4e7 }), newEv("child", { age: 33 }), newEv("child", { age: 35 }), newEv("child", { age: 38 })] },
+    gangnam: { start: 45, salary: 1.8e8, raise: 0.02, npsPrev: 18, living: 4e6, life: 0, retLiving: 6e6, house: "own", price: 4e9, oLoan: 6e8, mRate: 0.042, term: 25, hg: 0.04, student: 0,
+      cash0: 1e8, inv0: 5e8, pen0: 1.5e8, emerg: 6, save: 3e6, stock: 60, bond: 40, pc: 9e6,
+      ev: [newEv("marry", { age: 45, cost: 0, live: 0, sp: 1e8 }), newEv("child", { age: 33, care: 2.5e6, uni: 2e7 }), newEv("child", { age: 36, care: 2.5e6, uni: 2e7 }), newEv("sell", { age: 72, keep: 0.5 })] },
+    heir: { start: 35, salary: 7e7, student: 0, cash0: 1e8, jAge: 35, jAmt: 6e8, jLoan: 2e8,
+      ev: [newEv("marry", { age: 35, cost: 0, sp: 5e7 }), newEv("gift", { age: 35, amt: 3e8, wed: 1 }), newEv("child", { age: 36 }), newEv("inherit", { age: 62, est: 5e9, heirs: 2 })] },
   };
   const FMT = {
     age: (v) => v + "세", won: (v) => MB.won(v), pct: (v) => MB.pct(v, 2), pctS: (v) => (v > 0 ? "+" : "") + MB.pct(v, 2),
-    pct0: (v) => Math.round(v * 100) + "%", yr: (v) => (v ? v + "년" : "없음"), yr2: (v) => v + "년", mo: (v) => v + "개월", p100: (v) => v + "%",
+    pct0: (v) => Math.round(v * 100) + "%", yr: (v) => (v ? v + "년" : "없음"), yr2: (v) => v + "년", mo: (v) => v + "개월", p100: (v) => v + "%", n: (v) => v + "명",
   };
+  const seq = (...parts) => { const o = []; parts.forEach(([a, b, s]) => { for (let v = a; v <= b + 1e-6; v += s) if (!o.length || v > o[o.length - 1]) o.push(Math.round(v)); }); return o; };
+  const VT = {
+    salary: seq([15e6, 15e7, 1e6], [15e7, 5e8, 5e6]), sal0: seq([0, 15e7, 1e6], [15e7, 5e8, 5e6]),
+    living: seq([3e5, 4e6, 1e4], [4e6, 15e6, 1e5]), retLiving: seq([1e6, 6e6, 5e4], [6e6, 2e7, 5e5]),
+    rent: seq([2e5, 2e6, 1e4], [2e6, 1e7, 1e5]), jAmt: seq([5e7, 6e8, 1e7], [6e8, 3e9, 5e7]),
+    price: seq([1e8, 2e9, 1e7], [2e9, 5e9, 5e7], [5e9, 1e10, 1e8]), oLoan: seq([0, 1e9, 1e7], [1e9, 3e9, 5e7]),
+    save: seq([0, 3e6, 1e4], [3e6, 2e7, 1e5]), cash: seq([0, 1e8, 1e6], [1e8, 1e9, 1e7]),
+    big: seq([0, 1e8, 1e6], [1e8, 1e9, 1e7], [1e9, 5e9, 5e7]), huge: seq([0, 1e9, 1e7], [1e9, 1e10, 1e8], [1e10, 5e10, 1e9]),
+  };
+  /** 눈금 표(VT)를 따라 움직이는 슬라이더. 낮은 금액은 촘촘하게, 높은 금액은 성기게. */
+  function vrange(el, tab, fmt, on) {
+    const idx = (v) => { let b = 0; for (let i = 1; i < tab.length; i++) if (Math.abs(tab[i] - v) < Math.abs(tab[b] - v)) b = i; return b; };
+    const v0 = +el.getAttribute("value") || 0;
+    el.min = 0; el.max = tab.length - 1; el.step = 1; el.value = idx(v0);
+    const g = MB.range(el, (i) => fmt(tab[i]), (i) => on(tab[i]));
+    const get = () => tab[g()]; get.set = (v) => g.set(idx(v)); get.el = el;
+    return get;
+  }
   const RANGES = { start: "age", salary: "won", raise: "pct", retire: "age", gap: "yr", gapAge: "age", living: "won", life: "pctS", retLiving: "won",
-    rent: "won", jAge: "age", jAmt: "won", jLoan: "won", jRate: "pct", bAge: "age", price: "won", ltv: "pct0", mRate: "pct", term: "yr2", hg: "pct",
-    cash0: "won", emerg: "mo", save: "won", stock: "p100", bond: "p100", fee: "pct", npsAge: "age", pc: "won",
-    aMarry: "age", aChild: "age", childCost: "won", aCar: "age", aJob: "age", inf: "pct", end: "age" };
-  const CHECKS = ["student", "rebal", "dc", "evMarry", "evChild", "evCar", "evJob"];
+    rent: "won", jAge: "age", jAmt: "won", jLoan: "won", jRate: "pct", bAge: "age", price: "won", ltv: "pct0", oLoan: "won", mRate: "pct", term: "yr2", hg: "pct",
+    cash0: "won", inv0: "won", pen0: "won", emerg: "mo", save: "won", stock: "p100", bond: "p100", fee: "pct", npsAge: "age", npsPrev: "yr", pc: "won", inf: "pct", end: "age" };
+  const VKEY = { salary: "salary", living: "living", retLiving: "retLiving", rent: "rent", jAmt: "jAmt", price: "price", oLoan: "oLoan", save: "save", cash0: "cash", inv0: "huge", pen0: "big" };
+  const CHECKS = ["student", "rebal", "dc"];
   let batch = false, S = null, MC = null, mcKey = "", cursor = 60, L = null, dragging = null;
   const keyOf = (c) => JSON.stringify(c);
   const ctl = {};
   Object.keys(RANGES).forEach((k) => {
-    ctl[k] = MB.range("l-" + k, FMT[RANGES[k]], (v) => {
+    const on = (v) => {
       if (batch) return;
       cfg[k] = v;
       if (k === "stock" && cfg.stock + cfg.bond > 100) { cfg.bond = 100 - cfg.stock; batch = true; ctl.bond.set(cfg.bond); batch = false; }
       if (k === "bond" && cfg.stock + cfg.bond > 100) { cfg.stock = 100 - cfg.bond; batch = true; ctl.stock.set(cfg.stock); batch = false; }
       changed();
-    });
+    };
+    ctl[k] = VKEY[k] ? vrange($("l-" + k), VT[VKEY[k]], FMT[RANGES[k]], on) : MB.range("l-" + k, FMT[RANGES[k]], on);
   });
   CHECKS.forEach((k) => $("l-" + k).addEventListener("change", (e) => { cfg[k] = e.target.checked ? 1 : 0; changed(); }));
   const segHouse = MB.seg("l-house", (v) => { cfg.house = v; changed(); });
@@ -684,31 +829,155 @@
   const mode = MB.seg("lab-mode", () => { if (mode() === "mc" && mcKey !== keyOf(cfg)) heavy(); drawAll(); });
   const unit = MB.seg("lab-unit", () => drawAll());
 
+  /* ---------------------------------------------------------------- 이벤트 카드 */
+  const EVUI = {
+    child: [["age", "출산 나이(부모 나이)", "age", 20, 55, 1], ["care", "월 양육비(0~18세)", "won", 0, 5e6, 5e4], ["uni", "대학 연 비용(19~22세)", "won", 0, 8e7, 1e6],
+      ["gift", "독립 자금 증여", "won", "big"], ["gAge", "증여할 때 자녀 나이", "age", 19, 50, 1], ["wed", "혼인·출산 공제 1억원 적용", "check"]],
+    marry: [["age", "결혼 나이", "age", 20, 70, 1], ["cost", "결혼 비용", "won", 0, 3e8, 5e6], ["live", "늘어나는 월 생활비", "won", 0, 5e6, 5e4],
+      ["sp", "배우자 연봉(세전, 오늘 돈)", "won", "sal0"], ["spRet", "배우자 은퇴 나이", "age", 40, 75, 1]],
+    gift: [["age", "받는 나이", "age", 20, 90, 1], ["amt", "증여받는 돈", "won", "big"], ["wed", "혼인·출산 공제 1억원 적용", "check"]],
+    inherit: [["age", "받는 나이", "age", 25, 95, 1], ["est", "상속 재산 전체", "won", "huge"], ["heirs", "상속인 수(나 포함)", "n", 1, 8, 1]],
+    car: [["age", "구입 나이", "age", 20, 90, 1], ["cost", "차값", "won", 0, 3e8, 5e6], ["up", "연 유지비(10년)", "won", 0, 2e7, 5e5]],
+    job: [["age", "실직 나이", "age", 22, 69, 1], ["yrs", "기간", "yr2", 1, 5, 1]],
+    spend: [["age", "나이", "age", 20, 95, 1], ["amt", "금액", "won", "big"]],
+    sell: [["age", "파는 나이", "age", 30, 95, 1], ["keep", "옮길 집(판 집 대비)", "pct0", 0.2, 1, 0.05]],
+  };
+  const EVCOL = { child: "kid", marry: "warn", gift: "gift", inherit: "gift", car: "warn", job: "bad", spend: "warn", sell: "dim" };
+  const EVCSS = { kid: "var(--kid)", warn: "var(--warn)", gift: "var(--gift)", bad: "var(--bad)", dim: "var(--text-dim)" };
+  const ADD = [["child", "+ 자녀"], ["marry", "+ 결혼·맞벌이"], ["gift", "+ 증여 받기"], ["inherit", "+ 상속 받기"], ["sell", "+ 집 줄이기"], ["car", "+ 차"], ["job", "+ 실직"], ["spend", "+ 큰 지출"]];
+  const ORD = ["첫째", "둘째", "셋째", "넷째", "다섯째", "여섯째"];
+  let evCtl = [], evOpen = -1;
+  const kidNo = (e) => cfg.ev.filter((x) => x.t === "child").indexOf(e);
+  const evTitle = (e) => (e.t === "child" ? "자녀 · " + ORD[kidNo(e)] : EV[e.t].name);
+  const evShort = (e) => (e.t === "child" ? ORD[kidNo(e)] : { marry: "결혼", gift: "증여", inherit: "상속", car: "차", job: "실직", spend: "지출", sell: "집 줄임" }[e.t]);
+  function evSum(e) {
+    const w = MB.won;
+    return {
+      child: () => `${e.age}세 출산 · 월 ${w(e.care)}${e.gift ? " · 증여 " + w(e.gift) : ""}`,
+      marry: () => `${e.age}세${e.sp ? " · 배우자 " + w(e.sp) : ""}`,
+      gift: () => `${e.age}세 · ${w(e.amt)}`,
+      inherit: () => `${e.age}세 · ${w(e.est)} ÷ ${e.heirs}명`,
+      car: () => `${e.age}세 · ${w(e.cost)}`,
+      job: () => `${e.age}세 · ${e.yrs}년`,
+      spend: () => `${e.age}세 · ${w(e.amt)}`,
+      sell: () => `${e.age}세 · ${Math.round(e.keep * 100)}% 크기로`,
+    }[e.t]();
+  }
+  function evInfo(e) {
+    const w = MB.won, P = S.P;
+    if (e.t === "child") {
+      const g = P.kidGifts.find((x) => x.e === e), n = Math.max(0, Math.min(K.kidCare, cfg.end - e.age)), u = Math.max(0, Math.min(4, cfg.end - e.age - K.kidCare));
+      return `양육·교육비 합계 약 ${w(e.care * 12 * n + e.uni * u)}(오늘 돈). ` + (e.gift ? (g ? `증여 ${w(e.gift)}에 자녀가 낼 증여세 약 ${w(g.tax)}.` : "증여 시점이 계획 기간 밖이다.") : "부모급여·아동수당과 자녀 세액공제가 들어온다.");
+    }
+    if (e.t === "gift" || e.t === "inherit") {
+      const r = P.recv.find((x) => x.e === e);
+      return e.t === "gift" ? `증여세 약 ${w(r.tax)}(10년 합산·공제 반영), 손에 남는 돈 ${w(r.net)}. 투자 계좌로 들어간다.`
+        : `상속세(전체) 약 ${w(r.tax * Math.max(1, e.heirs))}, 내 몫 ${w(r.net)}(세후). 투자 계좌로 들어간다.`;
+    }
+    if (e.t === "marry") return e.sp ? `배우자 실수령이 가계 소득에 더해지고, 배우자 국민연금 월 약 ${w(P.spNpsM)}(오늘 돈)도 들어온다.` : "배우자 연봉을 넣으면 맞벌이가 된다. 0이면 비용만 든다.";
+    if (e.t === "sell") return P.sellT < Infinity ? "판 돈에서 대출을 갚고, 거래 비용(판 집 1%, 산 집 2%)을 뺀 나머지가 투자 계좌로 간다." : `<span class="warn-t">주거 경로가 '매수'나 '이미 보유'이고, 집을 산 뒤의 나이여야 작동한다.</span>`;
+    if (e.t === "job") return "실업급여는 첫해에 약 6개월(월 상한 198만원) 나온다. 그동안 국민연금 가입과 연봉 인상도 멈춘다.";
+    return "";
+  }
+  function renderEvents() {
+    const list = $("ev-list");
+    list.innerHTML = ""; evCtl = [];
+    cfg.ev.forEach((e, i) => {
+      const card = document.createElement("details");
+      card.className = "ev-card"; card.open = i === evOpen;
+      card.style.setProperty("--ev", EVCSS[EVCOL[e.t]]);
+      card.innerHTML = `<summary><b></b><span class="sum"></span><button type="button" class="ev-x" aria-label="이벤트 삭제">×</button></summary><div class="ev-bd"></div>`;
+      const bd = card.querySelector(".ev-bd"), c = {};
+      list.appendChild(card);
+      EVUI[e.t].forEach(([k, lab, f, a, b, st]) => {
+        const id = `ev${i}-${k}`;
+        if (f === "check") {
+          bd.insertAdjacentHTML("beforeend", `<label class="check"><input type="checkbox" id="${id}"${e[k] ? " checked" : ""}> ${lab}</label>`);
+          bd.querySelector("#" + id).addEventListener("change", (ev) => { e[k] = ev.target.checked ? 1 : 0; changed(); });
+          return;
+        }
+        bd.insertAdjacentHTML("beforeend", `<label class="ctrl"><span>${lab} <output id="${id}-out"></output></span><input type="range" id="${id}"${typeof a === "string" ? "" : ` min="${a}" max="${b}" step="${st}"`} value="${e[k]}"></label>`);
+        const el = bd.querySelector("#" + id), on = (v) => { if (batch) return; e[k] = v; changed(); };
+        c[k] = typeof a === "string" ? vrange(el, VT[a], FMT[f], on) : MB.range(el, FMT[f], on);
+      });
+      bd.insertAdjacentHTML("beforeend", `<p class="ev-info"></p>`);
+      card.querySelector(".ev-x").addEventListener("click", (ev) => {
+        ev.preventDefault(); ev.stopPropagation();
+        cfg.ev.splice(i, 1); evOpen = -1; renderEvents(); changed();
+      });
+      card.addEventListener("toggle", () => { if (card.open) evOpen = i; });
+      evCtl.push(c);
+    });
+    $("ev-add").querySelectorAll("button").forEach((b) => (b.disabled = cfg.ev.filter((e) => e.t === b.dataset.t).length >= EV[b.dataset.t].max));
+  }
+  function evText() {
+    const cards = $("ev-list").children;
+    cfg.ev.forEach((e, i) => {
+      const card = cards[i]; if (!card) return;
+      card.querySelector("summary b").textContent = evTitle(e);
+      card.querySelector("summary .sum").textContent = evSum(e);
+      card.querySelector(".ev-info").innerHTML = evInfo(e);
+    });
+  }
+  $("ev-add").innerHTML = ADD.map(([t, lab]) => `<button type="button" class="btn sm" data-t="${t}">${lab}</button>`).join("");
+  $("ev-add").querySelectorAll("button").forEach((b) => b.addEventListener("click", () => {
+    const t = b.dataset.t, kids = kidsOf(cfg), def = EV[t].f.age;
+    const age = t === "child" && kids.length ? kids[kids.length - 1].age + 2 : t === "sell" ? Math.max(def, cfg.retire + 5) : def;
+    cfg.ev.push(newEv(t, { age: MB.clamp(age, Math.max(cfg.start, EVUI[t][0][3]), Math.min(cfg.end - 1, EVUI[t][0][4])) }));
+    evOpen = cfg.ev.length - 1; renderEvents(); changed();
+  }));
+
   function setAll(o) {
     Object.keys(cfg).forEach((k) => delete cfg[k]);
     Object.assign(cfg, DEF, o);
+    cfg.ev = (o.ev || []).map((e) => Object.assign({}, e));
     batch = true;
     Object.keys(RANGES).forEach((k) => ctl[k].set(cfg[k]));
     CHECKS.forEach((k) => ($("l-" + k).checked = !!cfg[k]));
     segHouse.set(cfg.house, false); segLeft.set(cfg.left, false);
     batch = false;
+    evOpen = -1; renderEvents();
+  }
+  const C2T = {}; Object.keys(EV).forEach((t) => (C2T[EV[t].code] = t));
+  const encodeEv = (ev) => ev.map((e) => [EV[e.t].code].concat(Object.keys(EV[e.t].f).map((k) => +e[k])).join("~")).join("_");
+  function decodeEv(s) {
+    const out = [];
+    s.split("_").forEach((part) => {
+      const a = part.split("~"), t = C2T[a[0]];
+      if (!t || out.filter((e) => e.t === t).length >= EV[t].max) return;
+      const e = newEv(t);
+      Object.keys(EV[t].f).forEach((k, i) => { const v = Number(a[i + 1]); if (a[i + 1] != null && a[i + 1] !== "" && isFinite(v)) e[k] = v; });
+      out.push(e);
+    });
+    return out;
   }
   function readHash() {
     const h = location.hash;
     if (!h.startsWith("#cfg:")) return null;
-    const o = {};
+    const o = {}, old = {};
     try {
       new URLSearchParams(h.slice(5)).forEach((v, k) => {
-        if (!(k in DEF)) return;
-        if (typeof DEF[k] === "string") { if (["rent", "jeonse", "buy", "cash", "invest", "spend"].includes(v)) o[k] = v; }
+        if (k === "ev") { o.ev = decodeEv(v); return; }
+        if (!(k in DEF)) { if (isFinite(+v)) old[k] = +v; return; }
+        if (typeof DEF[k] === "string") { if (["rent", "jeonse", "buy", "own", "cash", "invest", "spend"].includes(v)) o[k] = v; }
         else if (isFinite(+v)) o[k] = +v;
       });
     } catch (e) { return null; }
+    if (!o.ev) {
+      o.ev = [];
+      if (old.evMarry) o.ev.push(newEv("marry", { age: old.aMarry || 32 }));
+      if (old.evChild) o.ev.push(newEv("child", { age: old.aChild || 34, care: old.childCost || 1e6 }));
+      if (old.evCar) o.ev.push(newEv("car", { age: old.aCar || 35 }));
+      if (old.evJob) o.ev.push(newEv("job", { age: old.aJob || 40 }));
+    }
     return o;
   }
   const writeHash = MB.debounce(() => {
     const p = new URLSearchParams();
-    Object.keys(DEF).forEach((k) => { if (cfg[k] !== DEF[k]) p.set(k, cfg[k]); });
+    Object.keys(DEF).forEach((k) => {
+      if (k === "ev") { if (cfg.ev.length) p.set("ev", encodeEv(cfg.ev)); }
+      else if (cfg[k] !== DEF[k]) p.set(k, cfg[k]);
+    });
     try { history.replaceState(null, "", location.pathname + location.search + "#cfg:" + p.toString()); } catch (e) {}
   }, 300);
 
@@ -718,30 +987,34 @@
   const conv = (v, i) => (isReal() ? v / fAt(i) : v);
 
   function markers() {
-    const c = cfg, m = [{ k: "retire", lab: "은퇴", age: c.retire, col: "accent" }, { k: "npsAge", lab: "연금", age: c.npsAge, col: "accent2" }];
-    if (c.house === "jeonse" || (c.house === "buy" && c.jAge < c.bAge)) m.push({ k: "jAge", lab: "전세", age: c.jAge, col: "dim" });
-    if (c.house === "buy") m.push({ k: "bAge", lab: "매수", age: c.bAge, col: "dim" });
-    if (c.gap > 0) m.push({ k: "gapAge", lab: "공백", age: c.gapAge, col: "warn" });
-    if (c.evMarry) m.push({ k: "aMarry", lab: "결혼", age: c.aMarry, col: "warn" });
-    if (c.evChild) m.push({ k: "aChild", lab: "자녀", age: c.aChild, col: "warn" });
-    if (c.evCar) m.push({ k: "aCar", lab: "차", age: c.aCar, col: "warn" });
-    if (c.evJob) m.push({ k: "aJob", lab: "실직", age: c.aJob, col: "bad" });
-    return m.filter((x) => x.age >= c.start && x.age <= c.end);
+    const c = cfg, m = [];
+    const base = (k, lab, col) => { const el = $("l-" + k); m.push({ k, lab, age: c[k], col, min: +el.min, max: +el.max, set: (v) => ctl[k].set(v) }); };
+    base("retire", "은퇴", "accent"); base("npsAge", "연금", "accent2");
+    if (c.house === "jeonse" || (c.house === "buy" && c.jAge < c.bAge)) base("jAge", "전세", "dim");
+    if (c.house === "buy") base("bAge", "매수", "dim");
+    if (c.gap > 0) base("gapAge", "공백", "warn");
+    c.ev.forEach((e, i) => {
+      const f = EVUI[e.t][0], span = e.t === "child" ? K.kidEnd : e.t === "car" ? K.carYears : e.t === "job" ? e.yrs : 0;
+      m.push({ k: "ev" + i, lab: evShort(e), age: e.age, at: Math.max(c.start, e.age), col: EVCOL[e.t], min: f[3], max: f[4], span, gift: e.t === "child" && e.gift ? e.age + e.gAge : null, set: (v) => evCtl[i] && evCtl[i].age.set(v) });
+    });
+    return m.filter((x) => (x.at != null ? x.age + x.span > c.start : x.age >= c.start) && x.age <= c.end);
   }
 
   function drawMain(ctx, w, h) {
     if (!S) return;
     const P = MB.palette(), c = cfg, st = S.R.st, n = st.length;
-    const colOf = { accent: P.accent, accent2: P.accent2, dim: P.dim, warn: P.warn, bad: P.bad };
+    const colOf = { accent: P.accent, accent2: P.accent2, dim: P.dim, warn: P.warn, bad: P.bad, kid: MB.color("kid"), gift: MB.color("gift") };
     const bx = 56, bw = w - bx - 14, span = Math.max(1, c.end - c.start);
     const X = (a) => bx + ((a - c.start) / span) * bw;
     ctx.font = MB.font(11, false, 600);
-    const mk = markers().map((m) => Object.assign(m, { x: X(m.age), tw: ctx.measureText(m.lab).width + 14 })).sort((a, b) => a.x - b.x);
+    const mk = markers().map((m) => Object.assign(m, { x: X(m.at != null ? m.at : m.age), tw: ctx.measureText(m.lab).width + 14 })).sort((a, b) => a.x - b.x);
     const laneEnd = [];
     mk.forEach((m) => {
       m.left = MB.clamp(m.x - m.tw / 2, 2, w - m.tw - 2);
+      m.xe = m.span ? X(Math.min(c.end, m.age + m.span)) : m.left;
+      const right = Math.max(m.left + m.tw, m.xe);
       let l = 0; while (laneEnd[l] != null && laneEnd[l] > m.left - 4) l++;
-      m.lane = l; laneEnd[l] = m.left + m.tw;
+      m.lane = l; laneEnd[l] = right;
     });
     const laneH = 20, lanes = Math.max(1, laneEnd.length);
     const box = { x: bx, y: 14, w: bw, h: h - 14 - 26 - lanes * laneH - 8 };
@@ -801,7 +1074,12 @@
     const y0 = box.y + box.h + 26;
     mk.forEach((m) => {
       const yy = y0 + m.lane * laneH, col = colOf[m.col];
-      ctx.strokeStyle = col; ctx.globalAlpha = 0.6; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(m.x, box.y + box.h); ctx.lineTo(m.x, yy); ctx.stroke(); ctx.globalAlpha = 1;
+      ctx.strokeStyle = col; ctx.globalAlpha = 0.6; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(m.x, box.y + box.h); ctx.lineTo(m.x, yy); ctx.stroke();
+      if (m.span) {
+        ctx.globalAlpha = 0.5; ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(m.x, yy + 8.5); ctx.lineTo(m.xe, yy + 8.5); ctx.stroke(); ctx.lineCap = "butt";
+        if (m.gift != null && m.gift <= c.end) { ctx.globalAlpha = 1; ctx.fillStyle = col; ctx.beginPath(); ctx.arc(X(m.gift), yy + 8.5, 4, 0, 7); ctx.fill(); }
+      }
+      ctx.globalAlpha = 1;
       ctx.fillStyle = col; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(m.left, yy, m.tw, 17, 8.5) : ctx.rect(m.left, yy, m.tw, 17); ctx.fill();
       ctx.fillStyle = MB.color("on-accent"); ctx.font = MB.font(11, false, 600); ctx.textAlign = "center"; ctx.textBaseline = "middle";
       ctx.fillText(m.lab, m.left + m.tw / 2, yy + 9);
@@ -809,30 +1087,34 @@
     L = { box, mk, y0, laneH, inv: (x) => c.start + ((x - box.x) / box.w) * span };
   }
 
+  const BARK = ["inc", "wf", "wd", "cash", "short", "spend", "kid", "repay", "save", "home"];
   function barsData() {
-    const ys = S.P.yrs, fl = S.R.flow, st = S.R.st, d = { inc: [], wd: [], cash: [], short: [], spend: [], repay: [], save: [], home: [] };
+    const ys = S.P.yrs, fl = S.R.flow, st = S.R.st, d = {};
+    BARK.forEach((k) => (d[k] = []));
     ys.forEach((y, i) => {
       const f = isReal() ? 1 / y.F : 1, r = fl[i];
-      const inc = (y.net + y.benefit + y.credit + y.nps) * f, wd = r.wd * f, spend = -(y.living + y.house + y.event + r.spent) * f;
-      const repay = -(y.loanPay + r.debtInt) * f, save = -(y.inv + y.pen + r.sweep) * f, home = y.cap * f;
-      d.inc.push(inc); d.wd.push(wd); d.spend.push(spend); d.repay.push(repay); d.save.push(save); d.home.push(home);
-      const gap = Math.max(0, -(inc + wd + spend + repay + save + home)), debt = Math.min(gap, Math.max(0, (st[i + 1].short - st[i].short) * f));
+      d.inc.push((y.net + y.benefit + y.credit + y.nps) * f); d.wf.push(y.wf * f); d.wd.push(r.wd * f);
+      d.spend.push(-(y.living + y.house + y.event + y.big + r.spent) * f); d.kid.push(-(y.kid + y.giftOut) * f);
+      d.repay.push(-(y.loanPay + r.debtInt) * f); d.save.push(-(y.inv + y.pen + r.sweep + y.toInv) * f); d.home.push((y.capH + y.sale) * f);
+      const tot = ["inc", "wf", "wd", "spend", "kid", "repay", "save", "home"].reduce((s, k) => s + d[k][i], 0);
+      const gap = Math.max(0, -tot), debt = Math.min(gap, Math.max(0, (st[i + 1].short - st[i].short) * f));
       d.short.push(debt); d.cash.push(gap - debt);
     });
     return d;
   }
   function drawBars(ctx, w, h) {
     if (!S) return;
-    const P = MB.palette(), d = barsData(), n = d.inc.length;
-    const mags = d.inc.map((_, i) => { let p = 0, m = 0; ["inc", "wd", "cash", "short", "spend", "repay", "save", "home"].forEach((k) => { const v = d[k][i]; if (v > 0) p += v; else m -= v; }); return Math.max(p, m); });
+    const P = MB.palette(), d = barsData(), n = d.inc.length, kid = MB.color("kid"), gift = MB.color("gift");
+    const pm = (i) => { let p = 0, q = 0; BARK.forEach((k) => { const v = d[k][i]; if (v > 0) p += v; else q -= v; }); return [p, q]; };
+    const mags = d.inc.map((_, i) => Math.max(...pm(i)));
     const srt = mags.slice().sort((a, b) => a - b), lim = Math.max(1, srt[Math.floor(srt.length * 0.9)] * 1.25);
     const box = { x: 56, y: 8, w: w - 56 - 14, h: h - 8 - 24 };
     ctx.save(); ctx.beginPath(); ctx.rect(0, box.y - 1, w, box.h + 2); ctx.clip();
     MB.bars(ctx, box, {
       labels: d.inc.map((_, i) => String(cfg.start + i)), y: [-lim, lim], yFmt: MB.wonAxis, gap: 0.15,
       stacks: [
-        { label: "소득", color: P.ok, data: d.inc }, { label: "인출", color: P.accent2, data: d.wd }, { label: "현금에서", color: P.dim, data: d.cash }, { label: "부족", color: P.red, data: d.short },
-        { label: "집", color: P.faint, data: d.home }, { label: "지출", color: P.warn, data: d.spend }, { label: "상환", color: P.bad, data: d.repay }, { label: "저축", color: P.blue, data: d.save },
+        { label: "소득", color: P.ok, data: d.inc }, { label: "증여·상속", color: gift, data: d.wf }, { label: "인출", color: P.accent2, data: d.wd }, { label: "현금에서", color: P.dim, data: d.cash }, { label: "부족", color: P.red, data: d.short },
+        { label: "집", color: P.faint, data: d.home }, { label: "지출", color: P.warn, data: d.spend }, { label: "자녀", color: kid, data: d.kid }, { label: "상환", color: P.bad, data: d.repay }, { label: "저축", color: P.blue, data: d.save },
       ],
     });
     ctx.restore();
@@ -842,8 +1124,7 @@
     ctx.fillStyle = P.text;
     mags.forEach((m, i) => {
       if (m <= lim) return;
-      const x = box.x + slot * (i + 0.5); let p = 0, q = 0;
-      ["inc", "wd", "cash", "short", "spend", "repay", "save", "home"].forEach((k) => { const v = d[k][i]; if (v > 0) p += v; else q -= v; });
+      const x = box.x + slot * (i + 0.5), [p, q] = pm(i);
       ctx.beginPath();
       if (p > lim) { ctx.moveTo(x - 4, box.y + 6); ctx.lineTo(x + 4, box.y + 6); ctx.lineTo(x, box.y); }
       if (q > lim) { const yb = box.y + box.h; ctx.moveTo(x - 4, yb - 6); ctx.lineTo(x + 4, yb - 6); ctx.lineTo(x, yb); }
@@ -866,44 +1147,61 @@
     const P = MB.palette(), i = MB.clamp(cursor - cfg.start, 0, S.R.st.length - 1), s = S.R.st[i], y = S.P.yrs[Math.min(i, S.P.yrs.length - 1)];
     const row = (col, k, v) => `<div class="row"><span><i style="background:${col}"></i>${k}</span><span>${won(conv(v, i))}</span></div>`;
     const f = isReal() ? 1 / y.F : 1;
-    const fl = S.R.flow[Math.min(i, S.R.flow.length - 1)], inflow = (y.net + y.benefit + y.credit + y.nps) * f, out = (y.living + y.house + y.event + y.loanPay) * f;
+    const fl = S.R.flow[Math.min(i, S.R.flow.length - 1)], inflow = (y.net + y.benefit + y.credit + y.nps) * f, out = (y.living + y.house + y.event + y.big + y.loanPay) * f;
+    const kids = S.P.kids.map((k) => cursor - k.age).map((a, j) => (a >= 0 ? `${ORD[j]} ${a}세` : null)).filter(Boolean);
+    const extra = [y.spNet ? `배우자 실수령 ${won(y.spNet * f)}` : "", y.kid + y.giftOut ? `자녀에게 ${won((y.kid + y.giftOut) * f)}` : "", y.wf ? `증여·상속 ${won(y.wf * f)}` : "", y.sale ? `집 줄여 ${won(y.sale * f)}` : ""].filter(Boolean);
     $("lab-bs").innerHTML = `<div class="hd">${cursor}세 재무상태표 <span class="pill">${isReal() ? "오늘 돈" : "명목"}</span></div>` +
       row(P.blue, "현금(비상금)", s.cash) + row(P.accent, "투자 계좌", s.inv) + row(P.accent2, "연금 계좌", s.pen) + row(P.faint, "집·보증금", s.home) + row(P.bad, "부채", -s.debt) +
       `<div class="row tot"><span>순자산</span><span>${won(conv(s.nw, i))}</span></div>` +
-      `<div class="note">${cursor}세 한 해: 소득 ${won(inflow)}, 자산 인출 ${won(fl.wd * f)}, 생활·주거·상환으로 나간 돈 ${won(out)}${y.retired ? " · 은퇴" : y.working ? "" : " · 소득 공백"}</div>`;
+      `<div class="note">${cursor}세 한 해: 소득 ${won(inflow)}, 자산 인출 ${won(fl.wd * f)}, 생활·주거·상환으로 나간 돈 ${won(out)}${extra.length ? ", " + extra.join(", ") : ""}${y.retired ? " · 은퇴" : y.working ? "" : " · 소득 공백"}${kids.length ? `<br>자녀: ${kids.join(", ")}` : ""}</div>`;
   }
 
   function summaries() {
-    const c = cfg, hs = { rent: "월세 " + MB.won(c.rent), jeonse: c.jAge + "세 전세 " + MB.won(c.jAmt), buy: c.bAge + "세 매수 " + MB.won(c.price) };
+    const c = cfg, hs = { rent: "월세 " + MB.won(c.rent), jeonse: c.jAge + "세 전세 " + MB.won(c.jAmt), buy: c.bAge + "세 매수 " + MB.won(c.price), own: "보유 " + MB.won(c.price) };
     $("sum-inc").textContent = MB.won(c.salary) + " · " + c.retire + "세 은퇴";
     $("sum-sp").textContent = "월 " + MB.won(c.living) + " → 은퇴 후 " + MB.won(c.retLiving);
     $("sum-house").textContent = hs[c.house];
     $("sum-inv").textContent = "월 " + MB.won(c.save) + " · " + c.stock + "/" + c.bond + " · 보수 " + MB.pct(c.fee, 2);
     $("sum-pen").textContent = c.npsAge + "세 · 연 " + MB.won(c.pc);
-    const ev = [c.evMarry && "결혼", c.evChild && "자녀", c.evCar && "차", c.evJob && "실직"].filter(Boolean);
-    $("sum-ev").textContent = ev.length ? ev.join("·") : "없음";
+    const nk = c.ev.filter((e) => e.t === "child").length, rest = c.ev.filter((e) => e.t !== "child").map((e) => evShort(e));
+    $("sum-ev").textContent = (nk ? ["자녀 " + nk + "명"] : []).concat([...new Set(rest)]).join(" · ") || "없음";
     $("sum-inf").textContent = MB.pct(c.inf, 2) + " · " + c.end + "세까지";
-    document.querySelectorAll('[data-g="j"], #g-j-h').forEach((e) => (e.hidden = c.house === "rent"));
-    document.querySelectorAll('[data-g="b"]').forEach((e) => (e.hidden = c.house !== "buy"));
+    const g = { r: c.house === "rent", j: c.house === "jeonse" || c.house === "buy", b: c.house === "buy", o: c.house === "own", bo: c.house === "buy" || c.house === "own" };
+    document.querySelectorAll("#sim-life [data-g]").forEach((e) => (e.hidden = !g[e.dataset.g]));
+    $("g-b-h").textContent = c.house === "own" ? "지금 가진 집" : "매수";
+    $("l-price-k").textContent = c.house === "own" ? "지금 시세(오늘 돈)" : "집값(오늘 돈)";
+    $("l-term-k").textContent = c.house === "own" ? "남은 대출 기간" : "대출 기간";
     const p = MN.payroll(c.salary), owed = p.annual.finalTax + p.annual.local, cr = MN.pensionCredit(c.pc, p.annual.taxable);
-    $("pen-note").innerHTML = `첫해 세액공제: 계산상 ${MB.won(cr)}, 낼 세금 ${MB.won(owed)} → 실제 <b>${MB.won(Math.min(cr, owed))}</b>. 예상 국민연금(${S.P.npsYears}년 가입): 월 약 ${MB.won(S.P.npsM)}(오늘 돈).`;
+    $("pen-note").innerHTML = `첫해 세액공제: 계산상 ${MB.won(cr)}, 낼 세금 ${MB.won(owed)} → 실제 <b>${MB.won(Math.min(cr, owed))}</b>. 예상 국민연금(${S.P.npsYears}년 가입): 월 약 ${MB.won(S.P.npsM)}(오늘 돈)${S.P.spNpsM ? `, 배우자 월 약 ${MB.won(S.P.spNpsM)}` : ""}.`;
+    evText();
   }
   function readouts() {
-    const c = cfg, st = S.R.st, ri = MB.clamp(c.retire - c.start, 0, st.length - 1), ei = st.length - 1;
+    const c = cfg, st = S.R.st, ri = MB.clamp(c.retire - c.start, 0, st.length - 1), ei = st.length - 1, Fe = isReal() ? 1 : fAt(ei);
     $("r-ret-k").textContent = "은퇴(" + Math.max(c.start, c.retire) + "세) 순자산";
     $("r-end-k").textContent = c.end + "세 순자산";
     $("r-ret").textContent = won(conv(st[ri].nw, ri));
     $("r-end").innerHTML = `<span class="${st[ei].nw < 0 ? "bad-t" : ""}">${won(conv(st[ei].nw, ei))}</span>`;
     $("r-dead").innerHTML = S.R.dead != null ? `<span class="bad-t">${S.R.dead}세</span>` : `<span class="ok-t">없음</span> <small>${c.end}세까지</small>`;
-    const sum = (a) => a.reduce((s, v, i) => s + conv(v, i), 0);
+    const sum = (a) => a.reduce((s, v, i) => s + conv(v, i), 0), ys = S.P.yrs;
     $("r-tax").textContent = won(sum(S.taxY));
     $("r-int").textContent = won(sum(S.intY));
+    const kid = sum(ys.map((y) => y.kid + y.giftOut)), wf = sum(ys.map((y) => y.wf)), wft = sum(ys.map((y) => y.wfTax));
+    $("r-kid").innerHTML = S.P.kids.length ? `${won(kid)} <small>${S.P.kids.length}명</small>` : `<small>자녀 없음</small>`;
+    $("r-wf").innerHTML = wf ? `${won(wf)} <small>세금 ${won(wft)}</small>` : `<small>없음</small>`;
+    const G = S.leg;
+    $("r-leg-k").textContent = c.end + "세에 물려줄 재산(세후)";
+    $("r-leg").innerHTML = `${won(G.net * Fe)} <small>상속세 ${won(G.tax * Fe)}${S.P.kids.length > 1 ? ` · 1인당 ${won(G.per * Fe)}` : ""}</small>`;
     succText();
     const fl = [];
     const fs = st.findIndex((s, i) => s.short > 0 && c.start + i <= c.retire);
     if (S.R.workDebt && fs >= 0) fl.push(`<span class="bad-t">${c.start + fs - 1}세 무렵 현금이 바닥나 마이너스 통장(연 6%)을 쓴다</span>`);
     if (S.R.dead != null) fl.push(`<span class="bad-t">${S.R.dead}세에 꺼내 쓸 자산이 바닥난다</span>`);
     if (c.house === "buy" && S.P.dsr > 0.4) fl.push(`<span class="warn-t">매수 첫해 주담대 DSR ${Math.round(S.P.dsr * 100)}%: 은행 한도 40%를 넘는다</span>`);
+    if (c.house === "buy" && c.ltv > 0) {
+      const cap = MN.mortgageCap(c.price), loan = c.price * c.ltv;
+      if (loan > cap || c.ltv > 0.4) fl.push(`<span class="warn-t">수도권·규제지역이라면 LTV 40%, 대출 ${MB.won(cap)} 한도(2025.10.15 대책)에 걸린다. 지금 대출 ${MB.won(loan)}(오늘 돈)</span>`);
+    }
+    if (c.ev.some((e) => e.t === "sell") && S.P.sellT === Infinity) fl.push(`<span class="warn-t">'집 줄이기'는 집을 가진 뒤에만 작동한다</span>`);
     if (c.retire <= c.start) fl.push(`<span class="warn-t">은퇴 나이가 시작 나이보다 이르다</span>`);
     if (!fl.length) fl.push(`<span class="ok-t">일하는 동안 빚 없이 굴러가고, ${c.end}세까지 바닥나지 않는다(결정론)</span>`);
     $("lab-flags").innerHTML = fl.join("");
@@ -917,29 +1215,35 @@
     const it = (c, t) => `<span><i style="background:${c}"></i>${t}</span>`;
     $("lab-legend").innerHTML = mode() === "mc" ? it("var(--accent)", "중앙값(p50)") + it("color-mix(in srgb, var(--accent) 35%, transparent)", "하위 10%~상위 10%") + it("var(--text)", "결정론 순자산(점선)")
       : it("var(--blue)", "현금") + it("var(--accent)", "투자") + it("var(--accent-2)", "연금 계좌") + it("var(--text-faint)", "집·보증금") + it("var(--bad)", "부채") + it("var(--text)", "순자산");
-    $("lab-bars-legend").innerHTML = it("var(--ok)", "소득") + it("var(--accent-2)", "인출") + it("var(--text-dim)", "현금에서") + it("var(--red)", "부족(빚)") + it("var(--warn)", "지출") + it("var(--bad)", "상환·이자") + it("var(--blue)", "저축") + it("var(--text-faint)", "집·보증금");
+    $("lab-bars-legend").innerHTML = it("var(--ok)", "소득") + it("var(--gift)", "증여·상속") + it("var(--accent-2)", "인출") + it("var(--text-dim)", "현금에서") + it("var(--red)", "부족(빚)") + it("var(--warn)", "지출") + it("var(--kid)", "자녀") + it("var(--bad)", "상환·이자") + it("var(--blue)", "저축") + it("var(--text-faint)", "집·보증금");
   }
 
   function compute() { S = simulate(cfg); cursor = MB.clamp(cursor, cfg.start, cfg.end); }
   compute();
-  const cvMain = MB.canvas("#lab-cv", drawMain, { get height() { const w = $("lab-cv").parentElement.clientWidth; return w < 560 ? Math.round(w * 0.95) : Math.round(Math.min(400, w * 0.62)); } });
+  let lanesDrawn = 1;
+  const cvMain = MB.canvas("#lab-cv", drawMain, { get height() { const w = $("lab-cv").parentElement.clientWidth; return (w < 560 ? Math.round(w * 0.95) : Math.round(Math.min(400, w * 0.62))) + Math.max(0, lanesDrawn - 1) * 20; } });
   const cvBars = MB.canvas("#lab-bars", drawBars, { get height() { return $("lab-bars").parentElement.clientWidth < 560 ? 150 : 170; } });
   const cvDonut = MB.canvas("#lab-donut", drawDonut, { height: 200 });
-  function drawLight() { cvMain.redraw(); cvBars.redraw(); cvDonut.redraw(); yearPanel(); }
+  function drawLight() {
+    cvMain.redraw();
+    const ln = L ? L.mk.reduce((a, m) => Math.max(a, m.lane + 1), 1) : 1;
+    if (ln !== lanesDrawn) { lanesDrawn = ln; cvMain.resize(); }
+    cvBars.redraw(); cvDonut.redraw(); yearPanel();
+  }
   function drawAll() { legends(); readouts(); drawLight(); }
   MB.drag(cvMain.canvas, {
     start(x, y) {
       dragging = null; if (!L) return;
       if (y > L.box.y + L.box.h + 18) {
         const m = L.mk.find((m) => x >= m.left - 4 && x <= m.left + m.tw + 4 && y >= L.y0 + m.lane * L.laneH - 3 && y <= L.y0 + m.lane * L.laneH + 20);
-        if (m) dragging = m.k;
+        if (m) dragging = m;
       } else dragging = "cursor";
     },
     move(x) {
       if (!dragging || !L) return;
       const a = Math.round(L.inv(x));
       if (dragging === "cursor") { const v = MB.clamp(a, cfg.start, cfg.end); if (v !== cursor) { cursor = v; drawLight(); } }
-      else { const el = $("l-" + dragging), v = MB.clamp(a, +el.min, +el.max); if (v !== cfg[dragging]) ctl[dragging].set(v); }
+      else { const v = MB.clamp(a, dragging.min, dragging.max); if (v !== dragging.age) { dragging.age = v; dragging.set(v); } }
     },
     end() { dragging = null; },
   });
@@ -966,17 +1270,30 @@
     { t: "보수 1.5% → 0.1%로 은퇴 당기기", d: "보수 1.5%로는 성공 확률 80%를 넘길 수 없는 이른 나이에, 보수를 0.1% 이하로 낮춰 80% 이상으로 은퇴한다.", load: { fee: 0.015 },
       ok: () => early && cfg.fee <= 0.001 && early.lo != null && (early.hi == null || cfg.retire < early.hi) && mcOK(0.8),
       st: () => early ? `가장 이른 은퇴(80% 기준): 보수 1.5%면 ${early.hi == null ? "75세에도 미달" : early.hi + "세"}, 0.1%면 ${early.lo == null ? "75세에도 미달" : early.lo + "세"}` : "계산 중" },
-    { t: "40세 1년 실직 버티기", d: "38~42세에 실직 1년을 넣고, 빚 없이 지나가면서 60세 이하 은퇴와 성공 확률 70% 이상을 지킨다.", load: { evJob: 1, aJob: 40 },
-      ok: () => cfg.evJob && cfg.aJob >= 38 && cfg.aJob <= 42 && !S.R.workDebt && cfg.retire <= 60 && mcOK(0.7),
-      st: () => cfg.evJob ? `실직 ${cfg.aJob}세 · 성공 확률 ${pctS()}${S.R.workDebt ? " · 빚 발생" : ""}` : "실직 이벤트가 꺼져 있다" },
+    { t: "40세 1년 실직 버티기", d: "38~42세에 실직 1년을 넣고, 빚 없이 지나가면서 60세 이하 은퇴와 성공 확률 70% 이상을 지킨다.", load: { ev: [newEv("job", { age: 40 })] },
+      ok: () => cfg.ev.some((e) => e.t === "job" && e.age >= 38 && e.age <= 42) && !S.R.workDebt && cfg.retire <= 60 && mcOK(0.7),
+      st: () => cfg.ev.some((e) => e.t === "job") ? `실직 ${cfg.ev.find((e) => e.t === "job").age}세 · 성공 확률 ${pctS()}${S.R.workDebt ? " · 빚 발생" : ""}` : "실직 이벤트가 꺼져 있다" },
     { t: "50세 전에 은퇴하기(FIRE)", d: "은퇴 나이 50세 이하로 90세까지 결정론에서 바닥나지 않고 성공 확률 60% 이상을 만든다.", load: "fire",
       ok: () => cfg.retire <= 50 && cfg.end >= 90 && S.R.dead == null && mcOK(0.6), st: () => `은퇴 ${cfg.retire}세 · 성공 확률 ${pctS()}` },
-    { t: "아이를 키우며 60세에 은퇴하기", d: "자녀 이벤트를 켠 채 60세 이하 은퇴, 빚 없는 현역 시절, 성공 확률 70% 이상을 만든다.", load: { evChild: 1, aChild: 33 },
-      ok: () => cfg.evChild && cfg.retire <= 60 && !S.R.workDebt && mcOK(0.7), st: () => cfg.evChild ? `성공 확률 ${pctS()}${S.R.workDebt ? " · 빚 발생" : ""}` : "자녀 이벤트가 꺼져 있다" },
+    { t: "아이를 키우며 60세에 은퇴하기", d: "자녀 이벤트를 켠 채 60세 이하 은퇴, 빚 없는 현역 시절, 성공 확률 70% 이상을 만든다.", load: { ev: [newEv("child", { age: 33 })] },
+      ok: () => S.P.kids.length > 0 && cfg.retire <= 60 && !S.R.workDebt && mcOK(0.7), st: () => S.P.kids.length ? `성공 확률 ${pctS()}${S.R.workDebt ? " · 빚 발생" : ""}` : "자녀 이벤트가 꺼져 있다" },
     { t: "은퇴 전에 주택대출 다 갚기", d: "'매수' 경로로 은퇴하는 해에 주택담보대출 잔액이 0이고, 빚 없이 90세까지 바닥나지 않게 한다.", load: { house: "buy", bAge: 38, price: 4e8, ltv: 0.5, term: 20 },
       ok: () => cfg.house === "buy" && S.P.buyT < S.P.N && !S.R.workDebt && S.R.dead == null && mortAt(cfg.retire) < 1,
       st: () => cfg.house !== "buy" ? "주거 경로가 '매수'가 아니다" : `은퇴 때 대출 잔액 ${won(mortAt(cfg.retire))}(명목)` },
+    { t: "세 아이에게 2억씩 독립 자금 주기", d: "맞벌이 세 자녀에서 자녀마다 독립 자금 2억원(오늘 돈)을 증여하고도, 빚 없는 현역 시절과 성공 확률 80% 이상을 지킨다.",
+      load: { ev: PRESETS.family.ev.map((e) => (e.t === "child" ? Object.assign({}, e, { gift: 2e8 }) : e)) },
+      ok: () => S.P.kids.length >= 3 && S.P.kids.every((k) => k.gift >= 2e8) && !S.R.workDebt && mcOK(0.8),
+      st: () => `자녀 ${S.P.kids.length}명 · 2억 이상 증여 ${S.P.kids.filter((k) => k.gift >= 2e8).length}명 · 성공 확률 ${pctS()}${S.R.workDebt ? " · 빚 발생" : ""}` },
+    { t: "강남 집 한 채, 상속세 25% 줄이기", d: "'강남 자가'에서 자녀 증여세와 상속세를 합한 가족 전체 세금을, 증여 없이 모두 물려줄 때보다 25% 이상 줄인다. 90세까지 바닥나지 않고 성공 확률 70% 이상이어야 한다.", load: "gangnam",
+      ok: () => { const b = noGiftTax(); return S.P.kidGifts.length > 0 && b > 0 && S.leg.family <= 0.75 * b && S.R.dead == null && mcOK(0.7); },
+      st: () => { const b = noGiftTax(); return `가족 전체 세금 ${won(S.leg.family)} · 증여 없을 때 ${won(b)}${b > 0 ? ` (${Math.round((1 - S.leg.family / b) * 100)}% 줄임)` : ""} · 성공 확률 ${pctS()}`; } },
   ];
+  let ngKey = "", ngVal = 0;
+  function noGiftTax() {
+    const c = Object.assign({}, cfg, { ev: cfg.ev.map((e) => (e.t === "child" ? Object.assign({}, e, { gift: 0 }) : e)) }), k = keyOf(c);
+    if (k !== ngKey) { ngKey = k; ngVal = simulate(c).leg.family; }
+    return ngVal;
+  }
   function mortAt(age) { const t = age - cfg.start - 1; const y = S.P.yrs[MB.clamp(t, 0, S.P.yrs.length - 1)]; return t < 0 ? 0 : y.mort || 0; }
   $("mission-list").innerHTML = MISSIONS.map((m, i) => `<div class="mission" id="ms-${i}"><div class="m-ic">${CHECK}</div><div><h4>${i + 1}. ${m.t}</h4><p>${m.d}</p><p class="m-st" id="ms-${i}-st"></p></div><button class="btn sm" data-m="${i}">설정 불러오기</button></div>`).join("");
   document.querySelectorAll("#mission-list button").forEach((b) => b.addEventListener("click", () => {
@@ -1004,7 +1321,10 @@
     ["은퇴 나이 ±2년", "은퇴 나이", (c, s) => ({ retire: c.retire + 2 * s })],
     ["은퇴 후 생활비 ±10%", "은퇴 생활비", (c, s) => ({ retLiving: c.retLiving * (1 + 0.1 * s) })],
     ["집값 ±20%", "집값", (c, s) => ({ price: c.price * (1 + 0.2 * s) }), "buy"],
-    ["대출 금리 ±1%p", "대출 금리", (c, s) => (c.house === "buy" ? { mRate: Math.max(0.005, c.mRate + 0.01 * s) } : { jRate: Math.max(0.005, c.jRate + 0.01 * s) }), "loan"],
+    ["집값 상승률 ±1%p", "집값 상승률", (c, s) => ({ hg: Math.max(0, c.hg + 0.01 * s) }), "buy"],
+    ["자녀 양육비 ±20%", "양육비", (c, s) => ({ ev: c.ev.map((e) => (e.t === "child" ? Object.assign({}, e, { care: e.care * (1 + 0.2 * s) }) : e)) }), "kid"],
+    ["배우자 연봉 ±10%", "배우자 연봉", (c, s) => ({ ev: c.ev.map((e) => (e.t === "marry" ? Object.assign({}, e, { sp: e.sp * (1 + 0.1 * s) }) : e)) }), "sp"],
+    ["대출 금리 ±1%p", "대출 금리", (c, s) => (c.house === "buy" || c.house === "own" ? { mRate: Math.max(0.005, c.mRate + 0.01 * s) } : { jRate: Math.max(0.005, c.jRate + 0.01 * s) }), "loan"],
   ];
   let TOR = { base: 0, rows: [] };
   const torMetric = MB.seg("tor-metric", () => { tornado(); cvTor.resize(); });
@@ -1015,7 +1335,7 @@
   }
   function tornado() {
     const c = cfg, base = metric(c);
-    const rows = TF.filter((f) => !f[3] || (f[3] === "buy" ? c.house === "buy" : c.house !== "rent")).map((f) => {
+    const rows = TF.filter((f) => !f[3] || ({ buy: c.house === "buy" || c.house === "own", loan: c.house !== "rent" && !(c.house === "own" && !c.oLoan), kid: c.ev.some((e) => e.t === "child"), sp: c.ev.some((e) => e.t === "marry" && e.sp > 0) })[f[3]]).map((f) => {
       const lo = metric(Object.assign({}, c, f[2](c, -1))) - base, hi = metric(Object.assign({}, c, f[2](c, 1))) - base;
       return { label: f[0], short: f[1], lo, hi, span: Math.abs(hi - lo) };
     }).sort((a, b) => b.span - a.span);

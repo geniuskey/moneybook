@@ -204,7 +204,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="ut-cv"></canvas><span class="hint">곡선 위 손잡이를 끈다</span></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>지금 자산 W <output id="ut-w-out"></output></span><input type="range" id="ut-w" min="500" max="20000" step="100" value="3000"></label>
+          <label class="ctrl"><span>지금 자산 W <output id="ut-w-out"></output></span><input type="range" id="ut-w" min="500" max="500000" step="500" value="3000"></label>
           <label class="ctrl"><span>사고 확률 p <output id="ut-p-out"></output></span><input type="range" id="ut-p" min="1" max="30" step="0.5" value="5"></label>
         </div>
       </div>
@@ -417,9 +417,9 @@
         <div class="sim-view"><canvas id="nd-cv"></canvas></div>
         <div class="sim-controls">
           <div class="seg" id="nd-who"><button data-value="hg" class="on">한결(미혼)</button><button data-value="one">외벌이·자녀 둘</button><button data-value="two">맞벌이·자녀 하나</button></div>
-          <label class="ctrl"><span>가족에게 필요한 연 생활비(부족분) <output id="nd-live-out"></output></span><input type="range" id="nd-live" min="0" max="60000000" step="1000000" value="0"></label>
+          <label class="ctrl"><span>가족에게 필요한 연 생활비(부족분) <output id="nd-live-out"></output></span><input type="range" id="nd-live" min="0" max="200000000" step="1000000" value="0"></label>
           <label class="ctrl"><span>부양 기간 <output id="nd-yrs-out"></output></span><input type="range" id="nd-yrs" min="0" max="30" step="1" value="0"></label>
-          <label class="ctrl"><span>남는 빚 <output id="nd-debt-out"></output></span><input type="range" id="nd-debt" min="0" max="500000000" step="1000000" value="12000000"></label>
+          <label class="ctrl"><span>남는 빚 <output id="nd-debt-out"></output></span><input type="range" id="nd-debt" min="0" max="1000000000" step="1000000" value="12000000"></label>
         </div>
       </div>
       <div class="sim-readout">

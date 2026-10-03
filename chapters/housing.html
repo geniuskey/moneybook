@@ -215,8 +215,8 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="gp-cv"></canvas><span class="hint">시세 막대를 위아래로 끈다</span></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>선순위 대출(근저당) <output id="gp-sr-out"></output></span><input type="range" id="gp-sr" min="0" max="200000000" step="5000000" value="30000000"></label>
-          <label class="ctrl"><span>내 전세 보증금 <output id="gp-dep-out"></output></span><input type="range" id="gp-dep" min="50000000" max="300000000" step="5000000" value="200000000"></label>
+          <label class="ctrl"><span>선순위 대출(근저당) <output id="gp-sr-out"></output></span><input type="range" id="gp-sr" min="0" max="2000000000" step="5000000" value="30000000"></label>
+          <label class="ctrl"><span>내 전세 보증금 <output id="gp-dep-out"></output></span><input type="range" id="gp-dep" min="50000000" max="3000000000" step="5000000" value="200000000"></label>
           <label class="ctrl"><span>경매 낙찰가율 <output id="gp-bid-out"></output></span><input type="range" id="gp-bid" min="50" max="100" step="1" value="80"></label>
         </div>
       </div>
@@ -420,8 +420,8 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="rc-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>집값 <output id="rc-p-out"></output></span><input type="range" id="rc-p" min="100000000" max="1500000000" step="10000000" value="500000000"></label>
-          <label class="ctrl"><span>수리·인테리어 <output id="rc-i-out"></output></span><input type="range" id="rc-i" min="0" max="50000000" step="1000000" value="10000000"></label>
+          <label class="ctrl"><span>집값 <output id="rc-p-out"></output></span><input type="range" id="rc-p" min="100000000" max="10000000000" step="10000000" value="500000000"></label>
+          <label class="ctrl"><span>수리·인테리어 <output id="rc-i-out"></output></span><input type="range" id="rc-i" min="0" max="300000000" step="1000000" value="10000000"></label>
           <label class="check"><input type="checkbox" id="rc-first"> 생애최초 주택 취득세 감면(최대 200만원)</label>
           <div class="btn-row"><button class="btn" id="rc-print">다시 출력</button></div>
         </div>
@@ -450,7 +450,7 @@
     <h2>대출과 레버리지: 집값의 10%가 내 돈의 25%가 된다</h2>
     <p>집을 살 때는 대부분 <span class="term">주택담보대출</span><span class="en">(Mortgage)</span>을 받는다. 얼마나 빌릴 수 있는지는 두 가지 규제가 정한다(<a href="loan.html">10장</a>).</p>
     <ul>
-      <li><span class="term">LTV</span><span class="en">(Loan to value, 담보인정비율)</span>: 집값 대비 대출 한도. 지역·주택 수·생애최초 여부에 따라 대략 40~80%이고, 대출 금액 자체에 상한이 붙기도 한다.</li>
+      <li><span class="term">LTV</span><span class="en">(Loan to value, 담보인정비율)</span>: 집값 대비 대출 한도. 지역·주택 수·생애최초 여부에 따라 대략 40~80%이고, 대출 금액 자체에 상한이 붙기도 한다. 2025년 6·27 대책으로 수도권 주택담보대출은 6억원까지로 묶였고, 10·15 대책은 수도권·규제지역의 한도를 집값에 따라 나눴다. 15억원 이하는 6억원, 15억~25억원은 4억원, 25억원을 넘으면 2억원까지이고, 규제지역의 LTV는 40%다. 집값이 비쌀수록 LTV보다 금액 상한이 먼저 걸린다.</li>
       <li><span class="term">DSR</span><span class="en">(Debt service ratio, 총부채원리금상환비율)</span>: 연소득 대비 한 해 동안 갚는 모든 대출의 원리금 비율. 은행권은 40%다(2026년 기준). 미래 금리 상승을 가정해 한도를 더 줄이는 스트레스 DSR도 적용된다.</li>
     </ul>
     <p>대출로 집을 사면 집값의 변화가 <b>내 돈에 몰려서</b> 나타난다. 5억원 집을 내 돈 2억원, 대출 3억원으로 샀다고 하자. 집값이 10%(5,000만원) 오르면 대출은 그대로이므로 5,000만원이 모두 내 몫이다. 내 돈 2억원 기준으로는 25% 수익이다. 10% 떨어지면 똑같이 25% 손실이다. 이것이 <span class="term">레버리지</span><span class="en">(Leverage)</span>, 지렛대 효과다.</p>
@@ -488,8 +488,8 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="pr-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>지금 집값 <output id="pr-p-out"></output></span><input type="range" id="pr-p" min="200000000" max="1500000000" step="10000000" value="500000000"></label>
-          <label class="ctrl"><span>월 저축 <output id="pr-s-out"></output></span><input type="range" id="pr-s" min="300000" max="3000000" step="50000" value="1000000"></label>
+          <label class="ctrl"><span>지금 집값 <output id="pr-p-out"></output></span><input type="range" id="pr-p" min="200000000" max="10000000000" step="10000000" value="500000000"></label>
+          <label class="ctrl"><span>월 저축 <output id="pr-s-out"></output></span><input type="range" id="pr-s" min="300000" max="10000000" step="50000" value="1000000"></label>
           <label class="ctrl"><span>집값 상승률(연) <output id="pr-g-out"></output></span><input type="range" id="pr-g" min="-2" max="8" step="0.25" value="3"></label>
           <div class="seg" id="pr-d"><button data-value="0.3">자기 돈 30%</button><button data-value="0.5" class="on">50%</button><button data-value="1">100%</button></div>
         </div>
@@ -500,7 +500,7 @@
         <div class="stat"><span class="k">걸리는 해</span><span class="v" id="pr-o-y">—</span></div>
         <div class="stat"><span class="k">그때의 집값</span><span class="v" id="pr-o-px">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 기본값(5억원, 월 100만원, 상승 3%, 자기 돈 50%)에서 약 19.5년이 걸린다. ② 상승률을 5%로 올린다. 40년 안에 닿지 않는다. 집값이 저축보다 빨리 달아난다. ③ 자기 돈 비율을 30%로 낮춘다. 빨리 닿지만 그만큼 큰 빚을 진다. (시작 자금 4,000만원, 저축은 연 3%로 굴리고 저축액은 해마다 3% 늘린다고 가정. 집값 상승률은 가정일 뿐 예측이 아니다.)</div>
+      <div class="sim-note">해볼 것: ① 기본값(5억원, 월 100만원, 상승 3%, 자기 돈 50%)에서 약 19.5년이 걸린다. ② 상승률을 5%로 올린다. 40년 안에 닿지 않는다. 집값이 저축보다 빨리 달아난다. ③ 자기 돈 비율을 30%로 낮춘다. 빨리 닿지만 그만큼 큰 빚을 진다. ④ 집값을 서울 아파트 평균 수준인 15억원으로 올린다. 월 100만원으로는 40년 안에 닿지 않고, 월 300만원을 모아도 약 21.7년이 걸린다. (시작 자금 4,000만원, 저축은 연 3%로 굴리고 저축액은 해마다 3% 늘린다고 가정. 집값 상승률은 가정일 뿐 예측이 아니다.)</div>
     </div>
 
     <p>두 선의 경주는 결국 <b>저축이 불어나는 속도와 집값이 오르는 속도</b>의 싸움이다. 저축률을 높이는 것은 내가 정할 수 있지만, 집값 상승률은 정할 수 없다. 그래서 "언제 집을 사야 하는가"에는 정답이 없고, 정할 수 있는 것은 "얼마까지 빚을 질 수 있는가", "집값이 떨어져도 버틸 수 있는가"뿐이다. 앞의 레버리지 확대경이 그 질문의 답을 보여 준다.</p>
@@ -785,7 +785,8 @@
 
   /* ---------------------------------------------------------- 3. 깡통전세 */
   (function () {
-    const P0 = 2.8e8, YMAX = 5e8;
+    const P0 = 2.8e8;
+    const ymax = () => Math.max(5e8, Math.ceil((SR() + DP()) * 1.4 / 1e8) * 1e8);
     let price = P0, aDisp = null, G = null;
     const parts = [];
     const SR = MB.range("gp-sr", (v) => MB.won(v), () => stats());
@@ -806,7 +807,7 @@
     const cv = MB.canvas("#gp-cv", (ctx, w, h) => {
       const P = MB.palette(), c = calc();
       if (aDisp == null) aDisp = c.A;
-      const ch = MB.chart(ctx, { x: 58, y: 34, w: w - 58 - 12, h: h - 34 - 34 }, { x: [0, 1], y: [0, YMAX], xTicks: [], yFmt: MB.wonAxis });
+      const ch = MB.chart(ctx, { x: 58, y: 34, w: w - 58 - 12, h: h - 34 - 34 }, { x: [0, 1], y: [0, ymax()], xTicks: [], yFmt: MB.wonAxis });
       G = ch;
       const B = ch.box, Y = ch.Y, bw = Math.min(84, B.w * 0.22);
       const cxs = [B.x + B.w * 0.17, B.x + B.w * 0.5, B.x + B.w * 0.83];
@@ -841,7 +842,7 @@
       knob(ctx, cxs[0], Y(price), P, 8);
       G.cut = { x3, bw, top: Y(c.sr + c.dep), bot: Y(cut), loss: c.loss };
     }, { aspect: 0.62, minHeight: 320, maxHeight: 420 });
-    MB.drag(cv.canvas, { move(x, y) { if (!G) return; const v = G.box.y + G.box.h - y; price = MB.clamp(Math.round((v / G.box.h) * YMAX / 5e6) * 5e6, 1e8, 4.5e8); stats(); } });
+    MB.drag(cv.canvas, { move(x, y) { if (!G) return; const v = G.box.y + G.box.h - y; const Ym = ymax(); price = MB.clamp(Math.round((v / G.box.h) * Ym / 5e6) * 5e6, 1e8, Ym * 0.9); stats(); } });
     MB.loop(cv.canvas, (dt) => {
       const c = calc();
       if (aDisp == null) aDisp = c.A;

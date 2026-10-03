@@ -135,7 +135,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="sl-cv"></canvas><div class="slip" id="sl-slip"></div></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>세전 연봉 <output id="sl-sal-out"></output></span><input type="range" id="sl-sal" min="20000000" max="150000000" step="1000000" value="36000000"></label>
+          <label class="ctrl"><span>세전 연봉 <output id="sl-sal-out"></output></span><input type="range" id="sl-sal" min="20000000" max="500000000" step="1000000" value="36000000"></label>
           <label class="ctrl"><span>비과세 식대(월) <output id="sl-nt-out"></output></span><input type="range" id="sl-nt" min="0" max="200000" step="10000" value="200000"></label>
           <div class="legend" style="padding:0">
             <span><i style="background:var(--ok)"></i>실수령</span><span><i style="background:var(--accent-2)"></i>국민연금</span><span><i style="background:var(--blue)"></i>건강</span><span><i style="background:var(--text-dim)"></i>장기요양</span><span><i style="background:var(--warn)"></i>고용</span><span><i style="background:var(--bad)"></i>소득세</span><span><i style="background:var(--red)"></i>지방세</span>
@@ -161,7 +161,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="fa-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>세전 연봉 <output id="fa-sal-out"></output></span><input type="range" id="fa-sal" min="20000000" max="120000000" step="1000000" value="36000000"></label>
+          <label class="ctrl"><span>세전 연봉 <output id="fa-sal-out"></output></span><input type="range" id="fa-sal" min="20000000" max="500000000" step="1000000" value="36000000"></label>
           <div class="btn-row"><button class="btn primary" id="fa-go">다시 쏟기</button></div>
           <p style="font-size:13.5px;color:var(--text-dim);margin:0">동전 하나가 1만원이다. 세전 300만원이면 동전 300개가 떨어진다.</p>
         </div>
@@ -293,7 +293,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="fl-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>세전 연봉 <output id="fl-sal-out"></output></span><input type="range" id="fl-sal" min="20000000" max="150000000" step="1000000" value="36000000"></label>
+          <label class="ctrl"><span>세전 연봉 <output id="fl-sal-out"></output></span><input type="range" id="fl-sal" min="20000000" max="500000000" step="1000000" value="36000000"></label>
           <div class="btn-row"><button class="btn primary" id="fl-next">한 단계씩</button><button class="btn" id="fl-all">전부 보기</button></div>
         </div>
       </div>
@@ -452,7 +452,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="fm-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>세전 연봉 <output id="fm-sal-out"></output></span><input type="range" id="fm-sal" min="24000000" max="120000000" step="1000000" value="50000000"></label>
+          <label class="ctrl"><span>세전 연봉 <output id="fm-sal-out"></output></span><input type="range" id="fm-sal" min="24000000" max="500000000" step="1000000" value="50000000"></label>
           <label class="ctrl"><span>공제 인원(본인 포함) <output id="fm-n-out"></output></span><input type="range" id="fm-n" min="1" max="6" step="1" value="1"></label>
         </div>
       </div>
@@ -475,8 +475,8 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="ra-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>현재 연봉 <output id="ra-sal-out"></output></span><input type="range" id="ra-sal" min="24000000" max="100000000" step="1000000" value="36000000"></label>
-          <label class="ctrl"><span>인상액(연) <output id="ra-up-out"></output></span><input type="range" id="ra-up" min="0" max="10000000" step="500000" value="4000000"></label>
+          <label class="ctrl"><span>현재 연봉 <output id="ra-sal-out"></output></span><input type="range" id="ra-sal" min="24000000" max="500000000" step="1000000" value="36000000"></label>
+          <label class="ctrl"><span>인상액(연) <output id="ra-up-out"></output></span><input type="range" id="ra-up" min="0" max="50000000" step="500000" value="4000000"></label>
         </div>
       </div>
       <div class="sim-readout">
@@ -535,7 +535,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="co-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>세전 연봉 <output id="co-sal-out"></output></span><input type="range" id="co-sal" min="24000000" max="120000000" step="1000000" value="36000000"></label>
+          <label class="ctrl"><span>세전 연봉 <output id="co-sal-out"></output></span><input type="range" id="co-sal" min="24000000" max="500000000" step="1000000" value="36000000"></label>
           <label class="check"><input type="checkbox" id="co-sev" checked> 퇴직금 적립(월급의 1/12) 포함</label>
         </div>
       </div>

@@ -137,7 +137,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="st-cv"></canvas><span class="hint">가로로 끌어서 과세표준을 바꾼다</span></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>과세표준 <output id="st-b-out"></output></span><input type="range" id="st-b" min="0" max="200000000" step="1000000" value="30000000"></label>
+          <label class="ctrl"><span>과세표준 <output id="st-b-out"></output></span><input type="range" id="st-b" min="0" max="1200000000" step="1000000" value="30000000"></label>
           <div class="btn-row"><button class="btn sm" data-v="18545160" id="st-hg">한결(1,855만)</button><button class="btn sm" data-v="50000000" id="st-50">5,000만</button><button class="btn sm" data-v="150000000" id="st-150">1.5억</button></div>
           <div class="legend" style="padding:0"><span><i style="background:var(--bad)"></i>한계세율</span><span><i style="background:var(--accent)"></i>실효세율</span></div>
         </div>
@@ -148,7 +148,7 @@
         <div class="stat"><span class="k">실효세율</span><span class="v" id="st-o-3">—</span></div>
         <div class="stat"><span class="k">지방소득세 포함</span><span class="v" id="st-o-4">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 과세표준을 1,400만원에 둔다. 첫 물통만 가득 차고 세금은 84만원이다. ② 5,000만원으로 옮긴다. 한계세율은 15%인데 실효세율은 12.5%에 그친다. ③ 2억원까지 밀어 본다. 한계세율은 계단처럼 뛰지만 실효세율 곡선은 한 번도 뛰지 않고 부드럽게 올라간다. (지방소득세는 소득세의 10%를 따로 더한다. 실제 세금은 이 산출세액에서 세액공제를 뺀 값이다.)</div>
+      <div class="sim-note">해볼 것: ① 과세표준을 1,400만원에 둔다. 첫 물통만 가득 차고 세금은 84만원이다. ② 5,000만원으로 옮긴다. 한계세율은 15%인데 실효세율은 12.5%에 그친다. ③ 2억원까지 밀어 본다. 한계세율은 계단처럼 뛰지만 실효세율 곡선은 한 번도 뛰지 않고 부드럽게 올라간다. ④ 12억원까지 민다. 축이 넓어지며 10억원 위의 45% 구간까지 보인다. (지방소득세는 소득세의 10%를 따로 더한다. 실제 세금은 이 산출세액에서 세액공제를 뺀 값이다.)</div>
     </div>
 
     <p>두 세율을 구분해 둔다. <span class="term">한계세율</span><span class="en">(Marginal tax rate)</span>은 지금보다 1원을 더 벌 때 그 1원에 붙는 세율로, 그래프의 계단이다. <span class="term">실효세율</span><span class="en">(Effective tax rate)</span>은 지금까지 낸 세금을 전체 소득으로 나눈 평균 세율로, 부드러운 곡선이다.</p>
@@ -214,7 +214,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="sc-cv"></canvas><span class="hint">아래 그래프를 가로로 끈다</span></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>과세표준 <output id="sc-b-out"></output></span><input type="range" id="sc-b" min="0" max="150000000" step="1000000" value="30000000"></label>
+          <label class="ctrl"><span>과세표준 <output id="sc-b-out"></output></span><input type="range" id="sc-b" min="0" max="1200000000" step="1000000" value="30000000"></label>
           <label class="ctrl"><span>공제 대상 금액 <output id="sc-d-out"></output></span><input type="range" id="sc-d" min="100000" max="10000000" step="100000" value="1000000"></label>
           <div class="ctrl"><span>세액공제율(지방세 제외)</span><div class="seg" id="sc-r"><button data-value="0.12">12%</button><button data-value="0.15" class="on">15%</button></div></div>
           <div class="legend" style="padding:0"><span><i style="background:var(--accent-2)"></i>소득공제</span><span><i style="background:var(--accent)"></i>세액공제</span></div>
@@ -254,7 +254,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="ys-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>연봉 <output id="ys-s-out"></output></span><input type="range" id="ys-s" min="24000000" max="100000000" step="1000000" value="36000000"></label>
+          <label class="ctrl"><span>연봉 <output id="ys-s-out"></output></span><input type="range" id="ys-s" min="24000000" max="500000000" step="1000000" value="36000000"></label>
           <label class="ctrl"><span>월 카드 사용액 <output id="ys-c-out"></output></span><input type="range" id="ys-c" min="0" max="3000000" step="100000" value="1400000"></label>
           <div class="seg" id="ys-ct"><button data-value="credit" class="on">신용카드</button><button data-value="check">체크카드</button></div>
           <div class="ctrl"><span>원천징수 비율</span><div class="seg" id="ys-wh"><button data-value="0.8">80%</button><button data-value="1" class="on">100%</button><button data-value="1.2">120%</button></div></div>
@@ -287,8 +287,8 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="fi-cv"></canvas><span class="hint">점을 끌어 금융소득을 바꾼다</span></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>한 해 금융소득(이자+배당) <output id="fi-f-out"></output></span><input type="range" id="fi-f" min="0" max="60000000" step="1000000" value="30000000"></label>
-          <label class="ctrl"><span>다른 소득의 과세표준 <output id="fi-o-out"></output></span><input type="range" id="fi-o" min="0" max="150000000" step="1000000" value="30000000"></label>
+          <label class="ctrl"><span>한 해 금융소득(이자+배당) <output id="fi-f-out"></output></span><input type="range" id="fi-f" min="0" max="500000000" step="1000000" value="30000000"></label>
+          <label class="ctrl"><span>다른 소득의 과세표준 <output id="fi-o-out"></output></span><input type="range" id="fi-o" min="0" max="1000000000" step="1000000" value="30000000"></label>
           <div class="legend" style="padding:0"><span><i style="background:var(--text-faint)"></i>15.4% 분리과세만 있다면</span><span><i style="background:var(--accent-2)"></i>실제(종합과세 반영)</span></div>
         </div>
       </div>
@@ -312,7 +312,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="ov-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>실현할 이익 합계 <output id="ov-g-out"></output></span><input type="range" id="ov-g" min="0" max="30000000" step="500000" value="10000000"></label>
+          <label class="ctrl"><span>실현할 이익 합계 <output id="ov-g-out"></output></span><input type="range" id="ov-g" min="0" max="300000000" step="500000" value="10000000"></label>
           <label class="ctrl"><span>나눠 실현할 해 수 <output id="ov-n-out"></output></span><input type="range" id="ov-n" min="1" max="6" step="1" value="4"></label>
           <div class="legend" style="padding:0"><span><i style="background:var(--ok)"></i>기본공제 안</span><span><i style="background:var(--bad)"></i>과세되는 이익</span></div>
         </div>
@@ -386,7 +386,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="pn-cv"></canvas><span class="hint">막대 끝을 위아래로 끈다</span></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>연봉 <output id="pn-s-out"></output></span><input type="range" id="pn-s" min="24000000" max="120000000" step="1000000" value="36000000"></label>
+          <label class="ctrl"><span>연봉 <output id="pn-s-out"></output></span><input type="range" id="pn-s" min="24000000" max="500000000" step="1000000" value="36000000"></label>
           <div class="btn-row"><button class="btn sm" id="pn-hg">한결의 계획(600+300)</button><button class="btn sm" id="pn-0">모두 0</button></div>
         </div>
       </div>
@@ -619,21 +619,24 @@
 
   /* ---------------------------------------------------------- 2. 세금 계단 물통 */
   (function () {
-    const XMAX = 2e8, ST = { cur: 3e7, target: 3e7, t: 0 };
+    const TIERS = [2e8, 5e8, 1e9, 1.2e9], tierOf = (v) => TIERS.find((x) => v <= x) || TIERS[TIERS.length - 1];
+    const ST = { cur: 3e7, target: 3e7, t: 0, xmax: 2e8 };
     let G = null;
+    document.getElementById("st-b").addEventListener("input", (e) => { ST.xmax = tierOf(Number(e.target.value)); });
     const B = MB.range("st-b", man, (v) => { ST.target = v; cv.redraw(); });
     ["st-hg", "st-50", "st-150"].forEach((id) => {
       const b = document.getElementById(id);
-      b.addEventListener("click", () => { const v = Number(b.dataset.v); B.set(v); ST.target = v; });
+      b.addEventListener("click", () => { const v = Number(b.dataset.v); ST.xmax = tierOf(v); B.set(v); ST.target = v; });
     });
     const cv = MB.canvas("#st-cv", (ctx, w, h) => {
-      const P = MB.palette(), cur = ST.cur, tgt = ST.target, t = ST.t;
+      const P = MB.palette(), cur = ST.cur, tgt = ST.target, t = ST.t, XMAX = ST.xmax, RT = XMAX > 1e9 ? 0.5 : 0.4;
+      const RTICKS = RT > 0.4 ? [0, 0.1, 0.2, 0.3, 0.4, 0.5] : [0, 0.1, 0.2, 0.3, 0.4];
       const L = 50, R = 16;
       const T = { x: L, y: 26, w: w - L - R, h: Math.round(h * 0.42) };
-      const X = (v) => T.x + (v / XMAX) * T.w, Yr = (r) => T.y + T.h - (r / 0.4) * T.h;
+      const X = (v) => T.x + (v / XMAX) * T.w, Yr = (r) => T.y + T.h - (r / RT) * T.h;
       G = { x0: T.x, w: T.w };
       ctx.font = MB.font(10.5, true); ctx.fillStyle = P.dim; ctx.textAlign = "right"; ctx.textBaseline = "middle";
-      [0, 0.1, 0.2, 0.3, 0.4].forEach((r) => { ctx.strokeStyle = P.grid; ctx.beginPath(); ctx.moveTo(T.x, Yr(r)); ctx.lineTo(T.x + T.w, Yr(r)); ctx.stroke(); ctx.fillText(Math.round(r * 100) + "%", T.x - 6, Yr(r)); });
+      RTICKS.forEach((r) => { ctx.strokeStyle = P.grid; ctx.beginPath(); ctx.moveTo(T.x, Yr(r)); ctx.lineTo(T.x + T.w, Yr(r)); ctx.stroke(); ctx.fillText(Math.round(r * 100) + "%", T.x - 6, Yr(r)); });
       text(ctx, "세율", 6, T.y - 12, { size: 11, color: P.dim });
       let lo = 0;
       for (const [hi, rate] of K.brackets) {
@@ -665,7 +668,7 @@
       const marg = []; lo = 0;
       for (const [hi, rate] of K.brackets) { if (lo >= XMAX) break; marg.push([lo, rate], [Math.min(hi, XMAX), rate]); lo = hi; }
       const eff = []; for (let i = 1; i <= 200; i++) { const b = (i / 200) * XMAX; eff.push([b, tx(b) / b]); }
-      MB.chart(ctx, C, { x: [0, XMAX], y: [0, 0.42], xFmt: MB.wonAxis, yFmt: (v) => Math.round(v * 100) + "%", xTicks: [0, 5e7, 1e8, 1.5e8, 2e8], yTicks: [0, 0.1, 0.2, 0.3, 0.4],
+      MB.chart(ctx, C, { x: [0, XMAX], y: [0, RT + 0.02], xFmt: MB.wonAxis, yFmt: (v) => Math.round(v * 100) + "%", xTicks: [0, 0.25, 0.5, 0.75, 1].map((f) => f * XMAX), yTicks: RTICKS,
         series: [{ data: marg, color: P.bad, width: 2 }, { data: eff, color: P.accent, width: 2.4 }],
         vlines: [{ x: cur, color: P.text }],
         points: cur > 0 ? [{ x: cur, y: rc, color: P.bad, r: 4.5 }, { x: cur, y: tx(cur) / cur, color: P.accent, r: 4.5 }] : [] });
@@ -676,7 +679,7 @@
       MB.stat("st-o-3", tgt > 0 ? MB.pct(tt / tgt, 1) : "0%");
       MB.stat("st-o-4", W(tt * (1 + K.localTax)));
     }, { aspect: 0.66, minHeight: 400, maxHeight: 470 });
-    MB.drag(cv.canvas, { move(x) { if (!G) return; const v = MB.clamp(((x - G.x0) / G.w) * XMAX, 0, XMAX); B.set(Math.round(v / 1e6) * 1e6); } });
+    MB.drag(cv.canvas, { move(x) { if (!G) return; const v = MB.clamp(((x - G.x0) / G.w) * ST.xmax, 0, ST.xmax); B.set(Math.round(v / 1e6) * 1e6); } });
     MB.loop(cv.canvas, (dt, t) => {
       ST.t = t;
       const d = ST.target - ST.cur;
@@ -719,8 +722,10 @@
 
   /* ---------------------------------------------------------- 4. 소득공제 vs 세액공제 저울 */
   (function () {
-    const XMAX = 1.5e8, S = { tilt: 0, target: 0 };
+    const TIERS = [1.5e8, 5e8, 1e9, 1.2e9];
+    const S = { tilt: 0, target: 0, xmax: 1.5e8 };
     let G = null;
+    document.getElementById("sc-b").addEventListener("input", (e) => { const v = Number(e.target.value); S.xmax = TIERS.find((x) => v <= x) || TIERS[TIERS.length - 1]; });
     const B = MB.range("sc-b", man, () => {});
     const D = MB.range("sc-d", man, () => {});
     const RT = MB.seg("sc-r", () => {});
@@ -735,7 +740,7 @@
       }
     }
     const cv = MB.canvas("#sc-cv", (ctx, w, h) => {
-      const P = MB.palette(), b = B(), d = D(), r = Number(RT());
+      const P = MB.palette(), b = B(), d = D(), r = Number(RT()), XMAX = S.xmax;
       const ds = dSave(b, d), cs = cSave(b, d, r), mx = Math.max(ds, cs, 1);
       // 저울
       const px = w / 2, py = 34, arm = Math.min(w * 0.3, 190), th = S.tilt;
@@ -760,8 +765,8 @@
       const C = { x: 58, y: 196, w: w - 58 - 18, h: h - 196 - 70 };
       const sd = [], sc = [];
       for (let i = 0; i <= 300; i++) { const v = (i / 300) * XMAX; sd.push([v, dSave(v, d)]); sc.push([v, cSave(v, d, r)]); }
-      const ymax = d * 0.4 * L1;
-      G = MB.chart(ctx, C, { x: [0, XMAX], y: [0, ymax], xFmt: MB.wonAxis, yFmt: MB.wonAxis, xTicks: [0, 5e7, 1e8, 1.5e8], xLabel: "과세표준",
+      const ymax = d * (XMAX > 5e8 ? 0.46 : 0.4) * L1;
+      G = MB.chart(ctx, C, { x: [0, XMAX], y: [0, ymax], xFmt: MB.wonAxis, yFmt: MB.wonAxis, xTicks: XMAX === 1.5e8 ? [0, 5e7, 1e8, 1.5e8] : [0, 0.25, 0.5, 0.75, 1].map((f) => f * XMAX), xLabel: "과세표준",
         series: [{ data: sd, color: P.accent2, width: 2.4 }, { data: sc, color: P.accent, width: 2.4 }],
         vlines: [{ x: b, color: P.text }], points: [{ x: b, y: ds, color: P.accent2, r: 4.5 }, { x: b, y: cs, color: P.accent, r: 4.5 }] });
       MB.stat("sc-o-1", W(ds));
@@ -770,7 +775,7 @@
       MB.stat("sc-o-4", Math.abs(ds - cs) < 500 ? "같다" : ds > cs ? tone("warn-t", "소득공제") : tone("ok-t", "세액공제"));
       S.target = MB.clamp(((cs - ds) / mx) * 0.32, -0.32, 0.32);
     }, { aspect: 0.75, minHeight: 440, maxHeight: 500 });
-    MB.drag(cv.canvas, { move(x, y) { if (!G || y < G.box.y - 10) return; const v = MB.clamp(((x - G.box.x) / G.box.w) * XMAX, 0, XMAX); B.set(Math.round(v / 1e6) * 1e6); } });
+    MB.drag(cv.canvas, { move(x, y) { if (!G || y < G.box.y - 10) return; const v = MB.clamp(((x - G.box.x) / G.box.w) * S.xmax, 0, S.xmax); B.set(Math.round(v / 1e6) * 1e6); } });
     MB.loop(cv.canvas, (dt) => {
       const d = S.target - S.tilt;
       if (Math.abs(d) > 1e-4) S.tilt += d * Math.min(1, dt * 6);
@@ -853,8 +858,9 @@
 
   /* ---------------------------------------------------------- 6. 금융소득 2,000만원 */
   (function () {
-    const FMAX = 6e7;
-    let G = null;
+    const TIERS = [6e7, 2e8, 5e8];
+    let FMAX = 6e7, G = null;
+    document.getElementById("fi-f").addEventListener("input", (e) => { const v = Number(e.target.value); FMAX = TIERS.find((x) => v <= x) || TIERS[TIERS.length - 1]; });
     const F = MB.range("fi-f", man, () => cv.redraw());
     const O = MB.range("fi-o", man, () => cv.redraw());
     const finTax = (f, o) => {
@@ -868,7 +874,7 @@
       for (let i = 0; i <= 240; i++) { const v = (i / 240) * FMAX; real.push([v, finTax(v, o)]); flat.push([v, v * K.interestTax]); }
       const ymax = Math.max(finTax(FMAX, o), FMAX * K.interestTax) * 1.08;
       const box = { x: 76, y: 18, w: w - 76 - 18, h: h - 18 - 70 };
-      G = MB.chart(ctx, box, { x: [0, FMAX], y: [0, ymax], xFmt: MB.wonAxis, yFmt: MB.wonAxis, xTicks: [0, 1e7, 2e7, 3e7, 4e7, 5e7, 6e7], xLabel: "한 해 금융소득", yLabel: "금융소득에 붙는 세금",
+      G = MB.chart(ctx, box, { x: [0, FMAX], y: [0, ymax], xFmt: MB.wonAxis, yFmt: MB.wonAxis, xTicks: FMAX === 6e7 ? [0, 1e7, 2e7, 3e7, 4e7, 5e7, 6e7] : [0, 0.2, 0.4, 0.6, 0.8, 1].map((f) => f * FMAX), xLabel: "한 해 금융소득", yLabel: "금융소득에 붙는 세금",
         bands: [{ x0: K.finIncomeThreshold, x1: FMAX, color: P.grid }],
         series: [{ data: flat, color: P.faint, width: 2, dash: [5, 4] }, { data: real, color: P.accent2, width: 2.6 }],
         vlines: [{ x: K.finIncomeThreshold, color: P.warn, label: "2,000만원" }] });

@@ -39,6 +39,17 @@
     isa: { free: 2e6, freeLow: 4e6, rate: 0.099, yearLimit: 2e7 },
     pensionCredit: { limit: 9e6, savingLimit: 6e6, high: 0.165, low: 0.132, cut: 55e6 },
     retireAge: 60, npsAge: 65,
+    transfer: {                  // 증여세·상속세
+      brackets: [[1e8, 0.1], [5e8, 0.2], [1e9, 0.3], [3e9, 0.4], [Infinity, 0.5]],
+      filing: 0.03,              // 신고세액공제
+      giftDed: 5e7,              // 직계존속 → 성년 자녀, 10년 합산
+      giftDedMinor: 2e7,         // 미성년 자녀
+      wedDed: 1e8,               // 혼인·출산 증여재산공제(평생 1억)
+      lump: 5e8,                 // 상속 일괄공제
+      basic: 2e8, perChild: 5e7, // 기초공제 + 자녀공제(일괄공제와 큰 쪽)
+      spouse: 5e8,               // 배우자 상속공제 최소액
+      finMax: 2e8,               // 금융재산 상속공제 한도
+    },
   };
 
   /* ------------------------------------------------------------ 기본 수학 */
@@ -398,6 +409,43 @@
     const credit = base * (salary <= C.cut ? C.high : C.low);
     return o.tax == null ? credit : Math.min(credit, o.tax);
   };
+  /* ------------------------------------------------------------ 증여세·상속세 */
+  /** 과세표준 → 증여세·상속세 산출세액(10~50% 누진) */
+  MN.transferTax = function (base) {
+    let lo = 0, tax = 0;
+    for (const [hi, rate] of MN.KR.transfer.brackets) { if (base > lo) tax += (Math.min(base, hi) - lo) * rate; lo = hi; }
+    return tax;
+  };
+  /**
+   * 직계존속 → 자녀 증여세. 10년 안의 같은 증여(부모 합산)는 더해 계산하고 그때 낸 산출세액을 뺀다.
+   *   MN.giftTax(amount, { prior: 10년 내 이전 증여 합, priorTax: 그때의 산출세액, wed: 혼인·출산 공제 적용액, minor })
+   *   → { base(과세표준), calc(산출세액), tax(신고세액공제 3% 뒤 낼 세금) }
+   */
+  MN.giftTax = function (amount, o = {}) {
+    const T = MN.KR.transfer;
+    const ded = (o.minor ? T.giftDedMinor : T.giftDed) + Math.min(T.wedDed, o.wed || 0);
+    const base = Math.max(0, amount + (o.prior || 0) - ded);
+    const calc = Math.max(0, MN.transferTax(base) - (o.priorTax || 0));
+    return { base, calc, tax: calc * (1 - T.filing) };
+  };
+  /**
+   * 상속세(유산 전체에 매긴다).
+   *   MN.inheritTax(estate, { kids: 자녀 수, fin: 순금융재산, spouse: 배우자 생존, prior: 10년 내 상속인에게 한 증여, priorTax: 그 증여세 산출세액 })
+   *   → { base, ded(상속공제), calc, tax }
+   * 공제 종합한도: 사전증여분에는 공제를 쓰지 못한다.
+   */
+  MN.inheritTax = function (estate, o = {}) {
+    const T = MN.KR.transfer, fin = o.fin || 0, prior = o.prior || 0;
+    const finDed = fin <= 2e7 ? Math.max(0, fin) : fin <= 1e8 ? 2e7 : Math.min(T.finMax, fin * 0.2);
+    const personal = Math.max(T.lump, T.basic + T.perChild * (o.kids || 0)) + (o.spouse ? T.spouse : 0);
+    const ded = Math.min(personal + finDed, Math.max(0, estate));
+    const base = Math.max(0, estate + prior - ded);
+    const calc = Math.max(0, MN.transferTax(base) - (o.priorTax || 0));
+    return { base, ded, calc, tax: calc * (1 - T.filing) };
+  };
+  /** 2025.10.15 대책: 수도권·규제지역 주택담보대출 한도(집값 기준) */
+  MN.mortgageCap = (price) => (price <= 15e8 ? 6e8 : price <= 25e8 ? 4e8 : 2e8);
+
   /** 퇴직금(근속 연수, 최근 3개월 평균 월급) ≈ 30일분 평균임금 × 근속연수 */
   MN.severance = (years, monthlyWage) => monthlyWage * years;
 

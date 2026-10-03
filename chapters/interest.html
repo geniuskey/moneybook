@@ -306,7 +306,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="gr-cv"></canvas><span class="hint">끌어서 해를 읽는다</span></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>매달 적립 <output id="gr-m-out"></output></span><input type="range" id="gr-m" min="10" max="200" step="5" value="50"></label>
+          <label class="ctrl"><span>매달 적립 <output id="gr-m-out"></output></span><input type="range" id="gr-m" min="10" max="1000" step="5" value="50"></label>
           <label class="ctrl"><span>연 수익률 <output id="gr-r-out"></output></span><input type="range" id="gr-r" min="0" max="12" step="0.5" value="5"></label>
           <label class="ctrl"><span>기간 <output id="gr-y-out"></output></span><input type="range" id="gr-y" min="5" max="45" step="1" value="33"></label>
         </div>
@@ -330,7 +330,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="po-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>매달 받을 돈 <output id="po-m-out"></output></span><input type="range" id="po-m" min="50" max="300" step="10" value="100"></label>
+          <label class="ctrl"><span>매달 받을 돈 <output id="po-m-out"></output></span><input type="range" id="po-m" min="50" max="1000" step="10" value="100"></label>
           <label class="ctrl"><span>받는 기간 <output id="po-y-out"></output></span><input type="range" id="po-y" min="5" max="40" step="1" value="20"></label>
           <label class="ctrl"><span>남은 돈의 연 수익률 <output id="po-r-out"></output></span><input type="range" id="po-r" min="0" max="8" step="0.5" value="4"></label>
         </div>
@@ -385,7 +385,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="lt-cv"></canvas><span class="hint">점을 좌우로 끈다</span></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>60세 목표 금액 <output id="lt-g-out"></output></span><input type="range" id="lt-g" min="1" max="10" step="0.5" value="5"></label>
+          <label class="ctrl"><span>60세 목표 금액 <output id="lt-g-out"></output></span><input type="range" id="lt-g" min="1" max="50" step="0.5" value="5"></label>
           <label class="ctrl"><span>연 수익률 <output id="lt-r-out"></output></span><input type="range" id="lt-r" min="0" max="10" step="0.5" value="5"></label>
         </div>
       </div>
@@ -843,7 +843,7 @@
   /* ---------------------------------------------------------- 8. 매달 적립 */
   (function () {
     let cur = null, G = null;
-    const Mo = MB.range("gr-m", (v) => v + "만원", () => cv.redraw());
+    const Mo = MB.range("gr-m", (v) => v.toLocaleString("ko-KR") + "만원", () => cv.redraw());
     const R = MB.range("gr-r", (v) => v.toFixed(1) + "%", () => cv.redraw());
     const Yr = MB.range("gr-y", (v) => v + "년", () => { cur = null; cv.redraw(); });
     const cv = MB.canvas("#gr-cv", (ctx, w, h) => {
@@ -888,7 +888,7 @@
 
   /* ---------------------------------------------------------- 9. 매달 받는 돈 */
   (function () {
-    const Mo = MB.range("po-m", (v) => v + "만원", () => cv.redraw());
+    const Mo = MB.range("po-m", (v) => v.toLocaleString("ko-KR") + "만원", () => cv.redraw());
     const Y = MB.range("po-y", (v) => v + "년", () => cv.redraw());
     const R = MB.range("po-r", (v) => v.toFixed(1) + "%", () => cv.redraw());
     const cv = MB.canvas("#po-cv", (ctx, w, h) => {

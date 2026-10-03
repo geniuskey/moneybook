@@ -103,7 +103,7 @@
         <div class="sim-view"><canvas id="sc-cv"></canvas><span class="hint">막대 위를 짚어 회차 내역을 본다</span></div>
         <div class="sim-controls">
           <div class="seg" id="sc-type"><button data-value="annuity" class="on">원리금균등</button><button data-value="linear">원금균등</button><button data-value="bullet">만기일시</button><button data-value="grace">거치 2년</button></div>
-          <label class="ctrl"><span>빌린 돈 <output id="sc-p-out"></output></span><input type="range" id="sc-p" min="10000000" max="500000000" step="10000000" value="300000000"></label>
+          <label class="ctrl"><span>빌린 돈 <output id="sc-p-out"></output></span><input type="range" id="sc-p" min="10000000" max="2000000000" step="10000000" value="300000000"></label>
           <label class="ctrl"><span>연 금리 <output id="sc-r-out"></output></span><input type="range" id="sc-r" min="1" max="10" step="0.1" value="4"></label>
           <label class="ctrl"><span>기간 <output id="sc-n-out"></output></span><input type="range" id="sc-n" min="5" max="40" step="1" value="30"></label>
         </div>
@@ -234,7 +234,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="op-cv"></canvas><span class="hint">아래 축의 손잡이를 좌우로 끈다</span></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>빌린 돈 <output id="op-p-out"></output></span><input type="range" id="op-p" min="50000000" max="600000000" step="10000000" value="300000000"></label>
+          <label class="ctrl"><span>빌린 돈 <output id="op-p-out"></output></span><input type="range" id="op-p" min="50000000" max="2000000000" step="10000000" value="300000000"></label>
           <label class="ctrl"><span>기간 <output id="op-n-out"></output></span><input type="range" id="op-n" min="5" max="40" step="1" value="30"></label>
         </div>
       </div>
@@ -336,7 +336,7 @@
     <h2>DSR과 LTV: 은행은 얼마까지 빌려 주는가</h2>
     <p>지금까지는 빌린 다음의 이야기였다. 그 전에, 은행은 얼마까지 빌려 줄까. 한국에서는 두 가지 잣대가 대출 한도를 정한다. 하나는 <b>담보</b>, 하나는 <b>소득</b>이다.</p>
     <ul>
-      <li><span class="term">LTV</span><span class="en">(Loan To Value, 주택담보대출비율)</span>: 집값 대비 대출 비율의 상한이다. 6억원 집에 LTV 50%가 적용되면 담보만으로는 최대 3억원이다. 지역(규제지역 여부), 보유 주택 수, 생애최초 구입 여부에 따라 약 40~80% 범위에서 달라진다.</li>
+      <li><span class="term">LTV</span><span class="en">(Loan To Value, 주택담보대출비율)</span>: 집값 대비 대출 비율의 상한이다. 6억원 집에 LTV 50%가 적용되면 담보만으로는 최대 3억원이다. 지역(규제지역 여부), 보유 주택 수, 생애최초 구입 여부에 따라 약 40~80% 범위에서 달라진다. 수도권·규제지역에는 금액 상한도 붙는다. 2025년 6·27 대책이 수도권 주택담보대출을 6억원까지로 묶었고, 10·15 대책은 집값 15억원 이하 6억원, 15억~25억원 4억원, 25억원 초과 2억원으로 한도를 나누고 규제지역 LTV를 40%로 정했다.</li>
       <li><span class="term">DSR</span><span class="en">(Debt Service Ratio, 총부채원리금상환비율)</span>: 1년 동안 갚아야 하는 <b>모든 대출의 원리금</b>을 연소득으로 나눈 비율이다. 주택담보대출뿐 아니라 신용대출, 자동차 할부, 학자금 대출의 원리금까지 더한다. 2026년 기준 은행권 한도는 약 40%, 2금융권은 약 50%다(총대출이 1억원을 넘는 사람에게 적용).</li>
     </ul>
     <div class="formula">$$\mathrm{DSR} = \frac{\text{모든 대출의 연간 원리금 상환액}}{\text{연소득}} \le 40\%$$<div class="where">연소득 3,600만원이면 모든 대출의 원리금을 합쳐 1년에 1,440만원(월 120만원)까지 갚을 수 있는 만큼만 빌릴 수 있다. 일부 대출은 계산 방식이 다르거나 빠지기도 한다.</div></div>
@@ -366,7 +366,7 @@
           <text class="lbl-dim" x="196" y="188">연 4% · 30년</text>
         </svg>
       </div>
-      <figcaption><b>두 개의 문.</b> 대출 한도는 LTV로 계산한 금액과 DSR로 계산한 금액 가운데 <b>작은 쪽</b>이다. 6억원 집을 사려는 연소득 3,600만원의 사람은 LTV로는 3억원까지 되지만, DSR로는 약 2억 5천만원에서 막힌다. 집값이 비싼 지역일수록, 소득이 낮을수록 DSR이 먼저 문을 닫는다.</figcaption>
+      <figcaption><b>두 개의 문.</b> 대출 한도는 LTV로 계산한 금액과 DSR로 계산한 금액 가운데 <b>작은 쪽</b>이다. 6억원 집을 사려는 연소득 3,600만원의 사람은 LTV로는 3억원까지 되지만, DSR로는 약 2억 5천만원에서 막힌다. 수도권·규제지역에서는 여기에 금액 상한이 하나 더 걸린다. 집값이 비싼 지역일수록, 소득이 낮을수록 DSR이 먼저 문을 닫는다.</figcaption>
     </figure>
 
     <p>DSR은 금리와 기간에도 민감하다. 같은 연소득이라도 금리가 높으면 같은 원리금으로 갚을 수 있는 원금이 작아지고, 기간이 길면 커진다. 여기에 <span class="term">스트레스 DSR</span><span class="en">(Stress DSR)</span>이 더해진다. 앞으로 금리가 오를 수 있다고 보고, 한도를 계산할 때만 실제 금리에 가산금리(스트레스 금리)를 더하는 제도다. 2025년 하반기부터 은행권에서 전면 시행되었고, 수도권 주택담보대출 기준 약 1.5%p를 더하는 것이 대표적이다(대출 종류, 지역, 고정금리 기간에 따라 다르고 계속 조정되고 있다). 실제로 내는 금리는 그대로이고, 빌릴 수 있는 한도만 줄어든다.</p>
@@ -376,9 +376,9 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="ds-cv"></canvas><span class="hint">바늘을 끌어 원하는 대출액을 정한다</span></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>연소득 <output id="ds-inc-out"></output></span><input type="range" id="ds-inc" min="20000000" max="150000000" step="1000000" value="36000000"></label>
+          <label class="ctrl"><span>연소득 <output id="ds-inc-out"></output></span><input type="range" id="ds-inc" min="20000000" max="500000000" step="1000000" value="36000000"></label>
           <label class="ctrl"><span>새 대출 금리 <output id="ds-r-out"></output></span><input type="range" id="ds-r" min="2" max="8" step="0.1" value="4"></label>
-          <label class="ctrl"><span>기존 대출 연 원리금 <output id="ds-oth-out"></output></span><input type="range" id="ds-oth" min="0" max="24000000" step="500000" value="0"></label>
+          <label class="ctrl"><span>기존 대출 연 원리금 <output id="ds-oth-out"></output></span><input type="range" id="ds-oth" min="0" max="100000000" step="500000" value="0"></label>
           <div class="seg" id="ds-n"><button data-value="120">10년</button><button data-value="240">20년</button><button data-value="360" class="on">30년</button><button data-value="480">40년</button></div>
           <label class="check"><input type="checkbox" id="ds-st"> 스트레스 금리 +1.5%p</label>
           <div class="btn-row"><button class="btn" id="ds-max">한도까지 채우기</button></div>

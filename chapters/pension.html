@@ -396,7 +396,7 @@
         <div class="sim-view"><canvas id="cr-cv"></canvas></div>
         <div class="sim-controls">
           <label class="ctrl"><span>연 납입액 <output id="cr-p-out"></output></span><input type="range" id="cr-p" min="0" max="1800" step="50" value="900"></label>
-          <label class="ctrl"><span>총급여 <output id="cr-s-out"></output></span><input type="range" id="cr-s" min="2000" max="10000" step="100" value="3600"></label>
+          <label class="ctrl"><span>총급여 <output id="cr-s-out"></output></span><input type="range" id="cr-s" min="2000" max="30000" step="100" value="3600"></label>
           <label class="ctrl"><span>납입 기간 <output id="cr-n-out"></output></span><input type="range" id="cr-n" min="10" max="35" step="1" value="30"></label>
           <label class="check"><input type="checkbox" id="cr-re" checked> 환급액을 다음 해에 다시 넣는다</label>
           <div class="legend" style="padding:0"><span><i style="background:var(--text-dim)"></i>원금</span><span><i style="background:var(--accent-2)"></i>환급 재투자</span><span><i style="background:var(--ok)"></i>운용 수익</span></div>
@@ -460,7 +460,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="po-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>연금 계좌 잔액 <output id="po-b-out"></output></span><input type="range" id="po-b" min="3000" max="50000" step="1000" value="10000"></label>
+          <label class="ctrl"><span>연금 계좌 잔액 <output id="po-b-out"></output></span><input type="range" id="po-b" min="3000" max="300000" step="1000" value="10000"></label>
           <label class="ctrl"><span>나눠 받는 기간 <output id="po-n-out"></output></span><input type="range" id="po-n" min="1" max="30" step="1" value="10"></label>
           <label class="ctrl"><span>수령 시작 나이 <output id="po-a-out"></output></span><input type="range" id="po-a" min="55" max="70" step="1" value="55"></label>
           <div class="legend" style="padding:0"><span><i style="background:var(--ok)"></i>실수령</span><span><i style="background:var(--warn)"></i>연금소득세</span><span><i style="background:var(--bad)"></i>16.5% 과세</span></div>
