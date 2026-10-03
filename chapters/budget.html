@@ -1,0 +1,1214 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and MoneyBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "돈이 어디로 새는지부터 본다. 고정비와 변동비, 필수와 선택, 50·30·20 규칙, 선저축 후소비와 통장 쪼개기, 구독·할부·무이자 할부의 함정, 작은 지출의 기회비용과 라이프스타일 인플레이션을 직접 끌고 바꿔 보며 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>예산과 소비 · MoneyBook</title>
+<meta name="description" content="돈이 어디로 새는지부터 본다. 고정비와 변동비, 필수와 선택, 50·30·20 규칙, 선저축 후소비와 통장 쪼개기, 구독·할부·무이자 할부의 함정, 작은 지출의 기회비용과 라이프스타일 인플레이션을 직접 끌고 바꿔 보며 익힌다.">
+<link rel="canonical" href="https://moneybook.euiyun.com/chapters/budget.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0b8a63">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MoneyBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="예산과 소비 · MoneyBook">
+<meta property="og:description" content="돈이 어디로 새는지부터 본다. 고정비와 변동비, 필수와 선택, 50·30·20 규칙, 선저축 후소비와 통장 쪼개기, 구독·할부·무이자 할부의 함정, 작은 지출의 기회비용과 라이프스타일 인플레이션을 직접 끌고 바꿔 보며 익힌다.">
+<meta property="og:url" content="https://moneybook.euiyun.com/chapters/budget.html">
+<meta property="og:image" content="https://moneybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://moneybook.euiyun.com/chapters/budget.html#chapter","name":"예산과 소비","headline":"예산과 소비 · MoneyBook","description":"돈이 어디로 새는지부터 본다. 고정비와 변동비, 필수와 선택, 50·30·20 규칙, 선저축 후소비와 통장 쪼개기, 구독·할부·무이자 할부의 함정, 작은 지출의 기회비용과 라이프스타일 인플레이션을 직접 끌고 바꿔 보며 익힌다.","url":"https://moneybook.euiyun.com/chapters/budget.html","position":7,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://moneybook.euiyun.com/og.png","dateModified":"2026-10-03","isPartOf":{"@type":"Book","@id":"https://moneybook.euiyun.com/#book","name":"MoneyBook · 살아가는 데 필요한 돈 교과서","url":"https://moneybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MoneyBook","item":"https://moneybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"7. 예산과 소비","item":"https://moneybook.euiyun.com/chapters/budget.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/money.js"></script>
+<!--head:end-->
+<style>
+  .sub-list { display: grid; gap: 4px; }
+  .sub-list .check { justify-content: space-between; }
+  .sub-list .check span { flex: 1; }
+  .sub-list .check em { font-style: normal; font-family: var(--mono); font-size: 12.5px; color: var(--text); }
+  .ctrl-cap { font-size: 12px; color: var(--text-faint); letter-spacing: .06em; font-weight: 700; }
+  #st-legend { padding-bottom: 10px; }
+  #st-legend i { height: 10px; width: 10px; border-radius: 3px; }
+  figure.diagram svg { max-width: 560px; margin: 0 auto; }
+</style>
+</head>
+<body data-chapter="budget">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 07</div>
+    <h1>예산과 소비</h1>
+    <p class="lead">월급날 통장에 찍힌 숫자는 크지만, 다음 월급날 직전의 잔고는 늘 비슷하게 바닥이다. 돈을 더 버는 것보다 먼저 할 일은 돈이 <b>어디로</b> 나가는지 보는 것이다. 이 장은 한결의 첫 달 지출을 조각내 보고, 막대를 직접 끌어 예산을 다시 짜고, 월급날 돈이 흘러가는 순서를 바꿔 본다. 그다음 구독, 할부, 커피 한 잔처럼 작아 보이는 지출이 시간 위에서 얼마나 커지는지, 그리고 왜 사람은 버는 만큼 쓰게 되는지를 확인한다.</p>
+    <ul class="objectives">
+      <li>지출을 고정비와 변동비, 필수와 선택으로 나누고 어디부터 줄일지 판단한다.</li>
+      <li>50·30·20 규칙의 뜻과 한국 물가 현실에서의 변형을 알고, 자기 예산을 기준선과 비교한다.</li>
+      <li>선저축 후소비와 통장 쪼개기가 왜 의지보다 강한지 잔고 곡선으로 설명한다.</li>
+      <li>구독·할부·무이자 할부·후불결제가 미래의 돈을 어떻게 묶는지 계산한다.</li>
+      <li>작은 지출의 기회비용, 쾌락 적응, 라이프스타일 인플레이션, 앵커링과 미끼 상품을 알아보고 24시간 규칙을 쓴다.</li>
+    </ul>
+  </header>
+
+  <section id="leak">
+    <h2>돈은 어디로 새는가</h2>
+    <p><a href="income.html">6장</a>에서 한결의 연봉 3,600만원은 월 실수령 265만 5,840원이 되었다. 한결은 첫 달을 특별한 계획 없이 보냈다. 카드 명세서와 통장 내역을 모아 항목별로 더해 보니 생활비가 201만 5천원, 여기에 학자금 상환 10만 8,811원이 나갔다. 남은 돈은 약 53만원이다.</p>
+    <p>"월급이 적어서 모을 돈이 없다"는 말은 절반만 맞다. 같은 월급으로도 어떤 사람은 50만원을, 어떤 사람은 120만원을 모은다. 차이는 대개 소득이 아니라 <b>지출의 모양</b>에서 난다. 그래서 첫걸음은 줄이는 것이 아니라 보는 것이다. 지출을 항목별로 모아 한 장에 놓는 일, 이것을 <span class="term">예산</span><span class="en">(Budget)</span>이라고 부른다. 예산은 쓰지 말라는 금지 목록이 아니라 한정된 돈을 어디에 쓸지 미리 정한 배분표다.</p>
+    <p>아래 도넛은 한결의 첫 달 실수령액 전체를 조각낸 것이다. 조각이나 오른쪽 목록 위에 마우스를 올리면(휴대폰에서는 누르면) 금액이 나온다. 위의 버튼으로 같은 돈을 세 가지 방식으로 묶어 본다.</p>
+
+    <div class="sim" id="sim-donut">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>한결의 첫 달: 266만원은 어디로 갔나</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="dn-cv"></canvas><span class="hint">조각에 올려 본다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="dn-mode"><button data-value="item" class="on">항목별</button><button data-value="fix">고정·변동</button><button data-value="need">필수·선택</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">나간 돈(학자금 포함)</span><span class="v" id="dn-o-spend">—</span></div>
+        <div class="stat"><span class="k">고정비</span><span class="v" id="dn-o-fix">—</span></div>
+        <div class="stat"><span class="k">변동비</span><span class="v" id="dn-o-var">—</span></div>
+        <div class="stat"><span class="k">남는 돈</span><span class="v" id="dn-o-left">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① '항목별'에서 가장 큰 조각 두 개를 찾는다(월세와 식비·카페). ② '고정·변동'으로 바꾸면 매달 똑같이 나가는 돈이 절반 가까이 된다. ③ '필수·선택'에서 선택 지출이 남는 돈보다 큰지 본다. (식비·카페 60만원 중 장보기와 기본 식사 35만원은 필수, 외식·카페 25만원은 선택으로 나눴다.)</div>
+    </div>
+
+    <p>두 가지 잣대가 보인다. 첫째는 <span class="term">고정비</span><span class="en">(Fixed cost)</span>와 <span class="term">변동비</span><span class="en">(Variable cost)</span>다. 고정비는 쓰든 안 쓰든 매달 같은 금액이 나가는 돈(월세, 통신비, 구독료, 대출 상환)이고, 변동비는 그달의 선택에 따라 달라지는 돈(식비, 쇼핑, 여가)이다. 둘째는 <span class="term">필수 지출</span>과 <span class="term">선택 지출</span>이다. 필수는 없으면 생활이 무너지는 것, 선택은 없어도 살 수는 있지만 삶을 즐겁게 하는 것이다.</p>
+    <p>두 잣대를 겹치면 네 칸이 생기고, 칸마다 줄이는 방법이 다르다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 420 450" role="img" aria-label="고정비와 변동비, 필수와 선택으로 나눈 네 칸에 한결의 지출을 배치한 그림">
+        <text x="133" y="22" text-anchor="middle" class="lbl-b">고정비</text>
+        <text x="133" y="40" text-anchor="middle" class="lbl-dim">매달 같은 금액</text>
+        <text x="323" y="22" text-anchor="middle" class="lbl-b">변동비</text>
+        <text x="323" y="40" text-anchor="middle" class="lbl-dim">그달의 선택</text>
+        <text x="20" y="149" text-anchor="middle" class="lbl-b" transform="rotate(-90 20 149)">필수</text>
+        <text x="20" y="347" text-anchor="middle" class="lbl-b" transform="rotate(-90 20 347)">선택</text>
+        <rect x="40" y="54" width="186" height="190" rx="10" class="f-acc-soft"/>
+        <rect x="230" y="54" width="186" height="190" rx="10" class="f-surface"/>
+        <rect x="40" y="252" width="186" height="190" rx="10" class="f-acc2-soft"/>
+        <rect x="230" y="252" width="186" height="190" rx="10" class="f-warn-soft"/>
+        <text x="52" y="80" class="lbl-acc">월세 60만</text>
+        <text x="52" y="104" class="lbl">관리비·공과금 12만</text>
+        <text x="52" y="128" class="lbl">통신 7만</text>
+        <text x="52" y="152" class="lbl">학자금 상환 10.9만</text>
+        <text x="52" y="190" class="lbl-dim">계약을 바꿔야 줄어든다.</text>
+        <text x="52" y="210" class="lbl-dim">대신 한 번 줄이면</text>
+        <text x="52" y="230" class="lbl-dim">매달 효과</text>
+        <text x="242" y="80" class="lbl">장보기·기본 식사 35만</text>
+        <text x="242" y="104" class="lbl">교통 8만</text>
+        <text x="242" y="210" class="lbl-dim">줄일 여지는 작다.</text>
+        <text x="242" y="230" class="lbl-dim">단가를 낮춘다</text>
+        <text x="52" y="278" class="lbl-acc2">구독 4.5만</text>
+        <text x="52" y="348" class="lbl-dim">잊힌 채로 매달</text>
+        <text x="52" y="368" class="lbl-dim">빠져나간다.</text>
+        <text x="52" y="408" class="lbl-dim">가장 먼저 볼 곳:</text>
+        <text x="52" y="428" class="lbl-dim">해지 한 번이면 끝</text>
+        <text x="242" y="278" class="lbl-bad">쇼핑·여가 40만</text>
+        <text x="242" y="302" class="lbl">외식·카페 25만</text>
+        <text x="242" y="326" class="lbl">경조사·기타 10만</text>
+        <text x="242" y="408" class="lbl-dim">매일의 작은 결정.</text>
+        <text x="242" y="428" class="lbl-dim">상한을 정해 둔다</text>
+      </svg>
+      <figcaption><b>그림 1. 지출의 네 칸.</b> 가로는 금액이 매달 같은지(고정·변동), 세로는 없으면 생활이 무너지는지(필수·선택)다. 고정·선택 칸(구독)은 한 번의 결정으로 끝나고, 변동·선택 칸은 매일 결정을 반복해야 한다. 고정·필수 칸은 가장 크지만 이사나 요금제 변경 같은 큰 결정이 있어야 움직인다.</figcaption>
+    </figure>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>칸</th><th>예</th><th>줄이는 방법</th><th>효과의 모양</th></tr></thead>
+      <tbody>
+        <tr><td>고정·필수</td><td>월세, 통신, 보험, 대출</td><td>요금제 변경, 이사, 재계약, 대환</td><td>어렵지만 한 번이면 매달 반복</td></tr>
+        <tr><td>고정·선택</td><td>구독, 멤버십, 정기 배송</td><td>안 쓰는 것을 해지</td><td>가장 쉽고 확실</td></tr>
+        <tr><td>변동·필수</td><td>장보기, 교통</td><td>단가 낮추기, 대량 구매, 도시락</td><td>작지만 꾸준</td></tr>
+        <tr><td>변동·선택</td><td>외식, 쇼핑, 여가</td><td>월 상한 정하기, 생활비 통장 분리</td><td>의지에 기대면 실패하기 쉽다</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="rule">
+    <h2>50·30·20 규칙과 한국의 현실</h2>
+    <p>예산을 처음 짤 때 가장 널리 쓰이는 출발점이 <span class="term">50·30·20 규칙</span><span class="en">(50/30/20 rule)</span>이다. 세금과 보험료를 뗀 실수령액을 필수 지출 50%, 선택 지출 30%, 저축과 빚 갚기 20%로 나눈다는 단순한 기준이다. 정밀한 공식이 아니라 "내 예산이 어느 쪽으로 기울었는지"를 재는 자다.</p>
+    <p>한결의 첫 달을 이 자에 대 보면 흥미로운 결과가 나온다. 학자금 상환까지 필수에 넣으면 필수 132.9만원(50.0%), 선택 79.5만원(29.9%), 남는 돈 53.2만원(20.0%)이다. 거의 정확히 50·30·20이다. 규칙만 보면 한결은 모범생인데, 한 달에 53만원을 모아서는 원하는 속도로 비상금도, 노후도 준비하기 어렵다. <b>50·30·20은 최소선이지 목표가 아니다.</b></p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>구분</th><th>50·30·20 기준</th><th class="num">기준 금액</th><th class="num">한결 첫 달</th><th class="num">비율</th></tr></thead>
+      <tbody>
+        <tr><td>필수(주거·공과금·통신·교통·기본 식비·학자금)</td><td>50%</td><td class="num">1,327,920</td><td class="num">1,328,811</td><td class="num">50.0%</td></tr>
+        <tr><td>선택(구독·외식·쇼핑·여가·기타)</td><td>30%</td><td class="num">796,752</td><td class="num">795,000</td><td class="num">29.9%</td></tr>
+        <tr><td>저축(남는 돈)</td><td>20%</td><td class="num">531,168</td><td class="num">532,029</td><td class="num">20.0%</td></tr>
+        <tr><td><b>실수령액</b></td><td>100%</td><td class="num">2,655,840</td><td class="num">2,655,840</td><td class="num">100%</td></tr>
+      </tbody>
+    </table></div>
+
+    <p>한국, 특히 수도권에서는 주거비 때문에 필수 지출이 50%를 넘기 쉽다. 실수령 250만원에 월세 70만원이면 주거비만 28%다. 그래서 현실에서는 몇 가지 변형을 쓴다.</p>
+    <ul>
+      <li><b>60·20·20</b>: 주거비가 큰 사회초년생. 필수가 큰 만큼 선택을 줄이고 저축 20%는 지킨다.</li>
+      <li><b>50·20·30</b>: 부모님 집에 살거나 주거비가 작아 필수에 여유가 있을 때. 선택을 늘리지 말고 저축을 30%로 올린다.</li>
+      <li><b>저축 먼저 정하기</b>: 비율보다 저축 금액(예: 월 100만원)을 먼저 정하고, 나머지를 필수와 선택에 나눈다. 다음 절의 선저축과 같은 생각이다.</li>
+    </ul>
+    <p>아래 편집기에서 막대 끝의 손잡이를 좌우로 끌어 한결의 예산을 다시 짜 본다. 월세와 학자금은 계약이라 이번 달에는 움직일 수 없다(흐리게 표시). 저축은 따로 정하지 않는다. 실수령액에서 지출을 뺀 나머지가 자동으로 저축이 된다. 아래쪽 띠는 지금 예산과 50·30·20 기준선을 나란히 놓은 것이다.</p>
+
+    <div class="sim" id="sim-edit">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>예산 편집기: 막대를 끌어 돈을 옮긴다</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="ed-cv"></canvas><span class="hint">막대 끝을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="btn-row"><button class="btn" id="ed-first">첫 달 예산</button><button class="btn primary" id="ed-plan">한결의 재설계안</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">필수</span><span class="v" id="ed-o-need">—</span></div>
+        <div class="stat"><span class="k">선택</span><span class="v" id="ed-o-want">—</span></div>
+        <div class="stat"><span class="k">저축률</span><span class="v" id="ed-o-rate">—</span></div>
+        <div class="stat"><span class="k">월 저축</span><span class="v" id="ed-o-save">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 쇼핑·여가를 40만원에서 20만원으로 끌면 저축 막대가 그만큼 자란다. ② 장보기·식사를 끝까지 왼쪽으로 끌어도 최소선(세로 눈금) 아래로는 내려가지 않는다. 필수는 줄이는 데 한계가 있다. ③ 선택 지출을 모두 오른쪽 끝까지 밀어 저축이 0 아래로 떨어지는 '적자'를 만들어 본다. ④ '한결의 재설계안'을 눌러 월 저축 100만원이 되는 배분을 본다.</div>
+    </div>
+
+    <p>편집기를 만져 보면 두 가지가 손에 잡힌다. 첫째, 저축을 늘리는 힘은 대부분 <b>선택 지출</b>에서 나온다. 필수 지출은 최소선이 있어 아무리 끌어도 몇만 원밖에 줄지 않는다. 둘째, 남는 돈이 저축이 되는 구조에서는 다른 막대가 조금씩만 늘어나도 저축이 그 합만큼 줄어든다. 저축은 모든 지출의 오차를 떠안는 자리다. 이 구조를 뒤집는 방법이 다음 절의 주제다.</p>
+  </section>
+
+  <section id="pay-first">
+    <h2>선저축 후소비: 남는 돈이 아니라 먼저 떼는 돈</h2>
+    <p>대부분의 사람은 "쓰고 남으면 저축한다". 이를 <span class="term">후저축</span>이라 하자. 반대로 월급이 들어오는 날 저축할 돈을 먼저 떼어 다른 통장으로 옮기고, 남은 돈으로 한 달을 사는 것이 <span class="term">선저축</span><span class="en">(Pay yourself first)</span>이다. 산수로는 같다. 수입에서 지출을 빼면 저축이고, 수입에서 저축을 빼면 지출이다. 그런데 결과는 크게 다르다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 420 312" role="img" aria-label="후저축과 선저축의 돈 흐름 비교">
+        <defs><marker id="bg-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <text x="105" y="22" text-anchor="middle" class="lbl-b">후저축</text>
+        <rect x="30" y="36" width="150" height="56" rx="10" class="f-ok-soft"/>
+        <text x="105" y="61" text-anchor="middle" class="lbl-b">월급</text>
+        <text x="105" y="81" text-anchor="middle" class="lbl-dim">266만</text>
+        <line x1="105" y1="94" x2="105" y2="124" class="s-line" stroke-width="10" marker-end="url(#bg-ar)"/>
+        <rect x="30" y="128" width="150" height="56" rx="10" class="f-bad-soft"/>
+        <text x="105" y="153" text-anchor="middle" class="lbl-b">한 달 소비</text>
+        <text x="105" y="173" text-anchor="middle" class="lbl-dim">보이는 만큼 쓴다</text>
+        <line x1="105" y1="186" x2="105" y2="216" class="s-dash" marker-end="url(#bg-ar)"/>
+        <text x="117" y="206" class="lbl-dim">?</text>
+        <rect x="30" y="220" width="150" height="44" rx="10" class="f-surface"/>
+        <text x="105" y="247" text-anchor="middle" class="lbl">남으면 저축</text>
+        <text x="305" y="22" text-anchor="middle" class="lbl-b">선저축</text>
+        <rect x="230" y="36" width="150" height="56" rx="10" class="f-ok-soft"/>
+        <text x="305" y="61" text-anchor="middle" class="lbl-b">월급</text>
+        <text x="305" y="81" text-anchor="middle" class="lbl-dim">266만</text>
+        <line x1="305" y1="94" x2="305" y2="124" class="s-acc" stroke-width="6" marker-end="url(#bg-ar)"/>
+        <rect x="230" y="128" width="150" height="56" rx="10" class="f-acc-soft"/>
+        <text x="305" y="153" text-anchor="middle" class="lbl-b">저축 통장</text>
+        <text x="305" y="173" text-anchor="middle" class="lbl-dim">월급날 자동이체</text>
+        <rect x="230" y="220" width="150" height="56" rx="10" class="f-surface"/>
+        <text x="305" y="245" text-anchor="middle" class="lbl">남은 돈으로</text>
+        <text x="305" y="265" text-anchor="middle" class="lbl">한 달 소비</text>
+        <path d="M382 64 C 416 64, 416 248, 384 248" class="s-line" marker-end="url(#bg-ar)"/>
+        <text x="305" y="300" text-anchor="middle" class="lbl-dim">먼저 뗀 뒤 나머지</text>
+      </svg>
+      <figcaption><b>그림 2. 같은 산수, 다른 순서.</b> 후저축에서 저축은 한 달 동안 일어난 모든 지출의 나머지라서 굵기를 미리 알 수 없다. 선저축에서는 저축이 첫 화살표가 되고, 소비는 눈에 보이는 잔고 안으로 저절로 맞춰진다.</figcaption>
+    </figure>
+
+    <p>왜 순서가 결과를 바꿀까. 사람은 통장 잔고를 "쓸 수 있는 돈"으로 읽는다. 잔고가 많아 보이면 씀씀이가 커지고, 적어 보이면 알아서 아낀다. 일이 주어진 시간만큼 늘어난다는 <span class="term">파킨슨의 법칙</span><span class="en">(Parkinson's law)</span>처럼 지출도 보이는 돈만큼 늘어난다. 아래 시뮬레이터는 이 성향을 단순한 규칙으로 만든 것이다. 하루에 쓰는 돈은 기본 생활비에, 앞으로 낼 고정비를 빼고도 남아 보이는 돈의 일부를 더한 값이다. 그 '일부'가 클수록 보이는 돈에 끌리는 사람이다.</p>
+
+    <div class="sim" id="sim-month">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>한 달 잔고 곡선: 선저축 vs 후저축</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="mo-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="mo-mode"><button data-value="post" class="on">후저축</button><button data-value="pre">선저축 100만</button></div>
+          <label class="ctrl"><span>보이는 돈에 끌리는 정도 <output id="mo-g-out"></output></span><input type="range" id="mo-g" min="0" max="1" step="0.05" value="0.4"></label>
+          <div class="btn-row"><button class="btn primary" id="mo-play">한 달 재생</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">이달 저축</span><span class="v" id="mo-o-save">—</span></div>
+        <div class="stat"><span class="k">변동 지출</span><span class="v" id="mo-o-disc">—</span></div>
+        <div class="stat"><span class="k">저축률</span><span class="v" id="mo-o-rate">—</span></div>
+        <div class="stat"><span class="k">다른 방식과 차이</span><span class="v" id="mo-o-diff">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 후저축에서 '끌리는 정도'를 0에서 1로 올리며 월말 저축이 녹아내리는 것을 본다. ② 선저축으로 바꾸고 같은 슬라이더를 움직인다. 저축 100만원은 그대로이고 달라지는 것은 남는 몇만 원뿐이다. ③ 빨간 점은 고정비가 빠져나가는 날이다. 주말(1주에 이틀)에는 씀씀이가 커진다. (고정비는 재설계안 기준, 모델은 교육용 단순화)</div>
+    </div>
+
+    <p>후저축에서는 성향이 조금만 바뀌어도 저축이 수십만 원씩 흔들린다. 선저축에서는 같은 성향 변화가 생활비 안에서만 출렁인다. <b>의지를 믿지 말고 구조를 바꾸라</b>는 말이 여기서 나온다. 의지는 매일 시험받지만, 월급날 자동이체는 한 번 설정하면 매달 저절로 이긴다.</p>
+
+    <h3>통장 쪼개기: 돈에 주소를 붙인다</h3>
+    <p>선저축을 실제로 굴리는 장치가 <span class="term">통장 쪼개기</span>다. 통장 하나에 모든 돈을 섞어 두면 "이 돈이 월세 낼 돈인지, 써도 되는 돈인지" 구분이 안 된다. 목적별로 통장을 나누면 잔고 자체가 예산이 된다.</p>
+    <ul>
+      <li><b>급여 통장</b>: 월급이 들어오는 곳. 들어오자마자 아래로 나눠 보내고 거의 비워 둔다.</li>
+      <li><b>고정비 통장</b>: 월세, 공과금, 통신비, 대출 상환이 자동이체로 빠져나가는 곳.</li>
+      <li><b>저축 통장</b>: 월급날 가장 먼저 자동이체. 생활비 카드와 연결하지 않는다.</li>
+      <li><b>비상금 통장</b>: 갑작스러운 병원비, 수리비를 위한 돈. 얼마가 적당한지는 <a href="saving.html">8장</a>에서 정한다.</li>
+      <li><b>생활비 통장</b>: 체크카드가 연결된 곳. 이 통장의 잔고가 이번 달 쓸 수 있는 돈의 전부다.</li>
+    </ul>
+    <p>아래 그림에서 '월급날'을 누르면 급여 통장의 돈이 동전이 되어 흘러간다. 저축과 비상금이 먼저, 고정비가 다음, 생활비는 마지막에 남은 것을 받는다. 저축 슬라이더를 오른쪽 끝까지 밀어 생활비 통장이 비는 모습도 본다.</p>
+
+    <div class="sim" id="sim-flow">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>월급날의 흐름: 통장 쪼개기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="fl-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>저축 자동이체 <output id="fl-save-out"></output></span><input type="range" id="fl-save" min="0" max="1500000" step="50000" value="700000"></label>
+          <label class="ctrl"><span>비상금 자동이체 <output id="fl-em-out"></output></span><input type="range" id="fl-em" min="0" max="500000" step="50000" value="300000"></label>
+          <div class="btn-row"><button class="btn primary" id="fl-go">월급날</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">먼저 뗀 돈</span><span class="v" id="fl-o-first">—</span></div>
+        <div class="stat"><span class="k">고정비(자동이체)</span><span class="v" id="fl-o-fix">—</span></div>
+        <div class="stat"><span class="k">생활비 통장</span><span class="v" id="fl-o-live">—</span></div>
+        <div class="stat"><span class="k">하루 쓸 수 있는 돈</span><span class="v" id="fl-o-day">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(저축 70만 + 비상금 30만)에서 생활비 통장에 약 77만원이 남는다. 30일로 나누면 하루 약 2.6만원이다. ② 저축을 150만원으로 올리면 생활비가 바닥나 빨갛게 변한다. 선저축도 현실적인 생활비 위에서만 버틴다. ③ 고정비는 재설계안(월세·관리비·통신·구독·학자금 88.9만원) 기준이다.</div>
+    </div>
+
+    <div class="callout tip"><strong>자동이체 날짜는 월급날 당일이나 다음 날로</strong>
+      <p>저축 이체를 월말에 걸어 두면 그 사이 생활비가 먼저 빠져나가 이체가 실패하거나, 이체 직전에 "이번 달만" 하고 금액을 줄이게 된다. 월급이 들어오는 날 바로 빠져나가게 하는 것이 선저축의 핵심이다. 생활비 통장에는 신용카드보다 체크카드를 연결하면 잔고가 곧 한도가 된다(신용카드는 <a href="credit.html">9장</a>).</p>
+    </div>
+  </section>
+
+  <section id="small">
+    <h2>작은 지출의 시간 가치</h2>
+    <p>커피 한 잔 5,000원은 작다. 그런데 출근하는 날마다 한 잔이면 한 달 20잔, 10만원이고, 1년이면 120만원이다. 작은 지출의 진짜 크기는 금액이 아니라 <b>반복 횟수 × 기간</b>에서 나온다. 여기에 <a href="interest.html">4장</a>의 복리를 더하면, 그 돈을 대신 모아 굴렸을 때의 가치, 즉 <span class="term">기회비용</span><span class="en">(Opportunity cost)</span>이 보인다. 이를 흔히 <span class="term">라테 효과</span><span class="en">(Latte factor)</span>라고 부른다.</p>
+    <div class="formula">$$FV = P \times \frac{(1+r)^{n} - 1}{r}$$<div class="where">\(FV\): \(n\)개월 뒤 모인 돈, \(P\): 매달 아낀 금액, \(r\): 월 이율(연 5%면 약 0.41%), \(n\): 개월 수. 월말에 넣고 월 복리로 굴린다고 가정한다.</div></div>
+    <p>가격, 한 달 횟수, 수익률 가정을 바꿔 본다. 그래프 위를 좌우로 끌면 그해의 값을 읽을 수 있다.</p>
+
+    <div class="sim" id="sim-latte">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>커피 한 잔의 30년</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="lt-cv"></canvas><span class="hint">그래프를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>한 잔 가격 <output id="lt-p-out"></output></span><input type="range" id="lt-p" min="2000" max="8000" step="500" value="5000"></label>
+          <label class="ctrl"><span>한 달 횟수 <output id="lt-n-out"></output></span><input type="range" id="lt-n" min="0" max="40" step="1" value="20"></label>
+          <label class="ctrl"><span>연 수익률 가정 <output id="lt-r-out"></output></span><input type="range" id="lt-r" min="0" max="0.1" step="0.005" value="0.05"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">한 달</span><span class="v" id="lt-o-m">—</span></div>
+        <div class="stat"><span class="k">낸 돈(원금)</span><span class="v" id="lt-o-c">—</span></div>
+        <div class="stat"><span class="k">모아 굴렸다면</span><span class="v" id="lt-o-v">—</span></div>
+        <div class="stat"><span class="k">원금 대비</span><span class="v" id="lt-o-x">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(5,000원 × 20잔, 연 5%)에서 30년 원금 3,600만원이 약 8,150만원이 된다. ② 수익률을 0%로 내리면 두 선이 겹친다. 기회비용의 절반 이상은 '시간'이 만든 것이다. ③ 횟수를 10잔으로 줄이면 결과도 정확히 절반이 된다. (수익률은 가정일 뿐 보장되지 않는다)</div>
+    </div>
+
+    <div class="callout"><strong>커피를 끊으라는 말이 아니다</strong>
+      <p>라테 효과의 교훈은 "즐거움을 모두 끊어라"가 아니다. 매일 반복되는 지출은 하나하나는 작아도 큰 결정과 같은 무게를 가진다는 것이다. 커피가 하루의 중요한 즐거움이라면 지키고, 대신 별 기쁨 없이 반복되는 지출을 찾는다. 그리고 금액만 놓고 보면 월세를 5만원 낮추거나 통신 요금제를 바꾸는 한 번의 결정이 커피 열 잔보다 크다는 점도 함께 기억한다.</p>
+    </div>
+
+    <h3>구독: 잊힌 채로 빠져나가는 고정비</h3>
+    <p>작은 반복 지출 중 가장 눈에 띄지 않는 것이 <span class="term">구독</span><span class="en">(Subscription)</span>이다. 한 번 가입하면 매달 자동으로 결제되고, 쓰지 않아도 해지하기 전까지 빠져나간다. 첫 달 무료 체험 뒤 유료로 넘어가는 구조, 해지 버튼을 깊숙이 숨겨 둔 화면이 이 관성을 노린다. 한결은 영상 스트리밍 두 개, 음악, 쇼핑 멤버십, 클라우드 저장공간으로 매달 4만 5천원을 낸다. 아래 목록에서 쓰지 않는 것을 꺼 본다.</p>
+
+    <div class="sim" id="sim-subs">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>구독 목록: 한 달 몇천 원의 10년</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sb-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="sub-list" id="sb-list">
+            <span class="ctrl-cap">구독 중인 서비스</span>
+            <label class="check"><input type="checkbox" data-v="13500" checked><span>영상 스트리밍 A</span><em>13,500</em></label>
+            <label class="check"><input type="checkbox" data-v="9500" checked><span>영상 스트리밍 B</span><em>9,500</em></label>
+            <label class="check"><input type="checkbox" data-v="10900" checked><span>음악 스트리밍</span><em>10,900</em></label>
+            <label class="check"><input type="checkbox" data-v="7900" checked><span>쇼핑 멤버십</span><em>7,900</em></label>
+            <label class="check"><input type="checkbox" data-v="3200" checked><span>클라우드 저장공간</span><em>3,200</em></label>
+            <label class="check"><input type="checkbox" data-v="3990"><span>배달 멤버십</span><em>3,990</em></label>
+            <label class="check"><input type="checkbox" data-v="9900"><span>운동 앱</span><em>9,900</em></label>
+            <label class="check"><input type="checkbox" data-v="9900"><span>전자책</span><em>9,900</em></label>
+          </div>
+          <label class="ctrl"><span>요금 인상(연) <output id="sb-up-out"></output></span><input type="range" id="sb-up" min="0" max="0.1" step="0.01" value="0.03"></label>
+          <label class="ctrl"><span>대신 모으면 수익률(연) <output id="sb-r-out"></output></span><input type="range" id="sb-r" min="0" max="0.08" step="0.005" value="0.05"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">한 달</span><span class="v" id="sb-o-m">—</span></div>
+        <div class="stat"><span class="k">1년</span><span class="v" id="sb-o-y">—</span></div>
+        <div class="stat"><span class="k">10년 동안 낸 돈</span><span class="v" id="sb-o-10">—</span></div>
+        <div class="stat"><span class="k">모았다면 10년 뒤</span><span class="v" id="sb-o-fv">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 한결의 다섯 개(월 4.5만원)만 켜 둔 상태에서 10년 합계를 본다. ② 영상 스트리밍 하나와 쇼핑 멤버십을 끄면 한 달 2만원 남짓이 줄어든다. ③ 요금 인상을 올려 보면 같은 구독도 해마다 비싸진다. 구독료는 대개 한 번 오르면 내려가지 않는다. (서비스 이름과 요금은 예시)</div>
+    </div>
+
+    <p>구독을 정리하는 가장 간단한 방법은 카드 명세서에서 3개월 동안 반복된 결제를 모두 찾아 "지난달에 실제로 썼는가"를 묻는 것이다. 한 달에 한 번도 열지 않았다면 해지하고, 필요할 때 다시 가입하면 된다. 몇 개를 번갈아 한 달씩만 구독하는 것도 방법이다.</p>
+  </section>
+
+  <section id="installment">
+    <h2>할부, 무이자 할부, 후불결제의 함정</h2>
+    <p>큰 물건을 살 때 <span class="term">할부</span><span class="en">(Installment)</span>는 한 번에 낼 돈을 여러 달로 나눠 준다. 편리하지만 공짜가 아니다. 카드 할부에는 <span class="term">할부 수수료</span>가 붙는데, 카드사와 회원 등급에 따라 대략 연 10%대에서 많게는 20% 가까이까지 된다. 수수료는 아직 갚지 않은 할부 잔액에 붙어서, 갚아 나갈수록 매달 수수료가 줄어든다. 아래에서 금액과 개월 수, 수수료율을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-inst">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>할부의 총비용</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="in-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>물건 가격 <output id="in-p-out"></output></span><input type="range" id="in-p" min="100000" max="3000000" step="100000" value="1200000"></label>
+          <label class="ctrl"><span>할부 개월 <output id="in-n-out"></output></span><input type="range" id="in-n" min="2" max="24" step="1" value="12"></label>
+          <label class="ctrl"><span>할부 수수료율(연) <output id="in-r-out"></output></span><input type="range" id="in-r" min="0" max="0.2" step="0.005" value="0.15"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>원금</span><span><i style="background:var(--bad)"></i>할부 수수료</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">첫 달 청구액</span><span class="v" id="in-o-first">—</span></div>
+        <div class="stat"><span class="k">수수료 합계</span><span class="v" id="in-o-fee">—</span></div>
+        <div class="stat"><span class="k">실제로 낸 값</span><span class="v" id="in-o-tot">—</span></div>
+        <div class="stat"><span class="k">가격 대비 더 낸 비율</span><span class="v" id="in-o-pct">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 120만원 노트북을 12개월, 연 15%로 사면 수수료가 9만 7,500원이다. 물건값이 8% 비싸진 셈이다. ② 개월을 24로 늘리면 매달 부담은 줄지만 수수료는 거의 두 배가 된다. ③ 수수료율을 0으로 내리면 무이자 할부다. 막대의 빨간 부분은 사라지지만 막대의 길이, 즉 앞으로 24개월 동안 묶이는 돈은 그대로다. (원금은 매달 똑같이 나누고 수수료는 남은 잔액에 붙는 방식으로 계산)</div>
+    </div>
+
+    <p>마지막 해볼 것이 이 절의 핵심이다. <span class="term">무이자 할부</span>는 수수료가 없으니 손해가 없어 보인다. 실제로 같은 돈을 일시불로 내는 것과 총액은 같다. 함정은 다른 곳에 있다.</p>
+    <ul>
+      <li><b>미래의 월급을 미리 쓴다.</b> 12개월 무이자 할부는 앞으로 1년 동안 매달 월급의 일부를 이미 써 버린 것이다. 할부가 여러 개 겹치면 새 달이 시작되기 전에 이미 생활비가 줄어 있다.</li>
+      <li><b>가격 감각이 흐려진다.</b> "150만원짜리 노트북"보다 "월 15만원"이 훨씬 가볍게 들린다. 사지 않았을 물건을 사게 만드는 것이 무이자 할부의 진짜 비용이다.</li>
+      <li><b>카드 한도를 통째로 묶는다.</b> 할부로 산 금액 전체가 결제 전까지 카드 한도를 차지한다. 급할 때 쓸 여유가 줄어든다.</li>
+    </ul>
+    <p><span class="term">후불결제</span><span class="en">(BNPL, Buy Now Pay Later)</span>도 같은 구조다. 일부 간편결제 서비스가 소액 한도 안에서 지금 사고 나중에 나눠 내게 해 주는데, 금액이 작고 결제가 간편해 지출로 느껴지지 않는다. 아래에서 한 달에 하나씩 할부로 무언가를 산다고 해 보자. 버튼 하나가 물건 하나다.</p>
+
+    <div class="sim" id="sim-stack">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>쌓이는 할부: 미래의 월급이 이미 쓰여 있다</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="st-cv"></canvas></div>
+        <div class="sim-controls">
+          <span class="ctrl-cap">이번 달에 하나 더 산다(무이자)</span>
+          <div class="btn-row">
+            <button class="btn sm" id="st-a">휴대폰 120만 · 24개월</button>
+            <button class="btn sm" id="st-b">노트북 150만 · 10개월</button>
+            <button class="btn sm" id="st-c">가전 90만 · 6개월</button>
+            <button class="btn sm" id="st-d">여행 60만 · 3개월</button>
+            <button class="btn sm" id="st-e">옷 24만 · 후불 4회</button>
+          </div>
+          <div class="btn-row"><button class="btn" id="st-re">처음부터</button></div>
+        </div>
+      </div>
+      <div class="legend" id="st-legend"></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">가장 무거운 달</span><span class="v" id="st-o-peak">—</span></div>
+        <div class="stat"><span class="k">묶인 미래 소득</span><span class="v" id="st-o-lock">—</span></div>
+        <div class="stat"><span class="k">예산을 넘는 달</span><span class="v" id="st-o-over">—</span></div>
+        <div class="stat"><span class="k">할부가 끝나는 달</span><span class="v" id="st-o-end">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 처음에는 휴대폰과 노트북 두 개만 있다. 두 할부가 겹치는 달은 이미 20만원으로 예산을 넘는다. ② 버튼을 하나씩 더 눌러 막대가 점선(재설계안의 쇼핑·여가 예산 18만원)을 넘는 달이 늘어나는 것을 본다. ③ 휴대폰 할부는 24개월이라 다른 것이 끝나도 바닥에 오래 깔려 있다. 하나하나는 '월 몇만 원'인데 합치면 생활비 통장을 먼저 비운다.</div>
+    </div>
+
+    <div class="callout warn"><strong>수수료율·한도·제도는 바뀐다</strong>
+      <p>이 장의 할부 수수료율(연 15% 예시), 후불결제 한도, 요금은 2026년 기준의 대표적인 예이며, 카드사·서비스·개인 신용도에 따라 다르고 해마다 바뀐다. 실제 숫자는 결제 전에 카드사 안내와 청구서의 '할부 수수료' 항목에서 직접 확인한다. 할부와 후불결제의 연체는 신용점수에 기록된다(<a href="credit.html">9장</a>).</p>
+    </div>
+  </section>
+
+  <section id="mind">
+    <h2>버는 만큼 쓰게 되는 이유</h2>
+    <p>지출을 줄이기 어려운 이유는 계산을 못해서가 아니라 마음이 그렇게 생겼기 때문이다. 이 절에서는 소비를 부풀리는 네 가지 힘을 본다. 돈과 심리는 <a href="behavior.html">17장</a>에서 더 깊이 다룬다.</p>
+
+    <h3>쾌락 적응</h3>
+    <p>새 휴대폰을 산 첫 주는 즐겁다. 한 달 뒤에는 그냥 휴대폰이다. 좋은 것을 얻어도 기쁨이 곧 원래 수준으로 돌아오는 현상을 <span class="term">쾌락 적응</span><span class="en">(Hedonic adaptation)</span>이라고 한다. 문제는 기쁨은 돌아오는데 지출 수준은 돌아오지 않는다는 점이다. 더 좋은 집, 더 비싼 외식에 익숙해지면 그것이 새 기본값이 되고, 그 아래로 내려가는 것은 손실처럼 느껴진다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 420 262" role="img" aria-label="지출 수준이 계단처럼 오르는 동안 만족감은 매번 원래 수준으로 돌아오는 쾌락 적응 그림">
+        <line x1="40" y1="226" x2="410" y2="226" class="s-axis"/>
+        <line x1="40" y1="20" x2="40" y2="226" class="s-axis"/>
+        <text x="410" y="250" text-anchor="end" class="lbl-dim">시간</text>
+        <path d="M40 196 H133 V156 H225 V116 H318 V76 H410" class="s-bad"/>
+        <text x="408" y="66" text-anchor="end" class="lbl-bad">지출 수준</text>
+        <path d="M40 176 H133 C 137 100, 142 92, 147 104 C 159 140, 185 172, 225 176 C 229 100, 234 92, 240 104 C 251 140, 278 172, 318 176 C 322 100, 327 92, 332 104 C 344 140, 370 172, 410 176" class="s-acc"/>
+        <line x1="40" y1="176" x2="410" y2="176" class="s-dash"/>
+        <text x="48" y="166" class="lbl-acc">만족</text>
+        <text x="148" y="88" class="lbl-dim">새 물건</text>
+        <text x="241" y="88" class="lbl-dim">더 좋은 것</text>
+        <text x="334" y="96" class="lbl-dim">또 더</text>
+        <text x="52" y="214" class="lbl-dim">만족의 기준선은 그대로</text>
+      </svg>
+      <figcaption><b>그림 3. 쾌락 적응.</b> 지출을 한 단계 올릴 때마다 만족은 잠깐 튀어 오르지만 곧 같은 기준선으로 돌아온다. 남는 것은 한 단계 높아진 지출 수준이다. 그래서 행복을 소비로 유지하려면 계속 더 써야 한다.</figcaption>
+    </figure>
+
+    <h3>라이프스타일 인플레이션</h3>
+    <p>쾌락 적응이 해마다 쌓이면 <span class="term">라이프스타일 인플레이션</span><span class="en">(Lifestyle inflation)</span>이 된다. 연봉이 오를 때마다 오른 만큼 생활 수준도 올리면 월급은 늘어도 저축은 늘지 않는다. 아래에서 한결의 연봉이 해마다 오를 때 인상분 중 얼마를 소비로 흘려보내는지 정해 본다. 실수령액은 해마다 <a href="income.html">6장</a>의 급여 계산으로 다시 구한다.</p>
+
+    <div class="sim" id="sim-life">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>연봉이 오르면 저축도 오를까</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="lf-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="lf-start"><button data-value="532029" class="on">첫해 저축 53만</button><button data-value="1000000">첫해 저축 100만</button></div>
+          <label class="ctrl"><span>연봉 인상률(연) <output id="lf-raise-out"></output></span><input type="range" id="lf-raise" min="0" max="0.08" step="0.005" value="0.03"></label>
+          <label class="ctrl"><span>인상분 중 소비로 가는 몫 <output id="lf-abs-out"></output></span><input type="range" id="lf-abs" min="0" max="1" step="0.05" value="1"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--ok)"></i>월 실수령</span><span><i style="background:var(--bad)"></i>월 지출</span><span><i style="background:var(--accent)"></i>월 저축(사이 간격)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">첫해 저축률</span><span class="v" id="lf-o-r0">—</span></div>
+        <div class="stat"><span class="k">15년 뒤 월 저축</span><span class="v" id="lf-o-s">—</span></div>
+        <div class="stat"><span class="k">15년 뒤 저축률</span><span class="v" id="lf-o-r">—</span></div>
+        <div class="stat"><span class="k">15년 누적 저축(원금)</span><span class="v" id="lf-o-cum">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(인상분 100% 소비)에서는 월급이 늘어도 저축은 53만원에 그대로 멈추고, 저축률은 오히려 떨어진다. ② '소비로 가는 몫'을 50%로 내리면 인상분의 절반만 저축해도 15년 누적이 크게 달라진다. ③ 인상률을 0으로 내리면 몫과 상관없이 저축은 그대로다. 저축을 늘리는 길은 인상분을 지키는 것뿐이다. (물가는 따로 반영하지 않은 명목 금액)</div>
+    </div>
+
+    <p>현실적인 처방은 "인상분의 절반 규칙"이다. 연봉이 오르면 오른 실수령액의 절반은 저축 자동이체를 올리는 데 쓰고, 나머지 절반으로 생활을 넓힌다. 생활도 조금씩 나아지고 저축률도 함께 오른다. 핵심은 인상된 첫 달에 바로 자동이체 금액을 바꾸는 것이다. 한 달만 늦어도 늘어난 월급은 이미 새 기본값이 된다.</p>
+
+    <h3>앵커링과 미끼 상품</h3>
+    <p>가격은 혼자 보이지 않는다. 처음 본 숫자가 기준점, 곧 닻이 되어 뒤의 판단을 끌어당기는 것을 <span class="term">앵커링</span><span class="en">(Anchoring)</span>이라고 한다. 정가 59,000원에 줄을 긋고 29,000원을 적어 두면 29,000원은 "싸다"로 읽힌다. 그 물건이 원래 29,000원어치인지는 묻지 않게 된다. 비슷한 원리로, 아무도 고르지 않을 선택지를 하나 끼워 넣어 판매자가 원하는 쪽을 돋보이게 하는 것이 <span class="term">미끼 효과</span><span class="en">(Decoy effect)</span>다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 420 476" role="img" aria-label="정가에 줄을 그은 앵커링 가격표와, 미끼 요금제가 끼어 있는 세 가지 요금제 비교">
+        <text x="10" y="22" class="lbl-b">앵커링</text>
+        <rect x="10" y="36" width="180" height="134" rx="12" class="f-elev"/>
+        <text x="100" y="68" text-anchor="middle" class="lbl-dim">오늘만 특가</text>
+        <text x="100" y="100" text-anchor="middle" class="lbl-dim">59,000원</text>
+        <line x1="57" y1="95" x2="143" y2="95" class="s-bad"/>
+        <text x="100" y="142" text-anchor="middle" class="lbl-b" style="font-size:24px">29,000원</text>
+        <text x="206" y="60" class="lbl-dim">처음 본 59,000원이</text>
+        <text x="206" y="82" class="lbl-dim">기준이 되어 29,000원이</text>
+        <text x="206" y="104" class="lbl-dim">'이득'으로 보인다.</text>
+        <text x="206" y="134" class="lbl-dim">물어야 할 질문:</text>
+        <text x="206" y="156" class="lbl-dim">나는 이 물건에 29,000원을</text>
+        <text x="206" y="178" class="lbl-dim">낼 생각이 있었나?</text>
+        <line x1="10" y1="200" x2="410" y2="200" class="s-dash"/>
+        <text x="10" y="228" class="lbl-b">미끼 효과</text>
+        <rect x="10" y="242" width="128" height="140" rx="12" class="f-elev"/>
+        <text x="74" y="270" text-anchor="middle" class="lbl">기본</text>
+        <text x="74" y="302" text-anchor="middle" class="lbl-b">9,900</text>
+        <text x="74" y="330" text-anchor="middle" class="lbl-dim">1명</text>
+        <text x="74" y="352" text-anchor="middle" class="lbl-dim">보통 화질</text>
+        <rect x="146" y="242" width="128" height="140" rx="12" class="f-bad-soft" stroke-dasharray="5 4"/>
+        <text x="210" y="270" text-anchor="middle" class="lbl">미끼</text>
+        <text x="210" y="302" text-anchor="middle" class="lbl-b">16,900</text>
+        <text x="210" y="330" text-anchor="middle" class="lbl-dim">1명</text>
+        <text x="210" y="352" text-anchor="middle" class="lbl-dim">고화질</text>
+        <rect x="282" y="242" width="128" height="140" rx="12" class="f-acc-soft"/>
+        <text x="346" y="270" text-anchor="middle" class="lbl-acc">프리미엄</text>
+        <text x="346" y="302" text-anchor="middle" class="lbl-b">17,900</text>
+        <text x="346" y="330" text-anchor="middle" class="lbl-dim">4명</text>
+        <text x="346" y="352" text-anchor="middle" class="lbl-dim">고화질</text>
+        <text x="278" y="406" text-anchor="middle" class="lbl-dim">1,000원 차이로 4명?</text>
+        <text x="10" y="440" class="lbl-dim">가운데 요금제는 팔려고 만든 것이 아니다.</text>
+        <text x="10" y="462" class="lbl-dim">오른쪽을 '합리적인 선택'처럼 보이게 하는 닻이다.</text>
+      </svg>
+      <figcaption><b>그림 4. 앵커링과 미끼.</b> 위: 지운 정가가 판단의 기준점이 된다. 아래: 거의 같은 값에 훨씬 못한 미끼가 옆에 있으면 비싼 요금제가 이득처럼 보인다. 미끼가 없었다면 9,900원으로 충분했을 사람도 17,900원을 고른다. (가격은 예시)</figcaption>
+    </figure>
+
+    <p>방어법은 비교의 기준을 판매자가 아니라 나에게 두는 것이다. "얼마나 할인되었나"가 아니라 "할인이 없어도 이 값에 샀을까", "가운데 것과 비교해서"가 아니라 "내가 실제로 쓰는 만큼에 맞는가"를 묻는다.</p>
+
+    <h3>충동구매와 24시간 규칙</h3>
+    <p>"지금 사야 할 것 같은" 기분은 강하지만 오래가지 않는다. 그 기분이 식을 시간을 일부러 두는 것이 <span class="term">24시간 규칙</span>이다. 계획에 없던 물건은 장바구니에 담아 두고 하루 뒤에 다시 본다. 큰 물건이라면 기간을 30일로 늘린다. 아래는 장바구니에 담긴 16개 물건이 기다리는 동안 어떻게 되는지 보여 주는 장난감 모델이다. 각 물건의 '갖고 싶은 마음'은 시간이 지나며 식다가, 진짜 필요한 만큼에서 멈춘다. 마음이 점선 위에 있으면 산다.</p>
+
+    <div class="sim" id="sim-wait">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>장바구니에서 하루 기다리기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="wt-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>기다린 시간 <output id="wt-h-out"></output></span><input type="range" id="wt-h" min="0" max="72" step="1" value="0"></label>
+          <div class="btn-row"><button class="btn primary" id="wt-play">시간 흘려보내기</button><button class="btn" id="wt-re">다시</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">그래도 사는 물건</span><span class="v" id="wt-o-n">—</span></div>
+        <div class="stat"><span class="k">쓰는 돈</span><span class="v" id="wt-o-buy">—</span></div>
+        <div class="stat"><span class="k">아낀 돈</span><span class="v" id="wt-o-save">—</span></div>
+        <div class="stat"><span class="k">장바구니 대비</span><span class="v" id="wt-o-pct">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 0시간에는 16개가 모두 점선 위에 있다. 충동의 순간에는 무엇이든 필요해 보인다. ② 24시간으로 옮기면 상당수가 점선 아래로 내려간다. ③ 72시간까지 가도 몇 개는 남는다. 그것이 진짜 필요한 물건이고, 그때는 사면 된다. (식는 속도와 필요의 크기는 무작위로 정한 교육용 가정)</div>
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>한결의 예산 다시 짜기</h2>
+    <p>이제 한결의 첫 달로 돌아간다. 한결은 이 장의 도구를 차례로 적용했다. 목표는 <b>월 저축 100만원</b>이다. 첫 달 남는 돈이 약 53만원이었으니 지출에서 약 47만원을 덜어 내야 한다. 월세와 학자금은 계약이라 손대지 않고, 네 칸 그림의 순서대로 줄였다.</p>
+    <ol>
+      <li><b>고정·선택(구독)</b>: 다섯 개 중 영상 스트리밍 하나, 쇼핑 멤버십, 클라우드를 해지하고 하나는 필요할 때만 한 달씩 쓴다. 4.5만원 → 1.5만원.</li>
+      <li><b>고정·필수(통신)</b>: 데이터를 다 쓰지 않는 요금제를 바꿨다. 7만원 → 4.5만원.</li>
+      <li><b>변동·선택(외식·쇼핑·기타)</b>: 생활비 통장 안에서만 쓰고, 계획에 없던 물건은 24시간 규칙. 외식·카페 25만 → 10만(대부분 아침 커피 몫), 쇼핑·여가 40만 → 18만, 경조사·기타 10만 → 7만원.</li>
+      <li><b>변동·필수(장보기)</b>: 점심 도시락 일부로 35만 → 33만원.</li>
+    </ol>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>항목</th><th class="num">첫 달</th><th class="num">재설계</th><th class="num">차이</th></tr></thead>
+      <tbody>
+        <tr><td>월세</td><td class="num">600,000</td><td class="num">600,000</td><td class="num">0</td></tr>
+        <tr><td>학자금 상환</td><td class="num">108,811</td><td class="num">108,811</td><td class="num">0</td></tr>
+        <tr><td>관리비·공과금</td><td class="num">120,000</td><td class="num">120,000</td><td class="num">0</td></tr>
+        <tr><td>통신</td><td class="num">70,000</td><td class="num">45,000</td><td class="num">−25,000</td></tr>
+        <tr><td>교통</td><td class="num">80,000</td><td class="num">80,000</td><td class="num">0</td></tr>
+        <tr><td>장보기·식사</td><td class="num">350,000</td><td class="num">330,000</td><td class="num">−20,000</td></tr>
+        <tr><td>구독</td><td class="num">45,000</td><td class="num">15,000</td><td class="num">−30,000</td></tr>
+        <tr><td>외식·카페</td><td class="num">250,000</td><td class="num">100,000</td><td class="num">−150,000</td></tr>
+        <tr><td>쇼핑·여가</td><td class="num">400,000</td><td class="num">180,000</td><td class="num">−220,000</td></tr>
+        <tr><td>경조사·기타</td><td class="num">100,000</td><td class="num">70,000</td><td class="num">−30,000</td></tr>
+        <tr><td><b>지출 합계</b></td><td class="num">2,123,811</td><td class="num">1,648,811</td><td class="num">−475,000</td></tr>
+        <tr><td><b>저축(실수령 2,655,840 − 지출)</b></td><td class="num">532,029</td><td class="num">1,007,029</td><td class="num">+475,000</td></tr>
+        <tr><td>저축률</td><td class="num">20.0%</td><td class="num">37.9%</td><td class="num"></td></tr>
+      </tbody>
+    </table></div>
+
+    <p>재설계안을 50·30·20의 자로 다시 재면 필수 48.3%, 선택 13.7%, 저축 37.9%다. 기준선보다 선택을 크게 줄이고 저축을 거의 두 배로 늘린 '50·15·35'형이다. 외식과 쇼핑을 반 이상 줄인 것은 쉽지 않은 선택이었다. 그런데 한결은 커피가 아니라 저녁 외식과 충동 쇼핑을 줄였다. 남겨 둔 외식·카페 10만원은 거의 매일 아침 커피 한 잔 몫이다. 한결에게 그 커피는 하루 중 가장 아끼는 즐거움이기 때문이다. 줄일 곳을 고르는 기준은 금액이 아니라 <b>기쁨 대비 비용</b>이다.</p>
+
+    <div class="slip">
+      <div class="row"><span>월 실수령(25일 입금)</span><span>2,655,840</span></div>
+      <div class="row"><span>→ 저축 통장 자동이체(월급날)</span><span>−1,000,000</span></div>
+      <div class="row"><span>→ 고정비 통장(월세·관리비·통신·구독·학자금)</span><span>−888,811</span></div>
+      <div class="row total"><span>생활비 통장(교통·식비·외식·쇼핑·기타)</span><span>767,029</span></div>
+    </div>
+
+    <div class="casefile">
+      <div class="tag"><b>LEDGER 한결</b><span>한결의 가계부 · 7장</span></div>
+      <h4>남는 돈 53만원에서, 먼저 떼는 돈 100만원으로</h4>
+      <p>첫 달 한결의 지출은 학자금 상환을 포함해 212만 3,811원, 남는 돈은 53만 2,029원이었다. 비율로는 정확히 50·30·20이었지만, 저축이 '남는 돈'이었기 때문에 다음 달에도 같다는 보장이 없었다. 한결은 지출을 네 칸으로 나눠 구독과 통신을 먼저 정리하고, 외식·쇼핑에 상한을 두어 지출을 47만 5천원 줄였다. 그리고 순서를 바꿨다. 월급날 100만원이 저축 통장으로 먼저 빠져나가고, 고정비 88만 8,811원이 자동이체되고, 남은 76만 7,029원이 생활비 통장에 들어간다. 이 통장의 잔고가 한 달 동안 쓸 수 있는 돈의 전부다.</p>
+      <p>매일 마시던 커피 한 잔(5,000원 × 한 달 20잔)은 지켰다. 이 돈을 30년 동안 연 5%로 굴렸다면 약 8,150만원이 된다는 것을 알고도 지킨 것이다. 기회비용을 알고 고른 지출은 낭비가 아니다.</p>
+      <div class="clue">
+        <div><b>이 장에서 정한 것</b>월 저축 100만원(저축률 37.9%), 월급날 선저축 자동이체, 통장 네 개(급여·고정비·저축·생활비)</div>
+        <div><b>아직 남은 문제</b>100만원 중 얼마를 비상금으로 두고, 어떤 통장에 넣어야 이자가 붙고 안전한가</div>
+        <div><b>다음 단계</b><a href="saving.html">8장 저축과 비상금</a>: 비상금의 크기, 예금과 적금의 실제 이자</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>예산은 금지 목록이 아니라 배분표다. 먼저 지출을 고정비·변동비, 필수·선택의 네 칸으로 나눠 본다. 구독 같은 고정·선택 지출이 가장 쉽게 줄고, 고정·필수는 큰 결정이 있어야 움직인다.</li>
+      <li>50·30·20(필수·선택·저축)은 출발점이자 최소선이다. 주거비가 큰 한국에서는 60·20·20 같은 변형을 쓰거나, 비율보다 저축 금액을 먼저 정한다.</li>
+      <li>저축을 '남는 돈'으로 두면 모든 지출의 오차를 저축이 떠안는다. 월급날 먼저 떼는 선저축과 통장 쪼개기는 의지 대신 구조로 저축을 지킨다.</li>
+      <li>작은 반복 지출의 크기는 금액 × 횟수 × 기간이다. 5,000원 커피를 한 달 20잔, 30년이면 원금 3,600만원, 연 5%로 굴린 기회비용은 약 8,150만원이다.</li>
+      <li>할부에는 남은 잔액에 붙는 수수료가 있고, 무이자 할부도 미래의 월급을 미리 묶는다. 여러 개가 쌓이면 새 달이 시작되기 전에 생활비가 줄어 있다.</li>
+      <li>쾌락 적응 때문에 지출 수준은 오르기만 한다. 연봉 인상분을 모두 소비로 보내면 저축은 제자리이고 저축률은 떨어진다. 인상분의 일부를 첫 달에 저축 자동이체로 돌리고, 계획에 없던 물건은 24시간 기다린다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>1. 월 실수령액이 250만원인 사람이 50·30·20 규칙을 그대로 따른다면 매달 저축(과 빚 갚기)에 배정하는 금액은?</p>
+        <div class="opts">
+          <button class="opt">25만원</button>
+          <button class="opt" data-correct>50만원</button>
+          <button class="opt">75만원</button>
+          <button class="opt">125만원</button>
+        </div>
+        <div class="quiz-exp">50·30·20은 실수령액(세금·보험료를 뗀 돈) 기준으로 필수 50%, 선택 30%, 저축 20%를 나눈다. 250만원의 20%는 50만원이다. 125만원은 필수 몫, 75만원은 선택 몫이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>2. 선저축(월급날 먼저 저축하고 남은 돈으로 생활)이 후저축보다 저축을 잘 지키는 가장 큰 이유는?</p>
+        <div class="opts">
+          <button class="opt">먼저 저축한 돈에는 이자가 더 많이 붙기 때문이다.</button>
+          <button class="opt">후저축은 산수상 저축이 더 작게 계산되기 때문이다.</button>
+          <button class="opt">선저축을 하면 고정비가 저절로 줄어들기 때문이다.</button>
+          <button class="opt" data-correct>사람은 보이는 잔고만큼 쓰는 경향이 있어, 먼저 떼어 두면 소비가 남은 잔고 안으로 맞춰지기 때문이다.</button>
+        </div>
+        <div class="quiz-exp">수입 − 지출 = 저축이라는 산수는 순서와 상관없이 같다. 차이는 행동에서 난다. 후저축에서는 저축이 한 달 동안의 모든 지출의 나머지라서 씀씀이가 조금만 커져도 저축이 줄어든다. 선저축은 저축을 먼저 확정하고, 지출이 눈에 보이는 잔고 안에서 조정되게 만든다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>3. 150만원짜리 노트북을 10개월 무이자 할부로 샀다. 이 선택에 대한 설명으로 가장 알맞은 것은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>수수료는 없지만 앞으로 10개월 동안 매달 15만원의 월급이 이미 쓰인 것이고, 카드 한도도 그만큼 묶인다.</button>
+          <button class="opt">수수료가 없으니 일시불보다 언제나 손해가 없고 예산에도 영향이 없다.</button>
+          <button class="opt">무이자 할부는 매달 수수료가 줄어드는 구조라 총비용이 일시불보다 싸다.</button>
+          <button class="opt">할부 기간이 길수록 매달 부담이 줄어 저축률이 오른다.</button>
+        </div>
+        <div class="quiz-exp">무이자 할부의 총액은 일시불과 같다. 그러나 미래 10개월의 소득 일부를 미리 써 버린 것이어서 할부가 여러 개 겹치면 생활비가 먼저 줄어든다. 결제 전까지 할부 잔액만큼 카드 한도도 차지한다. "월 15만원"으로 쪼개 보이는 가격이 구매 판단을 흐리는 것도 비용이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>4. 첫해 월 저축이 53만원인 사람이 연봉이 오를 때마다 오른 실수령액을 모두 생활 수준을 높이는 데 쓴다. 15년 뒤 이 사람의 저축은?</p>
+        <div class="opts">
+          <button class="opt">월급이 오른 만큼 월 저축액도 함께 늘어난다.</button>
+          <button class="opt">월 저축액도, 저축률도 그대로다.</button>
+          <button class="opt" data-correct>월 저축액은 53만원 그대로이고, 월급이 커진 만큼 저축률은 오히려 떨어진다.</button>
+          <button class="opt">지출이 늘어난 만큼 저축은 0이 된다.</button>
+        </div>
+        <div class="quiz-exp">인상분이 모두 지출로 가면 실수령 − 지출의 차이, 즉 저축액은 변하지 않는다. 분모인 실수령액은 커지므로 저축률은 내려간다. 이것이 라이프스타일 인플레이션이다. 인상분의 일부라도 첫 달에 저축 자동이체로 돌려야 저축이 소득과 함께 자란다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+(function () {
+  "use strict";
+  const HG = MN.HG;
+  const NET = MN.payroll(HG.salary, { nontax: HG.nontax }).monthly.net;
+  const LOAN = MN.pmt(HG.studentLoan, HG.studentRate / 12, HG.studentMonths);
+  const won = (x) => MB.won(x);
+  const man = (x) => MB.won(x, { short: true });
+  const wonExact = (x) => (x < 0 ? "−" : "") + Math.round(Math.abs(x)).toLocaleString("ko-KR") + "원";
+
+  function alpha(c, a) {
+    c = (c || "").trim();
+    if (c[0] !== "#") return c;
+    let h = c.slice(1);
+    if (h.length === 3) h = h.split("").map((x) => x + x).join("");
+    const n = parseInt(h.slice(0, 6), 16);
+    return "rgba(" + ((n >> 16) & 255) + "," + ((n >> 8) & 255) + "," + (n & 255) + "," + a + ")";
+  }
+  function rrect(ctx, x, y, w, h, r) {
+    w = Math.max(0, w); h = Math.max(0, h); r = Math.min(r, w / 2, h / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  function text(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = MB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color || MB.palette().text;
+    ctx.textAlign = o.align || "left";
+    ctx.textBaseline = o.base || "middle";
+    ctx.fillText(s, x, y);
+  }
+  const CAT = { rent: ["accent", 1], util: ["accent", 0.7], phone: ["accent", 0.45], subs: ["accent2", 1], trans: ["blue", 0.85], food: ["warn", 1], eat: ["warn", 0.6], shop: ["bad", 0.9], etc: ["dim", 0.75], loan: ["blue", 0.5], left: ["ok", 1] };
+  const cc = (P, k) => alpha(P[CAT[k][0]], CAT[k][1]);
+
+  /* ---------------------------------------------------------- 1. 도넛 */
+  (function () {
+    const cvEl = document.getElementById("dn-cv");
+    const base = HG.budget.map((b) => ({ key: b.key, label: b.name, value: b.v, fixed: b.fixed }));
+    base.push({ key: "loan", label: "학자금 상환", value: LOAN, fixed: true });
+    const spend = base.reduce((s, b) => s + b.value, 0);
+    const left = NET - spend;
+    const fixedSum = base.filter((b) => b.fixed).reduce((s, b) => s + b.value, 0);
+    const NEED_KEYS = { rent: 1, util: 1, phone: 1, trans: 1, loan: 1 };
+    const needSum = base.filter((b) => NEED_KEYS[b.key]).reduce((s, b) => s + b.value, 0) + 350000;
+    let hi = -1, hitFn = null, rowsBox = null;
+    function items(P) {
+      if (mode() === "fix") return [{ label: "고정비", value: fixedSum, color: P.accent }, { label: "변동비", value: spend - fixedSum, color: P.warn }, { label: "남는 돈", value: left, color: P.ok }];
+      if (mode() === "need") return [{ label: "필수", value: needSum, color: P.accent }, { label: "선택", value: spend - needSum, color: P.accent2 }, { label: "남는 돈", value: left, color: P.ok }];
+      return base.map((b) => ({ label: b.label, value: b.value, color: cc(P, b.key) })).concat([{ label: "남는 돈", value: left, color: cc(P, "left") }]);
+    }
+    const mode = MB.seg("dn-mode", () => { hi = -1; cv.redraw(); });
+    const cv = MB.canvas(cvEl, (ctx, w, h) => {
+      const P = MB.palette(), its = items(P);
+      let cx, cy, R, lx, ly, lw, rh = 24;
+      if (w >= 560) { R = Math.min(125, h / 2 - 22); cx = R + 34; cy = h / 2; lx = cx + R + 40; lw = w - lx - 20; ly = cy - (its.length * rh) / 2; }
+      else { R = Math.min(w * 0.33, 120); cx = w / 2; cy = R + 18; lx = 16; lw = w - 32; ly = cy + R + 22; rh = 22; }
+      const sel = hi >= 0 && hi < its.length ? its[hi] : null;
+      const d = MB.donut(ctx, cx, cy, R, its, { inner: 0.58, highlight: hi, center: sel ? { big: man(sel.value), small: sel.label } : { big: man(NET), small: "월 실수령" } });
+      hitFn = d.hit;
+      rowsBox = { x: lx, y: ly, w: lw, rh: rh, n: its.length };
+      its.forEach((it, i) => {
+        const y = ly + i * rh + rh / 2;
+        if (i === hi) { ctx.fillStyle = P.surface; rrect(ctx, lx - 6, y - rh / 2 + 1, lw + 12, rh - 2, 6); ctx.fill(); }
+        ctx.fillStyle = it.color; rrect(ctx, lx, y - 6, 12, 12, 3); ctx.fill();
+        text(ctx, it.label, lx + 20, y, { size: 13, color: i === hi ? P.text : P.dim, weight: i === hi ? 700 : 400 });
+        text(ctx, man(it.value), lx + lw - 52, y, { size: 12, mono: true, align: "right", color: P.text });
+        text(ctx, Math.round((it.value / NET) * 100) + "%", lx + lw, y, { size: 12, mono: true, align: "right", color: P.dim });
+      });
+    }, { get height() { const w = cvEl.parentElement.clientWidth || 600; return w >= 560 ? 300 : Math.round(Math.min(w * 0.33, 120) * 2 + 76 + 10 * 22); } });
+    function pick(x, y) {
+      let i = hitFn ? hitFn(x, y) : -1;
+      if (i < 0 && rowsBox && x >= rowsBox.x - 6 && x <= rowsBox.x + rowsBox.w + 6) {
+        const k = Math.floor((y - rowsBox.y) / rowsBox.rh);
+        if (k >= 0 && k < rowsBox.n) i = k;
+      }
+      if (i !== hi) { hi = i; cv.redraw(); }
+    }
+    cvEl.addEventListener("pointermove", (e) => { const r = cvEl.getBoundingClientRect(); pick(e.clientX - r.left, e.clientY - r.top); });
+    cvEl.addEventListener("pointerdown", (e) => { const r = cvEl.getBoundingClientRect(); pick(e.clientX - r.left, e.clientY - r.top); });
+    cvEl.addEventListener("pointerleave", () => { if (hi !== -1) { hi = -1; cv.redraw(); } });
+    MB.stat("dn-o-spend", man(spend) + "원");
+    MB.stat("dn-o-fix", man(fixedSum) + "원");
+    MB.stat("dn-o-var", man(spend - fixedSum) + "원");
+    MB.stat("dn-o-left", '<span class="ok-t">' + man(left) + "원</span>");
+  })();
+
+  /* ---------------------------------------------------------- 2. 예산 편집기 */
+  (function () {
+    const FIRST = { util: 120000, phone: 70000, trans: 80000, food: 350000, subs: 45000, eat: 250000, shop: 400000, etc: 100000 };
+    const PLAN = { util: 120000, phone: 45000, trans: 80000, food: 330000, subs: 15000, eat: 100000, shop: 180000, etc: 70000 };
+    const rows = [
+      { k: "rent", n: "월세", v: HG.rent, lock: true, g: "need" },
+      { k: "loan", n: "학자금 상환", v: LOAN, lock: true, g: "need" },
+      { k: "util", n: "관리비·공과금", g: "need", min: 80000 },
+      { k: "phone", n: "통신", g: "need", min: 25000 },
+      { k: "trans", n: "교통", g: "need", min: 50000 },
+      { k: "food", n: "장보기·식사", g: "need", min: 250000 },
+      { k: "subs", n: "구독", g: "want", min: 0 },
+      { k: "eat", n: "외식·카페", g: "want", min: 0 },
+      { k: "shop", n: "쇼핑·여가", g: "want", min: 0 },
+      { k: "etc", n: "경조사·기타", g: "want", min: 30000 },
+    ];
+    const MAX = 700000, STEP = 5000;
+    const set = (o) => rows.forEach((r) => { if (!r.lock) r.v = o[r.k]; });
+    set(FIRST);
+    let L = null, active = -1;
+    const sums = () => {
+      const need = rows.filter((r) => r.g === "need").reduce((s, r) => s + r.v, 0);
+      const want = rows.filter((r) => r.g === "want").reduce((s, r) => s + r.v, 0);
+      return { need, want, save: NET - need - want };
+    };
+    const cv = MB.canvas("#ed-cv", (ctx, w, h) => {
+      const P = MB.palette();
+      const narrow = w < 480;
+      const lab = narrow ? 88 : 120, right = narrow ? 50 : 70, x0 = lab, sw = w - lab - right - 6, rh = 26, top = 12;
+      L = { x0, sw, rh, top };
+      const X = (v) => x0 + (Math.min(v, MAX) / MAX) * sw;
+      rows.forEach((r, i) => {
+        const y = top + i * rh + rh / 2;
+        const col = r.g === "need" ? P.accent : P.accent2;
+        text(ctx, r.n, x0 - 8, y, { size: narrow ? 11.5 : 13, align: "right", color: r.lock ? P.faint : P.text });
+        ctx.fillStyle = P.grid; rrect(ctx, x0, y - 5, sw, 10, 5); ctx.fill();
+        ctx.fillStyle = r.lock ? alpha(col, 0.35) : alpha(col, i === active ? 1 : 0.85);
+        rrect(ctx, x0, y - 7, X(r.v) - x0, 14, 4); ctx.fill();
+        if (!r.lock && r.min) { ctx.strokeStyle = P.dim; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(X(r.min), y - 10); ctx.lineTo(X(r.min), y + 10); ctx.stroke(); }
+        if (!r.lock) { ctx.fillStyle = P.surface; ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(X(r.v), y, i === active ? 8 : 6.5, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); }
+        text(ctx, man(r.v), w - 6, y, { size: 12, mono: true, align: "right", color: r.lock ? P.faint : P.text });
+      });
+      const s = sums();
+      const ys = top + rows.length * rh + 6 + rh / 2;
+      ctx.strokeStyle = P.border; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(8, ys - rh / 2 - 3); ctx.lineTo(w - 8, ys - rh / 2 - 3); ctx.stroke();
+      text(ctx, s.save >= 0 ? "저축(남는 돈)" : "적자", x0 - 8, ys, { size: narrow ? 11.5 : 13, align: "right", weight: 700, color: s.save >= 0 ? P.ok : P.bad });
+      if (s.save >= 0) {
+        ctx.fillStyle = P.ok; rrect(ctx, x0, ys - 8, X(s.save) - x0, 16, 4); ctx.fill();
+        if (s.save > MAX) { ctx.fillStyle = P.ok; ctx.beginPath(); ctx.moveTo(x0 + sw + 2, ys - 8); ctx.lineTo(x0 + sw + 10, ys); ctx.lineTo(x0 + sw + 2, ys + 8); ctx.fill(); }
+      } else {
+        ctx.fillStyle = alpha(P.bad, 0.25); rrect(ctx, x0, ys - 8, X(-s.save) - x0, 16, 4); ctx.fill();
+        ctx.strokeStyle = P.bad; ctx.lineWidth = 1.5; ctx.setLineDash([4, 3]); rrect(ctx, x0, ys - 8, X(-s.save) - x0, 16, 4); ctx.stroke(); ctx.setLineDash([]);
+      }
+      text(ctx, man(s.save), w - 6, ys, { size: 12, mono: true, align: "right", weight: 700, color: s.save >= 0 ? P.ok : P.bad });
+      // 50·30·20 비교 띠
+      const yb = ys + 30, bh = 20;
+      const strip = (y, parts, label) => {
+        text(ctx, label, x0 - 8, y + bh / 2, { size: narrow ? 11.5 : 12.5, align: "right", color: P.dim });
+        let x = x0; const W = sw + right;
+        parts.forEach((p) => {
+          const pw = Math.max(0, p.f) * W;
+          ctx.fillStyle = p.c; ctx.fillRect(x, y, pw, bh);
+          if (pw > 34) text(ctx, Math.round(p.f * 100) + "%", x + pw / 2, y + bh / 2 + 1, { size: 11, mono: true, align: "center", color: "#fff", weight: 600 });
+          x += pw;
+        });
+      };
+      const tot = NET;
+      strip(yb, [{ f: s.need / tot, c: P.accent }, { f: s.want / tot, c: P.accent2 }, { f: Math.max(0, s.save) / tot, c: P.ok }], "지금");
+      strip(yb + bh + 8, [{ f: 0.5, c: alpha(P.accent, 0.55) }, { f: 0.3, c: alpha(P.accent2, 0.55) }, { f: 0.2, c: alpha(P.ok, 0.55) }], "50·30·20");
+      if (s.save < 0) text(ctx, "실수령보다 " + man(-s.save) + "원 더 쓴다", x0, yb - 2 + bh * 2 + 30, { size: 12, color: P.bad, weight: 700 });
+      else text(ctx, "필수 · 선택 · 저축", x0, yb + bh * 2 + 24, { size: 11.5, color: P.faint });
+    }, { height: 12 + 11 * 26 + 6 + 30 + 48 + 30 });
+    function readout() {
+      const s = sums();
+      MB.stat("ed-o-need", MB.pct(s.need / NET, 1));
+      MB.stat("ed-o-want", MB.pct(s.want / NET, 1));
+      MB.stat("ed-o-rate", '<span class="' + (s.save >= 0 ? "ok-t" : "bad-t") + '">' + MB.pct(s.save / NET, 1) + "</span>");
+      MB.stat("ed-o-save", '<span class="' + (s.save >= 0 ? "ok-t" : "bad-t") + '">' + man(s.save) + "원</span>");
+    }
+    readout();
+    MB.drag(cv.canvas, {
+      start(x, y) {
+        if (!L) return;
+        const i = Math.floor((y - L.top) / L.rh);
+        active = i >= 0 && i < rows.length && !rows[i].lock ? i : -1;
+      },
+      move(x) {
+        if (active < 0 || !L) return;
+        const r = rows[active];
+        let v = Math.round((((x - L.x0) / L.sw) * MAX) / STEP) * STEP;
+        r.v = MB.clamp(v, r.min || 0, MAX);
+        cv.redraw(); readout();
+      },
+      end() { active = -1; cv.redraw(); },
+    });
+    document.getElementById("ed-first").addEventListener("click", () => { set(FIRST); cv.redraw(); readout(); });
+    document.getElementById("ed-plan").addEventListener("click", () => { set(PLAN); cv.redraw(); readout(); });
+  })();
+
+  /* ---------------------------------------------------------- 3. 한 달 잔고 곡선 */
+  (function () {
+    const FIX = [[1, HG.rent, "월세"], [5, 120000, "관리비"], [10, 45000, "통신"], [15, 15000, "구독"], [20, LOAN, "학자금"]];
+    const SAVE = 1000000, BASE = 23000;
+    function run(pre, g) {
+      let bal = NET, disc = 0;
+      const pts = [[0, NET]], bills = [];
+      if (pre) bal -= SAVE;
+      const fixLeft = (d) => FIX.filter((f) => f[0] >= d).reduce((s, f) => s + f[1], 0);
+      for (let d = 1; d <= 30; d++) {
+        FIX.forEach((f) => { if (f[0] === d) { bal -= f[1]; bills.push([d, f[2]]); } });
+        const free = bal - fixLeft(d + 1), left = 31 - d;
+        const wk = d % 7 === 6 || d % 7 === 0 ? 1.5 : 0.8;
+        let s = (BASE + (g * Math.max(0, free - BASE * left) / left) * 2 * (left / 30)) * wk;
+        s = Math.min(s, Math.max(0, free));
+        bal -= s; disc += s;
+        pts.push([d, bal]);
+      }
+      return { pts, bills, disc, saved: pre ? SAVE + bal : bal, end: bal };
+    }
+    let prog = 30;
+    const g = MB.range("mo-g", (v) => Math.round(v * 100) + "%", () => { prog = 30; update(); });
+    const mode = MB.seg("mo-mode", () => { prog = 30; update(); });
+    const cv = MB.canvas("#mo-cv", (ctx, w, h) => {
+      const P = MB.palette(), pre = mode() === "pre";
+      const cur = run(pre, g()), oth = run(!pre, g());
+      const upto = (pts) => { const out = []; for (const p of pts) { if (p[0] <= prog) out.push(p); } const k = Math.floor(prog); if (k < 30 && prog > k) { const a = pts[k], b = pts[k + 1]; out.push([prog, a[1] + (b[1] - a[1]) * (prog - k)]); } return out; };
+      const c = MB.chart(ctx, { x: 58, y: 18, w: w - 58 - 16, h: h - 18 - 46 }, {
+        x: [0, 30], y: [0, NET * 1.05], yFmt: MB.wonAxis, xLabel: "월급날부터 지난 날", xTicks: [0, 5, 10, 15, 20, 25, 30], xFmt: (v) => v + "일",
+        series: [
+          { data: oth.pts, color: alpha(P.dim, 0.6), width: 1.5, dash: [5, 4] },
+          { data: upto(cur.pts), color: pre ? P.accent : P.warn, width: 2.6, fill: alpha(pre ? P.accent : P.warn, 0.1) },
+        ],
+      });
+      cur.bills.forEach(([d, n]) => {
+        if (d > prog) return;
+        const p = cur.pts[d];
+        ctx.fillStyle = P.bad; ctx.beginPath(); ctx.arc(c.X(d), c.Y(p[1]), 4, 0, Math.PI * 2); ctx.fill();
+        if (w > 420) text(ctx, n, c.X(d) + 6, c.Y(p[1]) - 10, { size: 11, color: P.bad });
+      });
+      if (pre) {
+        text(ctx, "월급날 저축 100만 이체", c.X(0) + 8, c.Y(NET) + 2, { size: 12, color: P.accent, weight: 700, base: "top" });
+      }
+      if (prog >= 30) {
+        const yE = c.Y(Math.max(0, cur.end));
+        const lbl = pre ? "남은 " + man(cur.end) + "원" : "남은 " + man(cur.end) + "원 → 저축";
+        ctx.font = MB.font(12, false, 700);
+        const tw = ctx.measureText(lbl).width, ly = Math.max(c.box.y + 10, yE - 30);
+        ctx.fillStyle = alpha(MB.color("canvas-bg"), 0.9); rrect(ctx, c.X(30) - tw - 10, ly - 10, tw + 8, 20, 5); ctx.fill();
+        text(ctx, lbl, c.X(30) - 6, ly, { size: 12, align: "right", weight: 700, color: pre ? P.accent : P.warn });
+      }
+    }, { aspect: 0.58, minHeight: 260, maxHeight: 360 });
+    function update() {
+      const pre = mode() === "pre";
+      const cur = run(pre, g()), oth = run(!pre, g());
+      MB.stat("mo-o-save", '<span class="ok-t">' + man(cur.saved) + "원</span>");
+      MB.stat("mo-o-disc", man(cur.disc) + "원");
+      MB.stat("mo-o-rate", MB.pct(cur.saved / NET, 1));
+      const d = cur.saved - oth.saved;
+      MB.stat("mo-o-diff", (d >= 0 ? "+" : "−") + man(Math.abs(d)) + "원");
+      cv.redraw();
+    }
+    update();
+    MB.loop(cv.canvas, (dt) => { if (prog < 30) { prog = Math.min(30, prog + dt * 9); cv.redraw(); } });
+    document.getElementById("mo-play").addEventListener("click", () => { prog = 0; cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 4. 통장 쪼개기 흐름 */
+  (function () {
+    const FIXED = HG.rent + 120000 + 45000 + 15000 + LOAN;
+    let coins = [], t = 0, tEnd = 0, amts = null;
+    const sv = MB.range("fl-save", (v) => man(v) + "원", () => { compute(); go(); });
+    const em = MB.range("fl-em", (v) => man(v) + "원", () => { compute(); go(); });
+    function compute() {
+      const live = NET - FIXED - sv() - em();
+      amts = [
+        { label: "저축", sub: "통장", v: sv(), key: "accent" },
+        { label: "비상금", sub: "통장", v: em(), key: "accent2" },
+        { label: "고정비", sub: "자동이체", v: FIXED, key: "blue" },
+        { label: "생활비", sub: "체크카드", v: live, key: "warn" },
+      ];
+      MB.stat("fl-o-first", man(sv() + em()) + "원");
+      MB.stat("fl-o-fix", man(FIXED) + "원");
+      MB.stat("fl-o-live", live >= 0 ? man(live) + "원" : '<span class="bad-t">부족 ' + man(-live) + "원</span>");
+      MB.stat("fl-o-day", live > 0 ? MB.won(live / 30, { digits: 1 }) : '<span class="bad-t">0원</span>');
+    }
+    function go() {
+      coins = []; t = 0;
+      let start = 0.15;
+      amts.forEach((a, k) => {
+        const n = a.v > 0 ? Math.max(1, Math.round((a.v / NET) * 44)) : 0;
+        for (let j = 0; j < n; j++) coins.push({ k, t0: start + j * 0.045, dur: 0.85, val: a.v / n });
+        if (n) start += n * 0.045 + 0.25;
+      });
+      tEnd = start + 1;
+    }
+    compute(); go();
+    const cv = MB.canvas("#fl-cv", (ctx, w, h) => {
+      const P = MB.palette();
+      const narrow = w < 460;
+      const sw = Math.min(240, w - 40), sx = (w - sw) / 2, sy = 14, sh = 54;
+      const gap = narrow ? 8 : 14, bw = (w - 24 - gap * 3) / 4, by = h - (narrow ? 104 : 112), bh = narrow ? 92 : 100;
+      const arrived = amts.map(() => 0);
+      coins.forEach((c) => { if (t >= c.t0 + c.dur) arrived[c.k] += c.val; });
+      const sent = arrived.reduce((s, v) => s + v, 0);
+      const srcLeft = Math.max(0, NET - sent);
+      const done = t >= tEnd - 0.9;
+      ctx.fillStyle = alpha(P.ok, 0.12); ctx.strokeStyle = P.ok; ctx.lineWidth = 1.5; rrect(ctx, sx, sy, sw, sh, 10); ctx.fill(); ctx.stroke();
+      text(ctx, "급여 통장 · 월급날", sx + sw / 2, sy + 17, { size: 12, align: "center", color: P.dim });
+      text(ctx, done && amts[3].v >= 0 ? "0원" : MB.won(Math.max(0, srcLeft)), sx + sw / 2, sy + 37, { size: 17, align: "center", weight: 800, mono: true, color: P.text });
+      amts.forEach((a, k) => {
+        const bx = 12 + k * (bw + gap), col = a.v < 0 ? P.bad : P[a.key];
+        const tx = bx + bw / 2;
+        ctx.strokeStyle = alpha(P.dim, 0.25); ctx.lineWidth = 1; ctx.setLineDash([3, 4]);
+        ctx.beginPath(); ctx.moveTo(sx + sw / 2, sy + sh); ctx.quadraticCurveTo(tx, sy + sh + 30, tx, by); ctx.stroke(); ctx.setLineDash([]);
+        ctx.fillStyle = P.surface; ctx.strokeStyle = col; ctx.lineWidth = 1.5; rrect(ctx, bx, by, bw, bh, 9); ctx.fill();
+        const f = a.v > 0 ? Math.min(1, arrived[k] / Math.max(a.v, NET * 0.42)) : 0;
+        if (f > 0) { ctx.save(); rrect(ctx, bx, by, bw, bh, 9); ctx.clip(); ctx.fillStyle = alpha(col, 0.28); ctx.fillRect(bx, by + bh * (1 - f), bw, bh * f); ctx.restore(); }
+        rrect(ctx, bx, by, bw, bh, 9); ctx.stroke();
+        text(ctx, a.label, tx, by + 17, { size: narrow ? 12 : 13.5, align: "center", weight: 700, color: col });
+        text(ctx, a.sub, tx, by + 34, { size: narrow ? 10 : 11, align: "center", color: P.dim });
+        const shown = a.v < 0 ? "부족" : man(Math.round(arrived[k] / 1e4) * 1e4);
+        text(ctx, shown, tx, by + bh - 20, { size: narrow ? 12 : 14, align: "center", weight: 700, mono: a.v >= 0, color: a.v < 0 ? P.bad : P.text });
+        if (a.v < 0 && done) text(ctx, "−" + man(-a.v), tx, by + bh - 4 - 2, { size: 10.5, align: "center", color: P.bad, base: "bottom" });
+      });
+      coins.forEach((c) => {
+        const u = (t - c.t0) / c.dur;
+        if (u <= 0 || u >= 1) return;
+        const k = c.k, bx = 12 + k * (bw + gap), tx = bx + bw / 2;
+        const x0 = sx + sw / 2, y0 = sy + sh, cx = tx, cy = sy + sh + 30, x1 = tx, y1 = by + 6;
+        const e = u * u * (3 - 2 * u);
+        const x = (1 - e) * (1 - e) * x0 + 2 * (1 - e) * e * cx + e * e * x1;
+        const y = (1 - e) * (1 - e) * y0 + 2 * (1 - e) * e * cy + e * e * y1;
+        ctx.fillStyle = P[amts[k].key]; ctx.strokeStyle = MB.color("canvas-bg"); ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.arc(x, y, 5.5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      });
+      if (amts[3].v < 0 && done) text(ctx, "선저축이 생활비를 넘었다: 이체를 줄여야 한다", w / 2, by - 12, { size: 12, align: "center", weight: 700, color: P.bad });
+    }, { aspect: 0.6, minHeight: 280, maxHeight: 330 });
+    MB.loop(cv.canvas, (dt) => { if (t < tEnd) { t += dt; cv.redraw(); } });
+    document.getElementById("fl-go").addEventListener("click", () => { go(); cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 5. 커피의 30년 */
+  (function () {
+    let cursor = 30, L = null;
+    const p = MB.range("lt-p", (v) => v.toLocaleString("ko-KR") + "원", () => update());
+    const n = MB.range("lt-n", (v) => v + "잔", () => update());
+    const r = MB.range("lt-r", (v) => MB.pct(v, 1), () => update());
+    const series = () => MN.grow({ monthly: p() * n(), rate: r(), years: 30 });
+    const cv = MB.canvas("#lt-cv", (ctx, w, h) => {
+      const P = MB.palette(), s = series();
+      const top = Math.max(1e6, s[30].value * 1.12);
+      const c = MB.chart(ctx, { x: 58, y: 18, w: w - 58 - 16, h: h - 18 - 46 }, {
+        x: [0, 30], y: [0, top], yFmt: MB.wonAxis, xLabel: "년", xTicks: [0, 5, 10, 15, 20, 25, 30],
+        series: [
+          { data: s.map((o) => [o.year, o.value]), color: P.accent2, width: 2.6, fill: alpha(P.accent2, 0.12) },
+          { data: s.map((o) => [o.year, o.contrib]), color: P.dim, width: 1.8, dash: [5, 4] },
+        ],
+        vlines: [{ x: cursor, color: P.faint }],
+      });
+      L = c;
+      const o = s[Math.round(cursor)];
+      ctx.fillStyle = P.accent2; ctx.beginPath(); ctx.arc(c.X(cursor), c.Y(o.value), 5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = P.dim; ctx.beginPath(); ctx.arc(c.X(cursor), c.Y(o.contrib), 4, 0, Math.PI * 2); ctx.fill();
+      const right = c.X(cursor) > c.box.x + c.box.w * 0.6;
+      const tx = c.X(cursor) + (right ? -8 : 8), al = right ? "right" : "left";
+      text(ctx, Math.round(cursor) + "년 뒤", tx, c.box.y + 10, { size: 12, align: al, weight: 700, color: P.text });
+      text(ctx, "모았다면 " + man(o.value), tx, c.box.y + 28, { size: 12, align: al, color: P.accent2, weight: 700 });
+      text(ctx, "낸 돈 " + man(o.contrib), tx, c.box.y + 45, { size: 12, align: al, color: P.dim });
+    }, { aspect: 0.56, minHeight: 250, maxHeight: 340 });
+    MB.drag(cv.canvas, { move(x) { if (!L) return; cursor = MB.clamp(Math.round(((x - L.box.x) / L.box.w) * 30), 0, 30); cv.redraw(); } });
+    function update() {
+      const s = series()[30];
+      MB.stat("lt-o-m", won(p() * n()));
+      MB.stat("lt-o-c", man(s.contrib) + "원");
+      MB.stat("lt-o-v", '<span style="color:var(--accent-2)">' + man(s.value) + "원</span>");
+      MB.stat("lt-o-x", s.contrib > 0 ? (s.value / s.contrib).toFixed(2) + "배" : "—");
+      cv.redraw();
+    }
+    update();
+  })();
+
+  /* ---------------------------------------------------------- 6. 구독 */
+  (function () {
+    const boxes = [...document.querySelectorAll("#sb-list input")];
+    const up = MB.range("sb-up", (v) => MB.pct(v, 0), () => update());
+    const r = MB.range("sb-r", (v) => MB.pct(v, 1), () => update());
+    const monthly = () => boxes.filter((b) => b.checked).reduce((s, b) => s + Number(b.dataset.v), 0);
+    function path() {
+      const m0 = monthly(), rm = MN.monthly(r());
+      let paid = 0, val = 0;
+      const a = [[0, 0]], b = [[0, 0]];
+      for (let m = 1; m <= 120; m++) {
+        const pay = m0 * Math.pow(1 + up(), Math.floor((m - 1) / 12));
+        paid += pay; val = val * (1 + rm) + pay;
+        if (m % 3 === 0) { a.push([m / 12, paid]); b.push([m / 12, val]); }
+      }
+      return { a, b, paid, val };
+    }
+    const cv = MB.canvas("#sb-cv", (ctx, w, h) => {
+      const P = MB.palette(), d = path();
+      const top = Math.max(1e6, d.val * 1.15);
+      const c = MB.chart(ctx, { x: 58, y: 18, w: w - 58 - 16, h: h - 18 - 46 }, {
+        x: [0, 10], y: [0, top], yFmt: MB.wonAxis, xLabel: "년", xTicks: [0, 2, 4, 6, 8, 10],
+        series: [
+          { data: d.b, color: P.ok, width: 2, dash: [5, 4] },
+          { data: d.a, color: P.bad, width: 2.6, fill: alpha(P.bad, 0.1) },
+        ],
+      });
+      text(ctx, "구독료로 낸 돈 " + man(d.paid), c.box.x + 10, c.box.y + 10, { size: 12, color: P.bad, weight: 700 });
+      text(ctx, "대신 모았다면 " + man(d.val), c.box.x + 10, c.box.y + 28, { size: 12, color: P.ok, weight: 700 });
+    }, { aspect: 0.62, minHeight: 250, maxHeight: 360 });
+    function update() {
+      const d = path(), m = monthly();
+      MB.stat("sb-o-m", wonExact(m));
+      MB.stat("sb-o-y", man(m * 12) + "원");
+      MB.stat("sb-o-10", '<span class="bad-t">' + man(d.paid) + "원</span>");
+      MB.stat("sb-o-fv", '<span class="ok-t">' + man(d.val) + "원</span>");
+      cv.redraw();
+    }
+    boxes.forEach((b) => b.addEventListener("change", update));
+    update();
+  })();
+
+  /* ---------------------------------------------------------- 7. 할부 총비용 */
+  (function () {
+    const p = MB.range("in-p", (v) => man(v) + "원", () => update());
+    const n = MB.range("in-n", (v) => v + "개월", () => update());
+    const r = MB.range("in-r", (v) => (v === 0 ? "무이자" : MB.pct(v, 1)), () => update());
+    const sched = () => MN.loan(p(), r(), n(), "linear");
+    const cv = MB.canvas("#in-cv", (ctx, w, h) => {
+      const P = MB.palette(), L = sched();
+      const maxPay = Math.max(...L.rows.map((x) => x.pay));
+      MB.bars(ctx, { x: 58, y: 18, w: w - 58 - 16, h: h - 18 - 40 }, {
+        labels: L.rows.map((x) => String(x.m)),
+        stacks: [
+          { label: "원금", color: P.accent, data: L.rows.map((x) => x.principal) },
+          { label: "수수료", color: P.bad, data: L.rows.map((x) => x.interest) },
+        ],
+        y: [0, Math.max(150000, maxPay * 1.15)], yFmt: MB.wonAxis, gap: 0.3,
+      });
+      text(ctx, "개월째 청구", w - 16, h - 8, { size: 11, align: "right", color: P.faint, base: "bottom" });
+    }, { aspect: 0.55, minHeight: 240, maxHeight: 330 });
+    function update() {
+      const L = sched();
+      MB.stat("in-o-first", wonExact(L.first));
+      MB.stat("in-o-fee", '<span class="' + (L.totalInterest > 0 ? "bad-t" : "ok-t") + '">' + wonExact(L.totalInterest) + "</span>");
+      MB.stat("in-o-tot", wonExact(L.totalPay));
+      MB.stat("in-o-pct", "+" + MB.pct(L.totalInterest / p(), 1));
+      cv.redraw();
+    }
+    update();
+  })();
+
+  /* ---------------------------------------------------------- 8. 쌓이는 할부 */
+  (function () {
+    const KINDS = {
+      a: { name: "휴대폰", P: 1200000, n: 24 },
+      b: { name: "노트북", P: 1500000, n: 10 },
+      c: { name: "가전", P: 900000, n: 6 },
+      d: { name: "여행", P: 600000, n: 3 },
+      e: { name: "옷(후불)", P: 240000, n: 4 },
+    };
+    const MONTHS = 24, BUDGET = 180000, CMAX = 10;
+    let buys = [];
+    const reset = () => { buys = [{ ...KINDS.a, s: 1 }, { ...KINDS.b, s: 2 }]; };
+    reset();
+    const colorOf = (P, i) => alpha([P.accent, P.accent2, P.blue, P.warn, P.bad, P.ok][i % 6], i >= 6 ? 0.55 : 0.9);
+    const data = () => buys.map((b) => { const d = []; for (let m = 1; m <= MONTHS; m++) d.push(m >= b.s && m < b.s + b.n ? b.P / b.n : 0); return d; });
+    const cv = MB.canvas("#st-cv", (ctx, w, h) => {
+      const P = MB.palette(), D = data();
+      const tot = []; for (let m = 0; m < MONTHS; m++) tot.push(D.reduce((s, d) => s + d[m], 0));
+      const peak = Math.max(...tot, 0);
+      MB.bars(ctx, { x: 58, y: 18, w: w - 58 - 16, h: h - 18 - 40 }, {
+        labels: Array.from({ length: MONTHS }, (_, i) => String(i + 1)),
+        stacks: buys.map((b, i) => ({ label: b.name, color: colorOf(P, i), data: D[i] })),
+        y: [0, Math.max(400000, peak * 1.12)], yFmt: MB.wonAxis, gap: 0.22,
+        hlines: [{ y: BUDGET, color: P.bad, label: "쇼핑·여가 예산 18만" }],
+      });
+      text(ctx, "개월", w - 16, h - 6, { size: 11, align: "right", color: P.faint, base: "bottom" });
+    }, { aspect: 0.58, minHeight: 250, maxHeight: 340 });
+    function update() {
+      const P = MB.palette(), D = data();
+      const tot = []; for (let m = 0; m < MONTHS; m++) tot.push(D.reduce((s, d) => s + d[m], 0));
+      const peak = Math.max(...tot, 0);
+      const lock = buys.reduce((s, b) => s + b.P, 0);
+      const over = tot.filter((v) => v > BUDGET).length;
+      const end = buys.reduce((m, b) => Math.max(m, b.s + b.n - 1), 0);
+      MB.stat("st-o-peak", '<span class="' + (peak > BUDGET ? "bad-t" : "") + '">' + man(peak) + "원</span>");
+      MB.stat("st-o-lock", man(lock) + "원");
+      MB.stat("st-o-over", over + "개월");
+      MB.stat("st-o-end", end + "개월째");
+      document.getElementById("st-legend").innerHTML = buys.map((b, i) => '<span><i style="background:' + colorOf(P, i) + '"></i>' + b.s + "월 " + b.name + "</span>").join("");
+      cv.redraw();
+    }
+    ["a", "b", "c", "d", "e"].forEach((k) => {
+      document.getElementById("st-" + k).addEventListener("click", () => {
+        if (buys.length >= CMAX) return;
+        const s = buys.length ? buys[buys.length - 1].s + 1 : 1;
+        buys.push({ ...KINDS[k], s: Math.min(s, MONTHS) });
+        update();
+      });
+    });
+    document.getElementById("st-re").addEventListener("click", () => { reset(); update(); });
+    MB.onTheme(update);
+    update();
+  })();
+
+  /* ---------------------------------------------------------- 9. 24시간 규칙 */
+  (function () {
+    const NAMES = ["무선 이어폰", "운동화", "후드티", "키보드", "향수", "가방", "스마트워치", "조명", "캠핑 의자", "커피 머신", "모니터", "재킷", "게임", "화장품", "블렌더", "선글라스"];
+    const PRICES = [159000, 129000, 59000, 139000, 89000, 239000, 299000, 49000, 69000, 189000, 259000, 179000, 64800, 78000, 99000, 119000];
+    const rnd = MN.rng(2026);
+    const items = NAMES.map((name, i) => {
+      const need = i % 5 === 1 ? 0.62 + rnd() * 0.25 : 0.1 + rnd() * 0.45;
+      return { name, price: PRICES[i], d0: 0.72 + rnd() * 0.26, need, tau: 6 + rnd() * 22 };
+    });
+    const TH = 0.6;
+    const desire = (it, hr) => it.need + (it.d0 - it.need) * Math.exp(-hr / it.tau);
+    let anim = -1;
+    const hr = MB.range("wt-h", (v) => v + "시간", () => update());
+    const cv = MB.canvas("#wt-cv", (ctx, w, h) => {
+      const P = MB.palette(), t = hr();
+      const bx = w > 520 ? 56 : 40, by = 18, bw = w - bx - 14, bh = h - by - (w > 520 ? 52 : 40);
+      const Y = (v) => by + bh * (1 - v);
+      ctx.strokeStyle = P.grid; ctx.lineWidth = 1;
+      [0, 0.25, 0.5, 0.75, 1].forEach((v) => { ctx.beginPath(); ctx.moveTo(bx, Y(v)); ctx.lineTo(bx + bw, Y(v)); ctx.stroke(); });
+      ctx.save(); ctx.translate(14, by + bh / 2); ctx.rotate(-Math.PI / 2); text(ctx, "갖고 싶은 마음", 0, 0, { size: 12, align: "center", color: P.dim }); ctx.restore();
+      ctx.strokeStyle = P.bad; ctx.setLineDash([5, 4]); ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(bx, Y(TH)); ctx.lineTo(bx + bw, Y(TH)); ctx.stroke(); ctx.setLineDash([]);
+      text(ctx, "살 만큼 원한다", bx + bw - 2, Y(TH) - 9, { size: 11.5, align: "right", color: P.bad, weight: 700 });
+      const slot = bw / items.length;
+      items.forEach((it, i) => {
+        const x = bx + slot * (i + 0.5), d = desire(it, t), buy = d > TH;
+        ctx.strokeStyle = alpha(P.dim, 0.35); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(x, Y(it.d0)); ctx.lineTo(x, Y(d)); ctx.stroke();
+        const rad = 3 + Math.sqrt(it.price / 1e4) * 0.9;
+        ctx.fillStyle = buy ? P.bad : P.ok; ctx.beginPath(); ctx.arc(x, Y(d), rad, 0, Math.PI * 2); ctx.fill();
+        if (w > 520) { ctx.save(); ctx.translate(x, by + bh + 6); ctx.rotate(-Math.PI / 5); text(ctx, it.name, 0, 0, { size: 10.5, align: "right", color: buy ? P.text : P.faint, base: "top" }); ctx.restore(); }
+      });
+      if (w <= 520) text(ctx, "점 하나가 물건 하나(크기는 가격)", bx, by + bh + 16, { size: 11, color: P.faint });
+    }, { get height() { const w = document.getElementById("wt-cv").parentElement.clientWidth || 600; return w > 520 ? 320 : 250; } });
+    function update() {
+      const t = hr();
+      let nb = 0, spend = 0, saved = 0;
+      items.forEach((it) => { if (desire(it, t) > TH) { nb++; spend += it.price; } else saved += it.price; });
+      MB.stat("wt-o-n", nb + " / " + items.length + "개");
+      MB.stat("wt-o-buy", '<span class="bad-t">' + man(spend) + "원</span>");
+      MB.stat("wt-o-save", '<span class="ok-t">' + man(saved) + "원</span>");
+      MB.stat("wt-o-pct", MB.pct(saved / (saved + spend), 0) + " 절약");
+      cv.redraw();
+    }
+    update();
+    MB.loop(cv.canvas, (dt) => { if (anim >= 0) { anim = Math.min(72, anim + dt * 18); hr.set(Math.round(anim)); if (anim >= 72) anim = -1; } });
+    document.getElementById("wt-play").addEventListener("click", () => { anim = 0; hr.set(0); });
+    document.getElementById("wt-re").addEventListener("click", () => { anim = -1; hr.set(0); });
+  })();
+
+  /* ---------------------------------------------------------- 10. 라이프스타일 인플레이션 */
+  (function () {
+    const YEARS = 15;
+    const raise = MB.range("lf-raise", (v) => MB.pct(v, 1), () => update());
+    const absb = MB.range("lf-abs", (v) => Math.round(v * 100) + "%", () => update());
+    const start = MB.seg("lf-start", () => update());
+    function model() {
+      const net0 = NET, save0 = Number(start()), spend0 = net0 - save0;
+      const out = [];
+      for (let y = 0; y <= YEARS; y++) {
+        const net = MN.payroll(HG.salary * Math.pow(1 + raise(), y), { nontax: HG.nontax }).monthly.net;
+        const spend = spend0 + absb() * (net - net0);
+        out.push({ y, net, spend, save: net - spend });
+      }
+      return out;
+    }
+    const cv = MB.canvas("#lf-cv", (ctx, w, h) => {
+      const P = MB.palette(), m = model();
+      const top = Math.max(...m.map((o) => o.net)) * 1.08;
+      const c = MB.chart(ctx, { x: 58, y: 18, w: w - 58 - 16, h: h - 18 - 46 }, {
+        x: [0, YEARS], y: [0, top], yFmt: MB.wonAxis, xLabel: "입사 후 햇수", xTicks: [0, 3, 6, 9, 12, 15],
+        series: [
+          { data: m.map((o) => [o.y, o.net]), color: P.ok, width: 2.6 },
+          { data: m.map((o) => [o.y, o.spend]), color: P.bad, width: 2.6 },
+        ],
+      });
+      ctx.save();
+      ctx.beginPath();
+      m.forEach((o, i) => (i ? ctx.lineTo(c.X(o.y), c.Y(o.net)) : ctx.moveTo(c.X(o.y), c.Y(o.net))));
+      for (let i = m.length - 1; i >= 0; i--) ctx.lineTo(c.X(m[i].y), c.Y(m[i].spend));
+      ctx.closePath(); ctx.fillStyle = alpha(P.accent, 0.18); ctx.fill();
+      ctx.restore();
+      [0, YEARS].forEach((y) => {
+        const o = m[y], xm = c.X(y), ym = (c.Y(o.net) + c.Y(o.spend)) / 2;
+        text(ctx, "저축 " + man(o.save), xm + (y ? -6 : 6), ym, { size: 12, weight: 700, align: y ? "right" : "left", color: P.accent });
+      });
+    }, { aspect: 0.56, minHeight: 250, maxHeight: 340 });
+    function update() {
+      const m = model(), last = m[YEARS];
+      const cum = m.slice(0, YEARS).reduce((s, o) => s + o.save * 12, 0);
+      MB.stat("lf-o-r0", MB.pct(m[0].save / m[0].net, 1));
+      MB.stat("lf-o-s", man(last.save) + "원");
+      MB.stat("lf-o-r", '<span class="' + (last.save / last.net < m[0].save / m[0].net - 0.001 ? "bad-t" : "ok-t") + '">' + MB.pct(last.save / last.net, 1) + "</span>");
+      MB.stat("lf-o-cum", MB.won(cum));
+      cv.redraw();
+    }
+    update();
+  })();
+})();
+</script>
+</body>
+</html>

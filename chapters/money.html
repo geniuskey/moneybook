@@ -1,0 +1,1294 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and MoneyBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "물물교환의 벽에서 화폐의 세 기능까지, 상품화폐·금본위·법정화폐의 역사, 은행 대출이 예금을 만드는 신용 창조와 통화승수, 본원통화와 M2, 뱅크런, 한국은행과 기준금리, 화폐수량설을 시뮬레이터로 직접 만져 본다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>돈은 어떻게 생겨나는가 · MoneyBook</title>
+<meta name="description" content="물물교환의 벽에서 화폐의 세 기능까지, 상품화폐·금본위·법정화폐의 역사, 은행 대출이 예금을 만드는 신용 창조와 통화승수, 본원통화와 M2, 뱅크런, 한국은행과 기준금리, 화폐수량설을 시뮬레이터로 직접 만져 본다.">
+<link rel="canonical" href="https://moneybook.euiyun.com/chapters/money.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0b8a63">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MoneyBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="돈은 어떻게 생겨나는가 · MoneyBook">
+<meta property="og:description" content="물물교환의 벽에서 화폐의 세 기능까지, 상품화폐·금본위·법정화폐의 역사, 은행 대출이 예금을 만드는 신용 창조와 통화승수, 본원통화와 M2, 뱅크런, 한국은행과 기준금리, 화폐수량설을 시뮬레이터로 직접 만져 본다.">
+<meta property="og:url" content="https://moneybook.euiyun.com/chapters/money.html">
+<meta property="og:image" content="https://moneybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://moneybook.euiyun.com/chapters/money.html#chapter","name":"돈은 어떻게 생겨나는가","headline":"돈은 어떻게 생겨나는가 · MoneyBook","description":"물물교환의 벽에서 화폐의 세 기능까지, 상품화폐·금본위·법정화폐의 역사, 은행 대출이 예금을 만드는 신용 창조와 통화승수, 본원통화와 M2, 뱅크런, 한국은행과 기준금리, 화폐수량설을 시뮬레이터로 직접 만져 본다.","url":"https://moneybook.euiyun.com/chapters/money.html","position":2,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://moneybook.euiyun.com/og.png","dateModified":"2026-10-03","isPartOf":{"@type":"Book","@id":"https://moneybook.euiyun.com/#book","name":"MoneyBook · 살아가는 데 필요한 돈 교과서","url":"https://moneybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MoneyBook","item":"https://moneybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"2. 돈은 어떻게 생겨나는가","item":"https://moneybook.euiyun.com/chapters/money.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/money.js"></script>
+<!--head:end-->
+<style>
+  .mn-eq { font-family: var(--mono); }
+  figure.diagram svg:not(.fig-w) { max-width: 520px; margin: 0 auto; }
+  figure.diagram svg.fig-n { display: none; }
+  @media (max-width: 640px) {
+    figure.diagram svg.fig-w { display: none; }
+    figure.diagram svg.fig-n { display: block; max-width: 420px; }
+  }
+</style>
+</head>
+<body data-chapter="money">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 02</div>
+    <h1>돈은 어떻게 생겨나는가</h1>
+    <p class="lead">지갑 속 5만원권은 종이 한 장이고, 통장 속 300만원은 은행 컴퓨터에 적힌 숫자 몇 개다. 그런데도 우리는 그것을 받고 밥을 주고, 일을 해 주고, 집을 내준다. 돈은 왜 생겼고, 지금 이 순간에도 누가 어떻게 새로 만들어 내는가. 이 장은 장터에서 시작해 은행의 장부, 그리고 한국은행의 회의실까지 따라간다. 마지막에 알게 되는 사실은 조금 놀랍다. 우리가 쓰는 돈의 대부분은 <b>누군가 대출을 받는 순간 생겨난다</b>.</p>
+    <ul class="objectives">
+      <li>물물교환이 왜 막히는지(욕구의 이중 일치)를 직접 장을 열어 보고, 화폐의 세 기능을 설명한다.</li>
+      <li>상품화폐에서 금본위, 법정화폐, 장부 속 디지털 돈으로 바뀐 이유를 말한다.</li>
+      <li>예금 → 지급준비금 → 대출 → 다시 예금으로 이어지는 신용 창조와 통화승수를 계산한다.</li>
+      <li>본원통화, M1, M2가 무엇을 담는지 구분하고 한국 통화량의 대략적인 크기를 감 잡는다.</li>
+      <li>뱅크런이 왜 건전한 은행도 무너뜨리는지, 예금자 보호와 중앙은행이 그것을 어떻게 막는지 본다.</li>
+      <li>기준금리가 통화량에, 통화량이 물가에 어떻게 이어지는지 화폐수량설로 짚는다.</li>
+    </ul>
+  </header>
+
+  <section id="barter">
+    <h2>물물교환의 벽: 욕구의 이중 일치</h2>
+    <p>돈이 없는 마을을 상상해 보자. 쌀 농사를 짓는 사람이 꿀이 먹고 싶다. 꿀을 가진 사람을 찾아갔더니 그 사람은 쌀이 아니라 솥을 원한다. 거래는 성사되지 않는다. 물물교환이 이루어지려면 <b>내가 가진 것을 상대가 원하고, 동시에 상대가 가진 것을 내가 원해야</b> 한다. 이 까다로운 조건을 <span class="term">욕구의 이중 일치</span><span class="en">(Double coincidence of wants)</span>라고 부른다. 두 사람의 바람이 서로 정확히 맞물려야 한다는 뜻이다.</p>
+    <p>물건이 몇 가지뿐이라면 그런 짝을 찾기 어렵지 않다. 하지만 물건 종류가 늘어나면 어떻게 될까. 아래 마을에서 사람마다 가진 물건 하나(원 안의 글자)와 원하는 물건 하나(바깥 금색 글자)가 무작위로 정해진다. <b>시장 하루</b>를 눌러 장을 열고, 물물교환과 화폐를 번갈아 눌러 같은 날의 결과를 비교해 본다.</p>
+
+    <div class="sim" id="sim-barter">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>물물교환 마을: 장이 열리면 몇 명이나 원하는 것을 얻는가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="bv-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>마을 사람 수 <output id="bv-n-out"></output></span><input type="range" id="bv-n" min="10" max="50" step="2" value="30"></label>
+          <label class="ctrl"><span>물건 종류 <output id="bv-k-out"></output></span><input type="range" id="bv-k" min="2" max="12" step="1" value="8"></label>
+          <label class="ctrl"><span>하루에 만나 보는 사람 <output id="bv-m-out"></output></span><input type="range" id="bv-m" min="1" max="20" step="1" value="8"></label>
+          <div class="seg" id="bv-mode"><button data-value="b" class="on">물물교환</button><button data-value="m">화폐</button></div>
+          <div class="btn-row"><button class="btn primary" id="bv-go">시장 하루</button><button class="btn" id="bv-ten">10일 돌리기</button><button class="btn" id="bv-re">다시</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">장이 열린 날</span><span class="v" id="bv-o-day">—</span></div>
+        <div class="stat"><span class="k">오늘 · 물물교환</span><span class="v" id="bv-o-b">—</span></div>
+        <div class="stat"><span class="k">오늘 · 화폐</span><span class="v" id="bv-o-m">—</span></div>
+        <div class="stat"><span class="k">누적 성사율 (물물 / 화폐)</span><span class="v" id="bv-o-c">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 물건 종류를 2가지로 줄이고 "10일 돌리기"를 누른다. 물물교환도 80% 안팎으로 잘 된다. ② 기본값 8가지로 돌린다. 물물교환은 약 20%, 화폐는 약 50%다. 12가지면 약 10% 대 40%로 벌어진다. ③ 하루에 만나 보는 사람을 늘리면 둘 다 오르지만 물물교환은 계속 한참 뒤처진다. ④ 마을 사람 수는 결과를 거의 바꾸지 않는다. (모델: 각자 물건 하나를 들고 와서 하나만 원하고, 하루에 정해진 수의 사람을 무작위로 만난다. 물물교환은 서로 원하는 것을 가진 두 사람이 만나야 거래한다. 화폐가 있으면 내가 원하는 물건을 가진 사람만 만나면 돈을 주고 산다. 화폐 쪽도 그 물건이 이미 팔렸으면 실패한다. 세 사람이 고리를 이루는 간접 교환은 넣지 않았다.)</div>
+    </div>
+
+    <p>물건이 8가지면 우연히 만난 두 사람이 서로 맞을 확률은 상대가 내가 원하는 것을 가졌을 확률 \(1/8\)에 상대가 내 것을 원할 확률 \(1/7\)을 곱한 1/56, 약 2%다. 물건이 늘수록 이 확률은 거의 제곱으로 줄어든다. 반면 화폐가 있으면 조건이 절반으로 풀린다. 상대가 내가 원하는 것을 가지기만 하면 되니 한 번 만날 때 성공 확률이 1/8, 약 12.5%로 일곱 배쯤 높다. 쌀 농부는 <b>쌀을 원하는 아무에게나</b> 쌀을 팔고, 받은 돈으로 <b>꿀을 가진 아무에게서나</b> 꿀을 산다. 한 번의 교환이 '파는 일'과 '사는 일' 두 번으로 쪼개지면서 서로의 바람이 맞물릴 필요가 사라진다.</p>
+    <p>물건 종류가 늘면 생기는 문제가 하나 더 있다. 쌀 한 말이 꿀 몇 병인지, 솥 하나가 옷 몇 벌인지, 모든 물건 쌍의 교환비율을 기억해야 한다. 아래에서 물건 종류를 늘려 본다. 점 하나에 마우스를 올리거나 눌러 보면 그 물건이 알아야 하는 비율이 강조된다.</p>
+
+    <div class="sim" id="sim-prices">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>교환비율의 그물 vs 가격표 한 장</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="pn-cv"></canvas><span class="hint">점을 가리키거나 누른다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>물건 종류 <output id="pn-k-out"></output></span><input type="range" id="pn-k" min="3" max="40" step="1" value="8"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">물물교환 교환비율 수</span><span class="v" id="pn-o-b">—</span></div>
+        <div class="stat"><span class="k">화폐 가격 수</span><span class="v" id="pn-o-m">—</span></div>
+        <div class="stat"><span class="k">외울 것의 차이</span><span class="v" id="pn-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 물건 8가지에서 선의 수(28개)와 화폐 쪽 선의 수(8개)를 비교한다. ② 40가지로 올린다. 물물교환 쪽은 780개의 비율이 얽힌 털실 뭉치가 되고, 화폐 쪽은 가격 40개면 끝난다. ③ 점 하나를 가리킨다. 물물교환에서는 그 물건이 다른 모든 물건과의 비율을 알아야 하지만, 화폐에서는 자기 가격 하나만 알면 된다.</div>
+    </div>
+    <p>\(K\)가지 물건의 교환비율은 \(K(K-1)/2\)개다. 동네 마트에 물건이 1만 가지라면 약 5,000만 개의 비율이 필요하다. 화폐로 재면 가격표 1만 장이면 된다. 돈은 모든 물건을 한 줄자로 잰다.</p>
+  </section>
+
+  <section id="functions">
+    <h2>화폐의 세 기능</h2>
+    <p>앞의 두 시뮬레이터가 보여 준 것이 화폐가 하는 일의 두 가지다. 여기에 하나를 더하면 경제학 교과서가 말하는 화폐의 세 기능이 된다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>기능</th><th>뜻</th><th>없으면 생기는 일</th></tr></thead>
+      <tbody>
+        <tr><td><span class="term">교환의 매개</span><span class="en">(Medium of exchange)</span></td><td>누구나 받아 주는 중간 물건. 교환을 '팔기'와 '사기'로 쪼갠다.</td><td>욕구의 이중 일치를 찾아 헤맨다.</td></tr>
+        <tr><td><span class="term">가치의 척도</span><span class="en">(Unit of account)</span></td><td>모든 값을 같은 단위(원)로 잰다. 가격, 월급, 빚, 순자산이 모두 같은 자로 비교된다.</td><td>물건 쌍마다 교환비율을 따로 외운다.</td></tr>
+        <tr><td><span class="term">가치의 저장</span><span class="en">(Store of value)</span></td><td>오늘 번 것을 나중에 쓸 수 있게 담아 둔다.</td><td>생선은 썩고 쌀은 쥐가 먹는다. 번 날 다 써야 한다.</td></tr>
+      </tbody>
+    </table></div>
+    <p>무엇이든 이 세 가지를 잘하면 돈이 될 수 있다. 실제로 사람들은 조개껍데기, 소금, 쌀, 삼베, 담배, 금과 은을 돈으로 썼다. 좋은 돈의 조건도 여기서 나온다. 누구나 알아보고(인지 가능), 잘게 나눌 수 있고(분할 가능), 들고 다니기 쉽고(휴대성), 썩지 않고(내구성), 함부로 늘릴 수 없어야(희소성) 한다. 세 번째 기능, 가치의 저장은 이 책 내내 다시 나온다. 돈이 가치를 얼마나 잘 담아 두는지가 바로 <a href="inflation.html">3장</a>의 물가 이야기다.</p>
+    <div class="callout tip"><strong>신용카드는 돈인가</strong>카드로 결제하면 돈처럼 느껴지지만 카드 자체는 돈이 아니다. 카드사가 대신 가게에 돈을 내주고 한 달 뒤 내 통장에서 가져가는 <b>짧은 빚</b>이다. 결제의 수단이지 가치를 담는 그릇이 아니다. 카드와 빚의 구조는 <a href="credit.html">9장</a>에서 다룬다.</div>
+  </section>
+
+  <section id="history">
+    <h2>조개에서 금으로, 금에서 약속으로</h2>
+    <p>돈의 역사는 '진짜 가치가 있는 물건'에서 '가치가 있다는 약속'으로 옮겨 온 역사다.</p>
+    <figure class="diagram">
+      <svg class="fig-w" viewBox="0 0 720 300" role="img" aria-label="돈의 형태 변화 연표: 물품화폐, 금속 주화, 금본위 태환지폐, 브레턴우즈 체제, 1971년 금 태환 정지, 법정화폐와 디지털 돈">
+        <defs><marker id="tl-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <line x1="20" y1="150" x2="700" y2="150" class="s-axis" marker-end="url(#tl-ar)"/>
+        <g>
+          <rect x="20" y="20" width="200" height="100" rx="10" class="f-acc2-soft"/>
+          <text x="34" y="46" class="lbl-acc2">물품화폐</text>
+          <text x="34" y="70" class="lbl-dim">조개, 소금, 쌀, 삼베</text>
+          <text x="34" y="92" class="lbl-dim">물건 자체가 쓸모 있다</text>
+          <line x1="120" y1="120" x2="120" y2="150" class="s-dash"/><circle cx="120" cy="150" r="6" class="f-acc2"/>
+        </g>
+        <g>
+          <rect x="260" y="20" width="200" height="100" rx="10" class="f-acc2-soft"/>
+          <text x="274" y="46" class="lbl-acc2">금속 주화</text>
+          <text x="274" y="70" class="lbl-dim">금·은·구리 동전, 엽전</text>
+          <text x="274" y="92" class="lbl-dim">무게와 순도를 나라가 보증</text>
+          <line x1="360" y1="120" x2="360" y2="150" class="s-dash"/><circle cx="360" cy="150" r="6" class="f-acc2"/>
+        </g>
+        <g>
+          <rect x="500" y="20" width="200" height="100" rx="10" class="f-acc2-soft"/>
+          <text x="514" y="46" class="lbl-acc2">금본위 태환지폐</text>
+          <text x="514" y="70" class="lbl-dim">19세기~: 지폐 = 금 교환권</text>
+          <text x="514" y="92" class="lbl-dim">은행에 가면 금으로 바꿔 준다</text>
+          <line x1="600" y1="120" x2="600" y2="150" class="s-dash"/><circle cx="600" cy="150" r="6" class="f-acc2"/>
+        </g>
+        <g>
+          <rect x="20" y="180" width="200" height="100" rx="10" class="f-surface"/>
+          <text x="34" y="206" class="lbl-b">브레턴우즈 (1944)</text>
+          <text x="34" y="230" class="lbl-dim">달러만 금에 묶고</text>
+          <text x="34" y="252" class="lbl-dim">다른 돈은 달러에 묶는다</text>
+          <line x1="120" y1="150" x2="120" y2="180" class="s-dash"/>
+        </g>
+        <g>
+          <rect x="260" y="180" width="200" height="100" rx="10" class="f-bad-soft"/>
+          <text x="274" y="206" class="lbl-bad">금 태환 정지 (1971)</text>
+          <text x="274" y="230" class="lbl-dim">미국이 달러-금 교환을</text>
+          <text x="274" y="252" class="lbl-dim">멈춘다. 금과의 끈이 끊김</text>
+          <line x1="360" y1="150" x2="360" y2="180" class="s-dash"/>
+        </g>
+        <g>
+          <rect x="500" y="180" width="200" height="100" rx="10" class="f-acc-soft"/>
+          <text x="514" y="206" class="lbl-acc">법정화폐 · 디지털</text>
+          <text x="514" y="230" class="lbl-dim">법과 신뢰가 가치를 받친다</text>
+          <text x="514" y="252" class="lbl-dim">대부분은 은행 장부의 숫자</text>
+          <line x1="600" y1="150" x2="600" y2="180" class="s-dash"/>
+        </g>
+      </svg>
+      <svg class="fig-n" viewBox="0 0 400 516" role="img" aria-label="돈의 형태 변화 연표: 물품화폐, 금속 주화, 금본위 태환지폐, 브레턴우즈 체제, 1971년 금 태환 정지, 법정화폐와 디지털 돈">
+        <defs><marker id="tl-n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <line x1="22" y1="6" x2="22" y2="512" class="s-axis" marker-end="url(#tl-n)"/>
+        <rect x="44" y="8" width="348" height="74" rx="10" class="f-acc2-soft"/>
+        <text x="58" y="32" class="lbl-acc2">물품화폐</text>
+        <text x="58" y="53" class="lbl-dim">조개, 소금, 쌀, 삼베</text>
+        <text x="58" y="73" class="lbl-dim">물건 자체가 쓸모 있다</text>
+        <line x1="28" y1="45" x2="44" y2="45" class="s-dash"/><circle cx="22" cy="45" r="6" class="f-acc2"/>
+        <rect x="44" y="90" width="348" height="74" rx="10" class="f-acc2-soft"/>
+        <text x="58" y="114" class="lbl-acc2">금속 주화</text>
+        <text x="58" y="135" class="lbl-dim">금·은·구리 동전, 엽전</text>
+        <text x="58" y="155" class="lbl-dim">무게와 순도를 나라가 보증</text>
+        <line x1="28" y1="127" x2="44" y2="127" class="s-dash"/><circle cx="22" cy="127" r="6" class="f-acc2"/>
+        <rect x="44" y="172" width="348" height="74" rx="10" class="f-acc2-soft"/>
+        <text x="58" y="196" class="lbl-acc2">금본위 태환지폐</text>
+        <text x="58" y="217" class="lbl-dim">19세기~: 지폐 = 금 교환권</text>
+        <text x="58" y="237" class="lbl-dim">은행에 가면 금으로 바꿔 준다</text>
+        <line x1="28" y1="209" x2="44" y2="209" class="s-dash"/><circle cx="22" cy="209" r="6" class="f-acc2"/>
+        <rect x="44" y="268" width="348" height="74" rx="10" class="f-surface"/>
+        <text x="58" y="292" class="lbl-b">브레턴우즈 (1944)</text>
+        <text x="58" y="313" class="lbl-dim">달러만 금에 묶고</text>
+        <text x="58" y="333" class="lbl-dim">다른 돈은 달러에 묶는다</text>
+        <line x1="22" y1="305" x2="44" y2="305" class="s-dash"/>
+        <rect x="44" y="350" width="348" height="74" rx="10" class="f-bad-soft"/>
+        <text x="58" y="374" class="lbl-bad">금 태환 정지 (1971)</text>
+        <text x="58" y="395" class="lbl-dim">미국이 달러-금 교환을</text>
+        <text x="58" y="415" class="lbl-dim">멈춘다. 금과의 끈이 끊김</text>
+        <line x1="22" y1="387" x2="44" y2="387" class="s-dash"/>
+        <rect x="44" y="432" width="348" height="74" rx="10" class="f-acc-soft"/>
+        <text x="58" y="456" class="lbl-acc">법정화폐 · 디지털</text>
+        <text x="58" y="477" class="lbl-dim">법과 신뢰가 가치를 받친다</text>
+        <text x="58" y="497" class="lbl-dim">대부분은 은행 장부의 숫자</text>
+        <line x1="22" y1="469" x2="44" y2="469" class="s-dash"/>
+      </svg>
+      <figcaption><b>그림 1. 돈의 형태 변화.</b> 위 줄은 돈이 물건이거나 물건(금)과 바꿀 수 있던 시대, 아래 줄은 그 끈이 점점 느슨해지다 끊어진 20세기다. 오늘의 원화는 금과 바꿔 주지 않는다. 한국은행이 발행하고 법이 세금과 빚을 갚는 수단으로 정한 <b>약속</b>이다.</figcaption>
+    </figure>
+    <p><span class="term">상품화폐</span><span class="en">(Commodity money)</span>는 물건 자체에 쓸모가 있었다. 쌀은 먹을 수 있고 삼베는 입을 수 있다. 하지만 무겁고 썩고 품질이 들쭉날쭉하다. 금과 은은 썩지 않고 잘게 나눌 수 있어서 오래 살아남았다. 그런데 금화도 들고 다니기 무겁다. 그래서 금은 금고에 두고 "이 종이를 가져오면 금을 내준다"는 보관증을 돌려 쓰기 시작했다. 이것이 <span class="term">금본위제</span><span class="en">(Gold standard)</span>의 태환지폐다. 지폐의 양이 금고 속 금의 양에 묶인다.</p>
+    <p>금에 묶인 돈은 믿음직하지만 족쇄가 있다. 경제는 커지는데 금광에서 캐는 금이 그만큼 늘지 않으면, 같은 돈으로 더 많은 물건을 사고팔아야 하므로 물가가 내려간다. 물가가 계속 내리면(디플레이션) 빚을 진 사람의 부담이 실질로 커지고, 사람들은 물건을 사지 않고 기다린다. 아래에서 금이 늘어나는 속도와 경제가 커지는 속도를 바꿔 본다.</p>
+
+    <div class="sim" id="sim-gold">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>금본위의 족쇄: 금이 경제를 못 따라가면</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="gf-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>금 공급 증가율 (연) <output id="gf-g-out"></output></span><input type="range" id="gf-g" min="0" max="6" step="0.1" value="1.5"></label>
+          <label class="ctrl"><span>실질 경제 성장률 (연) <output id="gf-y-out"></output></span><input type="range" id="gf-y" min="0" max="6" step="0.1" value="3"></label>
+          <label class="check"><input type="checkbox" id="gf-s"> 15년째에 큰 금광 발견 (금 +40%)</label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent-2)"></i>금본위: 돈 = 금</span><span><i style="background:var(--accent)"></i>법정화폐: 중앙은행이 물가 2% 목표로 조절</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">금본위 물가 변화 (연)</span><span class="v" id="gf-o-p">—</span></div>
+        <div class="stat"><span class="k">40년 뒤 물가 · 금본위</span><span class="v" id="gf-o-g">—</span></div>
+        <div class="stat"><span class="k">40년 뒤 물가 · 법정화폐</span><span class="v" id="gf-o-f">—</span></div>
+        <div class="stat"><span class="k">빚 1억원의 10년 뒤 실질 부담</span><span class="v" id="gf-o-d">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(금 1.5%, 성장 3%)에서 금본위 물가가 해마다 약 1.5%씩 내린다. 갚을 빚 1억원이 10년 뒤 오늘 돈으로 약 1억 1,580만원의 무게가 된다. ② 성장을 6%로 올린다. 경제가 잘 될수록 물가가 더 빨리 떨어지고 빚이 더 무거워진다. ③ 금광 발견을 켠다. 경제와 상관없는 이유로 물가가 하루아침에 40% 뛴다. (단순 모델: 돈의 양 ∝ 금, 유통속도 일정, 물가 = 돈의 양 ÷ 실질 생산량)</div>
+    </div>
+    <p>금본위에서 물가를 정하는 것은 금광과 경제 성장의 경주다. 사람이 손댈 수 없으니 함부로 돈을 찍는 정부를 막아 주는 장점이 있지만, 불황에 돈이 부족해도 늘릴 방법이 없다. 1930년대 대공황 때 금본위를 일찍 버린 나라일수록 빨리 회복했다는 연구가 많다. 2차 대전 뒤 <span class="term">브레턴우즈 체제</span>에서는 미국 달러만 금 1온스 = 35달러로 묶고 다른 나라 돈은 달러에 고정했다. 그러나 1971년 미국이 달러를 금으로 바꿔 주는 일을 멈추면서 세계의 돈은 금과의 마지막 끈을 놓았다.</p>
+    <p>그 뒤의 돈이 <span class="term">법정화폐</span><span class="en">(Fiat money)</span>다. 금과 바꿔 주지 않는다. 가치를 받치는 것은 세 가지다. 법이 이 돈으로 세금과 빚을 갚게 정했고, 모두가 이 돈을 받을 거라고 믿으며, 중앙은행이 돈의 양을 조절해 가치를 지키겠다고 약속한다. 그래프의 초록 선처럼 중앙은행은 보통 물가가 연 2% 정도 천천히 오르도록 돈의 양을 맞춘다. 약속이 깨지면, 즉 중앙은행이 돈을 마구 찍으면 어떻게 되는지는 이 장 끝에서 본다.</p>
+  </section>
+
+  <section id="ledger">
+    <h2>대부분의 돈은 장부의 숫자다</h2>
+    <p>오늘 한국에서 '돈'이라고 부르는 것 가운데 지폐와 동전은 아주 작은 부분이다. 대부분은 은행 전산 장부에 적힌 <b>예금 잔액</b>이다. 월급날 회사가 월급을 '보낸다'고 하지만 실제로 움직이는 지폐는 한 장도 없다. 회사 계좌의 숫자가 줄고 내 계좌의 숫자가 늘 뿐이다.</p>
+    <p>아래는 한결의 첫 월급날이다. 실수령 2,655,840원이 회사 계좌에서 한결 계좌로 옮겨진다. 회사와 한결이 같은 은행을 쓸 때와 다른 은행을 쓸 때를 바꿔 가며 이체해 본다.</p>
+
+    <div class="sim" id="sim-ledger">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>월급날의 장부: 움직이는 것은 숫자뿐이다</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="lg-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="lg-mode"><button data-value="same" class="on">같은 은행</button><button data-value="diff">다른 은행</button></div>
+          <div class="btn-row"><button class="btn primary" id="lg-pay">월급 이체</button><button class="btn" id="lg-cash">현금 10만원 찾기</button><button class="btn" id="lg-re">다시</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">한결 통장</span><span class="v" id="lg-o-hg">—</span></div>
+        <div class="stat"><span class="k">한결 지갑</span><span class="v" id="lg-o-w">—</span></div>
+        <div class="stat"><span class="k">실제로 움직인 지폐</span><span class="v" id="lg-o-n">—</span></div>
+        <div class="stat"><span class="k">은행 사이 지급준비금 이동</span><span class="v" id="lg-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 같은 은행에서 월급을 이체한다. A은행 장부 안에서 숫자 두 개만 바뀐다. ② 다른 은행으로 바꿔 이체한다. 한결 계좌가 B은행에 있으면, A은행이 한국은행에 맡겨 둔 지급준비금이 B은행 쪽으로 옮겨진다. 여전히 지폐는 0장이다. ③ 현금 10만원을 찾는다. 이때 처음으로 종이돈이 금고에서 지갑으로 나온다. (은행 사이 이체는 실제로는 금융결제원을 거쳐 하루 단위로 차액만 정산하지만 원리는 같다.)</div>
+    </div>
+    <p>예금은 은행이 나에게 진 <b>빚</b>이다. 내 통장의 300만원은 "은행이 한결에게 300만원을 언제든 내주겠다"는 약속이고, 은행 재무상태표에서는 부채 칸에 적힌다. 그 약속이 현금만큼 믿을 만하기 때문에 우리는 예금을 돈처럼 쓴다. 다른 은행으로 돈을 보낼 때 은행끼리는 각자 한국은행에 맡겨 둔 계좌, 곧 <span class="term">지급준비금</span><span class="en">(Reserves)</span>으로 결제한다. 은행의 돈은 한국은행 장부에, 우리의 돈은 은행 장부에 적힌 셈이다. 돈은 장부가 두 층으로 포개진 구조다.</p>
+  </section>
+
+  <section id="credit">
+    <h2>은행은 돈을 만든다: 신용 창조</h2>
+    <p>은행은 맡은 돈을 전부 금고에 두지 않는다. 예금자들이 한꺼번에 돈을 찾으러 오는 일은 드물기 때문에 일부만 남겨 두고 나머지는 대출해 준다. 남겨 두는 비율이 <span class="term">지급준비율</span><span class="en">(Reserve ratio)</span>이다. 한국은행은 은행이 최소한 남겨야 할 비율을 정해 두었다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>예금 종류</th><th class="num">지급준비율</th></tr></thead>
+      <tbody>
+        <tr><td>요구불예금 (보통·당좌 등 언제든 찾는 돈)</td><td class="num">7%</td></tr>
+        <tr><td>정기예금·정기적금·양도성예금증서 등</td><td class="num">2%</td></tr>
+        <tr><td>장기주택마련저축 등 일부 장기 상품</td><td class="num">0%</td></tr>
+      </tbody>
+    </table></div>
+    <p>여기서 마법 같은 일이 벌어진다. 한결이 300만원을 입출금 통장에 맡긴다. 은행은 7%인 21만원을 남기고 279만원을 다른 사람에게 빌려준다. 빌린 사람은 그 돈으로 가구를 사고, 가구점 주인은 받은 279만원을 자기 은행에 맡긴다. 이제 한결 통장에 300만원, 가구점 주인 통장에 279만원이 있다. <b>한결의 돈은 줄지 않았는데 세상의 예금은 579만원이 되었다.</b> 그 은행이 또 일부를 남기고 빌려주면 이야기는 계속 이어진다. 이것이 <span class="term">신용 창조</span><span class="en">(Credit creation)</span>다.</p>
+    <p>아래에서 한 단계씩 눌러 돈이 은행에서 은행으로 흘러가는 모습을 본다. 지급준비율을 바꾸고, 대출받은 돈 일부를 사람들이 현금으로 쥐고 있게 해 본다.</p>
+
+    <div class="sim" id="sim-chain">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>신용 창조의 연쇄: 300만원이 어디까지 불어나는가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cc-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>지급준비율 r <output id="cc-r-out"></output></span><input type="range" id="cc-r" min="1" max="50" step="1" value="10"></label>
+          <label class="ctrl"><span>현금으로 빠지는 비율 <output id="cc-c-out"></output></span><input type="range" id="cc-c" min="0" max="40" step="1" value="0"></label>
+          <div class="btn-row"><button class="btn primary" id="cc-step">한 단계</button><button class="btn" id="cc-auto">자동 재생</button><button class="btn" id="cc-re">다시</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent-2)"></i>지급준비금으로 남김</span><span><i style="background:var(--accent)"></i>대출로 나감 → 다음 은행의 예금</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">단계</span><span class="v" id="cc-o-n">—</span></div>
+        <div class="stat"><span class="k">세상의 총예금</span><span class="v" id="cc-o-d">—</span></div>
+        <div class="stat"><span class="k">대출로 새로 생긴 돈</span><span class="v" id="cc-o-l">—</span></div>
+        <div class="stat"><span class="k">이론 한계 (승수)</span><span class="v" id="cc-o-m">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 지급준비율 10%에서 자동 재생한다. 막대가 3,000만원(300만원의 10배)을 향해 다가간다. 10단계 만에 한계의 약 65%에 이른다. ② 지급준비율을 실제 요구불예금 수준인 7%로 낮춘다. 한계가 약 4,286만원으로 오른다. 1%로 내리면 3억원이다. ③ 현금으로 빠지는 비율을 20%로 올린다. 대출금 일부가 지갑에 머물면서 사슬이 빨리 끊긴다. (모든 은행이 남기라는 만큼만 남기고 나머지를 전부 빌려준다는 가정. 실제 은행은 빌려줄 사람이 있어야 빌려준다.)</div>
+    </div>
+
+    <p>각 단계에서 새로 생기는 예금은 앞 단계의 \((1-r)\)배다. 이 수열을 끝까지 더하면 처음 예금의 \(1/r\)배가 된다.</p>
+    <div class="formula">$$D_{\text{총}} = D_0\left[1 + (1-r) + (1-r)^2 + \cdots\right] = \frac{D_0}{r}$$<div class="where">\(D_0\): 처음 예금, \(r\): 지급준비율. 대출받은 돈 중 비율 \(c\)가 현금으로 빠지면 공비가 \((1-r)(1-c)\)로 줄어 \(D_{\text{총}} = D_0 / [1-(1-r)(1-c)]\)</div></div>
+    <p>지급준비율 10%면 10배, 7%면 약 14배, 2%면 50배다. 이 배수를 단순 <span class="term">통화승수</span><span class="en">(Money multiplier)</span>라고 한다. 지급준비율이 낮을수록 같은 돈에서 더 많은 예금이 만들어진다. 그러나 남겨 둔 현금도 그만큼 얇아진다. 그 얇음이 뒤에서 볼 뱅크런의 씨앗이다.</p>
+    <div class="callout deep"><strong>실제로는 대출이 먼저다</strong>위 이야기는 '누가 먼저 돈을 맡겨야 은행이 빌려줄 수 있다'는 순서로 설명하지만, 현대 은행은 반대로 움직인다. 은행이 대출을 승인하는 순간 빌린 사람의 계좌에 숫자를 <b>새로 적는다</b>. 대출이라는 자산과 예금이라는 부채가 장부 양쪽에 동시에 생긴다. 지급준비금은 나중에 맞추면 되고, 부족하면 다른 은행이나 한국은행에서 빌린다. 그래서 오늘날 은행 대출을 실제로 제약하는 것은 지급준비율보다 <b>빌려줄 만한 사람이 있는가, 금리가 얼마인가, 자기자본 규제를 지키는가</b>다. 영국 중앙은행은 2014년 보고서에서 이 점을 분명히 밝혔다. 어느 쪽으로 보든 결론은 같다. 시중의 돈 대부분은 대출과 함께 태어나고, 대출을 갚으면 사라진다.</div>
+  </section>
+
+  <section id="aggregates">
+    <h2>본원통화와 M2: 돈을 세는 여러 개의 자</h2>
+    <p>'돈이 얼마나 있느냐'는 어디까지를 돈으로 치느냐에 따라 답이 다르다. 지갑의 현금만 셀 수도 있고, 언제든 찾을 수 있는 예금까지, 혹은 만기가 있는 적금까지 셀 수도 있다. 한국은행은 이것을 몇 개의 지표로 나눠 발표한다.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 400 432" role="img" aria-label="통화지표의 포함 관계: 현금통화는 M1 안에, M1은 M2 안에, M2는 Lf 안에 있다. 본원통화는 현금통화와 은행의 지급준비금을 합친 것이다">
+        <rect x="8" y="8" width="384" height="334" rx="16" class="f-surface"/>
+        <text x="24" y="34" class="lbl-b">Lf (금융기관 유동성)</text>
+        <text x="24" y="56" class="lbl-dim">+ 만기 2년 이상 예적금, 생명보험 준비금 등</text>
+        <rect x="22" y="70" width="356" height="258" rx="14" class="f-acc-soft"/>
+        <text x="38" y="96" class="lbl-acc">M2 (광의통화) · 약 4,400조원</text>
+        <text x="38" y="118" class="lbl-dim">+ 정기예적금, 시장형 상품(CD·RP),</text>
+        <text x="38" y="138" class="lbl-dim">수익증권 등 만기 2년 미만</text>
+        <rect x="36" y="152" width="328" height="162" rx="12" class="f-acc2-soft"/>
+        <text x="52" y="178" class="lbl-acc2">M1 (협의통화) · 약 1,300조원</text>
+        <text x="52" y="200" class="lbl-dim">+ 요구불예금, 수시입출식 예금</text>
+        <rect x="52" y="214" width="146" height="84" rx="10" class="f-elev"/>
+        <text x="66" y="240" class="lbl-b">현금통화</text>
+        <text x="66" y="262" class="lbl-dim">지폐·동전</text>
+        <text x="66" y="284" class="lbl-dim">약 200조원</text>
+        <text x="226" y="252" class="lbl-dim">예금이</text>
+        <text x="226" y="274" class="lbl-dim">돈의 대부분</text>
+        <rect x="44" y="206" width="162" height="216" rx="12" fill="none" class="s-acc" stroke-dasharray="6 4"/>
+        <text x="58" y="366" class="lbl-acc">본원통화</text>
+        <text x="58" y="388" class="lbl-dim">약 300조원</text>
+        <text x="58" y="410" class="lbl-dim">= 현금 + 지급준비금</text>
+      </svg>
+      <figcaption><b>그림 2. 통화지표는 포개진 상자다.</b> 안쪽일수록 바로 쓸 수 있는 돈이다. 본원통화(점선)는 한국은행이 직접 만든 돈으로, 시중의 현금과 은행이 한국은행에 맡긴 지급준비금을 합친 것이다. 그 위에 은행이 신용 창조로 쌓아 올린 예금이 M1, M2를 이룬다. 금액은 2026년 무렵의 대략값이다.</figcaption>
+    </figure>
+    <ul>
+      <li><span class="term">본원통화</span><span class="en">(Monetary base)</span>: 한국은행이 발행한 돈. 현금과 은행의 지급준비금. '돈의 씨앗'이다.</li>
+      <li><span class="term">M1, 협의통화</span>: 현금 + 언제든 꺼내 쓸 수 있는 예금. 지금 당장 결제에 쓸 수 있는 돈.</li>
+      <li><span class="term">M2, 광의통화</span>: M1 + 만기 2년 미만의 정기예적금과 시장형 금융상품. 조금만 기다리면 쓸 수 있는 돈. 뉴스에서 '통화량'이라고 하면 보통 M2다.</li>
+    </ul>
+    <p>본원통화와 M2의 비율이 실제 통화승수다. 앞의 단순한 \(1/r\)에 사람들이 현금으로 쥐고 있는 몫까지 넣으면 아래 식이 된다. 아래 곡선 위의 손잡이를 좌우로 끌어 지급준비율을 바꾸고, 슬라이더로 현금 보유 성향을 바꿔 본다.</p>
+    <div class="formula">$$m = \frac{M}{B} = \frac{1 + c}{c + r}$$<div class="where">\(m\): 통화승수, \(M\): 통화량, \(B\): 본원통화, \(c\): 사람들이 예금 대비 현금으로 쥐는 비율, \(r\): 은행의 지급준비금 ÷ 예금</div></div>
+
+    <div class="sim" id="sim-mult">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>통화승수: 씨앗 돈 1원이 몇 원의 통화량이 되는가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="mm-cv"></canvas><span class="hint">곡선 위 점을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>현금 보유 비율 c <output id="mm-c-out"></output></span><input type="range" id="mm-c" min="0" max="40" step="1" value="5"></label>
+          <div class="btn-row"><button class="btn sm" id="mm-kr">한국 대략값</button><button class="btn sm" id="mm-cash">현금 사회</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>지금 고른 c</span><span><i style="background:var(--text-faint)"></i>비교용 c 0%·5%·10%·30% (위쪽 곡선일수록 작은 c)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">지급준비율 r</span><span class="v" id="mm-o-r">—</span></div>
+        <div class="stat"><span class="k">통화승수 m</span><span class="v" id="mm-o-m">—</span></div>
+        <div class="stat"><span class="k">본원통화 300조원이면 통화량</span><span class="v" id="mm-o-M">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "한국 대략값"(r 2%, c 5%)을 누른다. 승수가 약 15, 통화량이 약 4,500조원으로 실제 M2(약 4,400조원)와 비슷해진다. ② r을 왼쪽 끝으로 끈다. c가 작으면 승수가 수십 배로 치솟는다. ③ "현금 사회"를 누른다. 사람들이 돈을 은행에 맡기지 않고 쥐고 있으면 은행이 돈을 불릴 재료가 사라져 승수가 몇 배에 그친다. (r은 정해진 비율이 아니라 은행이 실제로 쌓아 둔 비율이다. 한국에서는 예금 대부분이 2% 대상인 저축성 예금이라 평균이 낮다.)</div>
+    </div>
+
+    <p>숫자가 너무 커서 감이 오지 않는다면 크기를 그림으로 비교해 본다. 아래 정사각형의 넓이는 금액에 비례한다. 1인당으로 바꾸면 한국 인구 약 5,100만 명으로 나눈 값이 된다.</p>
+
+    <div class="sim" id="sim-scale">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>한국 통화량의 크기 감각</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sc-cv"></canvas><span class="hint">상자를 가리킨다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="sc-mode"><button data-value="all" class="on">나라 전체</button><button data-value="per">1인당</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">가리킨 항목</span><span class="v" id="sc-o-h">—</span></div>
+        <div class="stat"><span class="k">M2 중 현금 비중</span><span class="v" id="sc-o-s">—</span></div>
+        <div class="stat"><span class="k">현금 전체를 5만원권으로 쌓으면</span><span class="v" id="sc-o-c">—</span></div>
+        <div class="stat"><span class="k">M2 전체를 5만원권으로 쌓으면</span><span class="v" id="sc-o-m">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① M2 안에서 현금 상자가 얼마나 작은지 본다. 통화량의 약 5%뿐이다. 나머지 95%는 장부 속 숫자다. ② 1인당으로 바꾼다. 한 사람 몫의 M2는 약 8,600만원이지만, 이것은 평균이며 기업 예금도 포함된다. ③ 나라 경제 한 해 생산(명목 GDP)과 정부 한 해 예산을 비교한다. (모든 값은 2026년 무렵의 대략값이다. 5만원권 한 장 두께는 약 0.1mm로 잡았다.)</div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>지표 (대략값)</th><th class="num">금액</th><th class="num">1인당</th></tr></thead>
+      <tbody>
+        <tr><td>현금통화 (시중의 지폐·동전)</td><td class="num">약 200조원</td><td class="num">약 390만원</td></tr>
+        <tr><td>본원통화</td><td class="num">약 300조원</td><td class="num">약 590만원</td></tr>
+        <tr><td>M1 (협의통화)</td><td class="num">약 1,300조원</td><td class="num">약 2,550만원</td></tr>
+        <tr><td>M2 (광의통화)</td><td class="num">약 4,400조원</td><td class="num">약 8,600만원</td></tr>
+      </tbody>
+    </table></div>
+    <p>현금 1인당 390만원이라는 숫자가 어색하게 느껴질 수 있다. 지갑에 그만큼 있는 사람은 드물다. 발행된 5만원권의 상당 부분은 지갑이 아니라 금고와 장롱 속에 머문다. 반대로 매일 쓰는 결제의 대부분은 카드와 이체, 곧 장부의 숫자로 이루어진다.</p>
+  </section>
+
+  <section id="bankrun">
+    <h2>뱅크런: 모두가 동시에 찾으러 오면</h2>
+    <p>신용 창조는 은행이 예금의 일부만 현금으로 남겨 둔다는 데서 출발한다. 평소에는 문제가 없다. 매일 찾아가는 사람과 새로 맡기는 사람이 비슷하기 때문이다. 하지만 "저 은행이 위험하다"는 소문이 돌면 이야기가 달라진다. 늦게 가면 못 받을지도 모른다는 생각에 모두가 한꺼번에 몰려간다. 이것이 <span class="term">뱅크런</span><span class="en">(Bank run)</span>이다.</p>
+    <p>무서운 점은 <b>건전한 은행도 무너질 수 있다</b>는 것이다. 은행의 돈은 대부분 수년짜리 대출로 나가 있어서 당장 현금으로 바꿀 수 없다. 예금은 오늘 찾을 수 있는데 대출은 10년 뒤에 돌아온다. 이 <span class="term">만기 불일치</span>가 은행의 본성이다. 아래 은행은 예금자 100명이 1,000만원씩 모두 10억원을 맡겼다. 소문을 퍼뜨리고 무슨 일이 일어나는지 본다.</p>
+
+    <div class="sim" id="sim-run">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>뱅크런: 소문이 은행의 현금을 바닥낸다</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="br-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>은행이 쥔 현금 비율 <output id="br-r-out"></output></span><input type="range" id="br-r" min="5" max="60" step="1" value="10"></label>
+          <label class="ctrl"><span>소문 전파력 <output id="br-s-out"></output></span><input type="range" id="br-s" min="0" max="1" step="0.05" value="0.5"></label>
+          <label class="check"><input type="checkbox" id="br-ins"> 예금자 보호 (1인 1억원까지)</label>
+          <label class="check"><input type="checkbox" id="br-lolr"> 한국은행 긴급 대출</label>
+          <div class="btn-row"><button class="btn primary" id="br-go">소문 퍼뜨리기</button><button class="btn" id="br-re">다시</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>예금을 둔 사람</span><span><i style="background:var(--text-faint)"></i>찾아간 사람</span><span><i style="background:var(--bad)"></i>못 찾은 사람</span><span><i style="background:var(--accent-2)"></i>은행 현금 (아래 그래프)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">경과 시간</span><span class="v" id="br-o-t">—</span></div>
+        <div class="stat"><span class="k">돈을 찾아간 예금자</span><span class="v" id="br-o-w">—</span></div>
+        <div class="stat"><span class="k">은행 금고 현금</span><span class="v" id="br-o-c">—</span></div>
+        <div class="stat"><span class="k">상태</span><span class="v" id="br-o-s">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(현금 10%, 소문 0.5)에서 소문을 퍼뜨린다. 찾아간 사람이 늘수록 남은 사람이 더 불안해지고, 몇 시간 만에 금고가 비어 남은 예금자가 돈을 못 받는다. ② 현금 비율을 40%로 올리고 다시 해 본다. 버티는 시간은 길어지지만 대개 하루 안팎에서 무너진다. 60%면 버티지만, 소문 전파력을 1로 올리면 60%도 반나절을 못 간다. ③ 현금 10%로 돌리고 예금자 보호를 켠다. 내 돈이 보장된다는 걸 아는 예금자는 서두르지 않는다. ④ 보호를 끄고 한국은행 긴급 대출을 켠다. 금고가 비는 순간 한국은행이 대출을 담보로 현금을 빌려주고, 돈이 나온다는 걸 본 사람들이 진정한다. (각 예금자는 1시간마다 최근 3시간 사이 돈을 찾아간 사람 수와 금고 사정을 보고 확률적으로 인출을 결정한다. 처음 소문의 힘은 시간이 지나면 잦아든다. 교육용 모델이다.)</div>
+    </div>
+
+    <p>뱅크런은 스스로를 키운다. 찾아간 사람이 늘수록 금고가 비고, 금고가 빌수록 남은 사람의 불안이 커진다. 은행이 실제로 건전했는지는 상관이 없다. 소문이 사실이 되어 버린다. 그래서 각국은 두 가지 안전장치를 둔다.</p>
+    <ul>
+      <li><span class="term">예금자 보호</span><span class="en">(Deposit insurance)</span>: 은행이 문을 닫아도 예금보험공사가 1인당, 금융회사별로 원금과 이자를 합쳐 <b>1억원</b>까지 대신 돌려준다(2026년 기준, 2025년 9월 5,000만원에서 상향). 보호받는 예금자는 줄을 설 이유가 없다. 자세한 활용은 <a href="saving.html">8장</a>에서 다룬다.</li>
+      <li><span class="term">최종 대부자</span><span class="en">(Lender of last resort)</span>: 은행이 일시적으로 현금이 모자라면 중앙은행이 담보를 받고 돈을 빌려준다. 은행이 지급을 멈추지 않는다는 것이 확인되면 공황은 가라앉는다.</li>
+    </ul>
+    <div class="callout warn"><strong>뱅크런은 옛날이야기가 아니다</strong>한국에서도 2011년 저축은행들의 부실이 드러나며 예금자들이 창구에 줄을 섰고, 여러 저축은행이 영업정지됐다. 2023년 미국에서는 한 중견 은행에서 하루 사이 예금의 4분의 1 가까이가 빠져나갔고, 이튿날 문을 닫았다. 스마트폰 이체와 SNS 때문에 오늘의 뱅크런은 줄을 설 필요도 없이 몇 시간 만에 일어난다.</div>
+  </section>
+
+  <section id="central">
+    <h2>중앙은행과 기준금리</h2>
+    <p>본원통화를 만들고, 은행들의 은행 역할을 하고, 뱅크런 때 마지막으로 돈을 빌려주는 곳이 <span class="term">중앙은행</span><span class="en">(Central bank)</span>이다. 한국의 중앙은행은 1950년에 세워진 <b>한국은행</b>이다. 한국은행법이 정한 첫 번째 목표는 <b>물가 안정</b>이고, 지금은 소비자물가 상승률 연 2%를 목표로 삼는다.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 400 446" role="img" aria-label="기준금리의 전달 경로: 한국은행이 기준금리를 정하면 은행 간 단기 금리가 따라가고, 은행의 예금·대출 금리가 바뀌어 가계와 기업의 대출과 소비가 달라지며, 통화량과 물가로 이어진다">
+        <defs><marker id="cb-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="16" y="8" width="244" height="84" rx="12" class="f-acc-soft"/>
+        <text x="32" y="34" class="lbl-acc">한국은행</text>
+        <text x="32" y="56" class="lbl-dim">기준금리 결정</text>
+        <text x="32" y="78" class="lbl-dim">(금융통화위원회, 연 8회)</text>
+        <line x1="138" y1="94" x2="138" y2="118" class="s-acc" marker-end="url(#cb-ar)"/>
+        <rect x="16" y="122" width="244" height="106" rx="12" class="f-surface"/>
+        <text x="32" y="148" class="lbl-b">은행</text>
+        <text x="32" y="170" class="lbl-dim">하루짜리 은행 간 금리</text>
+        <text x="32" y="192" class="lbl-dim">→ 예금 금리</text>
+        <text x="32" y="214" class="lbl-dim">→ 대출 금리</text>
+        <line x1="138" y1="230" x2="138" y2="254" class="s-acc" marker-end="url(#cb-ar)"/>
+        <rect x="16" y="258" width="244" height="84" rx="12" class="f-acc2-soft"/>
+        <text x="32" y="284" class="lbl-acc2">가계·기업</text>
+        <text x="32" y="306" class="lbl-dim">빌릴까, 저축할까</text>
+        <text x="32" y="328" class="lbl-dim">쓸까, 투자할까</text>
+        <line x1="138" y1="344" x2="138" y2="368" class="s-acc2" marker-end="url(#cb-ar)"/>
+        <rect x="16" y="372" width="244" height="66" rx="12" class="f-warn-soft"/>
+        <text x="32" y="400" class="lbl-b">통화량 · 물가</text>
+        <text x="32" y="424" class="lbl-dim">대출이 늘면 예금이 는다</text>
+        <path d="M264 405 H382 V50 H266" class="s-dash" marker-end="url(#cb-ar)"/>
+        <text x="322" y="220" text-anchor="middle" class="lbl-dim">물가를 보고</text>
+        <text x="322" y="242" text-anchor="middle" class="lbl-dim">다시 금리 결정</text>
+      </svg>
+      <figcaption><b>그림 3. 기준금리가 흘러가는 길.</b> 한국은행은 시중 돈의 양을 직접 정하지 않는다. 은행들이 하루짜리로 돈을 빌리고 빌려주는 금리를 기준금리 근처로 끌고 가고, 그 금리가 예금·대출 금리로 번져 사람들의 빌리고 쓰는 결정을 바꾼다. 대출이 바뀌면 신용 창조로 통화량이 바뀐다.</figcaption>
+    </figure>
+    <p><span class="term">기준금리</span><span class="en">(Base rate)</span>는 한국은행이 은행들과 7일짜리 환매조건부채권(RP)을 사고팔 때 쓰는 금리다. 한국은행은 시장에서 채권을 사서 돈을 풀거나 팔아서 돈을 거둬들이며(공개시장운영) 은행 간 하루짜리 금리를 기준금리 근처에 묶어 둔다. 2026년 기준 한국의 기준금리는 연 2%대 중반 수준이다. 기준금리가 오르면 은행의 자금 조달 비용이 오르고, 대출 금리가 올라 빌리려는 사람이 줄어든다. 대출이 줄면 앞에서 본 신용 창조가 느려져 통화량이 천천히 는다.</p>
+    <p>아래에서 앞으로 8년의 기준금리 경로를 직접 그려 본다. 해마다의 손잡이를 위아래로 끌면 아래 그래프에서 통화량(M2)이 어떻게 자라는지 보인다.</p>
+
+    <div class="sim" id="sim-rate">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>기준금리 경로를 그리면 통화량이 따라온다</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="rp-cv"></canvas><span class="hint">해마다의 손잡이를 위아래로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="btn-row"><button class="btn sm" id="rp-flat">2.5% 동결</button><button class="btn sm" id="rp-cut">인하 사이클</button><button class="btn sm" id="rp-hike">인상 사이클</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>내가 그린 경로</span><span><i style="background:var(--text-faint)"></i>2.5% 동결을 가정한 경로</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">평균 기준금리</span><span class="v" id="rp-o-r">—</span></div>
+        <div class="stat"><span class="k">평균 통화 증가율</span><span class="v" id="rp-o-g">—</span></div>
+        <div class="stat"><span class="k">2033년 말 M2</span><span class="v" id="rp-o-m">—</span></div>
+        <div class="stat"><span class="k">동결 경로 대비</span><span class="v" id="rp-o-d">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "인하 사이클"을 누른다. 금리가 내려가는 해마다 통화 증가율이 높아지고, 8년 뒤 통화량이 동결 경로보다 수백조원 커진다. ② "인상 사이클"을 누른다. 통화량이 느리게 자란다. ③ 모든 손잡이를 0%로 끌어내린다. 돈이 가장 빨리 불어나는 길이지만, 그 돈이 물건보다 빨리 늘면 무슨 일이 생기는지 다음 절에서 본다. (장난감 모델: 대출 금리 = 기준금리 + 1.8%p, 통화 증가율 = 10% − 1.2 × 대출 금리. 실제 경제에서는 효과가 몇 분기 늦게 나타나고 경기·규제·환율도 함께 움직인다.)</div>
+    </div>
+    <p>기준금리가 경기, 환율, 집값과 내 대출 이자에 어떤 경로로 번지는지는 <a href="economy.html">5장</a>에서 더 자세히 본다. 여기서 기억할 것은 하나다. 한국은행은 돈을 직접 찍어 뿌리기보다 <b>돈의 가격(금리)</b>을 움직여 은행과 사람들이 돈을 얼마나 만들지를 조절한다.</p>
+  </section>
+
+  <section id="quantity">
+    <h2>돈이 늘면 무슨 일이 생기는가</h2>
+    <p>돈이 많아지면 모두가 부자가 될까. 나라 안의 모든 돈이 하룻밤 사이 두 배가 되었다고 해 보자. 물건의 양은 그대로다. 사람들이 같은 물건을 놓고 두 배의 돈을 내밀면, 가게는 값을 올린다. 결국 물가가 두 배가 되고 모두의 실제 형편은 그대로다. 이 직관을 정리한 것이 <span class="term">화폐수량설</span><span class="en">(Quantity theory of money)</span>이다.</p>
+    <div class="formula">$$M \times V = P \times Y$$<div class="where">\(M\): 통화량, \(V\): 유통속도(돈 한 단위가 1년에 몇 번 거래에 쓰이는가), \(P\): 물가, \(Y\): 실질 생산량. 증가율로 쓰면 대략 \(\pi \approx g_M + g_V - g_Y\)</div></div>
+    <p>왼쪽은 1년 동안 돈이 쓰인 총액, 오른쪽은 1년 동안 팔린 물건의 총값이다. 같은 거래를 두 방향에서 센 것이니 항상 같다. 쓸모는 증가율로 바꿨을 때 나온다. 통화량이 6% 늘고 유통속도가 1% 줄고 경제가 2.5% 자라면 물가는 대략 6 − 1 − 2.5 = 2.5%, 정확히는 약 2.4% 오른다. 슬라이더를 움직이고 프리셋을 눌러 본다.</p>
+
+    <div class="sim" id="sim-qty">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>MV = PY: 돈이 물건보다 빨리 늘면</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="qt-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>통화량 증가율 M <output id="qt-m-out"></output></span><input type="range" id="qt-m" min="-5" max="80" step="1" value="6"></label>
+          <label class="ctrl"><span>유통속도 변화 V <output id="qt-v-out"></output></span><input type="range" id="qt-v" min="-5" max="5" step="0.5" value="-1"></label>
+          <label class="ctrl"><span>실질 성장률 Y <output id="qt-y-out"></output></span><input type="range" id="qt-y" min="-5" max="8" step="0.5" value="2.5"></label>
+          <div class="btn-row"><button class="btn sm" id="qt-p1">평상시</button><button class="btn sm" id="qt-p2">돈 많이 풀기</button><button class="btn sm" id="qt-p3">초인플레이션</button><button class="btn sm" id="qt-p4">성장이 흡수</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">연 물가 상승률</span><span class="v" id="qt-o-p">—</span></div>
+        <div class="stat"><span class="k">20년 뒤 물가</span><span class="v" id="qt-o-x">—</span></div>
+        <div class="stat"><span class="k">지금 1만원의 20년 뒤 구매력</span><span class="v" id="qt-o-w">—</span></div>
+        <div class="stat"><span class="k">물가가 두 배 되는 데</span><span class="v" id="qt-o-d">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "평상시": 물가가 연 약 2.4% 올라 20년 뒤 약 1.6배가 된다. 지금 1만원은 그때 약 6,250원어치만 산다. ② "성장이 흡수": 같은 통화 증가라도 경제가 빨리 크면 물가가 거의 오르지 않는다. ③ "초인플레이션": 통화량이 해마다 80% 늘고 경제가 뒷걸음질하면 물가가 몇 년 만에 수십 배가 된다. 세로축은 로그 눈금이다. (화폐수량설은 장기의 큰 흐름을 설명한다. 짧은 기간에는 유통속도가 크게 흔들려서 통화량과 물가가 따로 움직이기도 한다.)</div>
+    </div>
+    <p>역사 속 초인플레이션, 1920년대 독일과 2000년대 짐바브웨, 2010년대 베네수엘라는 모두 정부가 빚을 갚거나 재정을 메우려고 중앙은행에 돈을 찍게 한 경우였다. 그래서 많은 나라가 중앙은행을 정부에서 독립시키고 물가 안정을 첫 목표로 법에 적었다. 반대로 통화량이 늘지 않으면 금본위 시뮬레이터에서 본 디플레이션이 온다. 중앙은행의 일은 돈이 경제가 크는 속도보다 <b>조금만</b> 빨리 늘게 하는 것이다.</p>
+    <p>물가가 오르면 내 통장의 같은 숫자가 해마다 덜 사게 된다. 물가를 어떻게 재는지, 내 돈의 실질 가치가 얼마나 녹는지는 바로 다음 <a href="inflation.html">3장</a>에서 다룬다.</p>
+    <div class="callout warn"><strong>제도 숫자는 해마다 바뀐다</strong>이 장의 지급준비율, 예금자 보호 한도, 기준금리, 통화량은 2026년 무렵의 대표값이다. 기준금리는 한 해에도 여러 번 바뀌고, 통화량은 매달 달라진다. 정확한 최신 값은 한국은행 경제통계시스템과 예금보험공사에서 확인한다.</div>
+  </section>
+
+  <section id="case">
+    <h2>한결의 가계부: 월급은 장부의 숫자다</h2>
+    <div class="casefile">
+      <div class="tag"><b>LEDGER 한결</b><span>한결의 가계부 · 2장</span></div>
+      <h4>회사 통장에서 한결 통장으로 옮겨진 2,655,840원</h4>
+      <p>1월 월급날, 한결의 첫 월급 실수령 <span class="won plus">+2,655,840원</span>이 들어왔다. 지폐는 한 장도 움직이지 않았다. 회사가 거래하는 은행의 장부에서 숫자가 줄고, 한결 은행의 장부에서 숫자가 늘었다. 두 은행이 다르다면 은행끼리는 한국은행에 맡겨 둔 지급준비금으로 차액을 맞췄다.</p>
+      <p>입사 전부터 있던 통장 잔고 300만원도 다시 보자. 한결에게 이 돈은 '내 돈'이지만, 은행에게는 한결에게 진 빚이다. 수시입출식 통장이니 은행은 지급준비율 7%인 <b>21만원</b>만 남기고 <b>279만원</b>을 다른 사람에게 빌려줄 수 있다. 그 돈이 누군가의 통장에 다시 예금으로 들어가고, 또 빌려 나가기를 끝까지 되풀이하면 한결의 300만원 한 덩이에서 세상의 예금이 이론상 최대 약 <b>4,286만원</b>(300만원 ÷ 0.07)까지 불어날 수 있다. 한결의 잔고는 그동안 1원도 줄지 않는다.</p>
+      <div class="clue">
+        <div><b>이 장에서 정한 것</b>한결의 돈은 대부분 은행 장부의 숫자이고, 예금은 은행이 한결에게 진 빚이다. 1억원까지는 예금자 보호를 받는다.</div>
+        <div><b>아직 남은 문제</b>통장 속 300만원은 숫자가 그대로인데, 그 숫자로 살 수 있는 물건의 양도 그대로일까.</div>
+        <div><b>다음 단계</b><a href="inflation.html">3장</a>에서 물가가 한결 통장의 구매력을 어떻게 바꾸는지 계산한다.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>물물교환은 욕구의 이중 일치가 필요해서 물건 종류가 늘수록 거의 성사되지 않는다. 화폐는 교환을 팔기와 사기로 쪼개 이 문제를 푼다.</li>
+      <li>화폐의 세 기능은 교환의 매개, 가치의 척도, 가치의 저장이다. \(K\)가지 물건에 교환비율 \(K(K-1)/2\)개 대신 가격 \(K\)개면 된다.</li>
+      <li>돈은 물품화폐 → 금속 주화 → 금본위 태환지폐 → 법정화폐로 바뀌었다. 금본위는 돈의 양을 금광에 맡겨 디플레이션에 취약했고, 1971년 이후 세계의 돈은 금과의 끈이 끊긴 약속이다.</li>
+      <li>오늘 돈의 대부분(M2의 약 95%)은 은행 장부의 예금이다. 예금은 은행이 예금자에게 진 빚이고, 은행끼리는 한국은행의 지급준비금으로 결제한다.</li>
+      <li>은행은 예금의 일부만 남기고 빌려주며, 빌려준 돈이 다시 예금이 된다. 처음 예금의 최대 \(1/r\)배까지 예금이 불어나는 것이 신용 창조다. 실제로는 대출 승인과 동시에 예금이 생긴다.</li>
+      <li>본원통화(약 300조원)는 한국은행이 만든 씨앗 돈, M2(약 4,400조원)는 그 위에 은행이 쌓은 통화량이다. 통화승수 \(m = (1+c)/(c+r)\)는 한국에서 약 15다.</li>
+      <li>은행은 만기 불일치 때문에 뱅크런에 약하다. 예금자 보호(1인·금융회사별 1억원)와 중앙은행의 최종 대부자 역할이 공황을 막는다.</li>
+      <li>한국은행은 기준금리로 돈의 가격을 움직여 대출과 통화량을 조절한다. 화폐수량설 \(MV = PY\)에 따르면 통화량이 생산보다 빨리 늘면 물가가 오른다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>물건이 10가지인 마을에서 물물교환으로 거래하려 한다. 가장 큰 걸림돌은 무엇인가?</p>
+        <div class="opts">
+          <button class="opt">물건의 무게를 잴 저울이 없다</button>
+          <button class="opt" data-correct>내가 가진 것을 원하면서 동시에 내가 원하는 것을 가진 상대를 찾아야 한다</button>
+          <button class="opt">물건의 가격이 매일 오른다</button>
+          <button class="opt">사람 수가 너무 많다</button>
+        </div>
+        <div class="quiz-exp">욕구의 이중 일치 문제다. 우연히 만난 두 사람이 서로 맞을 확률은 \(1/10 \times 1/9\), 약 1.1%에 불과하다. 화폐가 있으면 '쌀을 원하는 아무에게 팔고, 꿀을 가진 아무에게서 사면' 되므로 이 조건이 사라진다. 시뮬레이터에서 보았듯 사람 수를 늘려도 크게 나아지지 않는다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>지급준비율이 20%이고 대출금이 현금으로 빠져나가지 않는다고 하자. 누군가 100만원을 새로 예금했을 때, 신용 창조로 늘어날 수 있는 총예금의 최대치는?</p>
+        <div class="opts">
+          <button class="opt">120만원</button>
+          <button class="opt">80만원</button>
+          <button class="opt">2,000만원</button>
+          <button class="opt" data-correct>500만원</button>
+        </div>
+        <div class="quiz-exp">총예금 = 처음 예금 ÷ 지급준비율 = 100만원 ÷ 0.2 = 500만원이다. 100 + 80 + 64 + 51.2 + … 의 합이다. 이 가운데 처음 100만원을 뺀 400만원이 대출을 통해 새로 생긴 예금이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>장부상 대출이 모두 정상적으로 상환되고 있는 건전한 은행도 뱅크런으로 무너질 수 있는 가장 큰 이유는?</p>
+        <div class="opts">
+          <button class="opt" data-correct>예금은 언제든 찾을 수 있지만 은행의 돈은 대부분 당장 현금으로 바꿀 수 없는 장기 대출로 나가 있기 때문이다</button>
+          <button class="opt">은행이 예금의 100%를 금고에 보관해야 하는 법이 있기 때문이다</button>
+          <button class="opt">예금자 보호 제도 때문에 사람들이 더 쉽게 돈을 찾기 때문이다</button>
+          <button class="opt">중앙은행이 은행에 돈을 빌려주는 것이 금지되어 있기 때문이다</button>
+        </div>
+        <div class="quiz-exp">만기 불일치 때문이다. 은행은 예금의 일부만 현금으로 갖고 나머지는 수년짜리 대출로 빌려준다. 모두가 동시에 찾으러 오면 대출이 아무리 건전해도 당장 내줄 현금이 없다. 예금자 보호와 중앙은행의 긴급 대출은 오히려 뱅크런을 막는 장치다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>1년 동안 통화량이 8% 늘고, 유통속도는 그대로이며, 실질 생산이 3% 늘었다. 화폐수량설로 본 물가 상승률은 대략 얼마인가?</p>
+        <div class="opts">
+          <button class="opt">11%</button>
+          <button class="opt">8%</button>
+          <button class="opt" data-correct>약 5%</button>
+          <button class="opt">3%</button>
+        </div>
+        <div class="quiz-exp">\(\pi \approx g_M + g_V - g_Y = 8\% + 0\% - 3\% = 5\%\)다. 정확히는 \(1.08/1.03 - 1 \approx 4.85\%\). 늘어난 돈의 일부는 늘어난 생산이 흡수하고, 나머지가 물가를 올린다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const won = (x, o) => MB.won(x, o).replace("조 원", "조원");
+  const pct = MB.pct;
+  function knob(ctx, x, y, P, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = P.bg; ctx.stroke();
+    ctx.restore();
+  }
+  function rbox(ctx, x, y, w, h, r) {
+    r = Math.min(r, w / 2, h / 2);
+    ctx.beginPath(); ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  function text(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = MB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color; ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "middle";
+    ctx.fillText(s, x, y);
+  }
+  const span = (cls, s) => '<span class="' + cls + '">' + s + "</span>";
+  const comma = (x) => Math.round(x).toLocaleString("ko-KR");
+  function hoverable(canvas, fn) {
+    const pos = (e) => { const r = canvas.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+    canvas.addEventListener("pointermove", (e) => fn(...pos(e)));
+    canvas.addEventListener("pointerdown", (e) => fn(...pos(e)));
+    canvas.addEventListener("pointerleave", () => fn(-1e4, -1e4));
+  }
+
+  /* ---------------------------------------------------------- 1. 물물교환 마을 */
+  (function () {
+    const GOODS = ["쌀", "콩", "꿀", "옷", "솥", "약", "술", "감", "무", "배", "실", "김"];
+    const rnd = MB.rng(20260202);
+    let ppl = [], tr = { b: [], m: [] }, an = 1, day = 0, cum = { b: 0, m: 0, n: 0 }, cv = null;
+    const N = MB.range("bv-n", (v) => v + "명", () => reset());
+    const K = MB.range("bv-k", (v) => v + "가지", () => reset());
+    const Mt = MB.range("bv-m", (v) => v + "명", () => reset());
+    const mode = MB.seg("bv-mode", () => { an = 0; });
+    function roll() {
+      const n = N(), k = K(); ppl = [];
+      for (let i = 0; i < n; i++) {
+        const h = Math.floor(rnd() * k); let w = Math.floor(rnd() * (k - 1)); if (w >= h) w++;
+        ppl.push({ h, w });
+      }
+    }
+    function meet(i) {
+      const n = ppl.length, s = new Set(), m = Math.min(Mt(), n - 1);
+      while (s.size < m) { const j = Math.floor(rnd() * n); if (j !== i) s.add(j); }
+      return [...s];
+    }
+    function match(kind) {
+      const n = ppl.length, out = [], used = new Array(n).fill(false);
+      const order = ppl.map((_, i) => [i, rnd()]).sort((a, b) => a[1] - b[1]).map((a) => a[0]);
+      for (const i of order) {
+        if (kind === "b") {
+          if (used[i]) continue;
+          for (const j of meet(i)) if (!used[j] && ppl[j].h === ppl[i].w && ppl[j].w === ppl[i].h) { used[i] = used[j] = true; out.push([i, j]); break; }
+        } else {
+          for (const j of meet(i)) if (!used[j] && ppl[j].h === ppl[i].w) { used[j] = true; out.push([j, i]); break; }
+        }
+      }
+      return out;
+    }
+    const sat = (kind) => (kind === "m" ? tr.m.length : tr.b.length * 2);
+    function nextDay(animate) {
+      day++; roll();
+      tr.b = match("b"); tr.m = match("m");
+      cum.b += sat("b"); cum.m += sat("m"); cum.n += ppl.length;
+      an = animate ? 0 : 1;
+      update();
+    }
+    function reset() { day = 0; cum = { b: 0, m: 0, n: 0 }; roll(); tr = { b: [], m: [] }; an = 1; update(); if (cv) cv.redraw(); }
+    function update() {
+      const n = ppl.length;
+      MB.stat("bv-o-day", day ? day + "일째" : "아직");
+      MB.stat("bv-o-b", day ? sat("b") + " / " + n + "명" : "—");
+      MB.stat("bv-o-m", day ? sat("m") + " / " + n + "명" : "—");
+      MB.stat("bv-o-c", cum.n ? span(cum.b / cum.n < 0.2 ? "bad-t" : "", pct(cum.b / cum.n, 0)) + " / " + span("ok-t", pct(cum.m / cum.n, 0)) : "—");
+    }
+    let G = null;
+    cv = MB.canvas("#bv-cv", (ctx, w, h) => {
+      const P = MB.palette(), n = ppl.length, cx = w / 2, cy = h / 2;
+      const R = Math.min(w, h) / 2 - 30, nr = MB.clamp((R * Math.PI) / n * 0.62, 6, 13);
+      const pos = ppl.map((p, i) => { const a = -Math.PI / 2 + (i / n) * TAU; return [cx + R * Math.cos(a), cy + R * Math.sin(a), a]; });
+      G = pos;
+      const m = mode(), T = m === "m" ? tr.m : tr.b, nt = T.length;
+      const got = new Set();
+      const curve = (i, j, t) => {
+        const [x1, y1] = pos[i], [x2, y2] = pos[j];
+        const qx = MB.lerp((x1 + x2) / 2, cx, 0.55), qy = MB.lerp((y1 + y2) / 2, cy, 0.55);
+        return [(1 - t) * (1 - t) * x1 + 2 * (1 - t) * t * qx + t * t * x2, (1 - t) * (1 - t) * y1 + 2 * (1 - t) * t * qy + t * t * y2, qx, qy];
+      };
+      T.forEach(([i, j], q) => {
+        const s = nt > 1 ? (q / nt) * 0.55 : 0, t = MB.clamp((an - s) / 0.45, 0, 1);
+        if (t <= 0) return;
+        const [x1, y1] = pos[i], [x2, y2] = pos[j], c = curve(i, j, 0);
+        ctx.strokeStyle = m === "m" ? P.accent : P.ok; ctx.lineWidth = 1.6; ctx.globalAlpha = t < 1 ? 0.8 : 0.4;
+        ctx.beginPath(); ctx.moveTo(x1, y1); ctx.quadraticCurveTo(c[2], c[3], x2, y2); ctx.stroke(); ctx.globalAlpha = 1;
+        if (t < 1) {
+          const a = curve(i, j, t), b = curve(i, j, 1 - t);
+          ctx.fillStyle = m === "m" ? P.accent : P.ok; ctx.beginPath(); ctx.arc(a[0], a[1], 4.5, 0, TAU); ctx.fill();
+          ctx.fillStyle = m === "m" ? P.accent2 : P.ok; ctx.beginPath(); ctx.arc(b[0], b[1], m === "m" ? 4 : 4.5, 0, TAU); ctx.fill();
+        } else { got.add(j); if (m !== "m") got.add(i); }
+      });
+      pos.forEach(([x, y, a], i) => {
+        const ok = got.has(i);
+        ctx.beginPath(); ctx.arc(x, y, nr, 0, TAU);
+        ctx.fillStyle = ok ? P.ok : P.surface; ctx.globalAlpha = ok ? 0.3 : 1; ctx.fill(); ctx.globalAlpha = 1;
+        ctx.strokeStyle = ok ? P.ok : P.border; ctx.lineWidth = ok ? 2 : 1; ctx.stroke();
+        text(ctx, GOODS[ppl[i].h], x, y + 0.5, { size: Math.max(9, Math.round(nr * 0.95)), color: P.text, align: "center", weight: 700 });
+        text(ctx, GOODS[ppl[i].w], x + Math.cos(a) * (nr + 10), y + Math.sin(a) * (nr + 10), { size: 10.5, color: P.accent2, align: "center", weight: 700 });
+      });
+      if (!day) {
+        text(ctx, "‘시장 하루’를 눌러", cx, cy - 10, { size: 13, color: P.dim, align: "center" });
+        text(ctx, "장을 연다", cx, cy + 10, { size: 13, color: P.dim, align: "center" });
+      } else {
+        const done = an >= 1, cnt = sat(m);
+        text(ctx, m === "m" ? "화폐로 거래" : "물물교환", cx, cy - 16, { size: 12, color: P.dim, align: "center" });
+        text(ctx, done ? cnt + "명 성공" : "거래 중…", cx, cy + 6, { size: 18, color: done ? (cnt / n < 0.2 ? P.bad : P.ok) : P.text, align: "center", weight: 800 });
+        if (done) text(ctx, pct(cnt / n, 0), cx, cy + 28, { size: 12, color: P.dim, align: "center", mono: true });
+      }
+    }, { aspect: 0.7, minHeight: 320, maxHeight: 460 });
+    reset();
+    MB.loop(cv.canvas, (dt) => { if (an < 1) { an = Math.min(1, an + dt / 2); cv.redraw(); } });
+    document.getElementById("bv-go").addEventListener("click", () => nextDay(true));
+    document.getElementById("bv-ten").addEventListener("click", () => { for (let i = 0; i < 10; i++) nextDay(i === 9); cv.redraw(); });
+    document.getElementById("bv-re").addEventListener("click", reset);
+  })();
+
+  /* ---------------------------------------------------------- 2. 교환비율의 그물 */
+  (function () {
+    const GOODS = ["쌀", "콩", "꿀", "옷", "솥", "약", "술", "감", "무", "배", "실", "김"];
+    let hov = -1, L = [];
+    const K = MB.range("pn-k", (v) => v + "가지", () => { upd(); cv.redraw(); });
+    function upd() {
+      const k = K(), e = (k * (k - 1)) / 2;
+      MB.stat("pn-o-b", comma(e) + "개");
+      MB.stat("pn-o-m", k + "개");
+      MB.stat("pn-o-r", (e / k).toFixed(1) + "배");
+    }
+    const cv = MB.canvas("#pn-cv", (ctx, w, h) => {
+      const P = MB.palette(), k = K(), narrow = w < 540, E = (k * (k - 1)) / 2;
+      const panels = narrow ? [{ x: 0, y: 0, w, h: h / 2 }, { x: 0, y: h / 2, w, h: h / 2 }] : [{ x: 0, y: 0, w: w / 2, h }, { x: w / 2, y: 0, w: w / 2, h }];
+      L = [];
+      if (hov >= k) hov = -1;
+      panels.forEach((pn, side) => {
+        const cx = pn.x + pn.w / 2, cy = pn.y + pn.h / 2 + 12, R = Math.min(pn.w, pn.h - 44) / 2 - 18;
+        const nr = MB.clamp((R * Math.PI) / k * 0.5, 3.5, 12);
+        const pts = []; for (let i = 0; i < k; i++) { const a = -Math.PI / 2 + (i / k) * TAU; pts.push([cx + R * Math.cos(a), cy + R * Math.sin(a)]); }
+        L.push(pts);
+        text(ctx, side ? "화폐: 가격 " + k + "개" : "물물교환: 교환비율 " + comma(E) + "개", pn.x + 12, pn.y + 16, { size: 13, color: side ? P.accent : P.accent2, weight: 700 });
+        ctx.lineWidth = 1;
+        if (!side) {
+          for (let a = 0; a < k; a++) for (let b = a + 1; b < k; b++) {
+            const hl = hov >= 0 && (a === hov || b === hov);
+            ctx.strokeStyle = P.accent2; ctx.lineWidth = hl ? 1.8 : 1;
+            ctx.globalAlpha = hl ? 0.95 : hov >= 0 ? 0.06 : Math.min(0.55, 24 / E + 0.08);
+            ctx.beginPath(); ctx.moveTo(pts[a][0], pts[a][1]); ctx.lineTo(pts[b][0], pts[b][1]); ctx.stroke();
+          }
+        } else {
+          for (let a = 0; a < k; a++) {
+            const hl = hov === a;
+            ctx.strokeStyle = P.accent; ctx.lineWidth = hl ? 2.4 : 1.2; ctx.globalAlpha = hl ? 1 : hov >= 0 ? 0.2 : 0.6;
+            ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(pts[a][0], pts[a][1]); ctx.stroke();
+          }
+          ctx.globalAlpha = 1;
+          ctx.beginPath(); ctx.arc(cx, cy, 17, 0, TAU); ctx.fillStyle = P.accent; ctx.fill();
+          text(ctx, "돈", cx, cy + 1, { size: 14, color: P.bg, align: "center", weight: 800 });
+        }
+        ctx.globalAlpha = 1;
+        pts.forEach(([x, y], i) => {
+          ctx.beginPath(); ctx.arc(x, y, nr, 0, TAU);
+          ctx.fillStyle = i === hov ? (side ? P.accent : P.accent2) : P.surface; ctx.fill();
+          ctx.strokeStyle = P.dim; ctx.lineWidth = 1; ctx.stroke();
+          if (k <= 12) text(ctx, GOODS[i], x, y + 0.5, { size: 11, color: i === hov ? P.bg : P.text, align: "center", weight: 700 });
+        });
+        if (hov >= 0) text(ctx, side ? "가격 1개만 알면 된다" : (k - 1) + "개의 비율을 알아야 한다", pn.x + 12, pn.y + 36, { size: 12, color: P.dim });
+      });
+      if (narrow) { ctx.strokeStyle = P.border; ctx.beginPath(); ctx.moveTo(0, h / 2); ctx.lineTo(w, h / 2); ctx.stroke(); }
+      else { ctx.strokeStyle = P.border; ctx.beginPath(); ctx.moveTo(w / 2, 10); ctx.lineTo(w / 2, h - 10); ctx.stroke(); }
+    }, { get height() { const w = document.getElementById("pn-cv").parentElement.clientWidth; return w < 540 ? Math.round(w * 1.45) : Math.round(Math.min(420, w * 0.55)); } });
+    hoverable(cv.canvas, (x, y) => {
+      let best = -1, bd = 18;
+      L.forEach((pts) => pts.forEach(([px, py], i) => { const d = Math.hypot(px - x, py - y); if (d < bd) { bd = d; best = i; } }));
+      if (best !== hov) { hov = best; cv.redraw(); }
+    });
+    upd();
+  })();
+
+  /* ---------------------------------------------------------- 3. 금본위 vs 법정화폐 */
+  (function () {
+    const GG = MB.range("gf-g", (v) => v.toFixed(1) + "%", () => { upd(); cv.redraw(); });
+    const GY = MB.range("gf-y", (v) => v.toFixed(1) + "%", () => { upd(); cv.redraw(); });
+    const shock = document.getElementById("gf-s");
+    function series() {
+      const g = GG() / 100, y = GY() / 100, a = [], b = [];
+      let p = 100;
+      for (let t = 0; t <= 40; t++) {
+        if (t > 0) { p *= (1 + g) / (1 + y); if (shock.checked && t === 15) p *= 1.4; }
+        a.push([t, p]); b.push([t, 100 * Math.pow(1.02, t)]);
+      }
+      return { a, b };
+    }
+    function upd() {
+      const s = series(), r = (1 + GG() / 100) / (1 + GY() / 100) - 1;
+      MB.stat("gf-o-p", span(r < -0.001 ? "bad-t" : r > 0.03 ? "warn-t" : "", (r > 0 ? "+" : "") + pct(r, 2)));
+      MB.stat("gf-o-g", s.a[40][1].toFixed(0) + "<small>(시작 100)</small>");
+      MB.stat("gf-o-f", s.b[40][1].toFixed(0) + "<small>(시작 100)</small>");
+      const d = 1e8 * 100 / s.a[10][1];
+      MB.stat("gf-o-d", span(d > 1.0005e8 ? "bad-t" : "ok-t", won(d)));
+    }
+    const cv = MB.canvas("#gf-cv", (ctx, w, h) => {
+      const P = MB.palette(), s = series();
+      const hi = Math.max(...s.a.map((p) => p[1]), ...s.b.map((p) => p[1]));
+      MB.chart(ctx, { x: 52, y: 16, w: w - 52 - 16, h: h - 16 - 50 }, {
+        x: [0, 40], y: [0, hi * 1.1], xLabel: "년", yLabel: "물가 지수",
+        xTicks: [0, 10, 20, 30, 40],
+        series: [{ data: s.b, color: P.accent, width: 2.2 }, { data: s.a, color: P.accent2, width: 2.6 }],
+        hlines: [{ y: 100, color: P.faint, label: "시작 물가 100" }],
+        vlines: shock.checked ? [{ x: 15, color: P.warn, label: "금광 발견" }] : [],
+      });
+    }, { aspect: 0.6, minHeight: 280, maxHeight: 400 });
+    shock.addEventListener("change", () => { upd(); cv.redraw(); });
+    upd();
+  })();
+
+  /* ---------------------------------------------------------- 4. 월급날의 장부 */
+  (function () {
+    const PAY = MN.payroll(MN.HG.salary).monthly.net;
+    let S, toks = [], cv = null, G = {};
+    const mode = MB.seg("lg-mode", () => reset());
+    function reset() {
+      S = { comp: 1e8, hg: MN.HG.cash, other: 2e8, wallet: 0, vaultA: 3e7, vaultB: 3e7, resA: 5e8, resB: 5e8, notes: 0, inter: 0 };
+      toks = []; upd(); if (cv) cv.redraw();
+    }
+    const fmtW = (v, narrow) => (narrow ? won(v) : comma(v) + "원");
+    function upd() {
+      MB.stat("lg-o-hg", comma(S.hg) + "원");
+      MB.stat("lg-o-w", won(S.wallet));
+      MB.stat("lg-o-n", S.notes + "장");
+      MB.stat("lg-o-r", comma(S.inter) + "원");
+    }
+    reset();
+    function addTok(from, to, label, color, apply) { toks.push({ from, to, label, color, t: 0, apply }); }
+    function pay() {
+      if (toks.length) return;
+      if (S.comp < PAY) return;
+      const P = MB.palette();
+      addTok("comp", "hg", comma(PAY) + "원", P.accent, () => { S.comp -= PAY; S.hg += PAY; });
+      if (mode() === "diff") addTok("resA", "resB", "지준 " + comma(PAY), P.accent2, () => { S.resA -= PAY; S.resB += PAY; S.inter += PAY; });
+    }
+    function cash() {
+      if (toks.length || S.hg < 1e5) return;
+      const P = MB.palette(), v = mode() === "diff" ? "vaultB" : "vaultA";
+      addTok(v, "wallet", "1만원권 10장", P.warn, () => { S.hg -= 1e5; S[v] -= 1e5; S.wallet += 1e5; S.notes += 10; });
+    }
+    cv = MB.canvas("#lg-cv", (ctx, w, h) => {
+      const P = MB.palette(), narrow = w < 520, diff = mode() === "diff";
+      const pad = 10, gap = 10, pw = (w - pad * 2 - gap) / 2, ph = 150, rowH = 30, fs = narrow ? 11 : 12.5;
+      G = {};
+      const row = (key, x, y, rw, label, val, hl) => {
+        rbox(ctx, x, y, rw, rowH, 7); ctx.fillStyle = P.surface; ctx.fill();
+        ctx.strokeStyle = hl ? P.accent : P.border; ctx.lineWidth = hl ? 2 : 1; ctx.stroke();
+        text(ctx, label, x + 8, y + rowH / 2, { size: fs, color: hl ? P.accent : P.dim, weight: hl ? 700 : 400 });
+        text(ctx, fmtW(val, narrow), x + rw - 8, y + rowH / 2, { size: fs, color: P.text, align: "right", weight: 600 });
+        G[key] = [x + rw / 2, y + rowH / 2];
+      };
+      const panel = (x, y, pw_, ph_, title, col) => {
+        rbox(ctx, x, y, pw_, ph_, 10); ctx.fillStyle = P.bg; ctx.fill(); ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.stroke();
+        text(ctx, title, x + 10, y + 16, { size: 13, color: col, weight: 700 });
+      };
+      const ax = pad, bx = pad + pw + gap, ty = 8;
+      panel(ax, ty, pw, ph, "A은행 장부", P.dim);
+      panel(bx, ty, pw, ph, "B은행 장부", P.dim);
+      const rw = pw - 16;
+      row("comp", ax + 8, ty + 34, rw, narrow ? "회사" : "회사 계좌", S.comp);
+      if (diff) { row("hg", bx + 8, ty + 34, rw, narrow ? "한결" : "한결 계좌", S.hg, true); row("other", ax + 8, ty + 72, rw, narrow ? "고객들" : "다른 고객들", S.other); }
+      else { row("hg", ax + 8, ty + 72, rw, narrow ? "한결" : "한결 계좌", S.hg, true); row("other", bx + 8, ty + 34, rw, narrow ? "고객들" : "다른 고객들", S.other); }
+      row("vaultA", ax + 8, ty + 110, rw, narrow ? "금고" : "금고 현금", S.vaultA);
+      row("vaultB", bx + 8, ty + 110, rw, narrow ? "금고" : "금고 현금", S.vaultB);
+      const by = ty + ph + 22;
+      panel(pad, by, w - pad * 2, 82, "한국은행 장부 (은행들의 지급준비금 계좌)", P.accent2);
+      row("resA", ax + 8, by + 36, rw, narrow ? "A 지준" : "A은행 지준", S.resA);
+      row("resB", bx + 8, by + 36, rw, narrow ? "B 지준" : "B은행 지준", S.resB);
+      const wy = by + 100, ww = Math.min(260, w - 40);
+      rbox(ctx, w / 2 - ww / 2, wy, ww, 34, 17); ctx.fillStyle = P.surface; ctx.fill(); ctx.strokeStyle = P.warn; ctx.lineWidth = 1.5; ctx.stroke();
+      text(ctx, "한결 지갑 (종이돈)", w / 2 - ww / 2 + 14, wy + 17, { size: fs, color: P.dim });
+      text(ctx, won(S.wallet), w / 2 + ww / 2 - 14, wy + 17, { size: fs, color: P.text, align: "right", weight: 600 });
+      G.wallet = [w / 2, wy + 17];
+      // 화살표 안내
+      toks.forEach((k) => {
+        const a = G[k.from], b = G[k.to]; if (!a || !b) return;
+        const e = k.t < 0.5 ? 2 * k.t * k.t : 1 - Math.pow(-2 * k.t + 2, 2) / 2;
+        const x = MB.lerp(a[0], b[0], e), y = MB.lerp(a[1], b[1], e) - Math.sin(e * Math.PI) * 26;
+        ctx.setLineDash([4, 4]); ctx.strokeStyle = k.color; ctx.globalAlpha = 0.5; ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
+        ctx.font = MB.font(11, false, 700); const tw = ctx.measureText(k.label).width + 14;
+        rbox(ctx, x - tw / 2, y - 11, tw, 22, 11); ctx.fillStyle = k.color; ctx.fill();
+        text(ctx, k.label, x, y + 0.5, { size: 11, color: P.bg, align: "center", weight: 700 });
+      });
+    }, { height: 330 });
+    MB.loop(cv.canvas, (dt) => {
+      if (!toks.length) return;
+      toks.forEach((k) => (k.t = Math.min(1, k.t + dt / 1.2)));
+      if (toks.every((k) => k.t >= 1)) { toks.forEach((k) => k.apply()); toks = []; upd(); }
+      cv.redraw();
+    });
+    document.getElementById("lg-pay").addEventListener("click", pay);
+    document.getElementById("lg-cash").addEventListener("click", cash);
+    document.getElementById("lg-re").addEventListener("click", reset);
+    reset();
+  })();
+
+  /* ---------------------------------------------------------- 5. 신용 창조 연쇄 */
+  (function () {
+    const D0 = MN.HG.cash, MAXR = 40;
+    let D = [D0], ph = 1, auto = false, cv = null;
+    const R = MB.range("cc-r", (v) => v + "%", () => reset());
+    const C = MB.range("cc-c", (v) => v + "%", () => reset());
+    const autoBtn = document.getElementById("cc-auto");
+    const q = () => (1 - R() / 100) * (1 - C() / 100);
+    const limit = () => D0 / (1 - q());
+    const total = () => D.reduce((s, v) => s + v, 0);
+    function setAuto(v) { auto = v; autoBtn.textContent = v ? "멈춤" : "자동 재생"; }
+    function reset() { D = [D0]; ph = 1; setAuto(false); upd(); if (cv) cv.redraw(); }
+    function done() { return D.length >= MAXR || D[D.length - 1] * q() < 1000; }
+    function step() { if (done()) { setAuto(false); return; } D.push(D[D.length - 1] * q()); ph = 0; upd(); }
+    function upd() {
+      const tot = total(), lim = limit();
+      MB.stat("cc-o-n", D.length + "번째 은행" + (done() ? " · 끝" : ""));
+      MB.stat("cc-o-d", won(tot));
+      MB.stat("cc-o-l", span("ok-t", "+" + won(tot - D0)));
+      MB.stat("cc-o-m", won(lim) + " <small>(" + (lim / D0).toFixed(1) + "배)</small>");
+    }
+    cv = MB.canvas("#cc-cv", (ctx, w, h) => {
+      const P = MB.palette(), r = R() / 100, c = C() / 100, n = D.length, narrow = w < 520;
+      const hT = Math.round(h * 0.44);
+      const vis = narrow ? 3 : 4, first = Math.max(0, n - vis);
+      const slot = (w - 20) / vis, bw = Math.min(150, slot - 26), bh = hT - 46;
+      for (let i = first; i < n; i++) {
+        const k = i - first, x = 10 + slot * k + (slot - bw) / 2, y = 16;
+        const fresh = i === n - 1 ? ph : 1;
+        ctx.globalAlpha = 0.25 + 0.75 * fresh;
+        rbox(ctx, x, y, bw, bh, 9); ctx.fillStyle = P.surface; ctx.fill(); ctx.strokeStyle = P.border; ctx.lineWidth = 1; ctx.stroke();
+        text(ctx, i === 0 ? "은행 1 · 한결" : "은행 " + (i + 1), x + 8, y + 14, { size: 11.5, color: P.dim, weight: 700 });
+        text(ctx, won(D[i]), x + 8, y + 34, { size: narrow ? 12 : 13.5, color: P.text, weight: 700 });
+        const barY = y + 52, barW = bw - 16, barH = Math.max(10, bh - 82);
+        ctx.fillStyle = P.accent2; ctx.fillRect(x + 8, barY, barW * r, barH);
+        ctx.fillStyle = P.accent; ctx.fillRect(x + 8 + barW * r, barY, barW * (1 - r), barH);
+        text(ctx, "지준 " + won(D[i] * r), x + 8, barY + barH + 11, { size: 10.5, color: P.accent2 });
+        if (i < n - 1 || ph >= 1) {
+          if (i < n - 1) {
+            const ax = x + bw + 2, bx2 = 10 + slot * (k + 1) + (slot - bw) / 2 - 2, ay = y + bh / 2;
+            ctx.strokeStyle = P.accent; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx2, ay); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(bx2, ay); ctx.lineTo(bx2 - 6, ay - 4); ctx.lineTo(bx2 - 6, ay + 4); ctx.closePath(); ctx.fillStyle = P.accent; ctx.fill();
+          }
+        }
+        ctx.globalAlpha = 1;
+      }
+      if (ph < 1 && n >= 2) {
+        const k = n - 2 - first, x0 = 10 + slot * k + (slot - bw) / 2 + bw * 0.6, x1 = 10 + slot * (k + 1) + (slot - bw) / 2 + bw * 0.4;
+        const e = ph, x = MB.lerp(x0, x1, e), y = 16 + bh / 2 - Math.sin(e * Math.PI) * 22;
+        ctx.beginPath(); ctx.arc(x, y, 9, 0, TAU); ctx.fillStyle = P.accent; ctx.fill();
+        text(ctx, "₩", x, y + 0.5, { size: 11, color: P.bg, align: "center", weight: 800 });
+        if (c > 0) { ctx.globalAlpha = 1 - e; ctx.beginPath(); ctx.arc(MB.lerp(x0, x1, e * 0.5), 16 + bh + 4 + e * 14, 5, 0, TAU); ctx.fillStyle = P.warn; ctx.fill(); ctx.globalAlpha = 1; }
+      }
+      if (first > 0) text(ctx, "… 앞의 " + first + "개 은행", 10, 8, { size: 10.5, color: P.faint });
+      // 누적 막대
+      const lim = limit(), box = { x: 56, y: hT + 14, w: w - 56 - 14, h: h - hT - 14 - 30 };
+      const ch = MB.chart(ctx, box, {
+        x: [0, MAXR + 1], y: [0, lim * 1.15], xTicks: narrow ? [1, 20, 40] : [1, 10, 20, 30, 40], yFmt: MB.wonAxis,
+        hlines: [{ y: lim, color: P.accent2, label: "한계 " + won(lim) }, { y: D0, color: P.faint, label: narrow ? "" : "처음 예금 300만원" }],
+      });
+      let cum = 0;
+      for (let i = 0; i < n; i++) {
+        const prev = cum; cum += D[i];
+        const grow = i === n - 1 ? ph : 1, top = prev + D[i] * grow;
+        const x0 = ch.X(i + 0.6), x1 = ch.X(i + 1.4);
+        ctx.fillStyle = P.accent; ctx.globalAlpha = 0.35; ctx.fillRect(x0, ch.Y(prev), x1 - x0, ch.Y(0) - ch.Y(prev));
+        ctx.globalAlpha = 1; ctx.fillRect(x0, ch.Y(top), x1 - x0, ch.Y(prev) - ch.Y(top));
+      }
+      text(ctx, "단계 →", box.x + box.w, box.y + box.h + 22, { size: 11, color: P.dim, align: "right" });
+      text(ctx, "총예금", box.x + 6, box.y + 8, { size: 11, color: P.dim });
+    }, { aspect: 0.66, minHeight: 400, maxHeight: 480 });
+    MB.loop(cv.canvas, (dt) => {
+      if (ph < 1) { ph = Math.min(1, ph + dt / (auto ? 0.4 : 0.7)); cv.redraw(); }
+      else if (auto) step();
+    });
+    document.getElementById("cc-step").addEventListener("click", () => { if (ph < 1) ph = 1; step(); });
+    autoBtn.addEventListener("click", () => { if (done()) reset(); setAuto(!auto); });
+    document.getElementById("cc-re").addEventListener("click", reset);
+    upd();
+  })();
+
+  /* ---------------------------------------------------------- 6. 통화승수 */
+  (function () {
+    let r = 0.02, B = null;
+    const C = MB.range("mm-c", (v) => v + "%", () => { upd(); cv.redraw(); });
+    const m = (rr, c) => (1 + c) / (c + rr);
+    function upd() {
+      const c = C() / 100, mm = m(r, c);
+      MB.stat("mm-o-r", pct(r, 1));
+      MB.stat("mm-o-m", span(mm > 30 ? "warn-t" : "", mm.toFixed(1) + "배"));
+      MB.stat("mm-o-M", won(3e14 * mm));
+    }
+    const cv = MB.canvas("#mm-cv", (ctx, w, h) => {
+      const P = MB.palette(), c = C() / 100;
+      const curve = (cc) => { const d = []; for (let x = 0.25; x <= 20.001; x += 0.25) d.push([x, m(x / 100, cc)]); return d; };
+      const others = [0, 0.05, 0.1, 0.3].filter((cc) => Math.abs(cc - c) > 0.004);
+      const ch = MB.chart(ctx, { x: 50, y: 16, w: w - 50 - 16, h: h - 16 - 50 }, {
+        x: [0, 20], y: [0, 60], yLabel: "통화승수 m", xFmt: (v) => v + "%",
+        series: others.map((cc) => ({ data: curve(cc), color: P.faint, width: 1, dash: [3, 3] })).concat([{ data: curve(c), color: P.accent, width: 2.6 }]),
+        points: [{ x: 2, y: 15, color: P.accent2, r: 5 }],
+        hlines: [{ y: 15, color: P.accent2, label: "한국 대략 15배" }],
+      });
+      B = ch.box;
+      text(ctx, "가로축: 지급준비율 r", ch.box.x + ch.box.w - 4, ch.box.y + 12, { size: 11.5, color: P.dim, align: "right" });
+      const mm = m(r, c), py = ch.Y(Math.min(60, mm));
+      ctx.strokeStyle = P.accent; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.moveTo(ch.X(r * 100), py); ctx.lineTo(ch.X(r * 100), ch.Y(0)); ctx.stroke(); ctx.setLineDash([]);
+      knob(ctx, ch.X(r * 100), py, P, 8);
+      const lx = ch.X(r * 100) + (r > 0.12 ? -12 : 12);
+      text(ctx, mm.toFixed(1) + "배", lx, Math.max(28, py - 14), { size: 13, color: P.text, align: r > 0.12 ? "right" : "left", weight: 700, mono: true });
+    }, { aspect: 0.58, minHeight: 270, maxHeight: 390 });
+    MB.drag(cv.canvas, { move(x) { if (!B) return; r = MB.clamp(Math.round(((x - B.x) / B.w) * 20 * 4) / 4, 0.25, 20) / 100; upd(); cv.redraw(); } });
+    document.getElementById("mm-kr").addEventListener("click", () => { r = 0.02; C.set(5); });
+    document.getElementById("mm-cash").addEventListener("click", () => { r = 0.07; C.set(40); });
+    upd();
+  })();
+
+  /* ---------------------------------------------------------- 7. 통화량 크기 감각 */
+  (function () {
+    const POP = 5.1e7, T = 1e12;
+    const ITEMS = [
+      { short: "M2", name: "M2 광의통화", v: 4400 * T },
+      { short: "M1", name: "M1 협의통화", v: 1300 * T },
+      { short: "현금", name: "현금통화", v: 200 * T },
+      { short: "GDP", name: "명목 GDP (1년)", v: 2600 * T },
+      { short: "예산", name: "정부 예산 (1년)", v: 730 * T },
+      { short: "본원", name: "본원통화", v: 300 * T },
+    ];
+    let hov = -1, rects = [];
+    const mode = MB.seg("sc-mode", () => { upd(); cv.redraw(); });
+    const val = (it) => (mode() === "per" ? it.v / POP : it.v);
+    const fmt = (v) => (mode() === "per" ? won(v) : "약 " + won(v));
+    const km = (v) => (v / 5e4) * 0.1e-3 / 1000;
+    function upd() {
+      MB.stat("sc-o-h", hov >= 0 ? ITEMS[hov].name + " " + fmt(val(ITEMS[hov])) : "—");
+      MB.stat("sc-o-s", pct(ITEMS[2].v / ITEMS[0].v, 1));
+      const c = mode() === "per" ? (ITEMS[2].v / POP / 5e4) * 0.1 : km(ITEMS[2].v), mm = mode() === "per" ? (ITEMS[0].v / POP / 5e4) * 0.1 : km(ITEMS[0].v);
+      MB.stat("sc-o-c", mode() === "per" ? "약 " + c.toFixed(1) + "<small>mm</small>" : "약 " + comma(c) + "<small>km</small>");
+      MB.stat("sc-o-m", mode() === "per" ? "약 " + (mm / 10).toFixed(1) + "<small>cm</small>" : "약 " + comma(mm) + "<small>km</small>");
+    }
+    const cv = MB.canvas("#sc-cv", (ctx, w, h) => {
+      const P = MB.palette(), narrow = w < 560;
+      const sd = ITEMS.map((it) => Math.sqrt(it.v / T));
+      const g = 14;
+      let s;
+      if (narrow) s = Math.min((w - 24) / sd[0], (w - 24 - 2 * g) / (sd[3] + sd[4] + sd[5]), (h - 74) / (sd[0] + sd[3]));
+      else s = Math.min((w - 24 - 3 * g) / (sd[0] + sd[3] + sd[4] + sd[5]), (h - 50) / sd[0]);
+      const S = sd.map((d) => d * s);
+      rects = [];
+      const base1 = narrow ? 14 + S[0] : h - 38;
+      const x0 = 12;
+      const col = [P.accent, P.accent2, P.warn, P.dim, P.dim, P.accent];
+      const put = (i, x, yb) => { rects[i] = [x, yb - S[i], S[i], S[i]]; };
+      put(0, x0, base1); put(1, x0, base1); put(2, x0, base1);
+      if (narrow) { let x = x0; const yb = h - 38; [3, 4, 5].forEach((i) => { put(i, x, yb); x += S[i] + g; }); }
+      else { let x = x0 + S[0] + g; [3, 4, 5].forEach((i) => { put(i, x, base1); x += S[i] + g; }); }
+      rects.forEach(([x, y, ww, hh], i) => {
+        ctx.fillStyle = col[i]; ctx.globalAlpha = i === hov ? 0.42 : i >= 3 && i <= 4 ? 0.1 : 0.2; ctx.fillRect(x, y, ww, hh); ctx.globalAlpha = 1;
+        ctx.strokeStyle = col[i]; ctx.lineWidth = i === hov ? 2.5 : 1.3; if (i === 5) ctx.setLineDash([5, 4]); ctx.strokeRect(x, y, ww, hh); ctx.setLineDash([]);
+      });
+      const lab = (i, line2) => {
+        const [x, y, ww] = rects[i];
+        const name = ITEMS[i].short;
+        if (ww > 64) {
+          text(ctx, name, x + 6, y + 13, { size: 12, color: P.text, weight: 700 });
+          text(ctx, fmt(val(ITEMS[i])), x + 6, y + 29, { size: 11, color: P.dim });
+        } else text(ctx, name, x + ww / 2, y - 9, { size: 11, color: P.text, align: "center", weight: 700 });
+      };
+      [0, 1, 2, 3, 4, 5].forEach((i) => lab(i));
+      text(ctx, "넓이 ∝ 금액", w - 10, 12, { size: 11, color: P.faint, align: "right" });
+    }, { get height() { const w = document.getElementById("sc-cv").parentElement.clientWidth; return w < 560 ? Math.round(w * 1.25) : Math.round(Math.min(380, w * 0.42)); } });
+    hoverable(cv.canvas, (x, y) => {
+      let best = -1, area = Infinity;
+      rects.forEach(([rx, ry, rw, rh], i) => { if (x >= rx && x <= rx + rw && y >= ry && y <= ry + rh && rw * rh < area) { area = rw * rh; best = i; } });
+      if (best !== hov) { hov = best; upd(); cv.redraw(); }
+    });
+    upd();
+  })();
+
+  /* ---------------------------------------------------------- 8. 뱅크런 */
+  (function () {
+    const NP = 100, EACH = 1e7, rnd = MB.rng(77);
+    let st, cv = null, acc = 0;
+    const RC = MB.range("br-r", (v) => v + "%", () => reset());
+    const RS = MB.range("br-s", (v) => v.toFixed(2), null);
+    const ins = document.getElementById("br-ins"), lolr = document.getElementById("br-lolr");
+    function reset() {
+      st = { hour: 0, ppl: new Array(NP).fill(0), cash: NP * EACH * RC() / 100, loans: NP * EACH * (1 - RC() / 100), running: false, failed: false, ended: false, lent: 0, hist: [], fl: [], log: [] };
+      st.hist.push([0, RC(), 0]); acc = 0; upd(); if (cv) cv.redraw();
+    }
+    reset();
+    function withdrawn() { return st.ppl.filter((p) => p === 1).length; }
+    function withdraw(i) {
+      if (st.cash < EACH && lolr.checked && !st.lent) { st.lent = st.loans * 0.8; st.cash += st.lent; }
+      if (st.cash >= EACH) { st.cash -= EACH; st.ppl[i] = 1; st.fl.push({ i, t: 0 }); return true; }
+      st.failed = true; st.running = false;
+      st.ppl = st.ppl.map((p) => (p === 1 ? 1 : 2));
+      return false;
+    }
+    function start() {
+      if (st.failed || st.ended || st.running) reset();
+      st.running = true;
+      const idle = st.ppl.map((p, i) => (p === 0 ? i : -1)).filter((i) => i >= 0);
+      for (let k = 0; k < 3 && idle.length; k++) { const j = Math.floor(rnd() * idle.length); if (!withdraw(idle.splice(j, 1)[0])) break; }
+      st.log.push(3);
+      upd();
+    }
+    function hour() {
+      st.hour++;
+      const before = withdrawn(), w = st.log.slice(-3).reduce((a, b) => a + b, 0) / NP, remain = NP - before;
+      const liq = remain ? st.cash / (remain * EACH) : 1, fade = Math.exp(-st.hour / 18), s = RS();
+      const calm = st.lent ? 0.3 : 1;
+      let p = ins.checked ? s * 0.1 * 0.02 * fade : s * (0.02 * fade + 0.6 * w + 0.1 * Math.max(0, 0.15 - liq) / 0.15);
+      p *= calm;
+      for (let i = 0; i < NP && !st.failed; i++) if (st.ppl[i] === 0 && rnd() < p) withdraw(i);
+      st.log.push(withdrawn() - before);
+      st.hist.push([st.hour, (st.cash / (NP * EACH)) * 100, withdrawn()]);
+      if (st.hour >= 72 && !st.failed) { st.running = false; st.ended = true; }
+      upd();
+    }
+    function upd() {
+      MB.stat("br-o-t", st.hour + "시간");
+      MB.stat("br-o-w", withdrawn() + "명");
+      MB.stat("br-o-c", won(st.cash));
+      let s = "평온";
+      if (st.failed) s = span("bad-t", "지급 불능");
+      else if (st.ended) s = span("ok-t", "72시간 버팀");
+      else if (st.running) s = st.lent ? span("warn-t", "긴급 대출로 지급 중") : span("warn-t", "소문 확산 중");
+      MB.stat("br-o-s", s);
+    }
+    cv = MB.canvas("#br-cv", (ctx, w, h) => {
+      const P = MB.palette(), hT = Math.round(h * 0.58), narrow = w < 480;
+      const gridW = Math.min(w * 0.56, hT - 24), cell = gridW / 10, gx = 14, gy = 14;
+      const bankX = gx + gridW + (w - gx - gridW) / 2, bankW = Math.min(150, w - gx - gridW - 30);
+      const pos = (i) => [gx + cell * (i % 10) + cell / 2, gy + cell * Math.floor(i / 10) + cell / 2];
+      st.ppl.forEach((p, i) => {
+        const [x, y] = pos(i), r = cell * 0.32;
+        ctx.beginPath(); ctx.arc(x, y, r, 0, TAU);
+        if (p === 0) { ctx.fillStyle = P.accent; ctx.fill(); }
+        else if (p === 1) { ctx.strokeStyle = P.faint; ctx.lineWidth = 1.5; ctx.stroke(); }
+        else { ctx.fillStyle = P.bad; ctx.fill(); }
+      });
+      // 은행
+      const by = gy + 26, bh = hT - by - 24;
+      ctx.fillStyle = P.surface; ctx.strokeStyle = st.failed ? P.bad : P.border; ctx.lineWidth = st.failed ? 2 : 1;
+      ctx.beginPath(); ctx.moveTo(bankX - bankW / 2 - 6, by); ctx.lineTo(bankX, by - 22); ctx.lineTo(bankX + bankW / 2 + 6, by); ctx.closePath(); ctx.fill(); ctx.stroke();
+      ctx.fillRect(bankX - bankW / 2, by, bankW, bh); ctx.strokeRect(bankX - bankW / 2, by, bankW, bh);
+      text(ctx, "은행", bankX, by - 7, { size: 12, color: P.text, align: "center", weight: 700 });
+      const tw = Math.min(46, bankW * 0.36), tx = bankX - bankW / 2 + 12, ty0 = by + 26, th = bh - 40;
+      ctx.strokeStyle = P.border; ctx.strokeRect(tx, ty0, tw, th);
+      const frac = MB.clamp(st.cash / (NP * EACH), 0, 1);
+      ctx.fillStyle = P.accent2; ctx.fillRect(tx, ty0 + th * (1 - frac), tw, th * frac);
+      text(ctx, "금고", tx + tw / 2, by + 14, { size: 10.5, color: P.dim, align: "center" });
+      const lx = tx + tw + 8, lw = bankX + bankW / 2 - 8 - lx;
+      if (lw > 30) {
+        const lf = MB.clamp(st.loans / (NP * EACH), 0, 1);
+        ctx.fillStyle = P.dim; ctx.globalAlpha = 0.25; ctx.fillRect(lx, ty0 + th * (1 - lf), lw, th * lf); ctx.globalAlpha = 1;
+        ctx.strokeStyle = P.border; ctx.strokeRect(lx, ty0, lw, th);
+        text(ctx, "대출", lx + lw / 2, by + 14, { size: 10.5, color: P.dim, align: "center" });
+        text(ctx, "못 꺼냄", lx + lw / 2, ty0 + th - 10, { size: 10, color: P.dim, align: "center" });
+      }
+      if (st.lent) text(ctx, "한국은행 +" + won(st.lent), bankX, by + bh + 12, { size: 10.5, color: P.warn, align: "center", weight: 700 });
+      st.fl.forEach((f) => {
+        const [x, y] = pos(f.i), e = f.t;
+        const cx = MB.lerp(tx + tw / 2, x, e), cy = MB.lerp(ty0 + th / 2, y, e) - Math.sin(e * Math.PI) * 18;
+        ctx.beginPath(); ctx.arc(cx, cy, 4, 0, TAU); ctx.fillStyle = P.accent2; ctx.fill();
+      });
+      if (st.failed) {
+        ctx.fillStyle = P.bad; ctx.globalAlpha = 0.9; rbox(ctx, bankX - 52, by + bh / 2 - 15, 104, 30, 8); ctx.fill(); ctx.globalAlpha = 1;
+        text(ctx, "지급 불능", bankX, by + bh / 2, { size: 13, color: P.bg, align: "center", weight: 800 });
+      }
+      // 시간 그래프
+      const box = { x: 46, y: hT + 12, w: w - 46 - 12, h: h - hT - 12 - 26 };
+      MB.chart(ctx, box, {
+        x: [0, 72], y: [0, 100], xTicks: narrow ? [0, 24, 48, 72] : [0, 12, 24, 36, 48, 60, 72], yTicks: [0, 50, 100], yFmt: (v) => v + "%", xFmt: (v) => v + "h",
+        series: [{ data: st.hist.map((p) => [p[0], p[1]]), color: P.accent2, width: 2.2 }, { data: st.hist.map((p) => [p[0], p[2]]), color: P.bad, width: 2 }],
+      });
+      text(ctx, "금고 현금 (예금 대비)", box.x + 6, box.y + 8, { size: 10.5, color: P.accent2 });
+      text(ctx, "찾아간 비율", box.x + 6, box.y + 22, { size: 10.5, color: P.bad });
+    }, { aspect: 0.8, minHeight: 400, maxHeight: 500 });
+    MB.loop(cv.canvas, (dt) => {
+      let dirty = false;
+      if (st.running) { acc += dt; while (acc > 0.5 && st.running) { acc -= 0.5; hour(); } dirty = true; }
+      if (st.fl.length) { st.fl.forEach((f) => (f.t += dt / 0.6)); st.fl = st.fl.filter((f) => f.t < 1); dirty = true; }
+      if (dirty) cv.redraw();
+    });
+    document.getElementById("br-go").addEventListener("click", start);
+    document.getElementById("br-re").addEventListener("click", reset);
+    reset();
+  })();
+
+  /* ---------------------------------------------------------- 9. 기준금리 경로 */
+  (function () {
+    const Y0 = 2026, NY = 8, M0 = 4400;
+    let rates = new Array(NY).fill(2.5), B1 = null, drag = -1;
+    const g = (r) => 0.1 - 1.2 * (r / 100 + 0.018);
+    const path = (rs) => { const out = [[Y0 - 0.5, M0]]; let m = M0; rs.forEach((r, i) => { m *= 1 + g(r); out.push([Y0 + i + 0.5, m]); }); return out; };
+    function upd() {
+      const avg = rates.reduce((s, v) => s + v, 0) / NY, p = path(rates), base = path(new Array(NY).fill(2.5));
+      const end = p[NY][1], gAvg = Math.pow(end / M0, 1 / NY) - 1, d = end - base[NY][1];
+      MB.stat("rp-o-r", avg.toFixed(2) + "%");
+      MB.stat("rp-o-g", pct(gAvg, 1));
+      MB.stat("rp-o-m", "약 " + comma(end) + "<small>조원</small>");
+      MB.stat("rp-o-d", span(Math.abs(d) < 1 ? "" : d > 0 ? "warn-t" : "ok-t", (d >= 0 ? "+" : "−") + comma(Math.abs(d)) + "<small>조원</small>"));
+    }
+    const cv = MB.canvas("#rp-cv", (ctx, w, h) => {
+      const P = MB.palette(), h1 = Math.round(h * 0.5);
+      const xf = (v) => "'" + String(Math.round(v)).slice(2);
+      const xt = []; for (let i = 0; i < NY; i++) xt.push(Y0 + i);
+      const step = []; rates.forEach((r, i) => { step.push([Y0 + i - 0.5, r]); step.push([Y0 + i + 0.5, r]); });
+      const c1 = MB.chart(ctx, { x: 54, y: 22, w: w - 54 - 14, h: h1 - 22 - 26 }, {
+        x: [Y0 - 0.5, Y0 + NY - 0.5], y: [0, 6], xTicks: xt, yTicks: [0, 2, 4, 6], xFmt: xf, yFmt: (v) => v + "%",
+        series: [{ data: step, color: P.accent, width: 2.4 }],
+        hlines: [{ y: 2.5, color: P.faint, label: "" }],
+      });
+      B1 = c1.box;
+      text(ctx, "기준금리", 54, 10, { size: 11.5, color: P.dim, weight: 700 });
+      rates.forEach((r, i) => knob(ctx, c1.X(Y0 + i), c1.Y(r), P, drag === i ? 8 : 6.5));
+      const p = path(rates), base = path(new Array(NY).fill(2.5));
+      const all = p.concat(base).map((q) => q[1]);
+      const lo = Math.min(...all), hi = Math.max(...all);
+      const c2 = MB.chart(ctx, { x: 54, y: h1 + 22, w: w - 54 - 14, h: h - h1 - 22 - 44 }, {
+        x: [Y0 - 0.5, Y0 + NY - 0.5], y: [Math.floor(lo / 500) * 500, Math.ceil(hi * 1.03 / 500) * 500], xTicks: xt, xFmt: xf, yFmt: (v) => comma(v) + "조",
+        series: [{ data: base, color: P.faint, width: 1.6, dash: [4, 4] }, { data: p, color: P.accent, width: 2.4 }],
+      });
+      text(ctx, "통화량 M2", 54, h1 + 10, { size: 11.5, color: P.dim, weight: 700 });
+      rates.forEach((r, i) => {
+        const gg = g(r), x = c2.X(Y0 + i);
+        if (w > 460) text(ctx, (gg * 100).toFixed(1) + "%", x, c2.box.y + c2.box.h - 10, { size: 10, color: gg < 0.03 ? P.ok : gg > 0.06 ? P.warn : P.faint, align: "center", mono: true });
+      });
+    }, { aspect: 0.72, minHeight: 380, maxHeight: 480 });
+    const setFrom = (x, y) => {
+      if (!B1) return;
+      const yr = Y0 - 0.5 + ((x - B1.x) / B1.w) * NY;
+      if (drag < 0) drag = MB.clamp(Math.round(yr) - Y0, 0, NY - 1);
+      const v = ((B1.y + B1.h - y) / B1.h) * 6;
+      rates[drag] = MB.clamp(Math.round(v * 4) / 4, 0, 6);
+      upd(); cv.redraw();
+    };
+    MB.drag(cv.canvas, { start() { drag = -1; }, move: setFrom, end() { drag = -1; cv.redraw(); } });
+    document.getElementById("rp-flat").addEventListener("click", () => { rates = new Array(NY).fill(2.5); upd(); cv.redraw(); });
+    document.getElementById("rp-cut").addEventListener("click", () => { rates = [2.5, 2, 1.5, 1, 0.75, 0.75, 1, 1.25]; upd(); cv.redraw(); });
+    document.getElementById("rp-hike").addEventListener("click", () => { rates = [2.5, 3.25, 4, 4.75, 5, 5, 4.5, 4]; upd(); cv.redraw(); });
+    upd();
+  })();
+
+  /* ---------------------------------------------------------- 10. MV = PY */
+  (function () {
+    let cv = null;
+    const re = () => { upd(); if (cv) cv.redraw(); };
+    const sg = (v) => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v) + "%";
+    const M = MB.range("qt-m", sg, re), V = MB.range("qt-v", sg, re), Y = MB.range("qt-y", sg, re);
+    const infl = () => ((1 + M() / 100) * (1 + V() / 100)) / (1 + Y() / 100) - 1;
+    function upd() {
+      const pi = infl(), x20 = Math.pow(1 + pi, 20);
+      const cls = pi > 0.1 ? "bad-t" : pi > 0.04 ? "warn-t" : pi < 0 ? "warn-t" : "ok-t";
+      MB.stat("qt-o-p", span(cls, (pi > 0 ? "+" : "") + pct(pi, 1)));
+      MB.stat("qt-o-x", (x20 >= 100 ? comma(x20) : x20.toFixed(2)) + "<small>배</small>");
+      MB.stat("qt-o-w", won(1e4 / x20));
+      MB.stat("qt-o-d", pi > 0.0005 ? MN.doubling(pi).exact.toFixed(1) + "<small>년</small>" : "오르지 않음");
+    }
+    cv = MB.canvas("#qt-cv", (ctx, w, h) => {
+      const P = MB.palette(), pi = infl(), narrow = w < 480;
+      const hT = 70;
+      const parts = [["M", M(), P.accent], ["×", null], ["V", V(), P.accent], ["=", null], ["P", Math.round(pi * 1000) / 10, pi > 0.1 ? P.bad : pi > 0.04 ? P.warn : P.accent2], ["×", null], ["Y", Y(), P.ok]];
+      const cellW = (w - 20) / 4.9;
+      let x = 10;
+      parts.forEach((pt) => {
+        if (pt[1] === null) { text(ctx, pt[0], x + cellW * 0.15, 36, { size: 18, color: P.faint, align: "center" }); x += cellW * 0.3; return; }
+        rbox(ctx, x + 3, 10, cellW - 6, 52, 10); ctx.fillStyle = P.surface; ctx.fill(); ctx.strokeStyle = pt[2]; ctx.lineWidth = 1.5; ctx.stroke();
+        text(ctx, pt[0], x + cellW / 2, 25, { size: 13, color: pt[2], align: "center", weight: 800, mono: true });
+        text(ctx, (pt[1] > 0 ? "+" : "") + pt[1] + "%", x + cellW / 2, 47, { size: narrow ? 12 : 14, color: P.text, align: "center", weight: 700, mono: true });
+        x += cellW;
+      });
+      const data = []; for (let t = 0; t <= 20; t += 0.5) data.push([t, 100 * Math.pow(1 + pi, t)]);
+      const tgt = []; for (let t = 0; t <= 20; t += 0.5) tgt.push([t, 100 * Math.pow(1.02, t)]);
+      const end = data[data.length - 1][1];
+      const lo = Math.min(50, end * 0.7), hi = Math.max(200, end * 1.5);
+      const yf = (v) => (v >= 1e8 ? v / 1e8 + "억" : v >= 1e4 ? v / 1e4 + "만" : String(v));
+      let yt = [];
+      for (let e = Math.floor(Math.log10(lo)); e <= Math.ceil(Math.log10(hi)); e++) [1, 2, 5].forEach((k) => { const v = k * Math.pow(10, e); if (v >= lo && v <= hi) yt.push(v); });
+      if (yt.length > 7) yt = yt.filter((v) => Math.abs(Math.log10(v) % 1) < 1e-9);
+      MB.chart(ctx, { x: 52, y: hT + 14, w: w - 52 - 14, h: h - hT - 14 - 44 }, {
+        x: [0, 20], y: [lo, hi], logY: true, xLabel: "년", yFmt: yf, xTicks: [0, 5, 10, 15, 20], yTicks: yt,
+        series: [{ data: tgt, color: P.faint, width: 1.5, dash: [4, 4] }, { data, color: pi > 0.1 ? P.bad : P.accent2, width: 2.6 }],
+        hlines: [{ y: 100, color: P.faint, label: "" }],
+      });
+      text(ctx, "물가 지수 (시작 100, 로그 눈금) · 점선은 연 2%", 58, hT + 22, { size: 11, color: P.dim });
+    }, { aspect: 0.66, minHeight: 330, maxHeight: 440 });
+    const preset = (m, v, y) => { M.set(m); V.set(v); Y.set(y); };
+    document.getElementById("qt-p1").addEventListener("click", () => preset(6, -1, 2.5));
+    document.getElementById("qt-p2").addEventListener("click", () => preset(20, 0, 2.5));
+    document.getElementById("qt-p3").addEventListener("click", () => preset(80, 3, -3));
+    document.getElementById("qt-p4").addEventListener("click", () => preset(6, 0, 6));
+    upd();
+  })();
+})();
+</script>
+</body>
+</html>

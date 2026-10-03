@@ -1,0 +1,1239 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and MoneyBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "월세·전세·매매를 '1년에 실제로 사라지는 돈'으로 같은 저울에 올리고, 전월세 전환율, 깡통전세와 등기부등본, 대항력·우선변제권·반환보증, 매수 총비용과 레버리지를 직접 움직여 보며 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>집: 월세·전세·매매 · MoneyBook</title>
+<meta name="description" content="월세·전세·매매를 '1년에 실제로 사라지는 돈'으로 같은 저울에 올리고, 전월세 전환율, 깡통전세와 등기부등본, 대항력·우선변제권·반환보증, 매수 총비용과 레버리지를 직접 움직여 보며 익힌다.">
+<link rel="canonical" href="https://moneybook.euiyun.com/chapters/housing.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0b8a63">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MoneyBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="집: 월세·전세·매매 · MoneyBook">
+<meta property="og:description" content="월세·전세·매매를 '1년에 실제로 사라지는 돈'으로 같은 저울에 올리고, 전월세 전환율, 깡통전세와 등기부등본, 대항력·우선변제권·반환보증, 매수 총비용과 레버리지를 직접 움직여 보며 익힌다.">
+<meta property="og:url" content="https://moneybook.euiyun.com/chapters/housing.html">
+<meta property="og:image" content="https://moneybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://moneybook.euiyun.com/chapters/housing.html#chapter","name":"집: 월세·전세·매매","headline":"집: 월세·전세·매매 · MoneyBook","description":"월세·전세·매매를 '1년에 실제로 사라지는 돈'으로 같은 저울에 올리고, 전월세 전환율, 깡통전세와 등기부등본, 대항력·우선변제권·반환보증, 매수 총비용과 레버리지를 직접 움직여 보며 익힌다.","url":"https://moneybook.euiyun.com/chapters/housing.html","position":11,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://moneybook.euiyun.com/og.png","dateModified":"2026-10-03","isPartOf":{"@type":"Book","@id":"https://moneybook.euiyun.com/#book","name":"MoneyBook · 살아가는 데 필요한 돈 교과서","url":"https://moneybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MoneyBook","item":"https://moneybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"11. 집: 월세·전세·매매","item":"https://moneybook.euiyun.com/chapters/housing.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/money.js"></script>
+<!--head:end-->
+<style>
+  figure.diagram svg { max-width: 520px; margin: 0 auto; }
+  figure.diagram svg .t-mono { font-size: 13px; }
+  .reg { margin: 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg-elev); font-size: 13.5px; line-height: 1.5; overflow: hidden; }
+  .reg h5 { margin: 0; padding: 7px 12px; font-size: 12.5px; letter-spacing: .04em; background: var(--surface); color: var(--text-dim); border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 8px; }
+  .reg h5:first-child { border-top: 0; }
+  .reg .ln { padding: 6px 12px; border-top: 1px dotted var(--border); transition: background .2s, box-shadow .2s; }
+  .reg .ln.del { text-decoration: line-through; color: var(--text-faint); }
+  .reg .ln.hl-ok { background: color-mix(in srgb, var(--ok) 14%, transparent); box-shadow: inset 3px 0 0 var(--ok); }
+  .reg .ln.hl-warn { background: color-mix(in srgb, var(--warn) 16%, transparent); box-shadow: inset 3px 0 0 var(--warn); }
+  .reg .ln.hl-bad { background: color-mix(in srgb, var(--bad) 13%, transparent); box-shadow: inset 3px 0 0 var(--bad); }
+  .reg .head { padding: 10px 12px; font-weight: 700; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .reg .head small { font-weight: 400; color: var(--text-dim); }
+  .rg-find { margin: 0 14px 14px; display: grid; gap: 6px; font-size: 13.5px; line-height: 1.5; }
+  .rg-find div { padding: 7px 10px; border-radius: 8px; background: var(--surface); border-left: 3px solid var(--border); }
+  .rg-find div.ok { border-left-color: var(--ok); }
+  .rg-find div.warn { border-left-color: var(--warn); }
+  .rg-find div.bad { border-left-color: var(--bad); }
+  .rg-find b { margin-right: 4px; }
+  #sim-reg .check { align-items: flex-start; line-height: 1.45; }
+  #sim-reg .check input { margin-top: 2px; flex: none; }
+  #sim-conv .hint, #sim-gap .hint { top: 8px; bottom: auto; }
+</style>
+</head>
+<body data-chapter="housing">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 11</div>
+    <h1>집: 월세·전세·매매</h1>
+    <p class="lead">살 곳은 고를 수 있어도 주거비를 피할 수는 없다. 월세는 매달 통장에서 빠져나가니 아프게 느껴지고, 전세는 "돌려받는 돈"이라 공짜처럼 느껴지고, 매매는 "내 집"이라 비용이 아니라 저축처럼 느껴진다. 그 느낌은 대부분 틀렸다. 이 장은 세 가지 방식을 <b>1년에 실제로 사라지는 돈</b>이라는 같은 저울에 올리고, 한국 특유의 전세 보증금이 어떻게 사라질 수 있는지, 집을 살 때 집값 말고 무엇이 드는지를 직접 끌고 바꿔 보며 확인한다.</p>
+    <ul class="objectives">
+      <li>전세가 왜 한국에서 생겼고 집주인과 세입자에게 각각 어떤 거래인지 설명한다.</li>
+      <li>전월세 전환율로 보증금과 월세를 서로 바꾸고, 보증금을 늘릴지 줄일지 판단한다.</li>
+      <li>월세·전세·매매의 연간 비용을 기회비용까지 넣어 비교하고, 승자가 바뀌는 금리와 집값 상승률을 찾는다.</li>
+      <li>깡통전세의 구조를 보고, 등기부등본에서 선순위 채권·신탁·압류를 찾아낸다.</li>
+      <li>전입신고·확정일자가 만드는 대항력과 우선변제권, 그리고 그 효력이 생기는 시각의 틈을 이해한다.</li>
+      <li>집을 살 때 드는 부대비용과 대출이 만드는 레버리지(손익 증폭)를 숫자로 확인한다.</li>
+    </ul>
+  </header>
+
+  <section id="question">
+    <h2>같은 집, 세 가지 가격표</h2>
+    <p>서울의 한 투룸 빌라를 생각해 보자. 부동산 앱에는 같은 집이 세 가지 가격으로 올라와 있다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>방식</th><th class="num">처음에 내는 돈</th><th class="num">매달 내는 돈</th><th>끝날 때</th></tr></thead>
+      <tbody>
+        <tr><td><b>월세</b></td><td class="num">보증금 1,000만원</td><td class="num">80만원</td><td>보증금 1,000만원을 돌려받는다</td></tr>
+        <tr><td><b>반전세</b></td><td class="num">보증금 1억원</td><td class="num">약 42만원</td><td>보증금 1억원을 돌려받는다</td></tr>
+        <tr><td><b>전세</b></td><td class="num">보증금 2억원</td><td class="num">0원</td><td>보증금 2억원을 돌려받는다</td></tr>
+        <tr><td><b>매매</b></td><td class="num">3억원 + 부대비용</td><td class="num">대출이자·보유세</td><td>그때의 집값으로 팔 수 있다</td></tr>
+      </tbody>
+    </table></div>
+    <p>"전세는 매달 내는 돈이 0원이니 가장 싸다"는 말은 반만 맞다. 2억원은 공짜로 생기지 않는다. 내 돈이라면 그 돈을 예금에 넣어 받을 수 있었던 이자를 포기한 것이고, 대출이라면 은행에 이자를 낸다. 앞의 것을 <span class="term">기회비용</span><span class="en">(Opportunity cost)</span>이라 한다. 어떤 선택을 하느라 포기한 다른 선택의 가치다. 매매도 마찬가지다. 집값의 상당 부분을 내 돈으로 내면 그 돈의 이자를 포기하고, 나머지는 대출이자를 낸다. 대신 집값이 오르면 그 상승분을 갖고, 내리면 떠안는다.</p>
+    <p>그래서 이 장의 질문은 하나다. <b>1년 동안 이 집에 사는 대가로 내 재산에서 실제로 사라지는 돈은 얼마인가.</b> 돌려받는 보증금은 사라지는 돈이 아니고, 매달 빠져나가는 월세와 대출이자, 포기한 이자, 세금과 수리비, 집값 하락분은 사라지는 돈이다. 이 기준 하나로 네 가지 가격표를 같은 저울에 올릴 수 있다.</p>
+    <div class="callout">
+      <strong>이 장은 돈의 흐름에서 어디인가</strong>
+      <a href="credit.html">9장</a>과 <a href="loan.html">10장</a>에서 빚의 구조를 봤다. 집은 대부분의 사람이 평생 지는 가장 큰 빚이자, 가장 큰 목돈(보증금)을 남의 손에 맡기는 자리다. 그래서 '빌리기' 단계의 마지막 장이다. 수치는 2026년 한국 제도를 기준으로 한 교육용 대표값이며 특정 지역의 시세를 말하지 않는다. 이 장은 집값을 예측하지 않는다.
+    </div>
+  </section>
+
+  <section id="jeonse">
+    <h2>전세: 이자 없이 빌려주는 목돈</h2>
+    <p><span class="term">전세</span><span class="en">(Jeonse, key-money lease)</span>는 세입자가 집값의 상당 부분(흔히 50~80%)을 보증금으로 맡기고, 계약 기간(보통 2년) 동안 월세 없이 살다가 끝날 때 보증금을 그대로 돌려받는 계약이다. 세계적으로 이런 방식이 큰 규모로 자리 잡은 나라는 거의 없다. 볼리비아에 비슷한 제도가 있는 정도다.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 440 486" role="img" aria-label="전세의 돈 흐름: 세입자가 집주인에게 보증금을 맡기고, 집주인은 그 돈을 쓰며, 계약이 끝나면 돌려준다">
+        <defs><marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/></marker></defs>
+        <rect x="40" y="12" width="220" height="60" rx="12" class="f-surface"/>
+        <text x="150" y="38" text-anchor="middle" class="lbl-b">은행</text>
+        <text x="150" y="60" text-anchor="middle" class="lbl-dim">전세자금대출</text>
+        <path d="M180 74 V136" class="s-line" marker-end="url(#ar1)"/>
+        <text x="192" y="100" class="lbl-dim">대출 1.6억</text>
+        <text x="192" y="120" class="lbl-dim">(보증금으로 바로 간다)</text>
+        <path d="M120 138 V76" class="s-dash" marker-end="url(#ar1)"/>
+        <text x="108" y="112" text-anchor="end" class="lbl-bad">매달 이자</text>
+        <rect x="40" y="140" width="220" height="96" rx="12" class="f-acc-soft"/>
+        <text x="150" y="170" text-anchor="middle" class="lbl-b">세입자</text>
+        <text x="150" y="196" text-anchor="middle" class="lbl-dim">내 돈 4,000만</text>
+        <text x="150" y="218" text-anchor="middle" class="lbl-dim">+ 대출 1.6억</text>
+        <path d="M180 238 V300" class="s-acc" marker-end="url(#ar1)"/>
+        <text x="192" y="276" class="lbl-acc">보증금 2억</text>
+        <path d="M120 302 V240" class="s-acc2" marker-end="url(#ar1)"/>
+        <text x="108" y="276" text-anchor="end" class="lbl-acc2">집을 쓸 권리</text>
+        <rect x="40" y="304" width="220" height="96" rx="12" class="f-acc2-soft"/>
+        <text x="150" y="334" text-anchor="middle" class="lbl-b">집주인</text>
+        <text x="150" y="360" text-anchor="middle" class="lbl-dim">보증금 2억을</text>
+        <text x="150" y="382" text-anchor="middle" class="lbl-dim">2년간 무이자로 쓴다</text>
+        <path d="M262 352 H292" class="s-line" marker-end="url(#ar1)"/>
+        <rect x="296" y="318" width="136" height="68" rx="12" class="f-surface"/>
+        <text x="364" y="346" text-anchor="middle" class="lbl-b">그 돈의 쓰임</text>
+        <text x="364" y="370" text-anchor="middle" class="lbl-dim">대출 상환·다른 집</text>
+        <path d="M110 402 V424 H16 V188 H36" class="s-dash" marker-end="url(#ar1)"/>
+        <text x="220" y="452" text-anchor="middle" class="lbl-dim">2년 뒤: 다음 세입자의 보증금이나</text>
+        <text x="220" y="474" text-anchor="middle" class="lbl-dim">집주인 돈으로 돌려준다</text>
+      </svg>
+      <figcaption><b>그림 1. 전세의 돈 흐름.</b> 세입자는 월세 대신 목돈의 이자(내 돈이면 기회비용, 대출이면 이자)를 낸다. 집주인은 은행보다 싸게, 사실상 이자 없이 목돈을 빌린다. 보증금을 돌려주는 돈은 대개 다음 세입자의 보증금에서 나온다는 점이 이 구조의 약한 고리다.</figcaption>
+    </figure>
+    <p>전세가 자리 잡은 이유는 크게 세 가지로 설명된다.</p>
+    <ul>
+      <li><b>은행에서 돈을 빌리기 어렵던 시절.</b> 고도성장기에 은행 대출은 기업에 먼저 돌아갔고, 가계가 집을 사려고 빌릴 길이 좁았다. 집주인은 세입자의 보증금을 사실상 사적인 대출로 썼다.</li>
+      <li><b>높은 금리.</b> 금리가 연 10%를 넘던 시절에는 보증금을 예금에 넣기만 해도 월세 못지않은 이자가 나왔다. 집주인에게 전세는 월세를 받는 것과 큰 차이가 없었다.</li>
+      <li><b>집값 상승 기대.</b> 집주인은 보증금으로 집값의 대부분을 메우고 적은 자기 돈으로 집을 사서, 집값이 오르면 그 차익을 가졌다. 이를 <span class="term">갭투자</span><span class="en">(Gap investment)</span>라 부른다. 매매가와 전세가의 차이(갭)만큼만 내 돈을 넣는다는 뜻이다.</li>
+    </ul>
+    <p>세입자 쪽에서 보면 전세는 <b>목돈을 맡기고 그 이자로 집세를 내는 계약</b>이다. 매달 나가는 돈이 없으니 저축이 쉽고, 끝나면 목돈이 그대로 돌아온다. 대신 그 목돈이 남의 손에 있는 동안 생기는 위험, 즉 집주인이 돌려주지 못하는 위험을 떠안는다. 이 장의 절반이 그 위험에 관한 이야기다.</p>
+  </section>
+
+  <section id="convert">
+    <h2>전월세 전환율: 보증금과 월세의 환율</h2>
+    <p>앞의 가격표에서 보증금 2억원 전세와 보증금 1,000만원·월세 80만원은 사실상 같은 값으로 매겨져 있다. 집주인이 보증금 1억 9,000만원을 덜 받는 대신 월세를 받기 때문이다. 그 교환 비율이 <span class="term">전월세 전환율</span><span class="en">(Deposit-to-rent conversion rate)</span>이다. 보증금 차액에 연 몇 %를 곱해 월세로 바꾸는지를 나타낸다.</p>
+    <div class="formula">$$\text{월세} = \frac{(\text{전세 보증금} - \text{월세 보증금}) \times \text{전환율}}{12}$$<div class="where">전환율 5%라면 보증금 1억원을 줄일 때마다 월세가 \(1억 \times 0.05 / 12 \approx 41.7\)만원 늘어난다.</div></div>
+    <p>아래 시소의 바닥 손잡이를 끌어 보증금을 바꿔 본다. 보증금을 덜어 낼수록 반대편에 월세 동전이 쌓인다. 그다음 전환율과 예금금리를 바꿔, 보증금을 더 넣는 쪽이 이득인지 덜 넣는 쪽이 이득인지가 뒤집히는 순간을 찾아본다.</p>
+
+    <div class="sim" id="sim-conv">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>전월세 시소: 보증금을 덜면 월세가 쌓인다</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cv-cv"></canvas><span class="hint">아래 손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>전월세 전환율 <output id="cv-rate-out"></output></span><input type="range" id="cv-rate" min="2" max="10" step="0.1" value="5"></label>
+          <label class="ctrl"><span>내 예금금리(세후) <output id="cv-dep-out"></output></span><input type="range" id="cv-dep" min="1" max="7" step="0.1" value="3"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">보증금</span><span class="v" id="cv-o-d">—</span></div>
+        <div class="stat"><span class="k">월세</span><span class="v" id="cv-o-m">—</span></div>
+        <div class="stat"><span class="k">연 주거비(기회비용 포함)</span><span class="v" id="cv-o-y">—</span></div>
+        <div class="stat"><span class="k">보증금 1,000만원 더 넣으면</span><span class="v" id="cv-o-t">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 보증금을 0원까지 끌어 월세가 얼마까지 오르는지 본다. ② 전환율 5%, 예금금리 3%에서 보증금을 1,000만원 늘리면 1년에 20만원이 줄어든다. ③ 예금금리를 전환율보다 높게 올린다. 이제는 보증금을 줄이고 그 돈을 예금하는 편이 낫다. (전세 2억원 기준. 연 주거비 = 월세 × 12 + 보증금 × 예금금리.)</div>
+    </div>
+
+    <p>시소가 보여 준 규칙은 단순하다. <b>전환율이 내 돈의 수익률(예금금리, 대출이라면 대출금리)보다 높으면 보증금을 늘리는 편이 싸고, 낮으면 월세가 싸다.</b> 집주인 입장에서도 같은 셈이 거꾸로 돈다. 은행 이자가 낮을 때 집주인은 전세보다 월세를 원하고, 금리가 오르면 세입자들이 전세 대출이자가 부담스러워 월세를 찾는다. 금리 뉴스가 전세·월세 비율을 흔드는 이유다.</p>
+    <div class="callout warn">
+      <strong>법정 전환율 상한과 시장 전환율은 다르다</strong>
+      주택임대차보호법은 계약 기간 중에 보증금을 월세로 바꿀 때 전환율을 "연 10%와 기준금리 + 2%p 중 낮은 값" 이하로 묶는다(2026년 기준. 기준금리가 2.5%면 상한 4.5%). 새로 계약할 때의 시장 전환율은 이 상한에 묶이지 않고, 지역과 주택 유형에 따라 대략 4~7% 사이에서 움직인다. 제도와 요율은 해마다 바뀔 수 있으니 계약 때 직접 확인한다.
+    </div>
+  </section>
+
+  <section id="scale">
+    <h2>같은 저울에 올리기</h2>
+    <p>이제 월세·전세·매매를 한 저울에 올린다. 사라지는 돈을 항목별로 쓰면 다음과 같다.</p>
+    <div class="formula">$$\begin{aligned}C_{\text{월세}} &= 12R + B\,r \\ C_{\text{전세}} &= E\,r + L\,i \\ C_{\text{매매}} &= E\,r + L\,i + P\,(t+m) - P\,g\end{aligned}$$<div class="where">\(R\): 월세, \(B\): 보증금, \(E\): 집에 묶인 내 돈, \(L\): 대출, \(r\): 내 돈의 기회비용(예금금리), \(i\): 대출금리, \(P\): 집값, \(t\): 보유세율, \(m\): 수선·유지비율, \(g\): 집값 상승률</div></div>
+    <p>매매에만 마지막 항 \(-Pg\)가 있다. 집값이 오르면 그만큼 비용이 줄고, 떨어지면 비용이 는다. 매매를 "비용이 아니라 투자"라고 부르는 이유가 이 한 항이고, 매매가 가장 비쌀 수도 있는 이유도 이 한 항이다. 아래에서 세 슬라이더를 움직이거나, 아래 그래프의 손잡이를 좌우로 끌어 집값 상승률을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-scale">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>주거비 저울: 1년에 실제로 사라지는 돈</h3></div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>월세·대출이자</span><span><i style="background:var(--warn)"></i>내 돈의 기회비용</span><span><i style="background:var(--accent-2)"></i>보유세·유지비</span><span><i style="background:var(--ok)"></i>집값 상승(비용을 줄인다)</span></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="hc-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>예금금리(기회비용) <output id="hc-r-out"></output></span><input type="range" id="hc-r" min="0" max="8" step="0.25" value="3"></label>
+          <label class="ctrl"><span>대출금리 <output id="hc-l-out"></output></span><input type="range" id="hc-l" min="1" max="10" step="0.25" value="4"></label>
+          <label class="ctrl"><span>집값 상승률(연) <output id="hc-g-out"></output></span><input type="range" id="hc-g" min="-4" max="8" step="0.25" value="2"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">월세 1,000/80</span><span class="v" id="hc-o-r">—</span></div>
+        <div class="stat"><span class="k">전세 2억(대출 1.6억)</span><span class="v" id="hc-o-j">—</span></div>
+        <div class="stat"><span class="k">매매 3억(대출 50%)</span><span class="v" id="hc-o-b">—</span></div>
+        <div class="stat"><span class="k">매매가 전세를 이기는 상승률</span><span class="v" id="hc-o-be">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 집값 상승률을 0%로 둔다. 매매가 가장 비싸다(연 1,260만원). ② 상승률을 올리며 매매 선이 전세 선 아래로 내려가는 지점을 찾는다(약 1.67%). ③ 대출금리를 7%로 올린다. 전세도 월세보다 비싸진다. (가정: 집값 3억원, 보유세 0.2%, 수선·유지 0.5%, 전세·매매 대출금리는 같다고 둔다. 취득세·중개보수 같은 한 번 내는 비용은 넣지 않았다. 세금과 거래비용을 빼면 매매가 실제보다 유리하게 보인다.)</div>
+    </div>
+
+    <p>저울에서 본 것을 정리하면 이렇다. 기본값(예금 3%, 대출 4%, 상승 2%)에서 연 비용은 월세 990만원, 전세 760만원, 매매 660만원이다. 그런데 매매의 660만원은 집값이 해마다 2%씩 오른다는 <b>가정</b>에 기대고 있다. 상승률이 0%면 매매는 1,260만원으로 가장 비싸다. 매매가 전세보다 싸려면 집값이 해마다 약 1.67%보다 더 올라야 한다. 매매를 고른다는 것은 그 상승률에 내기를 거는 일이고, 그 내기는 대출 때문에 크게 증폭된다(뒤의 레버리지 절).</p>
+    <p>반대로 월세는 늘 비싸 보이지만 가장 단순한 선택이다. 목돈이 묶이지 않고, 보증금이 작으니 떼일 돈도 작고, 이사가 자유롭다. 사회초년생에게 월세가 꼭 나쁜 선택이 아닌 이유다.</p>
+    <div class="callout deep">
+      <strong>전세 대출금리와 내 돈의 수익률</strong>
+      저울에서 전세의 비용은 "내 돈 × 예금금리 + 대출 × 대출금리"였다. 보증금의 대부분이 대출이면 전세의 비용은 사실상 대출금리가 결정한다. 전세자금대출은 대개 만기에 원금을 한 번에 갚는 만기일시 상환이고(<a href="loan.html">10장</a>), 변동금리인 경우가 많다. 그래서 금리가 오르는 시기에는 전세가 월세보다 빠르게 비싸진다. 전환율 5%짜리 월세와 대출금리 6%짜리 전세를 비교하면 월세가 싸다.
+    </div>
+  </section>
+
+  <section id="gap">
+    <h2>보증금이 사라지는 길: 깡통전세</h2>
+    <p>저울은 "보증금은 돌려받는다"고 가정했다. 그 가정이 깨질 때가 전세의 진짜 위험이다. 집주인이 보증금을 돌려주지 못하면 세입자는 결국 그 집을 <span class="term">경매</span><span class="en">(Auction)</span>에 넘겨 낙찰 대금에서 돌려받아야 한다. 이때 두 가지가 문제가 된다.</p>
+    <ul>
+      <li><b>내 앞에 선 빚.</b> 집주인이 그 집을 담보로 은행에서 먼저 빌린 돈(선순위 근저당)이 있으면, 낙찰 대금은 그 빚부터 갚는다. 나는 남은 돈에서 받는다.</li>
+      <li><b>낙찰가는 시세보다 낮다.</b> 경매로 팔리는 집은 대개 시세의 70~90% 정도에 낙찰된다(이를 <span class="term">낙찰가율</span><span class="en">(Winning bid ratio)</span>이라 한다). 빌라·오피스텔처럼 거래가 적은 집은 더 낮게, 여러 번 유찰되면 훨씬 더 낮게 팔린다.</li>
+    </ul>
+    <p>보증금과 선순위 빚을 합친 금액이 집값에 바짝 붙어 있거나 넘는 집을 <span class="term">깡통전세</span><span class="en">(Underwater jeonse)</span>라 한다. 집을 다 팔아도 보증금을 채우지 못하는, 속이 빈 깡통이라는 뜻이다. 보증금 ÷ 집값을 <span class="term">전세가율</span><span class="en">(Jeonse-to-price ratio)</span>이라 하는데, 전세가율만 보면 부족하고 선순위 빚까지 더해서 봐야 한다.</p>
+    <p>아래 그림에서 왼쪽 시세 막대의 손잡이를 위아래로 끌어 집값을 바꿔 본다. 가운데 낙찰가가 따라 움직이고, 그 높이에서 그은 선이 오른쪽 막대를 자른다. 선 위로 올라간 보증금은 돌려받지 못하는 돈이다.</p>
+
+    <div class="sim" id="sim-gap">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>깡통전세: 낙찰가가 보증금을 자르는 선</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="gp-cv"></canvas><span class="hint">시세 막대를 위아래로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>선순위 대출(근저당) <output id="gp-sr-out"></output></span><input type="range" id="gp-sr" min="0" max="200000000" step="5000000" value="30000000"></label>
+          <label class="ctrl"><span>내 전세 보증금 <output id="gp-dep-out"></output></span><input type="range" id="gp-dep" min="50000000" max="300000000" step="5000000" value="200000000"></label>
+          <label class="ctrl"><span>경매 낙찰가율 <output id="gp-bid-out"></output></span><input type="range" id="gp-bid" min="50" max="100" step="1" value="80"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">전세가율</span><span class="v" id="gp-o-r">—</span></div>
+        <div class="stat"><span class="k">(선순위 + 보증금) ÷ 시세</span><span class="v" id="gp-o-l">—</span></div>
+        <div class="stat"><span class="k">돌려받는 보증금</span><span class="v" id="gp-o-b">—</span></div>
+        <div class="stat"><span class="k">잃는 돈</span><span class="v" id="gp-o-x">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(시세 2.8억, 선순위 3,000만, 보증금 2억)에서도 낙찰가율 80%면 600만원이 잘린다. 전세가율 71%인데도 그렇다. ② 시세를 20% 끌어내린다(2.24억). 잃는 돈이 5,000만원을 넘는다. ③ 선순위 대출을 0으로, 보증금을 1.6억으로 줄인다. 시세가 꽤 떨어져도 선이 보증금에 닿지 않는다. (경매 비용, 소액임차인 최우선변제, 밀린 세금 같은 당해세는 넣지 않았다. 실제로는 이것들이 낙찰 대금에서 먼저 빠져 더 불리하다.)</div>
+    </div>
+
+    <p>그래프의 교훈은 두 가지다. 첫째, <b>집값이 그대로여도 경매에 가면 손해를 볼 수 있다.</b> 낙찰가가 시세보다 낮기 때문이다. 둘째, <b>(선순위 + 보증금) ÷ 시세가 70~80%를 넘으면 집값이 조금만 흔들려도 보증금이 잘린다.</b> 전세가율이 높은 집은 월세로 환산한 값이 싸 보이지만, 그 싼 값은 위험을 내가 떠안는 대가다.</p>
+    <div class="callout tip">
+      <strong>근저당의 '채권최고액'은 실제 빌린 돈보다 크다</strong>
+      등기부등본에 적힌 근저당 금액은 <span class="term">채권최고액</span><span class="en">(Maximum secured amount)</span>이다. 밀린 이자와 비용까지 담보하려고 은행이 실제 대출의 약 110~130%로 적어 둔다. 실제 대출 잔액은 등기부만으로는 알 수 없으니, 보수적으로 채권최고액 전부를 내 앞의 빚으로 보고 계산한다.
+    </div>
+  </section>
+
+  <section id="register">
+    <h2>등기부등본 읽기</h2>
+    <p>집에 얽힌 빚과 권리는 <span class="term">등기부등본</span><span class="en">(Real estate register)</span>에 적혀 있다. 누구나 인터넷 등기소에서 몇백 원에서 1,000원 남짓에 뗄 수 있다. 세 부분으로 나뉜다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>부분</th><th>적힌 것</th><th>세입자가 볼 것</th></tr></thead>
+      <tbody>
+        <tr><td><b>표제부</b></td><td>주소, 건물 구조, 면적, 용도</td><td>계약서의 주소·호수와 같은가. 용도가 주거용인가(근린생활시설·업무시설이면 전입·보증 가입이 막힐 수 있다).</td></tr>
+        <tr><td><b>갑구</b></td><td>소유권: 누가 주인인가, 언제 바뀌었나, 압류·가압류·경매·신탁</td><td>계약하러 나온 사람이 진짜 소유자인가. 소유권을 묶는 기록이 있는가.</td></tr>
+        <tr><td><b>을구</b></td><td>소유권 외의 권리: 근저당, 전세권, 임차권</td><td>내 앞에 선 빚(채권최고액)이 얼마인가.</td></tr>
+      </tbody>
+    </table></div>
+    <p>아래는 가상의 집 세 채의 등기부를 줄인 것이다. 집을 고르고 오른쪽 점검 항목을 하나씩 체크하면, 그 항목에 해당하는 줄이 표시되고 판단이 나온다. 세 집 모두에서 위험 신호를 찾아본다.</p>
+
+    <div class="sim" id="sim-reg">
+      <div class="sim-head"><span class="sim-tag">CHECKLIST</span><h3>등기부 점검: 위험 신호를 찾아라</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><div id="rg-doc"></div><div class="rg-find" id="rg-find"></div></div>
+        <div class="sim-controls">
+          <div class="seg" id="rg-house"><button data-value="a" class="on">빌라 A</button><button data-value="b">빌라 B</button><button data-value="c">오피스텔 C</button></div>
+          <label class="check"><input type="checkbox" id="rg-c1"> ① 표제부: 주소·호수·용도 확인</label>
+          <label class="check"><input type="checkbox" id="rg-c2"> ② 갑구: 소유자와 소유권이 바뀐 시기</label>
+          <label class="check"><input type="checkbox" id="rg-c3"> ③ 갑구: 압류·가압류·경매개시</label>
+          <label class="check"><input type="checkbox" id="rg-c4"> ④ 갑구: 신탁 등기</label>
+          <label class="check"><input type="checkbox" id="rg-c5"> ⑤ 을구: 살아 있는 근저당의 채권최고액</label>
+          <label class="check"><input type="checkbox" id="rg-c6"> ⑥ (선순위 + 내 보증금) ÷ 시세</label>
+          <div class="btn-row"><button class="btn sm" id="rg-all">모두 점검</button><button class="btn sm" id="rg-none">지우기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">점검한 항목</span><span class="v" id="rg-o-n">—</span></div>
+        <div class="stat"><span class="k">위험 신호</span><span class="v" id="rg-o-r">—</span></div>
+        <div class="stat"><span class="k">판단</span><span class="v" id="rg-o-v">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 빌라 A를 모두 점검한다. 말소된 근저당은 줄이 그어져 있고 더는 빚이 아니다. ② 빌라 B에서 소유권이 바뀐 시기와 근저당이 설정된 날짜를 나란히 본다. ③ 오피스텔 C의 갑구에서 진짜 소유자가 누구인지 찾는다. (모든 이름·주소·금액은 가상이다. 실제 등기부에는 접수 번호, 등기 원인, 권리자의 주소 등이 더 적힌다.)</div>
+    </div>
+
+    <p>등기부는 계약 직전에 한 번, <b>잔금을 치르는 당일에 한 번 더</b> 뗀다. 계약과 잔금 사이에 집주인이 대출을 받거나 집을 팔 수 있기 때문이다. 등기부 말고도 볼 것이 있다. 집주인이 밀린 세금이 있으면 경매 때 그 세금이 보증금보다 먼저 빠질 수 있으므로, 계약 전에 집주인의 납세증명서(국세·지방세 완납 증명)를 요구할 수 있다. 같은 건물에 먼저 들어온 세입자들의 보증금 합계(전입세대 확인서, 확정일자 부여 현황)도 다가구주택에서는 내 앞의 빚이 된다.</p>
+  </section>
+
+  <section id="rights">
+    <h2>대항력과 우선변제권: 효력이 생기는 시각</h2>
+    <p>보증금을 지키는 법적 장치는 두 가지다.</p>
+    <ul>
+      <li><span class="term">대항력</span><span class="en">(Opposability)</span>: 집주인이 바뀌어도 새 주인에게 "계약 기간 동안 살고, 보증금을 돌려받겠다"고 주장할 수 있는 힘이다. <b>입주(점유)와 전입신고</b>를 마치면 <b>그다음 날 0시</b>에 생긴다.</li>
+      <li><span class="term">우선변제권</span><span class="en">(Preferential repayment right)</span>: 집이 경매로 팔릴 때, 나보다 늦게 권리를 얻은 채권자보다 먼저 낙찰 대금에서 보증금을 받을 권리다. 대항력 요건에 더해 <b>계약서에 확정일자</b>를 받아야 생긴다. 확정일자는 주민센터나 온라인으로 받을 수 있고, 전입신고를 할 때 함께 받는 경우가 많다.</li>
+    </ul>
+    <p>함정은 시각이다. 은행의 근저당은 등기소에 <b>접수하는 즉시</b> 효력이 생기지만, 세입자의 대항력은 <b>전입신고 다음 날 0시</b>에 생긴다. 집주인이 내 잔금일 당일에 집을 담보로 대출을 받으면, 같은 날이라도 은행이 나보다 앞선다. 아래 타임라인에서 두 표식을 끌어 날짜를 바꿔 본다.</p>
+
+    <div class="sim" id="sim-order">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>순위 타임라인: 같은 날이면 누가 먼저인가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="od-cv"></canvas><span class="hint">두 표식을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="od-mode"><button data-value="both" class="on">전입 + 확정일자</button><button data-value="move">전입만</button><button data-value="fix">확정일자만</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">대항력</span><span class="v" id="od-o-a">—</span></div>
+        <div class="stat"><span class="k">우선변제권</span><span class="v" id="od-o-p">—</span></div>
+        <div class="stat"><span class="k">경매 배당 1순위</span><span class="v" id="od-o-r">—</span></div>
+      </div>
+      <div class="sim-note" id="od-note">해볼 것: ① 기본값은 잔금일에 전입신고를 하고, 집주인도 같은 날 근저당을 접수한 경우다. 은행이 앞선다. ② 근저당을 하루 뒤로 끈다. 이제 내가 앞선다. ③ '확정일자만'을 고른다. 전입신고가 없으면 확정일자만으로는 아무 순위도 없다. (단순화한 모델이다. 실제 배당에서는 경매 비용, 당해세, 소액임차인 최우선변제가 먼저 빠진다.)</div>
+    </div>
+
+    <p>그래서 실무에서는 계약서에 "잔금일 다음 날까지 집주인은 담보 대출(근저당 설정)을 하지 않는다. 어기면 계약을 해제하고 손해를 배상한다"는 <b>특약</b>을 넣는다. 그리고 잔금 당일, 돈을 보내기 직전에 등기부를 다시 떼어 본다. 이사 날 전입신고를 미루지 않는 것, 계약 기간 동안 주소를 옮기지 않는 것(주소를 옮기면 대항력이 사라진다)도 같은 이유다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 468" role="img" aria-label="보증금을 지키는 다섯 단계: 계약 전, 계약, 잔금 당일, 입주 후, 만기 전">
+        <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/></marker></defs>
+        <g>
+          <rect x="6" y="10" width="428" height="84" rx="12" class="f-surface"/>
+          <text x="22" y="57" class="lbl-acc">① 계약 전</text>
+          <text x="128" y="38" class="lbl-dim">등기부 갑구·을구 · 시세·전세가율</text>
+          <text x="128" y="60" class="lbl-dim">집주인 납세증명 · 건축물 용도</text>
+          <text x="128" y="82" class="lbl-dim">보증 가입 가능?</text>
+        </g>
+        <g>
+          <rect x="6" y="112" width="428" height="84" rx="12" class="f-surface"/>
+          <text x="22" y="159" class="lbl-acc">② 계약</text>
+          <text x="128" y="140" class="lbl-dim">소유자 본인 확인 · 소유자 명의 계좌</text>
+          <text x="128" y="162" class="lbl-dim">특약: 근저당 금지</text>
+          <text x="128" y="184" class="lbl-dim">특약: 보증 거절 시 계약 해제</text>
+        </g>
+        <g>
+          <rect x="6" y="214" width="428" height="84" rx="12" class="f-acc-soft"/>
+          <text x="22" y="261" class="lbl-acc">③ 잔금 당일</text>
+          <text x="128" y="242" class="lbl-dim">등기부 다시 발급 · 잔금 송금</text>
+          <text x="128" y="264" class="lbl">전입신고 · 확정일자</text>
+          <text x="128" y="286" class="lbl-dim">→ 다음 날 0시 대항력·우선변제권</text>
+        </g>
+        <g>
+          <rect x="6" y="316" width="428" height="62" rx="12" class="f-surface"/>
+          <text x="22" y="352" class="lbl-acc">④ 입주 후</text>
+          <text x="128" y="342" class="lbl-dim">반환보증 가입</text>
+          <text x="128" y="364" class="lbl-dim">주소 유지 (옮기면 대항력이 사라진다)</text>
+        </g>
+        <g>
+          <rect x="6" y="396" width="428" height="62" rx="12" class="f-surface"/>
+          <text x="22" y="432" class="lbl-acc">⑤ 만기 전</text>
+          <text x="128" y="422" class="lbl-dim">6~2개월 전 갱신·종료 통보</text>
+          <text x="128" y="444" class="lbl-dim">못 받으면 임차권등기명령 후 이사</text>
+        </g>
+        <path d="M60 95 V110" class="s-acc" marker-end="url(#ar2)"/>
+        <path d="M60 197 V212" class="s-acc" marker-end="url(#ar2)"/>
+        <path d="M60 299 V314" class="s-acc" marker-end="url(#ar2)"/>
+        <path d="M60 379 V394" class="s-acc" marker-end="url(#ar2)"/>
+      </svg>
+      <figcaption><b>그림 2. 보증금을 지키는 다섯 단계.</b> 가장 중요한 날은 ③ 잔금 당일이다. 등기부를 다시 보고, 돈을 보내고, 같은 날 전입신고와 확정일자를 마친다. 만기에 돈을 못 받고 이사해야 하면 <span class="term">임차권등기명령</span>을 먼저 받아 두어야 이사 뒤에도 대항력이 유지된다.</figcaption>
+    </figure>
+
+    <h3>전세보증금 반환보증</h3>
+    <p>앞의 장치들은 순위를 지켜 줄 뿐, 집값 자체가 모자라면 보증금을 채워 주지 못한다. 그 빈자리를 메우는 것이 <span class="term">전세보증금 반환보증</span><span class="en">(Deposit return guarantee)</span>이다. 공적 보증기관(주택도시보증공사 등)이나 보증보험사가 집주인 대신 보증금을 먼저 돌려주고, 나중에 집주인에게 받아 낸다. 보증료는 대략 보증금의 연 0.1~0.2% 수준이라(2026년 기준, 주택 유형·보증금·전세가율에 따라 다르다), 보증금 2억원이면 1년에 약 20만~40만원이다.</p>
+    <p>대신 아무 집이나 가입되지 않는다. (선순위 + 보증금)이 주택가격의 일정 비율(최근 기준 약 90%) 이하여야 하고, 주택가격을 매기는 방식도 정해져 있으며, 불법 건축물이나 근린생활시설은 막히는 경우가 많다. 그래서 <b>"보증 가입이 되는 집인가"를 계약 전에 확인하는 것 자체가 좋은 위험 점검</b>이 된다. 가입이 거절된다면 그 집은 보증기관이 보기에도 위험하다는 뜻이다.</p>
+    <div class="callout warn">
+      <strong>제도는 자주 바뀐다</strong>
+      전세사기 사태 이후 반환보증 가입 요건, 전세자금대출 규제, 소액임차인 최우선변제 금액(서울은 보증금 약 1억 6,500만원 이하일 때 약 5,500만원까지), 피해자 지원 제도가 여러 차례 바뀌었다. 이 장의 수치는 2026년 기준 대표값이다. 계약 전에 보증기관과 관할 지자체의 최신 기준을 확인한다.
+    </div>
+  </section>
+
+  <section id="fraud">
+    <h2>전세사기는 어떻게 짜이는가</h2>
+    <p>2020년대 초반 수도권 빌라와 오피스텔을 중심으로 대규모 전세사기가 잇따랐다. 피해자의 대부분은 20~30대였고, 처음 목돈을 맡긴 사람들이었다. 수법은 여러 가지지만 뼈대는 앞에서 본 구조의 약점을 그대로 파고든다.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 440 448" role="img" aria-label="전세사기의 대표 수법 세 가지와 막는 법">
+        <rect x="6" y="8" width="428" height="136" rx="12" class="f-bad-soft"/>
+        <text x="20" y="34" class="lbl-bad">(가) 깡통 동시진행</text>
+        <rect x="40" y="52" width="40" height="60" class="f-surface"/>
+        <text x="60" y="132" text-anchor="middle" class="lbl-dim">매매가</text>
+        <rect x="110" y="49" width="40" height="63" class="f-bad-soft"/>
+        <text x="130" y="132" text-anchor="middle" class="lbl-dim">전세가</text>
+        <text x="190" y="60" class="lbl-dim">시세를 부풀려 전세가를</text>
+        <text x="190" y="82" class="lbl-dim">매매가만큼 받고, 무자본</text>
+        <text x="190" y="104" class="lbl-dim">집주인에게 넘긴다</text>
+        <text x="190" y="130" class="lbl-acc">막기: 시세·전세가율·보증</text>
+        <rect x="6" y="156" width="428" height="136" rx="12" class="f-warn-soft"/>
+        <text x="20" y="182" class="lbl">(나) 잔금일 끼워 넣기</text>
+        <path d="M22 236 H168" class="s-axis"/>
+        <path d="M70 226 V246 M120 226 V246" class="s-axis"/>
+        <text x="45" y="216" text-anchor="middle" class="t-mono">D</text>
+        <text x="95" y="216" text-anchor="middle" class="t-mono">0시</text>
+        <text x="145" y="216" text-anchor="middle" class="t-mono">D+1</text>
+        <circle cx="45" cy="236" r="7" class="f-acc"/>
+        <rect x="51" y="252" width="14" height="14" class="f-bad"/>
+        <text x="190" y="210" class="lbl-dim">전입 효력이 생기기 전</text>
+        <text x="190" y="232" class="lbl-dim">같은 날 근저당을 잡거나</text>
+        <text x="190" y="254" class="lbl-dim">집을 다른 사람에게 판다</text>
+        <text x="190" y="280" class="lbl-acc">막기: 특약·당일 등기부</text>
+        <rect x="6" y="304" width="428" height="136" rx="12" class="f-acc2-soft"/>
+        <text x="20" y="330" class="lbl-acc2">(다) 권한 없는 계약</text>
+        <rect x="20" y="342" width="150" height="30" rx="6" class="f-elev"/>
+        <text x="95" y="362" text-anchor="middle" class="lbl-dim">등기상 소유자</text>
+        <text x="95" y="391" text-anchor="middle" class="lbl-bad">≠</text>
+        <rect x="20" y="398" width="150" height="30" rx="6" class="f-elev"/>
+        <text x="95" y="418" text-anchor="middle" class="lbl-dim">계약하러 온 사람</text>
+        <text x="190" y="358" class="lbl-dim">신탁된 집을 위탁자가,</text>
+        <text x="190" y="380" class="lbl-dim">위임장만 든 대리인이,</text>
+        <text x="190" y="402" class="lbl-dim">가짜 집주인이 계약한다</text>
+        <text x="190" y="428" class="lbl-acc">막기: 신분증·신탁원부</text>
+      </svg>
+      <figcaption><b>그림 3. 전세사기의 세 가지 뼈대.</b> (가)는 깡통전세를 일부러 만드는 것이고, (나)는 대항력이 생기는 시각의 틈을 노리는 것이며, (다)는 계약할 권한이 없는 사람과 계약하게 만드는 것이다. 막는 법은 모두 앞 절들에 이미 나왔다.</figcaption>
+    </figure>
+    <div class="callout warn">
+      <strong>이런 말이 들리면 멈춘다</strong>
+      "이 가격에 이런 집은 다시 안 나온다, 오늘 가계약금부터 넣자." "보증보험은 안 되지만 집주인이 부자라 괜찮다." "이사 지원금·이자 지원을 해 줄 테니 이 집으로 하자." "등기부는 우리가 봤으니 따로 안 봐도 된다." "보증금은 집주인 대신 이 계좌로 보내 달라." 서두르게 하는 말, 확인을 막는 말, 공짜를 주는 말은 모두 위험 신호다. 사기 수법이 보이는 공통 심리는 <a href="behavior.html">17장</a>에서 더 다룬다.
+    </div>
+  </section>
+
+  <section id="buy">
+    <h2>집을 산다는 것: 영수증에 찍히는 것들</h2>
+    <p>매매로 넘어가 보자. 저울에서는 매매의 연간 비용만 봤지만, 집을 사는 순간 한 번에 나가는 돈이 꽤 크다.</p>
+    <ul>
+      <li><span class="term">취득세</span><span class="en">(Acquisition tax)</span>: 집을 산 사람이 내는 지방세다. 1주택자 기준 6억원 이하 1%, 6억~9억원 구간은 1~3%로 서서히 오르고, 9억원 초과는 3%다. 여기에 지방교육세(취득세의 약 10%)가 붙고, 전용 85㎡를 넘으면 농어촌특별세가 더 붙는다. 다주택자는 세율이 훨씬 높다.</li>
+      <li><span class="term">중개보수</span><span class="en">(Brokerage fee)</span>: 공인중개사에게 내는 수수료다. 매매는 2억~9억원 구간에서 상한 0.4%처럼 금액 구간별 상한 요율이 정해져 있고, 상한 안에서 협의한다.</li>
+      <li><b>등기·법무 비용</b>: 소유권 이전 등기, 법무사 수수료, 국민주택채권 매입 할인비용, 인지세 등. 대략 집값의 0.1~0.3%다.</li>
+      <li><b>이사와 수리</b>: 이사 비용, 도배·장판, 인테리어. 오래된 집일수록 커진다.</li>
+      <li><span class="term">보유세</span><span class="en">(Holding tax)</span>: 집을 가진 동안 매년 내는 재산세와, 공시가격이 일정 금액을 넘으면 붙는 종합부동산세. 1주택자의 중저가 주택이라면 대략 시가의 0.1~0.2% 수준이다.</li>
+    </ul>
+    <p>아래 영수증에서 집값과 수리비를 바꿔 본다. 생애 처음 집을 사는 경우의 취득세 감면도 켜 본다.</p>
+
+    <div class="sim" id="sim-receipt">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>매수 영수증: 집값 말고 내는 돈</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="rc-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>집값 <output id="rc-p-out"></output></span><input type="range" id="rc-p" min="100000000" max="1500000000" step="10000000" value="500000000"></label>
+          <label class="ctrl"><span>수리·인테리어 <output id="rc-i-out"></output></span><input type="range" id="rc-i" min="0" max="50000000" step="1000000" value="10000000"></label>
+          <label class="check"><input type="checkbox" id="rc-first"> 생애최초 주택 취득세 감면(최대 200만원)</label>
+          <div class="btn-row"><button class="btn" id="rc-print">다시 출력</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">부대비용 합계</span><span class="v" id="rc-o-t">—</span></div>
+        <div class="stat"><span class="k">집값 대비</span><span class="v" id="rc-o-p">—</span></div>
+        <div class="stat"><span class="k">대출 50%일 때 필요한 현금</span><span class="v" id="rc-o-c">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 5억원 집의 부대비용은 약 2,000만원, 집값의 4%다. ② 집값을 6억원에서 9억원으로 올리며 취득세 줄이 얼마나 빨리 커지는지 본다. ③ 대출이 집값의 50%여도 필요한 현금은 집값의 절반보다 훨씬 많다. (1주택자, 전용 85㎡ 이하 가정. 세율·감면 요건·중개보수 상한은 2026년 기준 대략값이며 바뀔 수 있다. 중개보수에 부가가치세가 붙을 수 있다.)</div>
+    </div>
+
+    <p>집을 사고팔 때마다 집값의 3~5%가 사라진다고 보면 크게 틀리지 않는다. 2~3년마다 사고팔면 이 비용이 연 1~2%씩 비용을 늘리는 셈이라, 저울에서 매매가 이기려면 집값이 그만큼 더 올라야 한다. 집은 자주 사고팔수록 불리한 자산이다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>집값(1주택, 85㎡ 이하)</th><th class="num">취득세 + 지방교육세(약)</th><th class="num">중개보수 상한</th></tr></thead>
+      <tbody>
+        <tr><td>3억원</td><td class="num">330만원 (1.1%)</td><td class="num">120만원 (0.4%)</td></tr>
+        <tr><td>5억원</td><td class="num">550만원 (1.1%)</td><td class="num">200만원 (0.4%)</td></tr>
+        <tr><td>7.5억원</td><td class="num">1,650만원 (2.2%)</td><td class="num">300만원 (0.4%)</td></tr>
+        <tr><td>10억원</td><td class="num">3,300만원 (3.3%)</td><td class="num">500만원 (0.5%)</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="leverage">
+    <h2>대출과 레버리지: 집값의 10%가 내 돈의 25%가 된다</h2>
+    <p>집을 살 때는 대부분 <span class="term">주택담보대출</span><span class="en">(Mortgage)</span>을 받는다. 얼마나 빌릴 수 있는지는 두 가지 규제가 정한다(<a href="loan.html">10장</a>).</p>
+    <ul>
+      <li><span class="term">LTV</span><span class="en">(Loan to value, 담보인정비율)</span>: 집값 대비 대출 한도. 지역·주택 수·생애최초 여부에 따라 대략 40~80%이고, 대출 금액 자체에 상한이 붙기도 한다.</li>
+      <li><span class="term">DSR</span><span class="en">(Debt service ratio, 총부채원리금상환비율)</span>: 연소득 대비 한 해 동안 갚는 모든 대출의 원리금 비율. 은행권은 40%다(2026년 기준). 미래 금리 상승을 가정해 한도를 더 줄이는 스트레스 DSR도 적용된다.</li>
+    </ul>
+    <p>대출로 집을 사면 집값의 변화가 <b>내 돈에 몰려서</b> 나타난다. 5억원 집을 내 돈 2억원, 대출 3억원으로 샀다고 하자. 집값이 10%(5,000만원) 오르면 대출은 그대로이므로 5,000만원이 모두 내 몫이다. 내 돈 2억원 기준으로는 25% 수익이다. 10% 떨어지면 똑같이 25% 손실이다. 이것이 <span class="term">레버리지</span><span class="en">(Leverage)</span>, 지렛대 효과다.</p>
+    <div class="formula">$$\text{자기자본 수익률} = \frac{P\,g - (\text{이자} + \text{보유비용})}{P - L}, \qquad \text{배율} = \frac{P}{P-L} = \frac{1}{1-\text{LTV}}$$<div class="where">\(P\): 집값, \(L\): 대출, \(g\): 집값 변화율. LTV 60%면 집값 변화가 내 돈에는 2.5배로 나타난다.</div></div>
+    <p>아래에서 대출 비율을 바꾸고, 그래프 위 손잡이를 끌어 집값 변화를 바꿔 본다. 돋보기 안의 숫자가 내 돈에 일어난 일이다.</p>
+
+    <div class="sim" id="sim-lever">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>레버리지 확대경: 집값의 흔들림이 내 돈에서는 몇 배인가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="lv-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>대출 비율(LTV) <output id="lv-ltv-out"></output></span><input type="range" id="lv-ltv" min="0" max="80" step="5" value="60"></label>
+          <label class="ctrl"><span>1년 뒤 집값 변화 <output id="lv-chg-out"></output></span><input type="range" id="lv-chg" min="-30" max="30" step="1" value="10"></label>
+          <label class="check"><input type="checkbox" id="lv-cost"> 1년치 이자(4%)·보유비용(0.7%) 포함</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">내 돈(자기자본)</span><span class="v" id="lv-o-e">—</span></div>
+        <div class="stat"><span class="k">내 돈의 손익</span><span class="v" id="lv-o-g">—</span></div>
+        <div class="stat"><span class="k">자기자본 수익률</span><span class="v" id="lv-o-r">—</span></div>
+        <div class="stat"><span class="k">배율</span><span class="v" id="lv-o-m">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① LTV 0%에서 집값 +10%는 내 돈 +10%다. LTV 60%에서는 +25%가 된다. ② 비용을 켠다. 집값이 그대로여도 내 돈은 해마다 7.75%씩 줄어든다. ③ LTV 80%에서 집값을 −20%까지 끈다. 내 돈이 전부 사라지고(−100%), 그보다 더 떨어지면 집을 팔아도 빚이 남는다. (집값 5억원 가정. 세금·거래비용·원금 상환은 넣지 않았다.)</div>
+    </div>
+
+    <p>레버리지는 방향을 가리지 않는다. 집값이 오를 때 대출은 수익을 키우고, 내릴 때는 손실을 키운다. 그리고 집값이 그대로여도 이자는 꼬박꼬박 나간다. 비용을 켠 상태에서 손익이 0이 되는 집값 상승률을 찾아보면, 매매가 "비용 없는 저축"이 아니라는 것이 다시 보인다. 전세의 갭투자도 같은 구조다. 집주인의 대출이 은행 대신 세입자의 보증금일 뿐이고, 집값이 떨어지면 그 손실이 세입자의 보증금으로 넘어온다.</p>
+  </section>
+
+  <section id="pir">
+    <h2>집까지 걸리는 해</h2>
+    <p>집값이 소득에 비해 얼마나 높은지를 나타내는 지표가 <span class="term">PIR</span><span class="en">(Price to income ratio, 소득 대비 주택가격 비율)</span>이다. 집값을 연소득으로 나눈 값으로, "한 푼도 쓰지 않고 소득을 모두 모으면 몇 년 걸리는가"라는 뜻이다. 실제로는 소득의 일부만 모을 수 있고, 모으는 동안 집값도 움직인다. 아래 그래프는 모은 돈(초록)과 집을 사려면 필요한 자기 돈(빨강, 자기 돈 비율 + 부대비용 4%)이 시간에 따라 어떻게 움직이는지 보여 준다. 두 선이 만나는 해가 집을 살 수 있는 해다.</p>
+
+    <div class="sim" id="sim-pir">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>집까지 걸리는 해: 모으는 속도와 집값이 달아나는 속도</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="pr-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>지금 집값 <output id="pr-p-out"></output></span><input type="range" id="pr-p" min="200000000" max="1500000000" step="10000000" value="500000000"></label>
+          <label class="ctrl"><span>월 저축 <output id="pr-s-out"></output></span><input type="range" id="pr-s" min="300000" max="3000000" step="50000" value="1000000"></label>
+          <label class="ctrl"><span>집값 상승률(연) <output id="pr-g-out"></output></span><input type="range" id="pr-g" min="-2" max="8" step="0.25" value="3"></label>
+          <div class="seg" id="pr-d"><button data-value="0.3">자기 돈 30%</button><button data-value="0.5" class="on">50%</button><button data-value="1">100%</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">PIR (연소득 3,934만원 기준)</span><span class="v" id="pr-o-pir">—</span></div>
+        <div class="stat"><span class="k">지금 필요한 자기 돈</span><span class="v" id="pr-o-n">—</span></div>
+        <div class="stat"><span class="k">걸리는 해</span><span class="v" id="pr-o-y">—</span></div>
+        <div class="stat"><span class="k">그때의 집값</span><span class="v" id="pr-o-px">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(5억원, 월 100만원, 상승 3%, 자기 돈 50%)에서 약 19.5년이 걸린다. ② 상승률을 5%로 올린다. 40년 안에 닿지 않는다. 집값이 저축보다 빨리 달아난다. ③ 자기 돈 비율을 30%로 낮춘다. 빨리 닿지만 그만큼 큰 빚을 진다. (시작 자금 4,000만원, 저축은 연 3%로 굴리고 저축액은 해마다 3% 늘린다고 가정. 집값 상승률은 가정일 뿐 예측이 아니다.)</div>
+    </div>
+
+    <p>두 선의 경주는 결국 <b>저축이 불어나는 속도와 집값이 오르는 속도</b>의 싸움이다. 저축률을 높이는 것은 내가 정할 수 있지만, 집값 상승률은 정할 수 없다. 그래서 "언제 집을 사야 하는가"에는 정답이 없고, 정할 수 있는 것은 "얼마까지 빚을 질 수 있는가", "집값이 떨어져도 버틸 수 있는가"뿐이다. 앞의 레버리지 확대경이 그 질문의 답을 보여 준다.</p>
+  </section>
+
+  <section id="case">
+    <h2>한결의 결정: 서른 살의 이사</h2>
+    <p>2029년, 서른 살이 된 한결은 원룸(보증금 1,000만원, 월세 60만원)에서 3년을 살았다. 연봉은 해마다 3%씩 올라 약 3,934만원이 되었고, 월 100만원씩 모은 돈은 연 3%로 굴려 약 3,760만원이 되었다. <a href="saving.html">8장</a>에서 정한 비상금 600만원은 그대로 남겨 두기로 하니, 원룸 보증금 1,000만원을 돌려받으면 집에 쓸 수 있는 내 돈은 약 4,000만원이다. 회사와 가까운 투룸 빌라 하나가 눈에 들어왔다. 선택지는 셋이다.</p>
+    <ul>
+      <li><b>A. 원룸 유지</b>: 보증금 1,000만원, 월세 60만원.</li>
+      <li><b>B. 투룸 월세</b>: 보증금 1,000만원, 월세 80만원(중개보수·이사비 약 130만원).</li>
+      <li><b>C. 투룸 전세</b>: 보증금 2억원 = 내 돈 4,000만원 + 전세자금대출 1.6억원(연 4%, 만기일시). 시세 2.8억원, 선순위 근저당 없음, 반환보증 가입(연 0.15% 가정). 중개보수·이사비 약 160만원.</li>
+    </ul>
+    <p>매매는 이번 선택지에서 뺐다. 같은 집을 사려면 자기 돈 50%만 잡아도 1.4억원에 부대비용이 더 드는데, 한결의 돈은 4,000만원이다. 대출을 최대로 끌어 쓰면 앞의 확대경에서 본 것처럼 집값이 조금만 흔들려도 내 돈이 크게 흔들린다. 아래에서 세 선택지의 2년 누적 비용을 돌려 본다.</p>
+
+    <div class="sim" id="sim-hg">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>한결의 2년: 세 갈래의 누적 주거비</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="hg-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>전세대출 금리 <output id="hg-l-out"></output></span><input type="range" id="hg-l" min="2" max="8" step="0.25" value="4"></label>
+          <label class="ctrl"><span>예금금리(기회비용) <output id="hg-r-out"></output></span><input type="range" id="hg-r" min="1" max="6" step="0.25" value="3"></label>
+          <label class="check"><input type="checkbox" id="hg-ins" checked> 전세보증금 반환보증 가입</label>
+          <div class="seg" id="hg-sc"><button data-value="ok" class="on">정상 만기</button><button data-value="crash">집값 20% 하락·경매</button></div>
+          <div class="btn-row"><button class="btn primary" id="hg-play">2년 돌리기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">A 원룸 유지</span><span class="v" id="hg-o-a">—</span></div>
+        <div class="stat"><span class="k">B 투룸 월세</span><span class="v" id="hg-o-b">—</span></div>
+        <div class="stat"><span class="k">C 투룸 전세</span><span class="v" id="hg-o-c">—</span></div>
+        <div class="stat"><span class="k">C − B</span><span class="v" id="hg-o-d">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값에서 2년 비용은 A 1,500만원, B 2,110만원, C 1,740만원이다. ② 전세대출 금리를 올리며 C가 B를 넘어서는 금리를 찾는다(연 비용 기준 약 5.25%). ③ '집값 20% 하락·경매'를 고르고 반환보증을 끈다. 낙찰가율 80%면 보증금 중 2,080만원이 잘린다. (주거비만 비교한다. 대출 원금은 보증금으로 돌아오므로 비용에 넣지 않았다.)</div>
+    </div>
+
+    <div class="casefile">
+      <div class="tag"><b>LEDGER 한결</b><span>한결의 가계부 · 11장</span></div>
+      <h4>서른 살의 이사: 투룸 전세로 간다, 조건을 걸고</h4>
+      <p>예금 3%, 전세대출 4%에서 1년에 사라지는 돈은 A 원룸 유지 750만원, B 투룸 월세 990만원(<code>MN.housingCost</code>), C 투룸 전세 760만원에 반환보증료 약 30만원을 더한 약 790만원이다. 같은 투룸이라면 전세가 월세보다 1년에 약 200만원 싸고, 지금의 원룸보다 약 40만원 더 들 뿐이다. 매달 나가는 현금도 대출이자 약 53만원으로 지금 월세 60만원보다 적다. 이사 비용까지 넣은 2년 누적은 A 1,500만원, B 2,110만원, C 1,740만원이다.</p>
+      <p>한결은 C를 고르되 조건을 걸었다. ① 전세가율 약 71%(2억 ÷ 2.8억)이고 선순위 근저당이 없음을 등기부로 확인한다. ② 반환보증 가입이 거절되면 계약을 해제한다는 특약과, 잔금일 다음 날까지 근저당을 설정하지 않는다는 특약을 넣는다. ③ 잔금 당일 등기부를 다시 떼고, 같은 날 전입신고와 확정일자를 마친다. ④ 전세대출 금리가 약 5.25%를 넘으면 전세가 월세보다 비싸지므로, 만기 때 금리를 보고 다시 판단한다. 조건 중 하나라도 맞지 않으면 원룸에 1년 더 머문다.</p>
+      <div class="clue">
+        <div><b>이 장에서 정한 것</b>투룸 전세 2억원(내 돈 4,000만 + 대출 1.6억), 반환보증 가입. 매매는 아직 하지 않는다.</div>
+        <div><b>아직 남은 문제</b>전세대출 1.6억원은 변동금리라 금리가 오르면 비용이 는다. 비상금 600만원 말고 매달 쌓이는 저축은 어디에 둘 것인가.</div>
+        <div><b>다음 단계</b>12장: 매달 100만원 저축을 예금·채권·주식에 나눠 넣으면 30년 뒤 어떤 분포가 되는가.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>주거비는 '1년에 실제로 사라지는 돈'으로 비교한다. 돌려받는 보증금은 비용이 아니지만, 그 돈의 기회비용(예금 이자)과 대출이자는 비용이다.</li>
+      <li>전세는 세입자가 집주인에게 목돈을 무이자로 빌려주고 그 이자로 집세를 내는 계약이다. 전월세 전환율이 내 돈의 수익률보다 높으면 보증금을 늘리는 편이, 낮으면 월세가 싸다.</li>
+      <li>매매의 연간 비용은 내 돈의 기회비용 + 대출이자 + 보유세·유지비 − 집값 상승분이다. 매매가 싸 보이는 것은 대부분 집값 상승 가정 덕분이고, 상승률이 그 아래로 내려가면 가장 비싼 선택이 된다.</li>
+      <li>깡통전세는 (선순위 빚 + 보증금)이 집값에 바짝 붙은 집이다. 경매 낙찰가는 시세보다 낮아서, 집값이 그대로여도 보증금이 잘릴 수 있다. 근저당은 채권최고액으로 보수적으로 계산한다.</li>
+      <li>등기부등본은 표제부(용도), 갑구(소유자·압류·신탁), 을구(근저당)를 본다. 계약 전과 잔금 당일에 두 번 뗀다.</li>
+      <li>대항력은 전입신고 다음 날 0시, 우선변제권은 여기에 확정일자가 더해져야 생긴다. 근저당은 접수 즉시 효력이 생기므로 같은 날이면 은행이 앞선다. 특약과 반환보증으로 그 틈을 막는다.</li>
+      <li>집을 살 때는 집값의 약 3~5%가 취득세·중개보수·등기비·이사·수리로 사라지고, 대출은 집값 변화를 1/(1−LTV)배로 키워 내 돈에 얹는다. 세율·규제 수치는 해마다 바뀐다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>전세 2억원짜리 집을 보증금 1억원 반전세로 바꾸려 한다. 전월세 전환율이 연 5%라면 월세는 얼마인가?</p>
+        <div class="opts">
+          <button class="opt">약 25만원</button>
+          <button class="opt">약 50만원</button>
+          <button class="opt" data-correct>약 41.7만원</button>
+          <button class="opt">약 83.3만원</button>
+        </div>
+        <div class="quiz-exp">줄어든 보증금 1억원 × 5% ÷ 12 = 약 41.7만원이다(<code>MN.jeonseToRent(1e8, 0.05)</code>). 내 예금금리가 5%보다 낮다면, 보증금 1억원을 더 넣고 월세를 안 내는 편이 1년에 그 차이만큼 싸다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>3월 10일에 이사하고 전입신고와 확정일자를 마쳤다. 집주인이 같은 3월 10일 오후에 이 집을 담보로 근저당을 접수했다면?</p>
+        <div class="opts">
+          <button class="opt" data-correct>근저당이 앞선다. 세입자의 대항력은 3월 11일 0시에 생기기 때문이다.</button>
+          <button class="opt">세입자가 앞선다. 전입신고를 먼저 했기 때문이다.</button>
+          <button class="opt">같은 날이므로 둘은 같은 순위로 나눠 받는다.</button>
+          <button class="opt">확정일자를 받았으므로 날짜와 상관없이 세입자가 1순위다.</button>
+        </div>
+        <div class="quiz-exp">대항력은 입주와 전입신고를 마친 <b>다음 날 0시</b>에 생기고, 우선변제권도 그 시각보다 앞설 수 없다. 근저당은 접수 즉시 효력이 생긴다. 그래서 같은 날이면 은행이 앞선다. 잔금일 다음 날까지 근저당을 설정하지 않는다는 특약을 넣고, 잔금 직전 등기부를 다시 보는 이유다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>시세 3억원인 집에 선순위 근저당 1억원이 있고, 내 보증금은 2억원이다. 이 집이 경매에서 시세의 80%에 낙찰되면 돌려받는 보증금은? (경매 비용 등은 무시)</p>
+        <div class="opts">
+          <button class="opt">2억원 전부</button>
+          <button class="opt">1억 6,000만원</button>
+          <button class="opt">0원</button>
+          <button class="opt" data-correct>1억 4,000만원</button>
+        </div>
+        <div class="quiz-exp">낙찰가 3억 × 80% = 2.4억원. 선순위 근저당 1억원을 먼저 갚고 남은 1.4억원을 받는다. 6,000만원을 잃는다. 전세가율은 67%로 높지 않아 보이지만, (선순위 + 보증금) ÷ 시세는 100%다. 전세가율만 보면 안 되는 이유다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>5억원 집을 내 돈 2억원, 대출 3억원으로 샀다. 1년 뒤 집값이 10% 떨어졌다면 내 돈(자기자본)은 몇 % 줄었나? (이자·세금은 무시)</p>
+        <div class="opts">
+          <button class="opt">10%</button>
+          <button class="opt" data-correct>25%</button>
+          <button class="opt">40%</button>
+          <button class="opt">줄지 않는다. 팔지 않았으므로 손실이 아니다.</button>
+        </div>
+        <div class="quiz-exp">집값이 5,000만원 떨어지는데 대출 3억원은 그대로이므로 손실은 모두 내 돈 2억원이 떠안는다. 5,000만 ÷ 2억 = 25%. 배율은 1/(1−0.6) = 2.5배다. 팔지 않았어도 지금 팔면 받을 돈, 즉 순자산은 이미 줄었다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const tone = (c, s) => '<span class="' + c + '">' + s + "</span>";
+  const pctS = (v, d) => (v * 100).toFixed(d == null ? 1 : d) + "%";
+  const sg = (v) => (v > 0 ? "+" : v < 0 ? "−" : "");
+  function knob(ctx, x, y, P, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = "#fff"; ctx.stroke();
+    ctx.restore();
+  }
+  function hatch(ctx, x, y, w, h, color, alpha) {
+    if (w <= 0 || h <= 0) return;
+    ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
+    ctx.globalAlpha = alpha == null ? 0.25 : alpha; ctx.fillStyle = color; ctx.fillRect(x, y, w, h);
+    ctx.globalAlpha = 0.9; ctx.strokeStyle = color; ctx.lineWidth = 1.4;
+    for (let i = -h; i < w + h; i += 7) { ctx.beginPath(); ctx.moveTo(x + i, y + h); ctx.lineTo(x + i + h, y); ctx.stroke(); }
+    ctx.restore();
+  }
+  function txt(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = MB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color || MB.palette().text;
+    ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "middle";
+    ctx.fillText(s, x, y);
+  }
+  const wonShort = (v) => MB.won(v);
+
+  /* ---------------------------------------------------------- 1. 전월세 시소 */
+  (function () {
+    const J = 2e8;
+    let d = 1e7, ang = null, G = { x0: 0, x1: 1 };
+    const RT = MB.range("cv-rate", (v) => v.toFixed(1) + "%", () => { stats(); cv.redraw(); });
+    const DR = MB.range("cv-dep", (v) => v.toFixed(1) + "%", () => { stats(); cv.redraw(); });
+    const target = () => -((d - (J - d)) / J) * 0.17;
+    function stats() {
+      const conv = RT() / 100, dep = DR() / 100, m = MN.jeonseToRent(J - d, conv), y = m * 12 + d * dep;
+      MB.stat("cv-o-d", MB.won(d));
+      MB.stat("cv-o-m", MB.won(m));
+      MB.stat("cv-o-y", MB.won(y));
+      const diff = (conv - dep) * 1e7;
+      MB.stat("cv-o-t", Math.abs(diff) < 1 ? "차이 없음" : diff > 0 ? tone("ok-t", "연 " + MB.won(diff) + " 절약") : tone("bad-t", "연 " + MB.won(-diff) + " 손해"));
+    }
+    const cv = MB.canvas("#cv-cv", (ctx, w, h) => {
+      const P = MB.palette(), conv = RT() / 100, m = MN.jeonseToRent(J - d, conv);
+      if (ang == null) ang = target();
+      const cx = w / 2, by = h * 0.62, L = Math.min(w * 0.84, 560), Hmax = h * 0.4;
+      const ex = (s) => cx + s * (L / 2) * Math.cos(ang), ey = (s) => by + s * (L / 2) * Math.sin(ang);
+      // 받침
+      ctx.fillStyle = P.dim; ctx.globalAlpha = 0.5;
+      ctx.beginPath(); ctx.moveTo(cx, by + 4); ctx.lineTo(cx - 26, by + 46); ctx.lineTo(cx + 26, by + 46); ctx.closePath(); ctx.fill();
+      ctx.globalAlpha = 1;
+      // 판
+      ctx.save(); ctx.translate(cx, by); ctx.rotate(ang);
+      ctx.fillStyle = P.border; ctx.fillRect(-L / 2, -4, L, 8);
+      ctx.strokeStyle = P.axis; ctx.lineWidth = 1; ctx.strokeRect(-L / 2, -4, L, 8);
+      ctx.restore();
+      // 왼쪽: 보증금 벽돌
+      const bw = Math.min(78, L * 0.2), lx = ex(-1) + bw * 0.1, ly = ey(-1) - 4;
+      const dh = (d / J) * Hmax, blocks = Math.round(d / 1e7);
+      ctx.fillStyle = P.accent; ctx.globalAlpha = 0.85; ctx.fillRect(lx, ly - dh, bw, dh); ctx.globalAlpha = 1;
+      ctx.strokeStyle = P.bg; ctx.lineWidth = 1;
+      const bh = Hmax / 20;
+      for (let i = 1; i < blocks; i++) { ctx.beginPath(); ctx.moveTo(lx, ly - i * bh); ctx.lineTo(lx + bw, ly - i * bh); ctx.stroke(); }
+      txt(ctx, "보증금", lx + bw / 2, ly - dh - 26, { align: "center", color: P.dim });
+      txt(ctx, MB.won(d), lx + bw / 2, ly - dh - 10, { align: "center", weight: 700 });
+      // 오른쪽: 월세 동전(10만원 = 1개)
+      const rx = ex(1) - bw * 0.6, ry = ey(1) - 4, coins = Math.round(m / 1e5), ch = Math.min(7, Hmax / Math.max(10, coins));
+      for (let i = 0; i < coins; i++) {
+        const yy = ry - i * ch - ch / 2;
+        ctx.beginPath(); ctx.ellipse(rx, yy, bw * 0.38, ch * 0.75, 0, 0, TAU);
+        ctx.fillStyle = P.accent2; ctx.fill(); ctx.strokeStyle = P.bg; ctx.lineWidth = 1; ctx.stroke();
+      }
+      const top = ry - coins * ch;
+      txt(ctx, "월세", rx, top - 26, { align: "center", color: P.dim });
+      txt(ctx, MB.won(m), rx, top - 10, { align: "center", weight: 700, color: P.bad });
+      // 아래 손잡이 트랙
+      const ty = h - 22, x0 = 34, x1 = w - 34;
+      G = { x0, x1, ty };
+      ctx.strokeStyle = P.border; ctx.lineWidth = 5; ctx.lineCap = "round";
+      ctx.beginPath(); ctx.moveTo(x0, ty); ctx.lineTo(x1, ty); ctx.stroke();
+      const kx = x0 + (d / J) * (x1 - x0);
+      ctx.strokeStyle = P.accent; ctx.beginPath(); ctx.moveTo(x0, ty); ctx.lineTo(kx, ty); ctx.stroke(); ctx.lineCap = "butt";
+      txt(ctx, "월세만", x0, ty - 14, { size: 11, color: P.dim });
+      txt(ctx, "전세 2억", x1, ty - 14, { size: 11, color: P.dim, align: "right" });
+      knob(ctx, kx, ty, P, 8);
+      txt(ctx, "전환율 " + (conv * 100).toFixed(1) + "% · 동전 1개 = 월 10만원", 12, 16, { size: 11, color: P.dim });
+    }, { aspect: 0.6, minHeight: 300, maxHeight: 380 });
+    MB.drag(cv.canvas, { move(x) { d = MB.clamp(Math.round(((x - G.x0) / (G.x1 - G.x0)) * J / 5e6) * 5e6, 0, J); stats(); } });
+    MB.loop(cv.canvas, (dt) => {
+      const t = target();
+      if (ang == null) return;
+      if (Math.abs(ang - t) > 1e-4) { ang += (t - ang) * Math.min(1, dt * 7); cv.redraw(); }
+    });
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 2. 주거비 저울 */
+  (function () {
+    const base = { price: 3e8, jeonse: 2e8, deposit: 1e7, rent: 8e5, loanRatio: 0.5, jeonseLoan: 1.6e8, holdTax: 0.002, upkeep: 0.005 };
+    let G = null;
+    const R = MB.range("hc-r", (v) => v.toFixed(2) + "%", () => cv.redraw());
+    const L = MB.range("hc-l", (v) => v.toFixed(2) + "%", () => cv.redraw());
+    const Gg = MB.range("hc-g", (v) => (v > 0 ? "+" : "") + v.toFixed(2) + "%", () => cv.redraw());
+    const cost = (r, l, g) => MN.housingCost(Object.assign({}, base, { rate: r, loanRate: l, appreciation: g }));
+    const cv = MB.canvas("#hc-cv", (ctx, w, h) => {
+      const P = MB.palette(), r = R() / 100, l = L() / 100, g = Gg() / 100, c = cost(r, l, g);
+      const p = base.price, own = p * (1 - base.loanRatio), loan = p * base.loanRatio;
+      const rows = [
+        { name: "월세", net: c.rent, parts: [[base.rent * 12, P.bad], [base.deposit * r, P.warn]] },
+        { name: "전세", net: c.jeonse, parts: [[(base.jeonse - base.jeonseLoan) * r, P.warn], [base.jeonseLoan * l, P.bad]] },
+        { name: "매매", net: c.buy, parts: [[own * r, P.warn], [loan * l, P.bad], [p * (base.holdTax + base.upkeep), P.accent2]], gain: p * g },
+      ];
+      rows.forEach((o) => { o.pos = o.parts.reduce((s, q) => s + q[0], 0); });
+      const best = rows.reduce((a, b) => (b.net < a.net ? b : a));
+      const lo = Math.min(0, ...rows.map((o) => o.net)), hi = Math.max(...rows.map((o) => Math.max(o.pos, o.pos - (o.gain || 0))));
+      const bx0 = 50, bx1 = w - 92, X = (v) => bx0 + ((v - lo) / (hi - lo || 1)) * (bx1 - bx0);
+      const top = 16, rowH = 40;
+      ctx.strokeStyle = P.axis; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(X(0), top - 4); ctx.lineTo(X(0), top + rowH * 3 - 8); ctx.stroke();
+      rows.forEach((o, i) => {
+        const y = top + i * rowH, bh = 22;
+        txt(ctx, o.name, 8, y + bh / 2, { weight: o === best ? 800 : 500, color: o === best ? P.accent : P.text, size: 13 });
+        let x = 0;
+        o.parts.forEach(([v, col]) => { ctx.fillStyle = col; ctx.globalAlpha = 0.85; ctx.fillRect(X(x), y, Math.max(0, X(x + v) - X(x)), bh); x += v; });
+        ctx.globalAlpha = 1;
+        if (o.gain) {
+          if (o.gain > 0) hatch(ctx, X(o.pos - o.gain), y - 3, X(o.pos) - X(o.pos - o.gain), bh + 6, P.ok, 0.3);
+          else hatch(ctx, X(o.pos), y, X(o.pos - o.gain) - X(o.pos), bh, P.bad, 0.3);
+          ctx.strokeStyle = P.text; ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.moveTo(X(o.net), y - 5); ctx.lineTo(X(o.net), y + bh + 5); ctx.stroke();
+        }
+        txt(ctx, "연 " + MB.wonAxis(o.net), w - 8, y + bh / 2, { align: "right", weight: 700, size: 13, color: o === best ? P.accent : P.text });
+      });
+      // 아래: 상승률에 따른 연 비용
+      const box = { x: 58, y: top + rowH * 3 + 22, w: w - 58 - 18, h: h - (top + rowH * 3 + 22) - 46 };
+      const noG = c.buy + p * g, at = (gg) => noG - p * gg;
+      const ymin = Math.min(0, at(0.08)) * 1.1, ymax = Math.max(c.rent, c.jeonse, at(-0.04)) * 1.08;
+      const ch = MB.chart(ctx, box, {
+        x: [-4, 8], y: [ymin, ymax], yFmt: MB.wonAxis, xFmt: (v) => v + "%", xTicks: [-4, -2, 0, 2, 4, 6, 8], xLabel: "집값 상승률 (연)",
+        series: [
+          { data: [[-4, c.rent], [8, c.rent]], color: P.blue, width: 2 },
+          { data: [[-4, c.jeonse], [8, c.jeonse]], color: P.accent2, width: 2 },
+          { data: [[-4, at(-0.04)], [8, at(0.08)]], color: P.accent, width: 2.4 },
+        ],
+        vlines: [{ x: g * 100, color: P.faint }],
+        hlines: ymin < 0 ? [{ y: 0, color: P.axis, dash: [] }] : [],
+      });
+      G = ch;
+      const yr = ch.Y(c.rent), yj = ch.Y(c.jeonse);
+      txt(ctx, "월세", box.x + box.w - 4, yr - 9, { align: "right", size: 11, color: P.blue, weight: 700 });
+      txt(ctx, "전세", box.x + box.w - 4, Math.abs(yr - yj) < 16 && yj > yr ? yj + 10 : yj - 9, { align: "right", size: 11, color: P.accent2, weight: 700 });
+      txt(ctx, "매매", box.x + 6, ch.Y(at(-0.04)) + 12, { size: 11, color: P.accent, weight: 700 });
+      const gJ = (noG - c.jeonse) / p;
+      if (gJ > -0.04 && gJ < 0.08) { ctx.fillStyle = P.accent2; ctx.beginPath(); ctx.arc(ch.X(gJ * 100), ch.Y(c.jeonse), 4, 0, TAU); ctx.fill(); }
+      knob(ctx, ch.X(g * 100), ch.Y(c.buy), P, 7);
+      MB.stat("hc-o-r", MB.won(c.rent));
+      MB.stat("hc-o-j", MB.won(c.jeonse));
+      MB.stat("hc-o-b", tone(c.buy <= Math.min(c.rent, c.jeonse) ? "ok-t" : c.buy > Math.max(c.rent, c.jeonse) ? "bad-t" : "warn-t", MB.won(c.buy)));
+      MB.stat("hc-o-be", "&gt; " + (gJ * 100).toFixed(2) + "%");
+    }, { height: 420 });
+    MB.drag(cv.canvas, {
+      move(x, y) {
+        if (!G || y < G.box.y - 20) return;
+        const v = -4 + ((x - G.box.x) / G.box.w) * 12;
+        Gg.set(MB.clamp(Math.round(v * 4) / 4, -4, 8));
+      },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 3. 깡통전세 */
+  (function () {
+    const P0 = 2.8e8, YMAX = 5e8;
+    let price = P0, aDisp = null, G = null;
+    const parts = [];
+    const SR = MB.range("gp-sr", (v) => MB.won(v), () => stats());
+    const DP = MB.range("gp-dep", (v) => MB.won(v), () => stats());
+    const BID = MB.range("gp-bid", (v) => v + "%", () => stats());
+    function calc() {
+      const sr = SR(), dep = DP(), A = price * BID() / 100;
+      const back = MB.clamp(A - sr, 0, dep);
+      return { sr, dep, A, back, loss: dep - back };
+    }
+    function stats() {
+      const c = calc(), r1 = c.dep / price, r2 = (c.sr + c.dep) / price;
+      MB.stat("gp-o-r", tone(r1 > 0.8 ? "bad-t" : r1 > 0.7 ? "warn-t" : "ok-t", pctS(r1)));
+      MB.stat("gp-o-l", tone(r2 > 0.8 ? "bad-t" : r2 > 0.7 ? "warn-t" : "ok-t", pctS(r2)));
+      MB.stat("gp-o-b", MB.won(c.back));
+      MB.stat("gp-o-x", c.loss > 0 ? tone("bad-t", "−" + MB.won(c.loss)) : tone("ok-t", "0원"));
+    }
+    const cv = MB.canvas("#gp-cv", (ctx, w, h) => {
+      const P = MB.palette(), c = calc();
+      if (aDisp == null) aDisp = c.A;
+      const ch = MB.chart(ctx, { x: 58, y: 34, w: w - 58 - 12, h: h - 34 - 34 }, { x: [0, 1], y: [0, YMAX], xTicks: [], yFmt: MB.wonAxis });
+      G = ch;
+      const B = ch.box, Y = ch.Y, bw = Math.min(84, B.w * 0.22);
+      const cxs = [B.x + B.w * 0.17, B.x + B.w * 0.5, B.x + B.w * 0.83];
+      // 시세
+      ctx.fillStyle = P.accent; ctx.globalAlpha = 0.22; ctx.fillRect(cxs[0] - bw / 2, Y(price), bw, Y(0) - Y(price)); ctx.globalAlpha = 1;
+      ctx.strokeStyle = P.accent; ctx.lineWidth = 1.5; ctx.strokeRect(cxs[0] - bw / 2, Y(price), bw, Y(0) - Y(price));
+      ctx.setLineDash([4, 4]); ctx.strokeStyle = P.faint; ctx.beginPath(); ctx.moveTo(cxs[0] - bw / 2 - 6, Y(P0)); ctx.lineTo(cxs[0] + bw / 2 + 6, Y(P0)); ctx.stroke(); ctx.setLineDash([]);
+      if (Math.abs(price - P0) > 2e6) txt(ctx, "계약 때", cxs[0] + bw / 2 + 4, Y(P0) - 8, { size: 10, color: P.faint });
+      txt(ctx, MB.wonAxis(price), cxs[0], Y(price) - 24, { align: "center", weight: 700, size: 12 });
+      // 낙찰가
+      ctx.fillStyle = P.accent; ctx.globalAlpha = 0.5; ctx.fillRect(cxs[1] - bw / 2, Y(aDisp), bw, Y(0) - Y(aDisp)); ctx.globalAlpha = 1;
+      txt(ctx, MB.wonAxis(aDisp), cxs[1], Y(aDisp) - 10, { align: "center", weight: 700, size: 12 });
+      // 선순위 + 보증금
+      const x3 = cxs[2] - bw / 2;
+      ctx.fillStyle = P.dim; ctx.globalAlpha = 0.45; ctx.fillRect(x3, Y(c.sr), bw, Y(0) - Y(c.sr)); ctx.globalAlpha = 1;
+      if (c.sr > 0 && Y(0) - Y(c.sr) > 16) txt(ctx, "선순위", cxs[2], (Y(0) + Y(c.sr)) / 2, { align: "center", size: 11, color: P.text });
+      const cut = MB.clamp(aDisp, c.sr, c.sr + c.dep);
+      ctx.fillStyle = P.ok; ctx.globalAlpha = 0.75; ctx.fillRect(x3, Y(cut), bw, Y(c.sr) - Y(cut)); ctx.globalAlpha = 1;
+      hatch(ctx, x3, Y(c.sr + c.dep), bw, Y(cut) - Y(c.sr + c.dep), P.bad, 0.3);
+      ctx.strokeStyle = P.axis; ctx.lineWidth = 1; ctx.strokeRect(x3, Y(c.sr + c.dep), bw, Y(c.sr) - Y(c.sr + c.dep));
+      txt(ctx, "보증금", cxs[2], Y(c.sr + c.dep) - 10, { align: "center", size: 12, weight: 700 });
+      // 자르는 선
+      ctx.strokeStyle = P.bad; ctx.lineWidth = 2; ctx.setLineDash([6, 4]);
+      ctx.beginPath(); ctx.moveTo(cxs[1] - bw / 2, Y(aDisp)); ctx.lineTo(x3 + bw + 6, Y(aDisp)); ctx.stroke(); ctx.setLineDash([]);
+      // 부서지는 조각
+      ctx.fillStyle = P.bad;
+      parts.forEach((q) => { ctx.globalAlpha = Math.max(0, q.life); ctx.fillRect(q.x, q.y, q.s, q.s); });
+      ctx.globalAlpha = 1;
+      // 열 이름
+      const lab = w < 420 ? ["시세", "낙찰가", "빚+보증금"] : ["시세", "경매 낙찰가", "선순위 + 보증금"];
+      lab.forEach((s, i) => txt(ctx, s, cxs[i], h - 16, { align: "center", size: 12, color: P.dim }));
+      knob(ctx, cxs[0], Y(price), P, 8);
+      G.cut = { x3, bw, top: Y(c.sr + c.dep), bot: Y(cut), loss: c.loss };
+    }, { aspect: 0.62, minHeight: 320, maxHeight: 420 });
+    MB.drag(cv.canvas, { move(x, y) { if (!G) return; const v = G.box.y + G.box.h - y; price = MB.clamp(Math.round((v / G.box.h) * YMAX / 5e6) * 5e6, 1e8, 4.5e8); stats(); } });
+    MB.loop(cv.canvas, (dt) => {
+      const c = calc();
+      if (aDisp == null) aDisp = c.A;
+      aDisp += (c.A - aDisp) * Math.min(1, dt * 9);
+      if (G && G.cut && G.cut.loss > 0 && G.cut.bot - G.cut.top > 2 && Math.random() < 0.6) {
+        parts.push({ x: G.cut.x3 + Math.random() * G.cut.bw, y: G.cut.top + Math.random() * (G.cut.bot - G.cut.top), vy: 0, vx: (Math.random() - 0.3) * 30, s: 2 + Math.random() * 3, life: 1 });
+      }
+      for (let i = parts.length - 1; i >= 0; i--) {
+        const q = parts[i]; q.vy += 300 * dt; q.y += q.vy * dt; q.x += q.vx * dt; q.life -= dt * 0.9;
+        if (q.life <= 0 || q.y > cv.h) parts.splice(i, 1);
+      }
+      cv.redraw();
+    });
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 4. 등기부 점검 */
+  (function () {
+    const H = {
+      a: {
+        name: "빌라 A", price: 3e8, dep: 1.9e8, sr: 0,
+        title: [{ t: "서울특별시 ○○구 ○○동 12-3, 제3층 제301호", k: 1 }, { t: "철근콘크리트조 · 다세대주택 · 전용 42.5㎡", k: 1 }],
+        gap: [{ t: "2017.04.12 소유권이전 · 매매 · 소유자 김○○", k: 2 }],
+        eul: [{ t: "2017.04.12 근저당권설정 · 채권최고액 9,600만원 · 근저당권자 ○○은행", k: 5, del: true }, { t: "2023.08.21 1번 근저당권설정 등기말소 · 변제", k: 5 }],
+        f: {
+          1: ["ok", "주소·호수가 계약서와 같고 용도가 다세대주택(주거용)이다."],
+          2: ["ok", "소유자 김○○가 2017년부터 소유했고, 계약에 본인이 신분증을 들고 나왔다."],
+          3: ["ok", "압류·가압류·경매개시결정 기록이 없다."],
+          4: ["ok", "신탁 등기가 없다."],
+          5: ["ok", "근저당이 있었지만 2023년에 말소되었다. 살아 있는 근저당은 없다."],
+          6: ["ok", "(0 + 1.9억) ÷ 3억 = 63%. 집값이 꽤 떨어져도 버틸 여유가 있다."],
+        },
+      },
+      b: {
+        name: "빌라 B", price: 2.8e8, dep: 2e8, sr: 1.2e8,
+        title: [{ t: "서울특별시 ○○구 △△동 45-6, 제2층 제202호", k: 1 }, { t: "철근콘크리트조 · 다세대주택 · 전용 38.1㎡", k: 1 }],
+        gap: [{ t: "2022.06.03 소유권이전 · 매매 · 소유자 이○○", k: 2, del: true }, { t: "2029.01.15 소유권이전 · 매매 · 소유자 박○○", k: 2 }],
+        eul: [{ t: "2029.01.15 근저당권설정 · 채권최고액 1억 2,000만원 · 근저당권자 △△저축은행", k: 5 }],
+        f: {
+          1: ["ok", "주소·호수와 용도(다세대주택)는 문제없다."],
+          2: ["warn", "소유자가 3개월 전에 바뀌었고, 같은 날 근저당이 잡혔다. 매매와 전세가 동시에 진행된 집일 수 있다."],
+          3: ["ok", "압류·가압류 기록은 없다."],
+          4: ["ok", "신탁 등기는 없다."],
+          5: ["bad", "채권최고액 1억 2,000만원의 근저당이 살아 있다. 내 보증금보다 앞선다."],
+          6: ["bad", "(1.2억 + 2억) ÷ 2.8억 = 114%. 집을 시세대로 팔아도 보증금을 다 돌려줄 수 없는 깡통전세다."],
+        },
+      },
+      c: {
+        name: "오피스텔 C", price: 2.4e8, dep: 1.8e8, sr: 0,
+        title: [{ t: "경기도 ○○시 ○○동 7-1, 제11층 제1105호", k: 1 }, { t: "철근콘크리트조 · 업무시설(오피스텔) · 전용 29.8㎡", k: 1 }],
+        gap: [{ t: "2021.03.02 소유권이전 · 매매 · 소유자 최○○", k: 2, del: true }, { t: "2021.03.02 소유권이전 · 신탁 · 수탁자 ○○신탁(주)", k: 4 }, { t: "2028.11.20 가압류 · 청구금액 3,000만원 · 채권자 정○○", k: 3 }],
+        eul: [{ t: "(기록 없음)", k: 5 }],
+        f: {
+          1: ["warn", "용도가 업무시설이다. 주거용으로 쓰고 전입신고가 가능한지, 반환보증 가입이 되는지 따로 확인해야 한다."],
+          2: ["bad", "등기상 소유자는 최○○가 아니라 신탁회사다. 계약하러 나온 최○○는 위탁자일 뿐이다."],
+          3: ["bad", "가압류가 걸려 있다. 집주인(또는 위탁자)에게 돈을 받을 사람이 있다는 뜻이다."],
+          4: ["bad", "신탁 등기가 있다. 신탁원부를 떼어 수탁자와 우선수익자의 동의 없이 맺은 임대차는 보호받지 못할 수 있다."],
+          5: ["warn", "을구에 근저당은 없지만, 신탁된 집은 대출이 신탁원부의 우선수익권으로 숨어 있을 수 있다."],
+          6: ["warn", "보증금만 보면 1.8억 ÷ 2.4억 = 75%다. 신탁 우선수익권과 가압류를 더하면 더 높다."],
+        },
+      },
+    };
+    const doc = document.getElementById("rg-doc"), find = document.getElementById("rg-find");
+    const boxes = [1, 2, 3, 4, 5, 6].map((i) => document.getElementById("rg-c" + i));
+    const house = MB.seg("rg-house", () => render());
+    const nums = ["①", "②", "③", "④", "⑤", "⑥"];
+    function line(o, on, h) {
+      const sev = on ? h.f[o.k][0] : "";
+      return '<div class="ln' + (o.del ? " del" : "") + (sev ? " hl-" + sev : "") + '">' + o.t + "</div>";
+    }
+    function render() {
+      const h = H[house()], on = boxes.map((b) => b.checked);
+      const sec = (name, sub, arr) => "<h5><span>" + name + "</span><span>" + sub + "</span></h5>" + arr.map((o) => line(o, on[o.k - 1], h)).join("");
+      doc.innerHTML = '<div class="reg"><div class="head"><span>등기사항전부증명서(가상) · ' + h.name + '</span><small>시세 ' + MB.won(h.price) + " · 내 보증금 " + MB.won(h.dep) + "</small></div>" +
+        sec("표제부", "건물의 표시", h.title) + sec("갑구", "소유권에 관한 사항", h.gap) + sec("을구", "소유권 이외의 권리", h.eul) + "</div>";
+      let n = 0, risk = 0, html = "";
+      on.forEach((v, i) => {
+        if (!v) return;
+        n++;
+        const [s, t] = h.f[i + 1];
+        if (s !== "ok") risk++;
+        html += '<div class="' + s + '"><b>' + nums[i] + "</b>" + t + "</div>";
+      });
+      if (!n) html = "<div>점검 항목을 체크하면 판단이 여기에 나온다.</div>";
+      find.innerHTML = html;
+      MB.stat("rg-o-n", n + " / 6");
+      MB.stat("rg-o-r", risk ? tone("bad-t", risk + "개") : n ? tone("ok-t", "0개") : "—");
+      let v = "—";
+      if (n === 6) {
+        const bad = [1, 2, 3, 4, 5, 6].some((k) => h.f[k][0] === "bad");
+        v = bad ? tone("bad-t", "계약하지 않는다") : risk ? tone("warn-t", "추가 확인") : tone("ok-t", "기본 점검 통과");
+      } else if (n) v = "점검 중";
+      MB.stat("rg-o-v", v);
+    }
+    boxes.forEach((b) => b.addEventListener("change", render));
+    document.getElementById("rg-all").addEventListener("click", () => { boxes.forEach((b) => (b.checked = true)); render(); });
+    document.getElementById("rg-none").addEventListener("click", () => { boxes.forEach((b) => (b.checked = false)); render(); });
+    render();
+  })();
+
+  /* ---------------------------------------------------------- 5. 순위 타임라인 */
+  (function () {
+    let tD = 0, bD = 0, which = null, G = null;
+    const mode = MB.seg("od-mode", () => cv.redraw());
+    const dayName = (k) => (k === 0 ? "잔금일" : k > 0 ? "D+" + k : "D−" + -k);
+    const cv = MB.canvas("#od-cv", (ctx, w, h) => {
+      const P = MB.palette(), md = mode();
+      const x0 = 12, x1 = w - 12, dayW = (x1 - x0) / 6, X = (t) => x0 + (t + 2) * dayW;
+      const yT = 92, yB = 168;
+      G = { X, dayW, x0, yT, yB };
+      for (let k = -2; k <= 3; k++) {
+        if (k % 2 === 0) { ctx.fillStyle = P.grid; ctx.fillRect(X(k), 26, dayW, yB + 26 - 26); }
+        txt(ctx, dayName(k), X(k + 0.5), 14, { align: "center", size: 11, color: k === 0 ? P.accent : P.dim, weight: k === 0 ? 700 : 500 });
+      }
+      ctx.setLineDash([3, 4]); ctx.strokeStyle = P.faint; ctx.lineWidth = 1;
+      for (let k = -1; k <= 3; k++) { ctx.beginPath(); ctx.moveTo(X(k), 26); ctx.lineTo(X(k), yB + 26); ctx.stroke(); }
+      ctx.setLineDash([]);
+      txt(ctx, "0시", X(1), yB + 34, { align: "center", size: 10, color: P.faint });
+      // 레인
+      [[yT, "세입자 (전입신고·확정일자)"], [yB, "집주인 (근저당 접수)"]].forEach(([y, s]) => {
+        ctx.strokeStyle = P.border; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.stroke();
+        txt(ctx, s, x0 + 2, y - 24, { size: 11, color: P.dim });
+      });
+      const hasA = md !== "fix", hasP = md === "both";
+      const tEff = tD + 1, bEff = bD + 0.5, tenantFirst = hasA && tEff < bEff;
+      // 세입자 효력 화살표
+      if (hasA) {
+        ctx.strokeStyle = P.accent; ctx.lineWidth = 1.8;
+        ctx.beginPath(); ctx.moveTo(X(tD + 0.5) + 9, yT); ctx.quadraticCurveTo(X(tD + 0.75), yT - 26, X(tEff), yT - 2); ctx.stroke();
+        ctx.fillStyle = P.accent; ctx.beginPath(); ctx.moveTo(X(tEff), yT); ctx.lineTo(X(tEff) - 7, yT - 8); ctx.lineTo(X(tEff) + 3, yT - 9); ctx.closePath(); ctx.fill();
+        ctx.strokeStyle = P.accent; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(X(tEff), yT - 6); ctx.lineTo(X(tEff), yT + 6); ctx.stroke();
+        txt(ctx, "효력", X(tEff) + 4, yT + 14, { size: 10, color: P.accent });
+      }
+      // 은행 효력
+      ctx.strokeStyle = P.bad; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(X(bEff), yB - 10); ctx.lineTo(X(bEff), yB + 10); ctx.stroke();
+      // 표식
+      knob(ctx, X(tD + 0.5), yT, P, 9);
+      ctx.fillStyle = P.bad; ctx.fillRect(X(bD + 0.5) - 8, yB - 8, 16, 16);
+      ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; ctx.strokeRect(X(bD + 0.5) - 8, yB - 8, 16, 16);
+      txt(ctx, md === "fix" ? "확정일자" : md === "move" ? "전입" : "전입+확정", X(tD + 0.5), yT + 22, { align: "center", size: 11, weight: 700 });
+      txt(ctx, "근저당", X(bD + 0.5), yB + 22, { align: "center", size: 11, weight: 700, color: P.bad });
+      // 순위 상자
+      const ry = yB + 48, rh = h - ry - 30, half = (x1 - x0 - 10) / 2;
+      const first = tenantFirst ? (hasP ? "내 보증금" : "내 대항력") : "은행 근저당";
+      const second = tenantFirst ? "은행 근저당" : (hasP ? "내 보증금" : hasA ? "대항력 없음" : "순위 없음");
+      [[first, tenantFirst ? P.ok : P.bad], [second, tenantFirst ? P.bad : P.dim]].forEach(([s, col], i) => {
+        const bx = x0 + i * (half + 10);
+        ctx.fillStyle = col; ctx.globalAlpha = 0.14; ctx.fillRect(bx, ry, half, rh); ctx.globalAlpha = 1;
+        ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.strokeRect(bx, ry, half, rh);
+        txt(ctx, (i + 1) + "순위", bx + 10, ry + rh / 2, { size: 12, color: P.dim });
+        txt(ctx, s, bx + half - 10, ry + rh / 2, { size: 13, weight: 700, align: "right", color: col === P.dim ? P.dim : P.text });
+      });
+      const tm = (k) => (k === 0 ? "잔금일 다음 날" : dayName(k) + " 다음 날") + " 0시";
+      MB.stat("od-o-a", hasA ? tm(tD) : tone("bad-t", "없음"));
+      MB.stat("od-o-p", hasP ? tm(tD) : tone("bad-t", "없음"));
+      MB.stat("od-o-r", tenantFirst ? tone("ok-t", "세입자") : tone("bad-t", "은행"));
+    }, { height: 300 });
+    MB.drag(cv.canvas, {
+      start(x, y) { which = Math.abs(y - G.yT) < Math.abs(y - G.yB) ? "t" : "b"; },
+      move(x) {
+        if (!G || !which) return;
+        const k = MB.clamp(Math.round((x - G.x0) / G.dayW - 2 - 0.5), -2, 3);
+        if (which === "t") tD = k; else bD = k;
+        cv.redraw();
+      },
+      end() { which = null; },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 6. 매수 영수증 */
+  (function () {
+    let printed = 0, lastN = 0;
+    const PR = MB.range("rc-p", (v) => MB.won(v), () => { cv.redraw(); });
+    const IN = MB.range("rc-i", (v) => MB.won(v), () => { cv.redraw(); });
+    const first = document.getElementById("rc-first");
+    first.addEventListener("change", () => { printed = 0; });
+    document.getElementById("rc-print").addEventListener("click", () => { printed = 0; });
+    const acq = (p) => { const r = p <= 6e8 ? 0.01 : p <= 9e8 ? ((p / 1e8) * 2 / 3 - 3) / 100 : 0.03; return p * r * 1.1; };
+    const broker = (p) => (p < 5e7 ? Math.min(p * 0.006, 25e4) : p < 2e8 ? Math.min(p * 0.005, 8e5) : p < 9e8 ? p * 0.004 : p < 12e8 ? p * 0.005 : p < 15e8 ? p * 0.006 : p * 0.007);
+    function lines() {
+      const p = PR(), tax = acq(p), L = [];
+      L.push({ k: "집값", v: p, b: true });
+      L.push({ sep: true });
+      L.push({ k: "취득세·지방교육세(약)", v: tax });
+      if (first.checked) L.push({ k: "생애최초 감면", v: -Math.min(2e6, tax), ok: true });
+      L.push({ k: "중개보수(상한)", v: broker(p) });
+      L.push({ k: "등기·법무 비용(약)", v: p * 0.002 });
+      L.push({ k: "이사", v: 1.5e6 });
+      L.push({ k: "수리·인테리어", v: IN() });
+      const sum = L.filter((o) => o.v != null && !o.b).reduce((s, o) => s + o.v, 0);
+      L.push({ sep: true });
+      L.push({ k: "부대비용 합계", v: sum, b: true, total: true });
+      L.push({ k: "집값 대비", s: pctS(sum / p, 1) });
+      L.push({ sep: true });
+      L.push({ k: "매년: 보유세(약 0.15%)", v: p * 0.0015, dim: true });
+      return { L, sum, p };
+    }
+    const cv = MB.canvas("#rc-cv", (ctx, w, h) => {
+      const P = MB.palette(), { L, sum, p } = lines();
+      if (L.length !== lastN) { lastN = L.length; }
+      const n = Math.min(L.length, printed), lh = 24, pw = Math.min(360, w - 32), px = (w - pw) / 2, py = 12;
+      const ph = 58 + n * lh + 26;
+      ctx.save();
+      ctx.shadowColor = "rgba(0,0,0,0.18)"; ctx.shadowBlur = 10; ctx.shadowOffsetY = 2;
+      ctx.fillStyle = MB.isDark() ? "#1b2333" : "#fffdf7";
+      ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px + pw, py); ctx.lineTo(px + pw, py + ph);
+      const zz = 10;
+      for (let x = px + pw; x > px; x -= zz) { ctx.lineTo(x - zz / 2, py + ph - 6); ctx.lineTo(Math.max(px, x - zz), py + ph); }
+      ctx.closePath(); ctx.fill();
+      ctx.restore();
+      txt(ctx, "매수 영수증 (가정)", px + pw / 2, py + 22, { align: "center", size: 15, weight: 800 });
+      txt(ctx, "1주택 · 전용 85㎡ 이하 · 2026년 기준 대략값", px + pw / 2, py + 42, { align: "center", size: 11, color: P.dim });
+      for (let i = 0; i < n; i++) {
+        const o = L[i], y = py + 58 + i * lh + lh / 2;
+        if (o.sep) { ctx.setLineDash([3, 3]); ctx.strokeStyle = P.faint; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(px + 14, y); ctx.lineTo(px + pw - 14, y); ctx.stroke(); ctx.setLineDash([]); continue; }
+        const col = o.ok ? P.ok : o.dim ? P.dim : o.total ? P.bad : P.text;
+        txt(ctx, o.k, px + 16, y, { size: 13, weight: o.b ? 700 : 500, color: o.dim ? P.dim : P.text });
+        txt(ctx, o.s || MB.won(o.v), px + pw - 16, y, { size: 13, weight: o.b ? 800 : 600, align: "right", color: col });
+      }
+      MB.stat("rc-o-t", MB.won(sum));
+      MB.stat("rc-o-p", pctS(sum / p, 1));
+      MB.stat("rc-o-c", MB.won(p * 0.5 + sum));
+    }, { height: 440 });
+    MB.loop(cv.canvas, (dt) => {
+      const N = lines().L.length;
+      if (printed < N) { printed = Math.min(N, printed + dt * 14); cv.redraw(); }
+    });
+  })();
+
+  /* ---------------------------------------------------------- 7. 레버리지 확대경 */
+  (function () {
+    const PRICE = 5e8, RATE = 0.04, HOLD = 0.007;
+    let G = null;
+    const LT = MB.range("lv-ltv", (v) => v + "%", () => cv.redraw());
+    const CH = MB.range("lv-chg", (v) => (v > 0 ? "+" : "") + v + "%", () => cv.redraw());
+    const cost = document.getElementById("lv-cost");
+    cost.addEventListener("change", () => cv.redraw());
+    const ret = (ltv, g) => { const eq = PRICE * (1 - ltv), c = cost.checked ? PRICE * ltv * RATE + PRICE * HOLD : 0; return (PRICE * g - c) / eq; };
+    const narrowW = () => document.getElementById("lv-cv").parentElement.clientWidth < 600;
+    const cv = MB.canvas("#lv-cv", (ctx, w, h) => {
+      const P = MB.palette(), ltv = LT() / 100, g = CH() / 100, nar = w < 600;
+      const loan = PRICE * ltv, eq = PRICE - loan, c = cost.checked ? loan * RATE + PRICE * HOLD : 0;
+      const after = PRICE * (1 + g), eqAfter = after - loan - c, r = (eqAfter - eq) / eq;
+      // 막대 영역
+      const A = nar ? { x: 16, y: 14, w: w - 32, h: 200 } : { x: 16, y: 14, w: w * 0.42 - 16, h: h - 28 };
+      const ymax = PRICE * 1.4, base = A.y + A.h - 22, sc = (A.h - 44) / ymax, bw = Math.min(70, A.w * 0.22);
+      const xs = [A.x + A.w * 0.2, A.x + A.w * 0.52];
+      const bar = (x, total, eqv, label) => {
+        const lh = loan * sc;
+        ctx.fillStyle = P.dim; ctx.globalAlpha = 0.35; ctx.fillRect(x - bw / 2, base - lh, bw, lh); ctx.globalAlpha = 1;
+        if (eqv >= 0) { ctx.fillStyle = P.accent; ctx.fillRect(x - bw / 2, base - lh - eqv * sc, bw, eqv * sc); }
+        else hatch(ctx, x - bw / 2, base - lh, bw, -eqv * sc, P.bad, 0.35);
+        if (lh > 16) txt(ctx, "대출", x, base - lh / 2, { align: "center", size: 11 });
+        txt(ctx, label, x, base + 12, { align: "center", size: 11, color: P.dim });
+        return base - lh - Math.max(0, eqv) * sc;
+      };
+      bar(xs[0], PRICE, eq, "산 날");
+      const topA = bar(xs[1], after, eqAfter, "1년 뒤");
+      ctx.strokeStyle = P.axis; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(A.x, base); ctx.lineTo(A.x + A.w, base); ctx.stroke();
+      // 돋보기
+      const lr = Math.min(48, A.w * 0.17), lx = Math.min(A.x + A.w - lr - 4, xs[1] + bw / 2 + lr + 8), ly = Math.max(A.y + lr + 4, topA + 10);
+      ctx.save();
+      ctx.beginPath(); ctx.arc(lx, ly, lr, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.92; ctx.fill(); ctx.globalAlpha = 1;
+      ctx.lineWidth = 4; ctx.strokeStyle = P.accent2; ctx.stroke();
+      ctx.lineWidth = 6; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(lx + lr * 0.72, ly + lr * 0.72); ctx.lineTo(lx + lr * 1.15, ly + lr * 1.15); ctx.stroke();
+      ctx.restore();
+      const rs = r <= -1 ? "−100%" : sg(r) + Math.abs(r * 100).toFixed(r * 100 > -10 && r * 100 < 10 ? 1 : 0) + "%";
+      txt(ctx, "내 돈", lx, ly - lr * 0.38, { align: "center", size: 11, color: P.dim });
+      txt(ctx, rs, lx, ly + 6, { align: "center", size: Math.max(14, lr * 0.42), weight: 800, color: r >= 0 ? P.ok : P.bad });
+      // 그래프
+      const B = nar ? { x: 58, y: 236, w: w - 58 - 16, h: h - 236 - 44 } : { x: w * 0.42 + 46, y: 16, w: w * 0.58 - 46 - 16, h: h - 16 - 46 };
+      const mk = (lv) => { const a = []; for (let x = -30; x <= 30; x += 1) a.push([x, ret(lv, x / 100) * 100]); return a; };
+      const ch = MB.chart(ctx, B, {
+        x: [-30, 30], y: [-200, 200], xTicks: [-30, -20, -10, 0, 10, 20, 30], yTicks: [-200, -100, 0, 100, 200],
+        xFmt: (v) => (v > 0 ? "+" : "") + v + "%", yFmt: (v) => v + "%", xLabel: "집값 변화", yLabel: "내 돈 수익률",
+        series: [{ data: mk(0), color: P.faint, width: 1.6, dash: [5, 4] }, { data: mk(ltv), color: P.accent, width: 2.6 }],
+        hlines: [{ y: -100, color: P.bad, label: "내 돈 전부" }, { y: 0, color: P.axis, dash: [] }],
+      });
+      G = ch;
+      const py = MB.clamp(ch.Y(r * 100), B.y, B.y + B.h);
+      knob(ctx, ch.X(g * 100), py, P, 7);
+      txt(ctx, "대출 없음", ch.X(24), ch.Y(ret(0, 0.24) * 100) + 12, { size: 10, color: P.faint, align: "center" });
+      MB.stat("lv-o-e", MB.won(eq));
+      MB.stat("lv-o-g", tone(eqAfter - eq >= 0 ? "ok-t" : "bad-t", (eqAfter - eq >= 0 ? "+" : "−") + MB.won(Math.abs(eqAfter - eq))));
+      MB.stat("lv-o-r", tone(r >= 0 ? "ok-t" : "bad-t", r <= -1 ? "−100% 이하" : (r >= 0 ? "+" : "−") + Math.abs(r * 100).toFixed(1) + "%"));
+      MB.stat("lv-o-m", (1 / (1 - ltv)).toFixed(2) + "배");
+    }, { get height() { return narrowW() ? 520 : 340; } });
+    MB.drag(cv.canvas, { move(x, y) { if (!G || x < G.box.x - 10 || y < G.box.y - 20) return; CH.set(MB.clamp(Math.round(-30 + ((x - G.box.x) / G.box.w) * 60), -30, 30)); } });
+  })();
+
+  /* ---------------------------------------------------------- 8. 집까지 걸리는 해 */
+  (function () {
+    const INC = 36e6 * Math.pow(1.03, 3), START = 4e7, YRS = 40;
+    let prog = 0;
+    const replay = () => { prog = 0; cv.redraw(); };
+    const PRC = MB.range("pr-p", (v) => MB.won(v), replay);
+    const SV = MB.range("pr-s", (v) => MB.won(v), replay);
+    const GR = MB.range("pr-g", (v) => (v > 0 ? "+" : "") + v.toFixed(2) + "%", replay);
+    const DN = MB.seg("pr-d", replay);
+    function calc() {
+      const price = PRC(), g = GR() / 100, down = Number(DN()) + 0.04;
+      const sv = MN.grow({ start: START, monthly: SV(), rate: 0.03, years: YRS, raise: 0.03 }).map((o) => o.value);
+      const need = []; for (let t = 0; t <= YRS; t++) need.push(price * Math.pow(1 + g, t) * down);
+      let hit = null;
+      for (let t = 0; t <= YRS; t++) if (sv[t] >= need[t]) { hit = t === 0 ? 0 : t - 1 + (need[t - 1] - sv[t - 1]) / ((sv[t] - sv[t - 1]) - (need[t] - need[t - 1])); break; }
+      return { price, g, down, sv, need, hit };
+    }
+    const cv = MB.canvas("#pr-cv", (ctx, w, h) => {
+      const P = MB.palette(), c = calc(), T = prog * YRS;
+      const ymax = Math.max(c.sv[YRS] * 1.2, c.need[0] * 1.4);
+      const cut = (arr) => { const a = []; for (let t = 0; t <= YRS; t++) { if (t > T + 1e-9) { const f = T - Math.floor(T); if (Math.floor(T) < YRS) a.push([T, arr[Math.floor(T)] + (arr[Math.floor(T) + 1] - arr[Math.floor(T)]) * f]); break; } a.push([t, arr[t]]); } return a; };
+      const sv = cut(c.sv), nd = cut(c.need);
+      const box = { x: 62, y: 16, w: w - 62 - 16, h: h - 16 - 46 };
+      const fillCol = P.accent + "22";
+      const ch = MB.chart(ctx, box, {
+        x: [0, YRS], y: [0, ymax], yFmt: MB.wonAxis, xFmt: (v) => v + "년", xTicks: [0, 10, 20, 30, 40], xLabel: "지금부터 (한결 30세 기준)",
+        series: [{ data: sv, color: P.accent, width: 2.6, fill: fillCol }, { data: nd, color: P.bad, width: 2.4 }],
+      });
+      const lastS = sv[sv.length - 1], lastN = nd[nd.length - 1];
+      if (lastS) txt(ctx, "모은 돈", Math.min(ch.X(lastS[0]) + 4, box.x + box.w - 44), Math.max(box.y + 8, ch.Y(lastS[1]) - 10), { size: 11, color: P.accent, weight: 700 });
+      if (lastN && ch.Y(lastN[1]) > box.y + 6) txt(ctx, "필요한 자기 돈", Math.min(ch.X(lastN[0]) + 4, box.x + box.w - 84), ch.Y(lastN[1]) + 12, { size: 11, color: P.bad, weight: 700 });
+      if (c.hit != null && T >= c.hit) {
+        const yv = c.sv[Math.floor(c.hit)] + (c.sv[Math.min(YRS, Math.floor(c.hit) + 1)] - c.sv[Math.floor(c.hit)]) * (c.hit - Math.floor(c.hit));
+        const x = ch.X(c.hit), y = ch.Y(yv);
+        ctx.strokeStyle = P.text; ctx.setLineDash([3, 3]); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, box.y + box.h); ctx.stroke(); ctx.setLineDash([]);
+        ctx.fillStyle = P.text; ctx.beginPath(); ctx.arc(x, y, 5, 0, TAU); ctx.fill();
+        txt(ctx, c.hit.toFixed(1) + "년 뒤 · " + Math.floor(30 + c.hit) + "세", MB.clamp(x, box.x + 60, box.x + box.w - 60), y - 16, { align: "center", size: 12, weight: 700 });
+      } else if (c.hit == null && prog >= 1) {
+        txt(ctx, "40년 안에 닿지 않는다", box.x + box.w / 2, box.y + 14, { align: "center", size: 13, weight: 700, color: P.bad });
+      }
+      MB.stat("pr-o-pir", (c.price / INC).toFixed(1) + "배");
+      MB.stat("pr-o-n", MB.won(c.need[0]));
+      MB.stat("pr-o-y", c.hit == null ? tone("bad-t", "40년 초과") : c.hit === 0 ? tone("ok-t", "지금") : c.hit.toFixed(1) + "년");
+      MB.stat("pr-o-px", c.hit == null ? "—" : MB.won(c.price * Math.pow(1 + c.g, c.hit)));
+    }, { aspect: 0.6, minHeight: 300, maxHeight: 400 });
+    MB.loop(cv.canvas, (dt) => { if (prog < 1) { prog = Math.min(1, prog + dt / 1.2); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 9. 한결의 2년 */
+  (function () {
+    const M = 24;
+    let prog = 0;
+    const replay = () => { prog = 0; cv.redraw(); };
+    const LR = MB.range("hg-l", (v) => v.toFixed(2) + "%", () => cv.redraw());
+    const RR = MB.range("hg-r", (v) => v.toFixed(2) + "%", () => cv.redraw());
+    const ins = document.getElementById("hg-ins");
+    ins.addEventListener("change", () => cv.redraw());
+    const sc = MB.seg("hg-sc", replay);
+    document.getElementById("hg-play").addEventListener("click", replay);
+    function series() {
+      const r = RR() / 100, l = LR() / 100, crash = sc() === "crash";
+      const mA = 6e5 + 1e7 * r / 12, mB = 8e5 + 1e7 * r / 12, mC = 4e7 * r / 12 + 1.6e8 * l / 12 + (ins.checked ? 2e8 * 0.0015 / 12 : 0);
+      const loss = Math.max(0, 2e8 - 2.8e8 * 0.8 * 0.8);
+      const A = [0], B = [1.3e6], C = [1.6e6];
+      for (let m = 1; m <= M; m++) {
+        A.push(A[m - 1] + mA); B.push(B[m - 1] + mB);
+        C.push(C[m - 1] + mC + (m === M && crash && !ins.checked ? loss : 0));
+      }
+      return { A, B, C, crash, loss };
+    }
+    const cv = MB.canvas("#hg-cv", (ctx, w, h) => {
+      const P = MB.palette(), s = series(), T = prog * M;
+      const ymax = Math.max(s.A[M], s.B[M], s.C[M]) * 1.12;
+      const upto = (arr) => { const a = []; for (let m = 0; m <= M; m++) { if (m > T) { const k = Math.floor(T); a.push([T, arr[k] + (arr[Math.min(M, k + 1)] - arr[k]) * (T - k)]); break; } a.push([m, arr[m]]); } return a; };
+      const box = { x: 62, y: 16, w: w - 62 - 70, h: h - 16 - 46 };
+      const cols = [P.blue, P.warn, P.accent];
+      const ch = MB.chart(ctx, box, {
+        x: [0, M], y: [0, ymax], yFmt: MB.wonAxis, xTicks: [0, 6, 12, 18, 24], xFmt: (v) => v + "개월", xLabel: "이사 후 경과",
+        series: [{ data: upto(s.A), color: cols[0], width: 2.2 }, { data: upto(s.B), color: cols[1], width: 2.2 }, { data: upto(s.C), color: cols[2], width: 2.8 }],
+      });
+      const k = Math.min(M, T), idx = Math.floor(k), f = k - idx;
+      const at = (arr) => arr[idx] + (arr[Math.min(M, idx + 1)] - arr[idx]) * f;
+      const ys = [at(s.A), at(s.B), at(s.C)].map(ch.Y), names = ["A 원룸", "B 월세", "C 전세"];
+      const order = [0, 1, 2].sort((a, b) => ys[a] - ys[b]), ly = ys.slice();
+      for (let i = 1; i < 3; i++) if (ly[order[i]] - ly[order[i - 1]] < 15) ly[order[i]] = ly[order[i - 1]] + 15;
+      [0, 1, 2].forEach((i) => {
+        ctx.fillStyle = cols[i]; ctx.beginPath(); ctx.arc(ch.X(k), ys[i], 4, 0, TAU); ctx.fill();
+        txt(ctx, names[i], box.x + box.w + 6, ly[i], { size: 11, weight: 700, color: cols[i] });
+      });
+      if (s.crash && T >= M) {
+        txt(ctx, ins.checked ? "보증기관이 보증금을 대신 돌려준다" : "보증금 " + MB.won(s.loss) + " 손실", box.x + box.w - 4, box.y + 10, { align: "right", size: 12, weight: 700, color: ins.checked ? P.ok : P.bad });
+      }
+      const fin = (arr) => MB.won(arr[M]);
+      MB.stat("hg-o-a", fin(s.A));
+      MB.stat("hg-o-b", fin(s.B));
+      MB.stat("hg-o-c", tone(s.C[M] < s.B[M] ? "ok-t" : "bad-t", fin(s.C)));
+      const d = s.C[M] - s.B[M];
+      MB.stat("hg-o-d", tone(d < 0 ? "ok-t" : "bad-t", (d < 0 ? "−" : "+") + MB.won(Math.abs(d))));
+    }, { aspect: 0.58, minHeight: 300, maxHeight: 400 });
+    MB.loop(cv.canvas, (dt) => { if (prog < 1) { prog = Math.min(1, prog + dt / 2.4); cv.redraw(); } });
+  })();
+})();
+</script>
+</body>
+</html>

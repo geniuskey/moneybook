@@ -1,0 +1,1364 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and MoneyBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "연봉 3,600만원이 왜 통장에는 월 265만원으로 찍히는지 월급 명세서 한 장을 해부한다. 4대 보험과 회사 부담분, 근로소득공제에서 결정세액까지의 소득세 계산, 누진세의 계단과 한계세율, 원천징수와 연말정산, 시급·주휴수당·최저임금, 회사가 쓰는 진짜 인건비를 시뮬레이터로 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>월급 명세서 읽기 · MoneyBook</title>
+<meta name="description" content="연봉 3,600만원이 왜 통장에는 월 265만원으로 찍히는지 월급 명세서 한 장을 해부한다. 4대 보험과 회사 부담분, 근로소득공제에서 결정세액까지의 소득세 계산, 누진세의 계단과 한계세율, 원천징수와 연말정산, 시급·주휴수당·최저임금, 회사가 쓰는 진짜 인건비를 시뮬레이터로 익힌다.">
+<link rel="canonical" href="https://moneybook.euiyun.com/chapters/income.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0b8a63">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MoneyBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="월급 명세서 읽기 · MoneyBook">
+<meta property="og:description" content="연봉 3,600만원이 왜 통장에는 월 265만원으로 찍히는지 월급 명세서 한 장을 해부한다. 4대 보험과 회사 부담분, 근로소득공제에서 결정세액까지의 소득세 계산, 누진세의 계단과 한계세율, 원천징수와 연말정산, 시급·주휴수당·최저임금, 회사가 쓰는 진짜 인건비를 시뮬레이터로 익힌다.">
+<meta property="og:url" content="https://moneybook.euiyun.com/chapters/income.html">
+<meta property="og:image" content="https://moneybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://moneybook.euiyun.com/chapters/income.html#chapter","name":"월급 명세서 읽기","headline":"월급 명세서 읽기 · MoneyBook","description":"연봉 3,600만원이 왜 통장에는 월 265만원으로 찍히는지 월급 명세서 한 장을 해부한다. 4대 보험과 회사 부담분, 근로소득공제에서 결정세액까지의 소득세 계산, 누진세의 계단과 한계세율, 원천징수와 연말정산, 시급·주휴수당·최저임금, 회사가 쓰는 진짜 인건비를 시뮬레이터로 익힌다.","url":"https://moneybook.euiyun.com/chapters/income.html","position":6,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://moneybook.euiyun.com/og.png","dateModified":"2026-10-03","isPartOf":{"@type":"Book","@id":"https://moneybook.euiyun.com/#book","name":"MoneyBook · 살아가는 데 필요한 돈 교과서","url":"https://moneybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MoneyBook","item":"https://moneybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"6. 월급 명세서 읽기","item":"https://moneybook.euiyun.com/chapters/income.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/money.js"></script>
+<!--head:end-->
+<style>
+  figure.diagram svg { max-width: 520px; margin: 0 auto; }
+  figure.diagram svg .t-mono { font-size: 13px; }
+  .slip .row.head { color: var(--text-dim); font-size: 13px; border-bottom: 1px solid var(--border); padding-top: 10px; }
+  .slip .row.head span:last-child { font-family: var(--font); }
+  .slip .row.sub { font-weight: 700; }
+  .slip .row .sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 8px; vertical-align: 0; }
+  .sim-view .slip { margin: 4px 16px 16px; }
+  .two-slips { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  .two-slips .slip { margin: 0; }
+  .slip-cap { font-size: 13px; color: var(--text-dim); margin-bottom: 4px; font-weight: 700; }
+</style>
+</head>
+<body data-chapter="income">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 06</div>
+    <h1>월급 명세서 읽기</h1>
+    <p class="lead">연봉 계약서에는 3,600만원이라고 적혀 있다. 12로 나누면 300만원이다. 그런데 첫 월급날 통장에 찍힌 숫자는 265만 5,840원이다. 34만원은 어디로 갔을까. 이 장은 월급 명세서 한 장을 줄마다 뜯어본다. 사라진 돈은 하나도 허투루 사라지지 않았다. 일부는 노후의 연금으로, 일부는 병원비 보험으로, 일부는 세금으로 갔다. 무엇이 얼마씩, 왜 빠지는지 알면 연봉 협상도, 연말정산도, 아르바이트 시급 계산도 같은 그림 위에서 읽힌다.</p>
+    <ul class="objectives">
+      <li>연봉, 월 세전 급여, 실수령액이 왜 다른지 월급 명세서의 항목으로 설명한다.</li>
+      <li>4대 보험(국민연금·건강·장기요양·고용)의 요율과, 회사도 같은 만큼 낸다는 사실을 안다.</li>
+      <li>총급여에서 결정세액까지 소득세 계산 흐름을 따라가고, 한계세율과 평균세율을 구분한다.</li>
+      <li>원천징수와 연말정산의 관계, '13월의 월급'과 '세금 폭탄'이 생기는 이유를 설명한다.</li>
+      <li>시급·주휴수당·최저임금으로 월급을 환산하고, 연봉 인상과 회사의 실제 인건비를 계산한다.</li>
+    </ul>
+  </header>
+
+  <section id="contract">
+    <h2>계약서의 숫자, 명세서의 숫자, 통장의 숫자</h2>
+    <p>월급에는 세 가지 얼굴이 있다. 첫째는 <span class="term">연봉</span><span class="en">(Annual salary)</span>이다. 1년 동안 회사가 주기로 약속한 돈을, 아무것도 빼지 않고 적은 숫자다. 둘째는 <span class="term">월 세전 급여</span><span class="en">(Gross pay)</span>로, 연봉을 12로 나눈 한 달 몫이다. 셋째는 <span class="term">실수령액</span><span class="en">(Take-home pay)</span>, 공제할 것을 다 뺀 뒤 실제로 통장에 들어오는 돈이다. 사람들이 "월급이 얼마냐"고 물을 때 세 숫자 중 어느 것을 말하는지가 자주 섞인다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 348" role="img" aria-label="연봉 3,600만원이 12로 나뉘어 월 300만원이 되고, 공제 34만 4,160원을 뺀 265만 5,840원이 통장에 들어오는 흐름">
+        <defs><marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/></marker></defs>
+        <rect x="20" y="10" width="400" height="66" rx="12" class="f-surface"/>
+        <text x="40" y="38" class="lbl-dim">연봉 계약서</text>
+        <text x="40" y="60" class="lbl-dim">1년 · 세전</text>
+        <text x="400" y="52" text-anchor="end" class="lbl-b" style="font-size:24px">3,600만원</text>
+        <rect x="20" y="116" width="400" height="66" rx="12" class="f-acc2-soft"/>
+        <text x="40" y="144" class="lbl-dim">월급 명세서</text>
+        <text x="40" y="166" class="lbl-dim">한 달 · 세전</text>
+        <text x="400" y="158" text-anchor="end" class="lbl-b" style="font-size:24px">300만원</text>
+        <rect x="20" y="222" width="400" height="66" rx="12" class="f-ok-soft"/>
+        <text x="40" y="250" class="lbl-dim">내 통장</text>
+        <text x="40" y="272" class="lbl-dim">한 달 · 실수령</text>
+        <text x="400" y="264" text-anchor="end" class="lbl-b" style="font-size:24px">265.6만원</text>
+        <line x1="220" y1="80" x2="220" y2="112" class="s-line" marker-end="url(#ar1)"/>
+        <text x="234" y="101" class="lbl-acc">÷12</text>
+        <line x1="220" y1="186" x2="220" y2="218" class="s-bad" marker-end="url(#ar1)"/>
+        <text x="234" y="207" class="lbl-bad">−34만</text>
+        <text x="220" y="316" text-anchor="middle" class="lbl-dim">빠지는 34만 4,160원 = 4대 보험 27만 2,070원</text>
+        <text x="220" y="338" text-anchor="middle" class="lbl-dim">+ 소득세·지방소득세 7만 2,090원</text>
+      </svg>
+      <figcaption><b>그림 1. 월급의 세 얼굴.</b> 이 책의 인물 한결(가상)의 첫 월급이다. 연봉 3,600만원에는 비과세 식대 월 20만원이 들어 있다. 숫자는 이 책의 계산 엔진(2026년 요율, 단순화한 연간 정산)으로 구했다.</figcaption>
+    </figure>
+
+    <p>연봉 계약서를 볼 때 확인할 것이 하나 더 있다. 연봉에 <b>퇴직금이 포함</b>되어 있는지다. 한국의 퇴직금은 1년 일할 때마다 한 달 치 평균임금이 쌓이는 제도라서, "퇴직금 포함 연봉 3,900만원"이면 실제 매달 받는 몫은 3,900만원을 13으로 나눈 300만원이다. 같은 300만원이어도 "퇴직금 별도 연봉 3,600만원"과 계약서 숫자가 300만원이나 다르게 보인다. 회사끼리 연봉을 비교할 때는 이런 조건을 맞춰 놓고 비교한다.</p>
+    <p>이제 300만원에서 34만원이 빠지는 과정을 명세서의 줄 하나하나로 따라간다.</p>
+  </section>
+
+  <section id="slip">
+    <h2>월급 명세서 해부</h2>
+    <p>회사는 월급을 줄 때 <span class="term">급여 명세서</span><span class="en">(Pay slip)</span>를 함께 준다(2021년부터 법으로 의무다). 위쪽 절반은 <b>지급 항목</b>, 아래쪽 절반은 <b>공제 항목</b>이다. 한결의 첫 명세서를 보자.</p>
+
+    <div class="two-slips">
+      <div>
+        <div class="slip-cap">지급 항목</div>
+        <div class="slip">
+          <div class="row"><span>기본급(과세)</span><span>2,800,000</span></div>
+          <div class="row"><span>식대(비과세)</span><span>200,000</span></div>
+          <div class="row total"><span>지급 합계</span><span>3,000,000</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="slip-cap">공제 항목</div>
+        <div class="slip">
+          <div class="row"><span>국민연금</span><span>133,000</span></div>
+          <div class="row"><span>건강보험</span><span>100,660</span></div>
+          <div class="row"><span>장기요양보험</span><span>13,220</span></div>
+          <div class="row"><span>고용보험</span><span>25,190</span></div>
+          <div class="row"><span>소득세</span><span>65,540</span></div>
+          <div class="row"><span>지방소득세</span><span>6,550</span></div>
+          <div class="row total"><span>공제 합계</span><span>344,160</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="slip">
+      <div class="row total" style="border-top:0;margin-top:0;padding-top:4px"><span>실지급액(통장 입금)</span><span>2,655,840</span></div>
+    </div>
+
+    <p>줄마다 뜻은 이렇다.</p>
+    <ul>
+      <li><b>기본급과 수당</b>: 일한 대가로 받는 돈이다. 회사에 따라 직책수당, 연장근로수당, 상여금이 따로 붙는다.</li>
+      <li><span class="term">비과세</span><span class="en">(Tax-exempt)</span> <b>식대</b>: 법이 "이만큼은 세금도 보험료도 매기지 않는다"고 정해 둔 돈이다. 식대는 2026년 기준 월 20만원까지 비과세다. 자가운전보조금, 출산·보육수당 같은 다른 비과세 항목도 있다. 같은 300만원이어도 비과세가 많을수록 실수령이 늘어난다.</li>
+      <li><b>4대 보험</b>: 국민연금, 건강보험, 장기요양보험, 고용보험. 세금이 아니라 <b>보험료</b>다. 나중에 연금·병원비·실업급여로 돌려받는 몫이다. 다음 절에서 자세히 본다.</li>
+      <li><b>소득세와 지방소득세</b>: 국가와 지방자치단체에 내는 세금이다. 지방소득세는 소득세의 정확히 10%다. 매달 떼는 소득세는 1년 치 세금을 미리 나눠 내는 <b>선납금</b>이고, 진짜 세금은 연말에 확정된다.</li>
+    </ul>
+    <p>아래 시뮬레이터에서 연봉과 비과세 식대를 바꿔 보며 명세서가 어떻게 달라지는지 본다. 위쪽 막대는 세전 월급 전체를 100으로 놓고 어디로 나뉘는지를 보여 준다.</p>
+
+    <div class="sim" id="sim-slip">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>연봉을 넣으면 명세서가 나온다</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sl-cv"></canvas><div class="slip" id="sl-slip"></div></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>세전 연봉 <output id="sl-sal-out"></output></span><input type="range" id="sl-sal" min="20000000" max="150000000" step="1000000" value="36000000"></label>
+          <label class="ctrl"><span>비과세 식대(월) <output id="sl-nt-out"></output></span><input type="range" id="sl-nt" min="0" max="200000" step="10000" value="200000"></label>
+          <div class="legend" style="padding:0">
+            <span><i style="background:var(--ok)"></i>실수령</span><span><i style="background:var(--accent-2)"></i>국민연금</span><span><i style="background:var(--blue)"></i>건강</span><span><i style="background:var(--text-dim)"></i>장기요양</span><span><i style="background:var(--warn)"></i>고용</span><span><i style="background:var(--bad)"></i>소득세</span><span><i style="background:var(--red)"></i>지방세</span>
+          </div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">월 세전</span><span class="v" id="sl-o-g">—</span></div>
+        <div class="stat"><span class="k">공제 합계</span><span class="v" id="sl-o-d">—</span></div>
+        <div class="stat"><span class="k">월 실수령</span><span class="v" id="sl-o-n">—</span></div>
+        <div class="stat"><span class="k">공제율</span><span class="v" id="sl-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 연봉 3,600만원에서 식대를 0으로 내린다. 세전은 같은데 실수령이 약 2만 6천원 줄어든다. ② 연봉을 1억까지 올리며 빨간 세금 몫이 얼마나 빨리 커지는지 본다. ③ 연봉을 1억 5천만원으로 두고 국민연금(금색)이 더 늘지 않는 것을 확인한다(기준소득월액 상한). (2026년 요율, 부양가족 없음. 소득세는 1년 치를 연간 정산식으로 계산해 12로 나눈 값이라 실제 간이세액표와 몇천 원 다를 수 있다.)</div>
+    </div>
+
+    <p>연봉이 오를수록 공제율이 오른다. 3,600만원에서는 약 11.5%가 빠지지만, 1억에서는 약 21%가 빠진다. 4대 보험은 대체로 월급에 정비례하지만(국민연금은 상한에서 멈춘다), 소득세는 소득이 늘수록 <b>비율 자체가</b> 커지기 때문이다. 이 '비율이 커지는' 구조가 이 장 후반의 주제인 누진세다.</p>
+
+    <h3>300만원이 쪼개져 떨어지는 길</h3>
+    <p>같은 내용을 폭포처럼 그려 본다. 맨 왼쪽 막대가 세전 월급이고, 오른쪽으로 갈수록 공제 항목이 하나씩 떨어져 나간다. 떨어진 동전이 각 통에 쌓이고, 끝에 남은 것이 통장으로 간다. 이런 그림을 <span class="term">워터폴 차트</span><span class="en">(Waterfall chart)</span>라고 한다.</p>
+
+    <div class="sim" id="sim-fall">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>월급의 폭포: 공제 통마다 떨어지는 동전</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="fa-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>세전 연봉 <output id="fa-sal-out"></output></span><input type="range" id="fa-sal" min="20000000" max="120000000" step="1000000" value="36000000"></label>
+          <div class="btn-row"><button class="btn primary" id="fa-go">다시 쏟기</button></div>
+          <p style="font-size:13.5px;color:var(--text-dim);margin:0">동전 하나가 1만원이다. 세전 300만원이면 동전 300개가 떨어진다.</p>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">4대 보험(월)</span><span class="v" id="fa-o-i">—</span></div>
+        <div class="stat"><span class="k">세금(월)</span><span class="v" id="fa-o-t">—</span></div>
+        <div class="stat"><span class="k">통장으로</span><span class="v" id="fa-o-n">—</span></div>
+        <div class="stat"><span class="k">100원 중 남는 돈</span><span class="v" id="fa-o-k">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "다시 쏟기"로 동전이 떨어지는 순서를 본다. 연금 → 건강 → 요양 → 고용 → 소득세 → 지방세. ② 연봉 3,600만원에서 가장 큰 통은 국민연금이다. 세금은 보험료보다 작다. ③ 연봉을 8,000만원 이상으로 올리면 소득세 통이 국민연금 통을 넘어선다. (2026년 요율, 부양가족 없음, 식대 20만원 비과세.)</div>
+    </div>
+
+    <p>사회초년생 연봉에서는 <b>세금보다 4대 보험이 훨씬 크다</b>. 한결의 경우 보험료가 27만원, 세금이 7만원이다. 세금이 공제의 주인공이 되는 것은 연봉이 꽤 높아진 다음이다. 그래서 "세금 때문에 월급이 적다"는 말은 사회초년생에게는 대개 반만 맞다.</p>
+  </section>
+
+  <section id="insurance">
+    <h2>4대 보험: 회사도 같은 만큼 낸다</h2>
+    <p>4대 보험은 아프거나, 일자리를 잃거나, 늙어서 일을 못 하게 되는 위험을 사회 전체가 나눠 지는 장치다. 가입은 선택이 아니라 의무이고, 보험료는 소득에 비례한다. 명세서에 찍힌 금액은 <b>근로자 몫의 절반</b>일 뿐이다. 회사도 거의 같은 금액을 따로 낸다.</p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>보험</th><th class="num">전체 요율</th><th class="num">근로자</th><th class="num">회사</th><th>무엇을 돌려받나</th></tr></thead>
+      <tbody>
+        <tr><td>국민연금</td><td class="num">9.5%</td><td class="num">4.75%</td><td class="num">4.75%</td><td>노후 연금, 장애·유족 연금(<a href="pension.html">20장</a>)</td></tr>
+        <tr><td>건강보험</td><td class="num">7.19%</td><td class="num">3.595%</td><td class="num">3.595%</td><td>병원비의 상당 부분, 건강검진</td></tr>
+        <tr><td>장기요양보험(건강보험료 기준)</td><td class="num">13.14%</td><td class="num">반</td><td class="num">반</td><td>노인 요양 서비스(가족의 부담을 덜어 준다)</td></tr>
+        <tr><td>고용보험(실업급여)</td><td class="num">1.8%</td><td class="num">0.9%</td><td class="num">0.9%</td><td>실업급여, 육아휴직 급여</td></tr>
+        <tr><td>고용안정·직업능력개발</td><td class="num">0.25~0.85%</td><td class="num">—</td><td>전액</td><td>직업 훈련, 고용 지원(회사 규모별 요율)</td></tr>
+        <tr><td>산재보험</td><td>업종별</td><td class="num">—</td><td>전액</td><td>일하다 다치면 치료비와 휴업 급여</td></tr>
+      </tbody>
+    </table></div>
+    <p>요율은 <b>비과세를 뺀 월 보수</b>에 곱한다. 한결의 월 보수는 300만원에서 식대 20만원을 뺀 280만원이고, 280만원 × 4.75% = 13만 3,000원이 국민연금이다. 건강보험은 280만원 × 3.595% = 10만 660원, 장기요양은 그 건강보험료의 13.14%인 1만 3,220원, 고용보험은 280만원 × 0.9% = 2만 5,200원에서 10원 미만을 버린 2만 5,190원이다.</p>
+
+    <div class="callout warn">
+      <strong>요율은 해마다 바뀐다</strong>
+      이 장의 숫자는 2026년 기준 대표값이다. 국민연금은 2025년 개혁으로 2026년 9.5%에서 매년 0.5%p씩 올라 13%가 될 예정이고, 건강보험·장기요양 요율도 해마다 새로 고시된다. 소득세 구간과 공제 금액, 비과세 한도, 최저임금도 바뀐다. 실제 계산을 할 때는 그해의 국민연금공단·국민건강보험공단·국세청 공지를 확인한다.
+    </div>
+
+    <p>아래 그래프의 세로선을 좌우로 끌어 월 보수를 바꿔 본다. 위쪽은 근로자가 내는 보험료가 보수에 따라 어떻게 늘어나는지, 아래쪽은 같은 보수에서 근로자와 회사가 각각 얼마를 내는지 보여 준다.</p>
+
+    <div class="sim" id="sim-ins">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>보수에 따라 늘어나는 보험료, 그리고 회사 몫</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="in-cv"></canvas><span class="hint">세로선을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="check"><input type="checkbox" id="in-extra" checked> 회사만 내는 보험 포함(고용안정 0.25%, 산재 1% 가정)</label>
+          <div class="legend" style="padding:0">
+            <span><i style="background:var(--accent-2)"></i>국민연금</span><span><i style="background:var(--blue)"></i>건강</span><span><i style="background:var(--text-dim)"></i>장기요양</span><span><i style="background:var(--warn)"></i>고용</span><span><i style="background:var(--accent)"></i>회사만 내는 몫</span>
+          </div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">월 보수(비과세 제외)</span><span class="v" id="in-o-b">—</span></div>
+        <div class="stat"><span class="k">근로자 부담</span><span class="v" id="in-o-e">—</span></div>
+        <div class="stat"><span class="k">회사 부담</span><span class="v" id="in-o-c">—</span></div>
+        <div class="stat"><span class="k">합계 / 보수 대비</span><span class="v" id="in-o-t">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 280만원(한결)에서 근로자와 회사 막대 길이를 비교한다. 거의 같다. ② 선을 637만원 너머로 끈다. 금색 국민연금 선이 수평으로 꺾인다. 소득이 아무리 높아도 국민연금은 상한 소득까지만 매긴다. ③ 반대로 40만원 아래로 끌면 국민연금이 바닥에서 멈춘다(하한). (2026년 요율, 국민연금 기준소득월액 상·하한은 약값. 산재보험은 업종마다 다르며 여기서는 1%로 가정했다.)</div>
+    </div>
+
+    <p>국민연금 선만 꺾이는 이유는 국민연금이 <b>낸 만큼 돌려받는</b> 성격이 강하기 때문이다. 상한 없이 걷으면 고소득자에게 줄 연금도 끝없이 커져야 한다. 반면 건강보험은 아플 때 받는 혜택이 소득과 무관하므로 소득에 비례해 계속 걷는다(아주 높은 상한이 있지만 이 그래프 밖이다).</p>
+    <div class="callout tip">
+      <strong>회사 몫도 사실은 내 몫이다</strong>
+      회사가 내는 보험료는 명세서에 보이지 않는다. 하지만 회사 입장에서는 나를 고용하는 비용의 일부다. 회사가 쓸 수 있는 인건비 예산이 정해져 있다면, 회사 부담 보험료가 없을 때 그 돈은 월급으로 왔을 것이다. 경제학에서는 이것을 "보험료의 실제 부담은 결국 근로자에게 상당 부분 돌아간다"고 표현한다. 이 장 끝에서 회사가 실제로 쓰는 돈을 다시 계산한다.
+    </div>
+  </section>
+
+  <section id="taxflow">
+    <h2>소득세는 어떻게 계산되는가</h2>
+    <p>4대 보험은 "보수 × 요율" 한 줄이면 끝난다. 소득세는 다르다. 1년 치 소득을 놓고 여러 번 깎고, 곱하고, 다시 깎는다. 단계가 많아 보이지만 큰 흐름은 두 가지 동작의 반복이다. 세금을 매길 <b>대상을 줄이는 것</b>(소득공제)과, 계산된 <b>세금 자체를 줄이는 것</b>(세액공제).</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 438" role="img" aria-label="소득세 계산 흐름: 총급여에서 근로소득공제를 빼 근로소득금액, 인적공제와 보험료공제를 빼 과세표준, 세율을 곱해 산출세액, 세액공제를 빼 결정세액, 12로 나눠 매달 원천징수">
+        <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/></marker></defs>
+        <rect x="10" y="10" width="150" height="64" rx="10" class="f-surface"/>
+        <text x="85" y="36" text-anchor="middle" class="lbl-dim">총급여(과세)</text>
+        <text x="85" y="60" text-anchor="middle" class="lbl-b">3,360만</text>
+        <rect x="280" y="10" width="150" height="64" rx="10" class="f-surface"/>
+        <text x="355" y="36" text-anchor="middle" class="lbl-dim">근로소득금액</text>
+        <text x="355" y="60" text-anchor="middle" class="lbl-b">2,331만</text>
+        <line x1="164" y1="42" x2="274" y2="42" class="s-bad" marker-end="url(#ar2)"/>
+        <text x="220" y="31" text-anchor="middle" class="lbl-bad" style="font-size:13px">−근로소득공제</text>
+        <text x="220" y="62" text-anchor="middle" class="t-mono">1,029만</text>
+        <line x1="355" y1="78" x2="355" y2="118" class="s-bad" marker-end="url(#ar2)"/>
+        <text x="341" y="96" text-anchor="end" class="lbl-bad" style="font-size:13px">−인적·보험료</text>
+        <text x="341" y="114" text-anchor="end" class="t-mono">476.5만</text>
+        <rect x="280" y="124" width="150" height="64" rx="10" class="f-acc-soft"/>
+        <text x="355" y="150" text-anchor="middle" class="lbl-dim">과세표준</text>
+        <text x="355" y="174" text-anchor="middle" class="lbl-b">1,854.5만</text>
+        <path d="M355,192 L355,222 L85,222 L85,246" class="s-line" marker-end="url(#ar2)"/>
+        <text x="200" y="213" text-anchor="middle" class="lbl-acc">× 누진세율 (6%, 15%, …)</text>
+        <rect x="10" y="252" width="150" height="64" rx="10" class="f-warn-soft"/>
+        <text x="85" y="278" text-anchor="middle" class="lbl-dim">산출세액</text>
+        <text x="85" y="302" text-anchor="middle" class="lbl-b">152.2만</text>
+        <rect x="280" y="252" width="150" height="64" rx="10" class="f-bad-soft"/>
+        <text x="355" y="278" text-anchor="middle" class="lbl-dim">결정세액(연)</text>
+        <text x="355" y="302" text-anchor="middle" class="lbl-b">78.7만</text>
+        <line x1="164" y1="284" x2="274" y2="284" class="s-ok" marker-end="url(#ar2)"/>
+        <text x="220" y="273" text-anchor="middle" class="lbl-acc" style="font-size:13px">−세액공제</text>
+        <text x="220" y="304" text-anchor="middle" class="t-mono">73.5만</text>
+        <line x1="355" y1="320" x2="355" y2="360" class="s-line" marker-end="url(#ar2)"/>
+        <text x="341" y="345" text-anchor="end" class="lbl-dim">÷12</text>
+        <rect x="280" y="366" width="150" height="64" rx="10" class="f-acc2-soft"/>
+        <text x="355" y="392" text-anchor="middle" class="lbl-dim">매달 소득세</text>
+        <text x="355" y="416" text-anchor="middle" class="lbl-b">6만 5,540원</text>
+        <text x="10" y="390" class="lbl-dim">지방소득세는 소득세의 10%가</text>
+        <text x="10" y="412" class="lbl-dim">따로 붙는다 → 매달 6,550원</text>
+      </svg>
+      <figcaption><b>그림 2. 소득세 계산 흐름(한결, 연봉 3,600만원).</b> 위 줄은 세금을 매길 대상을 줄이는 소득공제, 아래 줄은 세금 자체를 줄이는 세액공제다. 같은 100만원이라도 소득공제는 "100만원 × 내 세율"만큼, 세액공제는 100만원 그대로 세금이 준다.</figcaption>
+    </figure>
+
+    <p>단계별로 보면 이렇다.</p>
+    <ol>
+      <li><b>총급여</b>: 1년 치 급여에서 비과세를 뺀 금액이다. 한결은 280만원 × 12 = 3,360만원.</li>
+      <li><span class="term">근로소득공제</span><span class="en">(Earned income deduction)</span>: 출퇴근 비용처럼 일하느라 드는 돈을 일괄로 쳐 주는 공제다. 영수증 없이 자동으로 빠진다. 총급여가 적을수록 비율이 크다(500만원까지는 70%, 1,500만~4,500만원 구간은 15%). 한결은 1,029만원이 빠져 <b>근로소득금액</b> 2,331만원이 남는다.</li>
+      <li><b>종합소득공제</b>: 본인과 부양가족 1명당 150만원의 <span class="term">인적공제</span>, 그리고 낸 국민연금·건강·고용보험료 전액이 빠진다. 한결은 150만 + 연금 159.6만 + 건강·요양·고용 166.9만 = 476.5만원이다. 신용카드 사용액, 주택자금 같은 공제는 여기에 더해진다.</li>
+      <li><span class="term">과세표준</span><span class="en">(Tax base)</span>: 이렇게 깎고 남은 금액. 세율을 곱하는 진짜 대상이다. 한결은 1,854만 5,160원.</li>
+      <li><b>산출세액</b>: 과세표준에 누진세율을 곱한다. 1,400만원까지는 6%, 넘는 부분은 15%다. 84만 + 68만 1,774 = 152만 1,774원.</li>
+      <li><span class="term">세액공제</span><span class="en">(Tax credit)</span>: 계산된 세금에서 직접 뺀다. 근로자는 근로소득세액공제를 받는다(산출세액 130만원까지 55%, 한도 약 66만~74만원). 한결은 73만 5,200원.</li>
+      <li><b>결정세액</b>: 최종 1년 치 소득세. 78만 6,574원이다. 12로 나누면 매달 6만 5,540원, 여기에 지방소득세 10%가 붙는다.</li>
+    </ol>
+
+    <div class="formula">$$\text{결정세액} = \underbrace{(\text{과세표준} \times \text{세율} - \text{누진공제})}_{\text{산출세액}} - \text{세액공제}$$<div class="where">누진공제는 구간별 세율을 한 번에 계산하려고 빼 주는 상수다(아래 표). 1,854만원 × 15% − 126만원 = 152만원으로 앞의 계산과 같다.</div></div>
+
+    <p>아래 시뮬레이터는 이 흐름을 막대로 보여 준다. "한 단계씩"을 눌러 막대가 줄어드는 순서를 따라간다. 위 여섯 줄은 소득, 아래 세 줄은 세금이다. 세금은 소득보다 훨씬 작아서 같은 비율로 그리면 보이지 않으므로 확대해서 그렸다.</p>
+
+    <div class="sim" id="sim-flow">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>총급여에서 결정세액까지, 한 단계씩</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="fl-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>세전 연봉 <output id="fl-sal-out"></output></span><input type="range" id="fl-sal" min="20000000" max="150000000" step="1000000" value="36000000"></label>
+          <div class="btn-row"><button class="btn primary" id="fl-next">한 단계씩</button><button class="btn" id="fl-all">전부 보기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">과세표준</span><span class="v" id="fl-o-b">—</span></div>
+        <div class="stat"><span class="k">산출세액</span><span class="v" id="fl-o-c">—</span></div>
+        <div class="stat"><span class="k">결정세액(연)</span><span class="v" id="fl-o-f">—</span></div>
+        <div class="stat"><span class="k">총급여 대비</span><span class="v" id="fl-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "한 단계씩"을 아홉 번 눌러 3,360만원이 78.7만원의 세금으로 바뀌는 과정을 따라간다. ② 연봉 2,000만원으로 내린다. 근로소득공제가 총급여의 절반 가까이를 지워 과세표준이 작아지고, 세액공제가 산출세액 대부분을 지운다. ③ 연봉 1억 5천만원에서 세액공제 막대가 얼마나 짧아지는지 본다(고소득일수록 한도가 줄어든다). (본인 1명, 비과세 식대 20만원, 추가 공제 없음. 표준세액공제 등 일부 공제를 생략한 단순화 모델이다.)</div>
+    </div>
+
+    <p>연봉 3,600만원인 한결은 총급여 3,360만원의 약 2.3%만 소득세로 낸다. 근로소득공제와 세액공제가 사회초년생 소득대를 두텁게 보호하기 때문이다. 연봉 2,000만원 근처에서는 결정세액이 연 10만원 안팎까지 내려간다.</p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>과세표준</th><th class="num">세율</th><th class="num">누진공제</th></tr></thead>
+      <tbody>
+        <tr><td>1,400만원 이하</td><td class="num">6%</td><td class="num">—</td></tr>
+        <tr><td>1,400만원 초과 ~ 5,000만원 이하</td><td class="num">15%</td><td class="num">126만원</td></tr>
+        <tr><td>5,000만원 초과 ~ 8,800만원 이하</td><td class="num">24%</td><td class="num">576만원</td></tr>
+        <tr><td>8,800만원 초과 ~ 1억 5천만원 이하</td><td class="num">35%</td><td class="num">1,544만원</td></tr>
+        <tr><td>1억 5천만원 초과 ~ 3억원 이하</td><td class="num">38%</td><td class="num">1,994만원</td></tr>
+        <tr><td>3억원 초과 ~ 5억원 이하</td><td class="num">40%</td><td class="num">2,594만원</td></tr>
+        <tr><td>5억원 초과 ~ 10억원 이하</td><td class="num">42%</td><td class="num">3,594만원</td></tr>
+        <tr><td>10억원 초과</td><td class="num">45%</td><td class="num">6,594만원</td></tr>
+      </tbody>
+    </table></div>
+    <p>표의 세율은 지방소득세를 뺀 것이다. 지방소득세 10%를 더하면 15% 구간은 실제로 16.5%, 24% 구간은 26.4%가 된다. 그리고 이 표에서 가장 많이 오해받는 것이 바로 "구간"의 뜻이다.</p>
+  </section>
+
+  <section id="brackets">
+    <h2>누진세의 계단: 한계세율과 평균세율</h2>
+    <p>흔한 오해가 있다. "과세표준이 5,000만원을 넘으면 세율이 24%로 올라가니, 연봉이 조금 올라 구간을 넘으면 오히려 손해다." 사실이 아니다. 한국의 소득세는 <span class="term">초과누진세</span><span class="en">(Progressive tax by bracket)</span>다. 높은 세율은 <b>구간을 넘은 부분에만</b> 붙는다. 5,000만원까지는 여전히 앞 구간의 세율로 계산하고, 넘은 금액에만 24%를 곱한다.</p>
+    <p>계단 모양의 물통을 떠올리면 쉽다. 통마다 폭은 구간의 길이, 높이는 그 구간의 세율이다. 과세표준만큼 왼쪽부터 물을 채우면, <b>채워진 물의 넓이가 세금</b>이다. 아래 그림의 손잡이를 끌어 과세표준을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-stair">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>세금 계단: 과세표준만큼 물통을 채운다</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="st-cv"></canvas><span class="hint">아래 손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="st-range"><button data-value="160" class="on">1.6억까지</button><button data-value="600">6억까지</button></div>
+          <label class="check"><input type="checkbox" id="st-myth"> 오해대로: 전부에 최고 구간 세율</label>
+          <div class="btn-row"><button class="btn sm" id="st-hg">한결(1,854만)</button><button class="btn sm" id="st-50">5,000만 경계</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">과세표준</span><span class="v" id="st-o-b">—</span></div>
+        <div class="stat"><span class="k">산출세액</span><span class="v" id="st-o-t">—</span></div>
+        <div class="stat"><span class="k">한계세율</span><span class="v" id="st-o-m">—</span></div>
+        <div class="stat"><span class="k">평균세율</span><span class="v" id="st-o-a">—</span></div>
+        <div class="stat"><span class="k">오해대로라면</span><span class="v" id="st-o-x">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "5,000만 경계"를 누른 뒤 손잡이를 아주 조금 오른쪽으로 끈다. 24% 통에 물이 살짝 들어갈 뿐 세금은 계단처럼 뛰지 않는다. ② "오해대로"를 켠다. 빨간 점선 상자가 실제 물보다 얼마나 큰지 본다. ③ "6억까지"로 바꾸고 끝까지 끈다. 평균세율은 한계세율을 쫓아 올라가지만 결코 따라잡지 못한다. (지방소득세 제외, 2026년 세율 구간.)</div>
+    </div>
+
+    <p>여기서 두 가지 세율이 구분된다.</p>
+    <ul>
+      <li><span class="term">한계세율</span><span class="en">(Marginal tax rate)</span>: 소득이 <b>한 단위 더</b> 늘 때 그 돈에 붙는 세율이다. 물이 지금 차오르는 통의 높이다. 한결은 15%, 지방세까지 16.5%다.</li>
+      <li><span class="term">평균세율</span><span class="en">(Average tax rate)</span>: 낸 세금을 전체 소득으로 나눈 값이다. 물의 넓이를 폭으로 나눈 평균 높이다. 한결의 산출세액 기준 평균은 과세표준의 약 8.2%이고, 세액공제까지 빼고 총급여에 견주면 2.3%에 불과하다.</li>
+    </ul>
+    <p>계산 근거: 과세표준 5,000만원의 산출세액은 624만원, 5,001만원이면 624만 2,400원이다. 1만원 더 벌었을 때 세금은 2,400원(24%) 더 붙는다. 구간을 넘었다고 앞의 5,000만원 전체에 24%가 붙지는 않는다. 따라서 누진세 구조에서는 <b>세전 소득이 늘면 세후 소득도 반드시 는다</b>.</p>
+
+    <p>이제 세금과 보험료를 다 합친 그림으로 넓혀 본다. 아래 위쪽 그래프는 연봉에 따른 연 실수령, 아래쪽은 세 가지 비율이다. 세로선을 끌어 움직여 본다.</p>
+
+    <div class="sim" id="sim-curve">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>연봉 → 실수령 곡선과 공제율 곡선</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="cu-cv"></canvas><span class="hint">세로선을 좌우로 끈다</span></div>
+      </div>
+      <div class="legend">
+        <span><i style="background:var(--text-faint)"></i>세전 연봉</span><span><i style="background:var(--ok)"></i>연 실수령</span><span><i style="background:var(--accent)"></i>공제율(평균)</span><span><i style="background:var(--bad)"></i>한계세율(소득세+지방세)</span><span><i style="background:var(--warn)"></i>추가 100만원에서 빠지는 비율</span>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">세전 연봉</span><span class="v" id="cu-o-s">—</span></div>
+        <div class="stat"><span class="k">월 실수령</span><span class="v" id="cu-o-n">—</span></div>
+        <div class="stat"><span class="k">공제율</span><span class="v" id="cu-o-e">—</span></div>
+        <div class="stat"><span class="k">한계세율</span><span class="v" id="cu-o-m">—</span></div>
+        <div class="stat"><span class="k">추가 100만원 중 남는 돈</span><span class="v" id="cu-o-k">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 초록 실수령 선이 한 번도 내려가지 않는 것을 확인한다. 연봉이 오르면 실수령도 반드시 오른다. ② 빨간 한계세율은 계단, 초록색 공제율은 매끈한 언덕이다. 공제율은 언제나 계단 아래에 있다. ③ 연봉 약 7,200만원의 뾰족한 주황 봉우리는 근로소득세액공제 한도가 줄어드는 구간이고, 약 7,900만원에서 주황 선이 뚝 떨어지는 곳은 국민연금이 상한에 닿아 더 늘지 않는 곳이다. (본인 1명, 식대 20만원 비과세, 단순화한 연간 정산 모델.)</div>
+    </div>
+
+    <p>주황 선이 흥미롭다. 이것은 연봉이 100만원 더 오를 때 그중 몇 %가 보험료와 세금으로 빠지는지, 곧 <b>보험료까지 포함한 한계 공제율</b>이다. 한결의 연봉대에서는 약 23%다. 한계세율 16.5%에 4대 보험 약 9.7%가 더해지고, 소득공제 효과가 조금 덜어 낸 값이다. 세율 구간의 깊은 이야기, 소득공제와 세액공제를 어떻게 활용하는지는 <a href="tax.html">18장</a>에서 다룬다.</p>
+  </section>
+
+  <section id="yearend">
+    <h2>원천징수와 연말정산</h2>
+    <p>소득세가 1년 치 소득으로 정해진다면, 회사는 1월 월급에서 세금을 어떻게 뗄까. 아직 1년이 끝나지 않았는데 말이다. 답은 <b>일단 어림잡아 떼고, 나중에 맞춘다</b>이다.</p>
+    <ul>
+      <li><span class="term">원천징수</span><span class="en">(Withholding)</span>: 회사가 월급을 줄 때 세금을 미리 떼어 국가에 대신 내는 것. 국세청의 <b>근로소득 간이세액표</b>가 "월급이 얼마고 부양가족이 몇 명이면 이만큼 떼라"고 정해 둔다.</li>
+      <li><span class="term">연말정산</span><span class="en">(Year-end tax settlement)</span>: 다음 해 초에 1년 동안의 실제 소득과 공제(카드 사용액, 의료비, 교육비, 연금저축 등)를 모아 진짜 세금(결정세액)을 계산하고, 이미 뗀 세금과 비교해 차액을 정리하는 것.</li>
+    </ul>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 404" role="img" aria-label="1월부터 12월까지 매달 원천징수, 다음 해 1월 간소화 자료, 2월 연말정산으로 환급 또는 추가 납부, 5월 종합소득세 신고">
+        <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/></marker></defs>
+        <text x="18" y="26" class="lbl-b">올해</text>
+        <g>
+          <rect x="18" y="38" width="30" height="44" rx="5" class="f-acc2-soft"/><rect x="52" y="38" width="30" height="44" rx="5" class="f-acc2-soft"/><rect x="86" y="38" width="30" height="44" rx="5" class="f-acc2-soft"/><rect x="120" y="38" width="30" height="44" rx="5" class="f-acc2-soft"/><rect x="154" y="38" width="30" height="44" rx="5" class="f-acc2-soft"/><rect x="188" y="38" width="30" height="44" rx="5" class="f-acc2-soft"/><rect x="222" y="38" width="30" height="44" rx="5" class="f-acc2-soft"/><rect x="256" y="38" width="30" height="44" rx="5" class="f-acc2-soft"/><rect x="290" y="38" width="30" height="44" rx="5" class="f-acc2-soft"/><rect x="324" y="38" width="30" height="44" rx="5" class="f-acc2-soft"/><rect x="358" y="38" width="30" height="44" rx="5" class="f-acc2-soft"/><rect x="392" y="38" width="30" height="44" rx="5" class="f-acc2-soft"/>
+          <text x="33" y="65" text-anchor="middle" class="t-mono">1</text><text x="67" y="65" text-anchor="middle" class="t-mono">2</text><text x="101" y="65" text-anchor="middle" class="t-mono">3</text><text x="135" y="65" text-anchor="middle" class="t-mono">4</text><text x="169" y="65" text-anchor="middle" class="t-mono">5</text><text x="203" y="65" text-anchor="middle" class="t-mono">6</text><text x="237" y="65" text-anchor="middle" class="t-mono">7</text><text x="271" y="65" text-anchor="middle" class="t-mono">8</text><text x="305" y="65" text-anchor="middle" class="t-mono">9</text><text x="339" y="65" text-anchor="middle" class="t-mono">10</text><text x="373" y="65" text-anchor="middle" class="t-mono">11</text><text x="407" y="65" text-anchor="middle" class="t-mono">12</text>
+        </g>
+        <text x="220" y="104" text-anchor="middle" class="lbl-dim">매달 간이세액표로 원천징수(어림값)</text>
+        <line x1="220" y1="112" x2="220" y2="144" class="s-line" marker-end="url(#ar3)"/>
+        <text x="18" y="136" class="lbl-b">다음 해</text>
+        <rect x="18" y="150" width="180" height="52" rx="6" class="f-surface"/>
+        <text x="108" y="171" text-anchor="middle" class="lbl-dim">1월</text>
+        <text x="108" y="192" text-anchor="middle" class="lbl">공제 자료 제출</text>
+        <line x1="200" y1="176" x2="236" y2="176" class="s-line" marker-end="url(#ar3)"/>
+        <rect x="240" y="150" width="182" height="52" rx="6" class="f-acc-soft"/>
+        <text x="331" y="171" text-anchor="middle" class="lbl-dim">2월 월급</text>
+        <text x="331" y="192" text-anchor="middle" class="lbl-acc">연말정산</text>
+        <path d="M331,204 L331,216 L117,216 L117,234" class="s-line" marker-end="url(#ar3)"/>
+        <path d="M331,216 L323,216 L323,234" class="s-line" marker-end="url(#ar3)"/>
+        <rect x="18" y="238" width="198" height="58" rx="8" class="f-ok-soft"/>
+        <text x="117" y="262" text-anchor="middle" class="lbl-acc">미리 낸 세금 &gt; 결정세액</text>
+        <text x="117" y="284" text-anchor="middle" class="lbl-dim">차액을 돌려받음(환급)</text>
+        <rect x="224" y="238" width="198" height="58" rx="8" class="f-bad-soft"/>
+        <text x="323" y="262" text-anchor="middle" class="lbl-bad">미리 낸 세금 &lt; 결정세액</text>
+        <text x="323" y="284" text-anchor="middle" class="lbl-dim">차액을 더 냄(추가 납부)</text>
+        <rect x="18" y="308" width="404" height="58" rx="8" class="f-surface"/>
+        <text x="220" y="332" text-anchor="middle" class="lbl">근로소득 외 소득이 있으면</text>
+        <text x="220" y="354" text-anchor="middle" class="lbl-dim">5월 종합소득세 신고로 한 번 더 정산</text>
+        <text x="220" y="392" text-anchor="middle" class="lbl-dim">환급은 보너스가 아니라 '더 냈던 내 돈'을 돌려받는 것이다</text>
+      </svg>
+      <figcaption><b>그림 3. 원천징수와 연말정산의 1년.</b> 매달 떼는 세금은 선납금이고, 진짜 세금은 다음 해 2월에 확정된다. 공제 자료는 대부분 국세청 연말정산 간소화 서비스에서 자동으로 모인다.</figcaption>
+    </figure>
+
+    <p>그러니 '13월의 월급'은 정부가 주는 선물이 아니다. 1년 동안 실제 세금보다 <b>많이 떼였던 돈</b>을 돌려받는 것이다. 반대로 '세금 폭탄'은 덜 떼였던 세금을 한꺼번에 내는 것이다. 근로자는 원천징수 비율을 간이세액표의 80%, 100%, 120% 중에서 고를 수 있다. 80%를 고르면 매달 실수령이 조금 늘지만 연말정산 때 덜 돌려받거나 더 낸다. 총 세금은 어느 쪽이든 같다.</p>
+
+    <div class="sim" id="sim-year">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>미리 낸 세금과 진짜 세금: 환급인가 추가 납부인가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ye-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="ctrl"><span>원천징수 비율</span><div class="seg" id="ye-ratio"><button data-value="0.8">80%</button><button data-value="1" class="on">100%</button><button data-value="1.2">120%</button></div></div>
+          <label class="ctrl"><span>추가 소득공제(카드·주택 등) <output id="ye-ded-out"></output></span><input type="range" id="ye-ded" min="0" max="6000000" step="100000" value="0"></label>
+          <label class="ctrl"><span>추가 세액공제(의료비·연금저축 등) <output id="ye-cr-out"></output></span><input type="range" id="ye-cr" min="0" max="800000" step="10000" value="0"></label>
+          <div class="btn-row"><button class="btn primary" id="ye-go">1년 돌려 보기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">1년간 미리 낸 세금</span><span class="v" id="ye-o-w">—</span></div>
+        <div class="stat"><span class="k">결정세액(지방세 포함)</span><span class="v" id="ye-o-f">—</span></div>
+        <div class="stat"><span class="k">연말정산 결과</span><span class="v" id="ye-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(100%, 추가 공제 없음)에서는 미리 낸 세금과 결정세액이 거의 같다. ② 추가 세액공제를 30만원으로 올린다. 결정세액이 줄어 차액이 환급된다. ③ 원천징수 비율 120%로 바꾼다. 환급이 커지지만, 그만큼 1년 내내 월급에서 더 떼였을 뿐이다. 80%로 바꾸면 추가 납부가 생긴다. (한결의 연봉 3,600만원 고정. 매달 원천징수는 엔진의 연간 계산값을 12로 나눈 것으로 간이세액표를 대신했다. 공제 금액은 예시이며 실제 공제 요건과 한도는 항목마다 다르다.)</div>
+    </div>
+
+    <p>연말정산의 결과를 좌우하는 것은 두 가지다. 1년 동안 <b>얼마나 미리 냈는가</b>(원천징수 비율과 간이세액표의 오차)와, <b>공제를 얼마나 챙겼는가</b>(카드 사용, 의료비, 연금저축 같은 공제 항목). 앞의 것은 시점만 바꾸고, 뒤의 것만 실제로 세금을 줄인다. 공제 항목 하나하나의 활용은 <a href="tax.html">18장</a>의 몫이다.</p>
+
+    <h3>부양가족이 있으면</h3>
+    <p>원천징수와 연말정산 모두 <b>부양가족 수</b>를 본다. 소득이 적은 배우자, 자녀, 부모를 부양하면 1명당 인적공제 150만원이 더해진다(나이·소득 요건이 있다). 같은 연봉이어도 부양가족이 많은 사람의 세금이 적은 이유다.</p>
+
+    <div class="sim" id="sim-fam">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>부양가족 수에 따른 1년 세금</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="fm-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>세전 연봉 <output id="fm-sal-out"></output></span><input type="range" id="fm-sal" min="24000000" max="120000000" step="1000000" value="50000000"></label>
+          <label class="ctrl"><span>공제 인원(본인 포함) <output id="fm-n-out"></output></span><input type="range" id="fm-n" min="1" max="6" step="1" value="1"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">1년 세금(지방세 포함)</span><span class="v" id="fm-o-t">—</span></div>
+        <div class="stat"><span class="k">혼자일 때보다</span><span class="v" id="fm-o-d">—</span></div>
+        <div class="stat"><span class="k">월 실수령</span><span class="v" id="fm-o-n">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 연봉 5,000만원에서 공제 인원을 1명에서 2명으로 늘린다. 150만원 × 한계세율 15%에 지방세를 더한 약 25만원이 준다. ② 연봉 1억으로 올리고 같은 일을 한다. 한계세율이 높을수록 같은 인적공제가 더 많은 세금을 줄인다. ③ 연봉 2,400만원에서는 몇 명을 더해도 줄어드는 폭이 작다. 원래 낼 세금이 적기 때문이다. (인적공제만 반영. 실제로는 자녀세액공제 등 추가 공제가 있다.)</div>
+    </div>
+    <p>②에서 본 것은 소득공제의 성질이다. 소득공제 150만원은 <b>150만원 × 내 한계세율</b>만큼 세금을 줄이므로, 세율이 높은 사람에게 더 큰 혜택이 간다. 그래서 정부는 저소득층에게도 같은 크기의 혜택이 가도록 자녀 공제처럼 일부 공제를 세액공제로 바꿔 왔다.</p>
+  </section>
+
+  <section id="raise">
+    <h2>연봉이 오르면 얼마가 남는가</h2>
+    <p>연봉 협상에서 "400만원 올려 주겠다"는 제안을 받았다고 하자. 한 달에 33만 3천원이 더 들어올 것 같지만, 늘어난 세전 월급에도 보험료와 세금이 붙는다. 그것도 <b>평균 공제율이 아니라 한계 공제율</b>로 붙는다. 한결의 경우 지금 공제율은 11.5%지만, 늘어나는 돈에서는 약 23%가 빠진다.</p>
+
+    <div class="sim" id="sim-raise">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>연봉 협상 계산기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ra-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>현재 연봉 <output id="ra-sal-out"></output></span><input type="range" id="ra-sal" min="24000000" max="100000000" step="1000000" value="36000000"></label>
+          <label class="ctrl"><span>인상액(연) <output id="ra-up-out"></output></span><input type="range" id="ra-up" min="0" max="10000000" step="500000" value="4000000"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">월 세전 증가</span><span class="v" id="ra-o-g">—</span></div>
+        <div class="stat"><span class="k">월 실수령 증가</span><span class="v" id="ra-o-n">—</span></div>
+        <div class="stat"><span class="k">손에 남는 비율</span><span class="v" id="ra-o-k">—</span></div>
+        <div class="stat"><span class="k">연 실수령 증가</span><span class="v" id="ra-o-y">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(3,600만원 → 4,000만원)에서 월 실수령이 약 25.7만원 는다. 세전 증가분 33.3만원의 77%다. ② 현재 연봉을 7,000만원으로 올린다. 같은 400만원 인상인데 남는 비율이 더 낮아진다. ③ 인상액을 0으로 내리면 막대가 사라지고, 다시 올리면 늘어난 돈이 어디로 나뉘는지 보인다. (본인 1명, 식대 20만원 비과세, 단순화한 연간 정산 모델.)</div>
+    </div>
+
+    <p>남는 비율이 77%라는 것은 실망스러운 숫자가 아니다. 늘어난 돈의 일부는 국민연금으로 가서 나중에 연금액을 키우고, 나머지 대부분은 손에 남는다. 연봉 인상이 손해인 경우는 이 모델 안에서 한 번도 없다. 협상할 때는 세전 금액과 함께 "월 실수령이 얼마 느는가"를 계산해 두면 제안의 크기를 실감하기 쉽다.</p>
+    <div class="callout">
+      <strong>인상률은 물가와 함께 본다</strong>
+      연봉 3% 인상은 명목 숫자다. 같은 해 물가가 2.5% 올랐다면 실제로 살 수 있는 것은 약 0.5%만 늘었다(<a href="inflation.html">3장</a>). 그리고 세율 구간은 물가에 맞춰 자동으로 오르지 않기 때문에, 실질 소득이 그대로여도 명목 소득이 오르면 세금 비율이 조금씩 올라간다. 이를 '숨은 증세'라고 부르기도 한다.
+    </div>
+  </section>
+
+  <section id="wage">
+    <h2>시급, 주휴수당, 최저임금</h2>
+    <p>아르바이트나 시간제 일은 시급으로 받는다. 시급을 월급으로, 월급을 시급으로 바꾸려면 한국 특유의 제도 하나를 알아야 한다. <span class="term">주휴수당</span><span class="en">(Weekly holiday allowance)</span>이다. 1주에 15시간 이상 일하고 정해진 날을 다 나오면, 쉬는 날 하루를 <b>유급</b>으로 쳐 준다. 주 40시간 일하면 8시간분, 주 20시간이면 4시간분이 더 붙는다.</p>
+    <p>2026년 <span class="term">최저임금</span><span class="en">(Minimum wage)</span>은 시간당 10,320원이다. 주 40시간 일하면 주휴 8시간을 더해 주 48시간분을 받고, 한 달(평균 4.345주)로 환산하면 약 209시간이다. 그래서 최저임금 월급은 10,320원 × 209시간 = 215만 6,880원이 된다. 아래에서 시급과 근무 시간을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-hour">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>시급 환산기: 주휴수당과 연장근로</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="hr-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>시급 <output id="hr-w-out"></output></span><input type="range" id="hr-w" min="10320" max="30000" step="1" value="10320"></label>
+          <label class="ctrl"><span>주 근무시간 <output id="hr-h-out"></output></span><input type="range" id="hr-h" min="8" max="52" step="1" value="40"></label>
+          <div class="btn-row"><button class="btn sm" id="hr-min">최저임금</button><button class="btn sm" id="hr-hg">한결의 시급</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">주휴수당(주)</span><span class="v" id="hr-o-j">—</span></div>
+        <div class="stat"><span class="k">월 환산 시간</span><span class="v" id="hr-o-h">—</span></div>
+        <div class="stat"><span class="k">월급(세전)</span><span class="v" id="hr-o-m">—</span></div>
+        <div class="stat"><span class="k">연봉 환산</span><span class="v" id="hr-o-y">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 주 근무시간을 15시간에서 14시간으로 줄인다. 주휴수당이 통째로 사라진다. 15시간이라는 문턱이 있다. ② 40시간을 넘겨 52시간까지 올린다. 넘는 시간은 1.5배(연장근로 가산)로 계산되어 주황색으로 쌓인다. ③ "한결의 시급"을 누른다. 월 300만원을 209시간으로 나누면 시급 약 14,354원이다. (주휴는 주 40시간 기준 8시간에 비례, 연장근로 가산은 5인 이상 사업장 기준. 월 환산은 주 48시간 = 209시간 비율을 썼다.)</div>
+    </div>
+
+    <p>최저임금은 이 책 전체의 바닥선이기도 하다. 최저임금으로 주 40시간 일한 월급 215만 6,880원에서 4대 보험과 세금을 빼면 엔진 계산으로 약 194만원이 남는다(식대 20만원 비과세 가정). 반대 방향 계산도 해 둘 만하다. 한결의 세전 월급 300만원을 209시간으로 나누면 시급 약 14,354원, 실수령 265.6만원으로는 약 12,707원이다. 지출 하나를 "이건 몇 시간 일한 값인가"로 바꿔 보는 습관은 <a href="budget.html">7장</a>에서 쓸모가 있다.</p>
+    <div class="callout warn">
+      <strong>최저임금은 매년 새로 정한다</strong>
+      최저임금위원회가 매년 여름 다음 해 최저임금을 결정한다. 10,320원은 2026년 값이다. 수습 기간, 일부 업종, 5인 미만 사업장(연장근로 가산 미적용 등)에는 예외 규정이 있으니 실제 근로 조건은 고용노동부 안내로 확인한다.
+    </div>
+  </section>
+
+  <section id="employer">
+    <h2>회사가 실제로 쓰는 돈</h2>
+    <p>한결의 연봉은 3,600만원이지만, 회사가 한결을 고용하느라 쓰는 돈은 이보다 많다. 회사 몫의 4대 보험, 회사만 내는 산재·고용안정 보험료, 그리고 매년 한 달 치씩 쌓이는 <span class="term">퇴직금</span><span class="en">(Severance pay)</span> 적립금이 더해진다. 이것을 모두 합친 것이 회사 입장의 <b>인건비</b>다.</p>
+
+    <div class="sim" id="sim-cost">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>회사가 한 사람에게 쓰는 한 달</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="co-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>세전 연봉 <output id="co-sal-out"></output></span><input type="range" id="co-sal" min="24000000" max="120000000" step="1000000" value="36000000"></label>
+          <label class="check"><input type="checkbox" id="co-sev" checked> 퇴직금 적립(월급의 1/12) 포함</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">회사 비용(월)</span><span class="v" id="co-o-m">—</span></div>
+        <div class="stat"><span class="k">회사 비용(연)</span><span class="v" id="co-o-y">—</span></div>
+        <div class="stat"><span class="k">연봉 대비</span><span class="v" id="co-o-x">—</span></div>
+        <div class="stat"><span class="k">그중 내 통장으로</span><span class="v" id="co-o-n">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 한결(3,600만원)의 회사 비용은 연 약 4,268만원, 연봉의 약 1.19배다. ② 도넛에서 초록(실수령)이 차지하는 몫을 읽는다. 회사가 쓰는 돈의 약 75%다. ③ 연봉을 1억 이상으로 올리면 회사 몫 보험료 비중이 줄어든다(국민연금 상한). (회사 부담 = 근로자와 같은 4대 보험 + 고용안정 0.25% + 산재 1% 가정 + 퇴직금 월급의 1/12. 퇴직금은 회사 적립 방식에 따라 다르다.)</div>
+    </div>
+    <p>회사 입장에서는 4,268만원을 써서 한 사람을 고용하고, 그 사람의 통장에는 약 3,187만원이 들어간다. 그 사이 약 1,080만원은 국민연금·건강보험·고용보험·산재보험 재정, 국세와 지방세, 그리고 나중에 받을 퇴직금으로 나뉜다. 이 중 연금과 퇴직금은 사라진 돈이 아니라 <b>미래의 내 소득</b>이다(<a href="pension.html">20장</a>). 이직할 때 "연봉 대신 처우 전체"를 비교하라는 조언이 여기서 나온다.</p>
+  </section>
+
+  <section id="others">
+    <h2>근로소득 밖의 소득</h2>
+    <p>세법은 소득을 출처에 따라 나눈다. 월급만 받는 직장인은 근로소득 하나만 있지만, 부업·투자·연금이 생기면 다른 칸이 채워진다. 칸마다 세금을 떼는 방식이 다르다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>소득 종류</th><th>예</th><th>세금을 내는 방식</th></tr></thead>
+      <tbody>
+        <tr><td>근로소득</td><td>월급, 상여금</td><td>매달 원천징수 → 다음 해 2월 연말정산</td></tr>
+        <tr><td>사업소득</td><td>자영업, 프리랜서 용역비</td><td>지급액의 3.3% 원천징수 → 5월 종합소득세 신고</td></tr>
+        <tr><td>기타소득</td><td>일시적인 강연료, 원고료, 상금</td><td>필요경비를 뺀 뒤 22% 원천징수(일정액 이하는 분리과세 선택)</td></tr>
+        <tr><td>이자·배당소득</td><td>예금 이자, 주식 배당</td><td>15.4% 원천징수, 연 2,000만원 넘으면 종합과세(<a href="saving.html">8장</a>)</td></tr>
+        <tr><td>연금소득</td><td>국민연금, 연금저축 수령액</td><td>연금 종류에 따라 원천징수 또는 종합과세(<a href="pension.html">20장</a>)</td></tr>
+        <tr><td>퇴직·양도소득</td><td>퇴직금, 집·주식을 판 차익</td><td>다른 소득과 합치지 않고 따로 계산(분류과세)</td></tr>
+      </tbody>
+    </table></div>
+
+    <p>사회초년생이 가장 자주 만나는 것은 <b>프리랜서 3.3%</b>다. 회사에 고용되지 않고 일을 맡아 대가를 받으면, 주는 쪽이 소득세 3%와 지방소득세 0.3%를 떼고 나머지를 준다. 같은 300만원을 두 방식으로 받으면 처음 입금액은 이렇게 다르다.</p>
+    <div class="two-slips">
+      <div>
+        <div class="slip-cap">근로자(한결)</div>
+        <div class="slip">
+          <div class="row"><span>지급 합계</span><span>3,000,000</span></div>
+          <div class="row"><span>4대 보험(근로자 몫)</span><span>−272,070</span></div>
+          <div class="row"><span>소득세·지방소득세</span><span>−72,090</span></div>
+          <div class="row total"><span>입금액</span><span>2,655,840</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="slip-cap">프리랜서(사업소득 3.3%)</div>
+        <div class="slip">
+          <div class="row"><span>계약 금액</span><span>3,000,000</span></div>
+          <div class="row"><span>소득세 3%</span><span>−90,000</span></div>
+          <div class="row"><span>지방소득세 0.3%</span><span>−9,000</span></div>
+          <div class="row total"><span>입금액</span><span>2,901,000</span></div>
+        </div>
+      </div>
+    </div>
+    <p>프리랜서 쪽이 24만원 많아 보이지만 착시다. 3.3%는 선납금일 뿐이고, 다음 해 5월 종합소득세 신고 때 실제 세금이 정해져 추가 납부나 환급이 생긴다. 또 국민연금과 건강보험을 <b>지역가입자로 본인이 전부</b> 낸다(국민연금은 9.5% 전체, 회사 몫이 없다). 고용보험이 없으면 실업급여도, 퇴직금도 없다. 프리랜서의 300만원과 직장인의 300만원은 같은 돈이 아니다.</p>
+    <div class="callout deep">
+      <strong>종합소득세 신고</strong>
+      근로소득만 있는 사람은 연말정산으로 끝나지만, 사업소득이나 일정액 이상의 기타·금융소득이 있으면 모든 소득을 합쳐 다음 해 5월에 <span class="term">종합소득세</span>를 신고한다. 이때 같은 누진세율표(앞의 표)가 합친 소득 전체에 적용된다. 월급에 부업 소득이 더해지면 부업 소득에는 내 한계세율이 붙는다는 뜻이다.
+    </div>
+  </section>
+
+  <section id="hangyeol">
+    <h2>한결의 첫 월급 명세서</h2>
+    <div class="casefile">
+      <div class="tag"><b>LEDGER 한결</b><span>한결의 가계부 · 6장</span></div>
+      <h4>첫 월급 300만원, 통장에는 265만원</h4>
+      <p>2026년 1월에 입사한 한결(가상 인물, 27세)의 연봉은 3,600만원, 월 세전 300만원이다. 그중 식대 20만원은 비과세다. 첫 명세서의 공제는 국민연금 133,000원, 건강보험 100,660원, 장기요양 13,220원, 고용보험 25,190원, 소득세 65,540원, 지방소득세 6,550원으로 합계 344,160원이다. 통장에는 <b>2,655,840원</b>이 들어왔다. 공제율은 약 11.5%이고, 그중 4분의 3 이상이 세금이 아니라 보험료다.</p>
+      <p>한결의 과세표준은 1,854만 5,160원으로 15% 구간에 있다. 지방세를 더한 <b>한계세율은 16.5%</b>다. 그래서 다음 연봉 협상에서 4,000만원(+400만원)을 받아 내면 월 실수령은 2,912,433원으로 약 25.7만원(세전 증가분의 77%), 1년에 약 308만원 늘어난다. 회사는 한결에게 퇴직금 적립과 회사 몫 보험료를 합쳐 연 약 4,268만원을 쓴다. 시급으로 따지면 한결의 한 시간은 세전 약 14,354원, 실수령 약 12,707원이다.</p>
+      <div class="clue">
+        <div><b>이 장에서 정한 것</b>한결이 한 달에 쓸 수 있는 돈의 출발점은 300만원이 아니라 265.6만원이다. 원천징수 비율은 100%로 둔다.</div>
+        <div><b>아직 남은 문제</b>265.6만원에서 월세, 생활비, 학자금 상환을 빼면 얼마가 남는가. 남는 돈은 충분한가.</div>
+        <div><b>다음 단계</b><a href="budget.html">7장</a>에서 한결의 한 달 지출을 고정비와 변동비로 나눠 예산을 짠다.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>월급에는 세 숫자가 있다. 연봉(1년·세전), 월 세전 급여, 실수령액. 연봉 3,600만원의 월 실수령은 2026년 기준 약 265.6만원이다.</li>
+      <li>공제는 4대 보험과 세금으로 나뉜다. 4대 보험은 비과세를 뺀 보수에 요율을 곱하고, 회사도 거의 같은 금액을 낸다. 국민연금은 상한 소득에서 멈춘다.</li>
+      <li>소득세는 총급여 → 근로소득공제 → 인적·보험료 공제 → 과세표준 → 누진세율 → 세액공제 → 결정세액 순서로 계산한다. 소득공제는 '대상'을, 세액공제는 '세금'을 줄인다.</li>
+      <li>초과누진세에서는 높은 세율이 구간을 넘은 부분에만 붙는다. 한계세율은 다음 1원에 붙는 세율, 평균세율은 전체 세금 ÷ 전체 소득이다. 세전 소득이 늘면 세후 소득도 반드시 는다.</li>
+      <li>매달 떼는 세금은 선납금(원천징수)이고, 진짜 세금은 연말정산에서 확정된다. 환급은 더 냈던 돈을 돌려받는 것이며, 원천징수 비율은 시점만 바꾼다.</li>
+      <li>최저임금 월급은 시급 × 209시간(주휴 포함)이다. 연봉 인상분에는 한계 공제율이 붙어 늘어난 세전의 약 4분의 3이 손에 남고, 회사는 연봉보다 약 1.2배를 쓴다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>과세표준이 4,990만원인 사람이 연봉이 올라 과세표준이 5,010만원이 되었다. 세율 구간이 15%에서 24%로 넘어갔다. 산출세액은 어떻게 되는가?</p>
+        <div class="opts">
+          <button class="opt">5,010만원 전체에 24%가 붙어 세금이 수백만원 늘어난다.</button>
+          <button class="opt">구간을 넘었으므로 세후 소득이 오히려 줄어든다.</button>
+          <button class="opt" data-correct>늘어난 20만원 중 5,000만원까지 10만원에는 15%, 넘는 10만원에만 24%가 붙어 약 3.9만원 는다.</button>
+          <button class="opt">구간이 바뀌어도 세금은 그대로다.</button>
+        </div>
+        <div class="quiz-exp">초과누진세에서는 높은 세율이 구간을 넘은 부분에만 붙는다. 10만원 × 15% + 10만원 × 24% = 3.9만원이다. 앞의 5,000만원은 여전히 6%와 15% 구간으로 계산한다. 그래서 세전 소득이 늘었는데 세후 소득이 줄어드는 일은 생기지 않는다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>한결의 명세서에 국민연금 133,000원이 찍혀 있다. 한결 몫으로 국민연금공단에 실제로 들어가는 보험료는 한 달에 얼마인가?</p>
+        <div class="opts">
+          <button class="opt" data-correct>266,000원. 회사가 같은 4.75%를 더 낸다.</button>
+          <button class="opt">133,000원. 명세서에 찍힌 것이 전부다.</button>
+          <button class="opt">142,500원. 300만원 전체의 4.75%다.</button>
+          <button class="opt">66,500원. 회사와 반씩 나눈 금액이다.</button>
+        </div>
+        <div class="quiz-exp">2026년 국민연금 보험료율은 9.5%이고 근로자와 회사가 4.75%씩 나눠 낸다. 명세서에는 근로자 몫만 보인다. 보험료는 비과세 식대를 뺀 280만원에 매기므로 300만원의 4.75%(142,500원)가 아니라 133,000원이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>연말정산에서 50만원을 환급받았다. 이 50만원의 정체로 가장 알맞은 것은?</p>
+        <div class="opts">
+          <button class="opt">정부가 근로자에게 주는 연말 보너스다.</button>
+          <button class="opt">회사가 한 해 성과에 따라 주는 13번째 월급이다.</button>
+          <button class="opt">내년 세금에서 미리 빌려 온 돈이다.</button>
+          <button class="opt" data-correct>1년 동안 원천징수로 미리 낸 세금이 결정세액보다 많아, 더 낸 몫을 돌려받은 것이다.</button>
+        </div>
+        <div class="quiz-exp">매달 떼는 소득세는 간이세액표에 따른 선납금이다. 연말정산에서 공제를 반영한 결정세액이 확정되고, 미리 낸 세금이 더 많으면 차액을 돌려받는다. 원천징수 비율을 120%로 올려 두면 환급이 커지지만, 1년 내내 그만큼 덜 받았을 뿐 총 세금은 같다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>연봉 3,600만원인 한결이 4,000만원으로 협상에 성공했다. 월 세전은 약 33.3만원 는다. 월 실수령은 대략 얼마나 늘까? (2026년 요율, 이 장의 계산 엔진 기준)</p>
+        <div class="opts">
+          <button class="opt">약 33.3만원. 인상분에는 공제가 붙지 않는다.</button>
+          <button class="opt" data-correct>약 25.7만원. 인상분에 보험료와 한계세율이 붙어 약 77%가 남는다.</button>
+          <button class="opt">약 29.5만원. 평균 공제율 11.5%만 빠진다.</button>
+          <button class="opt">약 16만원. 구간이 바뀌어 절반 가까이가 세금이다.</button>
+        </div>
+        <div class="quiz-exp">늘어나는 돈에는 평균 공제율이 아니라 한계 공제율이 붙는다. 국민연금·건강·장기요양·고용보험 약 9.7%에, 소득세와 지방소득세가 더해져 늘어난 33.3만원 중 약 7.7만원이 빠진다. 엔진 계산으로 월 실수령은 2,655,840원에서 2,912,433원으로 256,593원 는다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+  const num = (x) => Math.round(x).toLocaleString("ko-KR");
+  const wonF = (x) => num(x) + "원";
+  const manF = (v, d = 1) => {
+    const m = v / 1e4, a = Math.abs(m);
+    const s = a >= 1000 ? Math.round(m).toLocaleString("ko-KR") : (+m.toFixed(d)).toLocaleString("ko-KR");
+    return s + "만";
+  };
+  const KEYS = ["nps", "health", "ltc", "emp", "tax", "local"];
+  const NAME = { nps: "국민연금", health: "건강보험", ltc: "장기요양", emp: "고용보험", tax: "소득세", local: "지방소득세", net: "실수령" };
+  const SHORT = { nps: "연금", health: "건강", ltc: "요양", emp: "고용", tax: "소득세", local: "지방세", net: "실수령" };
+  const colors = (P) => ({ nps: P.accent2, health: P.blue, ltc: P.dim, emp: P.warn, tax: P.bad, local: P.red, net: P.ok });
+  function rr(ctx, x, y, w, h, r) {
+    r = Math.max(0, Math.min(r, w / 2, h / 2));
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  function handle(ctx, x, y, P, r = 8) {
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fillStyle = P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = MB.color("canvas-bg"); ctx.stroke();
+  }
+  const salFmt = (v) => MB.won(v);
+  const ease = (t) => 1 - Math.pow(1 - t, 3);
+  const SEV_RATE = 1 / 12, EMP_STAB = 0.0025, SANJAE = 0.01;
+
+  /* ---------------------------------------------------------- 1. 명세서 */
+  (function () {
+    let pr;
+    const sal = MB.range("sl-sal", salFmt, () => upd());
+    const nt = MB.range("sl-nt", (v) => MB.won(v), () => upd());
+    function upd() {
+      pr = MN.payroll(sal(), { nontax: nt() });
+      const m = pr.monthly, C = { nps: "var(--accent-2)", health: "var(--blue)", ltc: "var(--text-dim)", emp: "var(--warn)", tax: "var(--bad)", local: "var(--red)" };
+      const rows = [
+        `<div class="row head"><span>지급</span><span></span></div>`,
+        `<div class="row"><span>기본급(과세)</span><span>${num(m.gross - m.nontax)}</span></div>`,
+        `<div class="row"><span>식대(비과세)</span><span>${num(m.nontax)}</span></div>`,
+        `<div class="row sub"><span>지급 합계</span><span>${num(m.gross)}</span></div>`,
+        `<div class="row head"><span>공제</span><span></span></div>`,
+        ...KEYS.map((k) => `<div class="row"><span><i class="sw" style="background:${C[k]}"></i>${NAME[k]}</span><span class="minus">−${num(m[k])}</span></div>`),
+        `<div class="row sub"><span>공제 합계</span><span class="minus">−${num(m.deductions)}</span></div>`,
+        `<div class="row total"><span>실지급액</span><span>${num(m.net)}</span></div>`,
+      ];
+      $("sl-slip").innerHTML = rows.join("");
+      MB.stat("sl-o-g", MB.won(m.gross));
+      MB.stat("sl-o-d", `<span class="bad-t">${MB.won(m.deductions, { digits: 1 })}</span>`);
+      MB.stat("sl-o-n", `<span class="ok-t">${MB.won(m.net, { digits: 1 })}</span>`);
+      MB.stat("sl-o-r", MB.pct(m.deductions / m.gross, 1));
+      if (cv) cv.redraw();
+    }
+    let cv = null;
+    upd();
+    cv = MB.canvas("#sl-cv", (ctx, w, h) => {
+      const P = MB.palette(), C = colors(P), m = pr.monthly;
+      const x0 = 16, bw = w - 32, y = 40, bh = 34, S = (v) => (v / m.gross) * bw;
+      let x = x0;
+      [["net", m.net], ...KEYS.map((k) => [k, m[k]])].forEach(([k, v]) => { ctx.fillStyle = C[k]; ctx.fillRect(x, y, S(v), bh); x += S(v); });
+      // 비과세 빗금
+      const nx = S(m.nontax);
+      if (nx > 2) {
+        ctx.save(); ctx.beginPath(); ctx.rect(x0, y, nx, bh); ctx.clip();
+        ctx.strokeStyle = MB.color("canvas-bg"); ctx.globalAlpha = 0.5; ctx.lineWidth = 2;
+        for (let i = -bh; i < nx + bh; i += 8) { ctx.beginPath(); ctx.moveTo(x0 + i, y + bh); ctx.lineTo(x0 + i + bh, y); ctx.stroke(); }
+        ctx.restore();
+      }
+      ctx.font = MB.font(12.5, false, 700); ctx.textBaseline = "bottom";
+      ctx.fillStyle = P.ok; ctx.textAlign = "left";
+      ctx.fillText("실수령 " + manF(m.net) + "원 (" + MB.pct(m.net / m.gross, 1) + ")", x0, y - 8);
+      const dx = x0 + S(m.net);
+      ctx.fillStyle = P.bad; ctx.textAlign = "right";
+      if (w > 420) ctx.fillText("공제 " + manF(m.deductions) + "원", w - 16, y - 8);
+      ctx.strokeStyle = P.bad; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(dx, y - 5); ctx.lineTo(dx, y - 2); ctx.lineTo(w - 16, y - 2); ctx.lineTo(w - 16, y - 5); ctx.stroke();
+      ctx.font = MB.font(12); ctx.fillStyle = P.dim; ctx.textBaseline = "top"; ctx.textAlign = "left";
+      if (nx > 2) {
+        ctx.strokeStyle = P.dim; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x0, y + bh + 4); ctx.lineTo(x0, y + bh + 8); ctx.lineTo(x0 + nx, y + bh + 8); ctx.lineTo(x0 + nx, y + bh + 4); ctx.stroke();
+        ctx.fillText("빗금: 비과세 식대 " + manF(m.nontax) + "원 (보험료·세금 없음)", x0, y + bh + 12);
+      } else ctx.fillText("비과세 없음: 300만원 전체에 보험료·세금이 붙는다", x0, y + bh + 12);
+    }, { height: 108 });
+  })();
+
+  /* ---------------------------------------------------------- 2. 폭포 */
+  (function () {
+    const STEP = 0.55, DUR = 0.5, LEAD = 0.3, END = LEAD + 6 * STEP + DUR + 0.3;
+    const st = { t: 0, coins: [], acc: 0 };
+    let geo = null, m = null;
+    const sal = MB.range("fa-sal", salFmt, () => { st.t = END; st.coins = []; upd(); cv.redraw(); });
+    const frac = (j) => MB.clamp((st.t - LEAD - (j - 1) * STEP) / DUR, 0, 1);
+    function upd() {
+      m = MN.payroll(sal()).monthly;
+      const ins = m.nps + m.health + m.ltc + m.emp, tax = m.tax + m.local;
+      MB.stat("fa-o-i", MB.won(ins, { digits: 1 }));
+      MB.stat("fa-o-t", MB.won(tax, { digits: 1 }));
+      MB.stat("fa-o-n", `<span class="ok-t">${MB.won(m.net, { digits: 1 })}</span>`);
+      MB.stat("fa-o-k", (m.net / m.gross * 100).toFixed(1) + "원");
+    }
+    upd();
+    const cv = MB.canvas("#fa-cv", (ctx, w, h) => {
+      const P = MB.palette(), C = colors(P);
+      const box = { x: 50, y: 22, w: w - 50 - 10, h: h - 22 - 30 };
+      const ymax = m.gross * 1.08;
+      const c = MB.chart(ctx, box, { x: [0, 8], y: [0, ymax], xTicks: [], yFmt: MB.wonAxis });
+      const slot = box.w / 8, bw = slot * 0.66, cx = (i) => box.x + slot * (i + 0.5);
+      geo = { c, cx, bw };
+      const small = slot < 52;
+      ctx.font = MB.font(small ? 10 : 11.5);
+      const label = (i, s, col) => { ctx.fillStyle = col || P.dim; ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillText(s, cx(i), box.y + box.h + 6); };
+      const val = (i, v, yTop) => { ctx.fillStyle = P.text; ctx.font = MB.font(small ? 9.5 : 11, true); ctx.textAlign = "center"; ctx.textBaseline = "bottom"; ctx.fillText(manF(v, small ? 0 : 1), cx(i), yTop - 2); ctx.font = MB.font(small ? 10 : 11.5); };
+      // 세전
+      ctx.fillStyle = P.accent; ctx.fillRect(cx(0) - bw / 2, c.Y(m.gross), bw, c.Y(0) - c.Y(m.gross));
+      label(0, "세전"); val(0, m.gross, c.Y(m.gross));
+      let run = m.gross;
+      KEYS.forEach((k, idx) => {
+        const j = idx + 1, f = frac(j), v = m[k];
+        ctx.strokeStyle = P.faint; ctx.setLineDash([3, 3]); ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(cx(j - 1) + bw / 2, c.Y(run)); ctx.lineTo(cx(j) + bw / 2, c.Y(run)); ctx.stroke(); ctx.setLineDash([]);
+        ctx.strokeStyle = C[k]; ctx.lineWidth = 1;
+        ctx.strokeRect(cx(j) - bw / 2, c.Y(run), bw, Math.max(1, c.Y(run - v) - c.Y(run)));
+        if (f > 0) { ctx.fillStyle = C[k]; ctx.fillRect(cx(j) - bw / 2, c.Y(run), bw, Math.max(1, c.Y(run - v * f) - c.Y(run))); }
+        label(j, SHORT[k]);
+        if (f >= 1) val(j, v, c.Y(run));
+        run -= v;
+      });
+      ctx.strokeStyle = P.faint; ctx.setLineDash([3, 3]);
+      ctx.beginPath(); ctx.moveTo(cx(6) + bw / 2, c.Y(run)); ctx.lineTo(cx(7) + bw / 2, c.Y(run)); ctx.stroke(); ctx.setLineDash([]);
+      const fN = frac(7);
+      ctx.strokeStyle = P.ok; ctx.strokeRect(cx(7) - bw / 2, c.Y(m.net), bw, c.Y(0) - c.Y(m.net));
+      if (fN > 0) { ctx.fillStyle = P.ok; ctx.fillRect(cx(7) - bw / 2, c.Y(m.net * fN), bw, c.Y(0) - c.Y(m.net * fN)); }
+      label(7, "실수령", P.ok);
+      if (fN >= 1) val(7, m.net, c.Y(m.net));
+      // 동전
+      st.coins.forEach((cn) => {
+        const p = ease(cn.p), x = MB.lerp(cn.x0, cn.x1, p), y = MB.lerp(cn.y0, cn.y1, p) - Math.sin(Math.PI * cn.p) * 46;
+        ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2); ctx.fillStyle = cn.col; ctx.fill();
+        ctx.lineWidth = 1.2; ctx.strokeStyle = MB.color("canvas-bg"); ctx.stroke();
+      });
+    }, { get height() { const pw = $("fa-cv").parentElement.clientWidth; return Math.max(280, Math.min(380, pw * 0.56)); } });
+    function spawn(dt) {
+      if (!geo) return;
+      let j = 0;
+      for (let k = 1; k <= 7; k++) { const f = frac(k); if (f > 0 && f < 1) { j = k; break; } }
+      if (!j) return;
+      const P = MB.palette(), C = colors(P), c = geo.c;
+      const key = j === 7 ? "net" : KEYS[j - 1];
+      const v = key === "net" ? m.net : m[key];
+      st.acc += dt * Math.min(40, 6 + (v / 1e4) * 1.2);
+      while (st.acc > 1) {
+        st.acc -= 1;
+        let run = m.gross; for (let k = 1; k < j && k <= 6; k++) run -= m[KEYS[k - 1]];
+        const f = frac(j);
+        const yT = key === "net" ? c.Y(m.net * f) : c.Y(run - v * f);
+        st.coins.push({ p: 0, x0: geo.cx(0) + (Math.random() - 0.5) * geo.bw * 0.6, y0: c.Y(m.gross) + 6, x1: geo.cx(j) + (Math.random() - 0.5) * geo.bw * 0.5, y1: yT, col: C[key] });
+      }
+    }
+    MB.loop($("sim-fall"), (dt) => {
+      if (st.t >= END && !st.coins.length) return;
+      st.t += dt; spawn(dt);
+      st.coins.forEach((cn) => (cn.p += dt / 0.5));
+      st.coins = st.coins.filter((cn) => cn.p < 1);
+      cv.redraw();
+    });
+    $("fa-go").addEventListener("click", () => { st.t = 0; st.coins = []; st.acc = 0; cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 3. 4대 보험 */
+  (function () {
+    let bx = 2.8e6, geo = null;
+    const XMAX = 1e7;
+    const extra = $("in-extra");
+    const comp = (b) => {
+      const ins = MN.insurance(b);
+      const ex = extra.checked ? MN.floor10(b * EMP_STAB) + MN.floor10(b * SANJAE) : 0;
+      return { ins, ex, emp: ins.total, co: ins.total + ex };
+    };
+    function upd() {
+      const r = comp(bx);
+      MB.stat("in-o-b", MB.won(bx, { digits: 1 }));
+      MB.stat("in-o-e", wonF(r.emp));
+      MB.stat("in-o-c", wonF(r.co));
+      MB.stat("in-o-t", `${MB.won(r.emp + r.co, { digits: 1 })} <small>${MB.pct((r.emp + r.co) / Math.max(1, bx), 1)}</small>`);
+    }
+    const cv = MB.canvas("#in-cv", (ctx, w, h) => {
+      const P = MB.palette(), C = colors(P);
+      const ch = h - 118;
+      const box = { x: 58, y: 16, w: w - 58 - 26, h: ch - 16 - 40 };
+      const series = ["nps", "health", "ltc", "emp"].map((k) => {
+        const d = []; for (let b = 0; b <= XMAX; b += 50000) d.push([b, MN.insurance(b)[k]]);
+        return { data: d, color: C[k], width: 2.2 };
+      });
+      const r = comp(bx);
+      const c = MB.chart(ctx, box, {
+        x: [0, XMAX], y: [0, 4e5], xFmt: MB.wonAxis, yFmt: MB.wonAxis, xLabel: "월 보수(비과세 제외)",
+        series,
+        vlines: [{ x: MN.KR.npsCap, color: P.accent2, label: w > 500 ? "국민연금 상한" : "상한" }],
+        points: ["nps", "health", "ltc", "emp"].map((k) => ({ x: bx, y: r.ins[k], color: C[k], r: 4 })),
+      });
+      geo = { c, box };
+      ctx.strokeStyle = P.text; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(c.X(bx), box.y); ctx.lineTo(c.X(bx), box.y + box.h); ctx.stroke();
+      handle(ctx, c.X(bx), box.y + box.h, P);
+      // 근로자 vs 회사 막대
+      const L = w < 420 ? 46 : 60, x0 = L + 8, maxW = w - x0 - 92;
+      const scale = maxW / Math.max(r.co, r.emp, 1);
+      const rows = [["근로자", r.emp, false], ["회사", r.co, true]];
+      rows.forEach(([lab, tot, isCo], i) => {
+        const y = ch + 14 + i * 44, bh = 28;
+        ctx.fillStyle = P.text; ctx.font = MB.font(13, false, 700); ctx.textAlign = "left"; ctx.textBaseline = "middle";
+        ctx.fillText(lab, 8, y + bh / 2);
+        let x = x0;
+        ["nps", "health", "ltc", "emp"].forEach((k) => { const ww = r.ins[k] * scale; ctx.fillStyle = C[k]; ctx.fillRect(x, y, ww, bh); x += ww; });
+        if (isCo && r.ex > 0) { const ww = r.ex * scale; ctx.fillStyle = P.accent; ctx.fillRect(x, y, ww, bh); x += ww; }
+        ctx.fillStyle = P.text; ctx.font = MB.font(12, true, 600); ctx.textAlign = "left";
+        ctx.fillText(manF(tot) + "원", x + 6, y + bh / 2);
+      });
+    }, { get height() { const pw = $("in-cv").parentElement.clientWidth; return Math.round(Math.max(250, Math.min(330, pw * 0.4))) + 118; } });
+    MB.drag(cv.canvas, {
+      move(x) {
+        if (!geo) return;
+        const b = MB.map(x, geo.box.x, geo.box.x + geo.box.w, 0, XMAX);
+        bx = MB.clamp(Math.round(b / 10000) * 10000, 0, XMAX);
+        upd(); cv.redraw();
+      },
+    });
+    extra.addEventListener("change", () => { upd(); cv.redraw(); });
+    upd(); cv.redraw();
+  })();
+
+  /* ---------------------------------------------------------- 4. 소득세 흐름 */
+  (function () {
+    let stage = 9, anim = 1, pr;
+    const sal = MB.range("fl-sal", salFmt, () => { upd(); cv.redraw(); });
+    function upd() {
+      pr = MN.payroll(sal());
+      const a = pr.annual;
+      MB.stat("fl-o-b", MB.won(a.base, { digits: 1 }));
+      MB.stat("fl-o-c", MB.won(a.calcTax, { digits: 1 }));
+      MB.stat("fl-o-f", `<span class="bad-t">${MB.won(a.finalTax, { digits: 1 })}</span>`);
+      MB.stat("fl-o-r", MB.pct(a.finalTax / a.taxable, 1));
+    }
+    upd();
+    const cv = MB.canvas("#fl-cv", (ctx, w, h) => {
+      const P = MB.palette(), a = pr.annual, m = pr.monthly;
+      const insDed = (m.health + m.ltc + m.emp) * 12, npsDed = m.nps * 12, pers = MN.KR.personalDeduction;
+      const narrow = w < 440;
+      const L = narrow ? 92 : 120, R = narrow ? 64 : 84, bw = w - L - R - 8;
+      const S = (v) => (v / a.taxable) * bw;
+      const zoom = (a.calcTax > 0 ? (a.taxable / a.calcTax) * 0.92 : 1);
+      const T = (v) => S(v) * zoom;
+      const rows = [
+        { lab: "총급여(과세)", x0: 0, x1: S(a.taxable), col: P.accent, v: a.taxable },
+        { lab: "−근로소득공제", x0: S(a.earnedIncome), x1: S(a.taxable), col: P.warn, v: -a.earnedDed, cut: true },
+        { lab: "근로소득금액", x0: 0, x1: S(a.earnedIncome), col: P.accent, v: a.earnedIncome },
+        { lab: "−인적공제", x0: S(a.earnedIncome - pers), x1: S(a.earnedIncome), col: P.warn, v: -pers, cut: true },
+        { lab: "−보험료 공제", x0: S(a.base), x1: S(a.earnedIncome - pers), col: P.warn, v: -(npsDed + insDed), cut: true },
+        { lab: "과세표준", x0: 0, x1: S(a.base), col: P.accent, v: a.base, strong: true },
+        { lab: "산출세액", x0: 0, x1: T(a.calcTax), col: P.bad, v: a.calcTax, tax: true },
+        { lab: "−세액공제", x0: T(a.finalTax), x1: T(a.calcTax), col: P.ok, v: -a.credit, cut: true, tax: true },
+        { lab: "결정세액", x0: 0, x1: T(a.finalTax), col: P.bad, v: a.finalTax, strong: true, tax: true },
+      ];
+      const top = 10, rh = (h - top - 8) / rows.length, bh = Math.min(22, rh * 0.62);
+      rows.forEach((r, i) => {
+        if (i >= stage) return;
+        const y = top + i * rh + (rh - bh) / 2;
+        const f = i === stage - 1 ? ease(anim) : 1;
+        if (i === 6) {
+          ctx.strokeStyle = P.border; ctx.setLineDash([2, 3]); ctx.beginPath(); ctx.moveTo(8, top + i * rh - 1); ctx.lineTo(w - 8, top + i * rh - 1); ctx.stroke(); ctx.setLineDash([]);
+          ctx.fillStyle = P.faint; ctx.font = MB.font(10.5); ctx.textAlign = "right"; ctx.textBaseline = "bottom";
+          ctx.fillText("아래 세금 줄은 ×" + Math.round(zoom) + " 확대", L + bw, top + i * rh - 3);
+        }
+        ctx.fillStyle = r.cut ? P.dim : P.text; ctx.font = MB.font(narrow ? 11.5 : 13, false, r.strong ? 700 : 400);
+        ctx.textAlign = "left"; ctx.textBaseline = "middle";
+        ctx.fillText(r.lab, 8, y + bh / 2);
+        if (r.cut) {
+          const prevEnd = L + r.x1;
+          const ww = (r.x1 - r.x0) * f;
+          ctx.globalAlpha = 0.85; ctx.fillStyle = r.col;
+          ctx.fillRect(prevEnd - ww, y, Math.max(1, ww), bh); ctx.globalAlpha = 1;
+          ctx.strokeStyle = P.faint; ctx.setLineDash([3, 3]); ctx.strokeRect(L, y, r.x1, bh); ctx.setLineDash([]);
+        } else {
+          ctx.fillStyle = r.col; ctx.fillRect(L, y, Math.max(1, r.x1 * f), bh);
+          if (i === 6 && pr.steps.length > 1) {
+            ctx.strokeStyle = MB.color("canvas-bg"); ctx.lineWidth = 2;
+            let acc = 0;
+            pr.steps.slice(0, -1).forEach((s) => { acc += s.amount; const xx = L + T(acc) * f; ctx.beginPath(); ctx.moveTo(xx, y); ctx.lineTo(xx, y + bh); ctx.stroke(); });
+            ctx.lineWidth = 1;
+          }
+        }
+        if (f > 0.6) {
+          ctx.fillStyle = r.v < 0 ? (r.tax ? P.ok : P.warn) : (r.tax ? P.bad : P.text);
+          ctx.font = MB.font(narrow ? 11 : 12, true, r.strong ? 700 : 400); ctx.textAlign = "right";
+          ctx.fillText((r.v < 0 ? "−" : "") + manF(Math.abs(r.v)), w - 8, y + bh / 2);
+        }
+      });
+    }, { get height() { const pw = $("fl-cv").parentElement.clientWidth; return pw < 440 ? 330 : 350; } });
+    const loop = MB.loop($("sim-flow"), (dt) => {
+      if (anim >= 1) return;
+      anim = Math.min(1, anim + dt / 0.55); cv.redraw();
+    });
+    $("fl-next").addEventListener("click", () => { if (stage >= 9) stage = 0; stage++; anim = 0; loop.start(); cv.redraw(); });
+    $("fl-all").addEventListener("click", () => { stage = 9; anim = 1; cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 5. 세금 계단 */
+  (function () {
+    let base = 18545160, geo = null;
+    const rng = MB.seg("st-range", () => { base = Math.min(base, xmax()); upd(); cv.redraw(); });
+    const xmax = () => Number(rng()) * 1e6;
+    const myth = $("st-myth");
+    function upd() {
+      const it = MN.incomeTax(base);
+      MB.stat("st-o-b", MB.won(base, { digits: 1 }));
+      MB.stat("st-o-t", MB.won(it.tax, { digits: 1 }));
+      MB.stat("st-o-m", MB.pct(it.marginal, 0));
+      MB.stat("st-o-a", MB.pct(base > 0 ? it.tax / base : 0, 1));
+      MB.stat("st-o-x", `<span class="bad-t">${MB.won(base * it.marginal, { digits: 1 })}</span>`);
+    }
+    const cv = MB.canvas("#st-cv", (ctx, w, h) => {
+      const P = MB.palette(), X1 = xmax();
+      const box = { x: 46, y: 26, w: w - 46 - 16, h: h - 26 - 56 };
+      const it = MN.incomeTax(base);
+      const c = MB.chart(ctx, box, { x: [0, X1], y: [0, 0.5], xFmt: MB.wonAxis, yFmt: (v) => Math.round(v * 100) + "%", yTicks: [0, 0.1, 0.2, 0.3, 0.4, 0.5], xLabel: w > 520 ? "과세표준" : "" });
+      geo = { c, box };
+      let lo = 0;
+      MN.KR.brackets.forEach(([hi, rate]) => {
+        if (lo >= X1) { lo = hi; return; }
+        const xa = c.X(lo), xb = c.X(Math.min(hi, X1)), yt = c.Y(rate), yb = c.Y(0);
+        if (base > lo) {
+          const xw = c.X(Math.min(base, hi, X1));
+          ctx.globalAlpha = 0.5; ctx.fillStyle = P.blue; ctx.fillRect(xa, yt, xw - xa, yb - yt); ctx.globalAlpha = 1;
+          ctx.strokeStyle = P.blue; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(xa, yt); ctx.lineTo(xw, yt); ctx.stroke();
+        }
+        ctx.strokeStyle = P.axis; ctx.lineWidth = 1.4;
+        ctx.beginPath(); ctx.moveTo(xa, yb); ctx.lineTo(xa, yt); ctx.lineTo(xb, yt); ctx.lineTo(xb, yb); ctx.stroke();
+        if (xb - xa > 22) {
+          ctx.fillStyle = P.dim; ctx.font = MB.font(11, true); ctx.textAlign = "center"; ctx.textBaseline = "bottom";
+          ctx.fillText(Math.round(rate * 100) + "%", (xa + Math.min(xb, box.x + box.w)) / 2, yt - 3);
+        }
+        lo = hi;
+      });
+      if (myth.checked && base > 0) {
+        ctx.save(); ctx.strokeStyle = P.bad; ctx.lineWidth = 2; ctx.setLineDash([6, 4]);
+        ctx.globalAlpha = 0.12; ctx.fillStyle = P.bad; ctx.fillRect(c.X(0), c.Y(it.marginal), c.X(base) - c.X(0), c.Y(0) - c.Y(it.marginal));
+        ctx.globalAlpha = 1; ctx.strokeRect(c.X(0), c.Y(it.marginal), c.X(base) - c.X(0), c.Y(0) - c.Y(it.marginal)); ctx.restore();
+      }
+      // 평균세율선
+      if (base > 0) {
+        const avg = it.tax / base;
+        ctx.strokeStyle = P.accent2; ctx.setLineDash([2, 3]); ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(c.X(0), c.Y(avg)); ctx.lineTo(c.X(base), c.Y(avg)); ctx.stroke(); ctx.setLineDash([]);
+        ctx.fillStyle = P.accent2; ctx.font = MB.font(11.5, false, 700); ctx.textBaseline = "bottom";
+        const lx = c.X(base) + 8, txt = "평균 " + MB.pct(avg, 1);
+        ctx.textAlign = lx + 70 > box.x + box.w ? "right" : "left";
+        ctx.fillText(txt, ctx.textAlign === "right" ? c.X(base) - 8 : lx, c.Y(avg) - 2);
+      }
+      const hx = c.X(base);
+      ctx.strokeStyle = P.text; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(hx, box.y); ctx.lineTo(hx, box.y + box.h); ctx.stroke();
+      handle(ctx, hx, box.y + box.h, P, 9);
+      ctx.fillStyle = P.text; ctx.font = MB.font(12, false, 700); ctx.textBaseline = "top";
+      ctx.textAlign = hx > box.x + box.w - 90 ? "right" : "left";
+      ctx.fillText("세금 " + manF(it.tax) + "원", ctx.textAlign === "right" ? hx - 6 : hx + 6, box.y + 2);
+    }, { get height() { const pw = $("st-cv").parentElement.clientWidth; return Math.max(270, Math.min(360, pw * 0.6)); } });
+    MB.drag(cv.canvas, {
+      move(x) {
+        if (!geo) return;
+        const v = MB.map(x, geo.box.x, geo.box.x + geo.box.w, 0, xmax());
+        base = MB.clamp(Math.round(v / 1e5) * 1e5, 0, xmax());
+        upd(); cv.redraw();
+      },
+    });
+    myth.addEventListener("change", () => cv.redraw());
+    $("st-hg").addEventListener("click", () => { base = 18545160; upd(); cv.redraw(); });
+    $("st-50").addEventListener("click", () => { base = 5e7; upd(); cv.redraw(); });
+    upd(); cv.redraw();
+  })();
+
+  /* ---------------------------------------------------------- 6. 실수령 곡선 */
+  (function () {
+    const X0 = 2e7, X1 = 2e8, data = [];
+    for (let s = X0; s <= X1 + 1; s += 5e5) {
+      const p = MN.payroll(s), q = MN.payroll(s + 1e6);
+      data.push({ s, net: p.monthly.net * 12, eff: p.effective, mar: p.marginal, md: 1 - (q.monthly.net - p.monthly.net) * 12 / 1e6 });
+    }
+    let cur = 36e6, geo = null;
+    function upd() {
+      const p = MN.payroll(cur), q = MN.payroll(cur + 1e6);
+      MB.stat("cu-o-s", MB.won(cur));
+      MB.stat("cu-o-n", `<span class="ok-t">${MB.won(p.monthly.net, { digits: 1 })}</span>`);
+      MB.stat("cu-o-e", MB.pct(p.effective, 1));
+      MB.stat("cu-o-m", `<span class="bad-t">${MB.pct(p.marginal, 1)}</span>`);
+      MB.stat("cu-o-k", MB.won((q.monthly.net - p.monthly.net) * 12, { digits: 1 }));
+    }
+    const cv = MB.canvas("#cu-cv", (ctx, w, h) => {
+      const P = MB.palette();
+      const gap = 30, hh = (h - 14 - 66 - gap) / 2;
+      const b1 = { x: 58, y: 14, w: w - 58 - 24, h: hh };
+      const b2 = { x: 58, y: 14 + hh + gap, w: w - 58 - 24, h: hh };
+      const p = MN.payroll(cur);
+      const c1 = MB.chart(ctx, b1, {
+        x: [X0, X1], y: [0, X1], xFmt: () => "", yFmt: MB.wonAxis, yTicks: [0, 5e7, 1e8, 1.5e8, 2e8],
+        series: [{ data: [[X0, X0], [X1, X1]], color: P.faint, dash: [5, 4], width: 1.5 }, { data: data.map((d) => [d.s, d.net]), color: P.ok, width: 2.6 }],
+        points: [{ x: cur, y: p.monthly.net * 12, color: P.ok, r: 5 }],
+      });
+      const c2 = MB.chart(ctx, b2, {
+        x: [X0, X1], y: [0, 0.5], xFmt: MB.wonAxis, yFmt: (v) => Math.round(v * 100) + "%", yTicks: [0, 0.1, 0.2, 0.3, 0.4, 0.5], xLabel: "세전 연봉",
+        series: [
+          { data: data.map((d) => [d.s, d.md]), color: P.warn, width: 1.6, dash: [4, 3] },
+          { data: data.flatMap((d, i) => (i && data[i - 1].mar !== d.mar ? [[d.s, data[i - 1].mar], [d.s, d.mar]] : [[d.s, d.mar]])), color: P.bad, width: 2.2 },
+          { data: data.map((d) => [d.s, d.eff]), color: P.accent, width: 2.6 },
+        ],
+        points: [{ x: cur, y: p.effective, color: P.accent, r: 5 }, { x: cur, y: p.marginal, color: P.bad, r: 4 }],
+      });
+      geo = { c1, b1 };
+      const x = c1.X(cur);
+      ctx.strokeStyle = P.text; ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.moveTo(x, b1.y); ctx.lineTo(x, b2.y + b2.h); ctx.stroke();
+      handle(ctx, x, b2.y + b2.h, P);
+      ctx.fillStyle = P.dim; ctx.font = MB.font(12); ctx.textAlign = "left"; ctx.textBaseline = "top";
+      ctx.fillText("연 실수령", b1.x + 8, b1.y + 4);
+      ctx.fillText("공제율과 한계세율", b2.x + 8, b2.y + 4);
+    }, { get height() { const pw = $("cu-cv").parentElement.clientWidth; return Math.max(420, Math.min(560, pw * 0.72)); } });
+    MB.drag(cv.canvas, {
+      move(x) {
+        if (!geo) return;
+        const v = MB.map(x, geo.b1.x, geo.b1.x + geo.b1.w, X0, X1);
+        cur = MB.clamp(Math.round(v / 1e6) * 1e6, X0, X1);
+        upd(); cv.redraw();
+      },
+    });
+    upd(); cv.redraw();
+  })();
+
+  /* ---------------------------------------------------------- 7. 연말정산 */
+  (function () {
+    const SAL = 36e6;
+    let month = 13;
+    const ratio = MB.seg("ye-ratio", () => { upd(); cv.redraw(); });
+    const ded = MB.range("ye-ded", (v) => MB.won(v), () => { upd(); cv.redraw(); });
+    const cr = MB.range("ye-cr", (v) => MB.won(v), () => { upd(); cv.redraw(); });
+    let st;
+    function upd() {
+      const p0 = MN.payroll(SAL), p1 = MN.payroll(SAL, { extraDeduction: ded(), extraCredit: cr() });
+      const r = Number(ratio());
+      const mw = MN.floor10(p0.monthly.tax * r); const mwl = MN.floor10(mw * 0.1);
+      const withheld = (mw + mwl) * 12;
+      const fin = Math.round(p1.annual.finalTax) + Math.floor(p1.annual.finalTax * 0.1);
+      st = { m: mw + mwl, withheld, fin, diff: withheld - fin };
+      MB.stat("ye-o-w", wonF(withheld));
+      MB.stat("ye-o-f", wonF(fin));
+      MB.stat("ye-o-r", Math.abs(st.diff) < 1000 ? `거의 없음 <small>${st.diff >= 0 ? "+" : "−"}${wonF(Math.abs(st.diff))}</small>` : st.diff >= 0 ? `<span class="ok-t">환급 +${wonF(st.diff)}</span>` : `<span class="bad-t">추가 납부 −${wonF(-st.diff)}</span>`);
+    }
+    upd();
+    const cv = MB.canvas("#ye-cv", (ctx, w, h) => {
+      const P = MB.palette();
+      const ymax = Math.max(st.withheld, st.fin, 1) * 1.18;
+      const box = { x: 54, y: 18, w: w - 54 - 14, h: h - 18 - 34 };
+      const c = MB.chart(ctx, box, { x: [0, 14], y: [0, ymax], xTicks: [], yFmt: MB.wonAxis });
+      const slot = box.w / 14, bw = slot * 0.62, cx = (i) => box.x + slot * (i + 0.5);
+      const small = slot < 26;
+      ctx.font = MB.font(small ? 9.5 : 11); ctx.fillStyle = P.dim; ctx.textAlign = "center"; ctx.textBaseline = "top";
+      const shown = Math.floor(month);
+      for (let i = 1; i <= 12; i++) {
+        if (!small || i % 3 === 0 || i === 1) ctx.fillText(i + (small ? "" : "월"), cx(i - 1), box.y + box.h + 6);
+        if (i > shown) continue;
+        const v = st.m * i;
+        ctx.fillStyle = P.accent2; ctx.globalAlpha = i === shown && month < 13 ? 1 : 0.75;
+        ctx.fillRect(cx(i - 1) - bw / 2, c.Y(v), bw, c.Y(0) - c.Y(v)); ctx.globalAlpha = 1;
+        ctx.fillStyle = P.dim;
+      }
+      // 결정세액 선
+      ctx.strokeStyle = P.accent; ctx.lineWidth = 2; ctx.setLineDash([6, 4]);
+      ctx.beginPath(); ctx.moveTo(box.x, c.Y(st.fin)); ctx.lineTo(box.x + box.w, c.Y(st.fin)); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = P.accent; ctx.font = MB.font(12, false, 700); ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+      ctx.fillText("결정세액 " + manF(st.fin) + "원", box.x + 6, c.Y(st.fin) - 3);
+      ctx.fillStyle = P.dim; ctx.font = MB.font(small ? 9.5 : 11); ctx.textAlign = "center"; ctx.textBaseline = "top";
+      ctx.fillText("정산", cx(12.6), box.y + box.h + 6);
+      if (month >= 13) {
+        const x = cx(12.6), yW = c.Y(st.withheld), yF = c.Y(st.fin), good = st.diff >= 0;
+        ctx.strokeStyle = good ? P.ok : P.bad; ctx.fillStyle = good ? P.ok : P.bad; ctx.lineWidth = 2.5;
+        if (Math.abs(yW - yF) > 3) {
+          ctx.beginPath(); ctx.moveTo(x, yW); ctx.lineTo(x, yF); ctx.stroke();
+          const dir = yF > yW ? 1 : -1;
+          ctx.beginPath(); ctx.moveTo(x, yF); ctx.lineTo(x - 6, yF - 9 * dir); ctx.lineTo(x + 6, yF - 9 * dir); ctx.closePath(); ctx.fill();
+        }
+        ctx.strokeStyle = P.accent2; ctx.lineWidth = 1; ctx.setLineDash([2, 3]);
+        ctx.beginPath(); ctx.moveTo(cx(11) + bw / 2, yW); ctx.lineTo(x + 10, yW); ctx.stroke(); ctx.setLineDash([]);
+        ctx.font = MB.font(12, false, 700); ctx.textAlign = "right"; ctx.textBaseline = "middle";
+        const txt = Math.abs(st.diff) < 100 ? "차액 거의 없음" : (good ? "환급 +" : "추가 −") + manF(Math.abs(st.diff)) + "원";
+        ctx.fillStyle = good ? P.ok : P.bad;
+        ctx.fillText(txt, x - 12, Math.min(yW, yF) - 14);
+      }
+    }, { get height() { const pw = $("ye-cv").parentElement.clientWidth; return Math.max(270, Math.min(340, pw * 0.6)); } });
+    const loop = MB.loop($("sim-year"), (dt) => { if (month >= 13) return; month = Math.min(13, month + dt * 3.2); cv.redraw(); });
+    $("ye-go").addEventListener("click", () => { month = 0; loop.start(); cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 8. 부양가족 */
+  (function () {
+    const sal = MB.range("fm-sal", salFmt, () => { upd(); cv.redraw(); });
+    const n = MB.range("fm-n", (v) => v + "명", () => { upd(); cv.redraw(); });
+    const tax = (f) => { const p = MN.payroll(sal(), { family: f }); return { t: p.annual.finalTax * 1.1, net: p.monthly.net }; };
+    function upd() {
+      const a = tax(n()), b = tax(1);
+      MB.stat("fm-o-t", MB.won(a.t, { digits: 1 }));
+      MB.stat("fm-o-d", n() === 1 ? "—" : `<span class="ok-t">−${MB.won(b.t - a.t, { digits: 1 })}</span>`);
+      MB.stat("fm-o-n", MB.won(a.net, { digits: 1 }));
+    }
+    upd();
+    const cv = MB.canvas("#fm-cv", (ctx, w, h) => {
+      const P = MB.palette();
+      const vals = [1, 2, 3, 4, 5, 6].map((f) => tax(f).t);
+      MB.bars(ctx, { x: 58, y: 24, w: w - 58 - 14, h: h - 24 - 30 }, {
+        labels: ["1명", "2명", "3명", "4명", "5명", "6명"],
+        stacks: [{ label: "세금", color: P.bad, data: vals }],
+        y: [0, Math.max(...vals) * 1.18 || 1], yFmt: MB.wonAxis, highlight: n() - 1,
+        valueFmt: (v) => manF(v, 0),
+      });
+    }, { aspect: 0.55, minHeight: 240, maxHeight: 330 });
+  })();
+
+  /* ---------------------------------------------------------- 9. 연봉 협상 */
+  (function () {
+    const sal = MB.range("ra-sal", salFmt, () => { upd(); cv.redraw(); });
+    const up = MB.range("ra-up", (v) => "+" + MB.won(v), () => { upd(); cv.redraw(); });
+    let A, B, D;
+    function upd() {
+      A = MN.payroll(sal()).monthly; B = MN.payroll(sal() + up()).monthly;
+      D = {}; ["gross", "nps", "health", "ltc", "emp", "tax", "local", "net"].forEach((k) => (D[k] = B[k] - A[k]));
+      MB.stat("ra-o-g", "+" + MB.won(D.gross, { digits: 1 }));
+      MB.stat("ra-o-n", `<span class="ok-t">+${MB.won(D.net, { digits: 1 })}</span>`);
+      MB.stat("ra-o-k", D.gross > 0 ? MB.pct(D.net / D.gross, 1) : "—");
+      MB.stat("ra-o-y", "+" + MB.won(D.net * 12, { digits: 0 }));
+    }
+    upd();
+    const cv = MB.canvas("#ra-cv", (ctx, w, h) => {
+      const P = MB.palette(), C = colors(P);
+      const L = 14, bwMax = w - L * 2;
+      ctx.font = MB.font(12.5, false, 700); ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+      // 위: 인상 전후 월 실수령
+      const sc = bwMax / Math.max(B.gross, 1);
+      [["인상 전 월 실수령", A.net, 0], ["인상 후 월 실수령", B.net, A.net]].forEach(([lab, v, prev], i) => {
+        const y = 30 + i * 52;
+        ctx.fillStyle = P.text; ctx.fillText(lab + "  " + manF(v) + "원", L, y - 4);
+        ctx.globalAlpha = 0.45; ctx.fillStyle = P.ok; ctx.fillRect(L, y, (i ? prev : v) * sc, 22); ctx.globalAlpha = 1;
+        if (i && v > prev) { ctx.fillStyle = P.ok; ctx.fillRect(L + prev * sc, y, (v - prev) * sc, 22); }
+      });
+      // 아래: 늘어난 세전의 분해
+      const y = 150, bh = 34;
+      ctx.fillStyle = P.text; ctx.font = MB.font(12.5, false, 700); ctx.textBaseline = "bottom";
+      ctx.fillText("늘어난 세전 월급 " + manF(D.gross) + "원은 어디로 가나 (확대)", L, y - 6);
+      if (D.gross <= 0) { ctx.fillStyle = P.faint; ctx.font = MB.font(12); ctx.textBaseline = "top"; ctx.fillText("인상액을 올려 본다", L, y + 6); return; }
+      const parts = [["net", D.net], ["nps", D.nps], ["health", D.health + D.ltc], ["emp", D.emp], ["tax", D.tax + D.local]];
+      const lab = { net: "실수령", nps: "연금", health: "건강·요양", emp: "고용", tax: "세금" };
+      let x = L;
+      parts.forEach(([k, v]) => {
+        const ww = Math.max(0, v / D.gross * bwMax);
+        ctx.fillStyle = C[k]; ctx.fillRect(x, y, ww, bh);
+        if (ww > 44) {
+          ctx.fillStyle = MB.color("canvas-bg"); ctx.font = MB.font(11.5, false, 700); ctx.textAlign = "center"; ctx.textBaseline = "middle";
+          ctx.fillText(Math.round(v / D.gross * 100) + "%", x + ww / 2, y + bh / 2);
+        }
+        x += ww;
+      });
+      ctx.textAlign = "left"; ctx.textBaseline = "top"; ctx.font = MB.font(11.5);
+      let lx = L, ly = y + bh + 10;
+      parts.forEach(([k, v]) => {
+        const t = lab[k] + " " + manF(v) + "원";
+        const tw = ctx.measureText(t).width + 26;
+        if (lx + tw > w - L) { lx = L; ly += 18; }
+        ctx.fillStyle = C[k]; ctx.fillRect(lx, ly + 3, 10, 10);
+        ctx.fillStyle = P.dim; ctx.fillText(t, lx + 14, ly);
+        lx += tw;
+      });
+    }, { get height() { const pw = $("ra-cv").parentElement.clientWidth; return pw < 440 ? 270 : 240; } });
+  })();
+
+  /* ---------------------------------------------------------- 10. 시급 환산 */
+  (function () {
+    const calc = (wage, h) => {
+      const base = Math.min(h, 40), ot = Math.max(0, h - 40), juhu = h >= 15 ? (base / 40) * 8 : 0;
+      const weekly = base + juhu + ot * 1.5, mh = weekly * MN.KR.workHoursMonth / 48;
+      return { base, ot, juhu, weekly, mh, monthly: mh * wage };
+    };
+    const wage = MB.range("hr-w", (v) => num(v) + "원", () => { upd(); cv.redraw(); });
+    const hrs = MB.range("hr-h", (v) => v + "시간", () => { upd(); cv.redraw(); });
+    function upd() {
+      const r = calc(wage(), hrs());
+      MB.stat("hr-o-j", r.juhu ? wonF(r.juhu * wage()) : `<span class="bad-t">0원</span>`);
+      MB.stat("hr-o-h", (Math.round(r.mh * 10) / 10) + "<small>시간</small>");
+      MB.stat("hr-o-m", MB.won(r.monthly, { digits: 1 }));
+      MB.stat("hr-o-y", MB.won(r.monthly * 12));
+    }
+    upd();
+    const cv = MB.canvas("#hr-cv", (ctx, w, h) => {
+      const P = MB.palette(), H = hrs(), r = calc(wage(), H);
+      const box = { x: 40, y: 16, w: w - 40 - 12, h: h - 16 - 110 };
+      const c = MB.chart(ctx, box, { x: [0, 7], y: [0, 13], xTicks: [], yTicks: [0, 4, 8, 12], yFmt: (v) => v + "h" });
+      const days = ["월", "화", "수", "목", "금", "토", "일"], slot = box.w / 7, bw = slot * 0.6;
+      const per = H / 5;
+      days.forEach((d, i) => {
+        const cx = box.x + slot * (i + 0.5);
+        ctx.fillStyle = P.dim; ctx.font = MB.font(11.5); ctx.textAlign = "center"; ctx.textBaseline = "top";
+        ctx.fillText(d, cx, box.y + box.h + 5);
+        if (i < 5) {
+          const reg = Math.min(per, 8), ot = Math.max(0, per - 8);
+          ctx.fillStyle = P.accent; ctx.fillRect(cx - bw / 2, c.Y(reg), bw, c.Y(0) - c.Y(reg));
+          if (ot > 0) { ctx.fillStyle = P.warn; ctx.fillRect(cx - bw / 2, c.Y(reg + ot), bw, c.Y(reg) - c.Y(reg + ot)); }
+        } else if (i === 6 && r.juhu > 0) {
+          ctx.fillStyle = P.accent2; ctx.fillRect(cx - bw / 2, c.Y(r.juhu), bw, c.Y(0) - c.Y(r.juhu));
+          ctx.fillStyle = P.accent2; ctx.font = MB.font(11, false, 700); ctx.textBaseline = "bottom";
+          ctx.fillText("주휴", cx, c.Y(r.juhu) - 2);
+        } else if (i === 6) {
+          ctx.fillStyle = P.bad; ctx.font = MB.font(10.5, false, 700); ctx.textBaseline = "bottom";
+          ctx.fillText("주휴 없음", cx - 6, c.Y(0) - 4);
+        }
+      });
+      // 월급 막대 vs 최저임금 월급
+      const y = h - 70, bh = 24, x0 = 14, maxW = w - 28;
+      const minM = MN.minMonthly(), scaleMax = Math.max(r.monthly, minM, 3.5e6) * 1.05;
+      const S = (v) => (v / scaleMax) * maxW;
+      ctx.fillStyle = P.text; ctx.font = MB.font(12.5, false, 700); ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+      ctx.fillText("월급(세전) " + manF(r.monthly) + "원", x0, y - 6);
+      const regPart = (r.base + r.juhu) * MN.KR.workHoursMonth / 48 * wage();
+      ctx.fillStyle = P.accent; ctx.fillRect(x0, y, S(regPart), bh);
+      ctx.fillStyle = P.warn; ctx.fillRect(x0 + S(regPart), y, S(r.monthly - regPart), bh);
+      const mx = x0 + S(minM);
+      ctx.strokeStyle = P.bad; ctx.lineWidth = 2; ctx.setLineDash([4, 3]);
+      ctx.beginPath(); ctx.moveTo(mx, y - 4); ctx.lineTo(mx, y + bh + 4); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = P.bad; ctx.font = MB.font(11.5); ctx.textBaseline = "top";
+      ctx.textAlign = mx > w - 150 ? "right" : "left";
+      ctx.fillText("최저임금 주 40시간 " + manF(minM) + "원", mx + (ctx.textAlign === "right" ? -4 : 4), y + bh + 6);
+    }, { get height() { const pw = $("hr-cv").parentElement.clientWidth; return Math.max(300, Math.min(360, pw * 0.62)); } });
+    $("hr-min").addEventListener("click", () => { wage.set(MN.KR.minWage); hrs.set(40); });
+    $("hr-hg").addEventListener("click", () => { wage.set(Math.round(3e6 / MN.KR.workHoursMonth)); hrs.set(40); });
+  })();
+
+  /* ---------------------------------------------------------- 11. 회사 인건비 */
+  (function () {
+    const sal = MB.range("co-sal", salFmt, () => { upd(); cv.redraw(); });
+    const sev = $("co-sev");
+    let items, total, net, hi = -1, donut = null;
+    function upd() {
+      const p = MN.payroll(sal()), m = p.monthly, baseM = m.gross - m.nontax;
+      const ins = m.nps + m.health + m.ltc + m.emp;
+      const ex = MN.floor10(baseM * EMP_STAB) + MN.floor10(baseM * SANJAE);
+      const sv = sev.checked ? m.gross * SEV_RATE : 0;
+      const P = MB.palette();
+      items = [
+        { label: "내 통장(실수령)", value: m.net, color: P.ok },
+        { label: "근로자 4대 보험", value: ins, color: P.accent2 },
+        { label: "소득세·지방세", value: m.tax + m.local, color: P.bad },
+        { label: "회사 4대 보험", value: ins, color: P.blue },
+        { label: "산재·고용안정", value: ex, color: P.dim },
+        { label: "퇴직금 적립", value: sv, color: P.text },
+      ];
+      total = m.gross + ins + ex + sv; net = m.net;
+      MB.stat("co-o-m", MB.won(total, { digits: 1 }));
+      MB.stat("co-o-y", MB.won(total * 12));
+      MB.stat("co-o-x", (total * 12 / sal()).toFixed(2) + "<small>배</small>");
+      MB.stat("co-o-n", MB.pct(net / total, 1));
+    }
+    upd();
+    const cv = MB.canvas("#co-cv", (ctx, w, h) => {
+      const P = MB.palette();
+      upd();
+      const narrow = w < 480;
+      const R = narrow ? Math.min(w * 0.34, 120) : Math.min(h * 0.42, 130);
+      const cx = narrow ? w / 2 : R + 30, cy = narrow ? R + 16 : h / 2;
+      donut = MB.donut(ctx, cx, cy, R, items, { inner: 0.58, center: { big: manF(total), small: "회사 비용/월" }, highlight: hi >= 0 ? hi : undefined });
+      const lx = narrow ? 16 : cx + R + 34, ly0 = narrow ? cy + R + 22 : cy - items.length * 13;
+      ctx.textBaseline = "middle"; ctx.textAlign = "left";
+      items.forEach((it, i) => {
+        const y = ly0 + i * 26;
+        ctx.globalAlpha = hi >= 0 && hi !== i ? 0.45 : 1;
+        ctx.fillStyle = it.color; ctx.fillRect(lx, y - 6, 12, 12);
+        ctx.fillStyle = P.text; ctx.font = MB.font(13); ctx.fillText(it.label, lx + 20, y);
+        ctx.fillStyle = P.dim; ctx.font = MB.font(12, true); ctx.textAlign = "right";
+        ctx.fillText(manF(it.value) + "원", narrow ? w - 16 : Math.min(w - 12, lx + 250), y);
+        ctx.textAlign = "left"; ctx.globalAlpha = 1;
+      });
+    }, { get height() { const pw = $("co-cv").parentElement.clientWidth; return pw < 480 ? Math.round(Math.min(pw * 0.68, 240) + 16 + 22 + 6 * 26 + 6) : 300; } });
+    const pick = (e) => { const r = cv.canvas.getBoundingClientRect(); const k = donut ? donut.hit(e.clientX - r.left, e.clientY - r.top) : -1; if (k !== hi) { hi = k; cv.redraw(); } };
+    cv.canvas.addEventListener("pointermove", pick);
+    cv.canvas.addEventListener("pointerdown", pick);
+    cv.canvas.addEventListener("pointerleave", () => { if (hi !== -1) { hi = -1; cv.redraw(); } });
+    sev.addEventListener("change", () => { upd(); cv.redraw(); });
+  })();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and MoneyBook contributors.
+     Executable code: MIT (see LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see LICENSE.md). -->
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MoneyBook · 살아가는 데 필요한 돈 교과서</title>
+<meta name="description" content="월급 명세서에서 은퇴 설계까지 — 살아가는 데 필요한 돈의 지식을 직접 만지며 배우는 인터랙티브 교과서. 복리, 물가, 세금, 저축, 신용과 대출, 전세와 매매, 주식·채권·ETF, 자산배분, 보험, 연금을 시뮬레이터로 배운다.">
+<link rel="canonical" href="https://moneybook.euiyun.com/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="theme-color" content="#0b8a63">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MoneyBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="MoneyBook · 살아가는 데 필요한 돈 교과서">
+<meta property="og:description" content="월급 명세서에서 은퇴 설계까지 — 복리, 세금, 대출, 집, 투자, 연금을 직접 바꿔 보는 시뮬레이터로 배우는 돈 교과서.">
+<meta property="og:url" content="https://moneybook.euiyun.com/">
+<meta property="og:image" content="https://moneybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://moneybook.euiyun.com/#site","name":"MoneyBook","alternateName":"머니북","url":"https://moneybook.euiyun.com/","inLanguage":"ko","description":"살아가는 데 필요한 돈의 지식을 만져 보며 배우는 인터랙티브 교과서"},{"@type":"Book","@id":"https://moneybook.euiyun.com/#book","name":"MoneyBook · 살아가는 데 필요한 돈 교과서","url":"https://moneybook.euiyun.com/","inLanguage":"ko","isAccessibleForFree":true,"educationalLevel":"일반 성인","about":["개인 재무","금융 이해력","복리","세금","대출","주거","투자","자산배분","보험","연금","은퇴 설계"],"description":"월급 명세서에서 은퇴 설계까지 — 살아가는 데 필요한 돈의 지식을 직접 만지며 배우는 인터랙티브 교과서.","image":"https://moneybook.euiyun.com/og.png","dateModified":"2026-10-03","hasPart":[{"@type":"Chapter","name":"돈의 지도","position":1,"url":"https://moneybook.euiyun.com/chapters/overview.html"},{"@type":"Chapter","name":"돈은 어떻게 생겨나는가","position":2,"url":"https://moneybook.euiyun.com/chapters/money.html"},{"@type":"Chapter","name":"물가와 구매력","position":3,"url":"https://moneybook.euiyun.com/chapters/inflation.html"},{"@type":"Chapter","name":"금리와 복리","position":4,"url":"https://moneybook.euiyun.com/chapters/interest.html"},{"@type":"Chapter","name":"금리·환율·경기","position":5,"url":"https://moneybook.euiyun.com/chapters/economy.html"},{"@type":"Chapter","name":"월급 명세서 읽기","position":6,"url":"https://moneybook.euiyun.com/chapters/income.html"},{"@type":"Chapter","name":"예산과 소비","position":7,"url":"https://moneybook.euiyun.com/chapters/budget.html"},{"@type":"Chapter","name":"저축과 비상금","position":8,"url":"https://moneybook.euiyun.com/chapters/saving.html"},{"@type":"Chapter","name":"신용과 빚","position":9,"url":"https://moneybook.euiyun.com/chapters/credit.html"},{"@type":"Chapter","name":"대출 상환의 구조","position":10,"url":"https://moneybook.euiyun.com/chapters/loan.html"},{"@type":"Chapter","name":"집: 월세·전세·매매","position":11,"url":"https://moneybook.euiyun.com/chapters/housing.html"},{"@type":"Chapter","name":"위험과 수익","position":12,"url":"https://moneybook.euiyun.com/chapters/risk.html"},{"@type":"Chapter","name":"주식","position":13,"url":"https://moneybook.euiyun.com/chapters/stock.html"},{"@type":"Chapter","name":"채권","position":14,"url":"https://moneybook.euiyun.com/chapters/bond.html"},{"@type":"Chapter","name":"펀드·ETF·인덱스","position":15,"url":"https://moneybook.euiyun.com/chapters/fund.html"},{"@type":"Chapter","name":"자산배분","position":16,"url":"https://moneybook.euiyun.com/chapters/portfolio.html"},{"@type":"Chapter","name":"돈과 심리, 그리고 사기","position":17,"url":"https://moneybook.euiyun.com/chapters/behavior.html"},{"@type":"Chapter","name":"세금","position":18,"url":"https://moneybook.euiyun.com/chapters/tax.html"},{"@type":"Chapter","name":"보험과 위험 관리","position":19,"url":"https://moneybook.euiyun.com/chapters/insurance.html"},{"@type":"Chapter","name":"연금: 세 겹의 노후","position":20,"url":"https://moneybook.euiyun.com/chapters/pension.html"},{"@type":"Chapter","name":"은퇴 설계","position":21,"url":"https://moneybook.euiyun.com/chapters/retire.html"},{"@type":"Chapter","name":"인생 시뮬레이터","position":22,"url":"https://moneybook.euiyun.com/chapters/lab.html"},{"@type":"Chapter","name":"용어집 & 종합 퀴즈","position":23,"url":"https://moneybook.euiyun.com/chapters/glossary.html"}]}]}</script>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/common.js"></script>
+<script src="js/money.js"></script>
+<style>
+  .paths { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .path { padding: 18px 20px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-elev); }
+  .path h3 { margin: 0 0 6px; font-size: 17px; }
+  .path p { margin: 0 0 10px; color: var(--text-dim); font-size: 14.5px; }
+  .path .steps, .trail .steps { display: flex; flex-wrap: wrap; gap: 6px; }
+  .path .steps a, .trail .steps a { font-family: var(--mono); font-size: 12px; padding: 3px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+  .path .steps a:hover, .trail .steps a:hover { text-decoration: none; filter: brightness(1.1); }
+  .numbers { display: grid; gap: 1px; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .numbers div { background: var(--bg-elev); padding: 18px 20px; }
+  .numbers b { display: block; font-family: var(--mono); font-size: 26px; letter-spacing: -0.02em; color: var(--text); }
+  .numbers span { color: var(--text-dim); font-size: 14px; }
+  .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+  .hero-badges span { font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--text-dim); background: var(--bg-elev); }
+  .hero-sim { border-radius: 20px; border: 1px solid var(--border); background: var(--bg-elev); overflow: hidden; box-shadow: var(--shadow); }
+  .hero-sim canvas { display: block; width: 100%; }
+  .hero-sim .ctl { display: grid; gap: 10px; padding: 14px 16px 16px; border-top: 1px solid var(--border); }
+  .hero-sim .row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .hero-sim .row .ctrl { flex: 1 1 160px; margin: 0; }
+  .hero-sim .cap { font-size: 14px; color: var(--text-dim); min-height: 44px; line-height: 1.5; }
+  .hero-sim .cap b { color: var(--text); }
+  .trail { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); counter-reset: tr; }
+  .trail > div { counter-increment: tr; padding: 16px; border-radius: 12px; background: var(--bg-elev); border: 1px solid var(--border); }
+  .trail > div::before { content: counter(tr, decimal-leading-zero); font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 700; }
+  .trail b { display: block; font-size: 16px; margin: 4px 0 2px; }
+  .trail small { display: block; font-family: var(--mono); font-size: 11px; color: var(--text-faint); margin-bottom: 8px; }
+  .trail p { margin: 0 0 10px; font-size: 14px; color: var(--text-dim); line-height: 1.55; }
+  .series { display: flex; flex-wrap: wrap; gap: 10px; }
+  .series a { padding: 10px 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-elev); color: var(--text); font-weight: 600; font-size: 15px; }
+  .series a small { display: block; font-weight: 400; color: var(--text-dim); font-size: 13px; }
+  .series a:hover { text-decoration: none; border-color: var(--accent); }
+  .game-cta { display: grid; gap: 18px; align-items: center; grid-template-columns: minmax(0, 1fr); padding: 24px; border-radius: var(--radius); border: 1px solid var(--accent); background: linear-gradient(120deg, var(--accent-soft), var(--accent-2-soft)); }
+  @media (min-width: 760px) { .game-cta { grid-template-columns: minmax(0, 1fr) auto; } }
+  .game-cta h2 { margin: 0 0 6px; font-size: 24px; }
+  .game-cta p { margin: 0; color: var(--text-dim); font-size: 15.5px; }
+  .game-cta a { justify-self: start; padding: 12px 20px; border-radius: 12px; font-weight: 700; background: var(--accent); color: var(--on-accent); white-space: nowrap; }
+  .game-cta a:hover { text-decoration: none; filter: brightness(1.05); }
+  .persona { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); padding: 22px; border-radius: var(--radius); border: 1px solid var(--border); border-left: 4px solid var(--accent-2); background: var(--bg-elev); }
+  @media (min-width: 760px) { .persona { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); } }
+  .persona p { margin: 0 0 10px; color: var(--text-dim); }
+  .persona .slip { margin: 0; }
+  .disclaimer { font-size: 14px; color: var(--text-dim); }
+</style>
+</head>
+<body data-root="">
+<section class="home-hero">
+  <div class="inner">
+    <div>
+      <div class="eyebrow">Interactive Money Textbook</div>
+      <h1>살아가는 데 필요한<br><span class="grad">돈의 지식</span></h1>
+      <p>월급은 왜 계약한 연봉보다 적게 들어올까. 적금 5%는 왜 실제로는 절반일까. 전세와 월세 중 무엇이 더 쌀까. 이 교과서는 물가와 복리에서 시작해 월급 명세서, 예산, 저축, 신용과 대출, 집, 주식·채권·ETF, 자산배분, 세금, 보험, 연금, 은퇴까지 <strong>숫자를 직접 끌고 바꿔 보며</strong> 배운다. 외울 공식보다 손에 남는 감각이 목표다.</p>
+      <div class="cta">
+        <a class="primary" href="chapters/overview.html">1장부터 시작하기 →</a>
+        <a class="ghost" href="chapters/lab.html">인생 시뮬레이터</a>
+      </div>
+      <div class="hero-badges">
+        <span>23개 챕터</span><span>200여 개 시뮬레이터</span><span>이어지는 케이스: 한결의 가계부</span><span>2026년 한국 제도 기준</span>
+      </div>
+    </div>
+    <div class="hero-sim" id="hero">
+      <canvas id="hero-cv"></canvas>
+      <div class="ctl">
+        <div class="row">
+          <label class="ctrl"><span>매달 모으는 돈 <output id="hero-pay-out"></output></span><input type="range" id="hero-pay" min="100000" max="2000000" step="50000" value="500000"></label>
+          <label class="ctrl"><span>연 수익률 <output id="hero-rate-out"></output></span><input type="range" id="hero-rate" min="0" max="0.1" step="0.005" value="0.05"></label>
+        </div>
+        <div class="row">
+          <label class="ctrl"><span>시작 나이 <output id="hero-age-out"></output></span><input type="range" id="hero-age" min="20" max="50" step="1" value="27"></label>
+          <label class="check"><input type="checkbox" id="hero-real" checked> 오늘 돈 가치로 (물가 2.5%)</label>
+        </div>
+        <div class="cap" id="hero-cap"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="home-section">
+  <h2>숫자로 보는 돈</h2>
+  <p class="sub">이 교과서를 끝내면 아래 숫자가 어디서 나오는지, 내 삶에서 무엇을 뜻하는지 설명할 수 있게 됩니다.</p>
+  <div class="numbers">
+    <div><b>72 ÷ r</b><span>돈이 두 배가 되는 햇수. 연 6%면 약 12년, 물가 3%면 내 현금의 가치가 24년 만에 반토막</span></div>
+    <div><b>약 88.5%</b><span>연봉 3,600만원의 월급에서 4대 보험과 세금을 빼고 통장에 들어오는 비율</span></div>
+    <div><b>약 1.9%</b><span>연 3.5% 적금의 체감 이율. 마지막 달에 넣은 돈은 한 달 치 이자만 받는다</span></div>
+    <div><b>15.4%</b><span>이자와 배당에서 먼저 떼는 세금. 절세 계좌는 이 구멍을 막는다</span></div>
+    <div><b>−50% → +100%</b><span>반토막 난 투자가 원금을 되찾으려면 두 배가 되어야 한다</span></div>
+    <div><b>4%</b><span>은퇴 자산에서 해마다 꺼내 써도 30년을 버틸 가능성이 높다고 알려진 인출률</span></div>
+  </div>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <h2>돈의 흐름</h2>
+  <p class="sub">돈은 벌고, 쓰고, 모으고, 빌리고, 불리고, 지키고, 마지막에 나를 먹여 살린다. 각 장은 이 흐름의 한 단계를 맡습니다. 1~5장은 모든 단계에 깔린 원리입니다.</p>
+  <div class="trail" id="trail"></div>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <h2>이어지는 케이스: 한결의 가계부</h2>
+  <div class="persona">
+    <div>
+      <p><strong style="color:var(--text)">이한결, 27세.</strong> 2026년 1월에 첫 직장에 들어갔다. 세전 연봉 3,600만원, 서울 원룸 월세(보증금 1,000만원, 월 60만원), 학자금 대출 1,200만원, 통장 잔고 300만원.</p>
+      <p>책의 모든 장은 한결의 돈을 한 걸음씩 진전시킨다. 첫 월급 명세서를 읽고, 새는 지출을 막고, 비상금을 만들고, 이사할 집을 고르고, 처음으로 투자하고, 연말정산을 챙기고, 60세의 모습을 그린다. 마지막 장에서는 독자가 한결의 인생 전체를, 그리고 자기 인생을 직접 돌려 본다.</p>
+      <p style="font-size:13px">가상의 인물이며 실제 인물과 무관합니다.</p>
+    </div>
+    <div class="slip" id="hg-slip"></div>
+  </div>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <div class="game-cta">
+    <div>
+      <h2>인생 시뮬레이터</h2>
+      <p>27세부터 90세까지. 연봉, 지출, 이사와 내 집 마련, 투자 비율, 연금, 결혼과 실직 같은 사건을 직접 정하고 한 번의 인생을 돌린다. 수백 개의 미래를 한꺼번에 그려 내 계획이 버틸 확률을 본다.</p>
+    </div>
+    <a href="chapters/lab.html">시뮬레이터 열기 →</a>
+  </div>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <h2>전체 챕터</h2>
+  <p class="sub">1~5장은 돈의 원리, 6~8장은 벌고 쓰고 모으기, 9~11장은 빚과 집, 12~16장은 투자, 17~19장은 지키기, 20~21장은 노후, 22~23장은 종합입니다. 각 장은 일상의 질문 → 만져 보는 그림 → 원리 → 시뮬레이터 → 한결의 가계부 → 퀴즈 순서로 구성됩니다.</p>
+  <div class="ch-grid" id="chgrid"></div>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <h2>추천 학습 경로</h2>
+  <p class="sub">지금 필요한 것부터 읽어도 됩니다.</p>
+  <div class="paths">
+    <div class="path"><h3>첫 월급을 받았다면</h3><p>통장에 찍힌 숫자 읽기부터 돈이 모이는 구조까지.</p><div class="steps"><a href="chapters/income.html">06</a><a href="chapters/budget.html">07</a><a href="chapters/saving.html">08</a><a href="chapters/credit.html">09</a></div></div>
+    <div class="path"><h3>돈의 원리부터</h3><p>왜 시간이 돈이고, 왜 현금은 녹는가.</p><div class="steps"><a href="chapters/overview.html">01</a><a href="chapters/money.html">02</a><a href="chapters/inflation.html">03</a><a href="chapters/interest.html">04</a><a href="chapters/economy.html">05</a></div></div>
+    <div class="path"><h3>이사·대출을 앞두고</h3><p>상환 방식, DSR, 전세 보증금 위험.</p><div class="steps"><a href="chapters/interest.html">04</a><a href="chapters/loan.html">10</a><a href="chapters/housing.html">11</a></div></div>
+    <div class="path"><h3>투자를 시작하려면</h3><p>위험의 모양을 먼저 보고, 비용과 비율을 정한다.</p><div class="steps"><a href="chapters/risk.html">12</a><a href="chapters/stock.html">13</a><a href="chapters/bond.html">14</a><a href="chapters/fund.html">15</a><a href="chapters/portfolio.html">16</a><a href="chapters/behavior.html">17</a></div></div>
+    <div class="path"><h3>세금과 보험</h3><p>새는 세금을 막고, 감당 못 할 위험만 넘긴다.</p><div class="steps"><a href="chapters/income.html">06</a><a href="chapters/tax.html">18</a><a href="chapters/insurance.html">19</a></div></div>
+    <div class="path"><h3>노후 설계</h3><p>세 겹의 연금과 은퇴 자금, 그리고 내 인생 돌려 보기.</p><div class="steps"><a href="chapters/pension.html">20</a><a href="chapters/retire.html">21</a><a href="chapters/lab.html">22</a></div></div>
+  </div>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <h2>이 사이트 사용법</h2>
+  <div class="flow">
+    <div><b>읽기</b>일상의 질문에서 시작합니다. 금융 용어는 처음 나올 때 풀어 씁니다.</div>
+    <div><b>만지기</b>슬라이더를 밀고 그래프의 점을 끌어 보세요. 대부분의 그림은 움직입니다.</div>
+    <div><b>무너뜨리기</b>값을 끝까지 밀어 보세요. 빚이 불어나고 잔고가 바닥나는 지점이 배울 점입니다.</div>
+    <div><b>따라가기</b>장마다 한결의 가계부가 한 걸음씩 나아갑니다.</div>
+    <div><b>내 숫자 넣기</b>22장 인생 시뮬레이터에 내 연봉과 계획을 넣어 봅니다.</div>
+  </div>
+  <p class="disclaimer" style="margin-top:20px">이 사이트의 수치는 2026년 한국 제도를 바탕으로 한 교육용 근사이며, 세법·요율은 해마다 바뀝니다. 투자 수익률은 교육용 가정이고 미래를 보장하지 않습니다. 특정 상품을 권하지 않으며 투자·세무 자문이 아닙니다.</p>
+</section>
+
+<section class="home-section" style="padding-top:0">
+  <h2>함께 읽으면 좋은 교과서</h2>
+  <p class="sub">같은 방식으로 만든 인터랙티브 교과서 시리즈입니다.</p>
+  <div class="series">
+    <a href="https://carbook.euiyun.com/">CarBook<small>자동차 공학 · 엔진에서 자율주행까지</small></a>
+    <a href="https://sensorbook.euiyun.com/">SensorBook<small>이미지 센서 · 빛이 숫자가 되기까지</small></a>
+    <a href="https://aibook.euiyun.com/">AIBook<small>인공지능 · 만져 보며 배우는 AI</small></a>
+    <a href="https://lithobook.euiyun.com/">LithoBook<small>반도체 노광 · 빛으로 회로를 새긴다</small></a>
+  </div>
+</section>
+
+<script>
+(function () {
+  "use strict";
+  document.getElementById("chgrid").innerHTML = MB.CHAPTERS.map(function (c) {
+    return '<a class="ch-card" href="chapters/' + c.slug + '.html"><span class="num">CHAPTER ' + c.num + "</span><h3>" + c.title + "</h3><p>" + c.desc + '</p><span class="tags">' +
+      c.tags.map(function (t) { return '<span class="' + (t === "sim" ? "sim" : "") + '">' + (t === "sim" ? "시뮬레이터" : t) + "</span>"; }).join("") + "</span></a>";
+  }).join("");
+
+  var about = [
+    "연봉과 실수령의 차이. 4대 보험과 세금이 어디로 가는지.",
+    "돈이 새는 곳을 찾고, 쓰기 전에 먼저 떼어 둔다.",
+    "비상금을 만들고 예금·적금의 실제 이자를 안다.",
+    "신용과 대출, 그리고 가장 큰 지출인 집.",
+    "위험의 모양을 보고 주식·채권·펀드를 섞는다.",
+    "심리와 사기, 세금, 큰 사고로부터 돈을 지킨다.",
+    "연금 세 겹과 은퇴 자금. 일하지 않아도 들어오는 돈.",
+  ];
+  document.getElementById("trail").innerHTML = MB.STAGES.map(function (s, i) {
+    var chs = MB.CHAPTERS.filter(function (c) { return c.stage === i; });
+    return "<div><b>" + s.name + "</b><small>" + s.en + "</small><p>" + about[i] + '</p><span class="steps">' +
+      chs.map(function (c) { return '<a href="chapters/' + c.slug + '.html" title="' + c.title + '">' + c.num + "</a>"; }).join("") + "</span></div>";
+  }).join("");
+
+  var H = MN.HG, pay = MN.payroll(H.salary, { nontax: H.nontax }), spend = H.budget.reduce(function (s, b) { return s + b.v; }, 0);
+  var loanPay = MN.loan(H.studentLoan, H.studentRate, H.studentMonths).first;
+  var rows = [["세전 월급", pay.monthly.gross], ["4대 보험", -(pay.monthly.nps + pay.monthly.health + pay.monthly.ltc + pay.monthly.emp)], ["소득세·지방세", -(pay.monthly.tax + pay.monthly.local)], ["생활비", -spend], ["학자금 상환", -loanPay]];
+  var left = rows.reduce(function (s, r) { return s + r[1]; }, 0);
+  document.getElementById("hg-slip").innerHTML = rows.map(function (r) {
+    return '<div class="row"><span>' + r[0] + '</span><span class="' + (r[1] < 0 ? "minus" : "") + '">' + (r[1] < 0 ? "−" : "") + Math.round(Math.abs(r[1])).toLocaleString("ko-KR") + "</span></div>";
+  }).join("") + '<div class="row total"><span>한 달에 남는 돈</span><span>' + Math.round(left).toLocaleString("ko-KR") + "</span></div>";
+
+  // 히어로: 매달 모은 돈이 60세까지 자라는 모습. 시작 나이를 늦추면 무엇을 잃는가.
+  var END = 60, INF = 0.025;
+  var payG = MB.range("hero-pay", function (v) { return MB.won(v); }, draw);
+  var rateG = MB.range("hero-rate", function (v) { return MB.pct(v, 1); }, draw);
+  var ageG = MB.range("hero-age", function (v) { return v + "세"; }, draw);
+  var realEl = document.getElementById("hero-real"), cap = document.getElementById("hero-cap");
+  realEl.addEventListener("change", draw);
+  var anim = 1;
+  function series(start) {
+    var g = MN.grow({ monthly: payG(), rate: rateG(), years: END - start, inflation: INF });
+    return g.map(function (r) { return { age: start + r.year, v: realEl.checked ? r.real : r.value, c: realEl.checked ? r.contrib / Math.pow(1 + INF, r.year) : r.contrib }; });
+  }
+  var cv = MB.canvas("#hero-cv", function (ctx, w, h) {
+    var P = MB.palette(), a0 = ageG(), s = series(a0), s10 = a0 + 10 < END ? series(a0 + 10) : [];
+    var top = Math.max(1e7, s[s.length - 1].v) * 1.12;
+    var shown = Math.max(1, Math.round(s.length * anim));
+    var c = MB.chart(ctx, { x: 60, y: 18, w: w - 76, h: h - 62 }, {
+      x: [20, END], y: [0, top], yFmt: MB.wonAxis, xFmt: function (v) { return v + "세"; },
+      series: [
+        { data: s.slice(0, shown).map(function (r) { return [r.age, r.v]; }), color: P.accent, width: 2.6, fill: MB.color("accent-soft") },
+        { data: s.slice(0, shown).map(function (r) { return [r.age, r.c]; }), color: P.dim, width: 1.4, dash: [5, 4] },
+        { data: s10.map(function (r) { return [r.age, r.v]; }), color: P.accent2, width: 2, dash: [2, 3] },
+      ],
+    });
+    var last = s[shown - 1];
+    ctx.fillStyle = P.accent; ctx.beginPath(); ctx.arc(c.X(last.age), c.Y(last.v), 5, 0, 7); ctx.fill();
+    ctx.font = MB.font(12, false, 700); ctx.textAlign = "right"; ctx.textBaseline = "bottom"; ctx.fillStyle = P.text;
+    ctx.fillText(MB.won(last.v), c.X(last.age) - 8, c.Y(last.v) - 6);
+    ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.textAlign = "left"; ctx.textBaseline = "top";
+    ctx.fillText("실선: " + a0 + "세 시작   점선: 넣은 원금" + (s10.length ? "   금색: " + (a0 + 10) + "세 시작" : ""), c.box.x + 8, c.box.y + 4);
+  }, { aspect: 0.62, minHeight: 260, maxHeight: 400 });
+  function draw() {
+    var a0 = ageG(), s = series(a0), end = s[s.length - 1], s10 = a0 + 10 < END ? series(a0 + 10) : null;
+    var gain = end.v - end.c;
+    cap.innerHTML = "<b>" + a0 + "세부터 " + END + "세까지 " + MB.won(end.v) + "</b> (" + (realEl.checked ? "오늘 돈 기준" : "명목") + "). 넣은 돈 " + MB.won(end.c) + ", 나머지 " + MB.won(Math.max(0, gain)) + "는 복리가 만든 몫이다." +
+      (s10 ? " 10년 늦게 시작하면 " + MB.won(s10[s10.length - 1].v) + "에 그친다." : "");
+    cv.redraw();
+  }
+  MB.loop(document.getElementById("hero"), function (dt) { if (anim < 1) { anim = Math.min(1, anim + dt * 0.9); cv.redraw(); } });
+  anim = 0;
+  draw();
+})();
+</script>
+</body>
+</html>

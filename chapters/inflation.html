@@ -1,0 +1,1032 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and MoneyBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "같은 만 원이 해마다 덜 사는 이유를 장바구니, 소비자물가지수의 가중치, 근원물가와 체감물가, 명목과 실질, 72의 법칙, 빚과 현금에 미치는 효과, 디플레이션과 초인플레이션까지 시뮬레이터로 만져 보며 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>물가와 구매력 · MoneyBook</title>
+<meta name="description" content="같은 만 원이 해마다 덜 사는 이유를 장바구니, 소비자물가지수의 가중치, 근원물가와 체감물가, 명목과 실질, 72의 법칙, 빚과 현금에 미치는 효과, 디플레이션과 초인플레이션까지 시뮬레이터로 만져 보며 익힌다.">
+<link rel="canonical" href="https://moneybook.euiyun.com/chapters/inflation.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0b8a63">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MoneyBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="물가와 구매력 · MoneyBook">
+<meta property="og:description" content="같은 만 원이 해마다 덜 사는 이유를 장바구니, 소비자물가지수의 가중치, 근원물가와 체감물가, 명목과 실질, 72의 법칙, 빚과 현금에 미치는 효과, 디플레이션과 초인플레이션까지 시뮬레이터로 만져 보며 익힌다.">
+<meta property="og:url" content="https://moneybook.euiyun.com/chapters/inflation.html">
+<meta property="og:image" content="https://moneybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://moneybook.euiyun.com/chapters/inflation.html#chapter","name":"물가와 구매력","headline":"물가와 구매력 · MoneyBook","description":"같은 만 원이 해마다 덜 사는 이유를 장바구니, 소비자물가지수의 가중치, 근원물가와 체감물가, 명목과 실질, 72의 법칙, 빚과 현금에 미치는 효과, 디플레이션과 초인플레이션까지 시뮬레이터로 만져 보며 익힌다.","url":"https://moneybook.euiyun.com/chapters/inflation.html","position":3,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://moneybook.euiyun.com/og.png","dateModified":"2026-10-03","isPartOf":{"@type":"Book","@id":"https://moneybook.euiyun.com/#book","name":"MoneyBook · 살아가는 데 필요한 돈 교과서","url":"https://moneybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MoneyBook","item":"https://moneybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"3. 물가와 구매력","item":"https://moneybook.euiyun.com/chapters/inflation.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/money.js"></script>
+<!--head:end-->
+<style>
+  figure.diagram svg { max-width: 520px; margin: 0 auto; }
+  figure.diagram svg .t-mono { font-size: 13px; }
+</style>
+</head>
+<body data-chapter="inflation">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 03</div>
+    <h1>물가와 구매력</h1>
+    <p class="lead">통장에 찍힌 숫자는 그대로인데 그 돈으로 살 수 있는 것은 해마다 조금씩 줄어든다. 소리도 없고 고지서도 오지 않는 이 손실이 물가 상승이다. 이 장은 물가를 어떻게 재는지, 왜 통계와 내 느낌이 다른지, 같은 물가 상승이 현금을 가진 사람과 빚을 진 사람에게 어떻게 다르게 작용하는지를 직접 숫자를 움직여 가며 확인한다.</p>
+    <ul class="objectives">
+      <li>물가 상승률이 구매력을 어떻게 깎는지 장바구니와 녹는 지폐로 본다.</li>
+      <li>소비자물가지수가 품목 가격과 가중치로 만들어지는 과정을 따라가고, 나만의 물가를 계산해 본다.</li>
+      <li>근원물가와 체감물가가 공식 물가와 다른 이유를 설명한다.</li>
+      <li>명목과 실질을 구분하고, 72의 법칙으로 돈의 가치가 반으로 줄어드는 시간을 어림한다.</li>
+      <li>인플레이션이 현금·예금·연봉·빚에 주는 효과를 비교하고, 디플레이션과 초인플레이션의 사례를 안다.</li>
+    </ul>
+  </header>
+
+  <section id="basket">
+    <h2>같은 만 원, 줄어드는 장바구니</h2>
+    <p>지갑에 만 원이 있다. 오늘 동네 마트에서 라면, 콩나물, 사과, 두부, 바나나, 우유를 하나씩 담으면 딱 만 원이다. 그런데 이 만 원을 서랍에 넣어 두고 몇 년 뒤에 같은 마트에 가면 어떻게 될까. 지폐는 그대로 만 원이지만 물건값이 올라 있다.</p>
+    <p>물건값이 전반적으로, 꾸준히 오르는 현상을 <span class="term">인플레이션</span><span class="en">(Inflation)</span>이라 하고, 그 속도를 <span class="term">물가 상승률</span><span class="en">(Inflation rate)</span>이라 한다. 돈 한 단위로 살 수 있는 물건의 양을 <span class="term">구매력</span><span class="en">(Purchasing power)</span>이라 한다. 물가가 오르면 구매력은 떨어진다. 같은 말을 거꾸로 한 것이다.</p>
+    <p>아래에서 물가 상승률을 정하고 재생 버튼을 누른다. 해가 바뀔 때마다 모든 물건값이 그만큼 오르고, 만 원 안에 들어가지 못한 물건은 장바구니 밖으로 밀려난다.</p>
+
+    <div class="sim" id="sim-cart">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>장바구니: 만 원으로 담을 수 있는 것</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ct-cv"></canvas><span class="hint">아래 그래프를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>물가 상승률(연) <output id="ct-r-out"></output></span><input type="range" id="ct-r" min="0" max="10" step="0.5" value="3"></label>
+          <div class="btn-row"><button class="btn primary" id="ct-go">재생</button><button class="btn" id="ct-re">처음으로</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">연도</span><span class="v" id="ct-o-y">—</span></div>
+        <div class="stat"><span class="k">같은 장바구니 값</span><span class="v" id="ct-o-c">—</span></div>
+        <div class="stat"><span class="k">만 원의 구매력(오늘 돈)</span><span class="v" id="ct-o-p">—</span></div>
+        <div class="stat"><span class="k">담긴 품목</span><span class="v" id="ct-o-n">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 물가 3%로 재생한다. 딱 맞게 담겨 있던 장바구니에서 1년 만에 우유가 밀려나고, 남은 돈은 해마다 줄다가 11년째에는 바나나도 밀려난다. ② 10년 뒤 장바구니 값을 읽는다. 약 1만 3,439원이다. 거꾸로 말하면 오늘 만 원은 10년 뒤 약 7,441원어치만 산다. ③ 물가를 10%로 올린다. 30년이 지나면 장바구니에 거의 아무것도 남지 않는다. (모든 물건값이 같은 비율로 오른다고 가정한 교육용 모델이다. 가격은 2026년 동네 마트의 대략값이다.)</div>
+    </div>
+
+    <p>물가 3%는 1년 단위로 보면 아주 작다. 만 원짜리 장바구니가 1만 300원이 될 뿐이다. 하지만 이 작은 비율이 해마다 <b>앞의 오른 값 위에 다시</b> 붙는다. 그래서 장바구니 값은 직선이 아니라 점점 가파르게 오르고, 만 원의 구매력은 점점 완만하게 줄어드는 곡선을 그린다. 이 "앞의 결과 위에 다시 곱해지는" 성질이 <a href="interest.html">4장</a>에서 다룰 복리와 똑같은 구조다. 복리가 저축을 키우는 힘이라면 물가는 같은 힘으로 현금을 깎는다.</p>
+  </section>
+
+  <section id="cpi">
+    <h2>물가는 어떻게 재는가: 소비자물가지수</h2>
+    <p>"물가가 3% 올랐다"는 뉴스의 숫자는 누가, 어떻게 만든 것일까. 세상에는 수만 가지 물건과 서비스가 있고, 어떤 것은 오르고 어떤 것은 내린다. 이것을 숫자 하나로 줄이는 장치가 <span class="term">소비자물가지수</span><span class="en">(Consumer Price Index, CPI)</span>다. 가계가 실제로 사는 물건과 서비스의 가격을 모아, <b>많이 쓰는 것일수록 크게 반영</b>되도록 평균을 낸 지수다. 한국에서는 국가 통계 기관(통계청, 2025년 10월부터 국가데이터처)이 매달 발표한다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 378" role="img" aria-label="소비자물가지수가 만들어지는 네 단계: 가격 조사, 품목 지수, 가중치, 가중 평균">
+        <defs><marker id="if-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="10" y="10" width="420" height="58" rx="12" class="f-surface"/>
+        <text x="26" y="44" class="lbl-b">① 가격 조사</text>
+        <text x="146" y="34" class="lbl">약 460개 품목</text>
+        <text x="146" y="56" class="lbl-dim">매달, 전국 도시의 가게·서비스</text>
+        <line x1="70" y1="70" x2="70" y2="86" class="s-line" marker-end="url(#if-ar)"/>
+        <rect x="10" y="90" width="420" height="58" rx="12" class="f-surface"/>
+        <text x="26" y="124" class="lbl-b">② 품목 지수</text>
+        <text x="146" y="114" class="lbl">기준 해 = 100</text>
+        <text x="146" y="136" class="lbl-dim">라면 104.2 · 휴대폰 96.8</text>
+        <line x1="70" y1="150" x2="70" y2="166" class="s-line" marker-end="url(#if-ar)"/>
+        <rect x="10" y="170" width="420" height="58" rx="12" class="f-acc2-soft"/>
+        <text x="26" y="204" class="lbl-b">③ 가중치</text>
+        <text x="146" y="194" class="lbl">가계 지출 비중</text>
+        <text x="146" y="216" class="lbl-dim">많이 쓰는 품목일수록 큰 무게</text>
+        <line x1="70" y1="230" x2="70" y2="246" class="s-line" marker-end="url(#if-ar)"/>
+        <rect x="10" y="250" width="420" height="58" rx="12" class="f-acc-soft"/>
+        <text x="26" y="284" class="lbl-b">④ 가중 평균</text>
+        <text x="146" y="274" class="lbl-acc">소비자물가지수</text>
+        <text x="146" y="296" class="lbl-dim">1년 전 같은 달과 비교 → 상승률</text>
+        <text x="220" y="340" text-anchor="middle" class="lbl">물가 상승률 = 이번 달 지수 ÷ 1년 전 같은 달 지수 − 1</text>
+        <text x="220" y="366" text-anchor="middle" class="lbl-dim">예: 지수가 112.0에서 115.4가 되면 상승률은 약 3.0%</text>
+      </svg>
+      <figcaption><b>소비자물가지수를 만드는 네 단계.</b> 품목 수와 가중치는 가계의 소비 습관이 바뀌는 데 맞춰 몇 년마다 다시 정한다. 품목 지수의 숫자는 설명을 위한 예다.</figcaption>
+    </figure>
+
+    <p>세 번째 단계의 <span class="term">가중치</span><span class="en">(Weight)</span>가 핵심이다. 가계가 한 달에 쓰는 돈 가운데 전·월세와 외식이 차지하는 몫은 크고 소금이 차지하는 몫은 아주 작다. 그래서 소금 값이 두 배가 되어도 지수는 거의 움직이지 않지만, 집세가 5% 오르면 지수가 눈에 띄게 움직인다. 가중치는 가계 지출 조사로 정하며, 전국 평균 가구의 지출 구조를 따른다. 집을 사는 비용(자가 주거비)은 지수에 들어가지 않고 전세·월세는 들어간다는 점도 알아 둘 만하다.</p>
+    <p>문제는 <b>나는 평균 가구가 아니라는 것</b>이다. 혼자 사는 사회초년생은 월세와 외식 비중이 크고, 아이를 키우는 가족은 식료품과 교육비 비중이 크고, 은퇴한 부부는 의료비 비중이 크다. 아래에서 막대를 끌어 지출 비중을 바꾸면 같은 해의 같은 가격 변화가 사람마다 다른 물가가 되는 것을 볼 수 있다.</p>
+
+    <div class="sim" id="sim-cpi">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>가중치 바구니: 나만의 물가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cp-cv"></canvas><span class="hint">막대 끝을 위아래로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="cp-p"><button data-value="avg" class="on">평균 가구</button><button data-value="solo">자취생</button><button data-value="family">자녀 가족</button><button data-value="senior">은퇴 부부</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">공식 물가(평균 가구)</span><span class="v" id="cp-o-a">—</span></div>
+        <div class="stat"><span class="k">나의 물가</span><span class="v" id="cp-o-m">—</span></div>
+        <div class="stat"><span class="k">차이</span><span class="v" id="cp-o-d">—</span></div>
+        <div class="stat"><span class="k">가장 큰 기여</span><span class="v" id="cp-o-t">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "자취생"을 고른다. 외식·주거 비중이 커서 평균보다 물가가 높게 나온다. ② "은퇴 부부"를 고른다. 의료비(보건) 비중이 커서 물가가 더 높다. ③ 통신 막대를 끝까지 올린다. 값이 내린 품목에 돈을 많이 쓰는 사람은 물가가 낮아진다. ④ 식료품 막대를 0으로 내려 본다. 상승률이 가장 높은 품목이 빠지면 나의 물가가 크게 떨어진다. (8개 분류와 각 상승률은 한 해를 가정한 가상의 값이고, 비중도 실제 통계를 단순화한 교육용 값이다.)</div>
+    </div>
+
+    <p>같은 해, 같은 가격 변화인데 사람마다 물가가 0.5%p 가까이 차이 난다. 공식 물가는 틀린 숫자가 아니라 <b>평균 가구의 물가</b>다. 내 지출 구조가 평균에서 멀수록 내 물가도 공식 물가에서 멀어진다. 7장에서 가계부를 쓰면 내 지출 비중을 알 수 있고, 그것으로 나만의 물가를 어림할 수 있다.</p>
+
+    <div class="callout tip">
+      <strong>가격은 그대로인데 용량이 줄면</strong>
+      과자 한 봉지 가격은 그대로 두고 내용물을 90g에서 80g으로 줄이는 것을 흔히 슈링크플레이션이라 부른다. 물가 통계는 가격표가 아니라 <b>같은 양의 가격</b>을 비교하므로, 이 경우 그램당 가격이 약 12.5% 오른 것으로 반영한다. 품질이 좋아진 제품은 반대로 그만큼을 가격 상승에서 빼 주는 조정을 하기도 한다.
+    </div>
+    <div class="callout warn">
+      <strong>통계의 품목·가중치와 제도 수치는 바뀐다</strong>
+      소비자물가지수의 기준 연도, 품목 수, 가중치는 몇 년마다 개편된다. 이 장에 나오는 품목 수(약 460개)와 비중, 물가안정목표 같은 수치는 2026년 기준의 대표값이며, 최신 값은 통계 기관과 한국은행의 발표를 확인해야 한다.
+    </div>
+  </section>
+
+  <section id="feel">
+    <h2>체감물가와 근원물가: 왜 내 느낌과 다른가</h2>
+    <p>공식 물가가 2%라는데 장 보러 가면 다 오른 것 같다. 이 느낌은 착각만은 아니다. 첫째, 앞 절에서 본 것처럼 내 지출 구조가 평균과 다르다. 둘째, 사람은 <b>자주 사는 물건</b>의 가격을 기준으로 물가를 느낀다. 커피, 점심, 버스비는 매일 영수증으로 확인하지만 냉장고나 노트북은 몇 년에 한 번 산다. 지수는 <b>쓴 금액</b>으로 무게를 매기고, 느낌은 <b>산 횟수</b>로 무게를 매긴다. 셋째, 오른 가격이 내린 가격보다 더 오래 기억에 남는다.</p>
+    <p>아래에서 영수증이 쏟아진다. 대부분은 자주 사는 품목의 작은 영수증이고, 가끔 비싼 가전 영수증이 섞인다. 두 그룹의 가격 변화를 정하고 오른쪽의 두 막대를 비교한다.</p>
+
+    <div class="sim" id="sim-feel">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>영수증 장수로 느끼는 물가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="fl-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>자주 사는 것(커피·점심·버스) <output id="fl-a-out"></output></span><input type="range" id="fl-a" min="-2" max="10" step="0.5" value="5"></label>
+          <label class="ctrl"><span>가끔 사는 것(가전·노트북) <output id="fl-b-out"></output></span><input type="range" id="fl-b" min="-10" max="5" step="0.5" value="-5"></label>
+          <label class="check"><input type="checkbox" id="fl-l"> 오른 가격을 두 배로 크게 기억한다</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">통계 물가(금액 가중)</span><span class="v" id="fl-o-c">—</span></div>
+        <div class="stat"><span class="k">체감 물가(횟수 가중)</span><span class="v" id="fl-o-f">—</span></div>
+        <div class="stat"><span class="k">체감 − 통계</span><span class="v" id="fl-o-d">—</span></div>
+        <div class="stat"><span class="k">오른 품목 영수증 비율</span><span class="v" id="fl-o-u">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 처음 설정에서 통계 물가는 2.0%인데 체감 물가는 4% 넘게 나온다. 영수증 열 장 중 여덟 장이 오른 품목이기 때문이다. ② 가끔 사는 것을 −10%까지 내린다. 통계 물가는 꽤 내려가지만 체감은 거의 그대로다. ③ "두 배로 기억"을 켠다. 오른 가격만 크게 느끼면 체감 물가가 통계의 네 배 넘게 벌어진다. (지출 금액 비중: 자주 사는 것 35%, 가끔 사는 것 15%, 나머지 50%. 구매 횟수 비중: 80%, 2%, 18%. 나머지 품목은 2% 상승으로 고정한 교육용 모델이다.)</div>
+    </div>
+
+    <p>통계 당국도 이 차이를 알고 있다. 그래서 자주 사고 지출 비중이 큰 약 140여 개 품목만 모은 <span class="term">생활물가지수</span>를 따로 발표한다. 체감과 더 가까운 지표다. 반대로 물가의 <b>큰 흐름</b>을 보고 싶을 때는 날씨와 국제 유가에 따라 크게 출렁이는 품목을 빼고 본다. 이것이 <span class="term">근원물가</span><span class="en">(Core inflation)</span>다. 한국은 농산물과 석유류를 뺀 지수, 그리고 국제 비교용으로 식료품과 에너지를 뺀 지수를 함께 발표한다.</p>
+    <p>왜 빼는가. 태풍이 와서 배추값이 두 배가 되거나 중동 정세로 기름값이 치솟으면 전체 물가는 크게 출렁인다. 하지만 이런 충격은 몇 달 뒤 저절로 되돌아가는 경우가 많다. 한국은행이 기준금리를 정할 때 이런 일시적 출렁임에 매번 반응하면 정책이 오락가락한다. 아래에서 에너지 가격의 흔들림을 키워 보면 전체 물가와 근원물가가 어떻게 갈라지는지 보인다.</p>
+
+    <div class="sim" id="sim-core">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>전체 물가와 근원물가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="co-cv"></canvas><span class="hint">그래프 위를 훑어 읽는다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>에너지 가격 흔들림 <output id="co-s-out"></output></span><input type="range" id="co-s" min="0" max="3" step="0.1" value="1"></label>
+          <label class="check"><input type="checkbox" id="co-c" checked> 근원물가 선</label>
+          <label class="check"><input type="checkbox" id="co-p"> 식료품·에너지 선</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">전체 물가 흔들림(표준편차)</span><span class="v" id="co-o-h">—</span></div>
+        <div class="stat"><span class="k">근원물가 흔들림</span><span class="v" id="co-o-c">—</span></div>
+        <div class="stat"><span class="k">읽은 달</span><span class="v" id="co-o-m">—</span></div>
+        <div class="stat"><span class="k">그달 전체 / 근원</span><span class="v" id="co-o-v">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 흔들림 0에서는 두 선이 1%p 안팎에서 비슷하게 움직인다. ② 흔들림을 3배로 올린다. 전체 물가는 0% 아래로 떨어졌다가 6% 넘게 치솟지만 근원물가는 2% 근처에서 천천히 움직인다. ③ "식료품·에너지 선"을 켠다. 전체 물가의 출렁임이 거의 다 이 두 선에서 온다. (6년간의 가상 월별 자료다. 전체 = 근원 78% + 식료품 12% + 에너지 10%로 단순화했다.)</div>
+    </div>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>지표</th><th>무엇을 담나</th><th>어디에 쓰나</th></tr></thead>
+      <tbody>
+        <tr><td>소비자물가지수</td><td>가계가 사는 약 460개 품목, 지출 비중으로 가중</td><td>공식 물가 상승률, 연금·임금 조정의 기준</td></tr>
+        <tr><td>근원물가</td><td>농산물·석유류(또는 식료품·에너지)를 뺀 지수</td><td>물가의 기조 판단, 통화정책</td></tr>
+        <tr><td>생활물가지수</td><td>자주 사는 약 140여 개 품목</td><td>체감 물가에 가까운 참고 지표</td></tr>
+        <tr><td>신선식품지수</td><td>채소·과일·생선 같은 신선 식품</td><td>날씨·계절 충격 파악</td></tr>
+        <tr><td>생산자물가지수</td><td>기업끼리 거래하는 원재료·중간재 가격</td><td>몇 달 뒤 소비자물가의 선행 신호</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="cause">
+    <h2>물가는 왜 오르고, 왜 목표가 2%인가</h2>
+    <p>물가가 오르는 이유는 크게 두 갈래로 나눈다. 살 사람이 많아서 오르는 경우와 만드는 비용이 올라서 오르는 경우다. 여기에 "앞으로 오를 것"이라는 믿음이 불을 붙인다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 288" role="img" aria-label="물가 상승의 두 갈래, 수요 견인과 비용 인상, 그리고 기대 인플레이션">
+        <defs><marker id="if-ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="10" y="10" width="205" height="164" rx="12" class="f-acc-soft"/>
+        <text x="112" y="40" text-anchor="middle" class="lbl-acc">수요 견인</text>
+        <text x="24" y="68" class="lbl">경기가 좋고 돈이</text>
+        <text x="24" y="90" class="lbl">많이 풀려 사려는</text>
+        <text x="24" y="112" class="lbl">사람이 늘어난다</text>
+        <text x="24" y="140" class="lbl-dim">예: 저금리, 소득 증가,</text>
+        <text x="24" y="160" class="lbl-dim">정부 지출 확대</text>
+        <rect x="225" y="10" width="205" height="164" rx="12" class="f-bad-soft"/>
+        <text x="328" y="40" text-anchor="middle" class="lbl-bad">비용 인상</text>
+        <text x="239" y="68" class="lbl">원유·원자재·임금·</text>
+        <text x="239" y="90" class="lbl">환율이 올라 만드는</text>
+        <text x="239" y="112" class="lbl">비용이 오른다</text>
+        <text x="239" y="140" class="lbl-dim">예: 유가 급등, 공급망</text>
+        <text x="239" y="160" class="lbl-dim">차질, 원화 약세</text>
+        <line x1="112" y1="178" x2="180" y2="212" class="s-line" marker-end="url(#if-ar2)"/>
+        <line x1="328" y1="178" x2="260" y2="212" class="s-line" marker-end="url(#if-ar2)"/>
+        <rect x="60" y="218" width="320" height="58" rx="12" class="f-acc2-soft"/>
+        <text x="220" y="242" text-anchor="middle" class="lbl-b">물가 상승</text>
+        <text x="220" y="264" text-anchor="middle" class="lbl-dim">"더 오를 것" 기대 → 임금·가격 미리 인상</text>
+        <path d="M380 247 C 418 247 420 210 404 180" class="s-acc2" marker-end="url(#if-ar2)"/>
+        <path d="M60 247 C 22 247 20 210 36 180" class="s-acc2" marker-end="url(#if-ar2)"/>
+      </svg>
+      <figcaption><b>물가가 오르는 두 갈래.</b> 수요 견인은 돈과 소비가 물건보다 빨리 늘 때, 비용 인상은 만드는 비용이 오를 때 생긴다. 사람들이 물가가 더 오른다고 믿으면 미리 가격과 임금을 올려 실제로 물가가 오르는 되먹임이 생긴다. 금리와 환율 이야기는 <a href="economy.html">5장</a>에서 이어진다.</figcaption>
+    </figure>
+
+    <p><a href="money.html">2장</a>에서 본 것처럼 돈은 은행 대출로 늘어난다. 돈이 물건보다 빨리 늘면 같은 물건을 더 많은 돈이 쫓게 되어 가격이 오른다. 그래서 물가를 지키는 일은 중앙은행이 맡는다. 한국은행은 소비자물가 상승률 <b>연 2%</b>를 <span class="term">물가안정목표</span><span class="en">(Inflation target)</span>로 삼고 있다(2016년부터 2%, 2019년부터는 기간을 정하지 않은 상시 목표). 물가가 목표보다 높으면 기준금리를 올려 돈이 덜 풀리게 하고, 낮으면 내린다.</p>
+    <div class="callout deep">
+      <strong>왜 0%가 아니라 2%인가</strong>
+      세 가지 이유가 흔히 꼽힌다. 첫째, 물가 통계는 품질 개선과 새 상품을 완벽히 반영하지 못해 실제보다 조금 높게 나오는 경향이 있다. 둘째, 물가가 0% 근처면 작은 충격에도 <b>디플레이션</b>(물가 하락)으로 넘어가기 쉬운데, 디플레이션은 빠져나오기가 매우 어렵다. 셋째, 물가가 조금 오르는 세상에서는 명목 금리도 그만큼 높아서, 경기가 나쁠 때 중앙은행이 금리를 내릴 여유가 생긴다. 여러 선진국 중앙은행도 비슷하게 2% 안팎을 목표로 둔다.
+    </div>
+  </section>
+
+  <section id="real">
+    <h2>명목과 실질: 통장의 숫자와 장바구니</h2>
+    <p>통장에 찍힌 숫자 그대로의 금액을 <span class="term">명목</span><span class="en">(Nominal)</span> 금액, 그 돈으로 살 수 있는 물건의 양으로 다시 잰 금액을 <span class="term">실질</span><span class="en">(Real)</span> 금액이라 한다. 실질 금액은 보통 "오늘 돈으로 치면 얼마"로 나타낸다. 미래의 명목 금액을 그동안의 물가 상승만큼 나누면 된다.</p>
+    <div class="formula">$$V_{\text{real}} = \frac{V}{(1+\pi)^n}, \qquad 1 + r = \frac{1+i}{1+\pi} \;\Rightarrow\; r \approx i - \pi$$<div class="where">\(V\): \(n\)년 뒤의 명목 금액, \(\pi\): 연 물가 상승률, \(i\): 명목 이율(예금 금리, 연봉 인상률 등), \(r\): 실질 이율. 두 번째 식을 피셔 방정식이라 하며, 비율이 작을 때는 단순히 빼도 거의 같다.</div></div>
+    <p>먼저 첫 번째 식을 그림으로 본다. 현금 1,000만원을 금고에 넣어 두었다. 금고 안의 지폐 숫자는 영원히 1,000만원이지만, 오늘 돈으로 친 가치는 해마다 녹아내린다. 오른쪽 그래프의 점을 끌어 시간을 움직인다.</p>
+
+    <div class="sim" id="sim-melt">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>녹는 지폐: 현금 1,000만원의 실질 가치</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ml-cv"></canvas><span class="hint">그래프를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>물가 상승률(연) <output id="ml-r-out"></output></span><input type="range" id="ml-r" min="1" max="10" step="0.5" value="3"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">경과 시간</span><span class="v" id="ml-o-y">—</span></div>
+        <div class="stat"><span class="k">오늘 돈으로 친 가치</span><span class="v" id="ml-o-v">—</span></div>
+        <div class="stat"><span class="k">녹아 버린 구매력</span><span class="v" id="ml-o-l">—</span></div>
+        <div class="stat"><span class="k">반으로 줄어드는 데</span><span class="v" id="ml-o-h">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 물가 3%에서 10년으로 둔다. 1,000만원은 오늘 돈 약 744만원이 된다. 이자 0%짜리 통장에 그대로 둔 결과다. ② 같은 물가에서 30년까지 끈다. 절반 아래로 내려간다. ③ 물가를 10%로 올린다. 약 7년 만에 절반이 되고 40년 뒤에는 거의 남지 않는다. (지폐 넓이가 실질 가치에 비례한다. 점선 테두리는 처음 크기다.)</div>
+    </div>
+
+    <p>물가 2%면 약 35년, 3%면 약 23년, 5%면 약 14년 만에 현금의 실질 가치가 절반이 된다. 은퇴 자금처럼 수십 년 뒤를 계산할 때 물가를 빼먹으면 크게 틀린다. <a href="retire.html">21장</a>에서 은퇴 자금을 "오늘 돈"으로 계산하는 이유다.</p>
+    <p>두 번째 식, 피셔 방정식은 이율에 대한 이야기다. 연봉이 3% 올라도 물가가 3% 오르면 실제로 살 수 있는 것은 그대로다. 아래에서 연봉 인상률과 물가를 바꿔 10년 동안의 연봉을 명목과 실질로 나란히 그려 본다. 출발점은 이 책이 따라가는 한결의 연봉 3,600만원이다.</p>
+
+    <div class="sim" id="sim-wage">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>명목 연봉과 실질 연봉</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="wg-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>연봉 인상률(연) <output id="wg-s-out"></output></span><input type="range" id="wg-s" min="0" max="8" step="0.5" value="3"></label>
+          <label class="ctrl"><span>물가 상승률(연) <output id="wg-i-out"></output></span><input type="range" id="wg-i" min="0" max="8" step="0.5" value="2.5"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent-2)"></i>명목 연봉</span><span><i style="background:var(--accent)"></i>실질 연봉(오늘 돈)</span><span><i style="background:var(--bad)"></i>실질로 처음보다 줄어든 해</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">10년 뒤 명목</span><span class="v" id="wg-o-n">—</span></div>
+        <div class="stat"><span class="k">10년 뒤 실질</span><span class="v" id="wg-o-r">—</span></div>
+        <div class="stat"><span class="k">실질 인상률(연)</span><span class="v" id="wg-o-q">—</span></div>
+        <div class="stat"><span class="k">판정</span><span class="v" id="wg-o-s">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 인상 3%, 물가 2.5%. 명목으로는 10년 뒤 약 4,838만원이지만 실질로는 약 3,780만원이다. 실질 인상률은 연 약 0.49%다. ② 물가를 4%로 올린다. 명목 연봉은 그대로 오르는데 실질 막대는 처음보다 짧아진다. 연봉이 올랐는데 형편은 나빠진 것이다. ③ 인상률 0%, 물가 3%. 10년 동안 실질 연봉이 약 26% 깎인다. (세전 기준. 세금과 4대 보험은 <a href="income.html">6장</a>.)</div>
+    </div>
+
+    <p>연봉 협상 때 "올해 3% 인상"이라는 말을 들으면 그해 물가를 함께 떠올려야 한다. 물가가 4%인 해의 3% 인상은 실질로 1% 삭감이다. 반대로 물가가 1%인 해의 3% 인상은 실질로 2% 가까운 인상이다. 같은 원리가 예금 금리에도 그대로 적용된다. 예금 금리가 3%여도 이자소득세 15.4%를 떼면 세후 약 2.54%이고, 물가가 2.5%면 실질 이율은 0%에 가깝다.</p>
+  </section>
+
+  <section id="rule72">
+    <h2>72의 법칙: 반으로 줄어드는 시간</h2>
+    <p>"물가가 연 3%면 돈의 가치가 반이 되는 데 몇 년?"을 계산기 없이 답하는 방법이 있다. 72를 백분율 숫자로 나누면 된다. 72 ÷ 3 = 24년. 이것이 <span class="term">72의 법칙</span><span class="en">(Rule of 72)</span>이다. 원래는 복리로 돈이 <b>두 배</b>가 되는 시간을 어림하는 규칙이지만, 물가로 가격이 두 배가 되는 시간, 곧 돈의 가치가 <b>반</b>이 되는 시간에도 똑같이 쓸 수 있다.</p>
+    <div class="formula">$$n = \frac{\ln 2}{\ln(1+r)} \;\approx\; \frac{72}{100\,r}$$<div class="where">\(n\): 두 배(가치로는 절반)가 되는 데 걸리는 해, \(r\): 연 비율(3%면 0.03). \(\ln 2 \approx 0.693\)이고, 72는 약수가 많아 암산하기 좋도록 고른 숫자다.</div></div>
+    <p>얼마나 정확할까. 아래 그래프의 점을 좌우로 끌어 비율을 바꿔 가며 근사값과 정확값을 비교한다.</p>
+
+    <div class="sim" id="sim-r72">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>72의 법칙과 정확값</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="r7-cv"></canvas><span class="hint">점을 좌우로 끈다</span></div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>정확값 ln2 / ln(1+r)</span><span><i style="background:var(--accent-2)"></i>72 ÷ r</span><span><i style="background:var(--bad)"></i>오차(72 ÷ r이 길면 +)</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">연 비율</span><span class="v" id="r7-o-r">—</span></div>
+        <div class="stat"><span class="k">72의 법칙</span><span class="v" id="r7-o-a">—</span></div>
+        <div class="stat"><span class="k">정확값</span><span class="v" id="r7-o-e">—</span></div>
+        <div class="stat"><span class="k">오차</span><span class="v" id="r7-o-d">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 위 그래프의 두 곡선은 거의 겹친다. 아래 오차 그래프를 보면 2~10% 사이에서 오차는 3% 이내, 기간으로는 1년 이내다. 일상의 물가와 금리 범위에서는 충분히 정확하다. ② 8% 근처에서 오차 곡선이 0을 지난다. 72가 이 근처에 맞춰진 숫자이기 때문이다. ③ 25% 이상으로 끈다. 오차가 −7%를 넘어서며 근사값이 정확값보다 점점 짧게 나온다. 비율이 아주 크면 72의 법칙을 믿으면 안 된다.</div>
+    </div>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th class="num">연 물가</th><th class="num">72 ÷ r (년)</th><th class="num">정확값 (년)</th><th>현금 1,000만원이 오늘 돈 500만원이 되는 때</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1%</td><td class="num">72</td><td class="num">69.7</td><td>사실상 평생</td></tr>
+        <tr><td class="num">2%</td><td class="num">36</td><td class="num">35.0</td><td>사회초년생이 은퇴할 즈음</td></tr>
+        <tr><td class="num">3%</td><td class="num">24</td><td class="num">23.4</td><td>아이가 태어나 대학을 졸업할 즈음</td></tr>
+        <tr><td class="num">5%</td><td class="num">14.4</td><td class="num">14.2</td><td>초등학생이 대학생이 될 즈음</td></tr>
+        <tr><td class="num">10%</td><td class="num">7.2</td><td class="num">7.3</td><td>자동차 한 대를 타는 기간</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="debt">
+    <h2>빚진 사람과 돈을 가진 사람</h2>
+    <p>물가 상승은 모두에게 똑같이 나쁜 일이 아니다. 고정된 명목 금액을 <b>받기로 한</b> 사람은 손해를 보고, 고정된 명목 금액을 <b>갚기로 한</b> 사람은 이득을 본다. 현금을 가진 사람이 잃는 구매력이 사라지는 것이 아니라 어딘가로 옮겨 가는 것이다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 350" role="img" aria-label="예상하지 못한 인플레이션이 돈을 받기로 한 쪽에서 갚기로 한 쪽으로 구매력을 옮기는 그림">
+        <defs><marker id="if-ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="10" y="10" width="420" height="130" rx="14" class="f-bad-soft"/>
+        <text x="220" y="38" text-anchor="middle" class="lbl-bad">구매력을 잃는 쪽</text>
+        <text x="30" y="68" class="lbl">현금·이자 0% 통장</text>
+        <text x="30" y="92" class="lbl">고정 금리로 빌려준 쪽 (예금자, 채권자)</text>
+        <text x="30" y="116" class="lbl">인상이 늦은 월급·연금</text>
+        <line x1="220" y1="146" x2="220" y2="204" class="s-acc2" stroke-width="3" marker-end="url(#if-ar3)"/>
+        <text x="236" y="180" class="lbl-acc2">예상 못 한 인플레이션</text>
+        <rect x="10" y="210" width="420" height="130" rx="14" class="f-ok-soft"/>
+        <text x="220" y="238" text-anchor="middle" class="lbl-b">구매력을 얻는 쪽</text>
+        <text x="30" y="268" class="lbl">고정 금리로 빌린 쪽</text>
+        <text x="30" y="292" class="lbl">(대출자, 빚이 많은 정부)</text>
+        <text x="30" y="320" class="lbl-dim">빚의 원금은 명목으로 고정, 물가와 소득은 오른다</text>
+      </svg>
+      <figcaption><b>구매력이 옮겨 가는 방향.</b> 물가가 계약할 때 예상한 것보다 많이 오르면, 고정된 금액을 받기로 한 쪽에서 갚기로 한 쪽으로 구매력이 옮겨 간다. 물가가 예상보다 낮거나 떨어지면 방향이 반대가 된다.</figcaption>
+    </figure>
+
+    <p>예를 들어 1억원을 고정 금리 연 4%, 30년 원리금균등으로 빌렸다. 매달 갚는 돈은 30년 내내 약 47.7만원으로 같다. 그런데 물가가 해마다 3% 오르면 30년째의 47.7만원은 오늘 돈으로 약 19.7만원밖에 되지 않는다. 월급도 대체로 물가와 함께 오르니 갚는 부담은 해가 갈수록 가벼워진다. 물가를 바꿔 가며 확인해 본다.</p>
+
+    <div class="sim" id="sim-debt">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>고정금리 대출의 실질 부담</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="db-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>대출 금리(고정, 연) <output id="db-r-out"></output></span><input type="range" id="db-r" min="1" max="8" step="0.25" value="4"></label>
+          <label class="ctrl"><span>물가 상승률(연) <output id="db-i-out"></output></span><input type="range" id="db-i" min="0" max="8" step="0.5" value="3"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent-2)"></i>매달 상환액(명목)</span><span><i style="background:var(--accent)"></i>오늘 돈으로 친 상환액</span><span><i style="background:var(--ok);opacity:.4"></i>물가가 덜어 준 부담</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">매달 상환액</span><span class="v" id="db-o-p">—</span></div>
+        <div class="stat"><span class="k">마지막 달(오늘 돈)</span><span class="v" id="db-o-l">—</span></div>
+        <div class="stat"><span class="k">갚는 총액(오늘 돈)</span><span class="v" id="db-o-t">—</span></div>
+        <div class="stat"><span class="k">실질 금리</span><span class="v" id="db-o-q">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 금리 4%, 물가 3%. 명목으로는 약 1억 7,187만원을 갚지만 오늘 돈으로 치면 약 1억 1,383만원이다. 실질 금리는 약 1%다. ② 물가를 금리보다 높게(5% 이상) 올린다. 실질 금리가 음수가 되어, 오늘 돈으로 친 총상환액이 빌린 1억원보다 적어진다. ③ 물가를 0으로 내린다. 두 선이 겹치고 빚의 무게는 30년 내내 그대로다. (원금 1억원, 30년 원리금균등 상환, <code>MN.loan</code>. 물가가 예상보다 높을 때의 이야기다. 금리가 바뀌는 변동금리 대출은 <a href="loan.html">10장</a>.)</div>
+    </div>
+
+    <p>이 효과는 공짜가 아니다. 돈을 빌려주는 쪽도 바보가 아니어서, 앞으로 물가가 높을 것 같으면 그만큼 높은 금리를 요구한다. 그래서 인플레이션이 부를 옮기는 힘은 주로 <b>예상하지 못한</b> 물가 상승에서 나온다. 계약할 때 모두가 3%를 예상하고 금리를 정했는데 실제로 6%가 되면 빌린 쪽이 이득을 보고, 1%가 되면 빌려준 쪽이 이득을 본다. 그리고 빚을 진 사람이 이득을 보려면 월급이 물가만큼 따라 올라야 한다는 조건도 붙는다. 월급이 오르지 않는 물가 상승은 빚이 있든 없든 살림을 어렵게 만든다.</p>
+  </section>
+
+  <section id="history">
+    <h2>수십 년의 물가, 그리고 극단</h2>
+    <p>긴 시간을 놓고 보면 물가는 놀라울 만큼 오른다. 한국인에게 익숙한 기준이 짜장면 한 그릇 값이다. 아래 그래프는 수십 년 동안의 서울 짜장면 값을 대략 그린 것이다. 두 손잡이를 끌어 구간을 고르면 그 사이 연평균 몇 %씩 올랐는지 계산한다.</p>
+
+    <div class="sim" id="sim-jj">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>짜장면 한 그릇으로 보는 수십 년</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="jj-cv"></canvas><span class="hint">두 손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="check"><input type="checkbox" id="jj-l" checked> 로그 눈금(같은 비율이 같은 높이)</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">시작 가격(약)</span><span class="v" id="jj-o-a">—</span></div>
+        <div class="stat"><span class="k">끝 가격(약)</span><span class="v" id="jj-o-b">—</span></div>
+        <div class="stat"><span class="k">연평균 상승률</span><span class="v" id="jj-o-c">—</span></div>
+        <div class="stat"><span class="k">그때 만 원이면</span><span class="v" id="jj-o-n">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 1970년에서 2026년까지 잡는다. 약 100원에서 약 7,500원으로, 연평균 약 8%다. 72의 법칙으로 약 9년마다 두 배가 된 셈이다. ② 1970~1990년만 잡는다. 고도성장기의 높은 물가가 보인다. ③ 2000년 이후만 잡는다. 상승률이 연 4% 수준으로 내려온다. ④ 로그 눈금을 끈다. 최근의 오름폭만 커 보이지만, 비율로는 예전이 훨씬 빨랐다. (언론 보도와 가격 조사를 바탕으로 한 대략값이며 교육용이다. 지역·가게마다 차이가 크다.)</div>
+    </div>
+
+    <p>로그 눈금은 "몇 원 올랐나"가 아니라 "몇 배 올랐나"를 같은 높이로 보여 준다. 일반 눈금에서는 최근 10년의 오름폭이 가장 커 보이지만, 로그 눈금에서는 1970~80년대의 기울기가 가장 가파르다. 이 시기 한국의 물가 상승률은 연 10~20%대가 흔했고 1980년에는 약 29%에 이르렀다. 그 뒤 물가는 한 자릿수로 내려왔고, 외환위기가 있던 1998년에 약 7.5%, 국제 원자재 가격이 치솟은 2022년에 약 5.1%로 튀어 올랐던 것이 최근의 큰 출렁임이다.</p>
+    <p>물가가 내리는 것은 좋은 일일까. 물건값이 내려가면 지금 사지 않고 기다리는 사람이 늘고, 기업은 매출이 줄어 임금과 고용을 줄이고, 그러면 소비가 더 준다. 빚의 실질 부담은 거꾸로 커진다. 이것이 <span class="term">디플레이션</span><span class="en">(Deflation)</span>의 악순환이다. 반대 끝에는 물가가 한 달에 50% 넘게 오르는 <span class="term">초인플레이션</span><span class="en">(Hyperinflation)</span>이 있다. 이때는 돈이 물건의 값을 재는 잣대 역할을 아예 못 하게 된다. 아래에서 연 물가 상승률을 극단까지 밀어 본다.</p>
+
+    <div class="sim" id="sim-hyper">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>디플레이션에서 초인플레이션까지</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="hy-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>연 물가 상승률 <output id="hy-i-out"></output></span><input type="range" id="hy-i" min="0" max="12" step="1" value="3"></label>
+          <div class="btn-row"><button class="btn primary" id="hy-go">24개월 재생</button><button class="btn" id="hy-re">처음으로</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">국면</span><span class="v" id="hy-o-s">—</span></div>
+        <div class="stat"><span class="k">한 달 상승률</span><span class="v" id="hy-o-m">—</span></div>
+        <div class="stat"><span class="k">1년 뒤 짜장면 값</span><span class="v" id="hy-o-p">—</span></div>
+        <div class="stat"><span class="k">돈의 가치가 반이 되는 데</span><span class="v" id="hy-o-h">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 2%에서 재생한다. 2년 동안 가격표가 거의 그대로다. ② −2%로 내린다. 가격이 조금씩 내린다. 지금 사지 않고 기다릴 이유가 생긴다. ③ 1,000% 이상으로 밀고 재생한다. 몇 달 만에 가격 단위가 바뀐다. 월 50%를 넘는 끝 쪽은 월급을 받자마자 써야 하는 세계다. (짜장면 7,500원에서 출발, 매달 같은 비율로 오른다고 가정. 세로축은 로그 눈금이다.)</div>
+    </div>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>시기·장소</th><th>물가</th><th>무슨 일이 있었나</th></tr></thead>
+      <tbody>
+        <tr><td>1930년대 초 미국</td><td>연 약 −10% 안팎</td><td>대공황. 물가와 임금이 함께 떨어지고 빚 부담이 커져 파산이 이어졌다.</td></tr>
+        <tr><td>1990년대 말~2010년대 일본</td><td>0% 안팎, 때때로 하락</td><td>오랜 저성장. 물가가 오르지 않는다는 기대가 굳어 쉽게 풀리지 않았다.</td></tr>
+        <tr><td>1923년 독일</td><td>물가가 며칠 만에 두 배</td><td>전쟁 배상금과 화폐 남발. 손수레로 지폐를 나르는 사진이 남았다.</td></tr>
+        <tr><td>2008년 짐바브웨</td><td>월 수백억 %(추정)</td><td>100조 짐바브웨 달러 지폐가 발행됐고, 결국 자국 화폐 사용이 사실상 중단됐다.</td></tr>
+        <tr><td>2010년대 후반 베네수엘라</td><td>연 수십만 % 이상(추정)</td><td>원유 수입 급감과 화폐 증발. 많은 사람이 외화와 물물교환으로 버텼다.</td></tr>
+        <tr><td>1980년 한국</td><td>연 약 29%</td><td>석유 파동과 고도성장기의 높은 물가.</td></tr>
+        <tr><td>2022년 한국</td><td>연 약 5.1%</td><td>국제 에너지·원자재 가격 급등. 외환위기 이후 가장 높은 수준.</td></tr>
+      </tbody>
+    </table></div>
+    <p>역사 속 수치는 자료마다 조금씩 다르므로 대략적인 규모로 읽는다. 공통된 교훈은 두 가지다. 물가가 아주 높거나 떨어지는 세상은 모두 살기 어렵고, 그래서 대부분의 중앙은행이 "낮고 안정적인 플러스 물가"를 목표로 삼는다.</p>
+  </section>
+
+  <section id="scale">
+    <h2>인플레이션 저울: 누가 얻고 누가 잃나</h2>
+    <p>지금까지 본 것을 한 저울에 올린다. 같은 물가와 같은 기간에서 현금, 예금, 연봉, 빌려준 돈, 빌린 돈이 각각 실질로 얼마나 변하는지를 막대로 비교한다. 막대가 오른쪽(초록)이면 구매력이 늘어난 것, 왼쪽(빨강)이면 줄어든 것이다. 빚은 실질 크기가 줄어드는 것이 빌린 사람에게 이득이므로 왼쪽이 초록이다.</p>
+
+    <div class="sim" id="sim-scale">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>같은 물가, 다른 운명</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="wn-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>물가 상승률(연) <output id="wn-p-out"></output></span><input type="range" id="wn-p" min="0" max="10" step="0.5" value="3"></label>
+          <label class="ctrl"><span>기간 <output id="wn-n-out"></output></span><input type="range" id="wn-n" min="1" max="30" step="1" value="10"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">현금 1,000만원 → 오늘 돈</span><span class="v" id="wn-o-c">—</span></div>
+        <div class="stat"><span class="k">예금의 실질 이율(연)</span><span class="v" id="wn-o-d">—</span></div>
+        <div class="stat"><span class="k">연봉 3,600만원 → 오늘 돈</span><span class="v" id="wn-o-s">—</span></div>
+        <div class="stat"><span class="k">빚 1,000만원 → 오늘 돈</span><span class="v" id="wn-o-b">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 물가 3%, 10년. 현금은 약 26% 녹고 빚도 같은 비율로 가벼워진다. 현금이 잃은 것과 빚이 가벼워진 것이 같은 크기다. ② 물가 0%. 현금과 빚은 그대로이고 예금·연봉·빌려준 돈만 늘어난다. ③ 물가 6%, 30년. 세후 예금마저 실질로 줄어들고, 연 4%로 빌려준 쪽도 손해를 본다. (예금 연 3% 세후 약 2.54% 복리, 연봉 인상 연 3%, 빌려준 돈 고정 연 4% 세전, 빚은 원금 1,000만원을 만기에 갚는 고정금리. 모두 계약 뒤 물가가 바뀌어도 조건이 그대로라고 가정한 교육용 비교다.)</div>
+    </div>
+
+    <p>저울이 보여 주는 것은 단순하다. <b>물가보다 느리게 불어나는 돈은 실질로 줄어든다.</b> 이자 0%의 현금은 가장 확실하게 줄고, 물가와 비슷한 이자를 주는 예금은 세금까지 생각하면 겨우 제자리다. 이 사실이 <a href="interest.html">4장</a>의 복리, <a href="saving.html">8장</a>의 예금과 적금, 그리고 투자를 다루는 장들을 읽을 때 늘 바닥에 깔려 있어야 하는 기준선이다. 그렇다고 현금이 쓸모없다는 뜻은 아니다. 당장 써야 할 돈과 비상금은 가치가 흔들리지 않고 바로 꺼낼 수 있어야 하며, 그 편리함의 값이 물가만큼의 손실이다.</p>
+
+    <div class="casefile">
+      <div class="tag"><b>LEDGER 한결</b><span>한결의 가계부 · 3장</span></div>
+      <h4>통장 속 300만원은 10년 뒤 234만원어치</h4>
+      <p>입사한 한결의 통장에는 300만원이 있다. 이자가 거의 없는 입출금 통장이다. 물가가 연 2.5%로 오른다면 이 300만원은 10년 뒤 오늘 돈으로 약 234만원(<code>3e6 / 1.025^10</code> = 2,343,595원)어치만 산다. 첫 1년 동안 사라지는 구매력만 약 7.3만원으로, 한 달 통신비가 넘는 돈을 아무 소리 없이 내는 셈이다.</p>
+      <p>연봉도 같은 저울에 올렸다. 회사는 해마다 3% 인상을 가정하지만 물가가 2.5%면 실질 인상률은 <code>MN.real(0.03, 0.025)</code> = 약 0.49%, 사실상 0.5%다. 10년 뒤 명목 연봉은 약 4,838만원으로 크게 늘어 보이지만 오늘 돈으로는 약 3,780만원으로, 지금의 3,600만원과 크게 다르지 않다. 한결의 형편이 나아지려면 월급이 오르는 것만으로는 부족하고, 남는 돈이 물가보다 빠르게 불어나야 한다.</p>
+      <div class="clue">
+        <div><b>이 장에서 정한 것</b>모든 미래 금액은 "오늘 돈"으로 바꿔서 본다. 이자 0% 통장에 두는 돈에는 연 약 2.5%의 보이지 않는 비용이 붙는다.</div>
+        <div><b>아직 남은 문제</b>그렇다면 돈을 어디에, 얼마나 일찍 넣어야 물가를 이길 수 있는가. 금리 1.7%짜리 학자금 대출은 물가보다 낮은데, 이 빚은 어떻게 다뤄야 하는가.</div>
+        <div><b>다음 단계</b>시간이 돈을 키우는 원리, 복리. 매달 50만원을 일찍 시작하는 것과 늦게 시작하는 것의 차이(<a href="interest.html">4장</a>).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>물가 상승률은 작아 보여도 해마다 앞의 결과 위에 곱해진다. 3%면 10년 뒤 같은 장바구니는 약 1.34배, 만 원의 구매력은 약 7,441원이 된다.</li>
+      <li>소비자물가지수는 약 460개 품목의 가격을 가계 지출 비중(가중치)으로 평균한 것이다. 공식 물가는 평균 가구의 물가이고, 지출 구조가 다르면 나의 물가도 다르다.</li>
+      <li>체감물가는 자주 사는 품목과 오른 가격에 끌려 공식 물가보다 높게 느껴지기 쉽다. 근원물가는 출렁이는 농산물·에너지를 빼고 물가의 큰 흐름을 본다.</li>
+      <li>한국은행은 소비자물가 상승률 연 2%를 물가안정목표로 둔다. 너무 높은 물가도, 물가 하락(디플레이션)도 경제를 어렵게 만든다.</li>
+      <li>실질 = 명목 ÷ (1 + 물가)^n. 실질 이율은 대략 명목 이율 − 물가다. 3% 인상도 물가가 4%면 실질로는 삭감이다.</li>
+      <li>72 ÷ (백분율 숫자)로 돈의 가치가 반이 되는 해를 어림한다. 2%면 약 35년, 3%면 약 24년이다.</li>
+      <li>예상하지 못한 인플레이션은 고정 금액을 받는 쪽(현금·예금·채권자)에서 갚는 쪽(고정금리 채무자)으로 구매력을 옮긴다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>연봉이 4% 올랐고 같은 해 물가는 5% 올랐다. 이 사람의 실질 연봉은 어떻게 되었나?</p>
+        <div class="opts">
+          <button class="opt">4% 늘었다</button>
+          <button class="opt">9% 늘었다</button>
+          <button class="opt" data-correct>약 1% 줄었다</button>
+          <button class="opt">변하지 않았다</button>
+        </div>
+        <div class="quiz-exp">실질 변화는 \(1.04 / 1.05 - 1 \approx -0.95\%\)다. 명목 숫자는 늘었지만 같은 돈으로 살 수 있는 것은 약 1% 줄었다. 피셔 방정식의 근사 "명목 − 물가 = 4% − 5% = −1%"와 거의 같다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>소금 값이 두 배가 되었는데 소비자물가지수는 거의 움직이지 않았다. 가장 알맞은 설명은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>가계 지출에서 소금이 차지하는 비중(가중치)이 아주 작기 때문이다</button>
+          <button class="opt">소금은 근원물가에 속하지 않기 때문이다</button>
+          <button class="opt">소비자물가지수는 1년에 한 번만 계산하기 때문이다</button>
+          <button class="opt">가격이 오른 품목은 지수에서 빠지기 때문이다</button>
+        </div>
+        <div class="quiz-exp">소비자물가지수는 품목별 가격 변화를 가계가 그 품목에 쓰는 돈의 비중으로 가중 평균한다. 비중이 아주 작은 품목은 가격이 크게 변해도 지수를 거의 움직이지 못한다. 반대로 전·월세처럼 비중이 큰 품목은 조금만 올라도 지수가 움직인다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>물가 상승률이 연 6%로 유지된다면, 현금의 실질 가치가 절반이 되는 데 대략 몇 년이 걸리나?</p>
+        <div class="opts">
+          <button class="opt">약 6년</button>
+          <button class="opt" data-correct>약 12년</button>
+          <button class="opt">약 17년</button>
+          <button class="opt">약 36년</button>
+        </div>
+        <div class="quiz-exp">72의 법칙으로 \(72 \div 6 = 12\)년이다. 정확값은 \(\ln 2 / \ln 1.06 \approx 11.9\)년으로 거의 같다. 2~10% 범위에서 72의 법칙의 오차는 1년 이내다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>대출 계약 때 모두가 물가를 2%로 예상하고 고정 금리 4%를 정했다. 그런데 실제 물가가 계속 6%였다. 누가 유리해졌나?</p>
+        <div class="opts">
+          <button class="opt">빌려준 쪽. 금리 4%를 꼬박꼬박 받기 때문이다</button>
+          <button class="opt">아무도. 금리가 고정이라 양쪽 모두 계약대로다</button>
+          <button class="opt">빌려준 쪽. 물가가 오르면 원금의 가치가 오르기 때문이다</button>
+          <button class="opt" data-correct>빌린 쪽. 실질 금리가 약 −1.9%가 되어 갚는 돈의 실질 가치가 줄었다</button>
+        </div>
+        <div class="quiz-exp">실질 금리는 \(1.04/1.06 - 1 \approx -1.9\%\)다. 명목으로는 계약대로 갚지만 그 돈의 구매력이 빠르게 줄어, 빌려준 쪽에서 빌린 쪽으로 구매력이 옮겨 갔다. 예상하지 못한 인플레이션이 부를 옮기는 전형적인 경우다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const narrow = (id) => document.getElementById(id).parentElement.clientWidth < 560;
+  const tone = (cls, s) => '<span class="' + cls + '">' + s + "</span>";
+  const won0 = (x) => Math.round(x).toLocaleString("ko-KR") + "원";
+  const pct = (v, d) => (v * 100).toFixed(d == null ? 1 : d) + "%";
+  const spct = (v, d) => (v > 1e-12 ? "+" : v < -1e-12 ? "−" : "") + Math.abs(v * 100).toFixed(d == null ? 1 : d) + "%";
+  function knob(ctx, x, y, P, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = "#fff"; ctx.stroke();
+    ctx.restore();
+  }
+  function label(ctx, s, x, y, color, size, align, base, mono, weight) {
+    ctx.font = MB.font(size || 12, mono, weight);
+    ctx.fillStyle = color; ctx.textAlign = align || "left"; ctx.textBaseline = base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function rrect(ctx, x, y, w, h, r) {
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+
+  /* ---------------------------------------------------------- 1. 장바구니 */
+  (function () {
+    const ITEMS = [["라면", 1000], ["콩나물", 1000], ["사과", 1600], ["두부", 1800], ["바나나", 2000], ["우유", 2600]];
+    let year = 0, playing = false, G = null;
+    const btn = document.getElementById("ct-go");
+    const R = MB.range("ct-r", (v) => v.toFixed(1) + "%", () => cv.redraw());
+    const cv = MB.canvas("#ct-cv", (ctx, w, h) => {
+      const P = MB.palette(), r = R() / 100, g = Math.pow(1 + r, year), yr = Math.floor(year + 1e-9);
+      const gy = Math.pow(1 + r, yr), ON = MB.color("on-accent");
+      const bx = 14, capW = Math.min(w - 28, 560) * 0.86, sc = capW / 10000;
+      label(ctx, (2026 + yr) + "년 · 지갑에 만 원", bx, 20, P.dim, 12);
+      const by = 32, bh = 46;
+      // 바구니
+      ctx.fillStyle = P.surface; ctx.fillRect(bx, by, capW, bh);
+      ctx.strokeStyle = P.axis; ctx.lineWidth = 1.5; ctx.strokeRect(bx, by, capW, bh);
+      let c = 0, n = 0; const out = [];
+      ITEMS.forEach(([name, p0], i) => {
+        const p = p0 * gy;
+        if (c + p <= 10000 + 1e-6) {
+          const x = bx + c * sc, ww = p * sc;
+          ctx.fillStyle = P.series[i % 4]; ctx.globalAlpha = 0.85; ctx.fillRect(x + 1, by + 4, ww - 2, bh - 8); ctx.globalAlpha = 1;
+          if (ww > 34) { label(ctx, name, x + ww / 2, by + bh / 2 - 6, ON, 11, "center", "middle", false, 700); label(ctx, Math.round(p).toLocaleString(), x + ww / 2, by + bh / 2 + 9, ON, 10, "center", "middle", true); }
+          else if (ww > 14) label(ctx, name[0], x + ww / 2, by + bh / 2, ON, 11, "center", "middle", false, 700);
+          c += p; n++;
+        } else out.push([name, p]);
+      });
+      const left = 10000 - c;
+      if (left * sc > 46) label(ctx, "남은 " + Math.round(left).toLocaleString(), bx + c * sc + left * sc / 2, by + bh / 2, P.dim, 11, "center", "middle", true);
+      label(ctx, "1만원", bx + capW, by - 6, P.text, 11, "right", "alphabetic", true);
+      // 못 담은 것
+      let cx = bx, cy = by + bh + 16;
+      label(ctx, "못 담은 것", cx, cy + 11, P.bad, 12, "left", "middle", false, 700);
+      cx += 66;
+      out.forEach(([name, p]) => {
+        ctx.font = MB.font(11);
+        const s = name + " " + Math.round(p).toLocaleString(), tw = ctx.measureText(s).width + 14;
+        if (cx + tw > w - 8) { cx = bx + 66; cy += 26; }
+        ctx.strokeStyle = P.bad; ctx.lineWidth = 1; ctx.setLineDash([3, 3]); rrect(ctx, cx, cy, tw, 22, 6); ctx.stroke(); ctx.setLineDash([]);
+        label(ctx, s, cx + 7, cy + 11, P.bad, 11, "left", "middle");
+        cx += tw + 6;
+      });
+      if (!out.length) label(ctx, "없음", cx, cy + 11, P.faint, 12, "left", "middle");
+      // 구매력 곡선
+      const top = 160;
+      const box = { x: 52, y: top, w: w - 52 - 16, h: h - top - 50 };
+      const data = []; for (let t = 0; t <= 30; t += 0.25) data.push([t, 10000 / Math.pow(1 + r, t)]);
+      const ch = MB.chart(ctx, box, { x: [0, 30], y: [0, 10000], xTicks: [0, 5, 10, 15, 20, 25, 30], yTicks: [0, 2500, 5000, 7500, 10000],
+        xFmt: (v) => String(2026 + v), yFmt: MB.wonAxis,
+        series: [{ data, color: P.accent, width: 2.4, fill: MB.color("accent-soft") }],
+        hlines: [{ y: 5000, color: P.faint, label: "절반" }] });
+      G = ch;
+      const pv = 10000 / g;
+      ctx.strokeStyle = P.accent2; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(ch.X(year), box.y); ctx.lineTo(ch.X(year), box.y + box.h); ctx.stroke(); ctx.setLineDash([]);
+      knob(ctx, ch.X(year), ch.Y(pv), P, 7);
+      label(ctx, "만 원의 구매력(오늘 돈)", box.x + box.w - 6, box.y + 10, P.dim, 11, "right", "middle");
+      MB.stat("ct-o-y", (2026 + yr) + "<small>년</small>");
+      MB.stat("ct-o-c", won0(10000 * gy));
+      MB.stat("ct-o-p", won0(10000 / gy));
+      MB.stat("ct-o-n", (n < ITEMS.length ? tone("bad-t", n) : n) + " <small>/ " + ITEMS.length + "</small>");
+    }, { height: 370 });
+    MB.drag(cv.canvas, { move(x, y) { if (!G || y < G.box.y - 20) return; year = MB.clamp(((x - G.box.x) / G.box.w) * 30, 0, 30); playing = false; btn.textContent = "재생"; cv.redraw(); } });
+    MB.loop(cv.canvas, (dt) => {
+      if (!playing) return;
+      year = Math.min(30, year + dt * 2.5);
+      if (year >= 30) { playing = false; btn.textContent = "재생"; }
+      cv.redraw();
+    });
+    btn.addEventListener("click", () => { if (year >= 30) year = 0; playing = !playing; btn.textContent = playing ? "멈춤" : "재생"; });
+    document.getElementById("ct-re").addEventListener("click", () => { year = 0; playing = false; btn.textContent = "재생"; cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 2. 가중치 바구니 */
+  (function () {
+    const CATS = [["식료품", 5.0], ["외식", 4.5], ["주거", 3.0], ["교통", 0.5], ["보건", 2.5], ["교육", 1.0], ["통신", -2.0], ["기타", 1.5]];
+    const PRE = { avg: [15, 13, 17, 11, 9, 7, 8, 20], solo: [10, 25, 25, 8, 3, 2, 10, 17], family: [20, 10, 15, 12, 8, 15, 6, 14], senior: [22, 8, 20, 5, 22, 0, 5, 18] };
+    let W = PRE.avg.slice(), G = null, act = -1;
+    const infl = (ws) => { const s = ws.reduce((a, b) => a + b, 0) || 1; return ws.reduce((a, w, i) => a + w * CATS[i][1], 0) / s; };
+    MB.seg("cp-p", (v) => { W = PRE[v].slice(); cv.redraw(); });
+    const cv = MB.canvas("#cp-cv", (ctx, w, h) => {
+      const P = MB.palette(), tot = W.reduce((a, b) => a + b, 0) || 1, nr = w < 420;
+      const box = { x: 36, y: 34, w: w - 36 - 10, h: h - 34 - 70 };
+      const c = MB.chart(ctx, box, { x: [0, 8], y: [0, 40], xTicks: [], yTicks: [0, 10, 20, 30, 40], yFmt: (v) => String(v) });
+      const slot = box.w / 8, bw = slot * 0.62;
+      G = { box, slot, c };
+      W.forEach((wt, i) => {
+        const r = CATS[i][1], col = r >= 4 ? P.bad : r >= 2 ? P.warn : r >= 0 ? P.accent : P.ok;
+        const cx = box.x + slot * (i + 0.5), y = c.Y(wt);
+        ctx.fillStyle = col; ctx.globalAlpha = act === i ? 1 : 0.8; ctx.fillRect(cx - bw / 2, y, bw, box.y + box.h - y); ctx.globalAlpha = 1;
+        knob(ctx, cx, y, P, 6);
+        label(ctx, Math.round((wt / tot) * 100) + "%", cx, y - 12, P.text, 11, "center", "bottom", true);
+        label(ctx, CATS[i][0], cx, box.y + box.h + 6, P.text, nr ? 10.5 : 12, "center", "top");
+        label(ctx, (r > 0 ? "+" : r < 0 ? "−" : "") + Math.abs(r).toFixed(1), cx, box.y + box.h + 24, col, nr ? 10 : 11, "center", "top", true);
+      });
+      label(ctx, "막대: 지출 비중 · 아래 숫자: 올해 가격 상승률(%)", box.x, 14, P.dim, 11, "left", "middle");
+      const off = infl(PRE.avg), me = infl(W);
+      let best = 0, bi = 0; W.forEach((wt, i) => { const v = Math.abs(wt * CATS[i][1]); if (v > best) { best = v; bi = i; } });
+      const share = (W[bi] * CATS[bi][1]) / tot / (me || 1e-9);
+      MB.stat("cp-o-a", off.toFixed(2) + "<small>%</small>");
+      MB.stat("cp-o-m", tone(me > off + 0.005 ? "bad-t" : me < off - 0.005 ? "ok-t" : "", me.toFixed(2)) + "<small>%</small>");
+      MB.stat("cp-o-d", (me - off >= 0 ? "+" : "−") + Math.abs(me - off).toFixed(2) + "<small>%p</small>");
+      MB.stat("cp-o-t", CATS[bi][0] + (isFinite(share) && me > 0.01 ? " <small>" + Math.round(share * 100) + "%</small>" : ""));
+    }, { aspect: 0.6, minHeight: 320, maxHeight: 380 });
+    MB.drag(cv.canvas, {
+      start(x) { if (!G) return; act = Math.floor((x - G.box.x) / G.slot); if (act < 0 || act > 7) act = -1; },
+      move(x, y) { if (act < 0) return; W[act] = Math.round(MB.clamp(((G.box.y + G.box.h - y) / G.box.h) * 40, 0, 40)); cv.redraw(); },
+      end() { act = -1; cv.redraw(); },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 3. 체감물가 */
+  (function () {
+    const GR = [
+      { spend: 0.35, count: 0.80, items: ["커피", "점심", "버스", "과자", "라면", "택시"] },
+      { spend: 0.15, count: 0.02, items: ["TV", "노트북", "냉장고"] },
+      { spend: 0.50, count: 0.18, items: ["월세", "공과금", "보험", "통신비"] },
+    ];
+    const lossEl = document.getElementById("fl-l");
+    const fmt = (v) => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(1) + "%";
+    const A = MB.range("fl-a", fmt, () => cv.redraw()), B = MB.range("fl-b", fmt, () => cv.redraw());
+    lossEl.addEventListener("change", () => cv.redraw());
+    const rate = (i) => (i === 0 ? A() : i === 1 ? B() : 2);
+    const stats = () => { let cpi = 0, feel = 0; GR.forEach((g, i) => { const r = rate(i); cpi += g.spend * r; feel += g.count * (r > 0 && lossEl.checked ? 2 * r : r); }); return { cpi, feel }; };
+    const rnd = MB.rng(5);
+    let rec = [], acc = 0, W = 300, H = 300;
+    function spawn(split) {
+      const u = rnd(), gi = u < 0.8 ? 0 : u < 0.82 ? 1 : 2, g = GR[gi];
+      const big = gi === 1;
+      rec.push({ g: gi, item: g.items[Math.floor(rnd() * g.items.length)], x: 6 + rnd() * Math.max(10, split - (big ? 86 : 64)), y: -40, v: 50 + rnd() * 40, a: (rnd() - 0.5) * 0.4, big });
+    }
+    const cv = MB.canvas("#fl-cv", (ctx, w, h) => {
+      const P = MB.palette(), split = w * 0.58; W = w; H = h;
+      rec.forEach((o) => {
+        const r = rate(o.g), col = r > 0 ? P.bad : r < 0 ? P.ok : P.dim, rw = o.big ? 80 : 58, rh = o.big ? 40 : 30;
+        ctx.save(); ctx.translate(o.x + rw / 2, o.y + rh / 2); ctx.rotate(o.a);
+        ctx.fillStyle = P.surface; ctx.strokeStyle = col; ctx.lineWidth = 1.4; rrect(ctx, -rw / 2, -rh / 2, rw, rh, 4); ctx.fill(); ctx.stroke();
+        label(ctx, o.item, 0, -rh / 2 + 10, P.text, 11, "center", "middle");
+        label(ctx, fmt(r), 0, rh / 2 - 8, col, 10, "center", "middle", true);
+        ctx.restore();
+      });
+      // 게이지
+      const s = stats(), lo = -4, hi = 16;
+      const gx0 = split + 10, gw = w - gx0 - 8, top = 36, bot = h - 46;
+      const Y = (v) => bot - ((MB.clamp(v, lo, hi) - lo) / (hi - lo)) * (bot - top);
+      ctx.fillStyle = P.bg; ctx.fillRect(split, 0, w - split, h);
+      ctx.strokeStyle = P.border; ctx.beginPath(); ctx.moveTo(split, 0); ctx.lineTo(split, h); ctx.stroke();
+      ctx.strokeStyle = P.grid; ctx.lineWidth = 1;
+      [-4, 0, 4, 8, 12, 16].forEach((v) => { ctx.beginPath(); ctx.moveTo(gx0, Y(v)); ctx.lineTo(gx0 + gw, Y(v)); ctx.stroke(); label(ctx, v + "%", gx0 + gw, Y(v) - 2, P.faint, 10, "right", "bottom", true); });
+      ctx.strokeStyle = P.axis; ctx.beginPath(); ctx.moveTo(gx0, Y(0)); ctx.lineTo(gx0 + gw, Y(0)); ctx.stroke();
+      [["통계", "금액 가중", s.cpi, P.accent], ["체감", "횟수 가중", s.feel, P.bad]].forEach(([a, b, v, col], k) => {
+        const cx = gx0 + gw * (k === 0 ? 0.3 : 0.72), bw = Math.min(40, gw * 0.28);
+        ctx.fillStyle = col; ctx.globalAlpha = 0.85; ctx.fillRect(cx - bw / 2, Math.min(Y(0), Y(v)), bw, Math.abs(Y(v) - Y(0)) || 1); ctx.globalAlpha = 1;
+        label(ctx, v.toFixed(1) + "%", cx, Math.min(Y(0), Y(v)) - 4, P.text, 12, "center", "bottom", true, 600);
+        label(ctx, a, cx, bot + 8, P.text, 12, "center", "top", false, 700);
+        label(ctx, b, cx, bot + 24, P.dim, 10.5, "center", "top");
+      });
+      label(ctx, "쏟아지는 영수증", 8, 14, P.dim, 11, "left", "middle");
+      MB.stat("fl-o-c", s.cpi.toFixed(2) + "<small>%</small>");
+      MB.stat("fl-o-f", tone(s.feel > s.cpi + 0.01 ? "bad-t" : "", s.feel.toFixed(2)) + "<small>%</small>");
+      MB.stat("fl-o-d", (s.feel - s.cpi >= 0 ? "+" : "−") + Math.abs(s.feel - s.cpi).toFixed(2) + "<small>%p</small>");
+      MB.stat("fl-o-u", Math.round(GR.reduce((a, g, i) => a + (rate(i) > 0 ? g.count : 0), 0) * 100) + "<small>%</small>");
+    }, { height: 300 });
+    for (let i = 0; i < 10; i++) { spawn(W * 0.58); rec[i].y = rnd() * 240; }
+    cv.redraw();
+    MB.loop(cv.canvas, (dt) => {
+      acc += dt * 4;
+      while (acc > 1) { acc -= 1; spawn(W * 0.58); }
+      rec.forEach((o) => { o.y += o.v * dt; });
+      rec = rec.filter((o) => o.y < H + 10);
+      cv.redraw();
+    });
+  })();
+
+  /* ---------------------------------------------------------- 4. 근원물가 */
+  (function () {
+    const N = 72, g = MB.randnSeeded(21), nE = [], nF = [], nC = [];
+    let e = 0, f = 0, c = 0;
+    for (let t = 0; t <= N; t++) { e = 0.7 * e + 0.6 * g(); f = 0.6 * f + 0.7 * g(); c = 0.8 * c + 0.2 * g(); nE.push(e); nF.push(f); nC.push(c); }
+    let hov = 40;
+    const S = MB.range("co-s", (v) => v.toFixed(1) + "배", () => cv.redraw());
+    const showC = document.getElementById("co-c"), showP = document.getElementById("co-p");
+    showC.addEventListener("change", () => cv.redraw()); showP.addEventListener("change", () => cv.redraw());
+    const sd = (a) => { const m = a.reduce((s, x) => s + x, 0) / a.length; return Math.sqrt(a.reduce((s, x) => s + (x - m) * (x - m), 0) / a.length); };
+    let G = null;
+    const cv = MB.canvas("#co-cv", (ctx, w, h) => {
+      const P = MB.palette(), k = S();
+      const core = [], food = [], en = [], head = [];
+      for (let t = 0; t <= N; t++) {
+        const cc = 2.2 + 0.7 * Math.sin((t / N) * Math.PI * 1.6 - 0.4) + 0.25 * nC[t];
+        const ee = k * (11 * Math.sin((TAU * t) / 34 + 0.8) + 4 * nE[t]);
+        const ff = 2.5 + 3.5 * Math.sin((TAU * t) / 22 + 1.2) + 2 * nF[t];
+        core.push(cc); en.push(ee); food.push(ff); head.push(0.78 * cc + 0.12 * ff + 0.1 * ee);
+      }
+      const vis = head.concat(showC.checked ? core : []).concat(showP.checked ? food.concat(en) : []);
+      const ymin = Math.min(-1, Math.floor(Math.min(...vis) - 0.5)), ymax = Math.max(5, Math.ceil(Math.max(...vis) + 0.5));
+      const yspan = ymax - ymin, step = yspan > 30 ? 10 : yspan > 14 ? 4 : 2, yt = [];
+      for (let v = Math.ceil(ymin / step) * step; v <= ymax; v += step) yt.push(v);
+      const pts = (a) => a.map((v, t) => [t, v]);
+      const series = [];
+      if (showP.checked) { series.push({ data: pts(en), color: P.warn, width: 1.2, dash: [3, 3] }); series.push({ data: pts(food), color: P.ok, width: 1.2, dash: [3, 3] }); }
+      series.push({ data: pts(head), color: P.bad, width: 2.2 });
+      if (showC.checked) series.push({ data: pts(core), color: P.accent, width: 2.6 });
+      const box = { x: 44, y: 16, w: w - 44 - 14, h: h - 16 - 72 };
+      const ch = MB.chart(ctx, box, { x: [0, N], y: [ymin, ymax], xTicks: [0, 12, 24, 36, 48, 60, 72], yTicks: yt, xFmt: (v) => (v / 12) + "년", yFmt: (v) => v + "%",
+        series, hlines: [{ y: 2, color: P.accent2, label: "목표 2%" }], vlines: [{ x: hov, color: P.faint }] });
+      G = ch;
+      ctx.beginPath(); ctx.arc(ch.X(hov), ch.Y(head[hov]), 4, 0, TAU); ctx.fillStyle = P.bad; ctx.fill();
+      if (showC.checked) { ctx.beginPath(); ctx.arc(ch.X(hov), ch.Y(core[hov]), 4, 0, TAU); ctx.fillStyle = P.accent; ctx.fill(); }
+      // 범례
+      let lx = box.x + 8; const ly = h - 36;
+      [["전체", P.bad, true], ["근원", P.accent, showC.checked], ["식료품", P.ok, showP.checked], ["에너지", P.warn, showP.checked]].forEach(([s, col, on]) => {
+        if (!on) return; ctx.fillStyle = col; ctx.fillRect(lx, ly - 2, 14, 3); label(ctx, s, lx + 18, ly, P.dim, 11, "left", "middle"); lx += 18 + ctx.measureText(s).width + 14;
+      });
+      MB.stat("co-o-h", sd(head).toFixed(2) + "<small>%p</small>");
+      MB.stat("co-o-c", sd(core).toFixed(2) + "<small>%p</small>");
+      MB.stat("co-o-m", (Math.floor(hov / 12) + 1) + "년차 " + ((hov % 12) + 1) + "월");
+      MB.stat("co-o-v", tone("bad-t", head[hov].toFixed(1)) + " / " + tone("ok-t", core[hov].toFixed(1)) + "<small>%</small>");
+    }, { aspect: 0.55, minHeight: 300, maxHeight: 380 });
+    const pick = (x) => { if (!G) return; hov = Math.round(MB.clamp(((x - G.box.x) / G.box.w) * N, 0, N)); cv.redraw(); };
+    MB.drag(cv.canvas, { move: pick, hover: pick });
+  })();
+
+  /* ---------------------------------------------------------- 5. 녹는 지폐 */
+  (function () {
+    let t = 10, G = null, drops = [], acc = 0;
+    const rnd = MB.rng(9);
+    const R = MB.range("ml-r", (v) => v.toFixed(1) + "%", () => cv.redraw());
+    const isN = () => document.getElementById("ml-cv").parentElement.clientWidth < 560;
+    let NOTE = null;
+    const cv = MB.canvas("#ml-cv", (ctx, w, h) => {
+      const P = MB.palette(), r = R() / 100, real = 1e7 / Math.pow(1 + r, t), k = real / 1e7, N = isN();
+      const area = N ? { x: 0, y: 0, w: w, h: 170 } : { x: 0, y: 0, w: w * 0.4, h: h };
+      const box = N ? { x: 64, y: 186, w: w - 64 - 14, h: h - 186 - 52 } : { x: w * 0.4 + 64, y: 16, w: w * 0.6 - 64 - 14, h: h - 16 - 52 };
+      // 지폐
+      const bw0 = Math.min(area.w * 0.8, 230), bh0 = bw0 * 0.5, s = Math.sqrt(k);
+      const cx = area.x + area.w / 2, cy = area.y + (N ? 72 : area.h * 0.42);
+      const bw = bw0 * s, bh = bh0 * s;
+      NOTE = { cx, w: bw, y: cy + bh / 2 };
+      ctx.strokeStyle = P.faint; ctx.setLineDash([4, 4]); ctx.lineWidth = 1; rrect(ctx, cx - bw0 / 2, cy - bh0 / 2, bw0, bh0, 8); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = P.accent2; ctx.globalAlpha = 0.9; rrect(ctx, cx - bw / 2, cy - bh / 2, bw, bh, Math.max(3, 8 * s)); ctx.fill(); ctx.globalAlpha = 1;
+      ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.lineWidth = 1; rrect(ctx, cx - bw / 2 + 5 * s, cy - bh / 2 + 5 * s, bw - 10 * s, bh - 10 * s, Math.max(2, 5 * s)); ctx.stroke();
+      if (bw > 70) label(ctx, "1,000만원", cx, cy, MB.color("on-accent"), Math.max(11, Math.round(22 * s)), "center", "middle", false, 800);
+      drops.forEach((d) => { ctx.globalAlpha = Math.max(0, d.life); ctx.fillStyle = P.accent2; ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, TAU); ctx.fill(); });
+      ctx.globalAlpha = 1;
+      label(ctx, "오늘 돈 " + MB.won(real), cx, N ? area.h - 6 : cy + bh0 / 2 + 46, P.text, 14, "center", "bottom", false, 700);
+      // 곡선
+      const fam = [];
+      for (let q = 1; q <= 10; q++) { const d = []; for (let y = 0; y <= 40; y += 0.5) d.push([y, 1e7 / Math.pow(1 + q / 100, y)]); fam.push({ data: d, color: P.grid, width: 1 }); }
+      const cur = []; for (let y = 0; y <= 40; y += 0.25) cur.push([y, 1e7 / Math.pow(1 + r, y)]);
+      fam.push({ data: cur, color: P.accent2, width: 2.6 });
+      const ch = MB.chart(ctx, box, { x: [0, 40], y: [0, 1e7], xTicks: [0, 10, 20, 30, 40], yTicks: [0, 2.5e6, 5e6, 7.5e6, 1e7], xFmt: (v) => v + "년", yFmt: MB.wonAxis,
+        series: fam, hlines: [{ y: 5e6, color: P.faint, label: "절반" }], vlines: [{ x: t, color: P.accent2 }] });
+      G = ch;
+      knob(ctx, ch.X(t), ch.Y(real), P, 7);
+      const half = MN.doubling(r).exact;
+      MB.stat("ml-o-y", t.toFixed(0) + "<small>년</small>");
+      MB.stat("ml-o-v", MB.won(real));
+      MB.stat("ml-o-l", tone("bad-t", MB.won(1e7 - real)));
+      MB.stat("ml-o-h", half.toFixed(1) + "<small>년</small>");
+    }, { get height() { return isN() ? 420 : 320; } });
+    MB.drag(cv.canvas, { move(x, y) { if (!G || x < G.box.x - 20 || y < G.box.y - 20) return; t = Math.round(MB.clamp(((x - G.box.x) / G.box.w) * 40, 0, 40)); cv.redraw(); } });
+    MB.loop(cv.canvas, (dt) => {
+      if (!NOTE) return;
+      acc += dt * R() * 1.2;
+      while (acc > 1) { acc -= 1; drops.push({ x: NOTE.cx + (rnd() - 0.5) * NOTE.w * 0.9, y: NOTE.y, v: 20 + rnd() * 30, r: 1.5 + rnd() * 2.5, life: 1 }); }
+      drops.forEach((d) => { d.v += 120 * dt; d.y += d.v * dt; d.life -= dt * 1.4; });
+      drops = drops.filter((d) => d.life > 0);
+      cv.redraw();
+    });
+  })();
+
+  /* ---------------------------------------------------------- 6. 명목 vs 실질 연봉 */
+  (function () {
+    const S = MB.range("wg-s", (v) => v.toFixed(1) + "%", () => cv.redraw()), I = MB.range("wg-i", (v) => v.toFixed(1) + "%", () => cv.redraw());
+    const base = MN.HG.salary;
+    const cv = MB.canvas("#wg-cv", (ctx, w, h) => {
+      const P = MB.palette(), s = S() / 100, p = I() / 100;
+      const nom = [], real = [];
+      for (let y = 0; y <= 10; y++) { nom.push(base * Math.pow(1 + s, y)); real.push(nom[y] / Math.pow(1 + p, y)); }
+      const ymax = Math.max(base * 1.6, Math.max(...nom) * 1.08);
+      const ch = MB.chart(ctx, { x: 58, y: 16, w: w - 58 - 14, h: h - 16 - 34 }, { x: [-0.6, 10.6], y: [0, ymax], xTicks: [0, 2, 4, 6, 8, 10], xFmt: (v) => v + "년", yFmt: MB.wonAxis,
+        hlines: [{ y: base, color: P.dim, label: "지금 3,600만" }] });
+      const bw = Math.max(6, (ch.X(1) - ch.X(0)) * 0.7);
+      for (let y = 0; y <= 10; y++) {
+        const x = ch.X(y);
+        ctx.fillStyle = P.accent2; ctx.globalAlpha = 0.35; ctx.fillRect(x - bw / 2, ch.Y(nom[y]), bw, ch.Y(0) - ch.Y(nom[y])); ctx.globalAlpha = 1;
+        const col = real[y] < base - 1 ? P.bad : P.accent;
+        ctx.fillStyle = col; ctx.fillRect(x - bw * 0.3, ch.Y(real[y]), bw * 0.6, ch.Y(0) - ch.Y(real[y]));
+      }
+      const rr = MN.real(s, p);
+      MB.stat("wg-o-n", MB.won(nom[10]));
+      MB.stat("wg-o-r", tone(real[10] < base - 1 ? "bad-t" : "ok-t", MB.won(real[10])));
+      MB.stat("wg-o-q", spct(rr, 2));
+      MB.stat("wg-o-s", rr > 0.0005 ? tone("ok-t", "실질 인상") : rr < -0.0005 ? tone("bad-t", "실질 삭감") : "제자리");
+    }, { aspect: 0.55, minHeight: 260, maxHeight: 340 });
+  })();
+
+  /* ---------------------------------------------------------- 7. 72의 법칙 */
+  (function () {
+    let r = 6, G = null;
+    const exact = [], rule = [];
+    for (let q = 1; q <= 30; q += 0.25) { const d = MN.doubling(q / 100); exact.push([q, d.exact]); rule.push([q, d.rule72]); }
+    const err = exact.map(([q, e], i) => [q, (rule[i][1] - e) / e]);
+    const cv = MB.canvas("#r7-cv", (ctx, w, h) => {
+      const P = MB.palette(), d = MN.doubling(r / 100), xt = w < 420 ? [1, 10, 20, 30] : [1, 5, 10, 15, 20, 25, 30];
+      const top = { x: 52, y: 22, w: w - 52 - 18, h: (h - 22 - 60) * 0.6 };
+      const bot = { x: 52, y: top.y + top.h + 40, w: top.w, h: h - (top.y + top.h + 40) - 50 };
+      const ch = MB.chart(ctx, top, { x: [1, 30], y: [0, 75], xTicks: xt, yTicks: [0, 25, 50, 75], xFmt: (v) => v + "%", yFmt: (v) => v + "년",
+        series: [{ data: rule, color: P.accent2, width: 2, dash: [6, 4] }, { data: exact, color: P.accent, width: 2.6 }],
+        vlines: [{ x: r, color: P.faint }] });
+      G = ch;
+      label(ctx, "두 배(가치는 절반)가 되는 해", top.x + top.w - 4, top.y + 6, P.dim, 11, "right", "top");
+      ctx.beginPath(); ctx.arc(ch.X(r), ch.Y(d.rule72), 5, 0, TAU); ctx.fillStyle = P.accent2; ctx.fill();
+      knob(ctx, ch.X(r), ch.Y(d.exact), P, 7);
+      const rightSide = ch.X(r) > top.x + top.w * 0.6;
+      label(ctx, d.exact.toFixed(1) + "년", ch.X(r) + (rightSide ? -12 : 12), Math.max(top.y + 26, ch.Y(d.exact) - 14), P.accent, 13, rightSide ? "right" : "left", "middle", true, 600);
+      const e = (d.rule72 - d.exact) / d.exact;
+      const c2 = MB.chart(ctx, bot, { x: [1, 30], y: [-0.12, 0.06], xTicks: xt, yTicks: [-0.1, -0.05, 0, 0.05], xFmt: (v) => v + "%", yFmt: (v) => spct(v, 0),
+        series: [{ data: err, color: P.bad, width: 2.2 }], hlines: [{ y: 0, color: P.axis, dash: [] }], vlines: [{ x: r, color: P.faint }] });
+      label(ctx, "72의 법칙의 오차(정확값 대비)", bot.x + bot.w - 4, bot.y + 4, P.dim, 11, "right", "top");
+      ctx.beginPath(); ctx.arc(c2.X(r), c2.Y(e), 5, 0, TAU); ctx.fillStyle = P.bad; ctx.fill();
+      const diff = d.rule72 - d.exact;
+      MB.stat("r7-o-r", r.toFixed(1) + "<small>%</small>");
+      MB.stat("r7-o-a", d.rule72.toFixed(1) + "<small>년</small>");
+      MB.stat("r7-o-e", d.exact.toFixed(1) + "<small>년</small>");
+      MB.stat("r7-o-d", (Math.abs(diff) < 0.5 ? tone("ok-t", (diff >= 0 ? "+" : "−") + Math.abs(diff * 12).toFixed(0) + "개월") : tone("warn-t", (diff >= 0 ? "+" : "−") + Math.abs(diff).toFixed(1) + "년")) + " <small>" + spct(e, 1) + "</small>");
+    }, { aspect: 0.62, minHeight: 400, maxHeight: 480 });
+    MB.drag(cv.canvas, { move(x) { if (!G) return; r = Math.round(MB.clamp(1 + ((x - G.box.x) / G.box.w) * 29, 1, 30) * 4) / 4; cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 8. 고정금리 대출 */
+  (function () {
+    const RT = MB.range("db-r", (v) => v.toFixed(2) + "%", () => cv.redraw()), IN = MB.range("db-i", (v) => v.toFixed(1) + "%", () => cv.redraw());
+    let memo = { k: null, L: null };
+    const loan = (rate) => { if (memo.k !== rate) memo = { k: rate, L: MN.loan(1e8, rate, 360, "annuity") }; return memo.L; };
+    const cv = MB.canvas("#db-cv", (ctx, w, h) => {
+      const P = MB.palette(), rate = RT() / 100, inf = IN() / 100, L = loan(rate);
+      const nomS = [], realS = []; let tr = 0;
+      L.rows.forEach((row) => { const rv = row.pay / Math.pow(1 + inf, row.m / 12); tr += rv; if (row.m % 3 === 0 || row.m === 1) { nomS.push([row.m / 12, row.pay]); realS.push([row.m / 12, rv]); } });
+      const ymax = Math.ceil((L.first * 1.2) / 1e5) * 1e5;
+      const box = { x: 54, y: 16, w: w - 54 - 14, h: h - 16 - 34 };
+      const ch = MB.chart(ctx, box, { x: [0, 30], y: [0, ymax], xTicks: [0, 5, 10, 15, 20, 25, 30], xFmt: (v) => v + "년", yFmt: MB.wonAxis, series: [] });
+      ctx.beginPath();
+      nomS.forEach(([x, y], i) => (i ? ctx.lineTo(ch.X(x), ch.Y(y)) : ctx.moveTo(ch.X(x), ch.Y(y))));
+      for (let i = realS.length - 1; i >= 0; i--) ctx.lineTo(ch.X(realS[i][0]), ch.Y(realS[i][1]));
+      ctx.closePath(); ctx.fillStyle = P.ok; ctx.globalAlpha = 0.18; ctx.fill(); ctx.globalAlpha = 1;
+      MB.chart(ctx, box, { x: [0, 30], y: [0, ymax], xTicks: [], yTicks: [], series: [{ data: nomS, color: P.accent2, width: 2.4 }, { data: realS, color: P.accent, width: 2.6 }] });
+      const last = L.rows[L.rows.length - 1], lastReal = last.pay / Math.pow(1 + inf, last.m / 12);
+      label(ctx, MB.won(L.first, { digits: 1 }), ch.X(30) - 4, ch.Y(L.first) - 6, P.accent2, 12, "right", "bottom", false, 700);
+      label(ctx, MB.won(lastReal, { digits: 1 }), ch.X(30) - 4, ch.Y(lastReal) - 6, P.accent, 12, "right", "bottom", false, 700);
+      const rr = MN.real(rate, inf);
+      MB.stat("db-o-p", MB.won(L.first, { digits: 1 }));
+      MB.stat("db-o-l", MB.won(lastReal, { digits: 1 }));
+      MB.stat("db-o-t", tone(tr < 1e8 ? "ok-t" : "", MB.won(tr)) + " <small>명목 " + MB.wonAxis(L.totalPay) + "</small>");
+      MB.stat("db-o-q", tone(rr < 0 ? "ok-t" : "", spct(rr, 2)));
+    }, { aspect: 0.55, minHeight: 260, maxHeight: 340 });
+  })();
+
+  /* ---------------------------------------------------------- 9. 짜장면 */
+  (function () {
+    const D = [[1970, 100], [1980, 350], [1990, 1000], [2000, 2500], [2010, 4000], [2020, 5500], [2026, 7500]];
+    const price = (y) => { for (let i = 0; i < D.length - 1; i++) { const [a, pa] = D[i], [b, pb] = D[i + 1]; if (y <= b) return pa * Math.pow(pb / pa, (y - a) / (b - a)); } return D[D.length - 1][1]; };
+    let A = 1970, B = 2026, G = null, which = -1;
+    const logEl = document.getElementById("jj-l");
+    logEl.addEventListener("change", () => cv.redraw());
+    const cv = MB.canvas("#jj-cv", (ctx, w, h) => {
+      const P = MB.palette(), lg = logEl.checked;
+      const data = []; for (let y = 1970; y <= 2026; y += 0.5) data.push([y, price(y)]);
+      const box = { x: 54, y: 18, w: w - 54 - 22, h: h - 18 - 54 };
+      const ch = MB.chart(ctx, box, { x: [1970, 2026], y: lg ? [50, 15000] : [0, 8500], logY: lg, xTicks: w < 420 ? [1970, 1990, 2010] : [1970, 1980, 1990, 2000, 2010, 2020],
+        yTicks: lg ? [100, 300, 1000, 3000, 10000] : [0, 2000, 4000, 6000, 8000], xFmt: (v) => String(v), yFmt: MB.wonAxis,
+        bands: [{ x0: A, x1: B, color: MB.color("accent-soft") }],
+        series: [{ data, color: P.accent2, width: 2.6 }],
+        points: D.map(([x, y]) => ({ x, y, color: P.accent2, r: 3.5 })) });
+      G = ch;
+      [A, B].forEach((y, k) => {
+        const px = ch.X(y), py = ch.Y(price(y));
+        ctx.strokeStyle = P.accent; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(px, box.y); ctx.lineTo(px, box.y + box.h); ctx.stroke(); ctx.setLineDash([]);
+        knob(ctx, px, py, P, 7);
+        const s = "약 " + Math.round(price(y) / 10) * 10 + "원";
+        const right = k === 1 ? px > box.x + 70 : px > box.x + box.w - 70;
+        label(ctx, y + " · " + s.replace(/\B(?=(\d{3})+(?!\d))/g, ","), px + (right ? -8 : 8), py + (k ? -16 : 18), P.text, 12, right ? "right" : "left", "middle", false, 600);
+      });
+      const pa = price(A), pb = price(B), cagr = Math.pow(pb / pa, 1 / Math.max(1, B - A)) - 1;
+      MB.stat("jj-o-a", A + "년 <small>" + won0(Math.round(pa / 10) * 10) + "</small>");
+      MB.stat("jj-o-b", B + "년 <small>" + won0(Math.round(pb / 10) * 10) + "</small>");
+      MB.stat("jj-o-c", pct(cagr, 1) + " <small>" + MN.doubling(cagr).rule72.toFixed(0) + "년마다 2배</small>");
+      MB.stat("jj-o-n", Math.floor(10000 / pb) + "<small>그릇</small>");
+    }, { aspect: 0.55, minHeight: 300, maxHeight: 380 });
+    MB.drag(cv.canvas, {
+      start(x) { if (!G) return; which = Math.abs(x - G.X(A)) <= Math.abs(x - G.X(B)) ? 0 : 1; },
+      move(x) {
+        if (!G || which < 0) return;
+        const y = Math.round(MB.clamp(1970 + ((x - G.box.x) / G.box.w) * 56, 1970, 2026));
+        if (which === 0) A = Math.min(y, B - 2); else B = Math.max(y, A + 2);
+        cv.redraw();
+      },
+      end() { which = -1; },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 10. 디플레이션~초인플레이션 */
+  (function () {
+    const RATES = [-0.05, -0.02, 0, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 3, 10, 130, 1e4];
+    const fmtA = (a) => (a < 0 ? "−" : "") + Math.abs(a * 100).toLocaleString("ko-KR", { maximumFractionDigits: 0 }) + "%";
+    let m = 0, playing = false;
+    const btn = document.getElementById("hy-go");
+    const IX = MB.range("hy-i", (v) => fmtA(RATES[v]), () => { m = Math.min(m, 24); cv.redraw(); });
+    const regime = (a, mo) => a < 0 ? tone("ok-t", "디플레이션") : a <= 0.03 ? "물가 안정" : a <= 0.1 ? tone("warn-t", "높은 물가") : mo < 0.5 ? tone("bad-t", "고인플레이션") : tone("bad-t", "초인플레이션");
+    const cv = MB.canvas("#hy-cv", (ctx, w, h) => {
+      const P = MB.palette(), a = RATES[IX()], mo = Math.pow(1 + a, 1 / 12) - 1, p0 = 7500;
+      const path = [], ref = [];
+      for (let k = 0; k <= 96; k++) { const t = k / 4; path.push([t, p0 * Math.pow(1 + mo, t)]); ref.push([t, p0 * Math.pow(1.02, t / 12)]); }
+      const all = path.concat(ref).map((d) => d[1]);
+      let lo = Math.min(...all) * 0.97, hi = Math.max(...all) * 1.05;
+      let yt;
+      if (hi / lo < 30) { yt = []; for (let i = 0; i <= 4; i++) { const v = lo * Math.pow(hi / lo, i / 4), mag = Math.pow(10, Math.floor(Math.log10(v)) - 1); yt.push(Math.round(v / mag) * mag); } }
+      else { const e0 = Math.ceil(Math.log10(lo)), e1 = Math.floor(Math.log10(hi)), st = Math.max(1, Math.ceil((e1 - e0) / 5)); yt = []; for (let e = e0; e <= e1; e += st) yt.push(Math.pow(10, e)); }
+      const tag = { w: Math.min(190, w * 0.48), h: 62 };
+      const box = { x: 62, y: 16 + tag.h + 10, w: w - 62 - 28, h: h - 16 - tag.h - 10 - 34 };
+      const ch = MB.chart(ctx, box, { x: [0, 24], y: [lo, hi], logY: true, xTicks: [0, 6, 12, 18, 24], yTicks: yt, xFmt: (v) => v + "개월", yFmt: MB.wonAxis,
+        series: [{ data: ref, color: P.faint, width: 1.4, dash: [4, 4] }, { data: path.filter((d) => d[0] <= m + 1e-9), color: a < 0 ? P.ok : a > 0.1 ? P.bad : P.accent, width: 2.6 }, { data: path, color: P.border, width: 1.6 }],
+        vlines: [{ x: m, color: P.faint }] });
+      const pm = p0 * Math.pow(1 + mo, m);
+      ctx.beginPath(); ctx.arc(ch.X(m), ch.Y(pm), 5, 0, TAU); ctx.fillStyle = P.accent2; ctx.fill();
+      // 가격표
+      ctx.fillStyle = P.surface; ctx.strokeStyle = P.border; rrect(ctx, 14, 12, tag.w, tag.h, 10); ctx.fill(); ctx.stroke();
+      label(ctx, "짜장면 한 그릇 · " + m.toFixed(0) + "개월째", 26, 30, P.dim, 11.5, "left", "middle");
+      label(ctx, pm >= 1e8 ? MB.won(pm) : won0(Math.round(pm / 10) * 10), 26, 54, a > 0.1 ? P.bad : P.text, pm >= 1e8 ? 15 : 20, "left", "middle", false, 800);
+      label(ctx, "점선: 연 2% 물가", box.x + box.w, box.y - 6, P.faint, 11, "right", "bottom");
+      const p12 = p0 * (1 + a), halfM = a > 0 ? Math.log(2) / Math.log(1 + mo) : Infinity;
+      MB.stat("hy-o-s", regime(a, mo));
+      MB.stat("hy-o-m", spct(mo, mo > 1 ? 0 : 2));
+      MB.stat("hy-o-p", p12 >= 1e8 ? MB.won(p12) : won0(Math.round(p12 / 10) * 10));
+      MB.stat("hy-o-h", !isFinite(halfM) ? "<small>줄지 않는다</small>" : halfM >= 24 ? (halfM / 12).toFixed(1) + "<small>년</small>" : halfM >= 1 ? halfM.toFixed(1) + "<small>개월</small>" : (halfM * 30).toFixed(0) + "<small>일</small>");
+    }, { aspect: 0.6, minHeight: 320, maxHeight: 400 });
+    MB.loop(cv.canvas, (dt) => {
+      if (!playing) return;
+      m = Math.min(24, m + dt * 3);
+      if (m >= 24) { playing = false; btn.textContent = "24개월 재생"; }
+      cv.redraw();
+    });
+    btn.addEventListener("click", () => { if (m >= 24) m = 0; playing = !playing; btn.textContent = playing ? "멈춤" : "24개월 재생"; });
+    document.getElementById("hy-re").addEventListener("click", () => { m = 0; playing = false; btn.textContent = "24개월 재생"; cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 11. 인플레이션 저울 */
+  (function () {
+    const dep = 0.03 * (1 - MN.KR.interestTax);
+    const ROWS = [
+      { n: "현금 (이자 0%)", f: (p, n) => 1 / Math.pow(1 + p, n) - 1, good: 1 },
+      { n: "예금 (연 3%, 세후)", f: (p, n) => Math.pow((1 + dep) / (1 + p), n) - 1, good: 1 },
+      { n: "연봉 (해마다 3% 인상)", f: (p, n) => Math.pow(1.03 / (1 + p), n) - 1, good: 1 },
+      { n: "빌려준 돈 (고정 연 4%)", f: (p, n) => Math.pow(1.04 / (1 + p), n) - 1, good: 1 },
+      { n: "갚을 빚의 크기 (고정금리)", f: (p, n) => 1 / Math.pow(1 + p, n) - 1, good: -1 },
+    ];
+    const Pp = MB.range("wn-p", (v) => v.toFixed(1) + "%", () => cv.redraw()), Nn = MB.range("wn-n", (v) => v + "년", () => cv.redraw());
+    const cv = MB.canvas("#wn-cv", (ctx, w, h) => {
+      const P = MB.palette(), p = Pp() / 100, n = Nn();
+      const vals = ROWS.map((r) => r.f(p, n));
+      const M = Math.max(0.5, ...vals.map(Math.abs)) * 1.15;
+      const x0 = 14, x1 = w - 14, cx = (x0 + x1) / 2, sc = (x1 - x0) / 2 / M, rh = (h - 34) / ROWS.length;
+      ctx.strokeStyle = P.grid; ctx.lineWidth = 1;
+      [-1, -0.5, 0.5, 1].forEach((f) => { const v = f * M / 1.15, x = cx + v * sc; ctx.beginPath(); ctx.moveTo(x, 10); ctx.lineTo(x, h - 26); ctx.stroke(); label(ctx, spct(v, 0), x, h - 10, P.faint, 10, "center", "middle", true); });
+      ctx.strokeStyle = P.axis; ctx.beginPath(); ctx.moveTo(cx, 6); ctx.lineTo(cx, h - 24); ctx.stroke();
+      ROWS.forEach((r, i) => {
+        const v = vals[i], y = 10 + i * rh, good = v * r.good > 1e-9, bad = v * r.good < -1e-9;
+        const col = good ? P.ok : bad ? P.bad : P.dim;
+        label(ctx, r.n, x0, y + 12, P.text, 12.5, "left", "middle", false, 600);
+        const bx = Math.min(cx, cx + v * sc), bw = Math.abs(v * sc);
+        ctx.fillStyle = col; ctx.globalAlpha = 0.85; ctx.fillRect(bx, y + 22, Math.max(1.5, bw), rh - 34); ctx.globalAlpha = 1;
+        const tx = v >= 0 ? cx + v * sc + 6 : cx + v * sc - 6, inside = v >= 0 ? tx + 50 > x1 : tx - 50 < x0;
+        label(ctx, spct(v, 1), inside ? (v >= 0 ? tx - 12 : tx + 12) : tx, y + 22 + (rh - 34) / 2, inside ? MB.color("on-accent") : col, 12, inside ? (v >= 0 ? "right" : "left") : (v >= 0 ? "left" : "right"), "middle", true, 600);
+      });
+      MB.stat("wn-o-c", tone("bad-t", MB.won(1e7 / Math.pow(1 + p, n))));
+      MB.stat("wn-o-d", tone(MN.real(dep, p) < 0 ? "bad-t" : "ok-t", spct(MN.real(dep, p), 2)));
+      MB.stat("wn-o-s", MB.won(MN.HG.salary * Math.pow(1.03 / (1 + p), n)));
+      MB.stat("wn-o-b", tone("ok-t", MB.won(1e7 / Math.pow(1 + p, n))));
+    }, { height: 330 });
+  })();
+})();
+</script>
+</body>
+</html>

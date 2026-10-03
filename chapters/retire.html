@@ -1,0 +1,1170 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and MoneyBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "얼마가 있어야 일을 멈출 수 있는가. 필요 생활비와 필요 자금 역산, 4% 규칙과 25배, 몬테카를로로 보는 성공 확률, 순서 위험과 수명 위험, 연금 공백기, 정액·정률·가드레일 인출과 버킷 전략, 연금화와 주택연금을 직접 움직이며 은퇴 계획을 세운다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>은퇴 설계 · MoneyBook</title>
+<meta name="description" content="얼마가 있어야 일을 멈출 수 있는가. 필요 생활비와 필요 자금 역산, 4% 규칙과 25배, 몬테카를로로 보는 성공 확률, 순서 위험과 수명 위험, 연금 공백기, 정액·정률·가드레일 인출과 버킷 전략, 연금화와 주택연금을 직접 움직이며 은퇴 계획을 세운다.">
+<link rel="canonical" href="https://moneybook.euiyun.com/chapters/retire.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0b8a63">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MoneyBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="은퇴 설계 · MoneyBook">
+<meta property="og:description" content="얼마가 있어야 일을 멈출 수 있는가. 필요 생활비와 필요 자금 역산, 4% 규칙과 25배, 몬테카를로로 보는 성공 확률, 순서 위험과 수명 위험, 연금 공백기, 정액·정률·가드레일 인출과 버킷 전략, 연금화와 주택연금을 직접 움직이며 은퇴 계획을 세운다.">
+<meta property="og:url" content="https://moneybook.euiyun.com/chapters/retire.html">
+<meta property="og:image" content="https://moneybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://moneybook.euiyun.com/chapters/retire.html#chapter","name":"은퇴 설계","headline":"은퇴 설계 · MoneyBook","description":"얼마가 있어야 일을 멈출 수 있는가. 필요 생활비와 필요 자금 역산, 4% 규칙과 25배, 몬테카를로로 보는 성공 확률, 순서 위험과 수명 위험, 연금 공백기, 정액·정률·가드레일 인출과 버킷 전략, 연금화와 주택연금을 직접 움직이며 은퇴 계획을 세운다.","url":"https://moneybook.euiyun.com/chapters/retire.html","position":21,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://moneybook.euiyun.com/og.png","dateModified":"2026-10-03","isPartOf":{"@type":"Book","@id":"https://moneybook.euiyun.com/#book","name":"MoneyBook · 살아가는 데 필요한 돈 교과서","url":"https://moneybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MoneyBook","item":"https://moneybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"21. 은퇴 설계","item":"https://moneybook.euiyun.com/chapters/retire.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/money.js"></script>
+<!--head:end-->
+<style>
+  figure.diagram svg { max-width: 560px; margin: 0 auto; }
+  #fig-risk4 svg { max-width: 520px; }
+  .sim-view .hint { position: static; display: block; text-align: right; background: none; padding: 2px 10px 6px; }
+  @media (max-width: 640px) { figure.diagram { padding: 12px; } }
+</style>
+</head>
+<body data-chapter="retire">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 21</div>
+    <h1>은퇴 설계</h1>
+    <p class="lead">언젠가 월급이 멈춘다. 그날부터는 지금까지 모은 돈과 연금이 월급 노릇을 해야 한다. 그렇다면 얼마가 있어야 멈출 수 있을까? "10억"이라는 숫자를 흔히 듣지만, 정답은 얼마를 쓰며 살지, 연금이 얼마나 나오는지, 얼마나 오래 살지, 그리고 은퇴 직후 시장이 어떤 얼굴을 하는지에 따라 달라진다. 이 장은 이 네 가지를 하나씩 손으로 움직여 보며, 은퇴 계획을 '하나의 숫자'가 아니라 '확률'로 세우는 법을 익힌다.</p>
+    <ul class="objectives">
+      <li>은퇴 후 필요한 생활비를 오늘 돈으로 어림하고, 필요 자금 = (생활비 − 연금) ÷ 인출률로 목표 자산을 역산한다.</li>
+      <li>4% 규칙과 25배 규칙이 어디서 왔는지, 어떤 가정 위에 서 있고 한국에서는 무엇이 다른지 말한다.</li>
+      <li>몬테카를로 시뮬레이션으로 은퇴 계획의 성공 확률을 읽고, 순서 위험·수명 위험·물가가 그 확률을 어떻게 바꾸는지 확인한다.</li>
+      <li>60세 퇴직과 65세 국민연금 사이의 공백기를 계산하고, 정액·정률·가드레일 인출과 버킷 전략의 장단점을 비교한다.</li>
+      <li>종신 연금(연금화)과 주택연금이 수명 위험을 어떻게 덜어 주는지 이해하고, 한결의 60세 은퇴 계획을 세운다.</li>
+    </ul>
+  </header>
+
+  <section id="stop">
+    <h2>월급이 멈추는 날</h2>
+    <p><span class="term">은퇴</span><span class="en">(Retirement)</span>를 돈의 말로 바꾸면 이렇다. <b>근로소득이 멈추고, 쌓아 둔 자산과 연금이 소득을 대신하기 시작하는 시점</b>이다. 나이가 몇 살이든, 회사를 그만두든 일을 줄이든, 생활비의 주인이 월급에서 자산으로 바뀌는 순간이 은퇴다.</p>
+    <p><a href="overview.html">1장</a>의 물탱크로 보면 은퇴 전후는 정반대의 두 시기다. 일하는 동안에는 들어오는 수도꼭지(월급)가 나가는 배수구(생활비)보다 커서 수위가 오른다. 이 시기를 <span class="term">적립기</span><span class="en">(Accumulation)</span>라 한다. 은퇴하면 수도꼭지가 잠기고 배수구만 남는다. 수위가 내려가는 이 시기가 <span class="term">인출기</span><span class="en">(Decumulation)</span>다. 적립기에는 "얼마나 모을까"가 질문이었다면, 인출기의 질문은 "이 물이 내가 사는 동안 바닥나지 않을까"다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 332" role="img" aria-label="27세부터 자산이 쌓여 60세 은퇴 때 가장 크고, 그 뒤로 줄어든다. 60세와 65세 사이는 국민연금이 없는 공백기다">
+        <defs><marker id="rt-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="216" y="44" width="29" height="226" class="f-bad-soft" style="stroke:none"/>
+        <path d="M24 268 C80 264 150 170 216 80 C226 76 236 79 245 90 C300 140 360 202 420 238 L420 270 L24 270 Z" class="f-acc-soft" style="stroke:none"/>
+        <path d="M24 268 C80 264 150 170 216 80 C226 76 236 79 245 90 C300 140 360 202 420 238" class="s-acc" style="stroke-width:3"/>
+        <line x1="20" y1="270" x2="424" y2="270" class="s-axis"/>
+        <line x1="216" y1="40" x2="216" y2="270" class="s-dash"/>
+        <line x1="245" y1="40" x2="245" y2="270" class="s-dash"/>
+        <text x="20" y="296" class="t-mono" style="font-size:16px">27세</text>
+        <text x="214" y="296" text-anchor="end" class="t-mono" style="font-size:16px">60</text>
+        <text x="247" y="296" class="t-mono" style="font-size:16px">65</text>
+        <text x="420" y="296" text-anchor="end" class="t-mono" style="font-size:16px">95세</text>
+        <text x="208" y="30" text-anchor="end" class="lbl-b" style="font-size:19px">은퇴</text>
+        <text x="253" y="30" class="lbl-acc" style="font-size:18px">국민연금 시작</text>
+        <text x="230.5" y="262" text-anchor="middle" class="lbl-bad" style="font-size:13px">공백</text>
+        <text x="28" y="90" class="lbl-b" style="font-size:21px">적립기</text>
+        <text x="28" y="116" class="lbl-dim" style="font-size:16px">월급 → 저축 → 자산</text>
+        <path d="M84 238 L146 198" class="s-ok" style="stroke-width:3" marker-end="url(#rt-ar)"/>
+        <text x="280" y="66" class="lbl-b" style="font-size:21px">인출기</text>
+        <text x="280" y="92" class="lbl-dim" style="font-size:16px">자산 + 연금 → 생활비</text>
+        <path d="M302 118 L358 156" class="s-bad" style="stroke-width:3" marker-end="url(#rt-ar)"/>
+        <text x="220" y="324" text-anchor="middle" class="lbl-dim" style="font-size:14px">자산(오늘 돈)의 모양. 실제 경로는 시장에 따라 흔들린다</text>
+      </svg>
+      <figcaption><b>적립기와 인출기.</b> 은퇴 시점에 자산이 가장 크고, 그 뒤로는 연금이 메우지 못하는 생활비만큼 줄어든다. 법정 정년(60세)과 국민연금 수령 나이(65세) 사이에는 연금 없이 자산만으로 버티는 공백기가 있다.</figcaption>
+    </figure>
+
+    <p>은퇴 설계는 결국 세 가지 질문이다. ① 은퇴 뒤 <b>얼마를 쓰며</b> 살 것인가(필요 생활비). ② 그러려면 은퇴할 때 <b>얼마가 있어야</b> 하는가(필요 자금). ③ 그 돈이 <b>얼마나 확실하게</b> 버티는가(위험). 앞의 두 질문은 산수이고, 세 번째 질문이 이 장의 대부분을 차지한다.</p>
+  </section>
+
+  <section id="need">
+    <h2>얼마를 쓰며 살 것인가</h2>
+    <p>은퇴 생활비를 어림하는 가장 흔한 방법은 은퇴 직전 소득의 몇 %로 잡는 것이다. 이 비율을 <span class="term">소득대체율</span><span class="en">(Replacement rate)</span>이라 한다. 보통 <b>60~80%</b>를 기준으로 삼는다. 은퇴하면 사라지는 지출이 있기 때문이다. 연금 보험료와 저축이 멈추고, 출퇴근 비용이 줄고, 대출을 다 갚았다면 원리금도 없다. 반대로 늘어나는 지출도 있다. 병원비, 시간이 많아져 늘어나는 여가비, 그리고 직장 건강보험에서 지역가입자로 바뀌며 생기는 건강보험료다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>은퇴 뒤</th><th>항목</th><th>대략의 방향</th></tr></thead>
+      <tbody>
+        <tr><td class="ok-t">줄어든다</td><td>저축·연금 납입, 출퇴근·업무 비용, 근로소득세, (다 갚았다면) 주택대출 원리금, 자녀 교육비</td><td>소득의 20~40%가 빠진다</td></tr>
+        <tr><td class="bad-t">늘어난다</td><td>의료비·간병비, 여가·여행, 지역가입 건강보험료</td><td>나이가 들수록 의료비 비중이 커진다</td></tr>
+        <tr><td>그대로</td><td>식비, 주거 관리비, 통신, 경조사</td><td>생활 수준을 정하는 기본 몫</td></tr>
+      </tbody>
+    </table></div>
+    <p>여기서 중요한 약속이 하나 있다. 생활비는 반드시 <b>오늘 돈</b>(지금의 구매력)으로 적는다. 30년 뒤의 3,600만원과 오늘의 3,600만원은 전혀 다른 돈이다. 물가가 연 2.5%씩 오르면 오늘 3,600만원어치 생활은 30년 뒤 약 7,551만원이 든다(<a href="inflation.html">3장</a>). 목표를 오늘 돈으로 세우고, 수익률도 물가를 뺀 <span class="term">실질 수익률</span><span class="en">(Real return)</span>로 생각하면 머릿속에서 물가를 따로 계산할 필요가 없다.</p>
+    <p>생활비가 정해지면 필요 자금은 간단한 나눗셈이다. 생활비 가운데 국민연금 같은 평생 소득이 메워 주는 부분을 빼고, 남는 <b>부족분</b>을 자산에서 해마다 꺼내야 한다. 자산에서 해마다 꺼내는 비율을 <span class="term">인출률</span><span class="en">(Withdrawal rate)</span>이라 하면,</p>
+    <div class="formula">$$\text{필요 자금} = \frac{\text{연 생활비} - \text{연 연금 소득}}{\text{인출률}}$$<div class="where">모두 오늘 돈 기준. 인출률 4%면 부족분의 25배, 3%면 약 33배다.</div></div>
+    <p>아래에서 생활비와 연금을 바꿔 본다. 오른쪽 칸 하나가 "부족분 1년치"이고, 인출률이 그 칸을 몇 개 쌓아야 하는지 정한다.</p>
+
+    <div class="sim" id="sim-nd">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>필요 자금 역산기: 부족분을 몇 칸 쌓아야 하나</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="nd-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>은퇴 후 생활비 <output id="nd-sp-out"></output></span><input type="range" id="nd-sp" min="1200" max="6000" step="100" value="3600"></label>
+          <label class="ctrl"><span>연금 등 평생 소득 <output id="nd-pen-out"></output></span><input type="range" id="nd-pen" min="0" max="3000" step="10" value="1760"></label>
+          <label class="ctrl"><span>인출률 <output id="nd-wr-out"></output></span><input type="range" id="nd-wr" min="2.5" max="6" step="0.1" value="4"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">월 생활비</span><span class="v" id="nd-o-m">—</span></div>
+        <div class="stat"><span class="k">연 부족분</span><span class="v" id="nd-o-gap">—</span></div>
+        <div class="stat"><span class="k">몇 배</span><span class="v" id="nd-o-x">—</span></div>
+        <div class="stat"><span class="k">필요 자금</span><span class="v" id="nd-o-need">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 처음 값(연 3,600만원, 연금 1,760만원, 4%)에서 부족분 1,840만원 × 25 = 4억 6,000만원을 읽는다. ② 연금을 0으로 내린다. 필요 자금이 9억으로 두 배 가까이 뛴다. 평생 나오는 연금 1,760만원은 자산 4억 4,000만원과 같은 일을 한다. ③ 인출률을 3%로 내린다. 칸이 33개로 늘어난다. 안전하게 꺼낼수록 더 많이 모아야 한다. (오늘 돈 기준, 세금과 수익률은 인출률 안에 들어 있다고 본다.)</div>
+    </div>
+
+    <p>두 번째 실험이 은퇴 설계의 숨은 주인공을 보여 준다. <b>평생 나오는 연금 소득은 그 25배쯤 되는 자산과 맞먹는다.</b> 국민연금 월 147만원은 4% 규칙으로 환산하면 4억원이 넘는 자산이다. 게다가 물가에 맞춰 오르고, 오래 살수록 더 많이 받는다. <a href="pension.html">20장</a>의 세 겹 연금을 먼저 쌓는 것이 은퇴 준비의 바닥이 되는 이유다.</p>
+    <p>남은 것은 분모, 인출률이다. 몇 %면 안전한가? 이 질문에서 유명한 규칙 하나가 태어났다.</p>
+  </section>
+
+  <section id="four">
+    <h2>4% 규칙과 25배</h2>
+    <p>1994년 미국의 재무설계사 윌리엄 벤겐은 이런 질문을 던졌다. "은퇴 첫해에 자산의 몇 %를 꺼내고, 그 뒤 해마다 물가만큼 올려서 꺼내면 30년을 버틸 수 있을까?" 그는 1926년 이후 미국 주식과 채권의 실제 수익률로, 해마다 다른 해에 은퇴한 가상의 사람들을 모두 시험했다. 그 결과 주식 50~75%를 섞었을 때 <b>첫해 4%</b>로 시작한 사람은 최악의 시기(대공황 직전, 1960년대 말)에 은퇴했어도 30년 안에 돈이 바닥나지 않았다. 몇 년 뒤 미국 트리니티 대학의 교수 세 명이 비슷한 연구를 발표하면서 이 결과는 <span class="term">4% 규칙</span><span class="en">(4% rule)</span>이라는 이름으로 퍼졌다.</p>
+    <p>규칙은 이렇게 쓴다. 10억원으로 은퇴하면 첫해 4,000만원을 꺼낸다. 다음 해에는 시장이 올랐든 내렸든 상관없이 물가만큼만 올려 4,100만원(물가 2.5%), 그다음 해 약 4,203만원… 이렇게 <b>오늘 돈으로 같은 생활비</b>를 꺼낸다. 이것을 거꾸로 쓰면 <span class="term">25배 규칙</span>이 된다. 1 ÷ 0.04 = 25, 곧 <b>연 생활비(부족분)의 25배를 모으면 된다</b>는 말이다.</p>
+    <p>그런데 벤겐의 4%는 '미국의 과거'에서 나온 숫자다. 이 책의 교육용 가정(<code>MN.ASSETS</code>: 주식 기대수익 7.5%, 채권 3.5%, 물가 2.5%)은 미래를 과거 미국보다 보수적으로 본다. 이 가정 아래서 인출률별로 30년을 버틸 확률을 그려 보자. 각 점은 무작위 시장 400개를 돌린 결과다. 그래프를 좌우로 끌어 인출률을 고른다.</p>
+
+    <div class="sim" id="sim-wr">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>인출률이 0.5%p 오르면 성공 확률은 얼마나 떨어지나</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="wr-cv"></canvas><span class="hint">좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="ctrl"><span>주식 비중(나머지 채권)</span><div class="seg" id="wr-mix"><button data-value="0.3">30%</button><button data-value="0.5" class="on">50%</button><button data-value="0.7">70%</button><button data-value="1">100%</button></div></div>
+          <label class="ctrl"><span>은퇴 기간 <output id="wr-yr-out"></output></span><input type="range" id="wr-yr" min="20" max="45" step="5" value="30"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">인출률</span><span class="v" id="wr-o-r">—</span></div>
+        <div class="stat"><span class="k">필요 배수</span><span class="v" id="wr-o-x">—</span></div>
+        <div class="stat"><span class="k">10억이면 첫해</span><span class="v" id="wr-o-w">—</span></div>
+        <div class="stat"><span class="k">성공 확률</span><span class="v" id="wr-o-s">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 주식 50%, 30년에서 4%를 읽는다. 약 74%다. 3.5%로 내리면 약 90%, 3%면 약 97%로 오른다. ② 은퇴 기간을 40년으로 늘린다. 같은 4%가 약 43%로 떨어진다. 50대에 은퇴하는 사람에게 30년짜리 규칙은 짧다. ③ 주식 비중을 30%로 낮춘다. 낮은 인출률에서는 큰 차이가 없지만, 4%를 넘으면 오히려 성공 확률이 빠르게 떨어진다. 채권만으로는 물가를 이기는 힘이 약하다. (물가 2.5%, 해마다 초에 인출, 수수료·세금 없음. 흐린 선은 다른 주식 비중이다.)</div>
+    </div>
+
+    <p>곡선은 생각보다 가파르다. 인출률 4%에서 0.5%p만 올려도 성공 확률이 20%p 가까이 빠진다. 반대로 3~3.5%까지 낮추면 대부분의 미래에서 살아남는다. 이 가정에서 4%가 미국 과거 자료만큼 안전해 보이지 않는 이유는 단순하다. 우리가 넣은 미래 수익률이 20세기 미국보다 낮기 때문이다.</p>
+
+    <div class="callout deep">
+      <strong>4% 규칙을 그대로 쓰기 어려운 이유</strong>
+      <p>① <b>미국이라는 예외</b>: 20세기 미국 주식은 세계에서 가장 성적이 좋았던 시장 가운데 하나다. 여러 나라의 자료로 같은 시험을 하면 30년을 버티는 안전한 인출률이 3% 안팎으로 내려간다는 연구가 많다. ② <b>30년이라는 기간</b>: 벤겐은 65세 은퇴, 95세까지를 가정했다. 50대에 은퇴하면 40년 이상을 버텨야 한다. ③ <b>비용</b>: 운용 보수 1%는 인출률 1%p를 깎는 것과 비슷하다(<a href="fund.html">15장</a>). 연금 소득세, 건강보험료도 꺼내는 돈에서 나간다. ④ <b>경직된 지출</b>: 규칙은 시장이 반토막 나도 같은 금액을 꺼낸다고 가정한다. 실제 사람은 줄이기도 하고, 반대로 큰 병원비가 갑자기 생기기도 한다. ⑤ <b>남는 돈</b>: 거꾸로, 4% 규칙을 따른 사람 대부분은 30년 뒤 처음보다 많은 돈을 남겼다. 최악의 경우를 막으려고 평균적인 삶에서는 덜 쓰는 규칙이다.</p>
+    </div>
+
+    <p>한국에서 은퇴를 설계할 때 4% 규칙을 그대로 가져오기 어려운 사정도 있다. 주된 직장에서 물러나는 나이는 평균 50대 초중반(약 53세)으로, 법정 정년보다도 이르다. 그만큼 인출 기간이 길다. 국내 주식은 변동성이 큰 편이고, 자산의 대부분이 집에 묶인 가구가 많다. 그래서 국내에서는 3~3.5%를 기본값으로 삼고, 국민연금 같은 평생 소득으로 부족분 자체를 줄이는 쪽이 더 단단한 출발점이다.</p>
+  </section>
+
+  <section id="mc">
+    <h2>몬테카를로: 천 번의 은퇴</h2>
+    <p>앞 시뮬레이터의 "성공 확률"은 어떻게 나온 숫자일까. 은퇴는 한 번뿐이고, 앞으로 30년 동안 시장이 어떻게 움직일지는 아무도 모른다. 그래서 <b>가능한 미래를 수백 개 만들어 보고</b>, 그중 몇 개에서 돈이 버티는지 센다. 해마다 수익률을 주사위 굴리듯 무작위로 뽑아(평균과 흔들림은 <a href="risk.html">12장</a>의 가정 그대로) 30년짜리 시장을 600개 만든다. 이 방법을 카지노로 유명한 도시 이름을 따 <span class="term">몬테카를로 시뮬레이션</span><span class="en">(Monte Carlo simulation)</span>이라 부른다.</p>
+    <p>아래에서 자산, 첫해 인출액, 주식 비중을 바꿔 본다. 띠는 600개의 미래가 퍼진 범위(어두운 띠: 가운데 절반, 옅은 띠: 가운데 80%)이고, 가는 선 몇 개는 그중 실제 미래 몇 개다. 모든 금액은 오늘 돈이다.</p>
+
+    <div class="sim" id="sim-mc">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>은퇴 몬테카를로: 600개의 미래와 성공 확률</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="mc-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>은퇴 자산 <output id="mc-bal-out"></output></span><input type="range" id="mc-bal" min="2" max="20" step="0.5" value="10"></label>
+          <label class="ctrl"><span>첫해 인출액(물가만큼 늘림) <output id="mc-wd-out"></output></span><input type="range" id="mc-wd" min="1000" max="8000" step="100" value="4000"></label>
+          <label class="ctrl"><span>주식 비중 <output id="mc-st-out"></output></span><input type="range" id="mc-st" min="0" max="100" step="10" value="60"></label>
+          <div class="ctrl"><span>물가 상승률</span><div class="seg" id="mc-inf"><button data-value="0.02">2%</button><button data-value="0.025" class="on">2.5%</button><button data-value="0.04">4%</button></div></div>
+          <div class="btn-row"><button class="btn primary" id="mc-play">다시 재생</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">성공 확률(30년)</span><span class="v" id="mc-o-s">—</span></div>
+        <div class="stat"><span class="k">첫해 인출률</span><span class="v" id="mc-o-r">—</span></div>
+        <div class="stat"><span class="k">30년 뒤 잔고 중앙값</span><span class="v" id="mc-o-m">—</span></div>
+        <div class="stat"><span class="k">바닥난 미래의 중앙 시점</span><span class="v" id="mc-o-d">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 처음 값(10억, 4,000만원, 주식 60%)에서 성공 확률 약 72%를 읽는다. 빨간 선이 중간에 0으로 떨어진 미래들이다. ② 물가를 4%로 올린다. 수익률은 그대로인데 성공 확률이 약 49%로 떨어진다. 물가는 인출액을 해마다 키워서 조용히 계획을 무너뜨린다. ③ 주식을 0%로 내린다. 흔들림은 작아지지만 약 35%로 떨어진다. 너무 안전한 배분은 오래 사는 위험 앞에서 위험하다. ④ 인출액을 3,000만원(3%)으로 줄인다. 약 93%로 오른다. (해마다 초 인출, 수익률은 로그정규분포 무작위, 600개 경로, 시드 고정. 수수료·세금 없음.)</div>
+    </div>
+
+    <p>성공 확률 하나만 보면 놓치는 것이 있다. 첫째, <b>실패의 모양</b>이다. 29년째에 바닥나는 것과 12년째에 바닥나는 것은 같은 "실패"로 세지만 전혀 다른 인생이다. 그래서 바닥나는 시점도 함께 본다. 둘째, <b>성공의 모양</b>이다. 가운데 선(중앙값)을 보면 30년 뒤에도 처음 돈의 상당 부분이 남아 있는 미래가 많다. 성공 확률 100%를 노리면 대부분의 미래에서 돈을 쓰지 못하고 남긴 채 떠나게 된다.</p>
+    <div class="callout">
+      <strong>성공 확률은 몇 %면 충분한가</strong>
+      정답은 없다. 다만 은퇴 설계에서는 흔히 80~90%를 기준선으로 쓴다. 남은 10~20%의 미래에서도 곧바로 굶는 것이 아니라 "중간에 지출을 줄이면 된다"는 신호를 받는다. 아래에서 볼 유연한 인출 전략은 그 실패 확률을 계획 안으로 끌어들이는 방법이다.
+    </div>
+  </section>
+
+  <section id="sequence">
+    <h2>순서 위험: 언제 떨어지느냐가 중요하다</h2>
+    <p>같은 수익률이 같은 숫자만큼 나온다면, 순서는 상관이 없을까? 돈을 넣어 두기만 하는 사람에게는 상관이 없다. 곱셈은 순서를 바꿔도 결과가 같다(−20% 뒤 +25%나 +25% 뒤 −20%나 결과는 같다). 그런데 <b>해마다 돈을 꺼내는 사람</b>에게는 이야기가 완전히 달라진다. 이것을 <span class="term">수익률 순서 위험</span><span class="en">(Sequence-of-returns risk)</span>이라 한다.</p>
+    <p>아래 위쪽 막대는 가상의 25년 실질 수익률이다. 기하평균은 연 4.26%로, 순서를 어떻게 바꿔도 같다. 막대를 좌우로 끌어 순서를 바꾸면, 10억원에서 해마다 같은 금액을 꺼낼 때의 잔고가 아래에 그려진다. 금색 점선은 지금 순서를 정반대로 뒤집은 경우다.</p>
+
+    <div class="sim" id="sim-sq">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>순서 위험: 같은 수익률, 다른 순서</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sq-cv"></canvas><span class="hint">막대를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>인출률(오늘 돈, 고정) <output id="sq-wr-out"></output></span><input type="range" id="sq-wr" min="3" max="6" step="0.5" value="4"></label>
+          <div class="btn-row">
+            <button class="btn sm" id="sq-bad">나쁜 해를 앞으로</button>
+            <button class="btn sm" id="sq-good">나쁜 해를 뒤로</button>
+            <button class="btn sm" id="sq-rev">순서 뒤집기</button>
+            <button class="btn sm" id="sq-shuf">섞기</button>
+          </div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">기하평균 수익률</span><span class="v" id="sq-o-g">—</span></div>
+        <div class="stat"><span class="k">지금 순서 25년 뒤</span><span class="v" id="sq-o-a">—</span></div>
+        <div class="stat"><span class="k">뒤집은 순서 25년 뒤</span><span class="v" id="sq-o-b">—</span></div>
+        <div class="stat"><span class="k">꺼내지 않으면</span><span class="v" id="sq-o-n">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 처음 순서는 은퇴 직후 3년 연속 하락(−28%, −16%, −10%)이다. 4%를 꺼내면 25년째에 바닥난다. 뒤집은 순서는 25년 뒤 약 15.6억원이 남는다. ② 맨 앞의 −28% 막대 하나만 끌어 맨 뒤로 보낸다. 그것만으로 결과가 크게 바뀐다. ③ "꺼내지 않으면" 칸은 순서를 아무리 바꿔도 같은 28.4억원이다. 순서 위험은 돈을 꺼내는 사람에게만 생긴다. (수익률은 설명을 위한 가상의 값, 해마다 초에 인출한다.)</div>
+    </div>
+
+    <p>왜 이런 일이 생길까. 은퇴 직후 시장이 떨어지면 줄어든 잔고에서 같은 금액을 꺼내야 한다. 싸게 팔아 생활비를 마련하는 셈이고, 팔아 버린 주식은 나중에 시장이 회복해도 돌아오지 않는다. 잔고가 가장 클 때(은퇴 직후) 나쁜 해를 맞으면 그 손실이 가장 큰 금액에 곱해진다. 반대로 은퇴 후반의 하락은 이미 많이 쓰고 남은 작은 잔고에만 영향을 준다. 그래서 은퇴 전후 5~10년을 흔히 <b>위험 구간</b>이라 부른다.</p>
+    <p>순서 위험을 줄이는 방법은 세 갈래다. 은퇴 직전과 직후에 주식 비중을 조금 낮추거나, 몇 년치 생활비를 현금·채권에 따로 두어 하락장에서 주식을 팔지 않거나(버킷 전략), 하락장에서 지출을 줄이는 것(가드레일)이다. 뒤의 두 가지는 이 장 후반에서 직접 돌려 본다.</p>
+  </section>
+
+  <section id="longevity">
+    <h2>수명 위험: 평균보다 오래 사는 절반</h2>
+    <p>은퇴 기간을 정하려면 몇 살까지 살지 알아야 한다. 흔히 <span class="term">기대여명</span><span class="en">(Life expectancy)</span>을 쓰는데, 여기에 함정이 있다. 기대여명은 <b>평균</b>이다. 평균만큼 산다고 계획하면 대략 절반의 사람은 계획보다 오래 살아서 돈이 먼저 떨어진다. 오래 사는 것 자체가 돈의 위험이 되는 것, 이것이 <span class="term">수명 위험</span><span class="en">(Longevity risk)</span>이다.</p>
+    <p>아래 곡선은 60세인 사람이 각 나이까지 살아 있을 확률이다. 뒤에 깔린 언덕은 몇 살에 세상을 떠나는지의 분포다. 그래프를 좌우로 끌어 나이를 고른다.</p>
+
+    <div class="sim" id="sim-lv">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>60세가 각 나이까지 살아 있을 확률</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="lv-cv"></canvas><span class="hint">좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="lv-who"><button data-value="m">남성</button><button data-value="f">여성</button><button data-value="c" class="on">부부 중 한 명</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">기대여명(평균)</span><span class="v" id="lv-o-e">—</span></div>
+        <div class="stat"><span class="k">절반이 넘기는 나이</span><span class="v" id="lv-o-m">—</span></div>
+        <div class="stat"><span class="k">90세까지</span><span class="v" id="lv-o-90">—</span></div>
+        <div class="stat"><span class="k">고른 나이까지</span><span class="v" id="lv-o-a">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 남성을 고른다. 기대여명은 약 23년(83세)인데, 90세까지 살 확률이 약 26%다. 네 명 중 한 명이다. ② 여성으로 바꾼다. 절반이 89세를 넘기고, 95세까지 살 확률도 약 26%다. ③ "부부 중 한 명"으로 바꾼다. 둘 중 한 명이라도 90세에 살아 있을 확률이 약 60%다. 부부의 은퇴 자금은 더 오래 사는 쪽에 맞춰야 한다. (2020년대 한국 생명표 수준에 맞춘 곰페르츠 근사 모델이다. 실제 확률은 건강, 소득, 세대에 따라 다르고 앞으로도 길어질 수 있다.)</div>
+    </div>
+
+    <p>평균은 계획의 기준으로 쓰기에 짧다. 돈이 바닥나면 안 되는 은퇴 계획은 "살아 있을 확률이 꽤 남아 있는 나이", 예를 들어 <b>90~95세</b>까지를 기간으로 잡는 경우가 많다. 그만큼 기간이 길어지면 앞에서 본 것처럼 안전한 인출률은 내려간다. 그리고 수명 위험은 혼자 힘으로 완전히 없애기 어려운 위험이다. 100세까지 버틸 돈을 모으면 대부분의 사람은 많이 남긴 채 떠나고, 85세까지만 계획하면 적지 않은 사람이 돈 없이 노년을 맞는다. 이 딜레마를 푸는 도구가 뒤에서 볼 <b>연금화</b>다.</p>
+
+    <h3>물가: 조용히 두 배가 되는 생활비</h3>
+    <p>은퇴 기간이 길면 물가도 무섭다. 오늘 연 3,600만원이 드는 생활은 해마다 물가만큼 더 많은 돈을 요구한다. 몬테카를로에서 물가를 4%로 올렸을 때 성공 확률이 크게 떨어진 이유다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>오늘 연 3,600만원의 생활</th><th class="num">물가 2%</th><th class="num">물가 2.5%</th><th class="num">물가 3%</th></tr></thead>
+      <tbody>
+        <tr><td>10년 뒤에 드는 돈</td><td class="num">4,388만</td><td class="num">4,608만</td><td class="num">4,838만</td></tr>
+        <tr><td>20년 뒤</td><td class="num">5,349만</td><td class="num">5,899만</td><td class="num">6,502만</td></tr>
+        <tr><td>30년 뒤</td><td class="num">6,521만</td><td class="num">7,551만</td><td class="num">8,738만</td></tr>
+      </tbody>
+    </table></div>
+    <p>그래서 은퇴 자산에도 물가를 이길 힘이 필요하다. 예금과 채권만으로는 물가를 빼고 남는 실질 수익이 거의 없다. 국민연금이 소중한 또 하나의 이유는 해마다 물가에 맞춰 지급액이 오른다는 점이다.</p>
+
+    <figure class="diagram" id="fig-risk4">
+      <svg viewBox="0 0 440 400" role="img" aria-label="은퇴의 네 가지 위험과 대응: 수명 위험은 종신 연금, 물가는 주식과 물가연동 연금, 순서 위험은 버킷과 가드레일, 시장 위험은 분산">
+        <rect x="4" y="4" width="212" height="190" rx="12" class="f-bad-soft"/>
+        <rect x="224" y="4" width="212" height="190" rx="12" class="f-warn-soft"/>
+        <rect x="4" y="206" width="212" height="190" rx="12" class="f-acc2-soft"/>
+        <rect x="224" y="206" width="212" height="190" rx="12" class="f-acc-soft"/>
+        <text x="18" y="40" class="lbl-b" style="font-size:21px">수명 위험</text>
+        <text x="18" y="74" class="lbl-dim" style="font-size:17px">예상보다 오래 산다</text>
+        <text x="18" y="100" class="lbl-dim" style="font-size:17px">→ 돈이 먼저 바닥난다</text>
+        <text x="18" y="166" class="lbl-acc" style="font-size:17px">종신 연금, 국민연금</text>
+        <text x="238" y="40" class="lbl-b" style="font-size:21px">물가</text>
+        <text x="238" y="74" class="lbl-dim" style="font-size:17px">생활비가 해마다 오른다</text>
+        <text x="238" y="100" class="lbl-dim" style="font-size:17px">→ 30년이면 두 배</text>
+        <text x="238" y="166" class="lbl-acc" style="font-size:17px">주식, 물가연동 연금</text>
+        <text x="18" y="242" class="lbl-b" style="font-size:21px">순서 위험</text>
+        <text x="18" y="276" class="lbl-dim" style="font-size:17px">은퇴 직후 하락장</text>
+        <text x="18" y="302" class="lbl-dim" style="font-size:17px">→ 싸게 팔아 생활비</text>
+        <text x="18" y="368" class="lbl-acc" style="font-size:17px">버킷, 가드레일 인출</text>
+        <text x="238" y="242" class="lbl-b" style="font-size:21px">시장 위험</text>
+        <text x="238" y="276" class="lbl-dim" style="font-size:17px">평균 수익 자체가 낮다</text>
+        <text x="238" y="302" class="lbl-dim" style="font-size:17px">→ 모든 계획이 빠듯</text>
+        <text x="238" y="368" class="lbl-acc" style="font-size:17px">분산, 낮은 인출률</text>
+        <line x1="18" y1="130" x2="202" y2="130" class="s-dash"/>
+        <line x1="238" y1="130" x2="422" y2="130" class="s-dash"/>
+        <line x1="18" y1="332" x2="202" y2="332" class="s-dash"/>
+        <line x1="238" y1="332" x2="422" y2="332" class="s-dash"/>
+      </svg>
+      <figcaption><b>은퇴의 네 가지 위험.</b> 각 칸의 아래 줄이 주된 대응이다. 하나의 대응이 다른 위험을 키우기도 한다. 주식을 줄이면 순서 위험은 줄지만 물가와 수명 위험 앞에서 약해진다. 그래서 은퇴 설계는 하나를 없애기보다 네 가지를 함께 저울질하는 일이다.</figcaption>
+    </figure>
+  </section>
+
+  <section id="gap">
+    <h2>연금 공백기: 60세와 65세 사이</h2>
+    <p>한국의 법정 정년은 60세다. 그런데 국민연금은 1969년 이후 태어난 사람부터 <b>65세</b>에 나온다(2026년 기준). 정년까지 일해도 5년 동안은 월급도 국민연금도 없다. 이 기간을 <span class="term">연금 공백기</span><span class="en">(소득 크레바스)</span>라 부른다. 앞에서 본 것처럼 주된 직장을 정년보다 일찍 떠나는 사람이 많으니, 실제 공백은 5년보다 긴 경우가 흔하다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 318" role="img" aria-label="50세부터 75세까지의 소득 흐름. 근로소득은 60세에 끝나고 국민연금은 65세에 시작한다. 퇴직연금과 개인연금, 주택연금은 55세부터 받을 수 있다">
+        <rect x="180" y="10" width="78" height="270" class="f-bad-soft" style="stroke:none"/>
+        <line x1="24" y1="280" x2="414" y2="280" class="s-axis"/>
+        <text x="219" y="36" text-anchor="middle" class="lbl-bad" style="font-size:18px">공백기</text>
+        <text x="24" y="66" class="lbl" style="font-size:17px">근로소득</text>
+        <rect x="24" y="74" width="156" height="26" rx="5" class="f-acc2-soft"/>
+        <text x="24" y="124" class="lbl" style="font-size:17px">국민연금</text>
+        <rect x="258" y="132" width="156" height="26" rx="5" class="f-ok-soft"/>
+        <rect x="180" y="132" width="78" height="26" rx="5" class="f-surface" style="stroke-dasharray:4 3"/>
+        <text x="219" y="150" text-anchor="middle" class="lbl-dim" style="font-size:14px">조기 수령</text>
+        <text x="24" y="182" class="lbl" style="font-size:17px">퇴직·개인연금</text>
+        <rect x="102" y="190" width="312" height="26" rx="5" class="f-acc-soft"/>
+        <text x="24" y="240" class="lbl" style="font-size:17px">주택연금</text>
+        <rect x="102" y="248" width="312" height="26" rx="5" class="f-acc-soft" style="stroke-dasharray:4 3"/>
+        <line x1="102" y1="280" x2="102" y2="286" class="s-axis"/>
+        <line x1="180" y1="280" x2="180" y2="286" class="s-axis"/>
+        <line x1="258" y1="280" x2="258" y2="286" class="s-axis"/>
+        <line x1="336" y1="280" x2="336" y2="286" class="s-axis"/>
+        <text x="24" y="306" class="t-mono" style="font-size:16px">50</text>
+        <text x="102" y="306" text-anchor="middle" class="t-mono" style="font-size:16px">55</text>
+        <text x="180" y="306" text-anchor="middle" class="t-mono" style="font-size:16px">60</text>
+        <text x="258" y="306" text-anchor="middle" class="t-mono" style="font-size:16px">65</text>
+        <text x="336" y="306" text-anchor="middle" class="t-mono" style="font-size:16px">70</text>
+        <text x="414" y="306" text-anchor="end" class="t-mono" style="font-size:16px">75세</text>
+      </svg>
+      <figcaption><b>공백기를 메우는 재료들.</b> 근로소득(금색)은 정년 60세에 끝나고 국민연금(녹색)은 65세에 시작한다. 그 사이를 메울 수 있는 것은 55세부터 꺼낼 수 있는 퇴직연금·개인연금, 55세부터 가입할 수 있는 주택연금(점선, 집이 있을 때), 국민연금 조기 수령(최대 5년 당기되 1년에 6%씩 깎인다), 그리고 재취업 소득이다. 수령 조건은 2026년 기준이며 바뀔 수 있다.</figcaption>
+    </figure>
+
+    <p>아래 막대는 나이별로 연 생활비 3,600만원(오늘 돈)을 무엇으로 대는지 보여 준다. 국민연금은 <a href="pension.html">20장</a>에서 계산한 한결의 예상액(65세 정상 수령 월 약 146.9만원)을 쓴다. 그림 위의 두 손잡이, "은퇴"와 "연금 시작"을 끌어 본다.</p>
+
+    <div class="sim" id="sim-gp">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>연금 공백기: 은퇴 나이와 연금 시작 나이</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="gp-cv"></canvas><span class="hint">손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>은퇴 나이 <output id="gp-ret-out"></output></span><input type="range" id="gp-ret" min="55" max="65" step="1" value="60"></label>
+          <label class="ctrl"><span>국민연금 시작 나이 <output id="gp-nps-out"></output></span><input type="range" id="gp-nps" min="60" max="70" step="1" value="65"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">공백기</span><span class="v" id="gp-o-gap">—</span></div>
+        <div class="stat"><span class="k">공백기에 자산에서</span><span class="v" id="gp-o-gs">—</span></div>
+        <div class="stat"><span class="k">국민연금 월액</span><span class="v" id="gp-o-m">—</span></div>
+        <div class="stat"><span class="k">95세까지 자산에서</span><span class="v" id="gp-o-t">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 처음 값(60세 은퇴, 65세 연금)에서 공백기 5년 동안 자산에서 1억 8,000만원을 꺼내야 한다. ② 연금 시작을 60세로 당긴다. 공백은 사라지지만 연금이 평생 약 102.8만원(70%)으로 줄어 95세까지 자산에서 꺼낼 돈은 오히려 늘어난다. ③ 연금 시작을 70세로 늦춘다. 월 약 199.7만원(136%)이 되지만 공백이 10년으로 길어진다. ④ 은퇴를 55세로 당긴다. 빨간 막대가 10년으로 늘어난다. (오늘 돈 기준, 운용 수익 없이 단순 합계. 연금 감액·증액 비율은 2026년 기준 근사, 조기 수령 연 6% 감액·연기 연 7.2% 증액.)</div>
+    </div>
+
+    <p>공백기는 은퇴 계획에서 가장 무거운 구간이다. 자산이 아직 크고 시장 하락에 가장 취약한 은퇴 직후(순서 위험), 생활비 전부를 자산이 떠맡는다. 그래서 공백기 생활비만큼은 주식이 아니라 예금·채권처럼 흔들리지 않는 곳에 미리 떼어 두는 방법을 많이 쓴다. 국민연금을 당기는 것은 공백을 메우는 가장 쉬운 방법처럼 보이지만, 깎인 금액이 평생 이어진다. 오래 살수록 손해가 커지므로, 수명 위험까지 생각하면 마지막 수단으로 두는 편이 낫다.</p>
+  </section>
+
+  <section id="withdraw">
+    <h2>어떻게 꺼낼 것인가</h2>
+    <p>4% 규칙은 "시장과 상관없이 같은 금액"을 꺼낸다. 이것을 <span class="term">정액 인출</span><span class="en">(Constant-dollar)</span>이라 한다. 생활은 안정적이지만 하락장에서도 같은 금액을 팔아야 해서 바닥날 수 있다. 반대 끝에는 해마다 그때 잔고의 일정 비율만 꺼내는 <span class="term">정률 인출</span><span class="en">(Constant-percentage)</span>이 있다. 잔고의 4%만 꺼내니 절대 바닥나지 않지만, 시장이 30% 떨어지면 생활비도 30% 줄어든다.</p>
+    <p>둘 사이의 타협이 <span class="term">가드레일 인출</span><span class="en">(Guardrails)</span>이다. 평소에는 정액처럼 같은 금액을 꺼내다가, 지금 잔고 대비 인출률이 처음보다 20% 넘게 높아지면(시장이 크게 떨어지면) 생활비를 10% 줄이고, 20% 넘게 낮아지면(시장이 크게 오르면) 10% 늘린다. 도로의 가드레일처럼 크게 벗어날 때만 핸들을 꺾는다.</p>
+    <p>아래에서 세 전략을 같은 500개의 시장에 넣어 본다. 위 그래프는 해마다 실제로 쓴 돈(오늘 돈), 아래는 잔고다.</p>
+
+    <div class="sim" id="sim-ws">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>정액 vs 정률 vs 가드레일: 생활의 흔들림과 고갈 위험</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ws-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="ws-mode"><button data-value="fixed" class="on">정액</button><button data-value="pct">정률</button><button data-value="guard">가드레일</button></div>
+          <label class="ctrl"><span>처음 인출률 <output id="ws-wr-out"></output></span><input type="range" id="ws-wr" min="3" max="6" step="0.5" value="4"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">30년 안에 바닥</span><span class="v" id="ws-o-f">—</span></div>
+        <div class="stat"><span class="k">최저 생활비(나쁜 10%)</span><span class="v" id="ws-o-min">—</span></div>
+        <div class="stat"><span class="k">생활비가 바뀐 해(중앙)</span><span class="v" id="ws-o-ch">—</span></div>
+        <div class="stat"><span class="k">30년 뒤 잔고 중앙값</span><span class="v" id="ws-o-end">—</span></div>
+      </div>
+      <div class="sim-note" id="ws-note">해볼 것: ① 정액에서 위 띠가 4,000만원 한 줄로 평평하다가, 나쁜 미래에서는 어느 해 갑자기 0으로 떨어진다. 바닥날 확률 약 26%. ② 정률로 바꾼다. 바닥날 확률은 0%가 되지만 위 띠가 넓게 퍼지고, 생활비가 거의 해마다 바뀐다. ③ 가드레일로 바꾼다. 바닥나지 않으면서 생활비가 바뀌는 해가 훨씬 적다. ④ 처음 인출률을 5%로 올리고 세 전략을 다시 비교한다. (10억원, 주식 60·채권 40, 오늘 돈 기준 실질 수익률 무작위 500개 경로. 가드레일은 처음 인출률의 ±20%를 벗어나면 생활비를 10% 조정한다.)</div>
+    </div>
+
+    <p>공짜 점심은 없다. 정액은 생활이 고르지만 고갈 위험을 지고, 정률은 고갈 위험을 없애는 대신 생활의 흔들림을 진다. 가드레일은 "나쁠 때 조금 줄일 수 있다"는 약속으로 고갈 위험을 크게 낮춘다. 은퇴 생활비 가운데 줄일 수 있는 부분(여행, 외식, 선물)이 얼마나 되는지가 곧 유연성의 크기다. 반대로 줄일 수 없는 부분(식비, 관리비, 의료비)은 연금 같은 평생 소득으로 대는 것이 이상적이다. 이 두 층을 나누는 생각을 <b>바닥과 위층</b>(Floor and upside)이라 부르기도 한다.</p>
+
+    <h3>버킷 전략: 통 세 개로 나눠 담기</h3>
+    <p>순서 위험에 대한 또 하나의 대응은 돈을 쓰임새에 따라 통에 나눠 담는 <span class="term">버킷 전략</span><span class="en">(Bucket strategy)</span>이다. 첫째 통에는 1~2년치 생활비를 현금으로, 둘째 통에는 3~5년치를 채권으로, 셋째 통에는 나머지를 주식으로 둔다. 생활비는 언제나 현금 통에서 꺼낸다. 주식이 오른 해에는 주식 일부를 팔아 아래 통들을 다시 채우고, 주식이 떨어진 해에는 주식을 건드리지 않고 채권 통에서 현금 통을 채운다. 하락장에서 주식을 팔지 않아도 되는 시간을 몇 년 버는 구조다.</p>
+
+    <div class="sim" id="sim-bk">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>버킷 전략: 통 사이로 돈이 흐른다</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="bk-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="ctrl"><span>시장</span><div class="seg" id="bk-mkt"><button data-value="rand" class="on">무작위</button><button data-value="crash">은퇴 직후 폭락</button></div></div>
+          <div class="btn-row"><button class="btn primary" id="bk-play">일시정지</button><button class="btn" id="bk-re">새 시장으로 다시</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">은퇴 후</span><span class="v" id="bk-o-y">—</span></div>
+        <div class="stat"><span class="k">현금 통</span><span class="v" id="bk-o-c">—</span></div>
+        <div class="stat"><span class="k">주식을 팔지 않은 해</span><span class="v" id="bk-o-h">—</span></div>
+        <div class="stat"><span class="k">총자산</span><span class="v" id="bk-o-t">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 무작위 시장에서 몇 해를 지켜본다. 주식이 오른 해(아래 녹색 막대)에는 금색 알갱이가 주식 통에서 채권 통으로, 채권 통에서 현금 통으로 흘러내린다. ② "은퇴 직후 폭락"을 고른다. 첫 두 해 주식이 −35%, −15%로 떨어지는 동안 주식 통에서는 한 푼도 팔지 않는다. 채권 통이 줄어들며 생활비를 댄다. ③ 몇 번 다시 돌려 본다. 하락이 5년 넘게 이어지면 채권 통도 바닥나 결국 주식을 팔아야 한다. 버킷은 시간을 벌 뿐 수익을 만들지는 않는다. (10억원, 연 생활비 4,000만원, 현금 2년치·채권 5년치 목표, 오늘 돈 기준. 통마다 눈금이 다르다.)</div>
+    </div>
+
+    <p>버킷 전략을 계산기로만 보면 주식·채권·현금 비율을 정해 두고 리밸런싱하는 것과 크게 다르지 않다. 그런데도 많이 쓰이는 이유는 <b>마음</b>에 있다. "앞으로 7년 생활비는 이미 안전한 곳에 있다"는 사실이 하락장에서 주식을 내던지고 싶은 충동(<a href="behavior.html">17장</a>)을 견디게 해 준다. 앞의 공백기 생활비를 현금·채권 통에 떼어 두는 것도 같은 생각이다.</p>
+  </section>
+
+  <section id="annuity">
+    <h2>수명 위험을 넘기기: 연금화와 주택연금</h2>
+    <p>지금까지의 도구는 모두 "내 돈으로 내 수명을 감당하는" 방법이었다. 그런데 수명 위험은 혼자 지기에는 너무 크다. 내가 몇 살까지 살지는 모르지만, 같은 나이 1만 명이 평균 몇 년을 살지는 꽤 정확히 알 수 있다. 그래서 돈을 모아 두고 <b>살아 있는 동안 평생</b> 일정 금액을 주는 계약을 만들 수 있다. 이것이 <span class="term">종신 연금</span><span class="en">(Life annuity)</span>이고, 자산의 일부를 종신 연금으로 바꾸는 것을 <span class="term">연금화</span><span class="en">(Annuitization)</span>라 한다. 일찍 떠난 사람의 몫이 오래 사는 사람의 연금이 된다. 보험(<a href="insurance.html">19장</a>)이 사고 위험을 나누듯, 종신 연금은 수명 위험을 나눈다.</p>
+    <p>우리가 이미 가진 가장 큰 종신 연금이 국민연금이다. 물가에 연동되고 살아 있는 한 나온다. 연금저축이나 퇴직연금도 종신형으로 받는 방법이 있다. 아래는 10억원 가운데 일부를 종신 연금으로 바꿀 때 무엇이 달라지는지 보여 준다. 연금 지급률은 물가연동 기준 연 4.5%(60세, 교육용 가정)로 둔다. 1억원을 넣으면 평생 해마다 오늘 돈 450만원을 받는다는 뜻이다.</p>
+
+    <div class="sim" id="sim-an">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>연금화 비율: 성공 확률과 남기는 돈의 교환</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="an-cv"></canvas><span class="hint">좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>종신 연금으로 바꾸는 비율 <output id="an-p-out"></output></span><input type="range" id="an-p" min="0" max="100" step="5" value="0"></label>
+          <div class="ctrl"><span>계획 기간(60세부터)</span><div class="seg" id="an-h"><button data-value="35" class="on">95세까지</button><button data-value="40">100세까지</button></div></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">종신 연금(연)</span><span class="v" id="an-o-i">—</span></div>
+        <div class="stat"><span class="k">투자 자산</span><span class="v" id="an-o-b">—</span></div>
+        <div class="stat"><span class="k">성공 확률</span><span class="v" id="an-o-s">—</span></div>
+        <div class="stat"><span class="k">끝에 남는 돈(중앙값)</span><span class="v" id="an-o-m">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 0%에서 95세까지 버틸 확률은 약 59%다. ② 50%를 연금으로 바꾼다. 성공 확률이 약 79%로 오르고, 남는 돈의 중앙값도 오히려 늘어난다. 연금이 생활비의 절반 이상을 대니 투자 자산에서 꺼내는 비율이 낮아졌다. ③ 100%로 민다. 성공 확률은 100%지만 남기는 돈은 0원이다. 연금은 상속되지 않는다. ④ 100세까지로 바꾸면 연금화하지 않은 계획이 더 크게 무너진다. (연 생활비 4,000만원, 투자 자산은 주식 50·채권 50, 물가 2.5%. 연금 지급률과 상품 조건은 가정이며 실제 상품은 수수료와 조건이 다르다.)</div>
+    </div>
+
+    <p>연금화는 성공 확률을 사고 상속 가능한 돈과 유동성을 판다. 한번 연금으로 바꾼 돈은 급할 때 꺼낼 수 없고, 일찍 세상을 떠나면 돌려받지 못하는 몫이 생긴다(보증 기간을 붙이면 지급률이 낮아진다). 지급 회사의 신용도도 따져야 한다. 그래서 연금화는 전부 아니면 전무가 아니라, 바닥 생활비(줄일 수 없는 지출)를 평생 소득으로 맞추는 만큼만 하는 방식이 흔하다.</p>
+
+    <div class="callout">
+      <strong>주택연금: 집에 살면서 집으로 받는 연금</strong>
+      <p>은퇴 가구의 자산은 대부분 집에 묶여 있다. <span class="term">주택연금</span><span class="en">(Reverse mortgage)</span>은 집을 담보로 맡기고 그 집에 계속 살면서 평생 매달 연금을 받는 제도다(한국주택금융공사가 보증). 2026년 기준 대략 부부 중 한 명이 55세 이상이고 공시가격 12억원 이하 주택이면 가입할 수 있다. 받는 금액은 가입 나이와 집값으로 정해지며, 나이가 많고 집값이 높을수록 많다. 부부가 모두 세상을 떠나면 집을 팔아 그동안 받은 돈과 이자를 정산하고, 남으면 상속인에게 돌려주고 모자라도 더 청구하지 않는다. 집이라는 저수지를 평생 흐르는 수도꼭지로 바꾸는 장치다. 조건과 지급액은 해마다 바뀌므로 가입 전에 공사의 최신 기준을 확인한다.</p>
+    </div>
+  </section>
+
+  <section id="fire">
+    <h2>경제적 자립: 은퇴를 앞당기는 계산</h2>
+    <p>25배 규칙을 거꾸로 읽으면 흥미로운 결론이 나온다. 은퇴할 수 있는 시점은 나이가 아니라 <b>자산이 생활비의 25배(또는 30배)에 닿는 시점</b>이라는 것이다. 이 생각을 밀고 나간 것이 <span class="term">FIRE</span><span class="en">(Financial Independence, Retire Early)</span>, 경제적 자립과 조기 은퇴 운동이다. 소득의 절반 이상을 저축해 30~40대에 일을 그만두거나, 일을 하더라도 돈 때문에 하지 않는 상태를 목표로 한다.</p>
+    <p><a href="overview.html#rate">1장의 저축률 곡선</a>이 이 계산의 핵심이었다. 저축률은 붓는 속도를 높이고 동시에 채워야 할 저수지(생활비 × 25)를 줄인다. 실질 4%에서 저축률 20%면 약 41년, 50%면 약 17.5년이 걸린다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>이름</th><th>뜻</th><th>주의할 점</th></tr></thead>
+      <tbody>
+        <tr><td>린(Lean) FIRE</td><td>아주 적은 생활비로 일찍 자립</td><td>생활비를 줄일 여유가 없어 충격에 약하다</td></tr>
+        <tr><td>팻(Fat) FIRE</td><td>넉넉한 생활비의 25배 이상을 모은 뒤 자립</td><td>모으는 기간이 길다</td></tr>
+        <tr><td>바리스타(Barista) FIRE</td><td>자산이 생활비 일부를 대고, 나머지는 가벼운 일로 번다</td><td>공백기·순서 위험을 근로소득이 덜어 준다</td></tr>
+        <tr><td>코스트(Coast) FIRE</td><td>더 붓지 않아도 은퇴 나이까지 굴리면 목표에 닿는 만큼 모아 둔 상태</td><td>그 뒤로는 생활비만 벌면 된다</td></tr>
+      </tbody>
+    </table></div>
+    <p>조기 은퇴는 이 장의 모든 위험을 키운다. 인출 기간이 40~50년으로 길어지고(성공 확률 곡선이 내려간다), 국민연금까지의 공백기가 20년 가까이 되며, 가입 기간이 짧아 연금도 줄어든다. 그래서 조기 은퇴를 계획하는 사람들은 3~3.5% 인출률, 일부 근로소득, 유연한 지출을 함께 쓰는 경우가 많다. 반대로 은퇴를 몇 년 늦추는 것은 가장 강력한 은퇴 대책이다. 모으는 해가 늘고, 꺼내는 해가 줄고, 연금이 늘어나는 세 가지 효과가 한꺼번에 생긴다.</p>
+  </section>
+
+  <section id="case">
+    <h2>한결의 은퇴 계획</h2>
+    <p>이제 한결의 숫자로 돌아간다. <a href="overview.html">1장</a>에서 한결이 아무것도 바꾸지 않으면 60세에 약 2억 5,372만원(이자 없이 모은 명목 금액)을 갖게 된다는 계산이 나왔다. 그 사이 한결은 많은 것을 바꿨다. 예산을 다시 짜 <b>월 100만원</b>을 모으기 시작했고(<a href="budget.html">7장</a>), 그 가운데 75만원을 연금저축·IRP에(<a href="tax.html">18장</a>), 25만원을 일반 계좌에 넣는다. 회사는 DC형 퇴직연금에 해마다 연봉의 1/12을 넣어 준다. <a href="pension.html">20장</a>과 같은 가정(명목 연 5%, 물가 2.5%, 33년)으로 60세에 모인 돈을 오늘 돈으로 바꾸면 다음과 같다.</p>
+    <div class="slip">
+      <div class="row"><span>DC형 퇴직연금 (첫해 월 25만원, 해마다 3% 증가)</span><span>159,660,000</span></div>
+      <div class="row"><span>연금저축 + IRP (월 75만원)</span><span>326,250,000</span></div>
+      <div class="row"><span>일반 계좌 (월 25만원)</span><span>108,750,000</span></div>
+      <div class="row total"><span>60세 은퇴 자산 (오늘 돈)</span><span>594,650,000</span></div>
+    </div>
+    <p>목표 생활비는 연 3,600만원(오늘 돈, 월 300만원)이다. 지금 세전 연봉과 같은 금액으로, 은퇴 직전 소득을 생각하면 소득대체율 70% 안팎이다. 국민연금은 20장대로 65세부터 월 약 146.9만원(연 약 1,762만원)이다. 그러면 계획은 이렇게 짤 수 있다. 60~64세 공백기 5년 동안 국민연금이 대줄 몫(5 × 1,762만 = 약 8,811만원)을 따로 현금·채권 통에 떼어 두고, 나머지 자산에서는 해마다 부족분 3,600만 − 1,762만 = 약 1,838만원만 꺼낸다. 이렇게 하면 공백기에도 매년 총 3,600만원을 쓸 수 있다.</p>
+    <p>아래가 이 장의 종합 시뮬레이터다. 은퇴 나이, 생활비, 은퇴 후 주식 비중을 바꿔 한결의 95세까지를 600번 돌린다.</p>
+
+    <div class="sim" id="sim-hg">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>한결의 은퇴: 60세에 멈출 수 있을까</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="hg-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>은퇴 나이 <output id="hg-age-out"></output></span><input type="range" id="hg-age" min="55" max="65" step="1" value="60"></label>
+          <label class="ctrl"><span>연 생활비(오늘 돈) <output id="hg-sp-out"></output></span><input type="range" id="hg-sp" min="2400" max="4800" step="100" value="3600"></label>
+          <label class="ctrl"><span>은퇴 후 주식 비중 <output id="hg-st-out"></output></span><input type="range" id="hg-st" min="0" max="100" step="10" value="70"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">은퇴 때 자산</span><span class="v" id="hg-o-a">—</span></div>
+        <div class="stat"><span class="k">4% 규칙 목표</span><span class="v" id="hg-o-t">—</span></div>
+        <div class="stat"><span class="k">첫해 인출률</span><span class="v" id="hg-o-r">—</span></div>
+        <div class="stat"><span class="k">95세까지 성공 확률</span><span class="v" id="hg-o-s">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 처음 값(60세, 3,600만원, 주식 70%)에서 은퇴 자산 약 5억 9,465만원이 4% 규칙 목표 약 5억 4,755만원을 넘는다. 95세까지 성공 확률은 약 74%다. ② 생활비를 3,300만원으로 줄인다. 약 88%로 오른다. 월 25만원의 차이다. ③ 생활비는 3,600만원으로 두고 은퇴를 62세로 미룬다. 약 85%다. ④ 은퇴를 55세로 당긴다. 모은 돈은 줄고 공백기는 10년이 되어 약 11%로 무너진다. (은퇴 전 명목 5%·물가 2.5%로 적립, 은퇴 후는 주식·채권 가정값으로 600개 경로. 공백기 국민연금 몫은 따로 떼어 둔다고 보고 그래프에서 뺐다. 국민연금은 은퇴 뒤 최대 5년 임의계속가입을 가정해 최대 38년. 세금·건강보험료는 생활비에 들어 있다고 본다.)</div>
+    </div>
+
+    <p>한결의 계획은 "목표 금액을 넘었으니 끝"이 아니다. 4% 규칙 목표를 넘어도 95세까지 성공 확률은 74%쯤이다. 4% 규칙은 30년짜리 규칙인데 한결은 35년을 계획하고, 이 책의 수익률 가정은 과거 미국보다 낮기 때문이다. 대신 한결에게는 손잡이가 여럿 있다. 생활비를 조금 줄이거나, 2년 더 일하거나, 나쁜 해에 지출을 줄이는 가드레일을 미리 약속하는 것이다.</p>
+
+    <div class="casefile">
+      <div class="tag"><b>LEDGER 한결</b><span>한결의 가계부 · 21장</span></div>
+      <h4>60세 은퇴, 목표 5억 4,755만원에 예상 5억 9,465만원. 95세까지 성공 확률 약 74%</h4>
+      <p><b>필요 자금</b>: 연 생활비 3,600만원(오늘 돈)에서 65세부터 나오는 국민연금 약 1,762만원을 빼면 부족분은 약 1,838만원이다. 25배 규칙으로 4억 5,943만원, 여기에 공백기 5년 동안 국민연금 대신 쓸 8,811만원을 더하면 목표는 <b>약 5억 4,755만원</b>이다. 월 100만원 저축과 퇴직연금이 60세에 만드는 자산은 약 5억 9,465만원(오늘 돈)으로, 1장의 "그대로"였다면 닿지 못했을 목표를 넘는다.</p>
+      <p><b>성공 확률</b>: 공백기 몫을 떼어 둔 나머지 5억 654만원에서 첫해 부족분을 꺼내면 인출률은 약 3.6%다. 주식 70·채권 30으로 600개의 미래를 돌리면 90세까지 약 81%, 95세까지 약 74%가 버틴다. 생활비를 3,300만원으로 낮추면 95세까지 약 88%, 은퇴를 62세로 미루면 약 85%가 된다.</p>
+      <div class="clue">
+        <div><b>이 장에서 정한 것</b>60세 은퇴 목표를 유지한다. 공백기 몫 8,811만원은 60세 전에 현금·채권 통으로 옮기고, 나쁜 해에는 생활비를 3,300만원까지 줄이는 가드레일을 미리 정한다.</div>
+        <div><b>아직 남은 문제</b>수익률·물가·수명은 모두 가정이다. 큰 병원비, 집, 가족 같은 인생의 변화는 아직 넣지 않았다.</div>
+        <div><b>다음 단계</b><a href="lab.html">22장</a>에서 한결의 27세부터 95세까지를 한 번에 돌려 보고, 자기 숫자로도 넣어 본다.</div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong>계획은 해마다 다시 돌린다</strong>
+      <p>이 장의 모든 숫자는 교육용 근사 모델이다. 수익률·물가·생존 확률은 가정이고, 국민연금 수령 나이, 연금 소득세, 건강보험료, 주택연금 조건 같은 제도는 해마다 바뀐다(이 장은 2026년 기준). 은퇴 계획은 한 번 세우고 끝나는 숫자가 아니라, 해마다 실제 잔고와 지출을 넣어 다시 돌리는 과정이다. 국민연금공단의 '내 연금'과 금융감독원 '통합연금포털'에서 내 예상 연금을 확인하고, 이 장의 시뮬레이터에 넣어 본다. 특정 상품을 고르는 일은 이 책의 범위 밖이다.</p>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>은퇴는 근로소득이 멈추고 자산과 연금이 소득을 대신하는 시점이다. 적립기의 질문이 "얼마나 모을까"라면 인출기의 질문은 "사는 동안 바닥나지 않을까"다.</li>
+      <li>은퇴 생활비는 은퇴 전 소득의 60~80%(소득대체율)로 어림하고 반드시 오늘 돈으로 적는다. 필요 자금 = (연 생활비 − 연 연금 소득) ÷ 인출률.</li>
+      <li>4% 규칙은 첫해 자산의 4%를 꺼내고 그 뒤 물가만큼 늘려도 30년을 버텼다는 미국 과거 자료의 결과다. 거꾸로 쓰면 25배 규칙이다. 다른 나라 자료, 낮은 미래 수익률, 긴 은퇴 기간, 비용을 생각하면 3~3.5%가 더 단단하다.</li>
+      <li>몬테카를로 시뮬레이션은 수백 개의 가능한 미래로 성공 확률을 센다. 성공 확률과 함께 바닥나는 시점과 남는 돈의 분포도 본다.</li>
+      <li>순서 위험: 같은 평균 수익률이어도 돈을 꺼내는 사람에게는 은퇴 직후의 하락이 가장 치명적이다. 꺼내지 않으면 순서는 상관없다.</li>
+      <li>수명 위험: 기대여명은 평균일 뿐이고 절반은 더 산다. 계획 기간은 90~95세처럼 생존 확률이 꽤 남은 나이로 잡는다. 물가는 30년이면 생활비를 두 배로 만든다.</li>
+      <li>60세 정년과 65세 국민연금 사이의 공백기는 자산이 생활비 전부를 떠맡는 가장 무거운 구간이다. 공백기 몫은 흔들리지 않는 곳에 미리 떼어 둔다. 연금 조기 수령은 깎인 금액이 평생 간다.</li>
+      <li>정액 인출은 생활이 고르지만 고갈 위험이 있고, 정률은 고갈이 없지만 생활이 흔들린다. 가드레일은 나쁠 때 조금 줄이는 약속으로 둘의 균형을 잡는다. 버킷 전략은 하락장에서 주식을 팔지 않을 시간을 번다.</li>
+      <li>종신 연금(연금화)은 수명 위험을 여러 사람과 나눈다. 성공 확률을 높이는 대신 유동성과 상속을 포기한다. 주택연금은 집을 평생 소득으로 바꾼다. 은퇴를 몇 년 늦추는 것은 가장 강력한 대책이다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>은퇴 후 연 생활비 4,000만원(오늘 돈) 가운데 국민연금이 연 1,600만원을 댄다. 인출률 4%로 계산한 필요 자금은?</p>
+        <div class="opts">
+          <button class="opt">10억원</button>
+          <button class="opt">4억원</button>
+          <button class="opt" data-correct>6억원</button>
+          <button class="opt">2억 4,000만원</button>
+        </div>
+        <div class="quiz-exp">부족분 4,000만 − 1,600만 = 2,400만원을 4%로 나누면(25배) 6억원이다. 10억원은 연금을 빼지 않은 값이고, 2억 4,000만원은 부족분의 10년치일 뿐이다. 평생 소득이 필요 자금을 4억원이나 줄였다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>같은 25년치 수익률 묶음을 순서만 바꿔서 적용했다. 옳은 것은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>돈을 넣어 두기만 하면 결과가 같지만, 해마다 꺼내면 은퇴 초반에 하락이 몰린 순서가 가장 불리하다</button>
+          <button class="opt">기하평균이 같으므로 해마다 돈을 꺼내도 결과는 같다</button>
+          <button class="opt">해마다 꺼낼 때는 하락이 은퇴 후반에 몰린 순서가 가장 불리하다</button>
+          <button class="opt">순서 위험은 주식을 100% 가진 사람에게만 생긴다</button>
+        </div>
+        <div class="quiz-exp">곱셈은 순서를 바꿔도 같으므로 적립만 하면 결과가 같다. 그러나 인출이 있으면 잔고가 가장 클 때(은퇴 직후) 하락을 맞을수록 싸게 판 손실이 커진다. 채권이 섞여 있어도 하락의 크기가 줄 뿐 순서 위험은 남는다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>60세의 기대여명이 25년이라고 한다. 은퇴 자금이 바닥나지 않게 계획하려면 기간을 어떻게 잡는 것이 나은가?</p>
+        <div class="opts">
+          <button class="opt">평균이므로 정확히 85세까지 잡는다</button>
+          <button class="opt">평균보다 짧게 80세까지 잡고 나머지는 자녀에게 기댄다</button>
+          <button class="opt">수명은 알 수 없으므로 기간을 정하지 않고 4%를 꺼낸다</button>
+          <button class="opt" data-correct>살아 있을 확률이 꽤 남은 90~95세까지 잡거나, 일부를 종신 연금으로 바꾼다</button>
+        </div>
+        <div class="quiz-exp">기대여명은 평균이라서 대략 절반은 그보다 오래 산다. 평균까지만 계획하면 그 절반의 사람이 돈 없이 노년을 맞는다. 계획 기간을 길게 잡거나, 수명 위험을 종신 연금(국민연금 포함)으로 넘기는 것이 대응이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>가드레일 인출 전략을 가장 잘 설명한 것은?</p>
+        <div class="opts">
+          <button class="opt">해마다 그때 잔고의 정확히 4%만 꺼내서 절대 바닥나지 않게 한다</button>
+          <button class="opt" data-correct>평소에는 같은 금액을 꺼내다가, 현재 인출률이 처음보다 크게 벗어날 때만 생활비를 줄이거나 늘린다</button>
+          <button class="opt">시장과 상관없이 물가만큼 늘린 같은 금액을 꺼낸다</button>
+          <button class="opt">생활비 몇 년치를 현금·채권·주식 통으로 나눠 현금 통에서만 꺼낸다</button>
+        </div>
+        <div class="quiz-exp">첫째는 정률 인출, 셋째는 정액 인출(4% 규칙), 넷째는 버킷 전략이다. 가드레일은 정액의 안정감과 정률의 고갈 방지 사이에서, 크게 벗어날 때만 생활비를 조정해 고갈 위험을 낮춘다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2, MAN = 1e4, EOK = 1e8, INF = 0.025;
+  const tone = (cls, s) => '<span class="' + cls + '">' + s + "</span>";
+  const pTone = (p) => tone(p >= 0.9 ? "ok-t" : p >= 0.75 ? "warn-t" : "bad-t", MB.pct(p, 1));
+  const mix = (s) => MN.portfolio(s >= 1 ? { stock: 1 } : s <= 0 ? { bond: 1 } : { stock: s, bond: 1 - s });
+  const niceCap = (x) => { const e = Math.pow(10, Math.floor(Math.log10(x))); for (const m of [1, 1.5, 2, 3, 5, 7.5, 10]) if (m * e >= x) return m * e; return 10 * e; };
+  function alpha(c, a) {
+    c = (c || "").trim();
+    if (c[0] === "#" && c.length >= 7) return "rgba(" + parseInt(c.slice(1, 3), 16) + "," + parseInt(c.slice(3, 5), 16) + "," + parseInt(c.slice(5, 7), 16) + "," + a + ")";
+    return c;
+  }
+  function knob(ctx, x, y, P, r, col) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = col || P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = "#fff"; ctx.stroke();
+    ctx.restore();
+  }
+  function rr(ctx, x, y, w, h, r) {
+    r = Math.max(0, Math.min(r, w / 2, h / 2));
+    ctx.beginPath(); ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  function label(ctx, txt, x, y, P, col, font, align, base) {
+    ctx.save();
+    ctx.font = font || MB.font(12, false, 700); ctx.textAlign = align || "left"; ctx.textBaseline = base || "middle";
+    ctx.lineWidth = 4; ctx.lineJoin = "round"; ctx.strokeStyle = P.bg; ctx.strokeText(txt, x, y);
+    ctx.fillStyle = col || P.text; ctx.fillText(txt, x, y);
+    ctx.restore();
+  }
+  function gauge(ctx, cx, cy, R, p, P, sub) {
+    const col = p >= 0.9 ? P.ok : p >= 0.75 ? P.warn : P.bad;
+    ctx.save();
+    ctx.lineCap = "round"; ctx.lineWidth = Math.max(8, R * 0.2);
+    ctx.strokeStyle = P.border; ctx.beginPath(); ctx.arc(cx, cy, R, Math.PI, TAU); ctx.stroke();
+    if (p > 0.001) { ctx.strokeStyle = col; ctx.beginPath(); ctx.arc(cx, cy, R, Math.PI, Math.PI + Math.PI * Math.min(1, p)); ctx.stroke(); }
+    [0.75, 0.9].forEach((q) => {
+      const a = Math.PI + Math.PI * q;
+      ctx.strokeStyle = P.dim; ctx.lineWidth = 1.5; ctx.lineCap = "butt";
+      ctx.beginPath(); ctx.moveTo(cx + Math.cos(a) * (R - R * 0.2), cy + Math.sin(a) * (R - R * 0.2)); ctx.lineTo(cx + Math.cos(a) * (R + R * 0.2), cy + Math.sin(a) * (R + R * 0.2)); ctx.stroke();
+    });
+    ctx.fillStyle = P.text; ctx.font = MB.font(Math.round(R * 0.42), true, 700); ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+    ctx.fillText(Math.round(p * 100) + "%", cx, cy - 2);
+    ctx.fillStyle = P.dim; ctx.font = MB.font(12); ctx.textBaseline = "top";
+    ctx.fillText(sub || "성공 확률", cx, cy + 8);
+    ctx.restore();
+  }
+  // 팬 차트: bands(실질 백분위), sample 경로, 0..years, tt까지 그린다
+  function fan(ctx, box, o) {
+    const P = o.P, Y = o.years, T = Math.min(o.tt, Y);
+    const c = MB.chart(ctx, box, { x: [o.x0, o.x0 + Y], y: [0, o.yMax], yFmt: MB.wonAxis, xFmt: o.xFmt || ((v) => String(Math.round(v))), xLabel: o.xLabel, yLabel: o.yLabel, xTicks: o.xTicks, bands: o.shade });
+    const b = o.bands, k = Math.floor(T), f = T - k;
+    const at = (a, t) => { const i = Math.floor(t); return i >= Y ? a[Y] : a[i] + (a[i + 1] - a[i]) * (t - i); };
+    const pts = (a) => { const out = []; for (let i = 0; i <= k; i++) out.push([o.x0 + i, a[i]]); if (f > 0 && k < Y) out.push([o.x0 + T, at(a, T)]); return out; };
+    ctx.save();
+    ctx.beginPath(); ctx.rect(box.x, box.y - 1, box.w + 1, box.h + 2); ctx.clip();
+    const area = (lo, hi, col) => {
+      const u = pts(hi), d = pts(lo).reverse();
+      ctx.beginPath(); u.forEach(([x, y], i) => (i ? ctx.lineTo(c.X(x), c.Y(y)) : ctx.moveTo(c.X(x), c.Y(y))));
+      d.forEach(([x, y]) => ctx.lineTo(c.X(x), c.Y(y))); ctx.closePath(); ctx.fillStyle = col; ctx.fill();
+    };
+    area(b.p10, b.p90, alpha(P.accent, 0.13));
+    area(b.p25, b.p75, alpha(P.accent, 0.22));
+    (o.sample || []).slice(0, o.nS || 0).forEach((a) => {
+      const dead = a[Y] <= 0;
+      ctx.strokeStyle = dead ? P.bad : P.dim; ctx.globalAlpha = dead ? 0.75 : 0.45; ctx.lineWidth = 1;
+      ctx.beginPath(); pts(a).forEach(([x, y], i) => (i ? ctx.lineTo(c.X(x), c.Y(y)) : ctx.moveTo(c.X(x), c.Y(y)))); ctx.stroke();
+    });
+    ctx.globalAlpha = 1; ctx.strokeStyle = P.accent; ctx.lineWidth = 2.5;
+    ctx.beginPath(); pts(b.p50).forEach(([x, y], i) => (i ? ctx.lineTo(c.X(x), c.Y(y)) : ctx.moveTo(c.X(x), c.Y(y)))); ctx.stroke();
+    ctx.restore();
+    if (T > 0.5) label(ctx, "중앙값", c.X(o.x0 + T) - 4, Math.max(box.y + 10, Math.min(box.y + box.h - 10, c.Y(at(b.p50, T)) - 12)), P, P.accent, MB.font(11.5, false, 700), "right");
+    return c;
+  }
+
+  /* ---------------------------------------------------------- 1. 필요 자금 역산기 */
+  (function () {
+    const el = document.getElementById("nd-cv");
+    let shown = 0;
+    const SP = MB.range("nd-sp", (v) => "연 " + MB.won(v * MAN), () => { shown = 0; cv.redraw(); });
+    const PEN = MB.range("nd-pen", (v) => "연 " + MB.won(v * MAN), () => { shown = 0; cv.redraw(); });
+    const WR = MB.range("nd-wr", (v) => v.toFixed(1) + "%", () => { shown = 0; cv.redraw(); });
+    function draw(ctx, w, h) {
+      const P = MB.palette(), sp = SP() * MAN, pen = Math.min(PEN() * MAN, sp), gap = sp - pen, wr = WR() / 100, K = 1 / wr, need = gap / wr, nar = w < 520;
+      const top = 44, bot = h - 46, H = bot - top;
+      const bx = nar ? 12 : 26, bw = nar ? 48 : 70;
+      ctx.font = MB.font(12.5, false, 700); ctx.fillStyle = P.text; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+      ctx.fillText("1년 생활비", bx, 20);
+      const s = H / sp, yPen = bot - pen * s;
+      if (pen > 0) { rr(ctx, bx, yPen, bw, bot - yPen, 4); ctx.fillStyle = alpha(P.ok, 0.75); ctx.fill(); }
+      if (gap > 0) { rr(ctx, bx, top, bw, yPen - top, 4); ctx.fillStyle = alpha(P.warn, 0.8); ctx.fill(); }
+      ctx.font = MB.font(11.5, false, 700); ctx.textAlign = "center"; ctx.fillStyle = "#fff";
+      if (bot - yPen > 34) { ctx.fillText("연금", bx + bw / 2, (yPen + bot) / 2 - 8); ctx.font = MB.font(11, true); ctx.fillText(MB.wonAxis(pen), bx + bw / 2, (yPen + bot) / 2 + 8); }
+      ctx.font = MB.font(11.5, false, 700);
+      if (yPen - top > 34) { ctx.fillText("부족분", bx + bw / 2, (top + yPen) / 2 - 8); ctx.font = MB.font(11, true); ctx.fillText(MB.wonAxis(gap), bx + bw / 2, (top + yPen) / 2 + 8); }
+      const gx = bx + bw + (nar ? 34 : 70), gw = w - gx - 12;
+      if (gap <= 0) {
+        ctx.font = MB.font(14, false, 700); ctx.fillStyle = P.ok; ctx.textAlign = "left";
+        ctx.fillText("연금이 생활비를 모두 채운다", gx, h / 2 - 10);
+        ctx.font = MB.font(12.5); ctx.fillStyle = P.dim; ctx.fillText("자산에서 꺼낼 돈이 없다", gx, h / 2 + 14);
+      } else {
+        const cols = 5, rows = Math.ceil(K / cols - 1e-9), gp = 4;
+        const bs = Math.min((gw - (cols - 1) * gp) / cols, (H - (rows - 1) * gp) / rows, 46);
+        const gridW = cols * bs + (cols - 1) * gp, ox = gx + Math.max(0, (gw - gridW) / 2);
+        ctx.setLineDash([5, 4]); ctx.strokeStyle = P.warn; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(bx + bw + 4, (top + yPen) / 2); ctx.lineTo(ox - 6, bot - bs / 2); ctx.stroke(); ctx.setLineDash([]);
+        const full = Math.ceil(K - 1e-9);
+        for (let i = 0; i < full; i++) {
+          const r = Math.floor(i / cols), c = i % cols, x = ox + c * (bs + gp), y = bot - (r + 1) * bs - r * gp;
+          const cap = Math.min(1, K - i), fill = MB.clamp(shown - i, 0, cap);
+          rr(ctx, x, y, bs * cap, bs, 4); ctx.setLineDash([3, 3]); ctx.strokeStyle = P.border; ctx.lineWidth = 1; ctx.stroke(); ctx.setLineDash([]);
+          if (fill > 0) { rr(ctx, x, y, bs * fill, bs, 4); ctx.fillStyle = alpha(P.warn, 0.7); ctx.fill(); ctx.strokeStyle = P.warn; ctx.stroke(); }
+        }
+        ctx.font = MB.font(12.5, false, 700); ctx.fillStyle = P.text; ctx.textAlign = "left";
+        ctx.fillText("부족분 1년치 × " + (Math.round(K * 10) / 10) + "칸", ox, 20);
+      }
+      ctx.font = MB.font(nar ? 14 : 16, false, 800); ctx.fillStyle = P.text; ctx.textAlign = "right"; ctx.textBaseline = "middle";
+      ctx.fillText("필요 자금 " + MB.won(Math.max(0, need) * Math.min(1, K > 0 ? shown / K : 1)), w - 12, h - 20);
+      MB.stat("nd-o-m", MB.won(sp / 12, { digits: 1 }));
+      MB.stat("nd-o-gap", MB.won(gap));
+      MB.stat("nd-o-x", (Math.round(K * 10) / 10) + "<small>배</small>");
+      MB.stat("nd-o-need", MB.won(need));
+    }
+    const cv = MB.canvas(el, draw, { aspect: 0.6, minHeight: 300, maxHeight: 380 });
+    MB.loop(el, (dt) => { const K = 100 / WR(); if (shown < K) { shown = Math.min(K, shown + dt * Math.max(10, K)); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 2. 인출률 vs 성공 확률 */
+  (function () {
+    const el = document.getElementById("wr-cv");
+    const RATES = []; for (let r = 0.025; r <= 0.0651; r += 0.0025) RATES.push(+r.toFixed(4));
+    const cache = {};
+    const curve = (st, Y) => {
+      const key = st + "|" + Y;
+      if (!cache[key]) { const pf = mix(st); cache[key] = RATES.map((r) => [r, MN.retire({ balance: 1e8, withdraw: 1e8 * r, years: Y, mu: pf.mu, sigma: pf.sigma, inflation: INF, n: 400, seed: 5 }).success]); }
+      return cache[key];
+    };
+    const interp = (cur, r) => { for (let i = 0; i < cur.length - 1; i++) if (r <= cur[i + 1][0]) { const t = (r - cur[i][0]) / (cur[i + 1][0] - cur[i][0]); return cur[i][1] + (cur[i + 1][1] - cur[i][1]) * t; } return cur[cur.length - 1][1]; };
+    let sel = 0.04, L = null;
+    const MIX = MB.seg("wr-mix", () => cv.redraw());
+    const YR = MB.range("wr-yr", (v) => v + "년", () => cv.redraw());
+    function draw(ctx, w, h) {
+      const P = MB.palette(), st = +MIX(), Y = YR(), nar = w < 520;
+      const box = { x: nar ? 44 : 56, y: 20, w: w - (nar ? 44 : 56) - 16, h: h - 20 - 48 };
+      const others = ["0.3", "0.5", "0.7", "1"].filter((v) => +v !== st).map((v) => ({ data: curve(+v, Y), color: alpha(P.dim, 0.35), width: 1.2 }));
+      const cur = curve(st, Y);
+      const s = interp(cur, sel);
+      const series = others.concat([{ data: cur, color: P.accent, width: 2.8 }]);
+      if (Y !== 30) series.unshift({ data: curve(st, 30), color: P.accent2, width: 1.5, dash: [5, 4] });
+      L = MB.chart(ctx, box, { x: [0.025, 0.065], y: [0, 1], xFmt: (v) => +(v * 100).toFixed(1) + "%", yFmt: (v) => Math.round(v * 100) + "%", xLabel: "첫해 인출률", series,
+        hlines: [{ y: 0.9, color: P.ok, label: "90%" }], vlines: [{ x: sel, color: P.accent }] });
+      knob(ctx, L.X(sel), L.Y(s), P);
+      label(ctx, MB.pct(s, 0), L.X(sel) + (sel > 0.055 ? -12 : 12), L.Y(s) - 14, P, P.text, MB.font(13, true, 700), sel > 0.055 ? "right" : "left");
+      if (Y !== 30) label(ctx, "금색 점선: 30년", box.x + box.w - 4, box.y + box.h - 12, P, P.accent2, MB.font(11.5), "right");
+      MB.stat("wr-o-r", MB.pct(sel, 2));
+      MB.stat("wr-o-x", (1 / sel).toFixed(1) + "<small>배</small>");
+      MB.stat("wr-o-w", MB.won(1e9 * sel));
+      MB.stat("wr-o-s", pTone(s));
+    }
+    const cv = MB.canvas(el, draw, { aspect: 0.58, minHeight: 280, maxHeight: 400 });
+    MB.drag(cv.canvas, { move(x) { if (!L) return; const v = 0.025 + ((x - L.box.x) / L.box.w) * 0.04; sel = Math.round(MB.clamp(v, 0.025, 0.065) * 1000) / 1000; cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 3. 몬테카를로 팬 차트 */
+  (function () {
+    const el = document.getElementById("mc-cv");
+    let res = null, tt = 0, yMax = 2e9;
+    const BAL = MB.range("mc-bal", (v) => MB.won(v * EOK), () => run());
+    const WD = MB.range("mc-wd", (v) => "연 " + MB.won(v * MAN), () => run());
+    const ST = MB.range("mc-st", (v) => v + "%", () => run());
+    const IF = MB.seg("mc-inf", () => run());
+    function run(replay) {
+      const pf = mix(ST() / 100);
+      res = MN.retire({ balance: BAL() * EOK, withdraw: WD() * MAN, years: 30, mu: pf.mu, sigma: pf.sigma, inflation: +IF(), n: 600, seed: 11 });
+      yMax = niceCap(Math.max(BAL() * EOK * 1.25, Math.min(Math.max(...res.bands.p90), BAL() * EOK * 2.6)));
+      if (replay) tt = 0;
+      if (cv) cv.redraw();
+    }
+    const narrow = () => el.parentElement.clientWidth < 560;
+    function draw(ctx, w, h) {
+      if (!res) return;
+      const P = MB.palette(), nar = narrow();
+      const gw = nar ? 0 : 150, gh = nar ? 96 : 0;
+      const box = { x: 58, y: 16 + gh, w: w - 58 - 16 - gw, h: h - 16 - gh - 48 };
+      fan(ctx, box, { P, bands: res.bands, sample: res.sample, nS: 14, years: 30, tt, x0: 0, yMax, xLabel: "은퇴 후 연수", xFmt: (v) => v + "년" });
+      const T = Math.min(tt, 30), dead = res.depletedAt.filter((d) => d != null && d <= T).length;
+      const pNow = 1 - dead / res.depletedAt.length;
+      if (nar) { gauge(ctx, w / 2 - 70, 66, 40, pNow, P); label(ctx, "바닥난 미래 " + dead + "/600", w / 2 + 20, 52, P, dead ? P.bad : P.dim, MB.font(12, false, 700)); label(ctx, Math.floor(T) + "년째", w / 2 + 20, 74, P, P.dim, MB.font(12)); }
+      else { gauge(ctx, w - gw / 2 - 8, 96, 54, pNow, P); label(ctx, "바닥난 미래", w - gw / 2 - 8, 150, P, P.dim, MB.font(12), "center"); label(ctx, dead + " / 600", w - gw / 2 - 8, 170, P, dead ? P.bad : P.text, MB.font(14, true, 700), "center"); label(ctx, Math.floor(T) + "년째", w - gw / 2 - 8, 196, P, P.dim, MB.font(12), "center"); }
+      const fails = res.depletedAt.filter((d) => d != null).sort((a, b) => a - b);
+      MB.stat("mc-o-s", pTone(res.success));
+      MB.stat("mc-o-r", MB.pct((WD() * MAN) / (BAL() * EOK), 2));
+      MB.stat("mc-o-m", res.bands.p50[30] > 0 ? MB.won(res.bands.p50[30]) : tone("bad-t", "0원"));
+      MB.stat("mc-o-d", fails.length ? fails[Math.floor(fails.length / 2)] + "<small>년째</small>" : "—");
+    }
+    let cv = null;
+    run(true);
+    cv = MB.canvas(el, draw, { aspect: 0.6, minHeight: 320, maxHeight: 430, get height() { return narrow() ? 440 : 0; } });
+    document.getElementById("mc-play").addEventListener("click", () => run(true));
+    MB.loop(el, (dt) => { if (tt < 30) { tt = Math.min(30, tt + dt * 12); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 4. 순서 위험 */
+  (function () {
+    const el = document.getElementById("sq-cv");
+    const R = [-0.28, -0.16, -0.1, 0.03, 0.12, 0.07, 0.16, 0, 0.09, -0.06, 0.19, 0.05, 0.1, 0.14, 0.01, 0.08, 0.04, 0.11, 0.06, 0.13, 0.02, 0.09, 0.07, 0.15, 0.1];
+    const N = R.length, B0 = 1e9;
+    let order = R.map((_, i) => i), dragI = -1, L = null;
+    const WR = MB.range("sq-wr", (v) => v.toFixed(1) + "% (" + MB.won(B0 * v / 100) + ")", () => cv.redraw());
+    const byVal = (asc) => R.map((_, i) => i).sort((a, b) => (asc ? R[a] - R[b] : R[b] - R[a]));
+    document.getElementById("sq-bad").addEventListener("click", () => { order = byVal(true); cv.redraw(); });
+    document.getElementById("sq-good").addEventListener("click", () => { order = byVal(false); cv.redraw(); });
+    document.getElementById("sq-rev").addEventListener("click", () => { order = order.slice().reverse(); cv.redraw(); });
+    let seed = 1;
+    document.getElementById("sq-shuf").addEventListener("click", () => { const r = MB.rng(seed++ * 7919); const a = order.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } order = a; cv.redraw(); });
+    function path(ord, W) { let b = B0, dead = null; const out = [[0, b]]; ord.forEach((k, i) => { b -= W; if (b <= 0) { b = 0; if (dead == null) dead = i + 1; } b *= 1 + R[k]; out.push([i + 1, b]); }); return { out, dead, end: b }; }
+    function draw(ctx, w, h) {
+      const P = MB.palette(), W = B0 * WR() / 100, nar = w < 520;
+      const lx = nar ? 44 : 58, rx = w - 14, slot = (rx - lx) / N;
+      const t0 = 30, t1 = Math.round(h * 0.36), sc = (t1 - t0) / 0.52, zy = t0 + 0.22 * sc;
+      ctx.font = MB.font(12, false, 700); ctx.fillStyle = P.text; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+      ctx.fillText("해마다 실질 수익률 (끌어서 순서 바꾸기)", lx, 12);
+      ctx.strokeStyle = P.axis; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(lx, zy); ctx.lineTo(rx, zy); ctx.stroke();
+      ctx.font = MB.font(10.5, true); ctx.fillStyle = P.dim; ctx.textAlign = "right";
+      [0.2, 0, -0.28].forEach((v) => ctx.fillText((v > 0 ? "+" : "") + Math.round(v * 100) + "%", lx - 6, zy - v * sc));
+      order.forEach((k, i) => {
+        const v = R[k], x = lx + i * slot + slot * 0.14, bw = slot * 0.72, y = v >= 0 ? zy - v * sc : zy;
+        ctx.fillStyle = v >= 0 ? P.ok : P.bad; ctx.globalAlpha = i === dragI ? 1 : 0.78;
+        ctx.fillRect(x, y, bw, Math.max(1.5, Math.abs(v) * sc)); ctx.globalAlpha = 1;
+        if (i === dragI) { ctx.strokeStyle = P.text; ctx.lineWidth = 1.5; ctx.strokeRect(x - 1, y - 1, bw + 2, Math.max(1.5, Math.abs(v) * sc) + 2); }
+      });
+      const a = path(order, W), b = path(order.slice().reverse(), W), n0 = path(order, 0);
+      const box = { x: lx, y: t1 + 36, w: rx - lx, h: h - t1 - 36 - 30 };
+      const ym = niceCap(Math.max(B0 * 1.2, Math.min(3e9, Math.max(...a.out.map((p) => p[1]), ...b.out.map((p) => p[1])) * 1.05)));
+      L = { lx, slot };
+      const c = MB.chart(ctx, box, { x: [0, N], y: [0, ym], yFmt: MB.wonAxis, xFmt: (v) => v + "년", xTicks: [0, 5, 10, 15, 20, 25], series: [
+        { data: b.out, color: P.accent2, width: 2, dash: [6, 4] }, { data: a.out, color: P.accent, width: 2.8 }] });
+      if (a.dead) { const x = c.X(a.dead); ctx.fillStyle = P.bad; ctx.beginPath(); ctx.arc(x, c.Y(0), 5, 0, TAU); ctx.fill(); label(ctx, a.dead + "년째 바닥", x - 6, c.Y(0) - 14, P, P.bad, MB.font(12, false, 700), "right"); }
+      label(ctx, "지금 순서", box.x + 6, box.y + 10, P, P.accent, MB.font(12, false, 700));
+      label(ctx, "뒤집은 순서", box.x + 6, box.y + 28, P, P.accent2, MB.font(12, false, 700));
+      const geo = Math.pow(R.reduce((p, r) => p * (1 + r), 1), 1 / N) - 1;
+      MB.stat("sq-o-g", MB.pct(geo, 2));
+      MB.stat("sq-o-a", a.dead ? tone("bad-t", a.dead + "년째 바닥") : MB.won(a.end));
+      MB.stat("sq-o-b", b.dead ? tone("bad-t", b.dead + "년째 바닥") : MB.won(b.end));
+      MB.stat("sq-o-n", MB.won(n0.end));
+    }
+    const cv = MB.canvas(el, draw, { aspect: 0.66, minHeight: 400, maxHeight: 470 });
+    const idx = (x) => MB.clamp(Math.floor((x - L.lx) / L.slot), 0, N - 1);
+    MB.drag(cv.canvas, {
+      start(x, y) { if (!L) return; dragI = y < cv.h * 0.4 ? idx(x) : -1; },
+      move(x) { if (dragI < 0 || !L) return; const j = idx(x); if (j !== dragI) { const k = order.splice(dragI, 1)[0]; order.splice(j, 0, k); dragI = j; } cv.redraw(); },
+      end() { dragI = -1; cv.redraw(); },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 5. 생존 곡선 */
+  (function () {
+    const el = document.getElementById("lv-cv");
+    const B = 0.1, A = { m: 1.75e-5, f: 1.03e-5 };
+    const Sx = (s, age) => Math.exp(-(A[s] / B) * Math.exp(B * 60) * (Math.exp(B * (age - 60)) - 1));
+    const S = (who, age) => (who === "c" ? 1 - (1 - Sx("m", age)) * (1 - Sx("f", age)) : Sx(who, age));
+    const life = (who) => { let s = 0; for (let a = 60; a < 120; a += 0.05) s += S(who, a + 0.025) * 0.05; return s; };
+    const median = (who) => { let lo = 60, hi = 120; for (let i = 0; i < 50; i++) { const m = (lo + hi) / 2; if (S(who, m) > 0.5) lo = m; else hi = m; } return lo; };
+    const E = { m: life("m"), f: life("f"), c: life("c") }, M = { m: median("m"), f: median("f"), c: median("c") };
+    let age = 90, L = null;
+    const WHO = MB.seg("lv-who", () => cv.redraw());
+    const NAME = { m: "남성", f: "여성", c: "부부 중 한 명" };
+    function draw(ctx, w, h) {
+      const P = MB.palette(), who = WHO(), nar = w < 520;
+      const COL = { m: P.blue, f: P.accent2, c: P.accent };
+      const box = { x: nar ? 44 : 54, y: 18, w: w - (nar ? 44 : 54) - 16, h: h - 18 - 48 };
+      const series = [];
+      ["m", "f", "c"].forEach((k) => { const d = []; for (let a = 60; a <= 105; a += 0.5) d.push([a, S(k, a)]); series.push({ data: d, color: k === who ? COL[k] : alpha(COL[k], 0.3), width: k === who ? 3 : 1.5 }); });
+      const sel = series.splice(["m", "f", "c"].indexOf(who), 1)[0]; series.push(sel);
+      L = MB.chart(ctx, box, { x: [60, 105], y: [0, 1], xFmt: (v) => v + "세", yFmt: (v) => Math.round(v * 100) + "%", xLabel: "나이", series: [],
+        vlines: [{ x: 90, color: P.faint }, { x: 95, color: P.faint }] });
+      // 사망 나이 분포(언덕)
+      const dens = []; let mx = 0;
+      for (let a = 60; a <= 105; a += 0.5) { const d = (S(who, a) - S(who, a + 0.5)) / 0.5; dens.push([a, d]); mx = Math.max(mx, d); }
+      ctx.save(); ctx.beginPath(); ctx.moveTo(L.X(60), L.Y(0));
+      dens.forEach(([a, d]) => ctx.lineTo(L.X(a), L.Y((d / mx) * 0.42)));
+      ctx.lineTo(L.X(105), L.Y(0)); ctx.closePath(); ctx.fillStyle = alpha(COL[who], 0.16); ctx.fill(); ctx.restore();
+      MB.chart(ctx, box, { x: [60, 105], y: [0, 1], xTicks: [], yTicks: [], series });
+      label(ctx, "떠나는 나이의 분포", L.X(M[who]), L.Y(0.46), P, P.dim, MB.font(11.5), "center");
+      const sa = S(who, age);
+      ctx.setLineDash([4, 3]); ctx.strokeStyle = P.text; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(L.X(age), box.y); ctx.lineTo(L.X(age), box.y + box.h); ctx.stroke(); ctx.setLineDash([]);
+      knob(ctx, L.X(age), L.Y(sa), P, 7, COL[who]);
+      label(ctx, Math.round(age) + "세까지 " + Math.round(sa * 100) + "%", L.X(age) + (age > 92 ? -12 : 12), L.Y(sa) - 16, P, P.text, MB.font(13, false, 700), age > 92 ? "right" : "left");
+      label(ctx, NAME[who], box.x + box.w - 4, box.y + 10, P, COL[who], MB.font(12.5, false, 700), "right");
+      MB.stat("lv-o-e", E[who].toFixed(1) + "<small>년(" + Math.round(60 + E[who]) + "세)</small>");
+      MB.stat("lv-o-m", M[who].toFixed(1) + "<small>세</small>");
+      MB.stat("lv-o-90", MB.pct(S(who, 90), 0) + " <small>95세 " + MB.pct(S(who, 95), 0) + "</small>");
+      MB.stat("lv-o-a", MB.pct(sa, 0) + " <small>" + Math.round(age) + "세</small>");
+    }
+    const cv = MB.canvas(el, draw, { aspect: 0.58, minHeight: 280, maxHeight: 400 });
+    MB.drag(cv.canvas, { move(x) { if (!L) return; age = Math.round(MB.clamp(60 + ((x - L.box.x) / L.box.w) * 45, 60, 105)); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 6. 연금 공백기 */
+  (function () {
+    const el = document.getElementById("gp-cv");
+    const SPEND = 36e6, NPS = MN.nps(4e6, 38) * 12, A0 = 55, A1 = 95, n = A1 - A0 + 1;
+    let L = null, which = null;
+    const RET = MB.range("gp-ret", (v) => v + "세", () => cv.redraw());
+    const NP = MB.range("gp-nps", (v) => v + "세 (" + Math.round(MN.npsAgeFactor(v - 65) * 100) + "%)", () => cv.redraw());
+    function draw(ctx, w, h) {
+      const P = MB.palette(), ret = RET(), st = NP(), f = MN.npsAgeFactor(st - 65), nps = NPS * f, nar = w < 520;
+      const labels = [], work = [], pen = [], ast = [];
+      let gapSum = 0, tot = 0;
+      for (let a = A0; a <= A1; a++) {
+        labels.push("");
+        if (a < ret) { work.push(SPEND); pen.push(0); ast.push(0); continue; }
+        work.push(0);
+        const p = a >= st ? Math.min(SPEND, nps) : 0;
+        pen.push(p); ast.push(SPEND - p); tot += SPEND - p;
+        if (a < st) gapSum += SPEND;
+      }
+      const box = { x: 60, y: 48, w: w - 60 - 14, h: h - 48 - 30 };
+      L = MB.bars(ctx, box, { labels, y: [0, 4.4e7], yFmt: MB.wonAxis, gap: 0.18, stacks: [
+        { label: "근로소득", color: alpha(P.dim, 0.35), data: work },
+        { label: "국민연금", color: P.ok, data: pen },
+        { label: "자산에서", color: (i) => (i + A0 < st ? P.bad : alpha(P.warn, 0.85)), data: ast }],
+        hlines: [{ y: SPEND, color: P.text, label: "생활비 3,600만" }] });
+      const slot = L.box.w / n;
+      const hx = (age) => L.box.x + slot * (age - A0);
+      ctx.fillStyle = P.dim; ctx.font = MB.font(11, true); ctx.textAlign = "center"; ctx.textBaseline = "top";
+      for (let a = A0; a <= A1; a += 5) ctx.fillText(String(a), hx(a), L.box.y + L.box.h + 6);
+      [["ret", ret, P.accent2, "은퇴"], ["nps", st, P.ok, "연금 시작"]].forEach(([k, a, col, t], j) => {
+        const x = hx(a), ky = j ? 36 : 16, txt = t + " " + a, f = MB.font(12, false, 700);
+        ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x, ky); ctx.lineTo(x, L.box.y + L.box.h); ctx.stroke();
+        knob(ctx, x, ky, P, 7, col);
+        ctx.font = f;
+        const tw = ctx.measureText(txt).width, right = j ? x + 12 + tw < w - 4 : x - 12 - tw < 4;
+        label(ctx, txt, x + (right ? 12 : -12), ky, P, col, f, right ? "left" : "right");
+      });
+      if (st > ret) label(ctx, "공백 " + (st - ret) + "년", (hx(ret) + hx(st)) / 2, L.Y(SPEND) + 18, P, P.bad, MB.font(12, false, 700), "center");
+      MB.stat("gp-o-gap", st > ret ? tone("bad-t", (st - ret) + "<small>년</small>") : tone("ok-t", "없음"));
+      MB.stat("gp-o-gs", MB.won(gapSum));
+      MB.stat("gp-o-m", MB.won(nps / 12, { digits: 1 }));
+      MB.stat("gp-o-t", MB.won(tot));
+    }
+    const cv = MB.canvas(el, draw, { aspect: 0.56, minHeight: 300, maxHeight: 400 });
+    const ageAt = (x) => Math.round(A0 + (x - L.box.x) / (L.box.w / n));
+    MB.drag(cv.canvas, {
+      start(x) { if (!L) return; const a = ageAt(x); which = Math.abs(a - RET()) <= Math.abs(a - NP()) ? "ret" : "nps"; if (RET() === NP()) which = a < RET() ? "ret" : "nps"; },
+      move(x) { if (!L || !which) return; const a = ageAt(x); if (which === "ret") { const v = MB.clamp(a, 55, 65); if (v !== RET()) RET.set(v); } else { const v = MB.clamp(a, 60, 70); if (v !== NP()) NP.set(v); } },
+      end() { which = null; },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 7. 인출 전략 비교 */
+  function strat(mode, wr, N, Y, seed) {
+    const pf = mix(0.6), g = MN.gauss(seed), lm = Math.log(1 + pf.mu) - 0.5 * pf.sigma * pf.sigma - Math.log(1 + INF);
+    const B0 = 1e9, sp = [], bal = [], dep = [], ch = [];
+    for (let p = 0; p < N; p++) {
+      let b = B0, W = B0 * wr, dead = null, nch = 0;
+      const s = new Float64Array(Y + 1), a = new Float64Array(Y + 1); a[0] = b;
+      for (let y = 0; y < Y; y++) {
+        if (mode === "pct") W = b * wr;
+        else if (mode === "guard" && y > 0 && b > 0) { const cr = W / b; if (cr > wr * 1.2) W *= 0.9; else if (cr < wr * 0.8) W *= 1.1; }
+        const take = Math.min(W, Math.max(0, b));
+        s[y] = take; b -= take;
+        if (dead == null && b <= 1 && mode !== "pct") dead = y + 1;
+        if (y > 0 && Math.abs(take - s[y - 1]) > 0.05 * Math.max(1, s[y - 1])) nch++;
+        b *= Math.exp(lm + pf.sigma * g()); a[y + 1] = b;
+      }
+      s[Y] = s[Y - 1];
+      sp.push(s); bal.push(a); dep.push(dead); ch.push(nch);
+    }
+    return { sp, bal, dep, ch, sb: MN.bands(sp), bb: MN.bands(bal) };
+  }
+  (function () {
+    const el = document.getElementById("ws-cv");
+    let res = null, tt = 0;
+    const MODE = MB.seg("ws-mode", () => { run(); tt = 0; });
+    const WR = MB.range("ws-wr", (v) => v.toFixed(1) + "%", () => { run(); cv && cv.redraw(); });
+    function run() { res = strat(MODE(), WR() / 100, 500, 30, 3); }
+    function draw(ctx, w, h) {
+      if (!res) return;
+      const P = MB.palette(), W0 = 1e9 * WR() / 100, x0 = 60, bw = w - x0 - 16;
+      const h1 = Math.round((h - 40) * 0.46);
+      const b1 = { x: x0, y: 24, w: bw, h: h1 - 24 }, b2 = { x: x0, y: h1 + 46, w: bw, h: h - h1 - 46 - 40 };
+      const T = Math.min(tt, 30);
+      const part = (a) => { const out = []; for (let i = 0; i <= Math.floor(T); i++) out.push([i, a[i]]); return out; };
+      const fill = (c, lo, hi, col) => { const u = part(hi), d = part(lo).reverse(); if (u.length < 2) return; ctx.beginPath(); u.forEach(([x, y], i) => (i ? ctx.lineTo(c.X(x), c.Y(y)) : ctx.moveTo(c.X(x), c.Y(y)))); d.forEach(([x, y]) => ctx.lineTo(c.X(x), c.Y(y))); ctx.closePath(); ctx.fillStyle = col; ctx.fill(); };
+      const sm = niceCap(W0 * 1.9);
+      const c1 = MB.chart(ctx, b1, { x: [0, 30], y: [0, sm], yFmt: MB.wonAxis, xTicks: [0, 10, 20, 30], xFmt: () => "", hlines: [{ y: W0, color: P.faint }] });
+      ctx.save(); ctx.beginPath(); ctx.rect(b1.x, b1.y, b1.w, b1.h); ctx.clip();
+      fill(c1, res.sb.p10, res.sb.p90, alpha(P.accent2, 0.2)); fill(c1, res.sb.p25, res.sb.p75, alpha(P.accent2, 0.3)); ctx.restore();
+      MB.chart(ctx, b1, { x: [0, 30], y: [0, sm], xTicks: [], yTicks: [], series: [{ data: part(res.sb.p10), color: P.bad, width: 1.5, dash: [4, 3] }, { data: part(res.sb.p50), color: P.accent2, width: 2.6 }] });
+      label(ctx, "해마다 쓴 돈(오늘 돈)", b1.x + 6, b1.y - 12, P, P.text, MB.font(12, false, 700));
+      label(ctx, "빨간 점선: 나쁜 10%", b1.x + b1.w - 4, b1.y - 12, P, P.bad, MB.font(11.5), "right");
+      const bm = niceCap(Math.min(3e9, Math.max(1.4e9, Math.max(...res.bb.p90))));
+      const c2 = MB.chart(ctx, b2, { x: [0, 30], y: [0, bm], yFmt: MB.wonAxis, xFmt: (v) => v + "년", xTicks: [0, 5, 10, 15, 20, 25, 30] });
+      ctx.save(); ctx.beginPath(); ctx.rect(b2.x, b2.y, b2.w, b2.h); ctx.clip();
+      fill(c2, res.bb.p10, res.bb.p90, alpha(P.accent, 0.14)); fill(c2, res.bb.p25, res.bb.p75, alpha(P.accent, 0.24)); ctx.restore();
+      MB.chart(ctx, b2, { x: [0, 30], y: [0, bm], xTicks: [], yTicks: [], series: [{ data: part(res.bb.p10), color: P.bad, width: 1.5, dash: [4, 3] }, { data: part(res.bb.p50), color: P.accent, width: 2.6 }] });
+      label(ctx, "잔고", b2.x + 6, b2.y - 12, P, P.text, MB.font(12, false, 700));
+      const fails = res.dep.filter((d) => d != null && d <= 30).length / res.dep.length;
+      const mins = res.sp.map((s) => { let m = Infinity; for (let i = 0; i < 30; i++) m = Math.min(m, s[i]); return m; }).sort((a, b) => a - b);
+      const chs = res.ch.slice().sort((a, b) => a - b);
+      MB.stat("ws-o-f", tone(fails > 0.1 ? "bad-t" : fails > 0 ? "warn-t" : "ok-t", MB.pct(fails, 1)));
+      MB.stat("ws-o-min", mins[Math.floor(mins.length * 0.1)] < 1 ? tone("bad-t", "0원") : MB.won(mins[Math.floor(mins.length * 0.1)]));
+      MB.stat("ws-o-ch", chs[Math.floor(chs.length / 2)] + "<small>/30년</small>");
+      MB.stat("ws-o-end", MB.won(res.bb.p50[30]));
+    }
+    run();
+    const cv = MB.canvas(el, draw, { aspect: 0.66, minHeight: 380, maxHeight: 460 });
+    MB.loop(el, (dt) => { if (tt < 30) { tt = Math.min(30, tt + dt * 20); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 8. 버킷 전략 */
+  (function () {
+    const el = document.getElementById("bk-cv");
+    const W = 4e7, B0 = 1e9, CT = 2 * W, BT = 5 * W, Y = 30;
+    const CAP = [CT * 1.6, BT * 1.6, B0 * 2.2];
+    let st, year, ph, play = true, rets, hold, parts = [], snaps = null, seedN = 1, flows = [];
+    const MK = MB.seg("bk-mkt", () => reset());
+    const btn = document.getElementById("bk-play");
+    const setBtn = () => (btn.textContent = play ? "일시정지" : "재생");
+    btn.addEventListener("click", () => { if (year >= Y) reset(); else { play = !play; setBtn(); } });
+    document.getElementById("bk-re").addEventListener("click", () => { seedN++; reset(); });
+    function reset() {
+      st = [CT, BT, B0 - CT - BT]; year = 0; ph = 0; hold = 0; parts = []; snaps = null; play = true; setBtn();
+      const g = MN.gauss(seedN * 131 + 7), lmS = Math.log(1.05) - 0.5 * 0.16 * 0.16, lmB = Math.log(1.01) - 0.5 * 0.06 * 0.06;
+      rets = [];
+      for (let y = 0; y < Y; y++) rets.push([Math.exp(lmS + 0.16 * g()) - 1, Math.exp(lmB + 0.06 * g()) - 1]);
+      if (MK() === "crash") { rets[0][0] = -0.35; rets[1][0] = -0.15; rets[0][1] = 0.03; rets[1][1] = 0.02; }
+      if (cv) cv.redraw();
+    }
+    function step() {
+      const s0 = st.slice(), [rs, rb] = rets[year];
+      const s1 = s0.slice(); let need = W; flows = [];
+      const t0 = Math.min(need, s1[0]); s1[0] -= t0; need -= t0; flows.push(["c", "out", W]);
+      if (need > 0) { const t = Math.min(need, s1[1]); s1[1] -= t; need -= t; flows.push(["b", "out", t]); }
+      if (need > 0) { const t = Math.min(need, s1[2]); s1[2] -= t; need -= t; flows.push(["s", "out", t]); }
+      const s2 = [s1[0], s1[1] * (1 + rb), s1[2] * (1 + rs)];
+      const s3 = s2.slice(); let sold = false;
+      if (rs > 0) {
+        const tb = Math.max(0, Math.min(s3[2], BT + (CT - s3[0]) - s3[1]));
+        if (tb > 0) { s3[2] -= tb; s3[1] += tb; flows.push(["s", "b", tb]); sold = true; }
+      }
+      const tc = Math.max(0, Math.min(s3[1], CT - s3[0]));
+      if (tc > 0) { s3[1] -= tc; s3[0] += tc; flows.push(["b", "c", tc]); }
+      if (!sold && !flows.some((f) => f[0] === "s")) hold++;
+      snaps = [s0, s1, s2, s3];
+    }
+    const lerp = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
+    function cur() {
+      if (!snaps) return st;
+      if (ph < 0.35) return lerp(snaps[0], snaps[1], ph / 0.35);
+      if (ph < 0.6) return lerp(snaps[1], snaps[2], (ph - 0.35) / 0.25);
+      return lerp(snaps[2], snaps[3], Math.min(1, (ph - 0.6) / 0.35));
+    }
+    let lay = null;
+    function draw(ctx, w, h) {
+      const P = MB.palette(), nar = w < 520, s = cur();
+      const names = ["현금", "채권", "주식"], cols = [P.accent2, P.blue, P.accent];
+      const top = 40, bh = h - 150, bwid = Math.min(110, (w - 120) / 3.4), gapx = (w - 40 - (nar ? 0 : 70) - 3 * bwid) / 2;
+      const xs = [0, 1, 2].map((i) => 20 + i * (bwid + gapx));
+      lay = { xs, top, bh, bwid };
+      // 통 그리기 (오른쪽에서 왼쪽으로: 주식 → 채권 → 현금)
+      [0, 1, 2].forEach((i) => {
+        const x = xs[2 - i], v = s[i], f = MB.clamp(v / CAP[i], 0, 1), col = cols[i];
+        rr(ctx, x, top, bwid, bh, 10); ctx.fillStyle = P.surface; ctx.fill();
+        ctx.save(); rr(ctx, x, top, bwid, bh, 10); ctx.clip();
+        ctx.fillStyle = alpha(col, 0.55); ctx.fillRect(x, top + bh * (1 - f), bwid, bh * f); ctx.restore();
+        rr(ctx, x, top, bwid, bh, 10); ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.stroke();
+        const tgt = i === 0 ? CT : i === 1 ? BT : null;
+        if (tgt) { const ty = top + bh * (1 - tgt / CAP[i]); ctx.setLineDash([4, 3]); ctx.strokeStyle = P.text; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x, ty); ctx.lineTo(x + bwid, ty); ctx.stroke(); ctx.setLineDash([]); label(ctx, "목표", x + bwid - 4, ty - 8, P, P.dim, MB.font(10.5), "right"); }
+        label(ctx, names[i], x + bwid / 2, top - 14, P, col, MB.font(13, false, 800), "center");
+        label(ctx, MB.wonAxis(v), x + bwid / 2, top + bh + 14, P, P.text, MB.font(12, true, 700), "center");
+        label(ctx, (v / W).toFixed(1) + "년치", x + bwid / 2, top + bh + 30, P, P.dim, MB.font(11), "center");
+      });
+      // 생활비 출구
+      const ox = nar ? xs[2] + bwid - 6 : w - 34, oy = nar ? top + bh + 52 : top + bh * 0.85;
+      if (!nar) { label(ctx, "생활비", ox, oy - 34, P, P.bad, MB.font(12.5, false, 700), "center"); label(ctx, "연 4,000만", ox, oy - 18, P, P.dim, MB.font(11), "center"); }
+      // 알갱이
+      parts.forEach((p) => {
+        const t = p.t, x = p.x0 + (p.x1 - p.x0) * t, y = p.y0 + (p.y1 - p.y0) * t - Math.sin(Math.PI * t) * p.arc;
+        ctx.beginPath(); ctx.arc(x, y, 3.2, 0, TAU); ctx.fillStyle = p.col; ctx.fill();
+      });
+      // 아래 수익률 막대
+      const sy = h - 44, sh = 30, sx = 20, sw = w - 40, sl = sw / Y;
+      ctx.strokeStyle = P.axis; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(sx + sw, sy); ctx.stroke();
+      for (let i = 0; i < Math.min(year + (snaps && ph > 0.35 ? 1 : 0), Y); i++) {
+        const r = rets[i][0], hh = MB.clamp(r / 0.4, -1, 1) * sh * 0.5;
+        ctx.fillStyle = r >= 0 ? P.ok : P.bad; ctx.fillRect(sx + i * sl + sl * 0.15, hh >= 0 ? sy - hh : sy, sl * 0.7, Math.max(1, Math.abs(hh)));
+      }
+      label(ctx, "해마다 주식 수익률", sx, h - 8, P, P.dim, MB.font(11));
+      MB.stat("bk-o-y", Math.min(year + (snaps ? 1 : 0), Y) + "<small>년째</small>");
+      MB.stat("bk-o-c", (s[0] / W).toFixed(1) + "<small>년치</small>");
+      MB.stat("bk-o-h", hold + "<small>/" + year + "년</small>");
+      MB.stat("bk-o-t", MB.won(s[0] + s[1] + s[2]));
+    }
+    function spawn() {
+      if (!lay) return;
+      const { xs, top, bh, bwid } = lay, w = cv.w, h = cv.h, nar = w < 520;
+      const pos = { c: [xs[0] + bwid / 2, top + bh * 0.7], b: [xs[1] + bwid / 2, top + bh * 0.4], s: [xs[2] + bwid / 2, top + bh * 0.3], out: nar ? [xs[2] + bwid - 6, top + bh + 52] : [w - 34, top + bh * 0.85] };
+      const P = MB.palette();
+      flows.forEach(([a, b, amt]) => {
+        const phaseOk = b === "out" ? ph < 0.35 : ph >= 0.6 && ph < 0.95;
+        if (!phaseOk || Math.random() > Math.min(0.9, 0.15 + amt / 1.2e8)) return;
+        const [x0, y0] = pos[a], [x1, y1] = pos[b];
+        parts.push({ x0: x0 + (Math.random() - 0.5) * 20, y0, x1, y1: b === "out" ? y1 : y1 + 20, t: 0, arc: 40 + Math.random() * 20, col: b === "out" ? P.bad : P.accent2 });
+      });
+    }
+    let cv = null;
+    reset();
+    cv = MB.canvas(el, draw, { aspect: 0.62, minHeight: 360, maxHeight: 440 });
+    MB.loop(el, (dt) => {
+      parts.forEach((p) => (p.t += dt * 1.6)); parts = parts.filter((p) => p.t < 1);
+      if (play && year < Y) {
+        if (!snaps) step();
+        ph += dt / 1.5; spawn();
+        if (ph >= 1) { st = snaps[3]; snaps = null; ph = 0; year++; if (year >= Y) { play = false; setBtn(); btn.textContent = "처음부터"; } }
+      }
+      cv.redraw();
+    });
+  })();
+
+  /* ---------------------------------------------------------- 9. 연금화 */
+  (function () {
+    const el = document.getElementById("an-cv");
+    const B0 = 1e9, W = 4e7, PAY = 0.045, PS = []; for (let p = 0; p <= 100; p += 5) PS.push(p);
+    const cache = {};
+    const one = (p, Y) => { const pf = mix(0.5); const r = MN.retire({ balance: Math.max(1, (1 - p / 100) * B0), withdraw: W, years: Y, mu: pf.mu, sigma: pf.sigma, inflation: INF, n: 400, seed: 9, income: (p / 100) * B0 * PAY }); return { s: r.success, m: r.bands.p50[Y], lo: r.bands.p10[Y] }; };
+    const table = (Y) => (cache[Y] = cache[Y] || PS.map((p) => one(p, Y)));
+    let L = null;
+    const PP = MB.range("an-p", (v) => v + "%", () => cv.redraw());
+    const HZ = MB.seg("an-h", () => cv.redraw());
+    function draw(ctx, w, h) {
+      const P = MB.palette(), Y = +HZ(), T = table(Y), p = PP(), i = PS.indexOf(p), o = T[i], nar = w < 520, x0 = nar ? 46 : 58;
+      const h1 = Math.round((h - 30) * 0.5);
+      const b1 = { x: x0, y: 22, w: w - x0 - 16, h: h1 - 30 }, b2 = { x: x0, y: h1 + 24, w: w - x0 - 16, h: h - h1 - 24 - 46 };
+      const other = table(Y === 35 ? 40 : 35);
+      L = MB.chart(ctx, b1, { x: [0, 100], y: [0, 1], yFmt: (v) => Math.round(v * 100) + "%", xFmt: () => "", xTicks: [0, 25, 50, 75, 100], yTicks: [0, 0.5, 1],
+        series: [{ data: PS.map((q, k) => [q, other[k].s]), color: alpha(P.dim, 0.4), width: 1.3, dash: [4, 3] }, { data: PS.map((q, k) => [q, T[k].s]), color: P.accent, width: 2.8 }] });
+      knob(ctx, L.X(p), L.Y(o.s), P);
+      label(ctx, "성공 확률 " + MB.pct(o.s, 0), L.X(p) + (p > 60 ? -12 : 12), L.Y(o.s) + (o.s > 0.85 ? 16 : -14), P, P.text, MB.font(12.5, false, 700), p > 60 ? "right" : "left");
+      const mm = niceCap(Math.max(...T.map((t) => t.m), 1e8) * 1.1);
+      const c2 = MB.chart(ctx, b2, { x: [0, 100], y: [0, mm], yFmt: MB.wonAxis, xFmt: (v) => v + "%", xTicks: [0, 25, 50, 75, 100], xLabel: "종신 연금으로 바꾼 비율",
+        series: [{ data: PS.map((q, k) => [q, T[k].m]), color: P.accent2, width: 2.6 }] });
+      knob(ctx, c2.X(p), c2.Y(o.m), P, 6, P.accent2);
+      label(ctx, "끝에 남는 돈(중앙값)", b2.x + 6, b2.y + 8, P, P.accent2, MB.font(12, false, 700));
+      label(ctx, (Y === 35 ? "점선: 100세까지" : "점선: 95세까지"), b1.x + b1.w - 4, b1.y + b1.h - 10, P, P.dim, MB.font(11.5), "right");
+      MB.stat("an-o-i", MB.won((p / 100) * B0 * PAY));
+      MB.stat("an-o-b", MB.won((1 - p / 100) * B0));
+      MB.stat("an-o-s", pTone(o.s));
+      MB.stat("an-o-m", o.m > 0 ? MB.won(o.m) : "0원");
+    }
+    const cv = MB.canvas(el, draw, { aspect: 0.62, minHeight: 340, maxHeight: 430 });
+    MB.drag(cv.canvas, { move(x) { if (!L) return; const v = Math.round(MB.clamp(((x - L.box.x) / L.box.w) * 100, 0, 100) / 5) * 5; if (v !== PP()) PP.set(v); } });
+  })();
+
+  /* ---------------------------------------------------------- 10. 한결의 은퇴 */
+  (function () {
+    const el = document.getElementById("hg-cv");
+    let res = null, tt = 0, info = null;
+    const AGE = MB.range("hg-age", (v) => v + "세", () => run());
+    const SP = MB.range("hg-sp", (v) => "연 " + MB.won(v * MAN), () => run());
+    const ST = MB.range("hg-st", (v) => v + "%", () => run());
+    function plan(R, sp, st) {
+      const n = R - 27;
+      const g = (m, raise) => MN.grow({ monthly: m, rate: 0.05, years: n, inflation: INF, raise })[n].real;
+      const A = g(25e4, 0.03) + g(75e4, 0) + g(25e4, 0);
+      const npsY = MN.nps(4e6, Math.min(38, n + 5)) * 12;
+      const bridge = Math.max(0, 65 - R) * npsY;
+      return { A, npsY, bridge, target: bridge + Math.max(0, sp - npsY) / 0.04, R, sp };
+    }
+    function run() {
+      const R = AGE(), sp = SP() * MAN, pf = mix(ST() / 100);
+      info = plan(R, sp, ST() / 100);
+      res = MN.retire({ balance: Math.max(1, info.A - info.bridge), withdraw: sp, years: 95 - R, mu: pf.mu, sigma: pf.sigma, inflation: INF, n: 600, seed: 21, income: info.npsY });
+      tt = 0;
+      if (cv) cv.redraw();
+    }
+    const narrow = () => el.parentElement.clientWidth < 560;
+    function draw(ctx, w, h) {
+      if (!res) return;
+      const P = MB.palette(), nar = narrow(), R = info.R, Y = 95 - R;
+      const gw = nar ? 0 : 150, gh = nar ? 96 : 0;
+      const box = { x: 58, y: 18 + gh, w: w - 58 - 16 - gw, h: h - 18 - gh - 48 };
+      const yMax = niceCap(Math.max(info.A * 1.2, Math.min(Math.max(...res.bands.p90), info.A * 2.4)));
+      const shade = R < 65 ? [{ x0: R, x1: 65, color: alpha(P.bad, 0.08) }] : [];
+      const c = fan(ctx, box, { P, bands: res.bands, sample: res.sample, nS: 12, years: Y, tt, x0: R, yMax, xLabel: "나이", xFmt: (v) => v + "세", shade });
+      if (R < 65) label(ctx, "공백기", (c.X(R) + c.X(65)) / 2, box.y + box.h - 12, P, P.bad, MB.font(11.5, false, 700), "center");
+      ctx.setLineDash([5, 4]); ctx.strokeStyle = P.accent2; ctx.lineWidth = 1.3; ctx.beginPath(); ctx.moveTo(box.x, c.Y(info.target - info.bridge)); ctx.lineTo(box.x + box.w, c.Y(info.target - info.bridge)); ctx.stroke(); ctx.setLineDash([]);
+      label(ctx, "4% 목표(공백기 몫 제외)", box.x + box.w - 4, c.Y(info.target - info.bridge) - 10, P, P.accent2, MB.font(11.5), "right");
+      const T = Math.min(tt, Y), dead = res.depletedAt.filter((d) => d != null && d <= T).length, pNow = 1 - dead / res.depletedAt.length;
+      if (nar) { gauge(ctx, w / 2 - 70, 66, 40, pNow, P, (R + Math.floor(T)) + "세까지"); label(ctx, "바닥난 미래 " + dead + "/600", w / 2 + 20, 56, P, dead ? P.bad : P.dim, MB.font(12, false, 700)); label(ctx, "떼어 둔 공백기 몫 " + MB.wonAxis(info.bridge), w / 2 + 20, 78, P, P.dim, MB.font(11.5)); }
+      else { gauge(ctx, w - gw / 2 - 8, 96, 54, pNow, P, (R + Math.floor(T)) + "세까지"); label(ctx, "바닥난 미래", w - gw / 2 - 8, 158, P, P.dim, MB.font(12), "center"); label(ctx, dead + " / 600", w - gw / 2 - 8, 178, P, dead ? P.bad : P.text, MB.font(14, true, 700), "center"); label(ctx, "떼어 둔 공백기 몫", w - gw / 2 - 8, 214, P, P.dim, MB.font(11.5), "center"); label(ctx, MB.won(info.bridge), w - gw / 2 - 8, 232, P, P.text, MB.font(12.5, true, 700), "center"); }
+      MB.stat("hg-o-a", MB.won(info.A));
+      MB.stat("hg-o-t", tone(info.A >= info.target ? "ok-t" : "bad-t", MB.won(info.target)));
+      MB.stat("hg-o-r", info.A > info.bridge ? MB.pct(Math.max(0, info.sp - info.npsY) / (info.A - info.bridge), 1) : tone("bad-t", "—"));
+      MB.stat("hg-o-s", pTone(res.success));
+    }
+    let cv = null;
+    run();
+    cv = MB.canvas(el, draw, { aspect: 0.6, minHeight: 330, maxHeight: 440, get height() { return narrow() ? 450 : 0; } });
+    MB.loop(el, (dt) => { const Y = 95 - info.R; if (tt < Y) { tt = Math.min(Y, tt + dt * 14); cv.redraw(); } });
+  })();
+})();
+</script>
+</body>
+</html>

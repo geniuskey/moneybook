@@ -1,0 +1,1291 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and MoneyBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "신용은 미래의 나에게 빌리는 것이다. 신용점수의 구성 요소와 연체가 남기는 흔적, 체크카드와 신용카드의 결제 달력, 리볼빙·현금서비스·카드론의 금리, 법정 최고금리와 불법사금융, 좋은 빚과 나쁜 빚, 눈덩이·눈사태 상환 전략을 시뮬레이터로 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>신용과 빚 · MoneyBook</title>
+<meta name="description" content="신용은 미래의 나에게 빌리는 것이다. 신용점수의 구성 요소와 연체가 남기는 흔적, 체크카드와 신용카드의 결제 달력, 리볼빙·현금서비스·카드론의 금리, 법정 최고금리와 불법사금융, 좋은 빚과 나쁜 빚, 눈덩이·눈사태 상환 전략을 시뮬레이터로 익힌다.">
+<link rel="canonical" href="https://moneybook.euiyun.com/chapters/credit.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0b8a63">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MoneyBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="신용과 빚 · MoneyBook">
+<meta property="og:description" content="신용은 미래의 나에게 빌리는 것이다. 신용점수의 구성 요소와 연체가 남기는 흔적, 체크카드와 신용카드의 결제 달력, 리볼빙·현금서비스·카드론의 금리, 법정 최고금리와 불법사금융, 좋은 빚과 나쁜 빚, 눈덩이·눈사태 상환 전략을 시뮬레이터로 익힌다.">
+<meta property="og:url" content="https://moneybook.euiyun.com/chapters/credit.html">
+<meta property="og:image" content="https://moneybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://moneybook.euiyun.com/chapters/credit.html#chapter","name":"신용과 빚","headline":"신용과 빚 · MoneyBook","description":"신용은 미래의 나에게 빌리는 것이다. 신용점수의 구성 요소와 연체가 남기는 흔적, 체크카드와 신용카드의 결제 달력, 리볼빙·현금서비스·카드론의 금리, 법정 최고금리와 불법사금융, 좋은 빚과 나쁜 빚, 눈덩이·눈사태 상환 전략을 시뮬레이터로 익힌다.","url":"https://moneybook.euiyun.com/chapters/credit.html","position":9,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://moneybook.euiyun.com/og.png","dateModified":"2026-10-03","isPartOf":{"@type":"Book","@id":"https://moneybook.euiyun.com/#book","name":"MoneyBook · 살아가는 데 필요한 돈 교과서","url":"https://moneybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MoneyBook","item":"https://moneybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"9. 신용과 빚","item":"https://moneybook.euiyun.com/chapters/credit.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/money.js"></script>
+<!--head:end-->
+<style>
+  .debt-grid { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); padding: 12px 18px 14px; border-top: 1px solid var(--border); }
+  .debt-card { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; background: var(--surface); font-size: 13px; display: grid; gap: 4px; min-width: 0; }
+  .debt-card b { font-size: 13.5px; display: flex; align-items: center; gap: 6px; }
+  .debt-card b i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; }
+  .debt-card label { display: flex; justify-content: space-between; gap: 6px; align-items: center; color: var(--text-dim); }
+  .debt-card input { width: 76px; min-width: 0; font-family: var(--mono); font-size: 13px; padding: 3px 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-elev); color: var(--text); text-align: right; }
+  .slip .row span.ko { font-family: var(--font); white-space: nowrap; }
+  .stat .v.ko { font-family: var(--font); font-size: 17px; letter-spacing: -0.01em; }
+  .cs-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .cs-actions .btn { padding: 7px 8px; font-size: 13px; line-height: 1.35; }
+  .cs-actions .btn.good { border-color: var(--ok); }
+  .cs-actions .btn.harm { border-color: var(--bad); }
+  figure.diagram svg { max-width: 560px; margin: 0 auto; }
+</style>
+</head>
+<body data-chapter="credit">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 09</div>
+    <h1>신용과 빚</h1>
+    <p class="lead">카드를 긁는 순간 물건은 지금 내 것이 되지만, 돈은 다음 달의 내가 낸다. 신용이란 미래의 나에게 돈을 빌려 오는 능력이고, 빚은 그 약속이다. 약속을 잘 지키면 다음에 더 싸게, 더 많이 빌릴 수 있고, 한 번 어기면 그 흔적이 몇 년을 따라다닌다. 이 장에서는 신용점수가 무엇으로 매겨지는지, 신용카드가 돈을 언제 빼 가는지, 최소결제만 하면 빚이 어떻게 불어나는지, 그리고 이미 진 빚을 어떤 순서로 갚을지를 직접 움직여 보며 확인한다.</p>
+    <ul class="objectives">
+      <li>신용을 '시간을 건너 돈을 옮기는 약속'으로 설명하고, 연이율을 하루·한 달 이자로 바꿔 감각을 잡는다.</li>
+      <li>신용점수의 네 가지 구성 요소와, 소액 연체가 남기는 기록과 회복 기간을 말한다.</li>
+      <li>체크카드와 신용카드의 차이, 결제일과 이용기간, 카드 한도가 만드는 착시를 이해한다.</li>
+      <li>리볼빙(일부결제금액이월약정)·현금서비스·카드론의 금리와 최소결제의 함정을 숫자로 확인한다.</li>
+      <li>법정 최고금리 20%와 불법사금융·대출 사기의 신호를 알고, 좋은 빚과 나쁜 빚을 구분한다.</li>
+      <li>눈덩이(작은 빚부터)와 눈사태(높은 금리부터) 상환 전략을 비교한다.</li>
+    </ul>
+  </header>
+
+  <section id="future">
+    <h2>신용: 미래의 나에게 빌리기</h2>
+    <p>월급날까지 열흘이 남았는데 노트북이 고장 났다. 통장에는 50만원뿐이고 새 노트북은 120만원이다. 방법은 두 가지다. 돈을 모을 때까지 기다리거나, 미래에 들어올 월급을 <b>지금으로 당겨 오거나</b>. 두 번째 방법을 가능하게 하는 것이 <span class="term">신용</span><span class="en">(Credit)</span>이다. 신용은 "나중에 틀림없이 갚겠다"는 약속을 다른 사람이 믿어 주는 정도다. 라틴어 credo(나는 믿는다)에서 온 말이다.</p>
+    <p>그 약속이 숫자로 남은 것이 <span class="term">빚</span><span class="en">(Debt)</span>, 곧 부채다. <a href="overview.html">1장</a>의 재무상태표에서 부채는 자산 반대편에 놓였다. 빚을 지면 자산(현금이나 물건)과 부채가 같이 늘고 순자산은 그대로다. 하지만 시간이 지나면 이야기가 달라진다. 미래의 나는 빌린 돈에 더해 <b>시간의 값</b>, 곧 <span class="term">이자</span>를 함께 낸다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 420 310" role="img" aria-label="신용은 미래 소득을 지금으로 당겨 오는 약속이다. 지금의 나는 금융회사에서 돈을 받고, 미래의 나는 원금과 이자를 갚는다.">
+        <defs><marker id="fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="135" y="12" width="150" height="54" rx="10" class="f-elev"/>
+        <text x="210" y="36" text-anchor="middle" class="lbl-b">빌려주는 쪽</text>
+        <text x="210" y="56" text-anchor="middle" class="lbl-dim">은행·카드사</text>
+        <path d="M133 46 C 84 54, 72 100, 82 162" class="s-acc" marker-end="url(#fa)"/>
+        <text x="98" y="112" class="lbl-acc">원금 100</text>
+        <path d="M338 162 C 348 100, 336 54, 287 46" class="s-bad" marker-end="url(#fa)"/>
+        <text x="322" y="112" text-anchor="end" class="lbl-bad">원금 100 + 이자</text>
+        <rect x="10" y="168" width="150" height="54" rx="10" class="f-acc-soft"/>
+        <text x="85" y="192" text-anchor="middle" class="lbl-b">지금의 나</text>
+        <text x="85" y="212" text-anchor="middle" class="lbl-dim">돈이 필요하다</text>
+        <rect x="260" y="168" width="150" height="54" rx="10" class="f-acc2-soft"/>
+        <text x="335" y="192" text-anchor="middle" class="lbl-b">미래의 나</text>
+        <text x="335" y="212" text-anchor="middle" class="lbl-dim">월급이 들어온다</text>
+        <text x="210" y="158" text-anchor="middle" class="lbl-dim">약속(신용)이</text>
+        <text x="210" y="176" text-anchor="middle" class="lbl-dim">시간을 건넌다</text>
+        <path d="M164 195 L256 195" class="s-dash" marker-end="url(#fa)"/>
+        <line x1="10" y1="246" x2="410" y2="246" class="s-axis" marker-end="url(#fa)"/>
+        <text x="410" y="270" text-anchor="end" class="lbl-dim">시간</text>
+        <text x="210" y="298" text-anchor="middle" class="lbl-dim">미래의 소득을 당겨 쓴 만큼, 미래의 나는 덜 쓸 수 있다</text>
+      </svg>
+      <figcaption><b>그림 1. 신용은 시간을 건너는 약속이다.</b> 지금 받은 돈은 미래의 월급에서 이자를 얹어 빠져나간다. 빌린다는 것은 미래의 내 소비를 당겨 쓰는 일이다.</figcaption>
+    </figure>
+
+    <p>빌리는 값은 보통 <span class="term">연이율</span><span class="en">(Annual interest rate)</span>로 적힌다. "연 18%"는 1년 내내 빌리고 있으면 원금의 18%를 이자로 낸다는 뜻이다. 그런데 사람은 연 단위 숫자에 둔하다. 연 18%가 하루로는 얼마인지 바꿔 보면 감각이 달라진다. 아래에서 금액과 금리를 바꾸고, 시간이 흐르며 이자가 쌓이는 모습을 지켜본다.</p>
+
+    <div class="sim" id="sim-daily">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>연이율을 하루 이자로: 잠자는 동안에도 쌓인다</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="dy-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>빌린 돈 <output id="dy-a-out"></output></span><input type="range" id="dy-a" min="100000" max="10000000" step="100000" value="3000000"></label>
+          <label class="ctrl"><span>연이율 <output id="dy-r-out"></output></span><input type="range" id="dy-r" min="1" max="20" step="0.5" value="18"></label>
+          <div class="btn-row"><button class="btn primary" id="dy-go">일시정지</button><button class="btn" id="dy-re">처음부터</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">하루 이자</span><span class="v" id="dy-o-d">—</span></div>
+        <div class="stat"><span class="k">한 달 이자</span><span class="v" id="dy-o-m">—</span></div>
+        <div class="stat"><span class="k">1년 이자</span><span class="v" id="dy-o-y">—</span></div>
+        <div class="stat"><span class="k">같은 돈을 예금 연 3%에</span><span class="v" id="dy-o-s">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 300만원, 연 18%에서 하루 이자를 읽는다. 커피 한 잔에 가까운 돈이 매일 빠져나간다. ② 금리를 1.7%(한결의 학자금 금리)로 내린다. 같은 300만원인데 하루 이자가 열 배 넘게 작아진다. ③ 회색 막대(예금 연 3%로 받는 이자)와 빨간 막대를 비교한다. 빌리는 금리와 맡기는 금리의 차이가 은행과 카드사의 수입이다. (단리, 하루 이자 = 잔액 × 연이율 ÷ 365로 계산했다. 1초가 약 12일이다.)</div>
+    </div>
+
+    <div class="formula">$$\text{하루 이자} = \text{잔액} \times \frac{\text{연이율}}{365}, \qquad \text{한 달 이자} \approx \text{잔액} \times \frac{\text{연이율}}{12}$$<div class="where">카드사와 은행은 대부분 하루 단위로 이자를 계산한다. 300만원을 연 18%로 빌리면 하루 약 1,479원, 한 달 약 4만 5천원이다.</div></div>
+    <p>300만원에 연 18%면 하루에 약 1,479원이다. 한 달이면 4만 5천원, 1년이면 54만원이다. 같은 돈을 예금 연 3%에 맡겨 받는 이자는 1년에 9만원(세전)이다. 맡길 때와 빌릴 때의 금리 차이가 크기 때문에, <b>고금리 빚을 두고 저축을 하는 것은 대부분 손해</b>다. 저축 이자로 버는 돈보다 빚 이자로 나가는 돈이 훨씬 크다.</p>
+  </section>
+
+  <section id="score">
+    <h2>신용점수는 무엇으로 매겨지는가</h2>
+    <p>돈을 빌려주는 쪽은 "이 사람이 정말 갚을까"를 알고 싶다. 하지만 사람 속을 들여다볼 수는 없으니 과거의 행동을 본다. 그 기록을 모아 하나의 숫자로 요약한 것이 <span class="term">신용점수</span><span class="en">(Credit score)</span>다. 한국에서는 2021년부터 1~10등급 대신 <b>1~1,000점</b>의 점수제를 쓴다. 점수는 NICE평가정보, 코리아크레딧뷰로(KCB) 같은 <span class="term">개인신용평가회사</span>가 매기고, 은행과 카드사는 이 점수와 자체 심사를 함께 써서 대출 여부, 금리, 한도를 정한다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 420 456" role="img" aria-label="신용 정보의 흐름: 금융회사들이 거래 정보를 신용정보 집중기관과 개인신용평가회사로 보내고, 평가회사가 점수를 매기면 금융회사가 그 점수로 금리와 한도를 정한다.">
+        <defs><marker id="fb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="40" y="10" width="370" height="122" rx="12" class="f-surface"/>
+        <text x="225" y="36" text-anchor="middle" class="lbl-b">나의 거래</text>
+        <text x="135" y="64" text-anchor="middle" class="lbl">카드 결제·상환</text>
+        <text x="135" y="88" text-anchor="middle" class="lbl">대출 잔액</text>
+        <text x="315" y="64" text-anchor="middle" class="lbl">연체 여부</text>
+        <text x="315" y="88" text-anchor="middle" class="lbl">거래한 기간</text>
+        <text x="225" y="118" text-anchor="middle" class="lbl-dim">통신·공공요금 납부 (본인이 내면 가점)</text>
+        <path d="M225 134 L225 166" class="s-line" marker-end="url(#fb)"/>
+        <rect x="110" y="170" width="230" height="112" rx="12" class="f-elev"/>
+        <text x="225" y="196" text-anchor="middle" class="lbl-b">개인신용평가회사</text>
+        <text x="225" y="218" text-anchor="middle" class="lbl-dim">NICE평가정보, KCB 등</text>
+        <text x="225" y="246" text-anchor="middle" class="lbl">정보를 모아</text>
+        <text x="225" y="268" text-anchor="middle" class="lbl">통계 모형으로 점수화</text>
+        <path d="M225 284 L225 314" class="s-acc" marker-end="url(#fb)"/>
+        <rect x="125" y="318" width="200" height="96" rx="12" class="f-acc-soft"/>
+        <text x="225" y="346" text-anchor="middle" class="lbl-acc">신용점수</text>
+        <text x="225" y="372" text-anchor="middle" class="lbl-b">1 ~ 1,000점</text>
+        <text x="225" y="396" text-anchor="middle" class="lbl-dim">평가사마다 다르다</text>
+        <path d="M123 366 C 14 366, 14 72, 36 72" class="s-dash" marker-end="url(#fb)"/>
+        <text x="210" y="444" text-anchor="middle" class="lbl-dim">점수가 다음 거래의 금리·한도·승인을 바꾼다</text>
+      </svg>
+      <figcaption><b>그림 2. 신용 정보의 흐름.</b> 거래 기록이 모여 점수가 되고, 점수가 다시 다음 거래 조건을 정한다. 좋은 기록은 더 싼 빚으로, 나쁜 기록은 더 비싼 빚으로 이어지는 순환이다.</figcaption>
+    </figure>
+
+    <p>평가 모형의 세부 내용은 회사의 영업 비밀이다. 다만 어떤 종류의 정보를 얼마나 무겁게 보는지는 대략 공개되어 있다. 회사마다, 해마다 조금씩 다르지만 큰 틀은 네 가지다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>구성 요소</th><th>무엇을 보나</th><th class="num">대략 비중(약)</th></tr></thead>
+      <tbody>
+        <tr><td><b>상환 이력</b></td><td>약속한 날에 갚았는가. 연체의 금액·기간·횟수, 연체 후 얼마나 지났는가</td><td class="num">30~40%</td></tr>
+        <tr><td><b>부채 수준</b></td><td>지금 빚이 얼마인가. 대출 잔액, 카드 한도 대비 사용 비율</td><td class="num">25% 안팎</td></tr>
+        <tr><td><b>신용 거래 기간</b></td><td>얼마나 오래 신용 거래를 해 왔는가. 첫 거래와 유지 기간</td><td class="num">10% 안팎</td></tr>
+        <tr><td><b>신용 형태</b></td><td>어떤 빚인가. 현금서비스·카드론·고금리 대출 이용, 체크카드 실적, 비금융 정보</td><td class="num">25% 안팎</td></tr>
+      </tbody>
+    </table></div>
+    <p>몇 가지 오해도 바로잡아 둔다. 신용점수를 <b>조회하는 것만으로는</b> 점수가 내려가지 않는다. 통신요금·공공요금을 꾸준히 낸 기록을 제출하면 가점을 받을 수 있다. 반대로 "빚이 하나도 없으면 최고점"도 아니다. 기록이 없는 사람은 판단할 근거가 없어 점수가 어중간하게 나온다. 사회초년생의 점수가 낮은 주된 이유가 이것이다.</p>
+    <p>아래 저울은 이 네 요소를 단순하게 흉내 낸 <b>교육용 모형</b>이다. 실제 점수 계산과는 다르다. 행동 버튼을 눌러 바늘이 어떻게 움직이는지, 무엇이 빨리 떨어뜨리고 무엇이 천천히 올리는지를 본다.</p>
+
+    <div class="sim" id="sim-score">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>신용점수 저울: 행동이 바늘을 움직인다 (교육용 단순 모형)</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cs-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="cs-actions">
+            <button class="btn good" id="cs-pay1">한 달 완납</button>
+            <button class="btn good" id="cs-pay6">6개월 꾸준히 완납</button>
+            <button class="btn harm" id="cs-full">한도 90% 사용</button>
+            <button class="btn harm" id="cs-cash">현금서비스 이용</button>
+            <button class="btn harm" id="cs-loan">카드론 이용</button>
+            <button class="btn harm" id="cs-late">5일 연체 (10만원 이상)</button>
+            <button class="btn harm" id="cs-long">90일 장기 연체</button>
+            <button class="btn" id="cs-look">내 점수 조회</button>
+          </div>
+          <div class="btn-row"><button class="btn" id="cs-re">처음 상태로</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">점수(모형)</span><span class="v" id="cs-o-s">—</span></div>
+        <div class="stat"><span class="k">방금 변화</span><span class="v" id="cs-o-d">—</span></div>
+        <div class="stat"><span class="k">흐른 시간</span><span class="v" id="cs-o-m">—</span></div>
+        <div class="stat"><span class="k">기록에 남은 연체</span><span class="v" id="cs-o-l">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "5일 연체"를 한 번 누른다. 바늘이 크게 떨어진다. ② 이어서 "6개월 꾸준히 완납"을 여러 번 눌러 원래 점수로 돌아오는 데 몇 개월이 걸리는지 센다. 떨어지는 데는 한 번, 돌아오는 데는 수년이다. ③ "내 점수 조회"는 몇 번을 눌러도 바늘이 움직이지 않는다. ④ "한도 90% 사용" 뒤에 완납하면 부채 수준이 금방 회복된다. 사용률은 연체보다 기억이 짧다. (실제 평가 모형은 공개되지 않는다. 비중 40·25·10·25와 회복 속도는 교육용 가정이다.)</div>
+    </div>
+
+    <p>저울에서 본 비대칭이 핵심이다. 점수는 <b>떨어질 때는 빠르고 오를 때는 느리다</b>. 연체 한 번이 수년 치의 성실한 기록을 지우고, 그 기록이 흐려지는 데는 다시 수년이 걸린다. 한편 카드 사용률처럼 지금의 상태를 보는 항목은 상태가 바뀌면 곧 따라 바뀐다. 그러니 신용 관리의 우선순위는 분명하다. 첫째, 절대 연체하지 않는다. 둘째, 한도를 꽉 채워 쓰지 않는다. 셋째, 현금서비스·카드론처럼 '급전' 신호를 보내는 빚을 피한다.</p>
+  </section>
+
+  <section id="late">
+    <h2>연체가 남기는 흔적</h2>
+    <p>연체는 "며칠 늦게 낸 것"으로 끝나지 않는다. 늦은 날짜와 금액에 따라 기록이 남는 범위가 달라진다. 하루라도 늦으면 그 회사 안에 기록이 남고 <span class="term">연체이자</span>가 붙는다. 금융회사의 연체이자율은 원래 약정 금리에 최대 3%p를 더한 수준으로 묶여 있다. 그리고 <b>10만원 이상을 5영업일 이상</b> 연체하면 단기 연체 정보로 다른 금융회사들과 공유되어 점수가 크게 떨어진다. 90일을 넘기면 장기 연체로 등록되어 새 대출이나 카드 발급이 사실상 막힌다.</p>
+    <p>아래에서 연체 금액을 정하고, 위쪽 띠의 손잡이를 끌어 연체 일수를 늘려 본다. 아래쪽 그래프는 연체를 갚은 뒤 점수가 어떻게 회복되는지를 보여 주는 교육용 모형이다.</p>
+
+    <div class="sim" id="sim-late">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>연체의 그림자: 며칠, 얼마나 늦었는가</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="lt-cv"></canvas><span class="hint">위쪽 띠의 손잡이를 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>연체 금액 <output id="lt-a-out"></output></span><input type="range" id="lt-a" min="10000" max="3000000" step="10000" value="150000"></label>
+          <div class="seg" id="lt-pre"><button data-value="3">3일</button><button data-value="7" class="on">7일</button><button data-value="40">40일</button><button data-value="100">100일</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">단계</span><span class="v ko" id="lt-o-s">—</span></div>
+        <div class="stat"><span class="k">연체이자(연 21% 가정)</span><span class="v" id="lt-o-i">—</span></div>
+        <div class="stat"><span class="k">점수 하락(모형)</span><span class="v" id="lt-o-d">—</span></div>
+        <div class="stat"><span class="k">기록이 쓰이는 기간(약)</span><span class="v ko" id="lt-o-k">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 금액 15만원에서 연체를 3일 → 7일로 늘린다. 5영업일 선을 넘는 순간 단계가 바뀌고 점수 하락이 커진다. ② 금액을 9만원으로 내린다. 금융권 공유 기준(10만원)에는 못 미치지만 그 회사의 기록에는 남는다. 소액이라고 안전한 것이 아니다. ③ 100일로 늘린다. 연체이자는 1만원도 안 되는데 점수 회복에는 5년이 걸린다. 이자보다 기록이 비싸다. (영업일과 달력일의 차이, 평가사별 보존 기간 차이는 단순화했다. 기준 금액·기간은 제도 변경에 따라 달라질 수 있다.)</div>
+    </div>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>연체 단계</th><th>무슨 일이 생기나</th><th>기록(약)</th></tr></thead>
+      <tbody>
+        <tr><td>1~4영업일</td><td>연체이자, 카드 사용 정지 가능, 해당 회사 내부 기록</td><td>그 회사의 평가에 남는다</td></tr>
+        <tr><td>5영업일 이상, 10만원 이상</td><td>단기 연체 정보가 금융권에 공유, 점수 큰 폭 하락</td><td>갚은 뒤에도 약 3~5년 평가에 쓰일 수 있다</td></tr>
+        <tr><td>90일 이상</td><td>장기 연체 등록, 신규 대출·카드 사실상 불가, 추심</td><td>갚은 뒤에도 최장 5년 안팎</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout warn">
+      <strong>자동이체 잔고 부족이 가장 흔한 연체다</strong>
+      많은 연체는 갚을 돈이 없어서가 아니라 결제일에 통장 잔고가 잠깐 모자라서 생긴다. 카드값·통신비가 빠지는 날과 월급날의 순서를 맞추고, 결제 계좌에 작은 여유분을 늘 남겨 둔다. 실수로 늦었다면 알게 된 즉시, 5영업일이 지나기 전에 갚는다. 기준 금액과 기간, 기록 보존 기간은 제도와 평가사에 따라 바뀔 수 있다.
+    </div>
+  </section>
+
+  <section id="card">
+    <h2>체크카드와 신용카드: 돈이 빠지는 날</h2>
+    <p>두 카드는 겉모습이 같고 결제하는 동작도 같다. 차이는 <b>돈이 언제 빠지느냐</b>다. <span class="term">체크카드</span><span class="en">(Debit card)</span>는 결제하는 순간 내 통장에서 돈이 빠진다. 통장에 없는 돈은 쓸 수 없다. <span class="term">신용카드</span><span class="en">(Credit card)</span>는 카드사가 가게에 먼저 돈을 내주고, 한 달 치를 모아 정해진 <span class="term">결제일</span>에 내 통장에서 한꺼번에 가져간다. 그 사이의 몇 주 동안 나는 카드사에 돈을 빌린 상태다. 일시불로 제때 갚으면 이자가 없을 뿐, 엄연한 빚이다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 420 276" role="img" aria-label="체크카드는 결제 즉시 통장에서 돈이 빠지고, 신용카드는 카드사가 먼저 가게에 돈을 내고 결제일에 통장에서 한꺼번에 빠진다.">
+        <defs><marker id="fc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <text x="10" y="22" class="lbl-b">체크카드</text>
+        <line x1="10" y1="60" x2="410" y2="60" class="s-axis"/>
+        <circle cx="60" cy="60" r="7" class="f-acc"/>
+        <text x="60" y="46" text-anchor="middle" class="lbl">결제</text>
+        <path d="M60 70 L60 104" class="s-bad" marker-end="url(#fc)"/>
+        <text x="72" y="98" class="lbl-bad">즉시 통장 −</text>
+        <text x="300" y="98" text-anchor="middle" class="lbl-dim">통장 잔고 = 실제로 쓸 수 있는 돈</text>
+        <text x="10" y="144" class="lbl-b">신용카드</text>
+        <line x1="10" y1="190" x2="410" y2="190" class="s-axis"/>
+        <rect x="60" y="182" width="270" height="16" rx="4" class="f-warn-soft"/>
+        <circle cx="60" cy="190" r="7" class="f-acc"/>
+        <text x="60" y="174" text-anchor="middle" class="lbl">결제</text>
+        <text x="190" y="218" text-anchor="middle" class="lbl-dim">카드사가 빌려준 기간(신용공여기간)</text>
+        <circle cx="330" cy="190" r="7" class="f-bad"/>
+        <text x="330" y="174" text-anchor="middle" class="lbl">결제일</text>
+        <path d="M330 200 L330 234" class="s-bad" marker-end="url(#fc)"/>
+        <text x="340" y="228" class="lbl-bad">한꺼번에 −</text>
+        <text x="210" y="264" text-anchor="middle" class="lbl-dim">그 사이 통장 잔고는 '이미 쓴 돈'을 포함한다</text>
+      </svg>
+      <figcaption><b>그림 3. 같은 결제, 다른 시간.</b> 신용카드는 결제와 출금 사이에 틈을 만든다. 이 틈 덕분에 편리하지만, 통장 잔고가 실제보다 많아 보이는 착시도 함께 생긴다.</figcaption>
+    </figure>
+
+    <p>그 착시를 직접 본다. 한결의 숫자를 빌려 1~2월 두 달을 그렸다. 월급 265.6만원은 25일에 들어오고, 고정비(월세·관리비·통신·구독·학자금 상환) 약 94만원은 26일에 자동이체로 나간다. 나머지 생활비 118만원은 매일 조금씩 카드로 쓴다. 카드 종류를 바꾸고, 재생하거나 그래프를 끌어 날짜를 옮겨 본다.</p>
+
+    <div class="sim" id="sim-mirage">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>보이는 잔고와 진짜 잔고</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="mg-cv"></canvas><span class="hint">좌우로 끌어 날짜를 옮긴다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="mg-mode"><button data-value="check">체크카드</button><button data-value="credit" class="on">신용카드</button></div>
+          <label class="check"><input type="checkbox" id="mg-lim"> 남은 카드 한도까지 '쓸 수 있는 돈'으로 보기</label>
+          <div class="btn-row"><button class="btn primary" id="mg-go">재생</button><button class="btn" id="mg-re">처음으로</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">날짜</span><span class="v ko" id="mg-o-d">—</span></div>
+        <div class="stat"><span class="k">통장에 보이는 돈</span><span class="v" id="mg-o-b">—</span></div>
+        <div class="stat"><span class="k">아직 안 빠진 카드값</span><span class="v" id="mg-o-o">—</span></div>
+        <div class="stat"><span class="k">진짜 쓸 수 있는 돈</span><span class="v" id="mg-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 신용카드에서 1월 13일과 14일을 비교한다. 결제일 하루 만에 통장이 118만원 줄어든다. ② 체크카드로 바꾼다. 통장 선(초록)이 신용카드의 '진짜 쓸 수 있는 돈'(금색 점선)과 똑같다. 쓴 돈은 같고 보이는 방식만 다르다. ③ 한도 보기를 켠다. 한도 500만원을 더하면 쓸 수 있어 보이는 돈이 600만~800만원대로 부푼다. 한도는 내 돈이 아니라 빌릴 수 있는 최대치다. (결제일 14일, 이용기간 전월 1일~말일, 한도 500만원, 1월 1일 잔고 150만원 가정)</div>
+    </div>
+
+    <p>체크카드에서 통장 잔고는 정직하다. 신용카드에서 통장 잔고는 <b>이미 쓴 돈을 아직 품고 있는</b> 숫자다. 결제일 직전에 통장이 넉넉해 보이는 것은 지난달의 내가 쓴 돈이 아직 안 빠졌기 때문이다. 카드 앱이 보여 주는 '남은 한도'는 더 큰 착시다. 한도는 소득이 아니라 카드사가 정한 대출 상한이다. 신용카드를 쓸 때는 머릿속에서 늘 "통장 잔고 − 이번 달 카드값"을 계산하는 습관이 필요하다.</p>
+
+    <h3>결제일과 이용기간</h3>
+    <p>신용카드는 결제일마다 일정한 <span class="term">이용기간</span>에 쓴 돈을 묶어 청구한다. 결제일을 14일로 정하면 보통 전월 1일부터 말일까지 쓴 돈이 이번 달 14일에 빠진다. 결제일을 바꾸면 이용기간도 함께 밀린다. 같은 날 산 물건이라도 결제일에 따라 돈이 빠지는 날이 달라진다. 아래 달력에서 구매일(초록 칸)을 끌어 보고, 결제일을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-cal">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>카드 결제 달력: 이번에 쓴 돈은 언제 빠지나</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cal-cv"></canvas><span class="hint">구매일 칸을 끈다</span></div>
+        <div class="sim-controls">
+          <div class="ctrl"><span>결제일</span></div>
+          <div class="seg" id="cal-pay"><button data-value="1">1일</button><button data-value="14" class="on">14일</button><button data-value="25">25일</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">구매일</span><span class="v ko" id="cal-o-p">—</span></div>
+        <div class="stat"><span class="k">묶이는 이용기간</span><span class="v ko" id="cal-o-r">—</span></div>
+        <div class="stat"><span class="k">돈이 빠지는 날</span><span class="v ko" id="cal-o-d">—</span></div>
+        <div class="stat"><span class="k">빌린 기간</span><span class="v" id="cal-o-n">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 결제일 14일에서 구매일을 3월 31일과 4월 1일로 옮긴다. 하루 차이로 돈이 빠지는 날이 한 달 밀린다. ② 이용기간 첫날에 사면 빌린 기간이 가장 길고(40일 넘게), 마지막 날에 사면 가장 짧다(약 2주). ③ 결제일을 25일로 바꾸면 이용기간이 전월 12일~당월 11일로 바뀐다. (교육용 규칙: 결제일 14일 전까지 쓴 돈이 그 결제일에 청구된다. 실제 이용기간은 카드사마다 하루 이틀 다르다.)</div>
+    </div>
+
+    <p>결제일은 내가 고를 수 있다. 원칙은 하나다. <b>월급이 들어온 뒤에 카드값이 빠지게</b> 한다. 월급날이 25일인데 결제일이 23일이면 매달 이틀 동안 잔고 부족 위험을 안고 산다. 또 이용기간이 달력의 한 달(1일~말일)과 맞으면 "이번 달에 카드로 얼마 썼나"를 가계부와 맞춰 보기 쉽다. <a href="budget.html">7장</a>에서 짠 예산과 카드 명세서가 같은 달을 가리키게 하는 것이다.</p>
+    <div class="callout">
+      <strong>할부도 빚이다</strong>
+      할부는 한 번의 결제를 여러 달로 나눠 갚는 빚이다. 무이자 할부가 아니면 연 10%대의 할부 수수료가 붙는다. 무이자라도 다음 달들의 월급을 미리 써 버린 것이어서, 할부가 여러 개 겹치면 매달 빠져나가는 고정비가 조용히 늘어난다. 할부 잔액은 카드 한도도 함께 잡아먹는다.
+    </div>
+  </section>
+
+  <section id="revolving">
+    <h2>리볼빙, 현금서비스, 카드론: 카드 속의 고금리 빚</h2>
+    <p>신용카드에는 일시불 결제 말고도 세 가지 빚이 들어 있다. 이름이 친근해서 빚이라는 느낌이 덜하지만, 금리는 이 책에 나오는 합법적인 빚 가운데 가장 높은 편이다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>이름</th><th>무엇인가</th><th class="num">금리(연, 약)</th></tr></thead>
+      <tbody>
+        <tr><td><b>리볼빙</b><br><small class="en">일부결제금액이월약정</small></td><td>이번 달 카드값 중 일부(예: 10%)만 내고 나머지를 다음 달로 넘긴다. 넘긴 돈에 이자가 붙고, 다음 달 카드값에 다시 얹힌다.</td><td class="num">13~19%대</td></tr>
+        <tr><td><b>현금서비스</b><br><small class="en">단기카드대출</small></td><td>카드로 현금을 바로 빌린다. 쓰는 날부터 이자가 붙고 다음 결제일에 한꺼번에 갚는다.</td><td class="num">15~19%대</td></tr>
+        <tr><td><b>카드론</b><br><small class="en">장기카드대출</small></td><td>카드사가 해 주는 신용대출. 몇 달~몇 년에 걸쳐 나눠 갚는다.</td><td class="num">12~18%대</td></tr>
+        <tr><td>참고: 일시불</td><td>결제일에 전액을 낸다.</td><td class="num">0%</td></tr>
+      </tbody>
+    </table></div>
+    <p>가장 조심할 것은 <span class="term">리볼빙</span><span class="en">(Revolving)</span>이다. 카드 앱에서 '최소결제', '결제금액 조정', '일부만 결제' 같은 이름으로 권유되는데, 이번 달이 가벼워지는 대신 남은 돈이 고금리 빚으로 바뀐다. 이번 달 최소결제 금액은 남은 잔액의 일정 비율이어서, 잔액이 줄면 결제액도 같이 준다. 그래서 빚이 좀처럼 끝나지 않는다. 아래에서 잔액, 금리, 최소결제 비율을 바꿔 본다. 그다음 "매달 추가 사용"을 켜 본다.</p>
+
+    <div class="sim" id="sim-rv">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>리볼빙 눈덩이: 최소결제만 하면</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="rv-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>이월 잔액 <output id="rv-b-out"></output></span><input type="range" id="rv-b" min="500000" max="10000000" step="100000" value="3000000"></label>
+          <label class="ctrl"><span>리볼빙 금리(연) <output id="rv-r-out"></output></span><input type="range" id="rv-r" min="5" max="20" step="0.5" value="18"></label>
+          <label class="ctrl"><span>최소결제 비율 <output id="rv-p-out"></output></span><input type="range" id="rv-p" min="5" max="50" step="1" value="10"></label>
+          <div class="ctrl"><span>매달 카드로 새로 쓰는 돈</span></div>
+          <div class="seg" id="rv-s"><button data-value="0" class="on">없음</button><button data-value="100000">10만원</button><button data-value="300000">30만원</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>남은 잔액</span><span><i style="background:var(--warn)"></i>누적 이자</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">다 갚는 데 걸리는 기간</span><span class="v ko" id="rv-o-n">—</span></div>
+        <div class="stat"><span class="k">낸 이자 합계</span><span class="v" id="rv-o-i">—</span></div>
+        <div class="stat"><span class="k">첫 달 이자</span><span class="v" id="rv-o-f">—</span></div>
+        <div class="stat"><span class="k">원금 대비 이자</span><span class="v" id="rv-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 300만원, 연 18%, 최소결제 10%에서 기간과 이자를 읽는다. 31개월, 이자 약 48만원이다. ② 최소결제 비율을 5%로 내린다. 매달 내는 돈은 절반인데 기간은 두 배 가까이(55개월), 이자는 두 배 넘게(약 104만원) 늘어난다. ③ "매달 10만원"을 켠다. 빚이 0으로 가지 않고 어느 높이에서 멈춘 채 이자만 계속 낸다. 30만원이면 잔액이 오히려 커진다. (매달 잔액에 월 이자를 붙이고, 잔액의 최소결제 비율과 5만원 중 큰 금액을 낸다고 가정했다. 실제 리볼빙 약정은 카드사마다 다르다.)</div>
+    </div>
+
+    <p>최소결제 비율이 낮을수록 이번 달은 편하지만 빚의 수명은 길어진다. 더 무서운 것은 세 번째 실험이다. 리볼빙을 쓰는 사람은 대개 카드를 계속 쓴다. 새로 쓴 돈까지 다음 달로 넘어가면 잔액은 줄지 않고 <b>매달 내는 돈의 상당 부분이 이자</b>가 된다. 빚이 끝나지 않는 상태, 곧 빚의 쳇바퀴다.</p>
+    <p>왜 이렇게 오래 걸리는지 한 달씩 넘겨 보면 보인다. 아래는 같은 300만원을 두 방식으로 갚는다. 위는 매달 잔액의 일정 비율(최소결제)을, 아래는 <b>첫 달 최소결제 금액을 끝까지 고정</b>해서 낸다. 막대의 빨간 부분이 이자, 초록 부분이 실제로 줄어든 원금이다.</p>
+
+    <div class="sim" id="sim-mp">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>최소결제의 함정: 줄어드는 결제액, 늘어나는 기간</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="mp-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="ctrl"><span>최소결제 비율(300만원, 연 18%)</span><div class="seg" id="mp-p"><button data-value="0.05">5%</button><button data-value="0.1" class="on">10%</button><button data-value="0.2">20%</button></div></div>
+          <div class="btn-row"><button class="btn primary" id="mp-go">일시정지</button><button class="btn" id="mp-re">처음부터</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>이자</span><span><i style="background:var(--ok)"></i>갚은 원금</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">비율 결제: 기간</span><span class="v" id="mp-o-an">—</span></div>
+        <div class="stat"><span class="k">비율 결제: 이자</span><span class="v" id="mp-o-ai">—</span></div>
+        <div class="stat"><span class="k">금액 고정: 기간</span><span class="v" id="mp-o-bn">—</span></div>
+        <div class="stat"><span class="k">금액 고정: 이자</span><span class="v" id="mp-o-bi">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 10%에서 위아래 막대 높이를 비교한다. 위쪽은 달마다 결제액이 줄고 꼬리가 길게 늘어진다. 아래쪽은 같은 높이로 11개월 만에 끝난다. ② 5%로 바꾼다. 위쪽 꼬리가 4년 넘게 이어진다. ③ 위쪽 막대의 초반부를 본다. 결제액이 줄어도 이자 몫(빨강)은 천천히 줄어서, 원금은 생각보다 더디게 갚아진다.</div>
+    </div>
+
+    <p>비율 결제는 잔액이 줄수록 결제액도 줄어 원금 감소가 점점 느려진다. 첫 달 금액을 계속 내기만 해도 기간은 3분의 1, 이자는 절반 근처로 줄어든다(10% 기준 31개월 → 11개월, 약 48만원 → 약 27만원). 리볼빙에서 빠져나오는 첫걸음은 <b>추가 사용을 멈추고, 결제액을 고정하거나 늘리는 것</b>이다. 리볼빙 약정을 해지하면 다음 결제일부터는 다시 전액이 청구된다.</p>
+    <div class="callout warn">
+      <strong>금리와 제도는 해마다 바뀐다</strong>
+      이 장의 카드 금리 범위, 법정 최고금리, 연체 정보 기준은 2026년 기준의 대략적인 대표값이다. 카드사와 개인의 신용에 따라 실제 금리는 크게 다르고, 기준금리와 정책에 따라 해마다 달라진다. 실제 금리는 카드 명세서와 카드사 공시에서 확인한다.
+    </div>
+  </section>
+
+  <section id="maxrate">
+    <h2>법정 최고금리와 불법사금융</h2>
+    <p>아무리 신용이 낮아도 합법적인 금융회사가 받을 수 있는 이자에는 상한이 있다. 2026년 기준 <span class="term">법정 최고금리</span>는 <b>연 20%</b>다. 이를 넘는 이자 약정은 넘는 부분이 무효이고, 이미 냈다면 돌려받을 수 있다. 연 60% 초과 같은 반사회적인 대부 계약은 원금과 이자 전부를 무효로 할 수 있도록 법이 강화되었다(2025년 시행).</p>
+    <p>문제는 이 선 바깥이다. 은행과 카드사에서 거절당한 사람에게 "신용 무관, 당일 입금"을 내세우는 <span class="term">불법사금융</span>이 접근한다. 이들은 보통 연이율 대신 "일주일에 20만원만 더", "100만원 빌려 가면 30만원 떼고 입금" 같은 말을 쓴다. 이 말을 연이율로 바꾸면 정체가 드러난다.</p>
+    <div class="formula">$$\text{연 환산 이율} = \frac{\text{갚을 돈} - \text{실제로 받은 돈}}{\text{실제로 받은 돈}} \times \frac{365}{\text{빌린 일수}}$$<div class="where">단리로 환산한 값이다. 수수료·선이자를 떼고 받았다면 '실제로 받은 돈'은 그만큼 작다. 일주일에 50만원을 빌려 70만원을 갚으면 \(0.4 \times 365/7 \approx 20.9\), 곧 연 약 2,086%다.</div></div>
+    <p>아래 금리 사다리는 가로축이 로그 눈금이다. 1%에서 10%로 가는 거리와 100%에서 1,000%로 가는 거리가 같다. 손잡이를 끌거나 제안 예시를 눌러, 사채의 금리가 합법적인 빚들과 얼마나 멀리 떨어져 있는지 본다.</p>
+
+    <div class="sim" id="sim-ladder">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>금리 사다리: 20%의 선 너머</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="ld-cv"></canvas><span class="hint">손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="btn-row">
+            <button class="btn sm" data-rate="0.14">카드론 14%</button>
+            <button class="btn sm" data-rate="0.2">법정 최고 20%</button>
+            <button class="btn sm" data-rate="3.65">100만원 빌려 한 달 뒤 130만원</button>
+            <button class="btn sm" data-rate="20.857">50만원 빌려 일주일 뒤 70만원</button>
+          </div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">연이율</span><span class="v" id="ld-o-r">—</span></div>
+        <div class="stat"><span class="k">100만원, 1개월 이자</span><span class="v" id="ld-o-m">—</span></div>
+        <div class="stat"><span class="k">100만원, 1년 이자</span><span class="v" id="ld-o-y">—</span></div>
+        <div class="stat"><span class="k">판정</span><span class="v ko" id="ld-o-j">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 손잡이를 학자금(1.7%)에서 카드론(14%)까지 옮긴다. 합법적인 빚은 모두 왼쪽 3분의 1 안에 모여 있다. ② "일주일 뒤 70만원"을 누른다. 연 2,000%가 넘는다. 100만원을 1년 빌리면 이자만 2천만원이 넘는 셈이다. ③ 20% 선 바로 오른쪽부터 빨간 영역이다. 이 영역의 이자는 법적으로 갚을 의무가 없다. (대표 금리 표시는 2026년 기준 대략값, 단리 환산)</div>
+    </div>
+
+    <div class="callout warn">
+      <strong>대출 사기와 불법사금융의 신호</strong>
+      <p>다음 가운데 하나라도 들어 있으면 멈춘다. ① 대출 전에 수수료·보증금·'신용 올리는 비용'을 먼저 보내라고 한다. ② 저금리로 갈아타게 해 준다며 기존 대출을 특정 계좌로 갚으라고 한다. ③ 문자 링크로 앱을 설치하게 하거나 신분증 사진·인증번호를 요구한다. ④ 통장이나 체크카드를 빌려 달라고 한다(대포통장으로 쓰이면 나도 처벌받는다). ⑤ 연락처 목록 접근을 요구하거나 지인에게 알리겠다고 위협한다. ⑥ 이율 대신 "일주일에 얼마", "선이자 떼고 입금"으로 말한다.</p>
+      <p>정식 금융회사는 대출 전에 돈을 먼저 요구하지 않는다. 의심되면 금융감독원(1332)에 상담하고, 협박·불법 추심은 경찰(112)에 신고한다. 불법사금융 피해자는 정부가 지원하는 채무자대리인(무료 변호사) 제도를 이용할 수 있고, 급한 생활비가 필요하면 서민금융진흥원(1397) 같은 공적 창구부터 확인한다.</p>
+    </div>
+  </section>
+
+  <section id="good-bad">
+    <h2>좋은 빚과 나쁜 빚</h2>
+    <p>빚이 모두 나쁜 것은 아니다. 대부분의 사람은 집을 살 때, 공부할 때, 사업을 시작할 때 빚을 진다. 질문은 "빚이 있느냐"가 아니라 "이 빚이 미래의 나를 더 부유하게 만드느냐"다. 두 가지를 본다. 첫째, 빌린 돈이 <b>자산이나 소득을 만드는가</b>, 아니면 소비로 사라지는가. 둘째, 그 빚의 <b>금리가 빌린 돈이 벌어 오는 것보다 낮은가</b>.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 420 410" role="img" aria-label="좋은 빚과 나쁜 빚을 가르는 두 축. 가로축은 금리, 세로축은 빌린 돈이 자산이나 소득을 만드는지 소비로 사라지는지다.">
+        <defs><marker id="fd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="44" y="8" width="184" height="176" rx="10" class="f-ok-soft"/>
+        <rect x="234" y="8" width="184" height="176" rx="10" class="f-warn-soft"/>
+        <rect x="44" y="190" width="184" height="176" rx="10" class="f-warn-soft"/>
+        <rect x="234" y="190" width="184" height="176" rx="10" class="f-bad-soft"/>
+        <text x="136" y="36" text-anchor="middle" class="lbl-b">좋은 빚에 가깝다</text>
+        <text x="136" y="64" text-anchor="middle" class="lbl">저금리 학자금 대출</text>
+        <text x="136" y="88" text-anchor="middle" class="lbl">감당 가능한 주택 대출</text>
+        <text x="136" y="142" text-anchor="middle" class="lbl-dim">소득·자산이 금리보다</text>
+        <text x="136" y="162" text-anchor="middle" class="lbl-dim">크게 자란다</text>
+        <text x="326" y="36" text-anchor="middle" class="lbl-b">따져 봐야 한다</text>
+        <text x="326" y="64" text-anchor="middle" class="lbl">고금리로 낸</text>
+        <text x="326" y="84" text-anchor="middle" class="lbl">사업·자격증 비용</text>
+        <text x="326" y="110" text-anchor="middle" class="lbl">빚내서 하는 투자</text>
+        <text x="326" y="142" text-anchor="middle" class="lbl-dim">수익이 금리를 넘을지</text>
+        <text x="326" y="162" text-anchor="middle" class="lbl-dim">불확실</text>
+        <text x="136" y="218" text-anchor="middle" class="lbl-b">작게, 짧게</text>
+        <text x="136" y="246" text-anchor="middle" class="lbl">무이자 할부로 산 필수품</text>
+        <text x="136" y="270" text-anchor="middle" class="lbl">제때 갚는 일시불 카드</text>
+        <text x="136" y="324" text-anchor="middle" class="lbl-dim">편리하지만 미래</text>
+        <text x="136" y="344" text-anchor="middle" class="lbl-dim">소비를 당겨 쓴다</text>
+        <text x="326" y="218" text-anchor="middle" class="lbl-b">나쁜 빚</text>
+        <text x="326" y="246" text-anchor="middle" class="lbl">리볼빙으로 간 여행·쇼핑</text>
+        <text x="326" y="270" text-anchor="middle" class="lbl">현금서비스로 메운 생활비</text>
+        <text x="326" y="324" text-anchor="middle" class="lbl-dim">사라진 소비에</text>
+        <text x="326" y="344" text-anchor="middle" class="lbl-dim">고금리 이자가 붙는다</text>
+        <line x1="44" y1="380" x2="416" y2="380" class="s-axis" marker-end="url(#fd)"/>
+        <text x="230" y="402" text-anchor="middle" class="lbl-dim">금리 낮음 → 높음</text>
+        <line x1="32" y1="366" x2="32" y2="10" class="s-axis" marker-end="url(#fd)"/>
+        <text x="18" y="96" text-anchor="middle" class="lbl-dim" transform="rotate(-90 18 96)">자산·소득을 만든다</text>
+        <text x="18" y="278" text-anchor="middle" class="lbl-dim" transform="rotate(-90 18 278)">소비로 사라진다</text>
+      </svg>
+      <figcaption><b>그림 4. 빚을 나누는 두 축.</b> 같은 빚이라도 무엇에 쓰고 얼마의 금리를 내는지에 따라 자리가 달라진다. 오른쪽 아래 칸이 가장 먼저 없애야 할 빚이다. 왼쪽 위 칸도 금액이 소득에 비해 너무 크면 위험해진다.</figcaption>
+    </figure>
+
+    <p>좋은 빚도 <b>너무 많으면</b> 나쁜 빚이 된다. 소득에서 빚 갚는 데 나가는 몫이 커지면 작은 충격(이직, 병원비, 금리 인상)에도 버티지 못한다. 그 몫을 재는 잣대가 연 소득 대비 연간 원리금 상환액이다. 은행이 대출 한도를 정할 때 쓰는 DSR(<a href="loan.html">10장</a>)과 같은 생각이다. 아래에서 소득을 정하고 빚을 하나씩 더해 본다.</p>
+
+    <div class="sim" id="sim-dg">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>빚 부담 게이지: 소득의 몇 %가 빚 갚는 데 나가나</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="dg-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>세전 연소득 <output id="dg-i-out"></output></span><input type="range" id="dg-i" min="20000000" max="100000000" step="1000000" value="36000000"></label>
+          <label class="check"><input type="checkbox" id="dg-c0" checked> 학자금 1,200만원 (1.7%, 10년)</label>
+          <label class="check"><input type="checkbox" id="dg-c1"> 자동차 할부 2,000만원 (5.5%, 5년)</label>
+          <label class="check"><input type="checkbox" id="dg-c2"> 신용대출 3,000만원 (6%, 5년)</label>
+          <label class="check"><input type="checkbox" id="dg-c3"> 카드론 500만원 (14%, 2년)</label>
+          <label class="check"><input type="checkbox" id="dg-c4"> 리볼빙 300만원 (18%, 최소 10%)</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">월 상환액</span><span class="v" id="dg-o-m">—</span></div>
+        <div class="stat"><span class="k">연 원리금 ÷ 연소득</span><span class="v" id="dg-o-r">—</span></div>
+        <div class="stat"><span class="k">월 실수령 대비</span><span class="v" id="dg-o-n">—</span></div>
+        <div class="stat"><span class="k">판정</span><span class="v ko" id="dg-o-j">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 한결(연봉 3,600만원, 학자금만)의 게이지를 읽는다. 4%도 안 된다. ② 자동차 할부와 신용대출을 더한다. 월 실수령의 40%가 빚으로 나간다. ③ 카드론과 리볼빙을 더하면 은행권 기준선 40%를 넘는다. 이 상태에서는 작은 충격에도 연체로 이어지기 쉽다. (원리금균등 상환의 첫 달 금액, 리볼빙은 첫 달 최소결제액 기준. 실수령은 6장의 계산. 구간 색은 교육용 기준이다.)</div>
+    </div>
+
+    <p>게이지가 보여 주듯, 빚 하나하나는 감당할 만해 보여도 더해지면 다르다. 특히 금리가 높은 빚은 원금에 비해 월 상환액이 크고, 짧은 기간에 갚아야 해서 게이지를 빨리 밀어 올린다. 빚을 새로 질지 고민될 때는 "이 빚이 무엇을 만드는가"와 함께 "더하고 나면 게이지가 어디에 가는가"를 본다.</p>
+  </section>
+
+  <section id="payoff">
+    <h2>이미 진 빚을 갚는 순서: 눈덩이와 눈사태</h2>
+    <p>빚이 여러 개라면 매달 각 빚의 최소 상환액을 내고, 남는 돈을 어느 빚에 먼저 몰아줄지 정해야 한다. 대표적인 전략이 둘이다.</p>
+    <ul>
+      <li><span class="term">눈사태</span><span class="en">(Avalanche)</span>: <b>금리가 가장 높은 빚부터</b> 갚는다. 수학적으로 총이자가 가장 적다.</li>
+      <li><span class="term">눈덩이</span><span class="en">(Snowball)</span>: <b>잔액이 가장 작은 빚부터</b> 갚는다. 빚 하나가 빨리 사라지는 경험이 계속할 힘을 준다.</li>
+    </ul>
+    <p>어느 쪽이든 빚 하나를 다 갚으면 그 빚에 내던 최소 상환액까지 다음 빚으로 굴린다. 그래서 갚을수록 공격하는 돈이 커진다. 아래 예시의 네 가지 빚(숫자는 고칠 수 있다)으로 두 전략을 동시에 출발시킨다. 매달 빚 갚는 데 쓸 총액을 바꿔 가며 경주를 다시 돌려 본다.</p>
+
+    <div class="sim" id="sim-race">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>눈덩이와 눈사태의 경주</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="sn-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>매달 빚 갚는 데 쓰는 총액 <output id="sn-b-out"></output></span><input type="range" id="sn-b" min="500000" max="2000000" step="10000" value="900000"></label>
+          <div class="btn-row"><button class="btn primary" id="sn-go">일시정지</button><button class="btn" id="sn-re">다시 출발</button></div>
+        </div>
+      </div>
+      <div class="debt-grid" id="sn-grid"></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">눈덩이: 기간 · 총이자</span><span class="v ko" id="sn-o-s">—</span></div>
+        <div class="stat"><span class="k">눈사태: 기간 · 총이자</span><span class="v ko" id="sn-o-a">—</span></div>
+        <div class="stat"><span class="k">이자 차이</span><span class="v ko" id="sn-o-d">—</span></div>
+        <div class="stat"><span class="k">첫 빚을 없앤 달</span><span class="v ko" id="sn-o-f">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 월 90만원에서 경주를 본다. 눈덩이는 3개월 만에 가전 할부를 없애고, 눈사태는 리볼빙부터 줄여 이자를 약 4만원 덜 낸다. ② 총액을 최소 상환액 합(55만원)까지 내린다. 남는 돈이 없으니 두 전략이 똑같아진다. 전략보다 갚는 금액이 먼저다. ③ 리볼빙 금리를 19%, 잔액을 1,000만원으로 고친다. 고금리 빚이 클수록 눈사태의 이득이 커진다. (매달 각 빚에 월 이자를 붙이고 최소 상환액을 낸 뒤, 남는 돈을 전략 순서대로 몰아준다.)</div>
+    </div>
+
+    <p>이 예에서 두 전략의 이자 차이는 수만 원이다. 금리 차가 크고 고금리 빚의 잔액이 클수록 차이는 벌어진다. 원칙적으로는 눈사태가 돈을 아끼지만, 빚 갚기는 몇 년짜리 마라톤이라 중간에 포기하지 않는 것이 더 중요할 수 있다. 첫 승리가 필요한 사람에게는 눈덩이가 맞다. 어느 쪽이든 공통 규칙이 있다. <b>갚는 동안 새 빚을 만들지 않는다</b>, 그리고 <b>전략보다 매달 갚는 금액이 결과를 더 크게 바꾼다</b>.</p>
+    <div class="callout tip">
+      <strong>빚 갚기의 순서 정리</strong>
+      ① 모든 빚의 최소 상환액을 자동이체로 걸어 연체를 막는다. ② <a href="saving.html">8장</a>의 비상금을 작게라도(한 달 치) 먼저 만든다. 비상금이 없으면 다음 사고가 다시 카드 빚이 된다. ③ 리볼빙·현금서비스·카드론 같은 고금리 빚을 눈사태나 눈덩이로 정리한다. ④ 학자금처럼 금리가 예금보다 낮은 빚은 서두르지 않고 저축·투자와 함께 간다. 혼자 감당하기 어려우면 신용회복위원회의 채무조정 같은 공적 제도를 알아본다.
+    </div>
+  </section>
+
+  <section id="hangyeol">
+    <h2>한결의 첫 신용카드</h2>
+    <p>입사 두 달째, 한결에게 카드사의 문자가 온다. "첫 신용카드 발급 시 한도 500만원, 결제금액 조정 서비스로 부담 없이." 지금까지 체크카드만 쓴 한결은 이 장에서 본 것들로 조건을 하나씩 따져 본다.</p>
+    <div class="slip">
+      <div class="row"><span>리볼빙 잔액 300만원, 연 18%의 하루 이자</span><span>1,479원</span></div>
+      <div class="row"><span>첫 달 이자</span><span>45,000원</span></div>
+      <div class="row"><span>최소결제 10%로 끝까지: 기간</span><span class="ko">31개월</span></div>
+      <div class="row"><span>최소결제 10%로 끝까지: 이자</span><span>479,298원</span></div>
+      <div class="row"><span>첫 달 결제액 304,500원 고정: 기간</span><span class="ko">11개월</span></div>
+      <div class="row"><span>첫 달 결제액 304,500원 고정: 이자</span><span>270,983원</span></div>
+      <div class="row total"><span>매달 10만원씩 더 쓰며 리볼빙: 줄지 않는 잔액</span><span class="ko">약 104만원</span></div>
+    </div>
+
+    <div class="casefile">
+      <div class="tag"><b>LEDGER 한결</b><span>한결의 가계부 · 9장</span></div>
+      <h4>첫 신용카드: 한도는 낮게, 결제는 전액, 날짜는 월급 뒤로</h4>
+      <p>한결의 한 달 생활비 가운데 카드로 나가는 변동비는 교통·식비·쇼핑·기타를 합쳐 약 118만원이다. 한도 500만원은 이 네 배가 넘는다. 한결은 한도를 150만원으로 낮춰 신청하고, 월급날(25일) 뒤에 돈이 빠지도록 결제일을 정한 뒤 <b>전액 자동이체</b>를 걸었다. '결제금액 조정 서비스'가 리볼빙이라는 것을 알아보고 가입하지 않았다. 만약 첫 달에 300만원을 리볼빙으로 넘겨 최소결제 10%만 냈다면 31개월 동안 이자 약 48만원을 냈을 것이다. 거기에 매달 10만원씩 카드를 더 썼다면 빚은 약 104만원 근처에서 줄지 않고 이자만 계속 냈을 것이다.</p>
+      <p>신용점수를 위해서는 화려한 기술이 필요 없다. 카드값과 통신비를 하루도 늦지 않게 내고, 한도의 절반 이상을 쓰지 않으며, 현금서비스와 카드론을 쓰지 않는다. 체크카드는 비상금 통장과 연결해 두 번째 수단으로 남겼다.</p>
+      <div class="clue">
+        <div><b>이 장에서 정한 것</b>신용카드 1장, 한도 150만원, 결제일은 월급 뒤, 전액 자동이체, 리볼빙·현금서비스·카드론 쓰지 않기</div>
+        <div><b>아직 남은 문제</b>학자금 대출 1,200만원(연 1.7%)을 어떻게 갚을 것인가. 서둘러 갚는 것이 맞는가</div>
+        <div><b>다음 단계</b><a href="loan.html">10장</a>에서 대출 상환 방식(원리금균등·원금균등·만기일시)과 DSR로 본 한결의 대출 한도를 계산한다</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>신용은 미래의 소득을 지금으로 당겨 오는 약속이다. 빌린 만큼 미래의 나는 원금과 이자를 더해 덜 쓰게 된다. 연 18%는 300만원에 하루 약 1,479원이다.</li>
+      <li>신용점수(1~1,000점)는 상환 이력, 부채 수준, 신용 거래 기간, 신용 형태로 매겨진다. 조회는 점수를 내리지 않는다. 점수는 떨어질 때 빠르고 오를 때 느리다.</li>
+      <li>10만원 이상을 5영업일 이상 연체하면 금융권에 공유되고, 갚은 뒤에도 수년간 평가에 남을 수 있다. 소액·단기 연체도 그 회사에는 기록된다.</li>
+      <li>신용카드는 결제와 출금 사이에 틈을 만든다. 통장 잔고는 이미 쓴 돈을 품고 있고, 한도는 내 돈이 아니다. 결제일은 월급 뒤로, 결제는 전액으로 한다.</li>
+      <li>리볼빙·현금서비스·카드론은 연 10%대 중후반의 고금리 빚이다. 최소결제는 빚의 수명을 늘리고, 새 사용이 더해지면 빚이 끝나지 않는다.</li>
+      <li>법정 최고금리는 연 20%다. 선입금 요구, 대환 유도, 통장 대여 요구, "일주일에 얼마"식 제안은 불법사금융·대출 사기의 신호다.</li>
+      <li>좋은 빚은 자산·소득을 만들고 금리가 낮다. 여러 빚은 눈사태(고금리부터)가 이자를 가장 아끼고, 눈덩이(작은 것부터)는 빠른 성취감을 준다. 전략보다 갚는 금액과 새 빚을 만들지 않는 것이 더 중요하다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>1. 카드값 300만원을 연 18% 리볼빙으로 넘기고 매달 잔액의 10%만 낸다. 새로 쓰는 돈이 없을 때 가장 가까운 설명은?</p>
+        <div class="opts">
+          <button class="opt">매달 30만원씩 내므로 10개월이면 끝나고 이자는 거의 없다.</button>
+          <button class="opt" data-correct>결제액이 잔액과 함께 줄어 2년 반쯤 걸리고, 이자는 약 48만원이 된다.</button>
+          <button class="opt">리볼빙은 이자가 없는 분할 결제 서비스다.</button>
+          <button class="opt">잔액이 계속 커져 영원히 끝나지 않는다.</button>
+        </div>
+        <div class="quiz-exp">MN.revolving(300만, 18%, 10%)으로 계산하면 31개월, 이자 약 47.9만원이다. 결제액이 잔액의 비율이어서 잔액이 줄수록 결제액도 줄고 꼬리가 길어진다. 첫 달 금액(30.45만원)을 고정해서 내면 11개월, 약 27만원으로 줄어든다. 빚이 끝나지 않는 것은 새로 쓰는 돈이 계속 더해질 때다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>2. 빚이 여러 개일 때 총이자를 가장 적게 내는 상환 순서는?</p>
+        <div class="opts">
+          <button class="opt">잔액이 가장 작은 빚부터 갚는다.</button>
+          <button class="opt">잔액이 가장 큰 빚부터 갚는다.</button>
+          <button class="opt" data-correct>금리가 가장 높은 빚부터 갚는다.</button>
+          <button class="opt">모든 빚에 남는 돈을 똑같이 나눠 갚는다.</button>
+        </div>
+        <div class="quiz-exp">눈사태 전략이다. 같은 돈 1원을 갚을 때 금리가 높은 빚을 줄여야 다음 달 붙는 이자가 가장 많이 준다. 잔액이 작은 빚부터 갚는 눈덩이 전략은 이자는 조금 더 내지만 첫 성취가 빨라 꾸준히 갚는 데 도움이 된다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>3. 한 대부업자가 "100만원 빌려 가면 한 달 뒤 130만원만 갚으면 된다"고 한다. 옳은 판단은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>연 환산 이율이 약 365%로 법정 최고금리 20%를 크게 넘는다. 넘는 이자는 무효이고 불법사금융을 의심해야 한다.</button>
+          <button class="opt">한 달 이자율이 30%이므로 연 30%이고, 카드론보다 조금 비싼 정도다.</button>
+          <button class="opt">급할 때는 금리보다 빨리 받는 것이 중요하므로 합리적인 선택이다.</button>
+          <button class="opt">법정 최고금리는 은행에만 적용되므로 대부업자는 상관없다.</button>
+        </div>
+        <div class="quiz-exp">(130 − 100) ÷ 100 × 365 ÷ 30 ≈ 3.65, 곧 연 약 365%다. 법정 최고금리 20%는 대부업자를 포함해 적용되고, 넘는 이자 약정은 무효다. 이런 제안은 금융감독원(1332)에 상담하고 협박이 있으면 경찰(112)에 신고한다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>4. 신용점수에 대한 설명으로 옳은 것은?</p>
+        <div class="opts">
+          <button class="opt">신용점수를 자주 조회하면 점수가 내려간다.</button>
+          <button class="opt">빚이 하나도 없고 카드를 써 본 적도 없으면 최고점을 받는다.</button>
+          <button class="opt">5만원짜리 연체는 어디에도 기록되지 않으므로 신경 쓰지 않아도 된다.</button>
+          <button class="opt" data-correct>연체 한 번으로 크게 떨어진 점수는 갚은 뒤에도 회복에 수년이 걸릴 수 있다.</button>
+        </div>
+        <div class="quiz-exp">조회는 점수에 영향을 주지 않는다. 거래 기록이 없으면 판단 근거가 없어 점수가 어중간하다. 10만원 미만 소액 연체도 해당 회사에는 기록되고 그 회사의 평가에 쓰인다. 단기 연체 정보는 갚은 뒤에도 수년간 평가에 쓰일 수 있어, 점수는 떨어질 때 빠르고 오를 때 느리다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const $ = (id) => document.getElementById(id);
+  const narrow = (id) => $(id).parentElement.clientWidth < 560;
+  const tone = (cls, s) => '<span class="' + cls + '">' + s + "</span>";
+  const wonE = (x) => Math.round(x).toLocaleString("ko-KR") + "원";
+  const fade = (c, a) => (c && c[0] === "#" && c.length === 7 ? c + Math.round(MB.clamp(a, 0, 1) * 255).toString(16).padStart(2, "0") : c);
+  function knob(ctx, x, y, P, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = "#fff"; ctx.stroke();
+    ctx.restore();
+  }
+  function text(ctx, s, x, y, o) {
+    o = o || {};
+    ctx.font = MB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color || MB.palette().text;
+    ctx.textAlign = o.align || "left";
+    ctx.textBaseline = o.base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function rrect(ctx, x, y, w, h, r) {
+    r = Math.max(0, Math.min(r, w / 2, h / 2));
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y); ctx.closePath();
+  }
+  /* 반원 게이지: frac 0~1, zones [{to, color}] */
+  function gauge(ctx, cx, cy, R, frac, P, zones, ticks) {
+    const a0 = Math.PI;
+    ctx.save();
+    ctx.lineWidth = Math.max(10, R * 0.16);
+    let prev = 0;
+    zones.forEach((z) => { ctx.strokeStyle = z.color; ctx.beginPath(); ctx.arc(cx, cy, R, a0 + Math.PI * prev, a0 + Math.PI * z.to); ctx.stroke(); prev = z.to; });
+    ctx.lineWidth = 1;
+    (ticks || []).forEach((t) => {
+      const a = a0 + Math.PI * t.f, c = Math.cos(a), s = Math.sin(a);
+      ctx.strokeStyle = P.axis; ctx.beginPath(); ctx.moveTo(cx + c * (R - R * 0.1), cy + s * (R - R * 0.1)); ctx.lineTo(cx + c * (R + R * 0.1), cy + s * (R + R * 0.1)); ctx.stroke();
+      text(ctx, t.label, cx + c * (R + R * 0.1 + 12), cy + s * (R + R * 0.1 + 10), { size: 10.5, mono: true, color: P.dim, align: "center", base: "middle" });
+    });
+    const a = a0 + Math.PI * MB.clamp(frac, 0, 1);
+    ctx.strokeStyle = P.text; ctx.lineWidth = 3; ctx.lineCap = "round";
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(a) * R * 0.86, cy + Math.sin(a) * R * 0.86); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx, cy, 7, 0, TAU); ctx.fillStyle = P.text; ctx.fill();
+    ctx.restore();
+  }
+
+  /* ---------------------------------------------------------- 1. 하루 이자 */
+  (function () {
+    let day = 0, playing = true, hold = 0;
+    const A = MB.range("dy-a", (v) => MB.won(v), () => { stats(); cv.redraw(); });
+    const R = MB.range("dy-r", (v) => v.toFixed(1) + "%", () => { stats(); cv.redraw(); });
+    const go = $("dy-go");
+    function stats() {
+      const a = A(), r = R() / 100;
+      MB.stat("dy-o-d", wonE(a * r / 365));
+      MB.stat("dy-o-m", wonE(a * r / 12));
+      MB.stat("dy-o-y", MB.won(a * r, { digits: 1 }));
+      MB.stat("dy-o-s", tone("ok-t", MB.won(a * 0.03, { digits: 1 })) + " <small>세전 1년</small>");
+    }
+    const cv = MB.canvas("#dy-cv", (ctx, w, h) => {
+      const P = MB.palette(), a = A(), r = R() / 100, perDay = a * r / 365, yr = a * r, save = a * 0.03 / 365;
+      const nar = w < 520;
+      const box = { x: nar ? 52 : 64, y: 64, w: w - (nar ? 52 : 64) - 16, h: h - 64 - 44 };
+      const ymax = Math.max(yr, a * 0.2 * 0.25) * 1.08;
+      const c = MB.chart(ctx, box, { x: [0, 12], y: [0, ymax], xTicks: [0, 3, 6, 9, 12], xFmt: (v) => String(v), xLabel: "개월", yFmt: MB.wonAxis, series: [] });
+      const slot = box.w / 12, bw = slot * 0.62;
+      for (let m = 0; m < 12; m++) {
+        const dEnd = Math.min(day, (m + 1) * 365 / 12);
+        if (dEnd <= m * 365 / 12 && m > 0) break;
+        const x = box.x + slot * m + (slot - bw) / 2;
+        const vb = perDay * dEnd, vs = save * Math.min(day, (m + 1) * 365 / 12);
+        ctx.fillStyle = fade(P.dim, 0.35); ctx.fillRect(x + bw * 0.55, c.Y(vs), bw * 0.45, c.Y(0) - c.Y(vs));
+        ctx.fillStyle = P.bad; ctx.fillRect(x, c.Y(vb), bw * 0.55, c.Y(0) - c.Y(vb));
+      }
+      // 떨어지는 동전
+      const m = Math.min(11, Math.floor(day / (365 / 12))), frac = day - Math.floor(day);
+      if (day < 365) {
+        const x = box.x + slot * m + (slot - bw) / 2 + bw * 0.275, top = c.Y(perDay * day);
+        const y = MB.lerp(box.y - 8, top - 6, frac);
+        ctx.beginPath(); ctx.arc(x, y, 5, 0, TAU); ctx.fillStyle = P.accent2; ctx.fill();
+        ctx.strokeStyle = P.bg; ctx.lineWidth = 1.5; ctx.stroke();
+      }
+      const shown = Math.min(day, 365);
+      text(ctx, Math.floor(shown) + "일째", box.x, 22, { size: 13, color: P.dim });
+      text(ctx, "쌓인 이자 " + wonE(perDay * shown), box.x, 46, { size: nar ? 16 : 19, weight: 800, color: P.bad });
+      text(ctx, "하루 " + wonE(perDay), w - 16, 22, { size: 13, color: P.text, align: "right", weight: 700 });
+      text(ctx, "예금 3%면 하루 " + wonE(save), w - 16, 44, { size: 12, color: P.dim, align: "right" });
+    }, { get height() { return narrow("dy-cv") ? 300 : 320; } });
+    MB.loop(cv.canvas, (dt) => {
+      if (!playing) return;
+      if (day >= 365) { hold += dt; if (hold > 2.5) { day = 0; hold = 0; } else return; }
+      day = Math.min(365, day + dt * 12); cv.redraw();
+    });
+    go.addEventListener("click", () => { playing = !playing; go.textContent = playing ? "일시정지" : "재생"; });
+    $("dy-re").addEventListener("click", () => { day = 0; hold = 0; cv.redraw(); });
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 2. 신용점수 저울 */
+  (function () {
+    const W = { h: 0.4, d: 0.25, l: 0.1, t: 0.25 };
+    const NAME = { h: "상환 이력", d: "부채 수준", l: "거래 기간", t: "신용 형태" };
+    let S, disp, lastDelta = 0;
+    function init() { S = { m: 0, onTime: 6, util: 0.2, lates: [], cash: 0, loan: 0, log: ["시작: 체크카드 2년, 신용카드 6개월 사용"] }; }
+    function comp() {
+      const pen = S.lates.reduce((s, l) => s + l.sev * Math.sqrt(Math.max(0, 1 - l.ago / l.keep)), 0);
+      const h = MB.clamp(0.55 + 0.4 * Math.min(1, S.onTime / 72) - pen, 0, 1);
+      const d = MB.clamp(1 - 0.4 * Math.pow(S.util, 1.5) - (S.loan > 0 ? 0.2 : 0), 0, 1);
+      const l = Math.min(1, (24 + S.m) / 120);
+      const t = MB.clamp(0.72 - (S.cash > 0 ? 0.22 : 0) - (S.loan > 0 ? 0.3 : 0), 0, 1);
+      return { h, d, l, t };
+    }
+    const score = () => { const c = comp(); return Math.round(200 + 800 * (W.h * c.h + W.d * c.d + W.l * c.l + W.t * c.t)); };
+    function month(paid) {
+      S.m++; S.lates.forEach((l) => l.ago++);
+      S.cash = Math.max(0, S.cash - 1); S.loan = Math.max(0, S.loan - 1);
+      if (paid) { S.onTime++; S.util = 0.2 + (S.util - 0.2) * 0.3; }
+    }
+    function act(kind) {
+      const before = score();
+      if (kind === "pay1") { month(true); S.log.unshift("한 달 완납"); }
+      else if (kind === "pay6") { for (let i = 0; i < 6; i++) month(true); S.log.unshift("6개월 완납"); }
+      else if (kind === "full") { month(true); S.util = 0.9; S.log.unshift("한도 90% 사용"); }
+      else if (kind === "cash") { month(true); S.cash = 6; S.util = Math.min(1, S.util + 0.2); S.log.unshift("현금서비스 이용"); }
+      else if (kind === "loan") { month(true); S.loan = 24; S.log.unshift("카드론 이용(24개월)"); }
+      else if (kind === "late") { month(false); S.lates.push({ ago: 0, sev: 0.45, keep: 48 }); S.onTime = Math.floor(S.onTime / 2); S.log.unshift("5일 연체"); }
+      else if (kind === "long") { for (let i = 0; i < 3; i++) month(false); S.lates.push({ ago: 0, sev: 1.0, keep: 60 }); S.onTime = 0; S.log.unshift("90일 장기 연체"); }
+      else if (kind === "look") { S.log.unshift("점수 조회(변화 없음)"); }
+      S.log = S.log.slice(0, 4);
+      lastDelta = score() - before;
+      stats();
+    }
+    function stats() {
+      const s = score();
+      MB.stat("cs-o-s", s + " <small>/ 1000</small>");
+      MB.stat("cs-o-d", lastDelta === 0 ? "0" : lastDelta > 0 ? tone("ok-t", "+" + lastDelta) : tone("bad-t", "−" + Math.abs(lastDelta)));
+      MB.stat("cs-o-m", S.m + " <small>개월</small>");
+      const live = S.lates.filter((l) => l.ago < l.keep).length;
+      MB.stat("cs-o-l", live ? tone("bad-t", live + "건") : "없음");
+    }
+    init(); disp = score();
+    const cv = MB.canvas("#cs-cv", (ctx, w, h) => {
+      const P = MB.palette(), nar = w < 520, c = comp();
+      const R = nar ? Math.min(w * 0.36, 120) : Math.min(w * 0.22, 130);
+      const cx = nar ? w / 2 : 30 + R + 14, cy = nar ? R + 34 : R + 52;
+      gauge(ctx, cx, cy, R, disp / 1000, P,
+        [{ to: 0.5, color: fade(P.bad, 0.75) }, { to: 0.7, color: fade(P.warn, 0.8) }, { to: 0.85, color: fade(P.accent2, 0.8) }, { to: 1, color: fade(P.ok, 0.85) }],
+        [0, 250, 500, 750, 1000].map((v) => ({ f: v / 1000, label: String(v) })));
+      text(ctx, String(Math.round(disp)), cx, cy + 34, { size: nar ? 26 : 30, weight: 800, align: "center", base: "middle", mono: true });
+      text(ctx, "교육용 모형 점수", cx, cy + 62, { size: 11.5, color: P.dim, align: "center" });
+      // 구성 요소 막대
+      const bx = nar ? 20 : cx + R + 48, by = nar ? cy + 84 : 26, bw = w - bx - 20, rowH = 34;
+      ["h", "d", "l", "t"].forEach((k, i) => {
+        const y = by + i * rowH;
+        text(ctx, NAME[k] + " · " + Math.round(W[k] * 100) + "%", bx, y + 10, { size: 12, color: P.dim });
+        ctx.fillStyle = P.grid; rrect(ctx, bx, y + 16, bw, 9, 4); ctx.fill();
+        ctx.fillStyle = c[k] < 0.45 ? P.bad : c[k] < 0.7 ? P.warn : P.ok;
+        rrect(ctx, bx, y + 16, Math.max(4, bw * c[k]), 9, 4); ctx.fill();
+        text(ctx, Math.round(c[k] * 100), bx + bw, y + 10, { size: 11, mono: true, color: P.text, align: "right" });
+      });
+      const ly = by + 4 * rowH + 12;
+      text(ctx, "최근 행동", bx, ly, { size: 11.5, color: P.faint, weight: 700 });
+      S.log.forEach((s, i) => text(ctx, (i === 0 ? "▸ " : "  ") + s, bx, ly + 18 + i * 17, { size: 12, color: i === 0 ? P.text : P.dim }));
+    }, { get height() { return narrow("cs-cv") ? 470 : 330; } });
+    MB.loop(cv.canvas, (dt) => {
+      const tgt = score();
+      if (Math.abs(disp - tgt) < 0.3) { if (disp !== tgt) { disp = tgt; cv.redraw(); } return; }
+      disp += (tgt - disp) * Math.min(1, dt * 3.2); cv.redraw();
+    });
+    ["pay1", "pay6", "full", "cash", "loan", "late", "long", "look"].forEach((k) => $("cs-" + k).addEventListener("click", () => { act(k); cv.redraw(); }));
+    $("cs-re").addEventListener("click", () => { init(); lastDelta = 0; stats(); cv.redraw(); });
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 3. 연체의 그림자 */
+  (function () {
+    let days = 7, G = null;
+    const A = MB.range("lt-a", (v) => MB.won(v), () => { stats(); cv.redraw(); });
+    const pre = MB.seg("lt-pre", (v) => { days = +v; stats(); cv.redraw(); });
+    function stage() {
+      const a = A();
+      if (days <= 0) return { k: 0, name: "정상", drop: 0, keep: 0 };
+      if (days >= 90) return { k: 3, name: "장기 연체", drop: 260, keep: 60 };
+      if (days >= 5 && a >= 100000) return { k: 2, name: "단기 연체(공유)", drop: Math.round(70 + Math.min(60, a / 1e6 * 25) + Math.min(30, days / 3)), keep: 48 };
+      return { k: 1, name: days >= 5 ? "소액 연체" : "연체 시작", drop: days >= 5 ? 22 : 8 + days * 2, keep: days >= 5 ? 24 : 12 };
+    }
+    const score = (st, t) => (t < 0 ? 760 : 760 - st.drop * Math.pow(Math.max(0, 1 - t / st.keep), 1.4));
+    function stats() {
+      const st = stage();
+      MB.stat("lt-o-s", st.k === 0 ? tone("ok-t", "정상") : st.k === 1 ? tone("warn-t", st.name) : tone("bad-t", st.name));
+      MB.stat("lt-o-i", wonE(A() * 0.21 * days / 365));
+      MB.stat("lt-o-d", st.drop ? tone("bad-t", "−" + st.drop + "점") : "0");
+      MB.stat("lt-o-k", st.k === 0 ? "—" : st.k === 1 ? "그 회사 안에서" : st.k === 2 ? "3~5년" : "최장 5년 안팎");
+    }
+    const cv = MB.canvas("#lt-cv", (ctx, w, h) => {
+      const P = MB.palette(), st = stage(), a = A();
+      const tl = { x: 20, y: 40, w: w - 40, h: 26 }, DMAX = 120;
+      const X = (d) => tl.x + (d / DMAX) * tl.w;
+      G = { tl, X, DMAX };
+      const segs = [[0, 5, P.warn, 0.25], [5, 90, a >= 100000 ? P.bad : P.warn, a >= 100000 ? 0.3 : 0.35], [90, DMAX, P.bad, 0.6]];
+      segs.forEach(([d0, d1, col, al]) => { ctx.fillStyle = fade(col, al); ctx.fillRect(X(d0), tl.y, X(d1) - X(d0), tl.h); });
+      ctx.fillStyle = fade(P.accent, 0.55); ctx.fillRect(tl.x, tl.y + tl.h - 5, X(days) - tl.x, 5);
+      ctx.strokeStyle = P.axis; ctx.strokeRect(tl.x, tl.y, tl.w, tl.h);
+      (w < 520 ? [0, 30, 60, 90, 120] : [0, 5, 30, 60, 90, 120]).forEach((d) => { text(ctx, d + "일", X(d), tl.y + tl.h + 14, { size: 10.5, mono: false, color: P.dim, align: "center" }); });
+      const nar = w < 520;
+      text(ctx, "내부 기록", tl.x, tl.y - 8, { size: 11, color: P.dim });
+      text(ctx, a >= 100000 ? (nar ? "금융권 공유" : "금융권 공유(10만원 이상)") : (nar ? "10만원 미만" : "10만원 미만: 내부 기록"), X(47), tl.y - 8, { size: 11, color: a >= 100000 ? P.bad : P.dim, align: "center", weight: a >= 100000 ? 700 : 400 });
+      text(ctx, "장기", X(105), tl.y - 8, { size: 11, color: P.bad, align: "center", weight: 700 });
+      knob(ctx, X(days), tl.y + tl.h / 2, P, 8);
+      text(ctx, days + "일", X(days), tl.y + tl.h + 30, { size: 12, color: P.text, align: "center", weight: 700 });
+      // 회복 곡선
+      const box = { x: 56, y: tl.y + 96, w: w - 56 - 22, h: h - tl.y - 96 - 54 };
+      const data = []; for (let t = -6; t <= 60; t += 0.5) data.push([t, score(st, t)]);
+      const base = []; for (let t = -6; t <= 60; t += 6) base.push([t, 760]);
+      const c = MB.chart(ctx, box, { x: [-6, 60], y: [400, 800], xTicks: [0, 12, 24, 36, 48, 60], xFmt: (v) => v / 12 + "년", yTicks: [400, 500, 600, 700, 800], yLabel: "점수(모형)",
+        bands: st.keep ? [{ x0: 0, x1: Math.min(60, st.keep), color: fade(P.bad, 0.07) }] : [],
+        series: [{ data: base, color: P.faint, width: 1, dash: [4, 4] }, { data, color: st.k >= 2 ? P.bad : st.k === 1 ? P.warn : P.ok, width: 2.4 }],
+        vlines: [{ x: 0, color: P.dim, label: "상환" }] });
+      text(ctx, "연체를 갚은 뒤 점수 회복(교육용 모형)", box.x, box.y - 10, { size: 12, color: P.dim, weight: 700 });
+      if (st.drop) {
+        const yMin = score(st, 0);
+        ctx.fillStyle = P.bad; ctx.beginPath(); ctx.arc(c.X(0), c.Y(yMin), 4.5, 0, TAU); ctx.fill();
+        text(ctx, "−" + st.drop + "점", c.X(0) + 8, c.Y(yMin) + 14, { size: 12, color: P.bad, weight: 700 });
+      }
+    }, { get height() { return narrow("lt-cv") ? 376 : 356; } });
+    MB.drag(cv.canvas, {
+      move(x, y) { if (!G) return; days = Math.round(MB.clamp(((x - G.tl.x) / G.tl.w) * G.DMAX, 0, G.DMAX)); stats(); cv.redraw(); },
+    });
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 4. 보이는 잔고 */
+  (function () {
+    const N = 59, SAL = 2655840, FIX = 600000 + 120000 + 70000 + 45000 + 108811, SP = 1180000 / 30, LIMIT = 5e6, START = 1.5e6;
+    let t = 13, playing = false, data = [], G = null;
+    const mode = MB.seg("mg-mode", () => { build(); show(); cv.redraw(); });
+    const lim = $("mg-lim");
+    const go = $("mg-go");
+    const lab = (d) => (d <= 31 ? "1월 " + d + "일" : "2월 " + (d - 31) + "일");
+    function build() {
+      const credit = mode() === "credit";
+      let bank = START + (credit ? 1180000 : 0), billed = credit ? 1180000 : 0, cur = 0;
+      data = [{ d: 0, bank, real: bank - billed, owed: billed }];
+      for (let d = 1; d <= N; d++) {
+        const dom = d <= 31 ? d : d - 31;
+        if (credit && d === 32) { billed += cur; cur = 0; }
+        if (credit) cur += SP; else bank -= SP;
+        if (credit && dom === 14) { bank -= billed; billed = 0; }
+        if (dom === 25) bank += SAL;
+        if (dom === 26) bank -= FIX;
+        data.push({ d, bank, real: bank - billed - cur, owed: billed + cur });
+      }
+    }
+    function at(tt) { const i = MB.clamp(Math.round(tt), 1, N); return data[i]; }
+    function show() {
+      const r = at(t);
+      MB.stat("mg-o-d", lab(MB.clamp(Math.round(t), 1, N)));
+      MB.stat("mg-o-b", MB.won(r.bank, { digits: 1 }));
+      MB.stat("mg-o-o", r.owed > 0 ? tone("warn-t", MB.won(r.owed, { digits: 1 })) : "0원");
+      MB.stat("mg-o-r", MB.won(r.real, { digits: 1 }));
+    }
+    build();
+    const cv = MB.canvas("#mg-cv", (ctx, w, h) => {
+      const P = MB.palette(), credit = mode() === "credit", showLim = credit && lim.checked;
+      const pts = (k) => data.slice(1).map((r) => [r.d, k === "room" ? r.bank + LIMIT - r.owed : r[k]]);
+      let hi = Math.max(...data.map((r) => r.bank)), lo = Math.min(0, ...data.map((r) => r.real));
+      if (showLim) hi = Math.max(hi, ...data.map((r) => r.bank + LIMIT - r.owed));
+      const series = [];
+      if (showLim) series.push({ data: pts("room"), color: P.warn, width: 2, dash: [2, 3] });
+      if (credit) series.push({ data: pts("real"), color: P.accent2, width: 2, dash: [6, 4] });
+      series.push({ data: pts("bank"), color: P.accent, width: 2.6 });
+      const vl = [{ x: 25, color: P.ok, label: "월급" }, { x: 56, color: P.ok }];
+      if (credit) vl.push({ x: 14, color: P.bad, label: "결제일" }, { x: 45, color: P.bad });
+      const box = { x: 58, y: 28, w: w - 58 - 16, h: h - 28 - 52 };
+      const c = MB.chart(ctx, box, { x: [1, N], y: [lo, hi * 1.08], xTicks: [1, 14, 25, 32, 45, 56], xFmt: (d) => (d <= 31 ? "1/" + d : "2/" + (d - 31)), yFmt: MB.wonAxis, series, vlines: vl, hlines: [{ y: 0, color: P.axis, dash: [] }] });
+      G = c;
+      const r = at(t), x = c.X(MB.clamp(t, 1, N));
+      ctx.strokeStyle = P.faint; ctx.setLineDash([2, 3]); ctx.beginPath(); ctx.moveTo(x, box.y); ctx.lineTo(x, box.y + box.h); ctx.stroke(); ctx.setLineDash([]);
+      if (credit) { ctx.fillStyle = P.accent2; ctx.beginPath(); ctx.arc(x, c.Y(r.real), 4.5, 0, TAU); ctx.fill(); }
+      knob(ctx, x, c.Y(r.bank), P, 7);
+      const lx = x > box.x + box.w * 0.6 ? x - 10 : x + 10, al = x > box.x + box.w * 0.6 ? "right" : "left";
+      text(ctx, "통장 " + MB.wonAxis(r.bank), lx, Math.max(box.y + 12, c.Y(r.bank) - 12), { size: 12, color: P.accent, weight: 700, align: al });
+      text(ctx, credit ? (showLim ? "초록: 통장 · 금색: 진짜 · 주황: 한도 포함" : "초록: 통장 잔고 · 금색 점선: 진짜 쓸 수 있는 돈") : "체크카드: 통장 잔고 = 진짜 쓸 수 있는 돈", box.x, 16, { size: 11.5, color: P.dim });
+    }, { get height() { return narrow("mg-cv") ? 300 : 320; } });
+    MB.drag(cv.canvas, { move(x) { if (!G) return; playing = false; go.textContent = "재생"; t = MB.clamp(Math.round(1 + ((x - G.box.x) / G.box.w) * (N - 1)), 1, N); show(); cv.redraw(); } });
+    MB.loop(cv.canvas, (dt) => {
+      if (!playing) return;
+      t += dt * 7;
+      if (t >= N) { t = N; playing = false; go.textContent = "재생"; }
+      show(); cv.redraw();
+    });
+    go.addEventListener("click", () => { if (t >= N) t = 1; playing = !playing; go.textContent = playing ? "일시정지" : "재생"; });
+    $("mg-re").addEventListener("click", () => { t = 1; playing = false; go.textContent = "재생"; show(); cv.redraw(); });
+    lim.addEventListener("change", () => cv.redraw());
+    show();
+  })();
+
+  /* ---------------------------------------------------------- 5. 결제 달력 */
+  (function () {
+    const DAY = 864e5, BASE = Date.UTC(2026, 2, 1);
+    const MONTHS = [{ m: 2, n: 31 }, { m: 3, n: 30 }, { m: 4, n: 31 }, { m: 5, n: 30 }];
+    const idx = (mo, d) => Math.round((Date.UTC(2026, mo, d) - BASE) / DAY);
+    const dateOf = (i) => { const dt = new Date(BASE + i * DAY); return { mo: dt.getUTCMonth(), d: dt.getUTCDate() }; };
+    const lab = (i) => { const o = dateOf(i); return (o.mo + 1) + "월 " + o.d + "일"; };
+    let p = 9, G = null;
+    const pay = MB.seg("cal-pay", () => { stats(); cv.redraw(); });
+    function bill(pi) {
+      const D = +pay();
+      for (let mo = 1; mo <= 7; mo++) {
+        const P = idx(mo, D), cut = P - 14;
+        if (pi <= cut) { const prev = idx(mo - 1, D) - 14; return { pay: P, from: prev + 1, to: cut }; }
+      }
+      return null;
+    }
+    function stats() {
+      const b = bill(p);
+      MB.stat("cal-o-p", lab(p));
+      MB.stat("cal-o-r", lab(b.from).replace("월 ", "/").replace("일", "") + " ~ " + lab(b.to).replace("월 ", "/").replace("일", ""));
+      MB.stat("cal-o-d", tone("bad-t", lab(b.pay)));
+      MB.stat("cal-o-n", (b.pay - p) + " <small>일</small>");
+    }
+    const cv = MB.canvas("#cal-cv", (ctx, w, h) => {
+      const P = MB.palette(), b = bill(p), nar = w < 520;
+      const lx = nar ? 34 : 46, top = 30, cw = (w - lx - 12) / 31, rh = nar ? 40 : 46, ch = rh - 16;
+      G = { lx, top, cw, rh };
+      MONTHS.forEach((M, r) => {
+        const y = top + r * rh;
+        text(ctx, (M.m + 1) + "월", 8, y + ch / 2, { size: 13, weight: 700, color: P.text, base: "middle" });
+        for (let d = 1; d <= M.n; d++) {
+          const i = idx(M.m, d), x = lx + (d - 1) * cw;
+          let fill = fade(P.dim, 0.1);
+          if (i >= b.from && i <= b.to) fill = fade(P.accent, 0.22);
+          ctx.fillStyle = fill; ctx.fillRect(x + 0.5, y, cw - 1, ch);
+          if (i === b.pay) { ctx.fillStyle = P.bad; ctx.fillRect(x + 0.5, y, cw - 1, ch); }
+          if (i === p) { ctx.fillStyle = P.accent; ctx.fillRect(x + 0.5, y, cw - 1, ch); }
+          if (!nar || d === 1 || d % 5 === 0) text(ctx, String(d), x + cw / 2, y + ch + 10, { size: nar ? 9 : 10, mono: true, color: P.faint, align: "center" });
+        }
+      });
+      // 결제일 마커와 화살표
+      const pos = (i) => { const o = dateOf(i), r = MONTHS.findIndex((M) => M.m === o.mo); return { x: lx + (o.d - 0.5) * cw, y: top + r * rh }; };
+      const a = pos(p), z = pos(b.pay);
+      ctx.strokeStyle = P.text; ctx.lineWidth = 1.6; ctx.setLineDash([4, 3]);
+      ctx.beginPath(); ctx.moveTo(a.x, a.y + ch / 2);
+      ctx.bezierCurveTo(a.x + (z.x - a.x) * 0.2 + 30, a.y + ch / 2 + rh * 0.8, z.x - 30, z.y - rh * 0.5, z.x, z.y + 2); ctx.stroke(); ctx.setLineDash([]);
+      knob(ctx, a.x, a.y + ch / 2, P, 6);
+      const ly = top + 4 * rh + 8;
+      ctx.fillStyle = fade(P.accent, 0.22); ctx.fillRect(lx, ly, 12, 12);
+      text(ctx, "같이 청구되는 이용기간", lx + 18, ly + 6, { size: 11.5, color: P.dim, base: "middle" });
+      ctx.fillStyle = P.bad; ctx.fillRect(lx + (nar ? 150 : 170), ly, 12, 12);
+      text(ctx, "결제일", lx + (nar ? 168 : 188), ly + 6, { size: 11.5, color: P.dim, base: "middle" });
+      text(ctx, "빌린 기간 " + (b.pay - p) + "일", w - 12, 14, { size: 12.5, weight: 700, color: P.text, align: "right", base: "middle" });
+    }, { get height() { return narrow("cal-cv") ? 30 + 4 * 40 + 52 : 30 + 4 * 46 + 52; } });
+    MB.drag(cv.canvas, {
+      move(x, y) {
+        if (!G) return;
+        const r = MB.clamp(Math.floor((y - G.top + 4) / G.rh), 0, 1), d = MB.clamp(Math.floor((x - G.lx) / G.cw) + 1, 1, MONTHS[r].n);
+        p = idx(MONTHS[r].m, d); stats(); cv.redraw();
+      },
+    });
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 6. 리볼빙 눈덩이 */
+  (function () {
+    const B = MB.range("rv-b", (v) => MB.won(v), () => upd());
+    const R = MB.range("rv-r", (v) => v.toFixed(1) + "%", () => upd());
+    const Pm = MB.range("rv-p", (v) => v + "%", () => upd());
+    const S = MB.seg("rv-s", () => upd());
+    let res;
+    function calc() {
+      const b = B(), r = R() / 100, p = Pm() / 100, s = +S();
+      const out = MN.revolving(b, r, p, 50000, s);
+      const rows = out.rows.filter((x) => isFinite(x.m));
+      const done = rows.length === out.rows.length && rows.length && rows[rows.length - 1].balance <= 1;
+      const ext = rows.slice();
+      if (!done) {
+        let bal = rows.length ? rows[rows.length - 1].balance : b;
+        for (let m = ext.length + 1; m <= 120; m++) { const it = bal * r / 12; bal += it + s; const pay = Math.min(bal, Math.max(bal * p, 50000)); bal -= pay; ext.push({ m, interest: it, pay, balance: bal }); }
+      }
+      let cum = 0; const bal = [[0, b]], ci = [[0, 0]];
+      ext.forEach((x) => { cum += x.interest; bal.push([x.m, x.balance]); ci.push([x.m, cum]); });
+      return { b, done, months: done ? rows.length : Infinity, interest: done ? out.totalInterest : cum, bal, ci, first: ext[0] ? ext[0].interest : 0, H: done ? Math.max(12, rows.length + 2) : 120 };
+    }
+    function upd() { res = calc(); stats(); cv.redraw(); }
+    function stats() {
+      MB.stat("rv-o-n", res.done ? res.months + " <small>개월</small>" : tone("bad-t", "끝나지 않음"));
+      MB.stat("rv-o-i", res.done ? MB.won(res.interest, { digits: 1 }) : tone("bad-t", MB.won(res.interest)) + " <small>10년간</small>");
+      MB.stat("rv-o-f", wonE(res.first));
+      const k = res.interest / res.b;
+      MB.stat("rv-o-r", k > 0.5 ? tone("bad-t", MB.pct(k, 0)) : k > 0.2 ? tone("warn-t", MB.pct(k, 0)) : MB.pct(k, 0));
+    }
+    res = calc();
+    const cv = MB.canvas("#rv-cv", (ctx, w, h) => {
+      const P = MB.palette();
+      const ymax = Math.max(...res.bal.map((x) => x[1]), ...res.ci.map((x) => x[1])) * 1.1;
+      const box = { x: 58, y: 18, w: w - 58 - 18, h: h - 18 - 46 };
+      const H = res.H, step = H <= 24 ? 6 : H <= 60 ? 12 : 24;
+      const xt = []; for (let v = 0; v <= H; v += step) xt.push(v);
+      const c = MB.chart(ctx, box, { x: [0, H], y: [0, ymax], xTicks: xt, xFmt: (v) => v + "", yFmt: MB.wonAxis, xLabel: "개월",
+        series: [{ data: res.bal, color: P.bad, width: 2.4, fill: fade(P.bad, 0.12) }, { data: res.ci, color: P.warn, width: 2.2 }],
+        hlines: [{ y: res.b, color: P.faint, label: "처음 잔액" }] });
+      if (res.done) {
+        ctx.fillStyle = P.ok; ctx.beginPath(); ctx.arc(c.X(res.months), c.Y(0), 5, 0, TAU); ctx.fill();
+        text(ctx, res.months + "개월에 끝", c.X(res.months), c.Y(0) - 10, { size: 12, color: P.ok, weight: 700, align: res.months > H * 0.7 ? "right" : "center" });
+      } else {
+        const last = res.bal[res.bal.length - 1];
+        text(ctx, "10년이 지나도 " + MB.wonAxis(last[1]) + " 남음", box.x + box.w - 6, c.Y(last[1]) - 10, { size: 12, color: P.bad, weight: 700, align: "right" });
+      }
+      const li = res.ci[res.ci.length - 1];
+      text(ctx, "이자 " + MB.wonAxis(li[1]), c.X(li[0]) - 6, c.Y(li[1]) - 8, { size: 12, color: P.warn, weight: 700, align: "right" });
+    }, { get height() { return narrow("rv-cv") ? 280 : 320; } });
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 7. 최소결제의 함정 */
+  (function () {
+    const BAL = 3e6, RATE = 0.18;
+    let k = 0, playing = true, hold = 0, L;
+    const pct = MB.seg("mp-p", () => { build(); k = 0; hold = 0; cv.redraw(); });
+    const go = $("mp-go");
+    function build() {
+      const p = +pct();
+      const a = MN.revolving(BAL, RATE, p, 50000, 0);
+      const b = MN.revolving(BAL, RATE, 0, a.rows[0].pay, 0);
+      L = { a: a.rows.filter((x) => isFinite(x.m)), b: b.rows.filter((x) => isFinite(x.m)), ai: a.totalInterest, bi: b.totalInterest, fix: a.rows[0].pay };
+      MB.stat("mp-o-an", L.a.length + " <small>개월</small>");
+      MB.stat("mp-o-ai", tone("bad-t", MB.won(L.ai, { digits: 1 })));
+      MB.stat("mp-o-bn", L.b.length + " <small>개월</small>");
+      MB.stat("mp-o-bi", tone("ok-t", MB.won(L.bi, { digits: 1 })));
+    }
+    build();
+    const cv = MB.canvas("#mp-cv", (ctx, w, h) => {
+      const P = MB.palette(), nar = w < 520;
+      const n = Math.max(L.a.length, L.b.length), ymax = Math.max(L.a[0].pay, L.b[0].pay) * 1.15;
+      const lanes = [{ rows: L.a, title: "잔액의 " + Math.round(+pct() * 100) + "%씩 (최소결제)" }, { rows: L.b, title: "첫 달 금액 " + MB.won(L.fix, { digits: 1 }) + " 고정" }];
+      const lh = (h - 20) / 2;
+      lanes.forEach((ln, li) => {
+        const box = { x: 52, y: 10 + li * lh + 30, w: w - 52 - 14, h: lh - 30 - 24 };
+        MB.chart(ctx, box, { x: [0, n], y: [0, ymax], xTicks: [], yFmt: MB.wonAxis, yTicks: [0, Math.round(ymax / 2 / 1e4) * 1e4], series: [] });
+        const slot = box.w / n, bw = Math.max(1, slot * 0.78);
+        let paid = 0, intr = 0;
+        const shown = Math.min(k, ln.rows.length);
+        for (let i = 0; i < Math.ceil(shown); i++) {
+          const r = ln.rows[i], grow = Math.min(1, shown - i);
+          const x = box.x + i * slot + (slot - bw) / 2, yb = box.y + box.h;
+          const hi = (r.interest / ymax) * box.h * grow, hp = ((r.pay - r.interest) / ymax) * box.h * grow;
+          ctx.fillStyle = P.ok; ctx.fillRect(x, yb - hp, bw, hp);
+          ctx.fillStyle = P.bad; ctx.fillRect(x, yb - hp - hi, bw, hi);
+          if (grow >= 1) { paid += r.pay; intr += r.interest; }
+        }
+        const done = k >= ln.rows.length;
+        text(ctx, ln.title, box.x, box.y - 14, { size: 12.5, weight: 700, color: P.text });
+        text(ctx, (nar ? "" : "낸 돈 " + MB.won(paid, { digits: 1 }) + " · ") + "이자 " + MB.won(intr, { digits: 1 }) + (done ? " · 끝" : ""), box.x + box.w, box.y - 14, { size: 12, color: done ? P.ok : P.dim, align: "right", weight: done ? 700 : 400 });
+        for (let m = 0; m <= n; m += 12) text(ctx, m + "", box.x + m * slot, box.y + box.h + 13, { size: 10.5, mono: true, color: P.dim, align: "center" });
+      });
+      text(ctx, "개월", w - 14, h - 4, { size: 11, color: P.dim, align: "right" });
+    }, { get height() { return narrow("mp-cv") ? 340 : 360; } });
+    MB.loop(cv.canvas, (dt) => {
+      if (!playing) return;
+      const n = Math.max(L.a.length, L.b.length);
+      if (k >= n) { hold += dt; if (hold > 3) { k = 0; hold = 0; } else return; }
+      k = Math.min(n, k + dt * (n > 40 ? 9 : 5)); cv.redraw();
+    });
+    go.addEventListener("click", () => { playing = !playing; go.textContent = playing ? "일시정지" : "재생"; });
+    $("mp-re").addEventListener("click", () => { k = 0; hold = 0; cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 8. 금리 사다리 */
+  (function () {
+    const LO = 0.01, HI = 50;
+    let rate = 0.14, G = null;
+    const MARKS = [
+      { r: 0.017, s: "학자금 1.7%", l: 0, a: "center" }, { r: 0.03, s: "예금 3%", l: 1, a: "center" }, { r: 0.045, s: "주택담보 약 4~5%", l: 2, a: "center" },
+      { r: 0.065, s: "신용대출 약 6~7%", l: 3, a: "center" }, { r: 0.14, s: "카드론 약 14%", l: 0, a: "center" }, { r: 0.18, s: "현금서비스·리볼빙 약 18%", l: 1, a: "left" },
+    ];
+    function stats() {
+      MB.stat("ld-o-r", rate >= 1 ? Math.round(rate * 100).toLocaleString("ko-KR") + "%" : MB.pct(rate, 1));
+      MB.stat("ld-o-m", MB.won(1e6 * rate / 12, { digits: 1 }));
+      MB.stat("ld-o-y", MB.won(1e6 * rate, { digits: 1 }));
+      MB.stat("ld-o-j", rate <= 0.2 + 1e-9 ? tone("ok-t", "합법 범위") : rate < 0.6 ? tone("bad-t", "최고금리 초과") : tone("bad-t", "불법사금융 수준"));
+    }
+    const cv = MB.canvas("#ld-cv", (ctx, w, h) => {
+      const P = MB.palette(), nar = w < 520;
+      const ax = { x: 26, w: w - 52, y: nar ? 150 : 130 };
+      const X = (r) => ax.x + (Math.log10(r / LO) / Math.log10(HI / LO)) * ax.w;
+      G = { ax, X };
+      ctx.fillStyle = fade(P.ok, 0.12); ctx.fillRect(ax.x, ax.y - 20, X(0.2) - ax.x, 40);
+      ctx.fillStyle = fade(P.bad, 0.13); ctx.fillRect(X(0.2), ax.y - 20, ax.x + ax.w - X(0.2), 40);
+      ctx.strokeStyle = P.axis; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(ax.x, ax.y); ctx.lineTo(ax.x + ax.w, ax.y); ctx.stroke();
+      const ticks = nar ? [0.01, 0.1, 1, 10, 50] : [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50];
+      ticks.forEach((r) => {
+        ctx.strokeStyle = P.axis; ctx.beginPath(); ctx.moveTo(X(r), ax.y - 4); ctx.lineTo(X(r), ax.y + 4); ctx.stroke();
+        text(ctx, Math.round(r * 100).toLocaleString("ko-KR") + "%", X(r), ax.y + 34, { size: 10.5, mono: true, color: P.dim, align: "center" });
+      });
+      ctx.strokeStyle = P.bad; ctx.lineWidth = 2.2; ctx.beginPath(); ctx.moveTo(X(0.2), ax.y - 30); ctx.lineTo(X(0.2), ax.y + 22); ctx.stroke();
+      text(ctx, "법정 최고 20%", X(0.2) + 5, ax.y - 24, { size: 12, color: P.bad, weight: 700 });
+      text(ctx, "넘는 이자는 무효", X(0.2) + 5, ax.y - 8, { size: 11, color: P.bad });
+      MARKS.forEach((m, i) => {
+        const x = X(m.r), y = ax.y + 52 + m.l * 18;
+        ctx.strokeStyle = fade(P.dim, 0.5); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x, ax.y + 6); ctx.lineTo(x, y - 10); ctx.stroke();
+        ctx.fillStyle = P.dim; ctx.beginPath(); ctx.arc(x, ax.y, 3, 0, TAU); ctx.fill();
+        text(ctx, nar ? m.s.split(" ")[0] : m.s, m.a === "left" ? x - 4 : x, y, { size: 11, color: P.dim, align: m.a });
+      });
+      const sx = X(30), sy = ax.y + 52;
+      text(ctx, "사채 제안", sx, sy, { size: 11.5, color: P.bad, weight: 700, align: "center" });
+      text(ctx, "수백~수천%", sx, sy + 16, { size: 11, color: P.bad, align: "center" });
+      // 손잡이와 상자
+      const kx = X(rate);
+      knob(ctx, kx, ax.y, P, 9);
+      const label = (rate >= 1 ? Math.round(rate * 100).toLocaleString("ko-KR") : (rate * 100).toFixed(1)) + "%";
+      const msg = "100만원 → 1년 뒤 " + MB.won(1e6 * (1 + rate));
+      const bw = Math.min(w - 20, nar ? 230 : 280), bx = MB.clamp(kx - bw / 2, 10, w - 10 - bw), by = 14;
+      ctx.fillStyle = P.surface; rrect(ctx, bx, by, bw, 64, 10); ctx.fill();
+      ctx.strokeStyle = rate > 0.2 ? P.bad : P.border; ctx.lineWidth = 1.2; ctx.stroke();
+      text(ctx, "연 " + label, bx + bw / 2, by + 26, { size: 19, weight: 800, color: rate > 0.2 ? P.bad : P.text, align: "center" });
+      text(ctx, msg, bx + bw / 2, by + 50, { size: 12, color: P.dim, align: "center" });
+    }, { get height() { return narrow("ld-cv") ? 270 : 260; } });
+    MB.drag(cv.canvas, { move(x) { if (!G) return; const f = MB.clamp((x - G.ax.x) / G.ax.w, 0, 1); rate = LO * Math.pow(HI / LO, f); stats(); cv.redraw(); } });
+    document.querySelectorAll("#sim-ladder [data-rate]").forEach((b) => b.addEventListener("click", () => { rate = +b.dataset.rate; stats(); cv.redraw(); }));
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 9. 빚 부담 게이지 */
+  (function () {
+    const DEBTS = [
+      { n: "학자금", m: MN.loan(1.2e7, 0.017, 120).first },
+      { n: "자동차", m: MN.loan(2e7, 0.055, 60).first },
+      { n: "신용대출", m: MN.loan(3e7, 0.06, 60).first },
+      { n: "카드론", m: MN.loan(5e6, 0.14, 24).first },
+      { n: "리볼빙", m: MN.revolving(3e6, 0.18, 0.1, 50000, 0).rows[0].pay },
+    ];
+    const I = MB.range("dg-i", (v) => MB.won(v), () => upd());
+    const boxes = DEBTS.map((d, i) => $("dg-c" + i));
+    boxes.forEach((b) => b.addEventListener("change", () => upd()));
+    let disp = 0, R0 = { ratio: 0 };
+    function calc() {
+      const inc = I(), on = DEBTS.filter((d, i) => boxes[i].checked), monthly = on.reduce((s, d) => s + d.m, 0);
+      const net = MN.payroll(inc).monthly.net;
+      return { inc, on, monthly, ratio: MN.dsr(monthly * 12, inc), net };
+    }
+    function upd() { R0 = calc(); stats(); cv.redraw(); }
+    function stats() {
+      const r = R0;
+      MB.stat("dg-o-m", MB.won(r.monthly, { digits: 1 }));
+      MB.stat("dg-o-r", r.ratio < 0.2 ? tone("ok-t", MB.pct(r.ratio, 1)) : r.ratio < 0.4 ? tone("warn-t", MB.pct(r.ratio, 1)) : tone("bad-t", MB.pct(r.ratio, 1)));
+      MB.stat("dg-o-n", MB.pct(r.monthly / r.net, 0));
+      MB.stat("dg-o-j", r.ratio < 0.2 ? tone("ok-t", "여유") : r.ratio < 0.4 ? tone("warn-t", "주의") : tone("bad-t", "위험"));
+    }
+    R0 = calc(); disp = R0.ratio;
+    const cv = MB.canvas("#dg-cv", (ctx, w, h) => {
+      const P = MB.palette(), nar = w < 520, r = R0;
+      const R = nar ? Math.min(w * 0.34, 110) : Math.min(w * 0.2, 120);
+      const cx = nar ? w / 2 : 30 + R + 12, cy = nar ? R + 34 : R + 52;
+      const MAX = 0.8;
+      gauge(ctx, cx, cy, R, disp / MAX, P,
+        [{ to: 0.2 / MAX, color: fade(P.ok, 0.8) }, { to: 0.4 / MAX, color: fade(P.warn, 0.8) }, { to: 1, color: fade(P.bad, 0.75) }],
+        [0, 0.2, 0.4, 0.6, 0.8].map((v) => ({ f: v / MAX, label: Math.round(v * 100) + "%" })));
+      text(ctx, MB.pct(disp, 1), cx, cy + 34, { size: nar ? 24 : 28, weight: 800, align: "center", base: "middle", mono: true });
+      text(ctx, "연 원리금 ÷ 연소득", cx, cy + 62, { size: 11.5, color: P.dim, align: "center" });
+      // 오른쪽: 월 실수령 막대
+      const bx = nar ? 20 : cx + R + 50, by = nar ? cy + 92 : 34, bw = w - bx - 20, bh = 26;
+      text(ctx, "월 실수령 " + MB.won(r.net, { digits: 1 }) + " 중 빚 갚는 몫", bx, by, { size: 12, color: P.dim });
+      ctx.fillStyle = P.grid; rrect(ctx, bx, by + 10, bw, bh, 6); ctx.fill();
+      let x = bx;
+      const cols = [P.accent, P.accent2, P.warn, P.bad, P.red];
+      r.on.forEach((d) => {
+        const ww = Math.min(bx + bw - x, (d.m / r.net) * bw);
+        if (ww <= 0) return;
+        ctx.fillStyle = cols[DEBTS.indexOf(d)]; ctx.fillRect(x, by + 10, ww, bh);
+        if (ww > 44) text(ctx, d.n, x + ww / 2, by + 10 + bh / 2, { size: 11, color: "#fff", align: "center", base: "middle", weight: 700 });
+        x += ww;
+      });
+      let ly = by + 62;
+      r.on.forEach((d) => {
+        ctx.fillStyle = cols[DEBTS.indexOf(d)]; ctx.fillRect(bx, ly - 9, 10, 10);
+        text(ctx, d.n, bx + 16, ly, { size: 12, color: P.text });
+        text(ctx, "월 " + MB.won(d.m, { digits: 1 }), bx + bw, ly, { size: 12, mono: false, color: P.dim, align: "right" });
+        ly += 20;
+      });
+      if (!r.on.length) text(ctx, "빚 없음", bx, ly, { size: 12, color: P.dim });
+      text(ctx, "남는 돈 " + MB.won(r.net - r.monthly, { digits: 1 }), bx, ly + 8, { size: 12.5, weight: 700, color: r.net - r.monthly < 1e6 ? P.bad : P.ok });
+    }, { get height() { return narrow("dg-cv") ? 450 : 300; } });
+    MB.loop(cv.canvas, (dt) => {
+      if (Math.abs(disp - R0.ratio) < 1e-4) { if (disp !== R0.ratio) { disp = R0.ratio; cv.redraw(); } return; }
+      disp += (R0.ratio - disp) * Math.min(1, dt * 4); cv.redraw();
+    });
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 10. 눈덩이 vs 눈사태 */
+  (function () {
+    const DEF = [
+      { n: "가전 할부", bal: 120, rate: 10, min: 10 },
+      { n: "리볼빙", bal: 300, rate: 18, min: 10 },
+      { n: "카드론", bal: 500, rate: 14, min: 15 },
+      { n: "자동차 할부", bal: 900, rate: 5.5, min: 20 },
+    ];
+    const debts = DEF.map((d) => Object.assign({}, d));
+    const grid = $("sn-grid");
+    const colOf = (i) => { const P = MB.palette(); return [P.accent, P.bad, P.warn, P.blue][i]; };
+    function renderGrid() {
+      grid.innerHTML = debts.map((d, i) => '<div class="debt-card"><b><i style="background:' + ["var(--accent)", "var(--bad)", "var(--warn)", "var(--blue)"][i] + '"></i>' + d.n + '</b>' +
+        '<label>잔액(만원)<input type="number" min="10" max="5000" step="10" data-i="' + i + '" data-k="bal" value="' + d.bal + '"></label>' +
+        '<label>금리(연 %)<input type="number" min="0" max="20" step="0.5" data-i="' + i + '" data-k="rate" value="' + d.rate + '"></label>' +
+        '<label>최소 상환(만원)<input type="number" min="1" max="500" step="1" data-i="' + i + '" data-k="min" value="' + d.min + '"></label></div>').join("");
+      grid.querySelectorAll("input").forEach((el) => el.addEventListener("change", () => {
+        const v = Number(el.value), i = +el.dataset.i, k = el.dataset.k;
+        if (!isFinite(v)) return;
+        const lim = { bal: [10, 5000], rate: [0, 20], min: [1, 500] }[k];
+        debts[i][k] = MB.clamp(v, lim[0], lim[1]); el.value = debts[i][k];
+        restart();
+      }));
+    }
+    function race(order) {
+      const ds = debts.map((d) => ({ bal: d.bal * 1e4, rate: d.rate / 100, min: d.min * 1e4, paid: null }));
+      const hist = [ds.map((d) => d.bal)];
+      let tot = 0, m = 0;
+      const budget = B();
+      while (ds.some((d) => d.bal > 0.5) && m < 360) {
+        m++;
+        ds.forEach((d) => { if (d.bal > 0.5) { const it = d.bal * d.rate / 12; d.bal += it; tot += it; } });
+        let cash = budget;
+        ds.forEach((d) => { if (d.bal > 0.5) { const p = Math.min(d.bal, d.min); d.bal -= p; cash -= p; } });
+        const tg = ds.filter((d) => d.bal > 0.5).sort(order === "snow" ? (a, b) => a.bal - b.bal : (a, b) => b.rate - a.rate);
+        for (const d of tg) { if (cash <= 0) break; const p = Math.min(d.bal, cash); d.bal -= p; cash -= p; }
+        ds.forEach((d) => { if (d.bal <= 0.5) { d.bal = 0; if (d.paid == null) d.paid = m; } });
+        hist.push(ds.map((d) => d.bal));
+      }
+      return { months: ds.some((d) => d.bal > 0.5) ? Infinity : m, tot, hist, paid: ds.map((d) => d.paid), first: Math.min(...ds.map((d) => (d.paid == null ? Infinity : d.paid))) };
+    }
+    let S, A, k = 0, playing = true, hold = 0, short = false;
+    const B = MB.range("sn-b", (v) => MB.won(v), () => restart());
+    const go = $("sn-go");
+    function restart() {
+      short = B() < debts.reduce((s, d) => s + d.min * 1e4, 0);
+      S = race("snow"); A = race("aval"); k = 0; hold = 0;
+      const f = (r) => (isFinite(r.months) ? r.months + "개월 · " + MB.won(r.tot, { digits: 1 }) : tone("bad-t", "30년 넘게"));
+      MB.stat("sn-o-s", f(S)); MB.stat("sn-o-a", f(A));
+      const d = S.tot - A.tot;
+      MB.stat("sn-o-d", short ? tone("bad-t", "최소 상환액 부족") : Math.abs(d) < 1 ? "같음" : (d > 0 ? "눈사태가 " : "눈덩이가 ") + MB.won(Math.abs(d), { digits: 1 }) + " 적음");
+      MB.stat("sn-o-f", "눈덩이 " + (isFinite(S.first) ? S.first + "개월" : "—") + " · 눈사태 " + (isFinite(A.first) ? A.first + "개월" : "—"));
+      cv && cv.redraw();
+    }
+    renderGrid();
+    let cv = null;
+    restart();
+    cv = MB.canvas("#sn-cv", (ctx, w, h) => {
+      const P = MB.palette(), nar = w < 520;
+      const maxBal = Math.max(...debts.map((d) => d.bal * 1e4));
+      const lanes = [{ r: S, name: "눈덩이 · 작은 빚부터" }, { r: A, name: "눈사태 · 높은 금리부터" }];
+      const lh = (h - 30) / 2;
+      lanes.forEach((ln, li) => {
+        const y0 = 12 + li * lh, lx = nar ? 78 : 100, bw = w - lx - 16, rowH = (lh - 40) / 4;
+        const idx = Math.min(Math.floor(k), ln.r.hist.length - 1), row = ln.r.hist[idx];
+        const done = row.every((b) => b <= 0.5);
+        text(ctx, ln.name, 12, y0 + 12, { size: 13, weight: 700, color: P.text });
+        text(ctx, done ? (idx + "개월에 완주") : (idx + "개월째"), w - 16, y0 + 12, { size: 12.5, weight: 700, color: done ? P.ok : P.dim, align: "right" });
+        debts.forEach((d, i) => {
+          const y = y0 + 24 + i * rowH, bh = Math.max(8, rowH - 8);
+          text(ctx, d.n, lx - 8, y + bh / 2, { size: 11.5, color: P.dim, align: "right", base: "middle" });
+          ctx.fillStyle = P.grid; ctx.fillRect(lx, y, bw, bh);
+          const frac = row[i] / maxBal;
+          ctx.fillStyle = colOf(i); ctx.fillRect(lx, y, Math.max(0, bw * frac), bh);
+          const pd = ln.r.paid[i];
+          if (pd != null && pd <= idx) text(ctx, pd + "개월에 청산", lx + 6, y + bh / 2, { size: 11, color: P.ok, base: "middle", weight: 700 });
+          else if (row[i] > 0) text(ctx, MB.wonAxis(row[i]), lx + Math.max(0, bw * frac) + 5, y + bh / 2, { size: 10.5, mono: true, color: P.dim, base: "middle" });
+        });
+      });
+      text(ctx, short ? "매달 총액이 최소 상환액 합보다 작다: 빚이 줄지 않는다" : "막대 길이 = 남은 잔액", 12, h - 8, { size: 11.5, color: short ? P.bad : P.faint });
+    }, { get height() { return narrow("sn-cv") ? 380 : 360; } });
+    MB.loop(cv.canvas, (dt) => {
+      if (!playing) return;
+      const T = Math.max(S.hist.length, A.hist.length) - 1;
+      if (k >= T) { hold += dt; if (hold > 3) { k = 0; hold = 0; } else return; }
+      k = Math.min(T, k + dt * Math.max(4, T / 8)); cv.redraw();
+    });
+    go.addEventListener("click", () => { playing = !playing; go.textContent = playing ? "일시정지" : "재생"; });
+    $("sn-re").addEventListener("click", () => { k = 0; hold = 0; playing = true; go.textContent = "일시정지"; cv.redraw(); });
+  })();
+})();
+</script>
+</body>
+</html>

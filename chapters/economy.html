@@ -1,0 +1,1328 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and MoneyBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "기준금리가 오르내리면 예금·대출 금리, 소비, 물가, 자산 가격, 환율이 어떤 경로로 움직이는지 직접 조작해 보고, 경기 순환과 중앙은행의 대응, 환율이 장바구니와 해외투자에 미치는 영향, %와 %p·기저효과 같은 뉴스 숫자 읽기를 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>금리·환율·경기 · MoneyBook</title>
+<meta name="description" content="기준금리가 오르내리면 예금·대출 금리, 소비, 물가, 자산 가격, 환율이 어떤 경로로 움직이는지 직접 조작해 보고, 경기 순환과 중앙은행의 대응, 환율이 장바구니와 해외투자에 미치는 영향, %와 %p·기저효과 같은 뉴스 숫자 읽기를 익힌다.">
+<link rel="canonical" href="https://moneybook.euiyun.com/chapters/economy.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0b8a63">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MoneyBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="금리·환율·경기 · MoneyBook">
+<meta property="og:description" content="기준금리가 오르내리면 예금·대출 금리, 소비, 물가, 자산 가격, 환율이 어떤 경로로 움직이는지 직접 조작해 보고, 경기 순환과 중앙은행의 대응, 환율이 장바구니와 해외투자에 미치는 영향, %와 %p·기저효과 같은 뉴스 숫자 읽기를 익힌다.">
+<meta property="og:url" content="https://moneybook.euiyun.com/chapters/economy.html">
+<meta property="og:image" content="https://moneybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://moneybook.euiyun.com/chapters/economy.html#chapter","name":"금리·환율·경기","headline":"금리·환율·경기 · MoneyBook","description":"기준금리가 오르내리면 예금·대출 금리, 소비, 물가, 자산 가격, 환율이 어떤 경로로 움직이는지 직접 조작해 보고, 경기 순환과 중앙은행의 대응, 환율이 장바구니와 해외투자에 미치는 영향, %와 %p·기저효과 같은 뉴스 숫자 읽기를 익힌다.","url":"https://moneybook.euiyun.com/chapters/economy.html","position":5,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://moneybook.euiyun.com/og.png","dateModified":"2026-10-03","isPartOf":{"@type":"Book","@id":"https://moneybook.euiyun.com/#book","name":"MoneyBook · 살아가는 데 필요한 돈 교과서","url":"https://moneybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MoneyBook","item":"https://moneybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"5. 금리·환율·경기","item":"https://moneybook.euiyun.com/chapters/economy.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/money.js"></script>
+<!--head:end-->
+<style>
+  .pp-q { font-size: 14px; line-height: 1.55; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; min-height: 3.2em; }
+  .pp-q .ok-t, .pp-q .bad-t { font-weight: 700; }
+  #pp-opts .btn { flex: 1 1 auto; min-width: 0; }
+  figure.diagram svg { max-width: 560px; margin: 0 auto; }
+</style>
+</head>
+<body data-chapter="economy">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 05</div>
+    <h1>금리·환율·경기</h1>
+    <p class="lead">"한국은행, 기준금리 0.25%p 인상." "원/달러 환율 1,450원 돌파." "소비자물가 전년 동월 대비 3.1% 상승." 매일 보는 이 문장들은 내 통장과 대출, 장바구니와 여행 경비에 몇 주에서 몇 년의 시차를 두고 닿는다. 이 장은 그 연결선을 하나씩 손으로 당겨 본다. 기준금리 하나를 움직이면 어떤 숫자가 차례로 넘어지는지, 경기가 오르내릴 때 무엇이 함께 움직이는지, 환율이 1,300원에서 1,450원이 되면 누가 웃고 누가 우는지, 그리고 뉴스의 숫자를 어떻게 읽어야 속지 않는지를 다룬다.</p>
+    <ul class="objectives">
+      <li>기준금리가 시장금리, 예금·대출 금리, 소비·투자, 물가, 자산 가격, 환율로 번져 가는 전달 경로와 그 시차를 설명한다.</li>
+      <li>고정금리와 변동금리 차주가 금리 변화를 어떻게 다르게 겪는지 월 상환액으로 계산한다.</li>
+      <li>경기 순환의 네 국면에서 GDP 성장률, 실업률, 물가가 어떻게 움직이고 중앙은행이 어느 쪽으로 대응하는지 말한다.</li>
+      <li>원/달러 환율이 오를 때(원화 약세) 수입 물가, 해외여행·직구, 수출 기업, 해외투자 수익이 받는 영향을 구분한다.</li>
+      <li>뉴스의 숫자에서 %와 %p, 전년 동월 대비, 기저효과를 가려 읽는다.</li>
+    </ul>
+  </header>
+
+  <section id="base-rate">
+    <h2>기준금리: 모든 금리의 출발점</h2>
+    <p><a href="money.html">2장</a>에서 은행은 대출을 해 주면서 예금을 만들고, 중앙은행은 그 은행들이 서로 돈을 빌리고 빌려주는 하룻밤 금리를 조절한다고 했다. 그 목표치가 <span class="term">기준금리</span><span class="en">(Base rate, Policy rate)</span>다. 중앙은행이 "단기 자금의 값은 이 정도여야 한다"고 정해 두는 금리라고 보면 된다. 한국은 한국은행의 금융통화위원회가 1년에 여덟 번 회의를 열어 정하고, 미국은 연방준비제도(연준)가 정한다.</p>
+    <p>우리가 은행 창구에서 만나는 금리는 기준금리 그 자체가 아니다. 기준금리 위에 여러 층이 쌓인다. 은행이 돈을 모으는 비용을 나타내는 <span class="term">지표금리</span><span class="en">(Reference rate)</span>가 있고, 그 위에 은행의 운영비·위험·이윤을 더한 <span class="term">가산금리</span><span class="en">(Spread)</span>가 붙고, 급여 이체나 카드 실적으로 깎아 주는 우대금리가 빠진다. 한국의 주택담보대출은 은행들의 평균 자금조달 비용인 COFIX나 금융채 금리를 지표로 쓰는 경우가 많다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 420 332" role="img" aria-label="기준금리 위에 지표금리와 가산금리가 쌓이고 우대금리가 빠져 내 대출 금리가 되는 구조">
+        <defs><marker id="ec-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <text x="10" y="22" class="lbl-dim">기준금리가 0.25%p 오르면 맨 아래층이 올라가고,</text>
+        <text x="10" y="42" class="lbl-dim">위층 전체가 함께 들린다</text>
+        <line x1="6" y1="280" x2="414" y2="280" class="s-axis"/>
+        <rect x="10" y="210" width="82" height="70" class="f-acc-soft"/>
+        <text x="51" y="250" text-anchor="middle" class="lbl-acc">기준금리</text>
+        <text x="51" y="304" text-anchor="middle" class="lbl-dim">중앙은행이</text>
+        <text x="51" y="322" text-anchor="middle" class="lbl-dim">정함</text>
+        <line x1="94" y1="245" x2="112" y2="245" class="s-line" marker-end="url(#ec-ar)"/>
+        <rect x="116" y="210" width="82" height="70" class="f-acc-soft"/>
+        <rect x="116" y="180" width="82" height="30" class="f-acc2-soft"/>
+        <text x="157" y="250" text-anchor="middle" class="lbl-acc">기준금리</text>
+        <text x="157" y="201" text-anchor="middle" class="lbl-acc2">+ 조달 비용</text>
+        <text x="157" y="304" text-anchor="middle" class="lbl-dim">지표금리</text>
+        <text x="157" y="322" text-anchor="middle" class="lbl-dim">(COFIX 등)</text>
+        <line x1="200" y1="220" x2="218" y2="220" class="s-line" marker-end="url(#ec-ar)"/>
+        <rect x="222" y="210" width="82" height="70" class="f-acc-soft"/>
+        <rect x="222" y="180" width="82" height="30" class="f-acc2-soft"/>
+        <rect x="222" y="110" width="82" height="70" class="f-warn-soft"/>
+        <text x="263" y="150" text-anchor="middle" class="lbl">가산금리</text>
+        <text x="263" y="304" text-anchor="middle" class="lbl-dim">은행이 정함</text>
+        <line x1="306" y1="170" x2="324" y2="170" class="s-line" marker-end="url(#ec-ar)"/>
+        <rect x="328" y="210" width="82" height="70" class="f-acc-soft"/>
+        <rect x="328" y="180" width="82" height="30" class="f-acc2-soft"/>
+        <rect x="328" y="135" width="82" height="45" class="f-warn-soft"/>
+        <rect x="328" y="110" width="82" height="25" class="f-surface s-dash"/>
+        <text x="369" y="127" text-anchor="middle" class="lbl-dim">우대 −</text>
+        <text x="369" y="92" text-anchor="middle" class="lbl-b">내 대출 금리</text>
+      </svg>
+      <figcaption><b>내 대출 금리는 몇 층짜리 건물이다.</b> 기준금리가 움직이면 지표금리가 따라 움직이고, 가산금리가 그대로라면 내 금리도 거의 같은 폭으로 움직인다. 반대로 기준금리가 그대로여도 은행이 가산금리를 바꾸면 내 금리는 달라진다.</figcaption>
+    </figure>
+
+    <p>그래서 "기준금리 0.25%p 인상"은 맨 아래층이 0.25%p 올라갔다는 뜻이다. 위층에 사는 예금자와 대출자가 그 진동을 언제, 얼마나 느끼는지가 이 장의 첫 주제다. 여기서 <b>%p</b>(퍼센트포인트)는 퍼센트끼리의 차이를 말한다. 2.50%에서 2.75%로 오르면 0.25%p 오른 것이다. %와 %p의 차이는 마지막 절에서 직접 만져 본다.</p>
+    <div class="callout">
+      <strong>중앙은행은 왜 금리를 움직이는가</strong>
+      한국은행의 첫째 임무는 물가 안정이다. 소비자물가 상승률 연 2%를 중기 목표로 둔다(물가안정목표제). 물가가 목표보다 빠르게 오르면 금리를 올려 돈을 빌리고 쓰는 속도를 늦추고, 경기가 식어 물가가 너무 낮아지면 금리를 내려 속도를 높인다. 금융 시스템의 안정도 함께 살핀다.
+    </div>
+  </section>
+
+  <section id="transmission">
+    <h2>금리 파급: 도미노가 넘어지는 순서</h2>
+    <p>기준금리는 한 번에 모든 것을 바꾸지 않는다. 먼저 하루짜리 은행 간 금리가 바로 따라가고, 며칠에서 몇 주 사이에 국채·은행채 같은 시장금리가 움직이고, 그 위에 지어진 예금·대출 금리가 바뀐다. 이자 부담이 커진 가계와 기업이 소비와 투자를 줄이기까지는 몇 달이 걸리고, 그것이 물가에 나타나기까지는 1~2년이 걸린다. 이 연쇄를 <span class="term">통화정책 전달 경로</span><span class="en">(Monetary transmission)</span>라고 한다.</p>
+    <p>아래에서 기준금리 변경 폭을 움직이면 도미노가 왼쪽(위쪽)부터 차례로 넘어진다. 빨강은 오름, 파랑은 내림이다. 한국 시세판의 관례를 따랐다.</p>
+
+    <div class="sim" id="sim-dom">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>기준금리 도미노: 무엇이, 어느 쪽으로, 언제</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="dm-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>기준금리 변경 <output id="dm-d-out"></output></span><input type="range" id="dm-d" min="-1.5" max="1.5" step="0.25" value="0.5"></label>
+          <div class="btn-row"><button class="btn primary" id="dm-go">다시 넘어뜨리기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">기준금리</span><span class="v" id="dm-o-b">—</span></div>
+        <div class="stat"><span class="k">예금·대출 금리</span><span class="v" id="dm-o-r">—</span></div>
+        <div class="stat"><span class="k">소비·투자</span><span class="v" id="dm-o-c">—</span></div>
+        <div class="stat"><span class="k">물가 (1~2년 뒤)</span><span class="v" id="dm-o-p">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① +0.5%p에서 도미노가 넘어지는 순서를 본다. 금리는 오르고, 나머지는 모두 내리는 쪽이다. ② −1.0%p로 바꾼다. 모든 화살표가 뒤집힌다. ③ 0으로 둔다. 아무것도 넘어지지 않는다. (화살표 크기는 방향과 대략의 세기를 보여 줄 뿐 실제 크기가 아니다. 기준금리 출발점은 연 2.50%로 가정했다. 실제 경제에서는 다른 요인이 동시에 움직여 이 방향이 가려지기도 한다.)</div>
+    </div>
+
+    <p>금리가 오르면 저축의 보상은 커지고 빌리는 비용은 비싸진다. 사람들은 지금 쓰기보다 나중을 위해 모으는 쪽으로, 기업은 새 공장을 짓기보다 미루는 쪽으로 기운다. 수요가 줄면 가격을 올리기 어려워지고 물가 상승이 느려진다. 한편 같은 미래 수입의 현재가치가 줄어 주식·채권·부동산 같은 자산 가격에는 내리는 압력이 생기고, 원화 자산의 이자가 늘어 외국 돈이 들어오면 원화 가치가 오르는(원/달러 환율이 내리는) 압력이 생긴다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>단계</th><th>무엇이 움직이나</th><th>대략의 시차</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>은행 간 하룻밤 금리(콜금리)</td><td>당일</td></tr>
+        <tr><td>2</td><td>국채·은행채·CD 같은 시장금리, 환율, 주가</td><td>며칠~몇 주 (발표 전에 미리 움직이기도 한다)</td></tr>
+        <tr><td>3</td><td>예금·적금 금리, 신규 대출과 변동금리 대출의 금리</td><td>몇 주~몇 달</td></tr>
+        <tr><td>4</td><td>소비, 기업 투자, 주택 거래</td><td>6개월~1년</td></tr>
+        <tr><td>5</td><td>물가 상승률, 고용</td><td>1~2년</td></tr>
+      </tbody>
+    </table></div>
+    <p>시차가 길다는 것이 통화정책을 어렵게 만든다. 중앙은행은 오늘의 물가가 아니라 1~2년 뒤의 물가를 내다보고 움직여야 한다. 그래서 시장은 실제 결정보다 결정에 대한 <b>예상</b>에 먼저 반응한다. 인상이 확실해 보이면 시장금리는 발표 몇 주 전부터 이미 올라 있다.</p>
+  </section>
+
+  <section id="fixed-variable">
+    <h2>고정금리와 변동금리: 누가 먼저 느끼는가</h2>
+    <p>도미노의 셋째 줄 "대출 금리"는 사람마다 다르게 넘어진다. <span class="term">고정금리</span><span class="en">(Fixed rate)</span> 대출은 약정한 기간 동안 금리가 바뀌지 않는다. 기준금리가 몇 번 올라도 내 이자는 그대로다. <span class="term">변동금리</span><span class="en">(Variable rate)</span> 대출은 3개월, 6개월, 12개월마다 지표금리를 다시 읽어 금리를 고친다. 기준금리 인상은 다음 변경 주기에 바로 내 월 상환액이 된다.</p>
+    <p>아래 그래프의 위쪽은 금리 경로, 아래쪽은 매달 내는 원리금이다. 30년 원리금균등 대출에서 첫 1년이 지나 변동금리가 바뀐다고 하자. 위쪽 그래프의 손잡이를 위아래로 끌어 1년 뒤 금리를 정한다.</p>
+
+    <div class="sim" id="sim-fv">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>같은 대출, 다른 금리 방식: 1년 뒤 금리가 바뀌면</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="fv-cv"></canvas><span class="hint">손잡이를 위아래로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>대출 원금 <output id="fv-p-out"></output></span><input type="range" id="fv-p" min="1" max="5" step="0.5" value="3"></label>
+          <label class="ctrl"><span>처음 금리 <output id="fv-r-out"></output></span><input type="range" id="fv-r" min="2" max="7" step="0.1" value="4"></label>
+          <div class="seg" id="fv-pre"><button data-value="0">그대로</button><button data-value="1" class="on">+1%p</button><button data-value="2">+2%p</button><button data-value="-1">−1%p</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent-2)"></i>고정금리</span><span><i style="background:var(--accent)"></i>변동금리</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">고정 월 상환</span><span class="v" id="fv-o-f">—</span></div>
+        <div class="stat"><span class="k">변동 월 상환(2년 차)</span><span class="v" id="fv-o-v">—</span></div>
+        <div class="stat"><span class="k">월 차이</span><span class="v" id="fv-o-d">—</span></div>
+        <div class="stat"><span class="k">5년 이자 차이</span><span class="v" id="fv-o-i">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(3억원, 4% → 5%)에서 변동금리 차주의 월 상환이 약 17만원 늘어나는 것을 확인한다. ② 손잡이를 10%까지 끌어 올린다. 2020년대 초 몇몇 나라에서 실제로 1~2년 사이 금리가 수 %p 뛰었다. 월 상환이 처음의 두 배 가까이 된다. ③ 손잡이를 내리면 이번에는 변동금리 차주가 이득을 본다. (원리금균등 30년, 1년 뒤 한 번만 금리가 바뀐다고 단순화했다. 계산은 MN.loan. 고정금리와 변동금리의 처음 금리를 같게 두었지만 실제로는 고정금리가 조금 높은 경우가 많다.)</div>
+    </div>
+
+    <p>기본값에서 고정금리 차주는 30년 내내 월 약 143만원을 낸다. 변동금리 차주는 1년 뒤 금리가 1%p 오르자 월 약 161만원을 내게 됐다. 한 달에 약 17만원, 1년이면 약 208만원이다. 남은 원금이 약 2억 9,500만원이라 금리 1%p는 1년에 거의 300만원의 이자 차이가 되고, 그중 일부를 원금 상환 속도가 늦춰 줄 뿐이다.</p>
+    <p>그렇다고 고정금리가 늘 옳은 것은 아니다. 고정금리에는 "금리가 오를 위험을 은행이 대신 진다"는 보험료가 들어 있어 처음 금리가 변동금리보다 높은 경우가 많고, 금리가 내려가면 그 혜택을 받지 못한다. 한국에서는 5년쯤 고정했다가 그 뒤 변동으로 바뀌는 혼합형·주기형이 많이 쓰인다. 상환 방식과 중도상환은 <a href="loan.html">10장</a>에서 자세히 다룬다.</p>
+    <div class="callout tip">
+      <strong>금리 위험을 판단하는 질문 하나</strong>
+      "금리가 2%p 오르면 매달 얼마가 더 나가고, 그래도 생활이 되는가?" 변동금리를 고를 때는 이 질문에 숫자로 답할 수 있어야 한다. 위 시뮬레이터에서 자기 원금과 금리로 +2%p를 눌러 보면 된다. 감당할 수 없는 숫자라면 처음 금리가 조금 높더라도 고정 기간이 긴 쪽이 안전하다.
+    </div>
+  </section>
+
+  <section id="assets">
+    <h2>금리와 자산 가격: 시소의 반대편</h2>
+    <p>금리가 오르면 예금자는 웃지만, 이미 갖고 있는 채권·주식·집의 값에는 내리는 압력이 생긴다. 이유는 하나로 모인다. 자산의 값은 그 자산이 앞으로 벌어 줄 돈을 오늘의 가치로 바꾼 것이고(<a href="interest.html">4장</a>의 현재가치), 금리는 그 할인율이기 때문이다. 할인율이 오르면 같은 미래 수입의 오늘 가치가 줄어든다.</p>
+    <ul>
+      <li><b>채권.</b> 이자가 고정된 옛 채권은 새로 나오는 높은 이자 채권과 경쟁해야 하므로 값이 내려간다. 만기가 길수록 더 많이 내려간다(<a href="bond.html">14장</a>).</li>
+      <li><b>주식.</b> 기업의 미래 이익을 더 높은 금리로 할인하고, 기업의 이자 부담도 늘어 이익 자체가 줄 수 있다.</li>
+      <li><b>집.</b> 같은 소득으로 빌릴 수 있는 돈이 줄어 사려는 사람의 지갑이 얇아진다.</li>
+    </ul>
+    <p>아래에서 금리 변화를 움직여 네 가지가 시소처럼 반대로 기우는 모습을 본다. 막대는 각 자산을 가진 사람 입장에서 본 변화율이다.</p>
+
+    <div class="sim" id="sim-ap">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>금리가 바뀔 때 자산별 '이론상' 변화</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ap-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>금리 변화 <output id="ap-d-out"></output></span><input type="range" id="ap-d" min="-2" max="3" step="0.25" value="1"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">예금 이자(1년)</span><span class="v" id="ap-o-1">—</span></div>
+        <div class="stat"><span class="k">10년 채권 가격</span><span class="v" id="ap-o-2">—</span></div>
+        <div class="stat"><span class="k">주식 이론가치</span><span class="v" id="ap-o-3">—</span></div>
+        <div class="stat"><span class="k">대출 한도</span><span class="v" id="ap-o-4">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① +1%p에서 10년 채권은 약 8% 내린다. 이자 몇 년 치가 한 번에 사라지는 크기다. ② +3%p로 밀어 본다. 주식 이론가치가 40% 줄어든다. 할인율에 매우 민감하다는 뜻이다. ③ −2%p로 내리면 모든 막대가 반대로 선다. (교육용 단순 모델이다. 예금: 연 3% 기준. 채권: 표면금리 3% 10년 만기, MN.bond. 주식: 이익 수익률 = 금리 3% + 위험 프리미엄 4.5% − 성장률 3%에서 금리만 바뀐다고 가정. 대출 한도: 연소득 5,000만원, DSR 40%, 30년, 연 4% 기준, MN.maxLoan. 실제 가격은 경기·이익 전망·심리가 함께 움직여 이 방향과 다르게 갈 때가 많다.)</div>
+    </div>
+
+    <p>+1%p에서 연소득 5,000만원인 사람이 빌릴 수 있는 돈은 약 3억 4,900만원에서 3억 1,000만원으로 약 11% 준다. 집을 사려는 사람이 쓸 수 있는 돈이 그만큼 줄어드는 것이다. 채권은 정확한 계산이고, 주식과 집은 "다른 조건이 모두 같다면"이라는 단서가 붙은 이론값이다.</p>
+    <div class="callout warn">
+      <strong>경향이지 법칙이 아니다</strong>
+      금리가 오르는데 주가가 오르는 일은 흔하다. 경기가 좋아서 금리를 올리는 시기에는 기업 이익이 늘어 할인율 효과를 덮기도 한다. 집값은 공급, 인구, 정책, 기대에 크게 좌우된다. 이 절의 막대는 "다른 모든 것이 그대로일 때 금리만이 미는 방향"이다. 이것으로 시장을 예측하거나 사고팔 시점을 정할 수는 없다.
+    </div>
+  </section>
+
+  <section id="cycle">
+    <h2>경기 순환: 확장, 정점, 수축, 저점</h2>
+    <p>경제는 한 방향으로 매끈하게 자라지 않는다. 길게 보면 생산이 늘어나는 추세 위에서, 몇 년을 주기로 빨라졌다 느려졌다를 되풀이한다. 이것이 <span class="term">경기 순환</span><span class="en">(Business cycle)</span>이다. 생산이 늘어나는 <b>확장</b>, 꼭대기인 <b>정점</b>, 줄어드는 <b>수축</b>, 바닥인 <b>저점</b>의 네 국면으로 나눈다. 확장의 앞부분을 회복, 뒷부분을 호황이라 하고, 수축의 앞부분을 후퇴, 뒷부분을 침체라 부르기도 한다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 420 262" role="img" aria-label="추세선 위를 오르내리는 경기 순환 곡선과 확장, 정점, 수축, 저점 네 국면">
+        <line x1="30" y1="230" x2="410" y2="230" class="s-axis"/>
+        <line x1="30" y1="30" x2="30" y2="230" class="s-axis"/>
+        <text x="410" y="254" text-anchor="end" class="lbl-dim">시간</text>
+        <text x="36" y="24" class="lbl-dim">생산(실질 GDP)</text>
+        <line x1="30" y1="190" x2="410" y2="90" class="s-dash"/>
+        <text x="408" y="76" text-anchor="end" class="lbl-dim">장기 추세</text>
+        <path d="M30 220 C 70 220, 93 120, 134 110 S 197 175, 226 175 S 278 60, 318 62 S 381 120, 410 118" class="s-acc" style="stroke-width:3"/>
+        <circle cx="134" cy="110" r="6" class="f-acc2"/>
+        <text x="134" y="94" text-anchor="middle" class="lbl-acc2">정점</text>
+        <circle cx="226" cy="175" r="6" class="f-bad"/>
+        <text x="226" y="200" text-anchor="middle" class="lbl-bad">저점</text>
+        <circle cx="318" cy="62" r="6" class="f-acc2"/>
+        <text x="318" y="46" text-anchor="middle" class="lbl-acc2">정점</text>
+        <text x="80" y="200" text-anchor="middle" class="lbl-acc">확장</text>
+        <text x="186" y="122" text-anchor="middle" class="lbl-bad">수축</text>
+        <text x="262" y="150" text-anchor="middle" class="lbl-acc">확장</text>
+        <text x="376" y="146" text-anchor="middle" class="lbl-bad">수축</text>
+        <line x1="134" y1="216" x2="318" y2="216" class="s-line"/>
+        <line x1="134" y1="210" x2="134" y2="222" class="s-line"/>
+        <line x1="318" y1="210" x2="318" y2="222" class="s-line"/>
+        <text x="200" y="254" text-anchor="middle" class="lbl-dim">한 주기(정점에서 다음 정점까지, 수년)</text>
+      </svg>
+      <figcaption><b>경기 순환의 네 국면.</b> 곡선은 실제 생산, 점선은 장기 추세다. 수축 국면에서도 생산이 추세보다 높을 수 있고, 확장 국면에서도 추세보다 낮을 수 있다. 국면은 높이가 아니라 방향으로 정한다.</figcaption>
+    </figure>
+
+    <p>경기를 재는 대표 숫자는 셋이다. <span class="term">GDP</span><span class="en">(Gross domestic product, 국내총생산)</span>는 한 나라 안에서 일정 기간 새로 만든 재화와 서비스의 가치를 모두 더한 것이다. 물가 변동을 뺀 실질 GDP가 지난 기간보다 몇 % 늘었는지가 <b>경제성장률</b>이다. <span class="term">실업률</span><span class="en">(Unemployment rate)</span>은 일할 의사와 능력이 있어 일자리를 찾는 사람(경제활동인구) 가운데 일자리가 없는 사람의 비율이다. 그리고 <a href="inflation.html">3장</a>의 <b>소비자물가 상승률</b>이다.</p>
+    <p>아래 파동 위의 점을 끌어 경기의 여러 시점에 놓아 본다. 아래쪽 막대는 그 시점의 성장률, 실업률, 물가, 중앙은행의 대응 방향이다. 가운데 세로선이 '평소' 수준이다.</p>
+
+    <div class="sim" id="sim-cy">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>경기 파동 위의 한 점: 지금은 어느 국면인가</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="cy-cv"></canvas><span class="hint">파동 위의 점을 좌우로 끈다</span></div>
+      </div>
+      <div class="sim-controls">
+        <div class="btn-row"><button class="btn primary" id="cy-play">자동 재생</button><button class="btn" id="cy-re">처음으로</button></div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">국면</span><span class="v" id="cy-o-ph">—</span></div>
+        <div class="stat"><span class="k">GDP 성장률</span><span class="v" id="cy-o-g">—</span></div>
+        <div class="stat"><span class="k">실업률</span><span class="v" id="cy-o-u">—</span></div>
+        <div class="stat"><span class="k">물가 상승률</span><span class="v" id="cy-o-p">—</span></div>
+        <div class="stat"><span class="k">기준금리 방향</span><span class="v" id="cy-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 저점에서 정점까지 천천히 끈다. 성장률은 확장 중간에 가장 높고, 정점에 가까워지면 이미 꺾이기 시작한다. ② 실업률은 생산보다 늦게 움직인다. 저점을 지나 회복이 시작돼도 한동안 높게 남는다(후행 지표). ③ 물가도 늦게 따라온다. 정점을 지나 수축이 시작될 무렵 물가가 가장 높을 수 있다. 중앙은행이 어려운 이유다. (모양을 보여 주기 위한 가상의 순환이다. 평소 성장률 2%, 실업률 3.8%, 물가 2%를 중심으로 두었다. 실제 경기는 이렇게 규칙적이지 않다.)</div>
+    </div>
+
+    <p>지표에는 경기보다 먼저 움직이는 것과 늦게 움직이는 것이 있다. 주가, 건설 수주, 기업의 신규 주문, 소비자 심리는 <b>선행 지표</b>, 생산과 소매 판매는 <b>동행 지표</b>, 실업률과 물가는 대체로 <b>후행 지표</b>다. 실업은 경기가 나빠진 뒤에야 늘고, 좋아진 뒤에도 기업이 사람을 다시 뽑기까지 시간이 걸린다. 그래서 뉴스에서 "경기는 바닥을 지났는데 체감은 차갑다"는 말이 자주 나온다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>지표</th><th>무엇을 재나</th><th>읽는 법</th></tr></thead>
+      <tbody>
+        <tr><td>실질 GDP 성장률</td><td>물가를 뺀 생산의 증가율(분기·연간)</td><td>한국은 2020년대 들어 잠재성장률이 약 2% 안팎으로 추정된다. 두 분기 연속 마이너스면 흔히 '기술적 경기 침체'라 부른다.</td></tr>
+        <tr><td>실업률</td><td>경제활동인구 중 일자리를 찾는 사람의 비율</td><td>한국은 약 3% 안팎. 구직을 포기한 사람은 빠지므로 고용률과 함께 본다.</td></tr>
+        <tr><td>소비자물가 상승률</td><td>장바구니 가격의 전년 같은 달 대비 변화</td><td>한국은행 목표는 2%. 크게 웃돌면 인상, 크게 밑돌면 인하 압력.</td></tr>
+        <tr><td>경기선행지수</td><td>앞으로의 경기를 미리 보여 주는 지표들의 합성</td><td>방향이 몇 달 이어지는지가 중요하다.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="central-bank">
+    <h2>중앙은행의 저울: 물가와 경기 사이</h2>
+    <p>중앙은행은 두 가지를 저울에 올린다. 물가가 목표보다 높으면 금리를 올려야 하고, 경기가 잠재 수준보다 식어 있으면 금리를 내려야 한다. 두 신호가 같은 방향이면 결정이 쉽다. 과열(물가 높음, 경기 뜨거움)이면 인상, 침체(물가 낮음, 경기 차가움)면 인하다. 어려운 것은 물가는 높은데 경기는 식어 있는 <span class="term">스태그플레이션</span><span class="en">(Stagflation)</span>이다. 어느 쪽으로 움직여도 한쪽은 나빠진다.</p>
+    <p>경제학자 존 테일러는 이 저울을 간단한 식으로 적었다. 실제 중앙은행이 이 식대로 움직이지는 않지만, "지금 금리가 높은 편인가 낮은 편인가"를 어림하는 기준으로 널리 쓰인다.</p>
+    <div class="formula">$$i = r^* + \pi + 0.5\,(\pi - \pi^*) + 0.5\,(\text{GDP 갭})$$<div class="where">\(i\): 준칙이 가리키는 기준금리, \(r^*\): 중립 실질금리(여기서는 0.5%로 가정), \(\pi\): 물가 상승률, \(\pi^*\): 물가 목표(2%), GDP 갭: 실제 GDP가 잠재 GDP보다 몇 % 높은지(경기가 뜨거우면 +, 식으면 −)</div></div>
+    <p>아래 지도의 가로는 물가 상승률, 세로는 GDP 갭이다. 점을 끌어 경제 상태를 정하면 색이 준칙 금리를 보여 준다. 빨갈수록 지금(2.5%)보다 올려야 하고, 파랄수록 내려야 한다는 뜻이다.</p>
+
+    <div class="sim" id="sim-tr">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>테일러 준칙 지도: 이 경제라면 금리는 몇 %?</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="tr-cv"></canvas><span class="hint">점을 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="tr-pre"><button data-value="calm" class="on">안정</button><button data-value="hot">과열</button><button data-value="cold">침체</button><button data-value="stag">스태그플레이션</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">준칙 금리</span><span class="v" id="tr-o-i">—</span></div>
+        <div class="stat"><span class="k">지금(2.5%) 대비</span><span class="v" id="tr-o-d">—</span></div>
+        <div class="stat"><span class="k">상황</span><span class="v" id="tr-o-s">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "안정"(물가 2%, 갭 0)에서 준칙 금리는 2.5%다. 이것이 중립이다. ② 점을 오른쪽으로만 끌어 물가를 4%로 올린다. 물가가 2%p 오르면 준칙 금리는 3%p 오른다. 물가보다 금리를 더 많이 올려야 실질금리가 올라가 수요가 식기 때문이다. ③ "스태그플레이션"을 누른다. 경기는 내리라고 하지만 물가의 무게가 더 커서 준칙은 여전히 인상을 가리킨다. 경기가 식는데 금리를 올려야 하는, 가장 괴로운 자리다. 점을 아래로 더 끌어 내리면 색이 옅어진다. (교육용 단순화. 계수 0.5와 중립금리 0.5%는 가정이며 실제 결정은 금융 안정, 환율, 다른 나라 금리, 전망까지 함께 고려한다. 금리는 0% 아래로 잘 내려가지 않아 0에서 멈춘다.)</div>
+    </div>
+
+    <p>물가 상승률이 1%p 오를 때 금리는 1%p보다 더 올라야 한다는 것이 이 식의 핵심이다(테일러 원칙). 금리를 물가만큼만 올리면 물가를 뺀 <b>실질금리</b>는 그대로라 빌리고 쓰는 속도가 줄지 않는다. 3장의 실질 이율 \((1+\text{명목})/(1+\text{물가}) - 1\)이 여기서 정책의 언어가 된다.</p>
+  </section>
+
+  <section id="fx">
+    <h2>환율: 원화의 값</h2>
+    <p><span class="term">환율</span><span class="en">(Exchange rate)</span>은 두 나라 돈을 바꾸는 비율이다. 한국 뉴스의 "원/달러 환율 1,450원"은 1달러를 사는 데 1,450원이 든다는 뜻이다. 여기서 헷갈리기 쉬운 점이 있다. <b>환율이 오르면 원화의 값은 내린다.</b> 1달러에 1,300원이던 것이 1,450원이 되면 같은 1달러를 사는 데 원화를 더 내야 하므로, 원화가 싸진(약해진) 것이다. 이것을 원화 약세, 또는 원화 가치 하락이라 한다.</p>
+    <p>2020년대 들어 원/달러 환율은 대략 1,100원대에서 1,400원대 후반 사이를 오갔다. 몇 달 사이에 100원 넘게 움직이는 일도 드물지 않다. 그 100원이 내 생활에 무엇을 뜻하는지 계산해 본다. 위쪽 띠의 손잡이를 끌어 환율을 바꾸고, 달러 가격을 정한다.</p>
+
+    <div class="sim" id="sim-fx">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>환율 계산기: 같은 1달러, 다른 원화 값</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="fx-cv"></canvas><span class="hint">환율 손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>원/달러 환율 <output id="fx-r-out"></output></span><input type="range" id="fx-r" min="1000" max="1700" step="10" value="1450"></label>
+          <label class="ctrl"><span>물건의 달러 가격 <output id="fx-u-out"></output></span><input type="range" id="fx-u" min="10" max="2000" step="10" value="100"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">지금 원화 가격</span><span class="v" id="fx-o-n">—</span></div>
+        <div class="stat"><span class="k">1,300원일 때</span><span class="v" id="fx-o-b">—</span></div>
+        <div class="stat"><span class="k">차이</span><span class="v" id="fx-o-d">—</span></div>
+        <div class="stat"><span class="k">1만원으로 사는 달러</span><span class="v" id="fx-o-w">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 1,300원에서 1,450원으로 끈다. $100짜리 직구가 13만원에서 14만 5천원이 된다. 약 11.5% 비싸졌다. ② 아래 다섯 줄의 막대 길이는 모두 같은 %다. 그런데 색이 다르다. 같은 환율 변화가 누구에게는 비용, 누구에게는 수입이다. ③ 1,100원 쪽으로 끌어 원화 강세를 만든다. 색이 모두 뒤집힌다. (기준 환율 1,300원. 수수료와 환전 스프레드는 뺐다. 실제 카드 결제와 환전에는 보통 1~2% 안팎의 수수료가 더 붙는다.)</div>
+    </div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 420 318" role="img" aria-label="원/달러 환율이 오를 때 불리해지는 쪽과 유리해지는 쪽">
+        <defs><marker id="ec-ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="100" y="10" width="220" height="60" rx="12" class="f-surface"/>
+        <text x="210" y="38" text-anchor="middle" class="lbl-b" style="font-size:21px">1,300 → 1,450원</text>
+        <text x="210" y="60" text-anchor="middle" class="lbl-dim" style="font-size:15px">원화 약세</text>
+        <line x1="140" y1="72" x2="104" y2="98" class="s-bad" marker-end="url(#ec-ar3)"/>
+        <line x1="280" y1="72" x2="316" y2="98" class="s-ok" marker-end="url(#ec-ar3)"/>
+        <rect x="8" y="102" width="198" height="208" rx="12" class="f-bad-soft"/>
+        <rect x="214" y="102" width="198" height="208" rx="12" class="f-ok-soft"/>
+        <text x="107" y="136" text-anchor="middle" class="lbl-bad" style="font-size:20px">불리한 쪽</text>
+        <text x="313" y="136" text-anchor="middle" class="lbl-acc" style="font-size:20px">유리한 쪽</text>
+        <text x="22" y="182" class="lbl-b" style="font-size:16px">해외여행·직구</text>
+        <text x="22" y="228" class="lbl-b" style="font-size:16px">수입 원자재·에너지</text>
+        <text x="22" y="274" class="lbl-b" style="font-size:16px">달러 빚이 있는 기업</text>
+        <text x="228" y="182" class="lbl-b" style="font-size:16px">수출 기업</text>
+        <text x="228" y="228" class="lbl-b" style="font-size:16px">해외 자산 보유자</text>
+        <text x="228" y="274" class="lbl-b" style="font-size:16px">외국인 관광객</text>
+      </svg>
+      <figcaption><b>환율 변화는 한쪽의 비용이 다른 쪽의 수입이 되는 일이다.</b> 원화가 약해지면 해외여행·직구는 같은 달러에 원화를 더 내고, 원유·곡물 같은 수입품의 원화 값이 올라 물가를 밀고, 달러로 빌린 기업은 갚을 원화가 늘어난다. 반대로 수출 기업은 같은 달러 매출이 원화로 커지고, 달러 주식·예금의 원화 평가액이 오르며, 한국에 오는 외국인 관광객은 같은 달러로 더 많이 쓴다. 원화 강세(환율 하락)면 두 칸이 자리를 바꾼다. 그래서 "환율이 오르면 좋다/나쁘다"는 말은 누구의 입장인지를 빼면 성립하지 않는다.</figcaption>
+    </figure>
+
+    <p>환율은 수입 물가를 통해 물가로 이어진다. 한국은 원유, 가스, 곡물, 부품을 많이 수입한다. 원화가 약해지면 이것들의 원화 가격이 오르고, 몇 달에 걸쳐 휘발유값, 전기·가스 요금, 식품 가격으로 번진다. 앞 절의 도미노에서 "환율 → 수입 물가 → 물가"로 이어진 줄이 이것이다. 환율이 중앙은행의 고민거리가 되는 이유이기도 하다.</p>
+  </section>
+
+  <section id="overseas">
+    <h2>해외투자 수익: 주가 × 환율</h2>
+    <p>미국 주식이나 달러 예금처럼 해외 자산에 원화로 투자하면 수익이 두 겹이 된다. 자산 자체가 달러로 얼마나 올랐는지, 그리고 그동안 달러가 원화로 얼마나 비싸졌는지다. 두 효과는 더해지지 않고 곱해진다.</p>
+    <div class="formula">$$1 + R_{\text{원화}} = (1 + R_{\text{달러 자산}}) \times (1 + R_{\text{환율}})$$<div class="where">\(R_{\text{달러 자산}}\): 달러 기준 수익률, \(R_{\text{환율}}\): 원/달러 환율의 변화율. 펼치면 \(R_{\text{원화}} = R_{\text{달러 자산}} + R_{\text{환율}} + R_{\text{달러 자산}} \times R_{\text{환율}}\)</div></div>
+    <p>아래 지도의 가로는 달러 기준 주가 수익률, 세로는 환율 변화다. 초록 칸은 원화로 이익, 빨간 칸은 손실이다. 점을 끌어 여러 조합을 만들어 본다. 두 칸을 가르는 곡선이 '본전'이다.</p>
+
+    <div class="sim" id="sim-os">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>해외 주식의 원화 수익 지도</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="os-cv"></canvas><span class="hint">점을 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="os-pre"><button data-value="both" class="on">둘 다 오름</button><button data-value="cancel">서로 상쇄</button><button data-value="fx">환율 덕</button><button data-value="double">이중 손실</button></div>
+          <label class="check"><input type="checkbox" id="os-h"> 환헤지(환율 효과를 없앰)</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">주가(달러 기준)</span><span class="v" id="os-o-s">—</span></div>
+        <div class="stat"><span class="k">환율 변화</span><span class="v" id="os-o-f">—</span></div>
+        <div class="stat"><span class="k">원화 수익</span><span class="v" id="os-o-t">—</span></div>
+        <div class="stat"><span class="k">교차항</span><span class="v" id="os-o-x">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "서로 상쇄": 주가 +10%, 환율 −10%. 더하면 0인데 실제로는 −1%다. 곱셈이기 때문이다. ② "환율 덕": 주가는 내렸는데 원화로는 이익이다. 원화 약세기에 해외 자산이 완충 역할을 하는 이유다. ③ 환헤지를 켠다. 점이 가로축으로 내려앉아 환율과 무관해진다. 대신 환율 덕도 못 본다. (세금·수수료 제외. 실제 환헤지에는 두 나라 금리차만큼의 비용이나 이득이 생긴다.)</div>
+    </div>
+
+    <p>환율은 해외투자의 위험을 키우기도 하고 줄이기도 한다. 한국 경제가 어려울 때는 원화가 약해지는 경향이 있어서, 그때 달러 자산의 원화 값이 오르며 국내 자산의 손실을 일부 메워 주는 일이 많았다. 반대로 해외 주가가 오른 해에 원화가 크게 강해지면 수익이 깎인다. 어느 쪽이 될지는 미리 알 수 없다. 자산을 어떻게 나눌지는 <a href="portfolio.html">16장</a>에서 다룬다.</p>
+  </section>
+
+  <section id="rate-gap">
+    <h2>금리차와 환율: 돈은 이자가 높은 쪽으로</h2>
+    <p>환율을 움직이는 힘은 많다. 수출과 수입의 차이(무역수지), 경제 성장 전망, 세계 경제가 불안할 때 안전한 자산으로 몰리는 심리, 그리고 <b>두 나라의 금리 차이</b>다. 다른 조건이 같다면 돈은 이자를 더 주는 쪽으로 흐른다. 미국 금리가 한국보다 높으면 달러 자산을 사려는 수요가 늘고, 원화를 팔고 달러를 사는 흐름이 생겨 원화가 약해지는 압력이 된다.</p>
+    <p>아래에서 두 나라 금리를 움직여 동전이 어느 쪽으로 흐르는지 본다. "위험 회피"를 켜면 세계 경제가 불안해 안전 자산인 달러로 돈이 몰리는 상황이 된다.</p>
+
+    <div class="sim" id="sim-rd">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>두 나라 금리와 자금의 흐름</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="rd-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>한국 금리 <output id="rd-kr-out"></output></span><input type="range" id="rd-kr" min="0" max="6" step="0.25" value="2.5"></label>
+          <label class="ctrl"><span>미국 금리 <output id="rd-us-out"></output></span><input type="range" id="rd-us" min="0" max="6" step="0.25" value="4"></label>
+          <label class="check"><input type="checkbox" id="rd-risk"> 위험 회피(세계 경제 불안)</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">금리차(미국−한국)</span><span class="v" id="rd-o-d">—</span></div>
+        <div class="stat"><span class="k">자금 흐름</span><span class="v" id="rd-o-f">—</span></div>
+        <div class="stat"><span class="k">원화에 주는 압력</span><span class="v" id="rd-o-p">—</span></div>
+        <div class="stat"><span class="k">1억원 1년 이자 차이</span><span class="v" id="rd-o-i">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 두 금리를 같게 맞춘다. 동전이 멈춘다. ② 한국 금리를 미국보다 높인다. 흐름이 뒤집혀 원화 강세 압력이 된다. ③ 금리를 같게 둔 채 "위험 회피"를 켠다. 금리차가 없어도 돈이 달러로 몰린다. (경향을 보여 주는 개념 모형이다. 실제 환율은 금리차만으로 설명되지 않으며, 금리차가 커도 환율이 반대로 가는 시기가 흔하다. 이자 차이는 세금과 환율 변동을 뺀 단순 계산이다.)</div>
+    </div>
+
+    <p>금리차만 보고 환율을 맞히기는 어렵다. 높은 이자를 받으러 달러 자산을 샀는데 그사이 원화가 강해지면 이자보다 큰 환손실이 날 수 있다. 앞 절의 곱셈이 여기서도 작동한다. 이 절에서 가져갈 것은 예측 공식이 아니라 <b>왜 한국은행이 미국 금리를 신경 쓰는가</b>에 대한 답이다. 금리차가 너무 벌어지면 원화 약세 → 수입 물가 상승 → 물가라는 줄이 당겨진다.</p>
+  </section>
+
+  <section id="news">
+    <h2>뉴스의 숫자 읽기</h2>
+    <p>경제 뉴스의 숫자는 짧은 문장에 많은 약속을 담는다. 무엇과 비교했는지(전월? 작년 같은 달?), 단위가 %인지 %p인지, 계절의 영향을 뺐는지에 따라 같은 현실이 전혀 다른 제목이 된다. 세 가지만 익히면 대부분의 함정을 피할 수 있다.</p>
+
+    <h3>%와 %p</h3>
+    <p>금리가 2%에서 3%로 올랐다. "1%p 올랐다"와 "50% 올랐다"는 둘 다 맞다. 앞의 것은 두 퍼센트 숫자의 차이(3 − 2 = 1)이고, 뒤의 것은 변화율((3 − 2) ÷ 2 = 50%)이다. 금리, 실업률, 세율, 점유율처럼 그 자체가 %인 숫자의 변화는 %p로 말하는 것이 약속이다. 막대를 움직이며 두 숫자가 어떻게 따로 노는지 보고, "문제 내기"로 연습한다.</p>
+
+    <div class="sim" id="sim-pp">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>%p와 %: 같은 변화, 두 개의 제목</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="pp-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>이전 값 <output id="pp-a-out"></output></span><input type="range" id="pp-a" min="0.5" max="10" step="0.1" value="2"></label>
+          <label class="ctrl"><span>이후 값 <output id="pp-b-out"></output></span><input type="range" id="pp-b" min="0.5" max="10" step="0.1" value="3"></label>
+          <div class="btn-row"><button class="btn primary" id="pp-q">문제 내기</button></div>
+          <div class="pp-q" id="pp-qt">문제 내기를 누르면 뉴스 문장이 하나 나온다.</div>
+          <div class="btn-row" id="pp-opts"><button class="btn sm" id="pp-o0" disabled>—</button><button class="btn sm" id="pp-o1" disabled>—</button><button class="btn sm" id="pp-o2" disabled>—</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">차이 (%p)</span><span class="v" id="pp-o-p">—</span></div>
+        <div class="stat"><span class="k">변화율 (%)</span><span class="v" id="pp-o-r">—</span></div>
+        <div class="stat"><span class="k">맞힌 문제</span><span class="v" id="pp-o-s">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 0.5%에서 1.0%로: 0.5%p 차이인데 변화율은 100%다. 낮은 숫자에서 시작하면 %가 과장돼 보인다. ② 8%에서 9%로: 같은 1%p인데 변화율은 12.5%다. ③ "문제 내기"를 몇 번 눌러 %p와 %를 고르는 연습을 한다.</div>
+    </div>
+
+    <h3>전년 동월 대비와 전월 대비</h3>
+    <p>물가와 수출 같은 월별 지표는 보통 <span class="term">전년 동월 대비</span><span class="en">(Year-over-year)</span>로 발표된다. 이번 달 값을 바로 앞 달이 아니라 1년 전 같은 달과 비교한다. 설·추석, 여름 휴가, 김장철처럼 해마다 같은 때 되풀이되는 계절의 영향을 자연스럽게 지우기 위해서다. 반면 <b>전월 대비</b>는 최근의 방향을 빨리 보여 주지만 계절 영향이 섞인다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 420 224" role="img" aria-label="2026년 3월 값을 2026년 2월과 비교하면 전월 대비, 2025년 3월과 비교하면 전년 동월 대비">
+        <defs><marker id="ec-ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <line x1="10" y1="150" x2="410" y2="150" class="s-axis"/>
+        <g class="lbl-dim">
+          <text x="28" y="176" text-anchor="middle" class="lbl-dim">25.1</text>
+          <text x="117" y="176" text-anchor="middle" class="lbl-dim">25.3</text>
+          <text x="207" y="176" text-anchor="middle" class="lbl-dim">25.12</text>
+          <text x="297" y="176" text-anchor="middle" class="lbl-dim">26.1</text>
+          <text x="386" y="176" text-anchor="middle" class="lbl-dim">26.3</text>
+        </g>
+        <line x1="341" y1="144" x2="341" y2="156" class="s-line"/><text x="341" y="176" text-anchor="middle" class="lbl-dim">26.2</text>
+        <circle cx="117" cy="150" r="7" class="f-acc2"/>
+        <circle cx="341" cy="150" r="7" class="f-acc"/>
+        <circle cx="386" cy="150" r="9" class="f-bad"/>
+        <path d="M386 138 C 352 40, 154 40, 120 134" class="s-acc2" marker-end="url(#ec-ar2)"/>
+        <text x="252" y="26" text-anchor="middle" class="lbl-acc2">전년 동월 대비:</text>
+        <text x="252" y="46" text-anchor="middle" class="lbl-acc2">12개월 전 같은 달과 비교</text>
+        <path d="M382 140 C 372 112, 352 112, 345 138" class="s-acc" marker-end="url(#ec-ar2)"/>
+        <text x="336" y="124" text-anchor="end" class="lbl-acc">전월 대비</text>
+        <text x="386" y="208" text-anchor="middle" class="lbl-bad">이번 달</text>
+        <text x="10" y="214" class="lbl-dim">YoY = 이번 달 ÷ 작년 같은 달 − 1</text>
+      </svg>
+      <figcaption><b>무엇과 비교했는가.</b> 전년 동월 대비는 계절 영향을 지우는 대신 1년 전 그 달의 사정을 끌고 들어온다. 작년 그 달이 유난히 낮았거나 높았다면 올해 숫자가 왜곡된다. 이것이 기저효과다.</figcaption>
+    </figure>
+
+    <h3>기저효과</h3>
+    <p>비교 대상(기저)이 유난히 낮거나 높아서 변화율이 부풀거나 줄어 보이는 현상을 <span class="term">기저효과</span><span class="en">(Base effect)</span>라 한다. 작년 봄 유가가 폭락했다가 회복했다면, 올해 봄 물가는 아무 일이 없어도 "전년 대비 급등"으로 찍힌다. 아래 위쪽 그래프는 물가지수, 아래쪽은 2026년 각 달의 전년 동월 대비 상승률이다. 2025년의 손잡이를 위아래로 끌어 작년에 일시적인 급락이나 급등을 만들고, 1년 뒤 막대가 어떻게 되는지 본다.</p>
+
+    <div class="sim" id="sim-be">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>기저효과: 작년의 구멍이 올해의 급등이 된다</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="be-cv"></canvas><span class="hint">2025년의 손잡이를 끈다</span></div>
+      </div>
+      <div class="sim-controls">
+        <div class="btn-row"><button class="btn primary" id="be-play">한 달씩 훑기</button><button class="btn" id="be-re">작년을 평탄하게</button></div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">보는 달</span><span class="v" id="be-o-m">—</span></div>
+        <div class="stat"><span class="k">전년 동월 대비</span><span class="v" id="be-o-y">—</span></div>
+        <div class="stat"><span class="k">전월 대비</span><span class="v" id="be-o-mm">—</span></div>
+        <div class="stat"><span class="k">기저효과</span><span class="v" id="be-o-b">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본 상태에서 2025년 5월에 물가지수가 4% 꺼져 있다. 2026년 5월 막대가 홀로 6%대로 솟는다. 2026년에는 아무 일도 없었는데도. ② 손잡이를 위로 끌어 작년에 급등을 만든다. 이번에는 올해 그 달이 마이너스 물가처럼 보인다. ③ "한 달씩 훑기"로 각 달이 1년 전 어느 달과 비교되는지 따라간다. (평소 물가는 매달 0.2%씩, 1년에 약 2.4% 오른다고 두었다. 작년의 충격은 한두 달 안에 원래 추세로 돌아온다고 가정했다.)</div>
+    </div>
+
+    <p>기저효과를 걸러 내는 방법은 간단하다. 전년 동월 대비 숫자가 튀면 <b>1년 전 그 달에 무슨 일이 있었는지</b>를 본다. 그리고 2년 전과 비교하거나(2년 누적 상승률), 계절 조정한 전월 대비를 함께 본다. 뉴스가 "기저효과 영향"이라고 쓰면, 이번 달의 변화가 아니라 작년 숫자의 메아리라는 뜻이다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>뉴스 표현</th><th>뜻</th><th>함정</th></tr></thead>
+      <tbody>
+        <tr><td>0.25%p 인상</td><td>퍼센트 숫자끼리의 차이</td><td>"0.25% 인상"이라 쓰면 원래는 틀린 표현이다</td></tr>
+        <tr><td>전년 동월 대비 3.1%</td><td>작년 같은 달보다 3.1% 높다</td><td>작년 그 달이 유난히 낮았으면 부풀어 보인다(기저효과)</td></tr>
+        <tr><td>전월 대비 0.4%</td><td>지난달보다 0.4% 높다</td><td>계절 영향이 섞인다. 12를 곱해 연율처럼 읽으면 과장된다</td></tr>
+        <tr><td>계절조정 전기 대비 연율 2%</td><td>계절 영향을 빼고 직전 분기 변화를 1년치로 환산</td><td>미국 GDP는 연율, 한국 GDP는 보통 전기 대비 그대로 발표한다</td></tr>
+        <tr><td>속보치·잠정치</td><td>먼저 내는 추정 숫자</td><td>나중에 수정된다. 첫 숫자에 과하게 반응하지 않는다</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout warn">
+      <strong>숫자와 제도는 바뀐다</strong>
+      이 장의 금리·환율·성장률 숫자는 2026년 무렵의 대표적인 범위를 어림한 것이고, 시뮬레이터의 값은 원리를 보이기 위한 가정이다. 실제 기준금리와 환율은 매달 바뀌고, 대출 규제(DSR 등)와 통계 작성 방식도 해마다 고쳐진다. 결정을 내리기 전에는 한국은행, 통계청, 금융회사가 발표하는 최신 숫자를 직접 확인한다.
+    </div>
+  </section>
+
+  <section id="ledger">
+    <h2>한결의 가계부: 금리 1%p와 환율 150원</h2>
+    <p>지금까지 만든 도구를 한결의 숫자에 대 본다. 한결은 고정금리 1.7%짜리 학자금 대출 1,200만원과 통장 잔고 300만원이 있고, 해외 직구를 가끔 하며 여름에 해외여행을 계획하고 있다. 회사 선배는 3억원짜리 변동금리 주택담보대출을 갖고 있다. 기준금리 변화와 환율을 움직여 한결과 선배의 1년이 어떻게 달라지는지 본다.</p>
+
+    <div class="sim" id="sim-hg">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>한결과 선배의 1년: 금리와 환율이 바뀌면</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="hg-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>기준금리 변화 <output id="hg-d-out"></output></span><input type="range" id="hg-d" min="-1" max="2" step="0.25" value="1"></label>
+          <label class="ctrl"><span>원/달러 환율 <output id="hg-fx-out"></output></span><input type="range" id="hg-fx" min="1100" max="1700" step="10" value="1450"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">한결 학자금 월 상환</span><span class="v" id="hg-o-s">—</span></div>
+        <div class="stat"><span class="k">예금 세후 이자(1년)</span><span class="v" id="hg-o-d">—</span></div>
+        <div class="stat"><span class="k">한결 1년 순변화</span><span class="v" id="hg-o-n">—</span></div>
+        <div class="stat"><span class="k">선배 월 상환</span><span class="v" id="hg-o-m">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(+1%p, 1,450원)에서 한결에게는 금리보다 환율이 더 크게 작용한다. ② 환율을 1,300원으로 돌려놓고 금리만 +2%p로 올린다. 한결은 오히려 조금 이득이고, 선배는 1년에 400만원 넘게 더 낸다. ③ 금리를 −1%p로 내린다. 선배는 숨통이 트이지만 한결의 예금 이자는 준다. (가정: 출발점 예금 금리 연 2.5%, 기준금리 변화만큼 움직임, 300만원 1년 정기예금, 이자소득세 15.4%. 직구 월 $100, 여행 연 $1,500, 기준 환율 1,300원. 선배: 3억원, 30년 원리금균등, 처음 연 4% 변동, 1년 뒤 기준금리 변화만큼 바뀜.)</div>
+    </div>
+
+    <div class="casefile">
+      <div class="tag"><b>LEDGER 한결</b><span>한결의 가계부 · 5장</span></div>
+      <h4>금리가 1%p 올라도 학자금은 그대로, 환율 150원은 여행 경비 22만원</h4>
+      <p>기준금리가 1%p 오른다고 하자. 한결의 학자금 대출은 연 1.7% 고정금리라 월 상환액이 108,811원 그대로다. 통장의 300만원을 1년 정기예금에 넣는다면 금리가 2.5%에서 3.5%로 올라 세후 이자가 63,450원에서 88,830원으로 25,380원 는다(MN.deposit). 같은 1%p가 3억원 변동금리 대출을 가진 선배에게는 월 상환 약 143.2만원 → 160.6만원, 1년에 약 208만원의 추가 부담이다. 같은 뉴스가 예금자에게는 작은 선물, 변동금리 차주에게는 큰 청구서다.</p>
+      <p>환율이 1,300원에서 1,450원이 되면 $100짜리 직구는 13만원에서 14만 5천원, 여름 여행 경비 $1,500는 195만원에서 217만 5천원이 된다. 직구를 매달 한다면 1년에 18만원, 여행까지 합쳐 약 40만 5천원이 더 든다. 사회초년생 한결에게는 금리 1%p보다 환율 150원이 더 가까운 숫자다.</p>
+      <div class="clue">
+        <div><b>이 장에서 정한 것</b>학자금은 고정금리라 금리 뉴스에 흔들리지 않는다. 예금 이자는 금리를 따라 움직인다. 달러로 쓰는 돈(직구·여행)은 환율 위험에 그대로 노출돼 있다.</div>
+        <div><b>아직 남은 문제</b>한결은 아직 자기 월급에서 실제로 얼마가 빠져나가는지 정확히 모른다. 금리와 환율보다 먼저 들여다볼 숫자가 있다.</div>
+        <div><b>다음 단계</b>월급 명세서를 한 줄씩 읽는다. 연봉 3,600만원이 왜 월 265만원이 되는가(<a href="income.html">6장</a>).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>기준금리는 중앙은행이 정하는 단기 자금의 값이다. 내 예금·대출 금리는 그 위에 지표금리, 가산금리가 쌓이고 우대금리가 빠져 정해진다.</li>
+      <li>기준금리의 변화는 시장금리 → 예금·대출 금리 → 소비·투자 → 물가로 번진다. 자산 가격과 환율은 일찍 반응하고, 물가에는 1~2년의 시차가 있다.</li>
+      <li>변동금리 차주는 금리 변화를 다음 변경 주기에 바로 월 상환액으로 느낀다. 3억원, 30년, 4% → 5%면 월 약 17만원이 는다. 고정금리 차주는 약정 기간 동안 영향이 없다.</li>
+      <li>금리가 오르면 채권·주식·집에는 내리는 압력이 생긴다. 미래 수입을 할인하는 비율이 커지기 때문이다. 다만 이것은 다른 조건이 같을 때의 경향이지 법칙이 아니다.</li>
+      <li>경기는 확장·정점·수축·저점을 되풀이한다. 실업률과 물가는 생산보다 늦게 움직인다. 중앙은행은 물가가 목표보다 높고 경기가 뜨거우면 올리고, 반대면 내린다. 물가는 높은데 경기가 식은 스태그플레이션이 가장 어렵다.</li>
+      <li>원/달러 환율이 오르면 원화 가치는 내린다. 해외여행·직구·수입 물가에는 불리하고, 수출 기업과 해외 자산 보유자에게는 유리하다.</li>
+      <li>해외투자의 원화 수익은 (1 + 자산 수익) × (1 + 환율 변화) − 1이다. 주가 +10%, 환율 −10%면 약 −1%다.</li>
+      <li>금리처럼 그 자체가 %인 숫자의 차이는 %p로 말한다. 전년 동월 대비 숫자가 튀면 1년 전 그 달을 확인한다(기저효과).</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>기준금리가 연 2.0%에서 2.5%로 올랐다. 올바른 표현은?</p>
+        <div class="opts">
+          <button class="opt">0.5% 올랐고, 변화율로는 0.5%p다</button>
+          <button class="opt">0.5%p 올랐고, 변화율로는 2.5%다</button>
+          <button class="opt" data-correct>0.5%p 올랐고, 변화율로는 25%다</button>
+          <button class="opt">25%p 올랐고, 변화율로는 0.5%다</button>
+        </div>
+        <div class="quiz-exp">두 퍼센트 숫자의 차이는 2.5 − 2.0 = 0.5%p다. 변화율은 0.5 ÷ 2.0 = 25%다. 금리 기사에는 %p를 쓰는 것이 약속이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>기준금리가 1%p 오른 직후, 다음 중 매달 내는 돈이 가장 빨리 늘어날 가능성이 큰 사람은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>6개월마다 금리가 바뀌는 변동금리 주택담보대출을 가진 사람</button>
+          <button class="opt">10년 고정금리 학자금 대출을 가진 사람</button>
+          <button class="opt">대출 없이 정기예금만 가진 사람</button>
+          <button class="opt">5년 고정 기간이 막 시작된 혼합형 대출을 가진 사람</button>
+        </div>
+        <div class="quiz-exp">변동금리 대출은 다음 금리 변경 주기에 새 지표금리를 반영해 바로 월 상환액이 바뀐다. 고정금리와 고정 기간 중인 혼합형은 약정 기간 동안 그대로이고, 예금만 가진 사람은 오히려 이자가 는다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>원/달러 환율이 1,300원에서 1,450원으로 올랐다. 이때의 일반적인 영향으로 옳은 것은?</p>
+        <div class="opts">
+          <button class="opt">원화 가치가 올라 해외여행 경비가 줄어든다</button>
+          <button class="opt">수출 기업의 같은 달러 매출이 원화로는 줄어든다</button>
+          <button class="opt">달러로 가진 해외 주식의 원화 평가액이 줄어든다</button>
+          <button class="opt" data-correct>수입 원자재의 원화 가격이 올라 물가에 오르는 압력이 생긴다</button>
+        </div>
+        <div class="quiz-exp">환율 상승은 원화 약세다. 같은 달러를 사는 데 원화가 약 11.5% 더 든다. 수입품과 해외여행은 비싸지고, 수출 기업의 원화 매출과 달러 자산의 원화 평가액은 커진다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>미국 주식이 1년 동안 달러 기준으로 10% 올랐고, 같은 기간 원/달러 환율은 10% 내렸다. 원화로 본 수익률은 대략?</p>
+        <div class="opts">
+          <button class="opt">0%</button>
+          <button class="opt" data-correct>약 −1%</button>
+          <button class="opt">약 +1%</button>
+          <button class="opt">약 +20%</button>
+        </div>
+        <div class="quiz-exp">두 효과는 곱해진다. 1.10 × 0.90 = 0.99이므로 원화 수익률은 −1%다. 더해서 0%가 되는 것이 아니라 교차항(0.10 × −0.10 = −0.01)만큼 더 빠진다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const $ = (id) => document.getElementById(id);
+  const narrowOf = (id, lim) => $(id).parentElement.clientWidth < (lim || 520);
+  function knob(ctx, x, y, P, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = "#fff"; ctx.stroke();
+    ctx.restore();
+  }
+  function rr(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(x, y, w, h, r); else ctx.rect(x, y, w, h);
+  }
+  function tri(ctx, x, y, s, up) {
+    ctx.beginPath();
+    if (up) { ctx.moveTo(x, y - s); ctx.lineTo(x + s * 0.9, y + s * 0.6); ctx.lineTo(x - s * 0.9, y + s * 0.6); }
+    else { ctx.moveTo(x, y + s); ctx.lineTo(x + s * 0.9, y - s * 0.6); ctx.lineTo(x - s * 0.9, y - s * 0.6); }
+    ctx.closePath(); ctx.fill();
+  }
+  function alpha(col, a) {
+    if (col.startsWith("#")) {
+      const n = col.length === 4 ? col.slice(1).split("").map((c) => parseInt(c + c, 16)) : [1, 3, 5].map((i) => parseInt(col.slice(i, i + 2), 16));
+      return "rgba(" + n.join(",") + "," + a + ")";
+    }
+    return col;
+  }
+  const tone = (cls, s) => '<span class="' + cls + '">' + s + "</span>";
+  const sg = (v, d) => (v > 1e-9 ? "+" : v < -1e-9 ? "−" : "") + Math.abs(v).toFixed(d == null ? 1 : d);
+  const pctS = (x, d) => sg(x * 100, d == null ? 1 : d) + "%";
+  const wonS = (x) => (x > 0.5 ? "+" : "") + MB.won(x);
+  const wonFull = (x) => (x < 0 ? "−" : "") + Math.round(Math.abs(x)).toLocaleString("ko-KR") + "원";
+
+  /* ---------------------------------------------------------- 1. 금리 도미노 */
+  (function () {
+    const N = [
+      { k: "기준금리", lag: 0, s: 1, w: 1, from: [] },
+      { k: "시장금리", lag: 1, s: 1, w: 0.95, from: [0] },
+      { k: "예금금리", lag: 2, s: 1, w: 0.85, from: [1] },
+      { k: "대출금리", lag: 2, s: 1, w: 0.9, from: [1] },
+      { k: "자산 가격", lag: 2, s: -1, w: 0.7, from: [1] },
+      { k: "환율", sub: "원/달러", lag: 2, s: -1, w: 0.6, from: [1] },
+      { k: "소비", lag: 3, s: -1, w: 0.6, from: [2, 3, 4] },
+      { k: "투자", lag: 3, s: -1, w: 0.7, from: [3, 4] },
+      { k: "수입 물가", lag: 3, s: -1, w: 0.55, from: [5] },
+      { k: "물가", lag: 4, s: -1, w: 0.5, from: [6, 7, 8] },
+    ];
+    const LAGS = ["즉시", "며칠~몇 주", "몇 주~몇 달", "6개월~1년", "1~2년"];
+    const GROUPS = [[0], [1], [2, 3, 4, 5], [6, 7, 8], [9]];
+    const STEP = 0.85;
+    let t = 0;
+    const D = MB.range("dm-d", (v) => sg(v, 2) + "%p", () => { t = 0; cv.redraw(); });
+    function layout(w, h) {
+      const narrow = w < 520, pos = [];
+      if (!narrow) {
+        const cw = (w - 20) / 5, nw = Math.min(112, cw - 12), nh = 48, top = 34;
+        GROUPS.forEach((g, c) => g.forEach((i, r) => {
+          const bh = (h - top - 8) / g.length;
+          pos[i] = { x: 10 + cw * (c + 0.5), y: top + bh * (r + 0.5), w: nw, h: nh };
+        }));
+        return { narrow, pos, labels: GROUPS.map((g, c) => ({ x: 10 + cw * (c + 0.5), y: 10, align: "center" })) };
+      }
+      const bh = (h - 6) / 5;
+      GROUPS.forEach((g, r) => g.forEach((i, c) => {
+        const cw = w / g.length;
+        pos[i] = { x: cw * (c + 0.5), y: bh * r + 20 + (bh - 20) / 2, w: Math.min(118, cw - 8), h: 46 };
+      }));
+      return { narrow, pos, labels: GROUPS.map((g, r) => ({ x: 8, y: bh * r + 3, align: "left" })) };
+    }
+    const cv = MB.canvas("#dm-cv", (ctx, w, h) => {
+      const P = MB.palette(), d = D(), L = layout(w, h);
+      const act = (i) => MB.clamp((t - N[i].lag * STEP) / 0.35, 0, 1);
+      ctx.font = MB.font(11); ctx.fillStyle = P.faint; ctx.textBaseline = "top";
+      L.labels.forEach((l, i) => { ctx.textAlign = l.align; ctx.fillText(LAGS[i], l.x, l.y); });
+      // edges
+      N.forEach((n, b) => n.from.forEach((a) => {
+        const A = L.pos[a], B = L.pos[b];
+        ctx.strokeStyle = P.border; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y); ctx.stroke();
+        const ta = N[a].lag * STEP, tb = n.lag * STEP;
+        if (d !== 0 && t > ta && t < tb + 0.1) {
+          const u = MB.clamp((t - ta) / (tb - ta), 0, 1);
+          ctx.fillStyle = d > 0 ? P.red : P.blue;
+          ctx.beginPath(); ctx.arc(MB.lerp(A.x, B.x, u), MB.lerp(A.y, B.y, u), 4, 0, TAU); ctx.fill();
+        }
+      }));
+      // nodes
+      N.forEach((n, i) => {
+        const p = L.pos[i], a = d === 0 ? 0 : act(i), up = d * n.s > 0, col = up ? P.red : P.blue;
+        rr(ctx, p.x - p.w / 2, p.y - p.h / 2, p.w, p.h, 9);
+        ctx.fillStyle = P.bg; ctx.fill();
+        if (a > 0) { ctx.fillStyle = alpha(col, 0.16 * a); ctx.fill(); }
+        ctx.lineWidth = a > 0 ? 1.5 + a : 1; ctx.strokeStyle = a > 0.5 ? col : P.border; ctx.stroke();
+        ctx.fillStyle = P.text; ctx.font = MB.font(L.narrow ? 12 : 13, false, 700); ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        ctx.fillText(n.k, p.x, p.y - 9);
+        ctx.font = MB.font(11); ctx.fillStyle = P.dim;
+        if (a > 0) {
+          const sz = (3 + 6 * Math.min(1, Math.abs(d) / 1.5) * n.w) * (0.4 + 0.6 * a);
+          ctx.fillStyle = col; tri(ctx, p.x - 18, p.y + 10, sz, up);
+          ctx.fillText(up ? "오름" : "내림", p.x + 8, p.y + 10);
+        } else ctx.fillText(n.sub || (d === 0 ? "변화 없음" : "대기"), p.x, p.y + 10);
+      });
+      const b0 = 2.5, b1 = Math.max(0, b0 + d);
+      MB.stat("dm-o-b", b0.toFixed(2) + "% → " + b1.toFixed(2) + "%");
+      const dir = (s) => (d === 0 ? "그대로" : d * s > 0 ? tone("bad-t", "오르는 쪽") : tone("ok-t", "내리는 쪽"));
+      MB.stat("dm-o-r", d === 0 ? "그대로" : d > 0 ? "오른다" : "내린다");
+      MB.stat("dm-o-c", d === 0 ? "그대로" : d > 0 ? "줄어드는 쪽" : "늘어나는 쪽");
+      MB.stat("dm-o-p", dir(-1));
+    }, { get height() { const w = $("dm-cv").parentElement.clientWidth; return w < 520 ? 470 : 340; } });
+    MB.loop(cv.canvas, (dt) => { if (t < 4 * STEP + 0.6) { t += dt; cv.redraw(); } });
+    $("dm-go").addEventListener("click", () => { t = 0; });
+  })();
+
+  /* ---------------------------------------------------------- 2. 고정 vs 변동 */
+  (function () {
+    let r1 = 5, GA = null;
+    const PR = MB.range("fv-p", (v) => v.toFixed(1) + "억원", () => cv.redraw());
+    const R0 = MB.range("fv-r", (v) => v.toFixed(1) + "%", () => { pre(); });
+    const PRE = MB.seg("fv-pre", () => pre());
+    function pre() { r1 = MB.clamp(R0() + Number(PRE()), 0.5, 11); cv.redraw(); }
+    r1 = R0() + Number(PRE());
+    const cv = MB.canvas("#fv-cv", (ctx, w, h) => {
+      const P = MB.palette(), Pv = PR() * 1e8, r0 = R0() / 100, ra = r1 / 100;
+      const fx = MN.loan(Pv, r0, 360), vr = MN.loan(Pv, r0, 360, "annuity", { rates: (m) => (m <= 12 ? r0 : ra) });
+      const hA = Math.round(h * 0.36);
+      const A = { x: 62, y: 14, w: w - 86, h: hA };
+      const B = { x: 62, y: A.y + A.h + 34, w: w - 86, h: h - (A.y + A.h + 34) - 62 };
+      const cA = MB.chart(ctx, A, { x: [0, 5], y: [0, 12], yLabel: "금리(%)", xTicks: [0, 1, 2, 3, 4, 5], xFmt: (v) => v + "년", yTicks: [0, 4, 8, 12],
+        series: [{ data: [[0, r0 * 100], [5, r0 * 100]], color: P.accent2, width: 2.5 }, { data: [[0, r0 * 100], [1, r0 * 100], [1, r1], [5, r1]], color: P.accent, width: 2.5 }] });
+      GA = cA;
+      knob(ctx, cA.X(3), cA.Y(r1), P, 8);
+      ctx.font = MB.font(12, false, 700); ctx.fillStyle = P.accent; ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+      ctx.fillText(r1.toFixed(1) + "%", cA.X(3) + 14, cA.Y(r1) - 4);
+      const mx = Math.max(fx.first, vr.max) * 1.2;
+      const pf = fx.rows.slice(0, 61).map((r) => [(r.m - 1) / 12, r.pay]), pv = vr.rows.slice(0, 61).map((r) => [(r.m - 1) / 12, r.pay]);
+      MB.chart(ctx, B, { x: [0, 5], y: [0, mx], yFmt: MB.wonAxis, yLabel: "월 상환액", xLabel: "대출 후 경과 연수", xTicks: [0, 1, 2, 3, 4, 5], xFmt: (v) => v + "년",
+        series: [{ data: pf, color: P.accent2, width: 2.5 }, { data: pv, color: P.accent, width: 2.5 }] });
+      const v2 = vr.rows[12].pay, diff = v2 - fx.first;
+      const i5 = (L) => L.rows.slice(0, 60).reduce((s, r) => s + r.interest, 0);
+      MB.stat("fv-o-f", MB.won(fx.first, { digits: 1 }));
+      MB.stat("fv-o-v", MB.won(v2, { digits: 1 }));
+      MB.stat("fv-o-d", Math.abs(diff) < 500 ? "0원" : tone(diff > 0 ? "bad-t" : "ok-t", wonS(Math.round(diff / 1000) * 1000)));
+      const di = i5(vr) - i5(fx);
+      MB.stat("fv-o-i", Math.abs(di) < 5000 ? "0원" : tone(di > 0 ? "bad-t" : "ok-t", wonS(di)));
+    }, { aspect: 0.8, minHeight: 400, maxHeight: 480 });
+    MB.drag(cv.canvas, {
+      act: false,
+      start(x, y) { this.act = !!GA && y < GA.box.y + GA.box.h + 16; },
+      move(x, y) {
+        if (!this.act) return;
+        const b = GA.box, v = ((b.y + b.h - y) / b.h) * 12;
+        r1 = MB.clamp(Math.round(v * 10) / 10, 0.5, 11); cv.redraw();
+      },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 3. 금리와 자산 가격 */
+  (function () {
+    const ROWS = [
+      { k: "예금 이자", sub: "1년, 1천만원" },
+      { k: "10년 채권 가격", sub: "표면금리 3%" },
+      { k: "주식 이론가치", sub: "할인율만 변화" },
+      { k: "대출 한도", sub: "같은 소득 기준" },
+    ];
+    const B0 = MN.bond({ face: 10000, coupon: 0.03, ytm: 0.03, years: 10 }).price, M0 = MN.maxLoan(5e7, 0.04, 360);
+    function target(d) {
+      const dd = d / 100;
+      const dep = Math.max(0.001, 0.03 + dd) / 0.03 - 1;
+      const bond = MN.bond({ face: 10000, coupon: 0.03, ytm: Math.max(0.001, 0.03 + dd), years: 10 }).price / B0 - 1;
+      const stock = 0.045 / Math.max(0.01, 0.045 + dd) - 1;
+      const loan = MN.maxLoan(5e7, Math.max(0.005, 0.04 + dd), 360) / M0 - 1;
+      return [dep, bond, stock, loan];
+    }
+    const D = MB.range("ap-d", (v) => sg(v, 2) + "%p", () => {});
+    let disp = target(D());
+    const cv = MB.canvas("#ap-cv", (ctx, w, h) => {
+      const P = MB.palette(), narrow = w < 470;
+      const lw = narrow ? 0 : 128, x0 = lw + 10, bw = w - x0 - 16, cx = x0 + bw / 2, sc = (bw / 2 - 44) / 0.7;
+      const top = 30, rowH = (h - top - 10) / ROWS.length;
+      ctx.font = MB.font(11); ctx.fillStyle = P.faint; ctx.textBaseline = "top"; ctx.textAlign = "center";
+      ctx.fillText("보유자 입장에서 손해", cx - bw / 4, 8); ctx.fillText("보유자 입장에서 이득", cx + bw / 4, 8);
+      ctx.strokeStyle = P.axis; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(cx, top - 4); ctx.lineTo(cx, h - 8); ctx.stroke();
+      ROWS.forEach((r, i) => {
+        const y = top + rowH * i, v = disp[i], bar = MB.clamp(v, -0.7, 0.7) * sc;
+        const by = narrow ? y + 26 : y + rowH / 2 - 11, bh = 22;
+        ctx.fillStyle = P.text; ctx.font = MB.font(13, false, 700); ctx.textBaseline = "middle";
+        if (narrow) { ctx.textAlign = "left"; ctx.fillText(r.k, 8, y + 12); const kw = ctx.measureText(r.k).width; ctx.fillStyle = P.dim; ctx.font = MB.font(11); ctx.fillText(r.sub, 8 + kw + 8, y + 12); }
+        else { ctx.textAlign = "right"; ctx.fillText(r.k, lw, y + rowH / 2 - 8); ctx.fillStyle = P.dim; ctx.font = MB.font(11); ctx.fillText(r.sub, lw, y + rowH / 2 + 10); }
+        ctx.fillStyle = v >= 0 ? P.ok : P.bad;
+        rr(ctx, Math.min(cx, cx + bar), by, Math.max(1, Math.abs(bar)), bh, 4); ctx.fill();
+        ctx.font = MB.font(12, true, 600); ctx.fillStyle = P.text; ctx.textBaseline = "middle";
+        ctx.textAlign = v >= 0 ? "left" : "right";
+        ctx.fillText(pctS(v), cx + bar + (v >= 0 ? 6 : -6), by + bh / 2);
+      });
+      const T = target(D());
+      ["ap-o-1", "ap-o-2", "ap-o-3", "ap-o-4"].forEach((id, i) => MB.stat(id, tone(T[i] >= 0 ? "ok-t" : "bad-t", pctS(T[i]))));
+    }, { get height() { return $("ap-cv").parentElement.clientWidth < 470 ? 300 : 260; } });
+    MB.loop(cv.canvas, (dt) => {
+      const T = target(D()); let moved = false;
+      disp = disp.map((v, i) => { const n = v + (T[i] - v) * Math.min(1, dt * 8); if (Math.abs(n - T[i]) > 1e-4) moved = true; return Math.abs(n - T[i]) > 1e-4 ? n : T[i]; });
+      if (moved) cv.redraw();
+    });
+  })();
+
+  /* ---------------------------------------------------------- 4. 경기 순환 */
+  (function () {
+    let u = 0.12, playing = false, GT = null;
+    const phi = () => -Math.PI / 2 + u * 2 * TAU;
+    function state(f) {
+      const g = 2 + 2.5 * Math.cos(f), un = 3.8 - 1.0 * Math.sin(f - 0.6), inf = 2 + 1.5 * Math.sin(f - 0.9);
+      const score = 0.6 * (inf - 2) + 0.4 * Math.sin(f);
+      const m = ((f % TAU) + TAU) % TAU;
+      let ph, sub = "";
+      if (Math.abs(m - Math.PI / 2) < 0.35) ph = "정점";
+      else if (Math.abs(m - 1.5 * Math.PI) < 0.35) ph = "저점";
+      else if (Math.cos(f) > 0) { ph = "확장"; sub = Math.sin(f) < 0 ? "회복기" : "호황기"; }
+      else { ph = "수축"; sub = Math.sin(f) > 0 ? "후퇴기" : "침체기"; }
+      return { g, un, inf, score, ph, sub };
+    }
+    const cv = MB.canvas("#cy-cv", (ctx, w, h) => {
+      const P = MB.palette(), narrow = w < 520;
+      const T = { x: 16, y: 26, w: w - 32, h: Math.round(h * 0.44) };
+      GT = T;
+      const yOf = (uu) => { const f = -Math.PI / 2 + uu * 2 * TAU; return T.y + T.h * 0.5 - (uu - 0.5) * T.h * 0.24 - Math.sin(f) * T.h * 0.3; };
+      // phase bands
+      for (let i = 0; i < 200; i++) {
+        const uu = i / 200, f = -Math.PI / 2 + uu * 2 * TAU;
+        ctx.fillStyle = Math.cos(f) > 0 ? alpha(P.ok, 0.1) : alpha(P.bad, 0.09);
+        ctx.fillRect(T.x + uu * T.w, T.y, T.w / 200 + 1, T.h);
+      }
+      ctx.setLineDash([5, 4]); ctx.strokeStyle = P.faint; ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(T.x, T.y + T.h * 0.62); ctx.lineTo(T.x + T.w, T.y + T.h * 0.38); ctx.stroke(); ctx.setLineDash([]);
+      ctx.strokeStyle = P.accent; ctx.lineWidth = 3; ctx.beginPath();
+      for (let i = 0; i <= 300; i++) { const uu = i / 300; const x = T.x + uu * T.w, y = yOf(uu); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+      ctx.stroke();
+      ctx.font = MB.font(11, false, 700); ctx.textAlign = "center";
+      [0.25, 0.75].forEach((uu) => { ctx.fillStyle = P.accent2; ctx.textBaseline = "bottom"; ctx.fillText("정점", T.x + uu * T.w, yOf(uu) - 8); });
+      [0, 0.5, 1].forEach((uu) => { ctx.fillStyle = P.bad; ctx.textBaseline = "top"; ctx.fillText("저점", MB.clamp(T.x + uu * T.w, T.x + 14, T.x + T.w - 14), yOf(uu) + 8); });
+      ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.textAlign = "left"; ctx.textBaseline = "top";
+      ctx.fillText("생산(실질 GDP)", T.x + 4, 6);
+      ctx.fillStyle = P.ok; ctx.fillText("확장", T.x + T.w * 0.1, T.y + T.h - 16);
+      ctx.fillStyle = P.bad; ctx.fillText("수축", T.x + T.w * 0.36, T.y + T.h - 16);
+      ctx.fillStyle = P.faint; ctx.textAlign = "right"; ctx.fillText("추세", T.x + T.w - 4, T.y + T.h * 0.38 - 16);
+      const kx = T.x + u * T.w, ky = yOf(u);
+      ctx.strokeStyle = P.text; ctx.globalAlpha = 0.35; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(kx, T.y); ctx.lineTo(kx, T.y + T.h); ctx.stroke(); ctx.globalAlpha = 1;
+      knob(ctx, kx, ky, P, 9);
+      // gauges
+      const s = state(phi());
+      const G = [
+        { k: "GDP 성장률", v: s.g, lo: -1, hi: 5, mid: 2, good: 1, fmt: (v) => v.toFixed(1) + "%" },
+        { k: "실업률", v: s.un, lo: 2, hi: 5.6, mid: 3.8, good: -1, fmt: (v) => v.toFixed(1) + "%" },
+        { k: "물가 상승률", v: s.inf, lo: -0.5, hi: 4.5, mid: 2, good: 0, fmt: (v) => v.toFixed(1) + "%" },
+        { k: "기준금리", v: s.score, lo: -1.6, hi: 1.6, mid: 0, good: 2, fmt: (v) => (v > 0.25 ? "올리는 쪽" : v < -0.25 ? "내리는 쪽" : "지켜봄") },
+      ];
+      const gy0 = T.y + T.h + 16, gh = (h - gy0 - 30) / G.length, lw = narrow ? 76 : 96, gx = 16 + lw, gw = w - gx - (narrow ? 70 : 96);
+      G.forEach((g, i) => {
+        const y = gy0 + gh * i + gh / 2, X = (v) => gx + ((MB.clamp(v, g.lo, g.hi) - g.lo) / (g.hi - g.lo)) * gw;
+        ctx.font = MB.font(12, false, 700); ctx.fillStyle = P.text; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+        ctx.fillText(g.k, 16, y);
+        rr(ctx, gx, y - 8, gw, 16, 8); ctx.fillStyle = P.surface; ctx.fill();
+        const xm = X(g.mid), xv = X(g.v), dv = g.v - g.mid;
+        let col;
+        if (g.good === 2) col = dv > 0 ? P.red : P.blue;
+        else if (g.good === 0) col = Math.abs(dv) > 1 ? P.bad : Math.abs(dv) > 0.5 ? P.warn : P.ok;
+        else col = dv * g.good >= 0 ? P.ok : P.bad;
+        ctx.fillStyle = col; rr(ctx, Math.min(xm, xv), y - 6, Math.max(2, Math.abs(xv - xm)), 12, 6); ctx.fill();
+        ctx.strokeStyle = P.text; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(xm, y - 11); ctx.lineTo(xm, y + 11); ctx.stroke();
+        ctx.font = MB.font(12, g.good !== 2, 600); ctx.fillStyle = P.text; ctx.textAlign = "left";
+        ctx.fillText(g.fmt(g.v), gx + gw + 8, y);
+      });
+      MB.stat("cy-o-ph", s.ph + (s.sub ? " <small>" + s.sub + "</small>" : ""));
+      MB.stat("cy-o-g", s.g.toFixed(1) + "%");
+      MB.stat("cy-o-u", s.un.toFixed(1) + "%");
+      MB.stat("cy-o-p", s.inf.toFixed(1) + "%");
+      MB.stat("cy-o-r", s.score > 0.25 ? tone("bad-t", "인상 쪽") : s.score < -0.25 ? tone("ok-t", "인하 쪽") : "관망");
+    }, { get height() { return $("cy-cv").parentElement.clientWidth < 520 ? 400 : 380; } });
+    MB.drag(cv.canvas, { start() { playing = false; $("cy-play").textContent = "자동 재생"; }, move(x) { if (!GT) return; u = MB.clamp((x - GT.x) / GT.w, 0, 1); cv.redraw(); } });
+    MB.loop(cv.canvas, (dt) => { if (!playing) return; u += dt * 0.05; if (u > 1) u -= 1; cv.redraw(); });
+    $("cy-play").addEventListener("click", () => { playing = !playing; $("cy-play").textContent = playing ? "멈춤" : "자동 재생"; });
+    $("cy-re").addEventListener("click", () => { u = 0.12; cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 5. 테일러 준칙 */
+  (function () {
+    let pi = 2, gap = 0, G = null;
+    const NOW = 2.5;
+    const rule = (p, g) => Math.max(0, 0.5 + p + 0.5 * (p - 2) + 0.5 * g);
+    const PRESET = { calm: [2, 0], hot: [4.5, 2.5], cold: [0.8, -3], stag: [5, -3] };
+    MB.seg("tr-pre", (v) => { [pi, gap] = PRESET[v]; cv.redraw(); });
+    const cv = MB.canvas("#tr-cv", (ctx, w, h) => {
+      const P = MB.palette();
+      const box = { x: 54, y: 14, w: w - 72, h: h - 62 };
+      const X = (p) => box.x + (p / 6) * box.w, Y = (g) => box.y + box.h - ((g + 4) / 8) * box.h;
+      const cs = 6;
+      for (let px = 0; px < box.w; px += cs) for (let py = 0; py < box.h; py += cs) {
+        const p = ((px + cs / 2) / box.w) * 6, g = 4 - ((py + cs / 2) / box.h) * 8;
+        const d = MB.clamp((rule(p, g) - NOW) / 5, -1, 1);
+        ctx.fillStyle = alpha(d > 0 ? P.red : P.blue, Math.abs(d) * 0.55);
+        ctx.fillRect(box.x + px, box.y + py, Math.min(cs, box.w - px), Math.min(cs, box.h - py));
+      }
+      MB.chart(ctx, box, { x: [0, 6], y: [-4, 4], xLabel: "물가 상승률(%)", yLabel: "GDP 갭(%)", xTicks: [0, 1, 2, 3, 4, 5, 6], yTicks: [-4, -2, 0, 2, 4], xFmt: (v) => v + "%" });
+      ctx.save(); ctx.beginPath(); ctx.rect(box.x, box.y, box.w, box.h); ctx.clip();
+      ctx.font = MB.font(10, true); ctx.textBaseline = "bottom"; ctx.textAlign = "left";
+      for (let k = 0; k <= 10; k++) {
+        // 1.5p + 0.5g - 0.5 = k -> g = 2k + 1 - 3p
+        const ga = (p) => 2 * k + 1 - 3 * p;
+        ctx.strokeStyle = k === NOW ? P.text : P.faint; ctx.lineWidth = Math.abs(k - NOW) < 0.01 ? 1.6 : 0.8; ctx.setLineDash(k === 0 ? [3, 3] : []);
+        ctx.beginPath(); ctx.moveTo(X(0), Y(ga(0))); ctx.lineTo(X(6), Y(ga(6))); ctx.stroke();
+        const pl = (2 * k + 1 - 3.3) / 3;
+        if (pl > 0.1 && pl < 5.7) { ctx.fillStyle = P.dim; ctx.fillText(k + "%", X(pl) + 3, Y(3.3) + 12); }
+      }
+      ctx.setLineDash([5, 4]); ctx.strokeStyle = P.text; ctx.lineWidth = 1.4;
+      ctx.beginPath(); ctx.moveTo(X(0), Y(2 * NOW + 1)); ctx.lineTo(X(6), Y(2 * NOW + 1 - 18)); ctx.stroke(); ctx.setLineDash([]);
+      ctx.restore();
+      ctx.font = MB.font(11, false, 700); ctx.fillStyle = P.dim;
+      ctx.textAlign = "right"; ctx.textBaseline = "top"; ctx.fillText("과열", box.x + box.w - 6, box.y + 4);
+      ctx.textBaseline = "bottom"; ctx.fillText("스태그플레이션", box.x + box.w - 6, box.y + box.h - 4);
+      ctx.textAlign = "left"; ctx.fillText("침체", box.x + 6, box.y + box.h - 4);
+      ctx.textBaseline = "top"; ctx.fillText("저물가 호황", box.x + 6, box.y + 4);
+      G = { box };
+      const i = rule(pi, gap), kx = X(pi), ky = Y(gap);
+      knob(ctx, kx, ky, P, 8);
+      ctx.font = MB.font(12, false, 700); ctx.fillStyle = P.text; ctx.textAlign = kx > box.x + box.w - 110 ? "right" : "left"; ctx.textBaseline = "bottom";
+      ctx.fillText("준칙 " + i.toFixed(1) + "%", kx + (ctx.textAlign === "left" ? 13 : -13), ky - 6);
+      MB.stat("tr-o-i", i.toFixed(2) + "%");
+      const d = i - NOW;
+      MB.stat("tr-o-d", Math.abs(d) < 0.25 ? "비슷함" : tone(d > 0 ? "bad-t" : "ok-t", sg(d, 2) + "%p · " + (d > 0 ? "인상 쪽" : "인하 쪽")));
+      const s = pi >= 3 && gap <= -1 ? "스태그플레이션" : pi >= 3 && gap > 0.5 ? "과열" : pi <= 1.5 && gap <= -1 ? "침체" : pi >= 3 ? "물가 부담" : gap <= -1 ? "경기 둔화" : gap >= 1.5 ? "경기 과열 조짐" : "안정 부근";
+      MB.stat("tr-o-s", s);
+    }, { aspect: 0.72, minHeight: 320, maxHeight: 440 });
+    MB.drag(cv.canvas, {
+      move(x, y) {
+        if (!G) return;
+        const b = G.box;
+        pi = Math.round(MB.clamp(((x - b.x) / b.w) * 6, 0, 6) * 10) / 10;
+        gap = Math.round(MB.clamp(4 - ((y - b.y) / b.h) * 8, -4, 4) * 10) / 10;
+        cv.redraw();
+      },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 6. 환율 계산기 */
+  (function () {
+    const BASE = 1300;
+    let GT = null;
+    const R = MB.range("fx-r", (v) => v.toLocaleString("ko-KR") + "원", () => cv.redraw());
+    const U = MB.range("fx-u", (v) => "$" + v.toLocaleString("en-US"), () => cv.redraw());
+    const ROWS = [
+      { k: "여행·직구", s: -1, note: "내야 할 원화" },
+      { k: "수입 원자재", s: -1, note: "원화 비용" },
+      { k: "수출 기업", s: 1, note: "원화 매출" },
+      { k: "해외 자산", s: 1, note: "원화 평가액" },
+      { k: "외국인 관광객", s: 1, note: "달러의 구매력" },
+    ];
+    const cv = MB.canvas("#fx-cv", (ctx, w, h) => {
+      const P = MB.palette(), r = R(), usd = U(), ch = r / BASE - 1, narrow = w < 470;
+      const T = { x: 26, y: 36, w: w - 52 };
+      const X = (v) => T.x + ((v - 1000) / 700) * T.w;
+      GT = { T };
+      ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.textBaseline = "top";
+      ctx.textAlign = "left"; ctx.fillText("← 원화 강세(환율 하락)", T.x - 6, 6);
+      ctx.textAlign = "right"; ctx.fillText("원화 약세(환율 상승) →", T.x + T.w + 6, 6);
+      rr(ctx, T.x, T.y - 3, T.w, 6, 3); ctx.fillStyle = P.surface; ctx.fill();
+      rr(ctx, Math.min(X(BASE), X(r)), T.y - 3, Math.abs(X(r) - X(BASE)), 6, 3); ctx.fillStyle = r >= BASE ? P.red : P.blue; ctx.fill();
+      ctx.font = MB.font(10, true); ctx.fillStyle = P.faint; ctx.textAlign = "center";
+      for (let v = 1000; v <= 1700; v += 100) { if (narrow && v % 200 === 100 && v !== 1300) continue; ctx.fillText(v.toLocaleString("en-US"), X(v), T.y + 9); }
+      ctx.strokeStyle = P.text; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(X(BASE), T.y - 9); ctx.lineTo(X(BASE), T.y + 7); ctx.stroke();
+      knob(ctx, X(r), T.y, P, 9);
+      // 가격 막대
+      const y0 = T.y + 34, lw = 46, bw = w - lw - 20 - (narrow ? 84 : 100), mx = usd * 1700;
+      ctx.font = MB.font(12); ctx.fillStyle = P.dim; ctx.textAlign = "left"; ctx.textBaseline = "top";
+      ctx.fillText("$" + usd.toLocaleString("en-US") + " 물건의 원화 가격", 12, y0);
+      [[BASE, "1,300원", P.faint], [r, "지금", r > BASE ? P.bad : r < BASE ? P.ok : P.accent]].forEach(([rt, lab, col], i) => {
+        const y = y0 + 24 + i * 22, len = ((usd * rt) / mx) * bw;
+        ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.textAlign = "left"; ctx.textBaseline = "middle"; ctx.fillText(i ? "지금" : "기준", 12, y + 7);
+        rr(ctx, lw + 8, y, Math.max(2, len), 14, 4); ctx.fillStyle = col; ctx.fill();
+        ctx.font = MB.font(12, true, 600); ctx.fillStyle = P.text; ctx.fillText(wonFull(usd * rt), lw + 14 + len, y + 7);
+      });
+      // 입장별
+      const ry0 = y0 + 84;
+      ctx.strokeStyle = P.border; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(12, ry0 - 8); ctx.lineTo(w - 12, ry0 - 8); ctx.stroke();
+      ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.textAlign = "left"; ctx.textBaseline = "top";
+      ctx.fillText("같은 " + sg(ch * 100, 1) + "%, 입장마다 다른 색", 12, ry0);
+      const lab = narrow ? 92 : 120, cx = lab + (w - lab) / 2, half = (w - lab) / 2 - (narrow ? 46 : 70), rowH = (h - ry0 - 46) / ROWS.length;
+      ctx.strokeStyle = P.axis; ctx.beginPath(); ctx.moveTo(cx, ry0 + 18); ctx.lineTo(cx, h - 28); ctx.stroke();
+      ROWS.forEach((row, i) => {
+        const y = ry0 + 20 + rowH * (i + 0.5), imp = row.s * ch, len = (ch / 0.31) * half;
+        ctx.font = MB.font(12, false, 700); ctx.fillStyle = P.text; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+        ctx.fillText(row.k, 12, y - (narrow ? 0 : 7));
+        if (!narrow) { ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.fillText(row.note, 12, y + 9); }
+        ctx.fillStyle = Math.abs(imp) < 1e-6 ? P.faint : imp > 0 ? P.ok : P.bad;
+        rr(ctx, Math.min(cx, cx + len), y - 8, Math.max(2, Math.abs(len)), 16, 4); ctx.fill();
+        ctx.font = MB.font(11, false, 700); ctx.textAlign = len >= 0 ? "left" : "right";
+        ctx.fillText(Math.abs(imp) < 1e-6 ? "변화 없음" : imp > 0 ? "유리" : "불리", cx + len + (len >= 0 ? 6 : -6), y);
+      });
+      MB.stat("fx-o-n", wonFull(usd * r));
+      MB.stat("fx-o-b", wonFull(usd * BASE));
+      const d = usd * (r - BASE);
+      MB.stat("fx-o-d", Math.abs(d) < 1 ? "0원" : tone(d > 0 ? "bad-t" : "ok-t", (d > 0 ? "+" : "−") + wonFull(Math.abs(d)) + " <small>" + pctS(ch) + "</small>"));
+      MB.stat("fx-o-w", "$" + (10000 / r).toFixed(2));
+    }, { get height() { return $("fx-cv").parentElement.clientWidth < 470 ? 420 : 410; } });
+    MB.drag(cv.canvas, {
+      act: false,
+      start(x, y) { this.act = GT && y < GT.T.y + 26; },
+      move(x) { if (!this.act) return; R.set(Math.round(MB.clamp(1000 + ((x - GT.T.x) / GT.T.w) * 700, 1000, 1700) / 10) * 10); },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 7. 해외 주식 원화 수익 지도 */
+  (function () {
+    let s = 0.2, f = 0.1, G = null;
+    const PRE = { both: [0.2, 0.1], cancel: [0.1, -0.1], fx: [-0.05, 0.15], double: [-0.2, -0.1] };
+    MB.seg("os-pre", (v) => { [s, f] = PRE[v]; cv.redraw(); });
+    const H = $("os-h");
+    H.addEventListener("change", () => cv.redraw());
+    const tot = (a, b) => (1 + a) * (1 + b) - 1;
+    const cv = MB.canvas("#os-cv", (ctx, w, h) => {
+      const P = MB.palette(), hed = H.checked;
+      const box = { x: 58, y: 14, w: w - 74, h: h - 62 };
+      const X = (v) => box.x + ((v + 0.4) / 0.8) * box.w, Y = (v) => box.y + box.h - ((v + 0.3) / 0.6) * box.h;
+      const cs = 6;
+      for (let px = 0; px < box.w; px += cs) for (let py = 0; py < box.h; py += cs) {
+        const a = ((px + cs / 2) / box.w) * 0.8 - 0.4, b = 0.3 - ((py + cs / 2) / box.h) * 0.6;
+        const R = tot(a, hed ? 0 : b), t = Math.min(1, Math.abs(R) / 0.45);
+        ctx.fillStyle = alpha(R >= 0 ? P.ok : P.bad, 0.08 + t * 0.5);
+        ctx.fillRect(box.x + px, box.y + py, Math.min(cs, box.w - px), Math.min(cs, box.h - py));
+      }
+      const zero = [];
+      for (let i = 0; i <= 80; i++) { const a = -0.4 + i * 0.01; zero.push([a, 1 / (1 + a) - 1]); }
+      MB.chart(ctx, box, { x: [-0.4, 0.4], y: [-0.3, 0.3], xLabel: "주가 수익률(달러 기준)", yLabel: "환율 변화", xTicks: [-0.4, -0.2, 0, 0.2, 0.4], yTicks: [-0.3, -0.15, 0, 0.15, 0.3],
+        xFmt: (v) => Math.round(v * 100) + "%", yFmt: (v) => Math.round(v * 100) + "%",
+        series: hed ? [{ data: [[0, -0.3], [0, 0.3]], color: P.text, width: 2, dash: [6, 4] }] : [{ data: zero, color: P.text, width: 2, dash: [6, 4] }] });
+      ctx.font = MB.font(11, false, 700); ctx.fillStyle = P.text; ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+      ctx.fillText("본전", hed ? X(0) + 5 : X(-0.2) + 7, hed ? Y(0.26) : Y(0.25));
+      G = { box };
+      const R = tot(s, hed ? 0 : f);
+      if (hed) {
+        ctx.setLineDash([3, 3]); ctx.strokeStyle = P.dim; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(X(s), Y(f)); ctx.lineTo(X(s), Y(0)); ctx.stroke(); ctx.setLineDash([]);
+        ctx.fillStyle = P.dim; ctx.beginPath(); ctx.arc(X(s), Y(f), 5, 0, TAU); ctx.fill();
+      }
+      const kx = X(s), ky = Y(hed ? 0 : f);
+      knob(ctx, kx, ky, P, 8);
+      ctx.font = MB.font(12, false, 700); ctx.fillStyle = P.text; ctx.textBaseline = "bottom";
+      ctx.textAlign = kx > box.x + box.w - 120 ? "right" : "left";
+      ctx.fillText("원화 " + pctS(R), kx + (ctx.textAlign === "left" ? 13 : -13), ky - 6);
+      MB.stat("os-o-s", pctS(s));
+      MB.stat("os-o-f", hed ? "0% <small>헤지</small>" : pctS(f));
+      MB.stat("os-o-t", tone(R >= 0 ? "ok-t" : "bad-t", pctS(R)));
+      MB.stat("os-o-x", pctS(hed ? 0 : s * f, 2));
+    }, { aspect: 0.78, minHeight: 320, maxHeight: 440 });
+    MB.drag(cv.canvas, {
+      move(x, y) {
+        if (!G) return;
+        const b = G.box;
+        s = Math.round(MB.clamp(((x - b.x) / b.w) * 0.8 - 0.4, -0.4, 0.4) * 100) / 100;
+        f = Math.round(MB.clamp(0.3 - ((y - b.y) / b.h) * 0.6, -0.3, 0.3) * 100) / 100;
+        cv.redraw();
+      },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 8. 금리차와 자금 흐름 */
+  (function () {
+    const KR = MB.range("rd-kr", (v) => v.toFixed(2) + "%", () => {});
+    const US = MB.range("rd-us", (v) => v.toFixed(2) + "%", () => {});
+    const RK = $("rd-risk");
+    const rng = MB.rng(11);
+    let coins = [], acc = 0, press = 0;
+    const flow = () => (US() - KR()) * 0.7 + (RK.checked ? 1.6 : 0);
+    const cv = MB.canvas("#rd-cv", (ctx, w, h) => {
+      const P = MB.palette(), narrow = w < 470, kr = KR(), us = US(), d = us - kr, fl = flow();
+      const pw = narrow ? 104 : 150, ph = 104, py = 44;
+      const A = { x: 12, y: py, w: pw, h: ph }, B = { x: w - 12 - pw, y: py, w: pw, h: ph };
+      [[A, "한국", "원화 자산", kr], [B, "미국", "달러 자산", us]].forEach(([b, n, sub, rate]) => {
+        rr(ctx, b.x, b.y, b.w, b.h, 12); ctx.fillStyle = P.surface; ctx.fill(); ctx.strokeStyle = P.border; ctx.lineWidth = 1; ctx.stroke();
+        const lev = (rate / 6) * (b.h - 8);
+        rr(ctx, b.x + 4, b.y + b.h - 4 - lev, b.w - 8, lev, 8); ctx.fillStyle = alpha(P.accent2, 0.25); ctx.fill();
+        ctx.fillStyle = P.text; ctx.textAlign = "center"; ctx.textBaseline = "top";
+        ctx.font = MB.font(14, false, 800); ctx.fillText(n, b.x + b.w / 2, b.y + 10);
+        ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.fillText(sub, b.x + b.w / 2, b.y + 30);
+        ctx.font = MB.font(20, true, 600); ctx.fillStyle = P.text; ctx.fillText(rate.toFixed(2) + "%", b.x + b.w / 2, b.y + 56);
+      });
+      const x0 = A.x + A.w, x1 = B.x, cy = py + ph / 2, arcH = narrow ? 34 : 46;
+      ctx.setLineDash([4, 5]); ctx.strokeStyle = P.border; ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      for (let i = 0; i <= 40; i++) { const u = i / 40, x = MB.lerp(x0, x1, u), y = cy - Math.sin(Math.PI * u) * arcH; i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+      ctx.stroke(); ctx.setLineDash([]);
+      if (Math.abs(fl) >= 0.1) {
+        const ax = fl > 0 ? x1 - 4 : x0 + 4, dir = fl > 0 ? 1 : -1;
+        ctx.fillStyle = P.accent2; ctx.beginPath();
+        ctx.moveTo(ax, cy); ctx.lineTo(ax - dir * 12, cy - 9); ctx.lineTo(ax - dir * 8, cy + 3); ctx.closePath(); ctx.fill();
+        ctx.font = MB.font(11, false, 700); ctx.fillStyle = P.accent2; ctx.textAlign = "center"; ctx.textBaseline = "top";
+        ctx.fillText(fl > 0 ? "달러 자산으로" : "원화 자산으로", w / 2, cy + 6);
+      }
+      coins.forEach((c) => {
+        const u = c.dir > 0 ? c.p : 1 - c.p, x = MB.lerp(x0, x1, u), y = cy - Math.sin(Math.PI * c.p) * arcH + c.off;
+        ctx.globalAlpha = Math.min(1, Math.sin(Math.PI * c.p) * 3);
+        ctx.beginPath(); ctx.arc(x, y, 5.5, 0, TAU); ctx.fillStyle = P.accent2; ctx.fill(); ctx.strokeStyle = P.bg; ctx.lineWidth = 1.5; ctx.stroke();
+      });
+      ctx.globalAlpha = 1;
+      ctx.font = MB.font(12, false, 700); ctx.fillStyle = P.text; ctx.textAlign = "center"; ctx.textBaseline = "top";
+      ctx.fillText("금리차 " + sg(d, 2) + "%p", w / 2, 10);
+      if (RK.checked) { ctx.font = MB.font(11); ctx.fillStyle = P.warn; ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.fillText("위험 회피: 안전 자산(달러) 선호", w / 2, py + ph + 10); }
+      // 압력계
+      const gy = h - 46, gx0 = 30, gx1 = w - 30, gc = (gx0 + gx1) / 2;
+      const grd = ctx.createLinearGradient(gx0, 0, gx1, 0);
+      grd.addColorStop(0, alpha(P.blue, 0.55)); grd.addColorStop(0.5, alpha(P.faint, 0.2)); grd.addColorStop(1, alpha(P.red, 0.55));
+      rr(ctx, gx0, gy - 6, gx1 - gx0, 12, 6); ctx.fillStyle = grd; ctx.fill();
+      ctx.strokeStyle = P.text; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(gc, gy - 10); ctx.lineTo(gc, gy + 10); ctx.stroke();
+      const nx = gc + press * (gx1 - gc - 6);
+      ctx.fillStyle = P.text; tri(ctx, nx, gy - 14, 7, false);
+      ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.textBaseline = "top";
+      ctx.textAlign = "left"; ctx.fillText("원화 강세 압력", gx0, gy + 12);
+      ctx.textAlign = "right"; ctx.fillText("원화 약세 압력", gx1, gy + 12);
+      MB.stat("rd-o-d", sg(d, 2) + "%p");
+      MB.stat("rd-o-f", Math.abs(fl) < 0.1 ? "멈춤" : fl > 0 ? "달러 자산 쪽" : "원화 자산 쪽");
+      MB.stat("rd-o-p", Math.abs(fl) < 0.1 ? "중립" : fl > 0 ? tone("bad-t", "약세 쪽") : tone("ok-t", "강세 쪽"));
+      MB.stat("rd-o-i", Math.abs(d) < 1e-9 ? "0원" : MB.won(1e8 * Math.abs(d) / 100) + " <small>" + (d > 0 ? "미국 쪽" : "한국 쪽") + "</small>");
+    }, { height: 280 });
+    MB.loop(cv.canvas, (dt) => {
+      const fl = flow();
+      press += (MB.clamp(fl / 2.5, -1, 1) - press) * Math.min(1, dt * 2.5);
+      acc += dt * Math.min(14, Math.abs(fl) * 4);
+      while (acc > 1) { acc -= 1; if (Math.abs(fl) > 0.05) coins.push({ p: 0, dir: Math.sign(fl), off: (rng() - 0.5) * 26 }); }
+      coins.forEach((c) => (c.p += dt * 0.55));
+      coins = coins.filter((c) => c.p < 1);
+      cv.redraw();
+    });
+  })();
+
+  /* ---------------------------------------------------------- 9. %와 %p */
+  (function () {
+    let score = 0, tries = 0, Q = null, busy = false;
+    const fmt = (v, d) => String(+v.toFixed(d == null ? 2 : d));
+    const A = MB.range("pp-a", (v) => v.toFixed(1) + "%", () => { if (!busy) clearQ(); cv.redraw(); });
+    const B = MB.range("pp-b", (v) => v.toFixed(1) + "%", () => { if (!busy) clearQ(); cv.redraw(); });
+    const OB = [0, 1, 2].map((i) => $("pp-o" + i)), QT = $("pp-qt");
+    function clearQ() {
+      if (!Q) return;
+      Q = null; OB.forEach((b) => { b.disabled = true; b.textContent = "—"; });
+      QT.textContent = "문제 내기를 누르면 뉴스 문장이 하나 나온다.";
+    }
+    function ask() {
+      const a = (1 + Math.floor(Math.random() * 12)) * 0.5;
+      let dlt = (1 + Math.floor(Math.random() * 8)) * 0.25 * (Math.random() < 0.5 ? -1 : 1);
+      if (a + dlt < 0.5) dlt = -dlt;
+      const b = a + dlt, p = Math.abs(b - a), r = (Math.abs(b - a) / a) * 100, up = b > a;
+      const type = Math.random() < 0.5 ? "pp" : "pct";
+      const subj = ["기준금리", "실업률", "대출 금리", "물가 상승률"][Math.floor(Math.random() * 4)];
+      const verb = up ? "올랐다" : "내렸다";
+      let text, opts;
+      if (type === "pp") {
+        text = subj + "가 " + fmt(a) + "%에서 " + fmt(b) + "%로 " + verb + ". 두 숫자의 차이로 맞게 말한 것은?";
+        opts = [[fmt(p) + "%p " + verb, 1], [fmt(p) + "% " + verb, 0], [fmt(r, 1) + "%p " + verb, 0]];
+      } else {
+        text = subj + "가 " + fmt(a) + "%에서 " + fmt(b) + "%로 " + verb + ". 변화율(%)로 말하면?";
+        opts = [[fmt(r, 1) + "% " + verb, 1], [fmt(p) + "% " + verb, 0], [fmt(r, 1) + "%p " + verb, 0]];
+      }
+      if (Math.abs(r - p) < 0.05) opts[1][0] = fmt(p * 2) + (type === "pp" ? "%p " : "% ") + verb;
+      opts.sort(() => Math.random() - 0.5);
+      busy = true; A.set(a); B.set(b); busy = false;
+      Q = { opts, done: false };
+      QT.textContent = text;
+      OB.forEach((bt, i) => { bt.disabled = false; bt.textContent = opts[i][0]; });
+      cv.redraw();
+    }
+    OB.forEach((bt, i) => bt.addEventListener("click", () => {
+      if (!Q || Q.done) return;
+      Q.done = true; tries++;
+      const ok = Q.opts[i][1] === 1;
+      if (ok) score++;
+      const right = Q.opts.find((o) => o[1] === 1)[0];
+      QT.innerHTML = (ok ? tone("ok-t", "정답.") : tone("bad-t", "아쉽다.")) + " 맞는 답은 '" + right + "'. 그림에서 %p와 %를 확인한다.";
+      OB.forEach((b) => (b.disabled = true));
+      MB.stat("pp-o-s", score + " / " + tries);
+      cv.redraw();
+    }));
+    $("pp-q").addEventListener("click", ask);
+    const cv = MB.canvas("#pp-cv", (ctx, w, h) => {
+      const P = MB.palette(), a = A(), b = B(), hide = Q && !Q.done, p = b - a, r = (b - a) / a;
+      const box = { x: 44, y: 58, w: w - 60, h: h - 58 - 30 };
+      const Y = (v) => box.y + box.h - (v / 10) * box.h;
+      ctx.font = MB.font(10, true); ctx.fillStyle = P.faint; ctx.textAlign = "right"; ctx.textBaseline = "middle";
+      for (let v = 0; v <= 10; v += 2) { ctx.strokeStyle = P.grid; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(box.x, Y(v)); ctx.lineTo(box.x + box.w, Y(v)); ctx.stroke(); ctx.fillText(v + "%", box.x - 6, Y(v)); }
+      const bw = Math.min(70, box.w * 0.2), xa = box.x + box.w * 0.22, xb = box.x + box.w * 0.55;
+      [[xa, a, P.faint, "이전"], [xb, b, P.accent, "이후"]].forEach(([x, v, col, lab]) => {
+        rr(ctx, x - bw / 2, Y(v), bw, Y(0) - Y(v), 4); ctx.fillStyle = col; ctx.fill();
+        ctx.font = MB.font(12, true, 600); ctx.fillStyle = P.text; ctx.textAlign = "center"; ctx.textBaseline = "bottom"; ctx.fillText(v.toFixed(1) + "%", x, Y(v) - 4);
+        ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.textBaseline = "top"; ctx.fillText(lab, x, Y(0) + 6);
+      });
+      ctx.setLineDash([4, 3]); ctx.strokeStyle = P.faint; ctx.beginPath(); ctx.moveTo(xa + bw / 2, Y(a)); ctx.lineTo(xb + bw / 2 + 18, Y(a)); ctx.stroke(); ctx.setLineDash([]);
+      const bx = xb + bw / 2 + 18;
+      ctx.strokeStyle = P.accent2; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(bx, Y(a)); ctx.lineTo(bx, Y(b)); ctx.moveTo(bx - 5, Y(a)); ctx.lineTo(bx + 5, Y(a)); ctx.moveTo(bx - 5, Y(b)); ctx.lineTo(bx + 5, Y(b)); ctx.stroke();
+      ctx.font = MB.font(13, true, 600); ctx.fillStyle = P.accent2; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+      ctx.fillText(hide ? "? %p" : sg(p, 2) + "%p", bx + 8, (Y(a) + Y(b)) / 2);
+      ctx.font = MB.font(12); ctx.textBaseline = "top"; ctx.textAlign = "left";
+      ctx.fillStyle = P.dim; ctx.fillText("제목 A", 12, 8); ctx.fillText("제목 B", 12, 28);
+      ctx.font = MB.font(12, false, 700); ctx.fillStyle = P.text;
+      const verb = p >= 0 ? "인상" : "인하";
+      ctx.fillText(hide ? "금리 ? %p " + verb : "금리 " + Math.abs(p).toFixed(2).replace(/\.?0+$/, "") + "%p " + verb, 62, 8);
+      ctx.fillText(hide ? "금리 ? % " + verb : "금리 " + Math.abs(r * 100).toFixed(1).replace(/\.0$/, "") + "% " + verb, 62, 28);
+      MB.stat("pp-o-p", hide ? "?" : sg(p, 2) + "%p");
+      MB.stat("pp-o-r", hide ? "?" : pctS(r));
+      if (!tries) MB.stat("pp-o-s", "0 / 0");
+    }, { height: 300 });
+  })();
+
+  /* ---------------------------------------------------------- 10. 기저효과 */
+  (function () {
+    const M = 24, TR = 1.002;
+    let c = 4, amp = -4, k = 16, playing = false, kt = 0, GA = null;
+    const lvl = () => { const L = []; for (let i = 0; i < M; i++) { const bump = i < 12 ? (amp / 100) * Math.exp(-((i - c) ** 2) / (2 * 0.55 * 0.55)) : 0; L.push(100 * Math.pow(TR, i) * (1 + bump)); } return L; };
+    const mlab = (i) => (i < 12 ? "25." : "26.") + ((i % 12) + 1);
+    const trendY = Math.pow(TR, 12) - 1;
+    const cv = MB.canvas("#be-cv", (ctx, w, h) => {
+      const P = MB.palette(), L = lvl();
+      const A = { x: 54, y: 14, w: w - 70, h: Math.round(h * 0.4) };
+      const B = { x: 54, y: A.y + A.h + 36, w: w - 70, h: h - (A.y + A.h + 36) - 50 };
+      const cA = MB.chart(ctx, A, { x: [-0.5, 23.5], y: [90, 112], yLabel: "물가지수", xTicks: [0, 6, 12, 18], xFmt: mlab, yTicks: [90, 100, 110],
+        bands: [{ x0: -0.5, x1: 11.5, color: alpha(P.accent2, 0.08) }],
+        series: [{ data: L.map((v, i) => [i, v]), color: P.accent, width: 2.2 }, { data: [[0, 100], [23, 100 * Math.pow(TR, 23)]], color: P.faint, width: 1, dash: [4, 4] }] });
+      GA = cA;
+      ctx.font = MB.font(11, false, 700); ctx.fillStyle = P.accent2; ctx.textAlign = "left"; ctx.textBaseline = "top";
+      ctx.fillText("2025년(작년)", cA.X(0), A.y + 4);
+      ctx.fillStyle = P.dim; ctx.fillText("2026년(올해)", cA.X(12.2), A.y + 4);
+      // 비교 호
+      const xa = cA.X(k), ya = cA.Y(L[k]), xb = cA.X(k - 12), yb = cA.Y(L[k - 12]);
+      ctx.strokeStyle = P.accent2; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(xa, ya); ctx.quadraticCurveTo((xa + xb) / 2, Math.min(ya, yb) - 46, xb, yb); ctx.stroke();
+      ctx.fillStyle = P.accent2; ctx.beginPath(); ctx.arc(xb, yb, 4, 0, TAU); ctx.fill();
+      ctx.fillStyle = P.bad; ctx.beginPath(); ctx.arc(xa, ya, 5, 0, TAU); ctx.fill();
+      for (let i = 0; i < M; i++) { if (i === c) continue; ctx.fillStyle = P.accent; ctx.beginPath(); ctx.arc(cA.X(i), cA.Y(L[i]), 2.2, 0, TAU); ctx.fill(); }
+      knob(ctx, cA.X(c), cA.Y(L[c]), P, 8);
+      // 전년 동월 대비 막대
+      const Y = [];
+      for (let i = 12; i < M; i++) Y.push(L[i] / L[i - 12] - 1);
+      const lo = Math.min(-0.03, ...Y) * 100, hi = Math.max(0.08, ...Y) * 100;
+      const cB = MB.chart(ctx, B, { x: [11.5, 23.5], y: [Math.floor(lo), Math.ceil(hi)], yLabel: "전년 동월 대비", xTicks: [12, 15, 18, 21], xFmt: mlab, yFmt: (v) => v + "%",
+        hlines: [{ y: trendY * 100, color: P.faint, label: "평소 추세 " + (trendY * 100).toFixed(1) + "%" }, { y: 0, color: P.axis, dash: [] }] });
+      const bw = (B.w / 12) * 0.62;
+      Y.forEach((v, j) => {
+        const i = j + 12, x = cB.X(i), y0 = cB.Y(0), y1 = cB.Y(v * 100);
+        ctx.globalAlpha = i === k ? 1 : 0.55;
+        ctx.fillStyle = Math.abs(v - trendY) > 0.01 ? (v > trendY ? P.bad : P.blue) : P.accent;
+        ctx.fillRect(x - bw / 2, Math.min(y0, y1), bw, Math.max(1, Math.abs(y1 - y0)));
+      });
+      ctx.globalAlpha = 1;
+      const yk = Y[k - 12];
+      ctx.font = MB.font(11, true, 600); ctx.fillStyle = P.text; ctx.textAlign = "center"; ctx.textBaseline = yk >= 0 ? "bottom" : "top";
+      ctx.fillText((yk * 100).toFixed(1) + "%", cB.X(k), cB.Y(yk * 100) + (yk >= 0 ? -3 : 3));
+      const mm = L[k] / L[k - 1] - 1;
+      MB.stat("be-o-m", "20" + mlab(k).replace(".", "년 ") + "월");
+      MB.stat("be-o-y", pctS(yk));
+      MB.stat("be-o-mm", pctS(mm, 2));
+      const be = (yk - trendY) * 100;
+      MB.stat("be-o-b", Math.abs(be) < 0.05 ? "거의 없음" : tone(be > 0 ? "bad-t" : "ok-t", sg(be, 1) + "%p"));
+    }, { aspect: 0.75, minHeight: 420, maxHeight: 490 });
+    MB.drag(cv.canvas, {
+      act: false,
+      start(x, y) { this.act = !!GA && y < GA.box.y + GA.box.h + 10; if (this.act) { playing = false; $("be-play").textContent = "한 달씩 훑기"; } },
+      move(x, y) {
+        if (!this.act) return;
+        const b = GA.box, i = Math.round(MB.clamp(-0.5 + ((x - b.x) / b.w) * 24, 0, 11));
+        const val = 90 + ((b.y + b.h - y) / b.h) * 22, tr = 100 * Math.pow(TR, i);
+        c = i; amp = Math.round(MB.clamp((val / tr - 1) * 100, -8, 8) * 2) / 2; k = c + 12; cv.redraw();
+      },
+    });
+    MB.loop(cv.canvas, (dt) => {
+      if (!playing) return;
+      kt += dt * 1.3; const nk = 12 + (Math.floor(kt) % 12);
+      if (nk !== k) { k = nk; cv.redraw(); }
+    });
+    $("be-play").addEventListener("click", () => { playing = !playing; kt = k - 12; $("be-play").textContent = playing ? "멈춤" : "한 달씩 훑기"; });
+    $("be-re").addEventListener("click", () => { amp = 0; cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 11. 한결과 선배 */
+  (function () {
+    const HG = MN.HG;
+    const stu = MN.loan(HG.studentLoan, HG.studentRate, HG.studentMonths).first;
+    const dep0 = MN.deposit(HG.cash, 0.025, 12).net, m0 = MN.loan(3e8, 0.04, 360).first;
+    const D = MB.range("hg-d", (v) => sg(v, 2) + "%p", () => cv.redraw());
+    const FX = MB.range("hg-fx", (v) => v.toLocaleString("ko-KR") + "원", () => cv.redraw());
+    const won1 = (x) => (x > 0.5 ? "+" : "") + MB.won(x, { digits: 1 });
+    function calc() {
+      const d = D() / 100, fx = FX();
+      const dep = MN.deposit(HG.cash, Math.max(0.001, 0.025 + d), 12).net;
+      const mort = MN.loan(3e8, 0.04, 360, "annuity", { rates: (m) => (m <= 12 ? 0.04 : Math.max(0.001, 0.04 + d)) }).rows[12].pay;
+      const rows = [
+        { k: "학자금 상환", sub: "고정 1.7%", v: 0 },
+        { k: "예금 이자", sub: "300만원, 세후", v: dep - dep0 },
+        { k: "해외 직구", sub: "월 $100", v: -(fx - 1300) * 100 * 12 },
+        { k: "여름 여행", sub: "$1,500", v: -(fx - 1300) * 1500 },
+        { k: "선배 대출", sub: "3억원 변동", v: -(mort - m0) * 12, other: true },
+      ];
+      return { rows, dep, mort, net: rows.slice(0, 4).reduce((s, r) => s + r.v, 0) };
+    }
+    const cv = MB.canvas("#hg-cv", (ctx, w, h) => {
+      const P = MB.palette(), C = calc(), narrow = w < 470;
+      const lab = narrow ? 84 : 112, cx = lab + (w - lab) / 2, half = (w - lab) / 2 - (narrow ? 50 : 66);
+      const sc = Math.max(5e5, ...C.rows.filter((r) => !r.other).map((r) => Math.abs(r.v)));
+      ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.textBaseline = "top"; ctx.textAlign = "center";
+      ctx.fillText("1년 동안 줄어드는 돈", cx - half / 2 - 10, 8); ctx.fillText("늘어나는 돈", cx + half / 2 + 10, 8);
+      const top = 32, rowH = (h - top - 14) / C.rows.length;
+      ctx.strokeStyle = P.axis; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(cx, top - 4); ctx.lineTo(cx, h - 8); ctx.stroke();
+      C.rows.forEach((r, i) => {
+        const y = top + rowH * (i + 0.5) + (r.other ? 6 : 0), raw = (r.v / sc) * half, len = MB.clamp(raw, -half, half), cut = Math.abs(raw) > half + 0.5;
+        if (r.other) { ctx.setLineDash([4, 4]); ctx.strokeStyle = P.border; ctx.beginPath(); ctx.moveTo(8, y - rowH / 2 - 2); ctx.lineTo(w - 8, y - rowH / 2 - 2); ctx.stroke(); ctx.setLineDash([]); }
+        ctx.font = MB.font(12, false, 700); ctx.fillStyle = r.other ? P.dim : P.text; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+        ctx.fillText(r.k, 10, y - 7);
+        ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.fillText(r.sub, 10, y + 9);
+        ctx.globalAlpha = r.other ? 0.6 : 1;
+        ctx.fillStyle = Math.abs(r.v) < 1 ? P.faint : r.v > 0 ? P.ok : P.bad;
+        rr(ctx, Math.min(cx, cx + len), y - 9, Math.max(2, Math.abs(len)), 18, 4); ctx.fill();
+        ctx.globalAlpha = 1;
+        if (cut) {
+          const bx = cx + len * 0.82;
+          ctx.strokeStyle = P.bg; ctx.lineWidth = 3;
+          ctx.beginPath(); ctx.moveTo(bx - 4, y + 11); ctx.lineTo(bx + 1, y - 11); ctx.moveTo(bx + 3, y + 11); ctx.lineTo(bx + 8, y - 11); ctx.stroke();
+        }
+        const txt = Math.abs(r.v) < 1 ? "변화 없음" : won1(r.v);
+        ctx.font = MB.font(12, Math.abs(r.v) >= 1, 600); ctx.fillStyle = P.text;
+        const tw = ctx.measureText(txt).width;
+        let tx = cx + len + (len >= 0 ? 6 : -6 - tw);
+        if (tx < lab) tx = cx + 6;
+        ctx.textAlign = "left";
+        ctx.fillText(txt, tx, y);
+      });
+      MB.stat("hg-o-s", wonFull(stu) + " <small>그대로</small>");
+      MB.stat("hg-o-d", wonFull(C.dep));
+      MB.stat("hg-o-n", Math.abs(C.net) < 1 ? "0원" : tone(C.net > 0 ? "ok-t" : "bad-t", won1(C.net)));
+      MB.stat("hg-o-m", MB.won(C.mort, { digits: 1 }));
+    }, { get height() { return $("hg-cv").parentElement.clientWidth < 470 ? 330 : 300; } });
+  })();
+})();
+</script>
+</body>
+</html>

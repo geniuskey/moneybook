@@ -1,0 +1,1269 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and MoneyBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "무엇을 사느냐보다 어떤 비율로 담느냐가 수익의 흔들림을 정한다. 상관관계와 분산, 두 자산 조합 곡선과 효율적 투자선, 무위험 자산과 섞기, 리밸런싱, 인적 자본과 생애주기 배분, 감내 낙폭으로 비율 정하기를 시뮬레이터로 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자산배분 · MoneyBook</title>
+<meta name="description" content="무엇을 사느냐보다 어떤 비율로 담느냐가 수익의 흔들림을 정한다. 상관관계와 분산, 두 자산 조합 곡선과 효율적 투자선, 무위험 자산과 섞기, 리밸런싱, 인적 자본과 생애주기 배분, 감내 낙폭으로 비율 정하기를 시뮬레이터로 익힌다.">
+<link rel="canonical" href="https://moneybook.euiyun.com/chapters/portfolio.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0b8a63">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MoneyBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="자산배분 · MoneyBook">
+<meta property="og:description" content="무엇을 사느냐보다 어떤 비율로 담느냐가 수익의 흔들림을 정한다. 상관관계와 분산, 두 자산 조합 곡선과 효율적 투자선, 무위험 자산과 섞기, 리밸런싱, 인적 자본과 생애주기 배분, 감내 낙폭으로 비율 정하기를 시뮬레이터로 익힌다.">
+<meta property="og:url" content="https://moneybook.euiyun.com/chapters/portfolio.html">
+<meta property="og:image" content="https://moneybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://moneybook.euiyun.com/chapters/portfolio.html#chapter","name":"자산배분","headline":"자산배분 · MoneyBook","description":"무엇을 사느냐보다 어떤 비율로 담느냐가 수익의 흔들림을 정한다. 상관관계와 분산, 두 자산 조합 곡선과 효율적 투자선, 무위험 자산과 섞기, 리밸런싱, 인적 자본과 생애주기 배분, 감내 낙폭으로 비율 정하기를 시뮬레이터로 익힌다.","url":"https://moneybook.euiyun.com/chapters/portfolio.html","position":16,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://moneybook.euiyun.com/og.png","dateModified":"2026-10-03","isPartOf":{"@type":"Book","@id":"https://moneybook.euiyun.com/#book","name":"MoneyBook · 살아가는 데 필요한 돈 교과서","url":"https://moneybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MoneyBook","item":"https://moneybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"16. 자산배분","item":"https://moneybook.euiyun.com/chapters/portfolio.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/money.js"></script>
+<!--head:end-->
+<style>
+  figure.diagram svg { max-width: 520px; margin: 0 auto; }
+  #fig-front text, #fig-hc text { font-size: 16px; }
+  #fig-hc .t-mono { font-size: 15px; }
+  @media (max-width: 520px) { .sim-view .hint { position: static; display: block; text-align: right; background: none; padding: 2px 10px 6px; } }
+  .stat .v.sm { font-size: 15px; }
+  .stat .v.kr { font-family: var(--font); font-size: 15px; }
+  #case .slip .row span:last-child { font-family: var(--font); }
+</style>
+</head>
+<body data-chapter="portfolio">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 16</div>
+    <h1>자산배분</h1>
+    <p class="lead">어떤 주식을 살지, 어떤 펀드가 좋을지에 사람들은 많은 시간을 쓴다. 그런데 내 돈이 한 해에 얼마나 흔들릴지를 가장 크게 정하는 것은 종목이 아니라 <b>비율</b>이다. 주식과 채권과 현금을 몇 대 몇으로 담았는가. 이 장은 그 비율을 정하는 원리를 다룬다. 서로 다르게 움직이는 자산을 섞으면 왜 위험이 줄어드는지, 그 가운데 "더 나은 조합"은 어디에 모여 있는지, 시간이 흐르며 흐트러진 비율을 왜 되돌려야 하는지, 그리고 나이와 견딜 수 있는 낙폭이 비율을 어떻게 바꾸는지를 직접 끌어 보며 확인한다.</p>
+    <ul class="objectives">
+      <li>주식·채권·현금·금이 포트폴리오에서 맡는 역할을 구분하고, 비율에 따라 기대수익·변동성·나쁜 해가 어떻게 바뀌는지 읽는다.</li>
+      <li>상관계수가 낮을수록 섞었을 때 위험이 줄어드는 원리를 두 자산 조합 곡선으로 설명한다.</li>
+      <li>효율적 투자선과 최소분산 포트폴리오, 무위험 자산과 섞는 직선(자본시장선)의 뜻을 말한다.</li>
+      <li>리밸런싱이 비율 표류를 막고 '싸게 사고 비싸게 파는' 일을 기계적으로 해 주는 원리와 그 비용을 이해한다.</li>
+      <li>인적 자본, 생애주기 글라이드 패스, 감내할 낙폭, 해외 분산과 환율을 고려해 자기 비율을 정하는 방법을 익힌다.</li>
+    </ul>
+  </header>
+
+  <section id="mix">
+    <h2>무엇을 사느냐보다 어떤 비율로 담느냐</h2>
+    <p>같은 해에 같은 1,000만원으로 투자를 시작한 두 사람을 생각해 보자. 한 사람은 좋은 종목을 고르려고 몇 달을 공부했지만 돈의 대부분을 주식에 넣었다. 다른 사람은 종목은 시장 전체를 담은 지수로 간단히 정하고, 대신 주식과 채권의 비율을 고민했다. 주식 시장이 30% 떨어진 해, 두 사람의 계좌는 종목 선택보다 <b>주식이 몇 %였는가</b>에 따라 훨씬 크게 갈린다.</p>
+    <p>돈을 여러 종류의 자산에 어떤 비율로 나눌지 정하는 일을 <span class="term">자산배분</span><span class="en">(Asset allocation)</span>이라 한다. 미국 연기금들을 분석한 유명한 연구들은 포트폴리오 수익률이 시간에 따라 오르내리는 폭의 대부분(90% 안팎)이 자산배분으로 설명된다고 보고했다. 이 숫자는 "수익의 90%가 배분에서 나온다"로 과장되어 인용되기도 하지만, 흔들림의 크기를 정하는 가장 큰 손잡이가 비율이라는 점은 분명하다.</p>
+    <p>먼저 재료를 보자. 이 책은 <a href="risk.html">12장</a>부터 같은 교육용 가정(<code>MN.ASSETS</code>)을 쓴다. 과거 장기 평균을 반올림한 대표값일 뿐, 앞으로 이렇게 된다는 보장은 없다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 354" role="img" aria-label="주식, 채권, 현금, 금 네 자산의 역할을 비교한 카드">
+        <rect x="6" y="6" width="428" height="80" rx="12" class="f-acc-soft"/>
+        <text x="24" y="39" class="lbl-acc" style="font-size:20px">주식 · 엔진</text>
+        <text x="416" y="39" class="lbl-dim" text-anchor="end" style="font-size:16px">μ 7.5%  σ 16%</text>
+        <text x="24" y="69" class="lbl" style="font-size:17px">길게 보면 가장 많이 불린다</text>
+        <rect x="6" y="94" width="428" height="80" rx="12" class="f-surface"/>
+        <text x="24" y="127" class="lbl-b" style="font-size:20px">채권 · 완충재</text>
+        <text x="416" y="127" class="lbl-dim" text-anchor="end" style="font-size:16px">μ 3.5%  σ 6%</text>
+        <text x="24" y="157" class="lbl" style="font-size:17px">주식이 무너질 때 버텨 준다</text>
+        <rect x="6" y="182" width="428" height="80" rx="12" class="f-surface"/>
+        <text x="24" y="215" class="lbl-b" style="font-size:20px">현금 · 비상 연료</text>
+        <text x="416" y="215" class="lbl-dim" text-anchor="end" style="font-size:16px">μ 2.5%  σ 1%</text>
+        <text x="24" y="245" class="lbl" style="font-size:17px">흔들림 없이 바로 꺼내 쓴다</text>
+        <rect x="6" y="270" width="428" height="80" rx="12" class="f-acc2-soft"/>
+        <text x="24" y="303" class="lbl-acc2" style="font-size:20px">금 · 보험</text>
+        <text x="416" y="303" class="lbl-dim" text-anchor="end" style="font-size:16px">μ 4.5%  σ 15%</text>
+        <text x="24" y="333" class="lbl" style="font-size:17px">주식·채권과 따로 움직인다</text>
+      </svg>
+      <figcaption><b>그림 1. 네 자산의 역할.</b> 수익을 만드는 엔진(주식), 충격을 받아 주는 완충재(채권), 언제든 꺼내 쓰는 연료(현금), 다른 것들이 함께 무너질 때를 대비한 보험(금). mu는 기대수익률, sigma는 변동성(표준편차)으로, 모두 교육용 가정이다.</figcaption>
+    </figure>
+
+    <p>아래 막대의 경계 세 개를 좌우로 끌어 비율을 바꿔 본다. 가운데 계기판의 <b>나쁜 해</b>는 기대수익에서 변동성의 두 배를 뺀 값(\(\mu-2\sigma\))이다. 수익률이 정규분포를 따른다면 약 40년에 한 번 이보다 나쁜 해가 온다는 뜻인데, 실제 시장은 꼬리가 두꺼워 이런 해가 더 자주 온다.</p>
+
+    <div class="sim" id="sim-mix">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>비율 막대: 네 자산을 나눠 담기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="mx-cv"></canvas><span class="hint">막대의 경계를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="mx-pre"><button data-value="70,30,0,0" class="on">70·30</button><button data-value="60,40,0,0">60·40</button><button data-value="40,40,10,10">40·40·10·10</button><button data-value="25,25,25,25">25×4</button><button data-value="100,0,0,0">주식 100</button><button data-value="0,0,100,0">현금 100</button></div>
+          <label class="ctrl"><span>투자 금액 <output id="mx-amt-out"></output></span><input type="range" id="mx-amt" min="1000000" max="100000000" step="1000000" value="10000000"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">기대수익 μ</span><span class="v" id="mx-o-mu">—</span></div>
+        <div class="stat"><span class="k">변동성 σ</span><span class="v" id="mx-o-sd">—</span></div>
+        <div class="stat"><span class="k">나쁜 해 μ−2σ</span><span class="v" id="mx-o-bad">—</span></div>
+        <div class="stat"><span class="k">나쁜 해의 손실액</span><span class="v kr" id="mx-o-won">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "주식 100"을 누르고 나쁜 해를 읽는다. 약 −24.5%다. ② 경계를 끌어 채권을 30% 넣는다. 기대수익은 1.2%p 줄지만 나쁜 해는 약 −16.7%로 8%p 가까이 좋아진다. ③ "25×4"를 누른다. 금(σ 15%)을 25%나 넣었는데도 변동성은 약 6.1%로, 기대수익이 같은(4.5%) 주식 25·채권 75의 약 6.3%보다 작다. 따로 움직이는 자산이 섞인 효과다. (교육용 가정 <code>MN.ASSETS</code>, 상관계수 <code>MN.CORR</code>, 1년 단위 정규분포 근사)</div>
+    </div>
+
+    <p>두 번째 실험에서 눈여겨볼 것은 비대칭이다. 주식을 100%에서 70%로 줄이면 기대수익은 7.5%에서 6.3%로 16% 줄어드는데, 변동성은 16%에서 약 11.5%로 28% 가까이 줄어든다. 위험이 수익보다 빨리 줄어든다. 이것이 자산배분의 출발점이다. 단순한 가중 평균이라면 둘이 같은 비율로 줄어야 한다. 위험이 더 빨리 줄어드는 이유는 다음 절의 <b>상관관계</b>에 있다.</p>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>비율 (주식·채권·현금·금)</th><th class="num">기대수익 μ</th><th class="num">변동성 σ</th><th class="num">나쁜 해 μ−2σ</th></tr></thead>
+      <tbody>
+        <tr><td>주식 100</td><td class="num">7.50%</td><td class="num">16.00%</td><td class="num">약 −24.5%</td></tr>
+        <tr><td>70 · 30 · 0 · 0</td><td class="num">6.30%</td><td class="num">11.52%</td><td class="num">약 −16.7%</td></tr>
+        <tr><td>60 · 40 · 0 · 0</td><td class="num">5.90%</td><td class="num">10.13%</td><td class="num">약 −14.4%</td></tr>
+        <tr><td>40 · 40 · 10 · 10</td><td class="num">5.10%</td><td class="num">7.39%</td><td class="num">약 −9.7%</td></tr>
+        <tr><td>채권 100</td><td class="num">3.50%</td><td class="num">6.00%</td><td class="num">약 −8.5%</td></tr>
+        <tr><td>현금 100</td><td class="num">2.50%</td><td class="num">1.00%</td><td class="num">약 +0.5%</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section id="corr">
+    <h2>상관관계: 함께 움직이는 정도</h2>
+    <p>두 자산이 같은 날 같이 오르고 같이 떨어지는 경향을 숫자 하나로 나타낸 것이 <span class="term">상관계수</span><span class="en">(Correlation coefficient, ρ)</span>다. +1이면 늘 같은 방향으로 같은 비율만큼 움직이고, 0이면 서로 상관없이 움직이고, −1이면 늘 정반대로 움직인다.</p>
+    <p>아래 그림의 점 하나는 한 해의 성적이다. 가로는 자산 A의 수익률, 세로는 자산 B의 수익률이다. 두 자산은 기대수익(7%)과 변동성(20%)이 똑같다. 상관계수 슬라이더를 움직여 점구름의 모양과 오른쪽의 "반반 섞은 포트폴리오"의 흔들림을 비교해 본다.</p>
+
+    <div class="sim" id="sim-corr">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>상관계수와 섞었을 때의 흔들림</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cr-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>상관계수 ρ <output id="cr-r-out"></output></span><input type="range" id="cr-r" min="-1" max="1" step="0.05" value="0.3"></label>
+          <div class="btn-row"><button class="btn" id="cr-re">새 표본 뽑기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">표본 상관계수</span><span class="v" id="cr-o-s">—</span></div>
+        <div class="stat"><span class="k">A 하나의 σ</span><span class="v" id="cr-o-a">—</span></div>
+        <div class="stat"><span class="k">반반의 σ (이론)</span><span class="v" id="cr-o-p">—</span></div>
+        <div class="stat"><span class="k">위험 감소</span><span class="v" id="cr-o-d">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① ρ = 1로 민다. 점들이 대각선 한 줄에 서고, 반반을 섞어도 흔들림이 20% 그대로다. 섞는 의미가 없다. ② ρ = 0으로 둔다. 점구름이 동그래지고 반반의 σ는 약 14.1%로 줄어든다. ③ ρ = −1로 민다. 점들이 반대 대각선에 서고 반반의 σ가 0이 된다. 한쪽이 잃는 만큼 다른 쪽이 번다. (A와 B 모두 μ 7%, σ 20%인 가상의 자산. 점 80개는 같은 난수를 ρ만 바꿔 다시 섞은 것이다)</div>
+    </div>
+
+    <p>반반 섞은 포트폴리오의 수익률은 언제나 두 수익률의 평균이다. 그런데 흔들림은 평균이 아니다. 섞인 자산의 변동성은 다음 식으로 계산한다.</p>
+    <div class="formula">$$\sigma_p^2 = w^2\sigma_A^2 + (1-w)^2\sigma_B^2 + 2\,w(1-w)\,\rho\,\sigma_A\sigma_B$$<div class="where">\(w\): A의 비중, \(\sigma_A, \sigma_B\): 각 자산의 변동성, \(\rho\): 상관계수, \(\sigma_p\): 섞은 포트폴리오의 변동성</div></div>
+    <p>마지막 항이 핵심이다. \(\rho\)가 1보다 작으면 이 항이 작아져 \(\sigma_p\)가 단순 평균보다 작아진다. \(\rho\)가 음수면 오히려 빼진다. 한쪽이 나쁜 해에 다른 쪽이 덜 나쁘거나 좋으면 둘의 굴곡이 서로를 깎아 낸다. 이것이 <a href="risk.html">12장</a>에서 본 <span class="term">분산 효과</span><span class="en">(Diversification)</span>의 수학이다. 기대수익은 그대로 두고 위험만 줄이는, 투자에서 거의 유일한 "공짜 점심"이라 불린다.</p>
+    <div class="callout warn">
+      <strong>상관계수는 고정된 숫자가 아니다</strong>
+      이 책은 주식과 채권의 상관계수를 0.1로 가정한다. 2000년대 이후 오랫동안 둘은 0 근처나 음수였고, 주식이 폭락한 2008년에는 국채가 올랐다. 그러나 물가가 급등하고 금리가 빠르게 오른 2022년에는 세계 주식(약 −18%)과 채권(약 −13~−16%)이 함께 떨어졌다. 위기 때는 위험 자산끼리의 상관계수가 1에 가까워지는 경향도 있다. 분산의 효과는 믿되, 늘 같은 크기로 작동한다고 기대해서는 안 된다.
+    </div>
+  </section>
+
+  <section id="curve">
+    <h2>두 자산 조합 곡선</h2>
+    <p>이제 실제 재료인 주식과 채권 두 가지만 놓고 비율을 0%에서 100%까지 바꿔 보자. 각 비율은 위험(가로)과 기대수익(세로) 평면 위의 한 점이 되고, 점들을 이으면 곡선이 된다. 상관계수가 1이라면 이 곡선은 두 자산을 잇는 직선이다. 상관계수가 낮아질수록 곡선은 <b>왼쪽(위험이 작은 쪽)으로 휜다</b>.</p>
+    <p>슬라이더로 상관계수를 바꾸면 곡선이 그 모양으로 천천히 휘어 간다. 곡선 위의 손잡이를 끌어 주식 비중을 고른다.</p>
+
+    <div class="sim" id="sim-curve">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>주식·채권 조합 곡선이 휘는 모습</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cv-cv"></canvas><span class="hint">곡선 위의 점을 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>상관계수 ρ <output id="cv-r-out"></output></span><input type="range" id="cv-r" min="-1" max="1" step="0.05" value="0.1"></label>
+          <div class="seg" id="cv-pre"><button data-value="1">ρ = +1</button><button data-value="0.1" class="on">가정 0.1</button><button data-value="-0.5">−0.5</button><button data-value="-1">−1</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">주식 비중</span><span class="v" id="cv-o-w">—</span></div>
+        <div class="stat"><span class="k">기대수익 · 변동성</span><span class="v sm" id="cv-o-m">—</span></div>
+        <div class="stat"><span class="k">최소분산점</span><span class="v kr" id="cv-o-mv">—</span></div>
+        <div class="stat"><span class="k">상태</span><span class="v kr" id="cv-o-s">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① ρ = +1에서 곡선은 채권과 주식을 잇는 직선이다. 어느 비율도 공짜로 얻는 것이 없다. ② 가정값 0.1로 돌아와 손잡이를 채권 끝(주식 0%)에서 위로 조금 올린다. 주식을 10%쯤 넣으면 수익이 오르는데 위험은 오히려 채권 100%보다 작아진다. ③ ρ = −1로 민다. 곡선이 꺾여 세로축에 닿는다. 주식 약 27%에서 위험이 0이 된다. (주식 μ 7.5%·σ 16%, 채권 μ 3.5%·σ 6%, <code>MN.frontier2</code>)</div>
+    </div>
+
+    <p>두 번째 실험이 이 절의 핵심이다. 채권만 가진 사람이 주식을 조금 섞으면 <b>기대수익은 오르고 위험은 내려간다.</b> 위험한 자산을 더했는데 덜 위험해지는 것이다. 가정값에서는 주식 약 10%·채권 약 90%일 때 변동성이 약 5.8%로 가장 작다. 곡선에서 가장 왼쪽에 있는 이 점을 <span class="term">최소분산 포트폴리오</span><span class="en">(Minimum variance portfolio)</span>라 한다.</p>
+    <p>최소분산점보다 아래쪽 곡선(채권 100%와 최소분산점 사이)에 있는 비율은 고를 이유가 없다. 같은 위험으로 위쪽 곡선에서 더 높은 수익을 얻을 수 있기 때문이다. 극단으로 ρ = −1이면 주식 비중을 \(\sigma_B/(\sigma_A+\sigma_B) = 6/22 \approx 27.3\%\)로 맞췄을 때 두 자산의 흔들림이 정확히 상쇄되어 위험 0, 기대수익 약 4.6%가 된다. 현실에 그런 짝은 없지만, 상관이 낮은 짝을 찾는 이유를 가장 선명하게 보여 준다.</p>
+  </section>
+
+  <section id="frontier">
+    <h2>효율적 투자선</h2>
+    <p>자산이 세 개, 네 개로 늘어나면 가능한 비율은 곡선 하나가 아니라 평면 위의 넓은 영역을 채운다. 그 영역의 왼쪽 위 가장자리, 곧 <b>같은 위험에서 기대수익이 가장 높은 조합들</b>을 이은 선을 <span class="term">효율적 투자선</span><span class="en">(Efficient frontier)</span>이라 한다. 1952년 해리 마코위츠가 정리한 현대 포트폴리오 이론의 중심 그림이다.</p>
+
+    <figure class="diagram">
+      <svg id="fig-front" viewBox="0 0 440 330" role="img" aria-label="위험-수익 평면에서 효율적 투자선, 최소분산 포트폴리오, 비효율 구간을 표시한 그림">
+        <defs><marker id="pf-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/></marker></defs>
+        <line x1="40" y1="290" x2="430" y2="290" class="s-axis"/>
+        <line x1="40" y1="290" x2="40" y2="20" class="s-axis"/>
+        <text x="430" y="316" class="lbl-dim" text-anchor="end">위험(변동성) →</text>
+        <text x="48" y="30" class="lbl-dim">수익</text>
+        <path d="M135.0,200 Q175.7,250 230.0,268" class="s-dash"/>
+        <path d="M135.0,200 Q145.2,120 202.9,85 T379.3,40" class="s-acc" stroke-width="3"/>
+        <path d="M135.0,200 Q145.2,120 202.9,85 T379.3,40 Q318.2,190 230.0,268 Q175.7,250 135.0,200 Z" class="f-acc-soft" opacity="0.35" stroke="none"/>
+        <path d="M379.3,40 Q318.2,190 230.0,268" class="s-dash"/>
+        <circle cx="135.0" cy="200" r="7" class="f-acc"/>
+        <text x="122.0" y="206" class="lbl-acc" text-anchor="end">최소분산점</text>
+        <text x="159.4" y="72" class="lbl-acc" text-anchor="end">효율적 투자선</text>
+        <text x="159.4" y="262" class="lbl-dim" text-anchor="end">비효율 구간</text>
+        <circle cx="270.7" cy="190" r="6" class="f-warn"/>
+        <text x="304" y="196" class="lbl">수익이 낮은 조합</text>
+        <line x1="270.7" y1="182" x2="270.7" y2="72" class="s-line" marker-end="url(#pf-ar)"/>
+        <text x="262.7" y="128" class="lbl-dim" text-anchor="end">위로 옮길 수 있다</text>
+        <line x1="262.7" y1="190" x2="166.2" y2="190" class="s-line" marker-end="url(#pf-ar)"/>
+        <text x="256.7" y="180" class="lbl-dim" text-anchor="end">왼쪽으로도</text>
+        <circle cx="379.3" cy="40" r="5" class="f-acc2"/>
+        <text x="367.3" y="34" class="lbl-acc2" text-anchor="end">주식</text>
+        <circle cx="230.0" cy="268" r="5" class="f-acc2"/>
+        <text x="242.0" y="273" class="lbl-acc2">채권</text>
+      </svg>
+      <figcaption><b>그림 2. 효율적 투자선의 해부.</b> 가능한 모든 비율은 색칠한 영역 안에 있다. 영역 안의 점(주황)은 위로 옮기면 같은 위험에 더 높은 수익을, 왼쪽으로 옮기면 같은 수익에 더 작은 위험을 얻는다. 그렇게 더 옮길 수 없는 가장자리가 효율적 투자선이고, 그 시작점이 최소분산점이다.</figcaption>
+    </figure>
+
+    <p>아래 그림의 작은 점들은 주식·채권·현금·금을 5% 단위로 섞은 조합 1,771개다. 평면 아무 데나 원하는 위험과 수익의 자리를 끌어 놓아 본다. 효율적 투자선 위에서 그 자리에 가장 가까운 배분이 그림 위쪽 막대로 나타난다.</p>
+
+    <div class="sim" id="sim-front">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>효율적 투자선 위에서 배분 고르기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="fr-cv"></canvas><span class="hint">평면 위 아무 곳이나 끈다</span></div>
+        <div class="sim-controls">
+          <label class="check"><input type="checkbox" id="fr-gold" checked> 금을 재료에 넣기</label>
+          <label class="check"><input type="checkbox" id="fr-cloud" checked> 가능한 조합 점 보기</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">가장 가까운 효율적 배분</span><span class="v kr" id="fr-o-w">—</span></div>
+        <div class="stat"><span class="k">기대수익 · 변동성</span><span class="v sm" id="fr-o-m">—</span></div>
+        <div class="stat"><span class="k">끌어 놓은 자리</span><span class="v kr" id="fr-o-s">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 투자선 위쪽 바깥으로 끌어 본다. 어떤 비율로도 갈 수 없는 자리라 "도달 불가"가 뜬다. ② 점구름 한가운데로 끌어 놓는다. 같은 위험에서 투자선까지 몇 %p를 더 얻을 수 있는지가 나온다. ③ 맨 왼쪽 아래로 끈다. 위험을 아주 작게 원하면 배분이 현금으로 쏠린다. ④ "금을 재료에 넣기"를 끈다. 투자선이 조금 아래·오른쪽으로 물러난다. 섞을 재료가 다양할수록 투자선이 좋아진다. (교육용 가정 <code>MN.portfolio</code>, 투자선은 2% 단위 조합에서 구한 근사)</div>
+    </div>
+
+    <p>네 번째 실험은 이 이론의 강점이자 약점을 함께 보여 준다. 가정상 금은 주식·채권과 거의 따로 움직이기 때문에 조금 섞으면 투자선이 좋아진다. 하지만 그 이득은 같은 위험에서 기대수익 0.1%p 남짓이다. 금의 기대수익을 4.5%가 아니라 3%로, 상관계수를 0.05가 아니라 0.3으로 잡으면 이득은 사라진다. 효율적 투자선은 <b>입력한 가정만큼만 정확하다.</b></p>
+    <div class="callout deep">
+      <strong>최적화는 추정 오차를 키운다</strong>
+      마코위츠식 최적화에 과거 평균을 그대로 넣으면, 우연히 과거 수익이 높았던 자산에 비중이 쏠린 극단적인 배분이 자주 나온다. 기대수익의 작은 추정 오차를 최적화가 크게 부풀리기 때문이다. 그래서 실무에서는 비중에 상한을 두거나, 기대수익을 시장 비중에서 역산하거나, 아예 "주식·채권 몇 대 몇"처럼 단순한 배분을 쓰는 경우가 많다. 단순한 균등 배분이 정교한 최적화보다 앞으로의 성과에서 크게 뒤지지 않는다는 연구도 있다. 이 장의 투자선은 <b>방향을 알려 주는 지도</b>이지 정확한 좌표가 아니다.
+    </div>
+  </section>
+
+  <section id="cml">
+    <h2>무위험 자산과 섞기</h2>
+    <p>지금까지는 위험 자산끼리 섞었다. 여기에 흔들림이 거의 없는 현금(예금)을 더하면 그림이 하나 더 단순해진다. 현금을 <span class="term">무위험 자산</span><span class="en">(Risk-free asset)</span>으로 보고 위험 자산 묶음 하나와 섞으면, 그 조합은 곡선이 아니라 <b>직선</b> 위에 놓인다. 현금은 흔들림이 0이라 상관계수 항이 사라지기 때문이다.</p>
+    <p>현금에서 출발한 직선을 효율적 투자선에 닿을 때까지 위로 돌리면, 기울기가 가장 가파른 직선 하나가 남는다. 이 직선을 <span class="term">자본시장선</span><span class="en">(Capital market line)</span>, 닿는 점을 <span class="term">접점 포트폴리오</span><span class="en">(Tangency portfolio)</span>라 한다. 직선의 기울기, 곧 위험 1단위당 현금보다 더 얻는 수익이 <span class="term">샤프 지수</span><span class="en">(Sharpe ratio)</span>다.</p>
+    <div class="formula">$$\text{샤프 지수} = \frac{\mu_p - r_f}{\sigma_p}$$<div class="where">\(\mu_p\): 포트폴리오 기대수익, \(r_f\): 무위험 수익률(여기서는 현금 2.5%), \(\sigma_p\): 포트폴리오 변동성</div></div>
+    <p>슬라이더로 위험 자산 묶음(접점 포트폴리오)에 돈의 몇 %를 넣을지 정한다. 100%를 넘기면 돈을 빌려 더 넣는 것이다.</p>
+
+    <div class="sim" id="sim-cml">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>현금과 위험 자산 묶음을 섞는 직선</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cm-cv"></canvas><span class="hint">직선 위의 점을 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>위험 자산 묶음 비중 <output id="cm-a-out"></output></span><input type="range" id="cm-a" min="0" max="150" step="1" value="60"></label>
+          <label class="ctrl"><span>빌릴 때 금리 <output id="cm-b-out"></output></span><input type="range" id="cm-b" min="2.5" max="8" step="0.1" value="5"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">실제 배분</span><span class="v kr" id="cm-o-w">—</span></div>
+        <div class="stat"><span class="k">기대수익 · 변동성</span><span class="v sm" id="cm-o-m">—</span></div>
+        <div class="stat"><span class="k">샤프 지수</span><span class="v" id="cm-o-sh">—</span></div>
+        <div class="stat"><span class="k">같은 위험의 투자선</span><span class="v kr" id="cm-o-f">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 비중 0%는 현금 100%, 100%는 접점 포트폴리오다. 그 사이는 모두 직선 위에 있고, 같은 위험에서 곡선(효율적 투자선)보다 위에 놓인다. ② 100%를 넘긴다. 빌린 돈의 이자가 현금 수익보다 비싸서 직선이 꺾이며 덜 가팔라진다. 빌릴 때 금리를 올리면 더 꺾인다. ③ 회색 점(주식 70·채권 30)과 비교한다. 같은 위험에서 직선보다 약간 아래에 있다. (현금은 위험 0, 수익 2.5%로 단순화. 접점 포트폴리오는 주식·채권·금 1% 단위 조합 중 샤프 지수가 가장 큰 것)</div>
+    </div>
+
+    <p>가정값에서 접점 포트폴리오는 주식 약 42%·채권 약 44%·금 약 14%이고 샤프 지수는 약 0.35다. 주식 70·채권 30의 샤프 지수는 약 0.33으로 조금 낮다. 이론이 말하는 것은 이렇다. <b>위험 자산의 구성은 모두에게 같은 하나(접점)로 두고, 위험을 얼마나 질지는 현금과의 비율로 조절하라.</b> 이를 분리 정리라 한다.</p>
+    <p>현실은 두 가지 이유로 이 그림에서 벗어난다. 첫째, 대부분의 개인은 싼 금리로 돈을 빌릴 수 없어서 100% 오른쪽의 직선은 꺾인다. 그래서 더 높은 수익을 원하는 사람은 빚을 지는 대신 위험 자산 묶음 안에서 주식 비중을 높인다. 둘째, 접점의 위치는 가정에 매우 민감하다. 그래서 실제 배분은 "현금은 비상금으로 따로 두고, 투자 자산은 주식과 채권의 비율로 위험을 조절하는" 방식이 흔하다.</p>
+  </section>
+
+  <section id="rebalance">
+    <h2>리밸런싱: 비율은 저절로 흐트러진다</h2>
+    <p>주식 70·채권 30으로 시작했다고 해서 그 비율이 유지되지는 않는다. 주식이 한 해 20% 오르고 채권이 3% 오르면, 주식 70은 84가 되고 채권 30은 30.9가 되어 비율은 약 73·27이 된다. 주식이 평균적으로 더 많이 오르니 내버려 두면 비율은 시간이 갈수록 <b>주식 쪽으로 표류</b>한다. 처음에 고른 위험보다 큰 위험을 나도 모르게 지게 되는 것이다. 흐트러진 비율을 원래대로 되돌리는 일을 <span class="term">리밸런싱</span><span class="en">(Rebalancing)</span>이라 한다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 580 466" role="img" aria-label="주식이 오른 해와 떨어진 해에 비율이 흐트러지고 리밸런싱으로 되돌리는 과정" style="max-width:600px;margin:0 auto">
+        <defs><marker id="rb-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/></marker></defs>
+        <text x="10" y="34" class="lbl-b" style="font-size:24px">주식이 오른 해</text>
+        <rect x="10" y="54" width="175" height="48" class="f-acc"/><rect x="185" y="54" width="75" height="48" class="f-surface"/>
+        <text x="98" y="86" class="lbl-b" text-anchor="middle" style="font-size:22px;fill:var(--on-accent)">70</text><text x="222" y="86" class="lbl-b" text-anchor="middle" style="font-size:22px">30</text>
+        <text x="10" y="130" class="lbl-dim" style="font-size:19px">시작 1,000만원</text>
+        <line x1="135" y1="142" x2="135" y2="176" class="s-line" marker-end="url(#rb-ar)"/>
+        <rect x="10" y="186" width="182" height="48" class="f-acc"/><rect x="192" y="186" width="68" height="48" class="f-surface"/>
+        <text x="101" y="218" class="lbl-b" text-anchor="middle" style="font-size:22px;fill:var(--on-accent)">73</text><text x="226" y="218" class="lbl-b" text-anchor="middle" style="font-size:22px">27</text>
+        <text x="10" y="262" class="lbl-dim" style="font-size:19px">주식 +20%, 채권 +3%</text>
+        <text x="10" y="288" class="lbl-dim" style="font-size:19px">→ 1,149만원</text>
+        <line x1="135" y1="300" x2="135" y2="334" class="s-line" marker-end="url(#rb-ar)"/>
+        <rect x="10" y="344" width="175" height="48" class="f-acc"/><rect x="185" y="344" width="75" height="48" class="f-surface"/>
+        <text x="98" y="376" class="lbl-b" text-anchor="middle" style="font-size:22px;fill:var(--on-accent)">70</text><text x="222" y="376" class="lbl-b" text-anchor="middle" style="font-size:22px">30</text>
+        <text x="10" y="420" class="lbl-bad" style="font-size:20px">주식 36만원을 팔아</text>
+        <text x="10" y="448" class="lbl-dim" style="font-size:19px">→ 채권을 산다</text>
+        <text x="320" y="34" class="lbl-b" style="font-size:24px">주식이 떨어진 해</text>
+        <rect x="320" y="54" width="175" height="48" class="f-acc"/><rect x="495" y="54" width="75" height="48" class="f-surface"/>
+        <text x="408" y="86" class="lbl-b" text-anchor="middle" style="font-size:22px;fill:var(--on-accent)">70</text><text x="532" y="86" class="lbl-b" text-anchor="middle" style="font-size:22px">30</text>
+        <text x="320" y="130" class="lbl-dim" style="font-size:19px">시작 1,000만원</text>
+        <line x1="445" y1="142" x2="445" y2="176" class="s-line" marker-end="url(#rb-ar)"/>
+        <rect x="320" y="186" width="158" height="48" class="f-acc"/><rect x="478" y="186" width="92" height="48" class="f-surface"/>
+        <text x="399" y="218" class="lbl-b" text-anchor="middle" style="font-size:22px;fill:var(--on-accent)">63</text><text x="524" y="218" class="lbl-b" text-anchor="middle" style="font-size:22px">37</text>
+        <text x="320" y="262" class="lbl-dim" style="font-size:19px">주식 −25%, 채권 +4%</text>
+        <text x="320" y="288" class="lbl-dim" style="font-size:19px">→ 837만원</text>
+        <line x1="445" y1="300" x2="445" y2="334" class="s-line" marker-end="url(#rb-ar)"/>
+        <rect x="320" y="344" width="175" height="48" class="f-acc"/><rect x="495" y="344" width="75" height="48" class="f-surface"/>
+        <text x="408" y="376" class="lbl-b" text-anchor="middle" style="font-size:22px;fill:var(--on-accent)">70</text><text x="532" y="376" class="lbl-b" text-anchor="middle" style="font-size:22px">30</text>
+        <text x="320" y="420" class="lbl-acc" style="font-size:20px">채권 61만원을 팔아</text>
+        <text x="320" y="448" class="lbl-dim" style="font-size:19px">→ 싸진 주식을 산다</text>
+        <line x1="290" y1="10" x2="290" y2="456" class="s-dash"/>
+      </svg>
+      <figcaption><b>그림 3. 리밸런싱이 하는 일.</b> 오른 쪽을 팔고 내린 쪽을 산다. 오른 해에는 비싸진 주식 일부를 팔아 채권을 사고, 떨어진 해에는 버틴 채권을 팔아 싸진 주식을 산다. 예측 없이 규칙만으로 '비싸게 팔고 싸게 사는' 셈이다.</figcaption>
+    </figure>
+
+    <p>아래 시뮬레이터는 1,000만원을 주식 70·채권 30으로 넣고 30년을 한 번 굴린 장면이다. 위 그래프는 계좌 금액, 아래 그래프는 주식 비중이다. 색칠한 영역이 리밸런싱을 하지 않았을 때 주식 비중이 어디까지 떠내려가는지를 보여 준다. "다른 30년"을 눌러 여러 미래를 돌려 본다.</p>
+
+    <div class="sim" id="sim-drift">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>리밸런싱 vs 방치: 30년 한 경로</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="dr-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="dr-mode"><button data-value="year" class="on">연 1회</button><button data-value="band">밴드 ±5%p</button></div>
+          <div class="btn-row"><button class="btn primary" id="dr-new">다른 30년</button><button class="btn" id="dr-play">다시 재생</button></div>
+          <div class="legend" style="padding:0"><span><i style="background:var(--accent)"></i>리밸런싱</span><span><i style="background:var(--accent-2)"></i>방치</span></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">방치한 계좌의 주식 비중</span><span class="v" id="dr-o-w">—</span></div>
+        <div class="stat"><span class="k">최종 금액 (리밸 · 방치)</span><span class="v sm" id="dr-o-v">—</span></div>
+        <div class="stat"><span class="k">최대 낙폭 (리밸 · 방치)</span><span class="v sm" id="dr-o-dd">—</span></div>
+        <div class="stat"><span class="k">리밸런싱 횟수</span><span class="v" id="dr-o-n">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 몇 번 돌려 방치한 계좌의 주식 비중을 본다. 대개 80~90%대까지 올라가 있다. 30년 뒤의 나는 처음 정한 것보다 훨씬 공격적인 투자자가 되어 있다. ② 최대 낙폭을 비교한다. 방치한 쪽이 대체로 더 깊이 떨어진다. 위험이 커진 대가다. ③ 최종 금액은 경로마다 앞서거니 뒤서거니 한다. 주식이 꾸준히 오른 경로에서는 방치가 이긴다. 리밸런싱은 수익을 늘리는 도구가 아니라 <b>처음 정한 위험을 지키는 도구</b>다. (월 단위, 주식 μ 7.5%·σ 16%, 채권 μ 3.5%·σ 6%, 두 자산은 서로 독립으로 뽑은 단순 모델 <code>MN.paths</code>. 거래 비용·세금 없음)</div>
+    </div>
+  </section>
+
+  <section id="buylow">
+    <h2>'싸게 사고 비싸게 판다'가 자동으로 일어나는 원리</h2>
+    <p>리밸런싱이 위험을 지키는 도구라고 했지만, 특별한 상황에서는 수익도 더해 준다. 주가가 오르내리기만 하고 제자리로 돌아오는 시장을 생각해 보자. 주식만 가진 사람은 몇 년 뒤 본전이다. 주식 반·현금 반으로 사 두고 그대로 둔 사람도 본전이다. 그런데 주기적으로 반반을 맞춘 사람은 <b>돈이 늘어 있다.</b> 오를 때 판 주식과 내릴 때 산 주식의 차이가 쌓이기 때문이다.</p>
+    <p>아래 애니메이션에서 진폭을 키우고 리밸런싱 주기를 바꿔 본다. 삼각형은 리밸런싱으로 판(▼) 때와 산(▲) 때다.</p>
+
+    <div class="sim" id="sim-bonus">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>오르내리기만 하는 주식과 반반 리밸런싱</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="bn-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>주가 진폭 <output id="bn-a-out"></output></span><input type="range" id="bn-a" min="0.05" max="0.8" step="0.05" value="0.4"></label>
+          <div class="seg" id="bn-f"><button data-value="3" class="on">분기마다</button><button data-value="12">해마다</button><button data-value="1">매달</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">주가 (10년 뒤)</span><span class="v" id="bn-o-p">—</span></div>
+        <div class="stat"><span class="k">반반 방치</span><span class="v" id="bn-o-h">—</span></div>
+        <div class="stat"><span class="k">반반 리밸런싱</span><span class="v" id="bn-o-r">—</span></div>
+        <div class="stat"><span class="k">리밸런싱 보너스</span><span class="v" id="bn-o-b">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 진폭 40%에서 10년이 지나면 주가와 방치 계좌는 정확히 1.00으로 돌아오는데 리밸런싱 계좌는 1보다 크다. ② 진폭을 줄이면 보너스가 빠르게 작아진다. 흔들림이 클수록 거둘 것이 많다. ③ 주기를 "해마다"로 바꾼다. 주가가 2년 주기로 움직여서 해마다 맞추면 매번 주가가 제자리인 순간에만 거래하게 되어 보너스가 사라진다. 리밸런싱 이득은 시장의 리듬에 따라 달라진다. (가상의 주가: 2년 주기 사인파, 현금 수익 0, 거래 비용 없음)</div>
+    </div>
+
+    <p>이 보너스는 장담할 수 있는 것이 아니다. 실제 주식은 제자리로 돌아오는 대신 장기적으로 오르는 경향이 있어서, 오른 주식을 계속 팔아 채권으로 옮기면 상승을 덜 누린다. 앞 시뮬레이터에서 방치한 계좌가 최종 금액에서 이기는 경로가 많았던 이유다. 리밸런싱의 확실한 이득은 <b>위험을 처음 정한 수준으로 묶어 두는 것</b>이고, 수익 보너스는 시장이 크게 오르내릴 때 덤으로 따라온다고 보는 편이 정확하다.</p>
+    <div class="callout tip">
+      <strong>규칙이 감정을 대신한다</strong>
+      폭락장에서 주식을 더 사는 일은 머리로는 쉽지만 손이 잘 움직이지 않는다. 리밸런싱 규칙을 미리 정해 두면 "비율이 60%로 떨어졌으니 70%로 맞춘다"는 기계적인 일이 된다. 사람이 가장 하기 어려운 행동을 규칙이 대신하는 것, 이것이 리밸런싱의 숨은 가치다. 마음이 흔들리는 순간에 대해서는 <a href="behavior.html">17장</a>에서 더 다룬다.
+    </div>
+  </section>
+
+  <section id="methods">
+    <h2>정기 리밸런싱과 밴드 리밸런싱, 그리고 비용</h2>
+    <p>언제 되돌릴지에는 크게 두 가지 방법이 있다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>방법</th><th>규칙</th><th>장점</th><th>단점</th></tr></thead>
+      <tbody>
+        <tr><td>정기(달력)</td><td>매년 1월처럼 정해진 날에 맞춘다</td><td>단순하고 잊지 않는다</td><td>그 사이 크게 흐트러져도 기다린다. 거의 안 흐트러져도 거래한다</td></tr>
+        <tr><td>밴드(허용 범위)</td><td>목표에서 ±5%p 같은 범위를 벗어날 때만 맞춘다</td><td>필요할 때만 거래해 횟수가 적다</td><td>비율을 수시로 확인해야 한다</td></tr>
+        <tr><td>현금흐름</td><td>새로 넣는 적립금으로 모자란 쪽만 산다</td><td>팔지 않아 비용·세금이 거의 없다</td><td>잔고가 커지면 적립금만으로는 못 맞춘다</td></tr>
+      </tbody>
+    </table></div>
+    <p>리밸런싱은 공짜가 아니다. 사고팔 때마다 매매 수수료와 호가 차이가 들고, 과세 계좌에서는 판 차익에 세금이 붙을 수 있다. 아래 시뮬레이터는 같은 미래 400개에서 세 가지 방법을 비교한다. 밴드 폭과 거래 비용을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-band">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>방치 · 연 1회 · 밴드: 400개의 30년</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="bd-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>밴드 폭 <output id="bd-w-out"></output></span><input type="range" id="bd-w" min="1" max="20" step="1" value="5"></label>
+          <label class="ctrl"><span>거래 비용 (거래액 대비) <output id="bd-c-out"></output></span><input type="range" id="bd-c" min="0" max="2" step="0.05" value="0.2"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">평균 거래 횟수 (연 1회 · 밴드)</span><span class="v sm" id="bd-o-n">—</span></div>
+        <div class="stat"><span class="k">평균 최대 낙폭 (방치 · 연 · 밴드)</span><span class="v sm" id="bd-o-dd">—</span></div>
+        <div class="stat"><span class="k">중앙값 (방치 · 연 · 밴드)</span><span class="v sm" id="bd-o-m">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값에서 세 막대의 가운데(중앙값)는 거의 같고, 리밸런싱한 두 막대는 위쪽 끝(상위 10%)이 짧고 평균 낙폭이 작다. 좋은 쪽 꼬리를 조금 내주고 위험을 줄인 것이다. ② 밴드 폭을 1%p로 좁힌다. 거래 횟수가 수십 번으로 늘어난다. ③ 그 상태에서 거래 비용을 2%로 올리면 밴드 막대가 아래로 내려앉는다. 너무 자주 맞추면 비용이 이득을 잡아먹는다. ④ 밴드 폭을 20%p로 넓히면 거의 방치와 같아진다. (1,000만원, 주식 70·채권 30, 월 단위 <code>MN.paths</code> 400쌍, 두 자산 독립, 세금 없음)</div>
+    </div>
+    <p>여러 연구가 대체로 같은 결론을 낸다. 리밸런싱을 하느냐 마느냐는 큰 차이를 만들지만, <b>얼마나 자주 하느냐는 생각보다 차이가 작다.</b> 연 1회, 또는 ±5%p 정도의 밴드면 충분하다. 매달 맞추는 부지런함은 비용만 늘린다. 적립식으로 투자하는 사람은 매달 넣는 돈으로 모자란 쪽을 먼저 사면 팔지 않고도 대부분을 맞출 수 있다.</p>
+    <div class="callout warn">
+      <strong>세금과 계좌는 해마다 바뀐다</strong>
+      2026년 기준으로 국내 상장 주식은 대부분의 개인에게 매매 차익 과세가 없지만, 해외 주식은 연 250만원을 넘는 양도 차익에 약 22%의 양도소득세가 붙는다. 국내 상장 해외 ETF나 채권형 상품은 매매 차익이 배당소득(15.4%)으로 과세되는 경우가 많다. 그래서 리밸런싱은 ISA·연금저축·IRP처럼 계좌 안 매매에 바로 세금이 붙지 않는 절세 계좌 안에서 하는 편이 유리하다. 세율과 공제 한도는 해마다 바뀌므로 실제로는 그해 기준을 확인한다. 자세한 것은 <a href="tax.html">18장</a>에서 다룬다.
+    </div>
+  </section>
+
+  <section id="lifecycle">
+    <h2>나이와 자산배분: 나 자신이라는 채권</h2>
+    <p>같은 사람에게도 알맞은 비율은 나이에 따라 달라진다. 흔히 "젊으니까 위험을 더 져도 된다"고 말하는데, 그 이유를 가장 잘 설명하는 개념이 <span class="term">인적 자본</span><span class="en">(Human capital)</span>이다. 앞으로 일해서 벌 소득 전체를 지금 가치로 환산한 것을 하나의 자산으로 보는 관점이다.</p>
+
+    <figure class="diagram">
+      <svg id="fig-hc" viewBox="0 0 440 304" role="img" aria-label="나이에 따라 인적 자본은 줄고 금융 자본은 늘었다가 은퇴 후 줄어드는 모습">
+        <line x1="40" y1="250" x2="420" y2="250" class="s-axis"/>
+        <line x1="40" y1="250" x2="40" y2="20" class="s-axis"/>
+        <path d="M40.0,250 L40.0,40 C128.7,48 211.0,90 268.0,170 C287.0,200 299.7,235 306.0,250 Z" class="f-acc2-soft"/>
+        <path d="M40.0,250 C128.7,246 211.0,200 306.0,100 C344.0,110 382.0,170 420.0,230 L420.0,250 Z" class="f-acc-soft"/>
+        <line x1="306.0" y1="30" x2="306.0" y2="250" class="s-dash"/>
+        <text x="312.0" y="40" class="lbl-dim">은퇴</text>
+        <text x="52" y="92" class="lbl-acc2">인적 자본</text>
+        <text x="52" y="122" class="lbl-dim">앞으로 벌 소득의 가치</text>
+        <text x="52" y="148" class="lbl-dim">월급이라는 '이자'를 준다</text>
+        <text x="217.3" y="238" class="lbl-acc">금융 자본</text>
+        <text x="40" y="274" class="t-mono" text-anchor="middle">27</text>
+        <text x="306.0" y="274" class="t-mono" text-anchor="middle">60</text>
+        <text x="420" y="274" class="t-mono" text-anchor="middle">90</text>
+        <text x="230" y="298" class="lbl-dim" text-anchor="middle">나이</text>
+      </svg>
+      <figcaption><b>그림 4. 인적 자본과 금융 자본.</b> 사회초년생의 재산은 대부분 아직 받지 않은 월급이다. 시간이 흐르며 인적 자본이 금융 자본으로 바뀐다. 일할수록 인적 자본은 줄고, 그 일부가 저축을 통해 금융 자본으로 옮겨 간다. 은퇴 뒤에는 금융 자본을 헐어 쓴다.</figcaption>
+    </figure>
+
+    <p>안정된 직장의 월급은 매달 정해진 금액이 들어온다는 점에서 <b>채권과 비슷하다</b>. 27세 사회초년생은 통장 잔고가 몇백만원뿐이어도 수억원어치 채권(인적 자본)을 이미 들고 있는 셈이다. 그렇다면 전체 재산의 균형을 맞추기 위해 금융 자산은 주식 쪽으로 기울여도 된다. 나이가 들면 인적 자본이 줄고 금융 자본이 커지므로, 금융 자산 안의 채권 비중을 차츰 늘려야 전체 균형이 유지된다.</p>
+    <p>아래 시뮬레이터는 한결의 숫자로 이 계산을 해 본다. 가로축은 나이, 위 그래프는 두 자본의 크기, 아래 그래프는 "전체 재산 중 주식 비중을 목표에 맞추려면 금융 자산의 주식 비중이 얼마여야 하는가"다. 직업의 성격을 바꾸면 인적 자본이 얼마나 채권 같은지가 달라진다.</p>
+
+    <div class="sim" id="sim-hc">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>인적 자본을 채권으로 보면 알맞은 주식 비중</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="hc-cv"></canvas><span class="hint">세로선을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="hc-job"><button data-value="1" class="on">안정적 월급</button><button data-value="0.7">보통</button><button data-value="0.3">실적·경기 연동</button></div>
+          <label class="ctrl"><span>전체 재산 중 주식 목표 <output id="hc-t-out"></output></span><input type="range" id="hc-t" min="0.2" max="0.8" step="0.05" value="0.5"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">나이</span><span class="v" id="hc-o-a">—</span></div>
+        <div class="stat"><span class="k">인적 자본 · 금융 자본</span><span class="v sm" id="hc-o-c">—</span></div>
+        <div class="stat"><span class="k">금융 자산의 주식 비중</span><span class="v" id="hc-o-w">—</span></div>
+        <div class="stat"><span class="k">참고: 100 − 나이</span><span class="v" id="hc-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 27~40세에서는 계산값이 100%에 붙어 있다. 인적 자본이라는 채권이 너무 커서 금융 자산을 전부 주식에 넣어도 전체 재산의 주식 비중은 목표에 못 미친다. ② 세로선을 50대로 끈다. 금융 자본이 인적 자본을 넘어서며 주식 비중이 빠르게 내려온다. ③ 직업을 "실적·경기 연동"으로 바꾼다. 경기가 나쁠 때 소득도 줄어드는 직업이면 인적 자본이 주식처럼 움직이므로, 젊을 때도 금융 자산의 주식 비중을 낮추라고 나온다. (세전 연봉 3,600만원·연 3% 인상, 실수령 85%를 연 3.5%로 할인해 60세까지 합산. 월 100만원을 연 5%로 적립(<code>MN.grow</code>). 인적 자본 중 '채권 같은 몫'이 직업 버튼의 비율)</div>
+    </div>
+
+    <p>세 번째 실험이 이 관점의 실용적인 교훈이다. 금융권·건설·자영업처럼 경기가 나빠지면 소득이 같이 줄거나 일자리가 위태로운 직업이라면, 주식이 폭락하는 해에 월급도 함께 흔들린다. 그런 사람은 나이가 젊어도 금융 자산을 덜 공격적으로 두는 편이 균형이 맞다. 반대로 정년이 보장되는 공무원·교사는 인적 자본이 국채에 가깝다. 같은 나이라도 직업에 따라 알맞은 비율이 다르다.</p>
+    <div class="callout">
+      <strong>젊을 때 주식 비중이 높아도 되는 진짜 이유</strong>
+      "시간이 길면 주식은 안전해진다"는 말은 절반만 맞다. <a href="risk.html">12장</a>에서 본 것처럼 기간이 길수록 연평균 수익률의 흔들림은 줄지만 최종 금액의 흔들림은 오히려 커진다. 젊은 사람이 위험을 더 질 수 있는 더 단단한 이유는 두 가지다. 아직 큰 인적 자본(채권)을 들고 있고, 잔고가 작아 같은 −30%도 금액으로는 작으며, 앞으로 넣을 적립금으로 떨어진 가격에 더 살 수 있다.
+    </div>
+  </section>
+
+  <section id="glide">
+    <h2>글라이드 패스와 타깃데이트</h2>
+    <p>나이에 따라 주식 비중을 줄여 가는 경로를 비행기가 활주로로 내려앉는 길에 빗대 <span class="term">글라이드 패스</span><span class="en">(Glide path)</span>라 한다. 가장 유명한 어림 규칙은 "주식 비중 = 100 − 나이"다. 기대 수명이 늘고 채권 금리가 낮아지면서 110이나 120에서 빼라는 변형도 쓰인다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>나이</th><th class="num">100 − 나이</th><th class="num">110 − 나이</th><th class="num">120 − 나이</th></tr></thead>
+      <tbody>
+        <tr><td>27세</td><td class="num">73%</td><td class="num">83%</td><td class="num">93%</td></tr>
+        <tr><td>40세</td><td class="num">60%</td><td class="num">70%</td><td class="num">80%</td></tr>
+        <tr><td>50세</td><td class="num">50%</td><td class="num">60%</td><td class="num">70%</td></tr>
+        <tr><td>60세</td><td class="num">40%</td><td class="num">50%</td><td class="num">60%</td></tr>
+      </tbody>
+    </table></div>
+    <p>이런 규칙은 출발점으로는 쓸 만하지만 한계가 분명하다. 나이 하나만 보고 직업(인적 자본의 성격), 재산 규모, 연금 수준, 감내할 수 있는 낙폭을 모두 무시한다. 국민연금처럼 평생 나오는 연금이 넉넉한 사람은 그 연금 자체가 큰 채권이라 은퇴 후에도 주식 비중을 더 둘 수 있다. 반대로 3년 뒤 집을 살 계약금처럼 쓸 날이 정해진 돈은 나이와 상관없이 주식에 두면 안 된다.</p>
+    <p>정해진 은퇴 연도에 맞춰 이 글라이드 패스를 자동으로 따라가는 펀드를 <span class="term">타깃데이트 펀드</span><span class="en">(Target date fund, TDF)</span>라 한다. 이름에 붙은 연도(예: 2055)가 가까워질수록 운용사가 알아서 주식을 줄이고 채권을 늘린다. 편리하지만 경로는 운용사가 정한 것이고, 보수가 지수 ETF보다 높은 경우가 많다는 점을 함께 따져 봐야 한다.</p>
+    <p>아래 위쪽 그래프에 손가락이나 마우스로 <b>나이별 주식 비중을 직접 그려</b> 본다. 아래 그래프는 27세부터 60세까지 월 100만원(해마다 3% 늘림)을 그 경로대로 투자했을 때 400개 미래의 잔고 범위다.</p>
+
+    <div class="sim" id="sim-glide">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>글라이드 패스 그리기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="gl-cv"></canvas><span class="hint">위 그래프를 그어서 경로를 그린다</span></div>
+        <div class="sim-controls">
+          <div class="btn-row"><button class="btn sm" id="gl-p100">100 − 나이</button><button class="btn sm" id="gl-p110">110 − 나이</button><button class="btn sm" id="gl-p70">고정 70%</button><button class="btn sm" id="gl-tdf">타깃데이트형</button><button class="btn sm" id="gl-p100s">주식 100%</button></div>
+          <div class="legend" style="padding:0"><span><i style="background:var(--accent)"></i>중앙값</span><span><i style="background:var(--accent-soft);height:8px"></i>하위 10%~상위 10%</span></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">60세 잔고 중앙값</span><span class="v" id="gl-o-m">—</span></div>
+        <div class="stat"><span class="k">60세 하위 10%</span><span class="v" id="gl-o-lo">—</span></div>
+        <div class="stat"><span class="k">55~59세에 한 해 −20% 넘게 잃은 미래</span><span class="v" id="gl-o-dd">—</span></div>
+        <div class="stat"><span class="k">평균 주식 비중</span><span class="v" id="gl-o-avg">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "주식 100%"를 누른다. 중앙값은 가장 높지만 하위 10%와의 간격도 가장 넓고, 은퇴 직전 5년 안에 한 해 20% 넘게 잃는 미래가 많다. ② "타깃데이트형"과 비교한다. 중앙값은 조금 낮지만 은퇴 직전의 큰 낙폭이 크게 준다. ③ 젊을 때는 낮고 늙어서 높아지는 거꾸로 된 경로를 그려 본다. 잔고가 가장 클 때 가장 큰 위험을 지게 되어 하위 10%가 나빠진다. (연 단위, 주식·채권 교육용 가정, 상관 0.1, 400경로 고정 시드, 명목 금액, 세금·비용 없음)</div>
+    </div>
+    <p>세 번째 실험이 글라이드 패스가 내려가는 모양인 이유다. 적립식 투자자의 잔고는 은퇴 직전에 가장 크다. 같은 −30%라도 30세의 2,000만원에서는 600만원이지만 58세의 5억원에서는 1억 5,000만원이다. 이렇게 은퇴 직전과 직후의 수익률 순서가 결과를 크게 좌우하는 위험을 <span class="term">수익률 순서 위험</span><span class="en">(Sequence of returns risk)</span>이라 하고, <a href="retire.html">21장</a>에서 인출과 함께 다시 본다.</p>
+  </section>
+
+  <section id="drawdown">
+    <h2>감내할 낙폭으로 비율 정하기</h2>
+    <p>나이·인적 자본으로 정한 비율도 결국 한 가지 시험을 통과해야 한다. <b>그 비율이 크게 떨어지는 해에 나는 팔지 않고 버틸 수 있는가.</b> 아무리 이론적으로 알맞은 비율이라도 폭락장에서 겁에 질려 팔면, 손실은 확정되고 회복은 놓친다. 그래서 거꾸로, 견딜 수 있는 손실에서 비율을 정하는 방법이 실용적이다.</p>
+    <p>아래 그래프의 가로선이 "한 해에 이만큼까지는 잃어도 팔지 않겠다"는 선이다. 위아래로 끌어 자신의 선을 정하면, 그 선을 넘지 않는 가장 큰 주식 비중이 표시된다. 시나리오를 바꿔 어떤 종류의 나쁜 해를 기준으로 할지 고른다.</p>
+
+    <div class="sim" id="sim-dd">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>견딜 수 있는 손실에서 거꾸로 비율 찾기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="dd-cv"></canvas><span class="hint">가로선을 위아래로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="dd-sc"><button data-value="norm" class="on">나쁜 해 μ−2σ</button><button data-value="gfc">2008년형</button><button data-value="inf">2022년형</button></div>
+          <label class="ctrl"><span>투자 잔고 <output id="dd-amt-out"></output></span><input type="range" id="dd-amt" min="10000000" max="300000000" step="10000000" value="30000000"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">견딜 수 있는 한 해 손실</span><span class="v" id="dd-o-t">—</span></div>
+        <div class="stat"><span class="k">최대 주식 비중 (교육용)</span><span class="v kr" id="dd-o-w">—</span></div>
+        <div class="stat"><span class="k">그때 손실액</span><span class="v" id="dd-o-l">—</span></div>
+        <div class="stat"><span class="k">그 비율의 기대수익</span><span class="v" id="dd-o-mu">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본 시나리오에서 −15%를 견딜 수 있다면 주식은 60%대 초반까지다. ② "2008년형"으로 바꾼다. 주식 약 −40%, 채권 약 +5%를 가정하면 같은 −15%에서 주식 비중이 40%대 중반으로 내려간다. ③ "2022년형"으로 바꾸고 선을 −10%까지 올린다. 주식과 채권이 함께 떨어진 해라 주식을 0%로 해도 −13%를 넘는다. 이런 해에는 채권도 방패가 되지 못하고 현금만 버틴다. (주식·채권 두 자산만. 2008년형과 2022년형은 실제 그해의 세계 주식·채권 지수 수익률을 반올림한 교육용 시나리오)</div>
+    </div>
+
+    <p>비율을 금액으로 바꿔 보는 것도 중요하다. "−20%"는 담담하게 들리지만, 잔고 1억원에서는 2,000만원, 연봉의 절반이 넘는 돈이다. 숫자로 보는 손실과 계좌에 찍힌 손실은 느낌이 전혀 다르다. 처음 투자하는 사람은 자기가 생각하는 것보다 낙폭을 덜 견디는 경우가 많으므로, 처음에는 조금 보수적으로 시작하고 실제 하락장을 한 번 겪은 뒤 조정하는 편이 안전하다.</p>
+    <div class="callout warn">
+      <strong>이 장의 비율은 교육용 계산이다</strong>
+      이 장의 시뮬레이터가 내놓는 비율은 교육용 가정에서 나온 계산 결과이며, 어떤 개인에게 맞는 투자 권유가 아니다. 실제 배분은 비상금, 빚, 쓸 날이 정해진 돈, 연금, 직업, 가족 상황을 함께 보고 정한다. 과거 수익률은 미래를 보장하지 않는다.
+    </div>
+  </section>
+
+  <section id="global">
+    <h2>해외 분산과 환율</h2>
+    <p>한국 주식 시장은 세계 주식 시가총액의 2% 안팎이다. 한국 주식만 가진 사람은 세계 경제의 아주 작은 조각에, 그것도 반도체 같은 몇 개 업종에 크게 기대는 셈이다. 또 한국에서 일하는 사람의 인적 자본은 이미 한국 경제에 묶여 있다. 해외 주식을 섞는 것은 업종·국가를 넓히는 분산이자, 월급과 다른 곳에 돈을 두는 분산이다.</p>
+    <p>해외 자산에는 <b>환율</b>이라는 재료가 하나 더 붙는다. 달러 자산을 원화로 환산한 수익은 대략 "현지 수익 + 환율 변화"다. 흥미롭게도 원화는 위기 때 약해지는(환율이 오르는) 경향이 있어서, 세계 주식이 떨어지는 해에 환율 상승이 원화 손실을 일부 메워 주곤 한다. 환율 변동을 선물 등으로 없애는 것을 <span class="term">환헤지</span><span class="en">(Currency hedge)</span>라 한다.</p>
+    <p>슬라이더로 주식 중 해외 비중을 바꾸고, 환헤지 여부를 골라 본다.</p>
+
+    <div class="sim" id="sim-fx">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>국내·해외 주식 비중과 환율</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="fx-cv"></canvas><span class="hint">곡선 위의 점을 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>주식 중 해외 비중 <output id="fx-w-out"></output></span><input type="range" id="fx-w" min="0" max="100" step="5" value="60"></label>
+          <div class="seg" id="fx-h"><button data-value="open" class="on">환노출</button><button data-value="hedge">환헤지</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">기대수익 (원화)</span><span class="v" id="fx-o-mu">—</span></div>
+        <div class="stat"><span class="k">변동성 (원화)</span><span class="v" id="fx-o-sd">—</span></div>
+        <div class="stat"><span class="k">국내 100% 대비 위험</span><span class="v" id="fx-o-d">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 0%(국내 주식만)에서 시작해 해외 비중을 올린다. 변동성이 22%에서 빠르게 내려간다. ② 환노출과 환헤지를 비교한다. 이 가정에서는 환노출이 오히려 덜 흔들린다. 주가가 떨어질 때 원화가 약해지는 성질이 쿠션이 되기 때문이다. ③ 환노출에서는 해외 100%보다 국내를 10~15% 섞은 쪽의 위험이 가장 작다. (국내 주식 μ 6.5%·σ 22%, 세계 주식 현지 통화 μ 7.5%·σ 16%, 둘의 상관 0.75는 <code>MN.ASSETS</code>·<code>MN.CORR</code>. 환율은 이 장만의 가정: 변화율 평균 0·σ 8%, 세계 주식과 상관 −0.3, 국내 주식과 상관 −0.4, 헤지 비용 연 0.5%p)</div>
+    </div>
+    <p>환헤지가 늘 나쁘다는 뜻은 아니다. 채권처럼 원래 덜 흔들리는 해외 자산은 환율 변동(σ 8% 안팎)이 자산 자체의 흔들림보다 커서, 헤지하지 않으면 안전 자산이 위험 자산처럼 움직인다. 그래서 흔히 해외 주식은 환노출로, 해외 채권은 환헤지로 두는 방식이 쓰인다. 다만 원화가 늘 위기 때 약해진다는 보장은 없고, 헤지 비용도 두 나라 금리 차에 따라 바뀐다. 환율에 대해서는 <a href="economy.html">5장</a>을 함께 보자.</p>
+  </section>
+
+  <section id="case">
+    <h2>한결의 자산배분</h2>
+    <p>한결은 이제 비상금을 따로 떼어 두고, 매달 투자에 넣는 돈을 어떤 비율로 나눌지 정해야 한다. 이 장의 도구를 하나씩 적용해 본다.</p>
+    <div class="slip">
+      <div class="row"><span>나이 · 직업</span><span>27세 · 정규직 월급(안정적)</span></div>
+      <div class="row"><span>인적 자본 관점의 계산값</span><span>금융 자산 주식 100%</span></div>
+      <div class="row"><span>110 − 나이 · 100 − 나이</span><span>83% · 73%</span></div>
+      <div class="row"><span>감내 낙폭(나쁜 해 μ−2σ 기준)</span><span>약 −17%</span></div>
+      <div class="row"><span>2008년형 하락이 오면</span><span>약 −26.5%</span></div>
+      <div class="row total"><span>결정: 주식 70 · 채권 30</span><span>μ 6.3% · σ 11.5%</span></div>
+    </div>
+    <div class="casefile">
+      <div class="tag"><b>LEDGER 한결</b><span>한결의 가계부 · 16장</span></div>
+      <h4>주식 70 · 채권 30, 해마다 1월에 한 번 맞춘다</h4>
+      <p>인적 자본만 보면 한결은 금융 자산을 전부 주식에 넣어도 된다. 하지만 한결은 아직 큰 하락장을 겪어 본 적이 없다. 그래서 숫자 두 개로 선을 그었다. 나쁜 해(μ−2σ)에 약 −17%, 2008년 같은 해가 오면 약 −26.5%(주식 −40%·채권 +5%). 잔고 1,000만원이면 각각 약 170만원과 265만원이고, 한결은 이 정도까지는 팔지 않고 버티겠다고 정했다. 이 기준을 넘지 않으면서 나이에 비해 너무 보수적이지 않은 비율이 <b>주식 70 · 채권 30</b>이다. 가정값으로 기대수익 6.3%, 변동성 약 11.5%, 샤프 지수 약 0.33이다.</p>
+      <p>효율적 투자선 위에 한결을 찍어 보면, 주식·채권 두 자산만의 조합 곡선에서는 최소분산점(주식 약 10%)보다 위쪽, 곧 효율적인 구간에 있다. 금을 섞으면 같은 위험에서 0.1%p쯤 더 높은 조합이 있지만, 그 차이는 가정의 오차보다 작아서 한결은 단순함을 택했다. 주식은 국내·해외 지수를 함께 담고, 리밸런싱은 <b>연 1회(1월)</b>, 그 사이에는 매달 넣는 돈으로 모자란 쪽을 먼저 산다. 비율이 ±5%p 넘게 벌어지면 1월을 기다리지 않고 맞춘다.</p>
+      <div class="clue">
+        <div><b>이 장에서 정한 것</b>주식 70 · 채권 30, 연 1회 리밸런싱(+ 적립금으로 맞추기). 효율적 구간 위의 점.</div>
+        <div><b>아직 남은 문제</b>정말 하락장이 오면 규칙대로 주식을 더 살 수 있을까. 급등하는 자산 이야기에 흔들리지 않을 수 있을까.</div>
+        <div><b>다음 단계</b><a href="behavior.html">17장</a>에서 돈을 움직이는 마음과 사기의 구조를 본다.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>포트폴리오가 얼마나 흔들릴지는 종목보다 주식·채권·현금의 <b>비율</b>이 가장 크게 정한다. 주식은 엔진, 채권은 완충재, 현금은 비상 연료, 금은 보험 역할을 한다.</li>
+      <li>섞은 포트폴리오의 기대수익은 가중 평균이지만 변동성은 상관계수가 1보다 작으면 평균보다 작다. ρ가 낮을수록 조합 곡선이 왼쪽으로 휘고, ρ = −1이면 위험 0인 비율이 생긴다.</li>
+      <li>같은 위험에서 기대수익이 가장 높은 조합을 이은 선이 효율적 투자선이고, 가장 왼쪽 점이 최소분산 포트폴리오다. 투자선은 입력한 가정만큼만 정확하다.</li>
+      <li>무위험 자산과 위험 자산 묶음을 섞으면 직선(자본시장선) 위에 놓인다. 기울기가 샤프 지수다.</li>
+      <li>내버려 두면 비율은 주식 쪽으로 표류해 위험이 커진다. 리밸런싱은 처음 정한 위험을 지키고, 오른 쪽을 팔고 내린 쪽을 사는 일을 규칙으로 대신한다. 연 1회나 ±5%p 밴드면 충분하고, 너무 잦으면 비용이 이득을 먹는다.</li>
+      <li>젊을 때 주식 비중을 높여도 되는 이유는 채권 같은 인적 자본을 크게 갖고 있기 때문이다. "100 − 나이" 같은 규칙은 직업·연금·쓸 날이 정해진 돈을 무시하는 어림값이다.</li>
+      <li>마지막 시험은 감내 낙폭이다. 나쁜 해에 팔지 않고 버틸 수 있는 손실에서 거꾸로 비율을 정하고, 해외 분산과 환율의 쿠션 효과도 함께 따진다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>1. 변동성이 같은 두 자산을 반반 섞었다. 포트폴리오의 변동성이 각 자산의 변동성과 똑같이 유지되는 경우는?</p>
+        <div class="opts">
+          <button class="opt">상관계수가 0일 때</button>
+          <button class="opt">상관계수가 −1일 때</button>
+          <button class="opt" data-correct>상관계수가 +1일 때</button>
+          <button class="opt">두 자산의 기대수익이 같을 때</button>
+        </div>
+        <div class="quiz-exp">ρ = +1이면 두 자산이 늘 같은 방향으로 같은 비율만큼 움직여 섞어도 흔들림이 줄지 않는다. ρ = 0이면 σ가 약 0.71배(20% → 약 14.1%), ρ = −1이면 0이 된다. 기대수익은 변동성의 감소와 관계없다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>2. 채권 100%를 가진 사람이 주식을 10% 섞었다. 이 장의 가정(상관계수 0.1)에서 일어나는 일로 옳은 것은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>기대수익은 오르고 변동성은 오히려 조금 줄어든다</button>
+          <button class="opt">기대수익과 변동성이 모두 오른다</button>
+          <button class="opt">기대수익은 그대로이고 변동성만 오른다</button>
+          <button class="opt">기대수익은 내리고 변동성은 오른다</button>
+        </div>
+        <div class="quiz-exp">채권 100%(σ 6%)는 최소분산점(주식 약 10%, σ 약 5.8%)보다 아래쪽, 비효율 구간에 있다. 상관이 낮은 주식을 조금 섞으면 흔들림이 서로 상쇄되어 위험이 줄면서 수익은 오른다. 위험한 자산을 더했는데 덜 위험해지는 분산 효과다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>3. 주식 70·채권 30으로 시작해 30년 동안 리밸런싱을 하지 않았다. 가장 가능성이 높은 결과는?</p>
+        <div class="opts">
+          <button class="opt">비율이 70·30 근처에 그대로 머문다</button>
+          <button class="opt">채권 비중이 점점 커져 더 안전해진다</button>
+          <button class="opt">반드시 리밸런싱한 계좌보다 최종 금액이 적다</button>
+          <button class="opt" data-correct>주식 비중이 80~90%대로 올라가 처음보다 큰 위험을 지게 된다</button>
+        </div>
+        <div class="quiz-exp">주식의 기대수익이 더 높아 내버려 두면 비율이 주식 쪽으로 표류한다. 최종 금액은 경로에 따라 방치가 이기기도 한다. 리밸런싱의 확실한 이득은 수익이 아니라 처음 정한 위험 수준을 지키는 것이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>4. 같은 27세라도 금융 자산의 주식 비중을 더 낮게 두는 것이 합리적인 사람은?</p>
+        <div class="opts">
+          <button class="opt">정년이 보장되고 월급이 일정한 공무원</button>
+          <button class="opt" data-correct>경기가 나빠지면 소득이 크게 줄어드는 실적급 영업직</button>
+          <button class="opt">국민연금 외에 퇴직연금이 넉넉한 사람</button>
+          <button class="opt">앞으로 적립할 기간이 30년 넘게 남은 사람</button>
+        </div>
+        <div class="quiz-exp">인적 자본이 채권처럼 안정적이면 금융 자산은 주식 쪽으로 기울여 전체 균형을 맞출 수 있다. 소득이 경기와 함께 흔들리는 직업은 인적 자본 자체가 주식과 비슷하게 움직이므로, 주식이 폭락할 때 소득도 줄 수 있다. 그래서 금융 자산을 덜 공격적으로 두는 편이 균형에 맞다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2, A = MN.ASSETS;
+  const KEYS = ["stock", "bond", "cash", "gold"];
+  const NM = { stock: "주식", bond: "채권", cash: "현금", gold: "금" };
+  const col = (P, k) => ({ stock: P.accent, bond: P.blue, cash: P.dim, gold: P.accent2 })[k];
+  const pc = (x, d) => (x * 100).toFixed(d == null ? 1 : d) + "%";
+  const sp = (x, d) => (x > 0.00005 ? "+" : x < -0.00005 ? "−" : "") + Math.abs(x * 100).toFixed(d == null ? 1 : d) + "%";
+  const tone = (c, s) => '<span class="' + c + '">' + s + "</span>";
+  const hostW = (id) => document.getElementById(id).parentElement.clientWidth;
+  const wtxt = (W) => KEYS.filter((k) => W[k] > 0.004).map((k) => NM[k] + " " + Math.round(W[k] * 100)).join(" · ");
+  function knob(ctx, x, y, P, r, c, hollow) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU);
+    if (hollow) { ctx.lineWidth = 3; ctx.strokeStyle = c || P.accent; ctx.stroke(); }
+    else { ctx.fillStyle = c || P.accent; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = "#fff"; ctx.stroke(); }
+    ctx.restore();
+  }
+  function txt(ctx, P, s, x, y, o) {
+    o = o || {};
+    ctx.font = MB.font(o.size || 12, o.mono, o.weight);
+    ctx.fillStyle = o.color || P.text; ctx.textAlign = o.align || "left"; ctx.textBaseline = o.base || "alphabetic";
+    ctx.fillText(s, x, y);
+  }
+  function inv(G, px, py) {
+    const b = G.box;
+    return [G.x0 + ((px - b.x) / b.w) * (G.x1 - G.x0), G.y0 + ((b.y + b.h - py) / b.h) * (G.y1 - G.y0)];
+  }
+  /* 효율적 투자선: 시그마 순으로 정렬해 기대수익이 새로 높아지는 점만 남긴다 */
+  function envelope(list) {
+    const s = list.slice().sort((a, b) => a.sigma - b.sigma), out = [];
+    let best = -1;
+    s.forEach((p) => { if (p.mu > best + 1e-9) { out.push(p); best = p.mu; } });
+    return out;
+  }
+  function combos(n, keys) {
+    const out = [];
+    const rec = (i, left, w) => {
+      if (i === keys.length - 1) { w[keys[i]] = left / n; const W = Object.assign({}, w), p = MN.portfolio(W); out.push({ w: W, mu: p.mu, sigma: p.sigma }); return; }
+      for (let k = 0; k <= left; k++) { w[keys[i]] = k / n; rec(i + 1, left - k, w); }
+    };
+    rec(0, n, {});
+    return out;
+  }
+  function interpMu(F, s) {
+    if (s < F[0].sigma) return null;
+    for (let i = 1; i < F.length; i++) if (F[i].sigma >= s) { const a = F[i - 1], b = F[i], t = (s - a.sigma) / Math.max(1e-9, b.sigma - a.sigma); return a.mu + t * (b.mu - a.mu); }
+    return F[F.length - 1].mu;
+  }
+
+  /* ---------------------------------------------------------- 1. 비율 막대 */
+  (function () {
+    let cuts = [0.7, 1, 1], G = null, grp = null, act = null, x0 = 0;
+    const wts = () => ({ stock: cuts[0], bond: cuts[1] - cuts[0], cash: cuts[2] - cuts[1], gold: 1 - cuts[2] });
+    const amt = MB.range("mx-amt", (v) => MB.won(v), () => cv.redraw());
+    MB.seg("mx-pre", (v) => { const a = v.split(",").map(Number); cuts = [a[0] / 100, (a[0] + a[1]) / 100, (a[0] + a[1] + a[2]) / 100]; cv.redraw(); });
+    const cv = MB.canvas("#mx-cv", (ctx, w, h) => {
+      const P = MB.palette(), W = wts(), pf = MN.portfolio(W), bad = pf.mu - 2 * pf.sigma, narrow = w < 520;
+      let R, cx, cy, gx, gy, gw;
+      if (narrow) { R = Math.min(76, w * 0.22); cx = w / 2; cy = 16 + R; gx = 16; gy = cy + R + 30; gw = w - 32; }
+      else { R = Math.min(96, h * 0.29); cx = 26 + R; cy = 20 + R; gx = cx + R + 44; gy = 30; gw = w - gx - 24; }
+      MB.donut(ctx, cx, cy, R, KEYS.map((k) => ({ label: NM[k], value: W[k], color: col(P, k) })), { inner: 0.58, center: { big: pc(pf.mu, 1), small: "기대수익" } });
+      const gs = [
+        { k: "기대수익 μ", v: pf.mu, lo: 0, hi: 0.08, c: P.ok, f: pc(pf.mu, 2) },
+        { k: "변동성 σ", v: pf.sigma, lo: 0, hi: 0.2, c: P.warn, f: pc(pf.sigma, 2) },
+        { k: "나쁜 해 μ−2σ", v: bad, lo: -0.3, hi: 0.05, c: bad < 0 ? P.bad : P.ok, f: sp(bad) },
+      ];
+      gs.forEach((g, i) => {
+        const y = gy + i * 48, X = (v) => gx + ((v - g.lo) / (g.hi - g.lo)) * gw, z = X(0), xv = X(MB.clamp(g.v, g.lo, g.hi));
+        txt(ctx, P, g.k, gx, y + 12, { color: P.dim });
+        txt(ctx, P, g.f, gx + gw, y + 12, { mono: true, weight: 600, align: "right", size: 13 });
+        ctx.fillStyle = P.grid; ctx.fillRect(gx, y + 20, gw, 12);
+        ctx.fillStyle = g.c; ctx.fillRect(Math.min(z, xv), y + 20, Math.abs(xv - z), 12);
+        ctx.strokeStyle = P.axis; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(z, y + 16); ctx.lineTo(z, y + 36); ctx.stroke();
+      });
+      const bx = 16, bw = w - 32, bh = 34, by = h - 66;
+      G = { bx, bw, by, bh };
+      let x = bx;
+      KEYS.forEach((k) => {
+        const ww = W[k] * bw;
+        ctx.fillStyle = col(P, k); ctx.fillRect(x, by, ww, bh);
+        if (ww > 52) txt(ctx, P, NM[k] + " " + Math.round(W[k] * 100), x + ww / 2, by + bh / 2, { color: "#fff", align: "center", base: "middle", weight: 700, size: 12 });
+        else if (ww > 22) txt(ctx, P, String(Math.round(W[k] * 100)), x + ww / 2, by + bh / 2, { color: "#fff", align: "center", base: "middle", weight: 700, size: 11, mono: true });
+        x += ww;
+      });
+      cuts.forEach((c) => {
+        const px = bx + c * bw;
+        ctx.strokeStyle = P.text; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(px, by - 4); ctx.lineTo(px, by + bh + 4); ctx.stroke();
+        knob(ctx, px, by - 8, P, 6);
+      });
+      MB.stat("mx-o-mu", pc(pf.mu, 2));
+      MB.stat("mx-o-sd", pc(pf.sigma, 2));
+      MB.stat("mx-o-bad", tone(bad < 0 ? "bad-t" : "ok-t", sp(bad)));
+      MB.stat("mx-o-won", bad < 0 ? tone("bad-t", "−" + MB.won(-bad * amt())) : tone("ok-t", "손실 없음"));
+    }, { get height() { return hostW("mx-cv") < 520 ? 400 : 320; } });
+    MB.drag(cv.canvas, {
+      start(x) {
+        act = null; grp = null; x0 = x;
+        if (!G) return;
+        const d = cuts.map((c) => Math.abs(G.bx + c * G.bw - x)), m = Math.min.apply(null, d);
+        if (m > 40) return;
+        grp = cuts.map((c, i) => i).filter((i) => Math.abs(d[i] - m) < 0.5);
+        document.querySelectorAll("#mx-pre button").forEach((b) => b.classList.remove("on"));
+      },
+      move(x) {
+        if (!grp) return;
+        if (act == null) { if (grp.length === 1) act = grp[0]; else if (Math.abs(x - x0) < 2) return; else act = x < x0 ? grp[0] : grp[grp.length - 1]; }
+        const lo = act > 0 ? cuts[act - 1] : 0, hi = act < 2 ? cuts[act + 1] : 1;
+        cuts[act] = MB.clamp(Math.round(((x - G.bx) / G.bw) * 100) / 100, lo, hi);
+        cv.redraw();
+      },
+      end() { grp = null; act = null; },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 2. 상관계수 */
+  (function () {
+    const N = 80, mu = 0.07, sg = 0.2;
+    let seed = 5, Z = [], shown = 80, acc = 0;
+    const gen = () => { const g = MN.gauss(seed); Z = []; for (let i = 0; i < N; i++) Z.push([g(), g()]); };
+    gen();
+    const rho = MB.range("cr-r", (v) => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(2), () => cv.redraw());
+    document.getElementById("cr-re").addEventListener("click", () => { seed++; gen(); shown = 0; cv.redraw(); });
+    const dims = (w) => { const narrow = w < 520, S = narrow ? Math.min(w - 82, 250) : Math.min(260, w * 0.5 - 76); return { narrow, S }; };
+    const cv = MB.canvas("#cr-cv", (ctx, w, h) => {
+      const P = MB.palette(), r = rho(), q = Math.sqrt(Math.max(0, 1 - r * r)), d = dims(w);
+      const pts = Z.map(([a, b]) => [mu + sg * a, mu + sg * (r * a + q * b)]);
+      const box = { x: 64, y: 14, w: d.S, h: d.S };
+      const f = (v) => Math.round(v * 100) + "%", T = [-0.4, -0.2, 0, 0.2, 0.4];
+      const c = MB.chart(ctx, box, { x: [-0.55, 0.65], y: [-0.55, 0.65], xFmt: f, yFmt: f, xTicks: T, yTicks: T, xLabel: "자산 A 수익률", yLabel: "자산 B 수익률" });
+      const n = Math.min(shown, N);
+      ctx.save(); ctx.beginPath(); ctx.rect(box.x, box.y, box.w, box.h); ctx.clip();
+      for (let i = 0; i < n; i++) {
+        const [a, b] = pts[i], last = i === n - 1 && n < N;
+        ctx.beginPath(); ctx.arc(c.X(a), c.Y(b), last ? 6 : 3.4, 0, TAU);
+        ctx.fillStyle = (a + b) / 2 < 0 ? P.bad : P.accent; ctx.globalAlpha = last ? 1 : 0.7; ctx.fill();
+      }
+      ctx.restore(); ctx.globalAlpha = 1;
+      // 막대: σ 비교
+      const sub = pts.slice(0, Math.max(n, 2)), sd = (xs) => MN.stats(xs).sd;
+      const sA = n >= 6 ? sd(sub.map((p) => p[0])) : NaN, sB = n >= 6 ? sd(sub.map((p) => p[1])) : NaN, sP = n >= 6 ? sd(sub.map((p) => (p[0] + p[1]) / 2)) : NaN;
+      const th = sg * Math.sqrt((1 + r) / 2);
+      const px = d.narrow ? 16 : box.x + box.w + 40, py = d.narrow ? box.y + box.h + 62 : 30, pw = d.narrow ? w - 32 : w - px - 20;
+      txt(ctx, P, "흔들림(σ) 비교", px, py, { weight: 700, size: 13 });
+      const rows = [["A만", sg, sA, P.dim], ["B만", sg, sB, P.dim], ["반반", th, sP, P.accent]];
+      const lw = 44, scale = (pw - lw - 56) / 0.3;
+      rows.forEach(([lab, tv, sv, cc], i) => {
+        const y = py + 18 + i * 32;
+        txt(ctx, P, lab, px, y + 11, { color: P.dim, base: "middle" });
+        ctx.fillStyle = cc; ctx.globalAlpha = 0.85; ctx.fillRect(px + lw, y + 2, Math.max(1, tv * scale), 18); ctx.globalAlpha = 1;
+        if (isFinite(sv)) { ctx.strokeStyle = P.text; ctx.lineWidth = 2; const sx = px + lw + sv * scale; ctx.beginPath(); ctx.moveTo(sx, y - 1); ctx.lineTo(sx, y + 23); ctx.stroke(); }
+        txt(ctx, P, pc(tv, 1), px + lw + tv * scale + 6, y + 11, { mono: true, size: 12, base: "middle" });
+      });
+      txt(ctx, P, "막대: 이론값   세로 선: 지금 찍힌 점들로 잰 값", px, py + 18 + 3 * 32 + 8, { color: P.faint, size: 11 });
+      const all = MN.stats(pts.map((p) => p[0])), allB = MN.stats(pts.map((p) => p[1]));
+      let cov = 0; pts.forEach((p) => { cov += (p[0] - all.mean) * (p[1] - allB.mean); }); cov /= N - 1;
+      MB.stat("cr-o-s", (cov / (all.sd * allB.sd)).toFixed(2));
+      MB.stat("cr-o-a", pc(sg, 1));
+      MB.stat("cr-o-p", pc(th, 1));
+      MB.stat("cr-o-d", tone(th < sg - 1e-9 ? "ok-t" : "warn-t", "−" + pc(1 - th / sg, 0)));
+    }, { get height() { const w = hostW("cr-cv"), d = dims(w); return d.narrow ? d.S + 62 + 150 + 30 : 330; } });
+    MB.loop(cv.canvas, (dt) => { if (shown >= N) return; acc += dt; if (acc > 0.06) { acc = 0; shown++; cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 3. 조합 곡선 */
+  (function () {
+    let rd = 0.1, wSel = 0.7, G = null;
+    const rho = MB.range("cv-r", (v) => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(2), () => {});
+    MB.seg("cv-pre", (v) => rho.set(Number(v)));
+    const mvp = (fr) => fr.reduce((a, b) => (b.sigma < a.sigma - 1e-12 ? b : a));
+    const cv = MB.canvas("#cv-cv", (ctx, w, h) => {
+      const P = MB.palette(), fr = MN.frontier2(A.stock, A.bond, rd, 200), m = mvp(fr), mi = Math.round(m.w * 200);
+      const pct = (v) => Math.round(v * 100) + "%";
+      const ser = [
+        { data: [[A.bond.sigma, A.bond.mu], [A.stock.sigma, A.stock.mu]], color: P.faint, width: 1.2, dash: [4, 4] },
+        { data: fr.slice(0, mi + 1).map((p) => [p.sigma, p.mu]), color: P.faint, width: 2.5, dash: [6, 4] },
+        { data: fr.slice(mi).map((p) => [p.sigma, p.mu]), color: P.accent, width: 3 },
+      ];
+      const c = MB.chart(ctx, null, { x: [0, 0.18], y: [0.03, 0.08], xFmt: pct, yFmt: (v) => (v * 100).toFixed(1) + "%", xLabel: "위험 (변동성 σ)", yLabel: "기대수익 μ", series: ser,
+        points: [{ x: A.bond.sigma, y: A.bond.mu, color: P.blue, r: 6 }, { x: A.stock.sigma, y: A.stock.mu, color: P.accent2, r: 6 }] });
+      G = { c, fr };
+      txt(ctx, P, "채권", c.X(A.bond.sigma) + 9, c.Y(A.bond.mu) + 14, { color: P.blue, weight: 700 });
+      txt(ctx, P, "주식", c.X(A.stock.sigma) - 10, c.Y(A.stock.mu) + 18, { color: P.accent2, weight: 700, align: "right" });
+      const mx = c.X(m.sigma), my = c.Y(m.mu);
+      ctx.fillStyle = P.ok; ctx.beginPath(); ctx.arc(mx, my, 5, 0, TAU); ctx.fill();
+      txt(ctx, P, "최소분산", mx - 10, my + 4, { color: P.ok, weight: 700, align: "right" });
+      const s = MN.frontier2(A.stock, A.bond, rd, 1000)[Math.round(wSel * 1000)];
+      ctx.strokeStyle = P.faint; ctx.setLineDash([3, 3]); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(c.X(s.sigma), c.Y(s.mu)); ctx.lineTo(c.X(s.sigma), c.box.y + c.box.h); ctx.stroke(); ctx.setLineDash([]);
+      knob(ctx, c.X(s.sigma), c.Y(s.mu), P, 7);
+      txt(ctx, P, "ρ = " + rd.toFixed(2), c.box.x + 10, c.box.y + 16, { mono: true, color: P.dim });
+      MB.stat("cv-o-w", pc(wSel, 0));
+      MB.stat("cv-o-m", pc(s.mu, 2) + " · " + pc(s.sigma, 2));
+      MB.stat("cv-o-mv", "주식 " + pc(m.w, 0) + " · σ " + pc(m.sigma, 1));
+      MB.stat("cv-o-s", s.sigma < 0.002 ? tone("ok-t", "위험 0") : wSel < m.w - 0.004 ? tone("bad-t", "비효율 구간") : tone("ok-t", "효율적 구간"));
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 380 });
+    MB.drag(cv.canvas, { move(x, y) {
+      if (!G) return;
+      let best = 0, bd = Infinity;
+      G.fr.forEach((p, i) => { const d = Math.hypot(G.c.X(p.sigma) - x, G.c.Y(p.mu) - y); if (d < bd) { bd = d; best = i; } });
+      wSel = best / 200; cv.redraw();
+    } });
+    MB.loop(cv.canvas, (dt) => { const t = rho(); if (Math.abs(rd - t) > 0.0008) { rd += (t - rd) * Math.min(1, dt * 3.5); if (Math.abs(rd - t) < 0.001) rd = t; cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 4. 효율적 투자선 */
+  (function () {
+    const all4 = combos(50, KEYS), all3 = all4.filter((p) => !p.w.gold);
+    const F = { on: envelope(all4), off: envelope(all3) };
+    const C4 = combos(20, KEYS), C = { on: C4, off: C4.filter((p) => !p.w.gold) };
+    const gold = document.getElementById("fr-gold"), cloud = document.getElementById("fr-cloud");
+    let U = { s: 0.09, m: 0.048 }, G = null;
+    const cv = MB.canvas("#fr-cv", (ctx, w, h) => {
+      const P = MB.palette(), key = gold.checked ? "on" : "off", Fr = F[key];
+      const box = { x: 58, y: 66, w: w - 76, h: h - 66 - 46 };
+      const pct = (v) => Math.round(v * 100) + "%";
+      const c = MB.chart(ctx, box, { x: [0, 0.17], y: [0.02, 0.08], xFmt: pct, yFmt: (v) => (v * 100).toFixed(0) + "%", xLabel: "위험 (변동성 σ)", yLabel: "기대수익 μ" });
+      G = { box, x0: 0, x1: 0.17, y0: 0.02, y1: 0.08, c };
+      ctx.save(); ctx.beginPath(); ctx.rect(box.x, box.y, box.w, box.h); ctx.clip();
+      if (cloud.checked) { ctx.fillStyle = P.faint; ctx.globalAlpha = 0.45; C[key].forEach((p) => { ctx.fillRect(c.X(p.sigma) - 1.2, c.Y(p.mu) - 1.2, 2.4, 2.4); }); ctx.globalAlpha = 1; }
+      ctx.strokeStyle = P.accent; ctx.lineWidth = 3; ctx.beginPath();
+      Fr.forEach((p, i) => (i ? ctx.lineTo(c.X(p.sigma), c.Y(p.mu)) : ctx.moveTo(c.X(p.sigma), c.Y(p.mu)))); ctx.stroke();
+      if (!gold.checked) { ctx.strokeStyle = P.faint; ctx.setLineDash([4, 4]); ctx.lineWidth = 1.5; ctx.beginPath(); F.on.forEach((p, i) => (i ? ctx.lineTo(c.X(p.sigma), c.Y(p.mu)) : ctx.moveTo(c.X(p.sigma), c.Y(p.mu)))); ctx.stroke(); ctx.setLineDash([]); }
+      ctx.restore();
+      (gold.checked ? KEYS : ["stock", "bond", "cash"]).forEach((k) => {
+        ctx.fillStyle = col(P, k); ctx.beginPath(); ctx.arc(c.X(A[k].sigma), c.Y(A[k].mu), 5, 0, TAU); ctx.fill();
+        txt(ctx, P, NM[k], c.X(A[k].sigma) + 8, c.Y(A[k].mu) + (k === "stock" ? 14 : -6), { color: col(P, k), weight: 700 });
+      });
+      // 가장 가까운 투자선 위 점
+      let best = Fr[0], bd = Infinity;
+      Fr.forEach((p) => { const d = Math.hypot(c.X(p.sigma) - c.X(U.s), c.Y(p.mu) - c.Y(U.m)); if (d < bd) { bd = d; best = p; } });
+      ctx.strokeStyle = P.text; ctx.setLineDash([3, 3]); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(c.X(U.s), c.Y(U.m)); ctx.lineTo(c.X(best.sigma), c.Y(best.mu)); ctx.stroke(); ctx.setLineDash([]);
+      knob(ctx, c.X(best.sigma), c.Y(best.mu), P, 7);
+      knob(ctx, c.X(U.s), c.Y(U.m), P, 8, P.warn, true);
+      // 배분 막대
+      const by = 26, bh = 22, bx = 16, bw = w - 32;
+      let x = bx;
+      KEYS.forEach((k) => {
+        const ww = (best.w[k] || 0) * bw; if (ww <= 0) return;
+        ctx.fillStyle = col(P, k); ctx.fillRect(x, by, ww, bh);
+        if (ww > 50) txt(ctx, P, NM[k] + " " + Math.round(best.w[k] * 100), x + ww / 2, by + bh / 2, { color: "#fff", align: "center", base: "middle", weight: 700, size: 12 });
+        x += ww;
+      });
+      txt(ctx, P, "가장 가까운 효율적 배분", bx, by - 6, { color: P.dim, size: 11 });
+      const fm = interpMu(Fr, U.s);
+      let st;
+      if (fm == null) st = tone("bad-t", "도달 불가 (이보다 위험을 줄일 수 없다)");
+      else if (U.m > fm + 0.0006) st = tone("bad-t", "도달 불가 (투자선 위쪽)");
+      else if (U.m < fm - 0.0006) st = tone("warn-t", "비효율: 같은 위험에 " + sp(fm - U.m, 1) + "p");
+      else st = tone("ok-t", "투자선 위");
+      MB.stat("fr-o-w", wtxt(best.w));
+      MB.stat("fr-o-m", pc(best.mu, 2) + " · " + pc(best.sigma, 2));
+      MB.stat("fr-o-s", st);
+    }, { aspect: 0.66, minHeight: 360, maxHeight: 460 });
+    MB.drag(cv.canvas, { move(x, y) { if (!G) return; const [s, m] = inv(G, x, y); U = { s: MB.clamp(s, 0, 0.17), m: MB.clamp(m, 0.02, 0.08) }; cv.redraw(); } });
+    gold.addEventListener("change", () => cv.redraw());
+    cloud.addEventListener("change", () => cv.redraw());
+  })();
+
+  /* ---------------------------------------------------------- 5. 자본시장선 */
+  (function () {
+    const rf = A.cash.mu, risky = combos(100, ["stock", "bond", "gold"]);
+    const T = risky.reduce((a, b) => ((b.mu - rf) / b.sigma > (a.mu - rf) / a.sigma ? b : a));
+    const Fr = envelope(risky), ref = MN.portfolio({ stock: 0.7, bond: 0.3 });
+    let G = null;
+    const aG = MB.range("cm-a", (v) => v + "%", () => cv.redraw());
+    const rbG = MB.range("cm-b", (v) => v.toFixed(1) + "%", () => cv.redraw());
+    const at = (a, rb) => (a <= 1 ? { mu: rf + a * (T.mu - rf), sigma: a * T.sigma } : { mu: T.mu + (a - 1) * (T.mu - rb), sigma: a * T.sigma });
+    const cv = MB.canvas("#cm-cv", (ctx, w, h) => {
+      const P = MB.palette(), a = aG() / 100, rb = rbG() / 100, cur = at(a, rb);
+      const pct = (v) => Math.round(v * 100) + "%";
+      const end = at(1.5, rb), ghost = at(1.5, rf);
+      const c = MB.chart(ctx, null, { x: [0, 0.13], y: [0.02, 0.075], xFmt: pct, yFmt: (v) => (v * 100).toFixed(1) + "%", xLabel: "위험 (변동성 σ)", yLabel: "기대수익 μ",
+        series: [
+          { data: Fr.map((p) => [p.sigma, p.mu]), color: P.dim, width: 2 },
+          { data: [[0, rf], [T.sigma, T.mu]], color: P.accent, width: 3 },
+          { data: [[T.sigma, T.mu], [ghost.sigma, ghost.mu]], color: P.faint, width: 1.2, dash: [4, 4] },
+          { data: [[T.sigma, T.mu], [end.sigma, end.mu]], color: P.accent, width: 2.5, dash: [7, 4] },
+        ],
+        points: [{ x: 0, y: rf, color: P.dim, r: 5 }, { x: T.sigma, y: T.mu, color: P.accent2, r: 6, label: "접점" }, { x: ref.sigma, y: ref.mu, color: P.faint, r: 5 }] });
+      G = c;
+      txt(ctx, P, "70·30", c.X(ref.sigma) - 8, c.Y(ref.mu) + 16, { color: P.dim, size: 11, align: "right" });
+      txt(ctx, P, "현금", c.X(0) + 8, c.Y(rf) + 18, { color: P.dim, weight: 700 });
+      txt(ctx, P, "효율적 투자선(위험 자산만)", c.X(0.064), c.Y(0.039), { color: P.dim, size: 11 });
+      knob(ctx, c.X(cur.sigma), c.Y(cur.mu), P, 7, a > 1 ? P.warn : P.accent);
+      const W = a <= 1 ? { cash: 1 - a, stock: a * T.w.stock, bond: a * T.w.bond, gold: a * T.w.gold } : { stock: a * T.w.stock, bond: a * T.w.bond, gold: a * T.w.gold };
+      MB.stat("cm-o-w", (a > 1 ? tone("warn-t", "빌린 돈 " + Math.round((a - 1) * 100) + "% · ") : "") + wtxt(W));
+      MB.stat("cm-o-m", pc(cur.mu, 2) + " · " + pc(cur.sigma, 2));
+      MB.stat("cm-o-sh", cur.sigma > 1e-6 ? ((cur.mu - rf) / cur.sigma).toFixed(3) : "—");
+      const fm = interpMu(Fr, cur.sigma);
+      MB.stat("cm-o-f", fm == null ? "해당 없음" : pc(fm, 2) + " (" + (cur.mu - fm >= 0 ? tone("ok-t", sp(cur.mu - fm, 2) + "p") : tone("bad-t", sp(cur.mu - fm, 2) + "p")) + ")");
+    }, { aspect: 0.62, minHeight: 300, maxHeight: 380 });
+    MB.drag(cv.canvas, { move(x) { if (!G) return; const s = 0 + ((x - G.box.x) / G.box.w) * 0.13; aG.set(MB.clamp(Math.round((s / T.sigma) * 100), 0, 150)); } });
+  })();
+
+  /* ---------------------------------------------------------- 6. 리밸런싱 vs 방치 한 경로 */
+  (function () {
+    let seed = 1, prog = 360, R = null, yMax = 1;
+    const mode = MB.seg("dr-mode", () => { compute(); cv.redraw(); });
+    function run(S, B, rb) {
+      let s = 7e6, b = 3e6, n = 0;
+      const v = [1e7], wt = [0.7], ev = [];
+      for (let k = 1; k < S.length; k++) {
+        s *= S[k] / S[k - 1]; b *= B[k] / B[k - 1];
+        const t = s + b, w = s / t;
+        if (rb && ((mode() === "year" && k % 12 === 0) || (mode() === "band" && Math.abs(w - 0.7) > 0.05))) { s = 0.7 * t; b = 0.3 * t; n++; ev.push(k); }
+        v.push(s + b); wt.push(s / (s + b));
+      }
+      return { v, wt, n, ev, dd: MN.maxDrawdown(v) };
+    }
+    function compute() {
+      const S = MN.paths({ mu: A.stock.mu, sigma: A.stock.sigma, years: 30, steps: 12, n: 1, seed })[0];
+      const B = MN.paths({ mu: A.bond.mu, sigma: A.bond.sigma, years: 30, steps: 12, n: 1, seed: seed + 777 })[0];
+      R = { hold: run(S, B, false), reb: run(S, B, true) };
+      yMax = Math.max(Math.max.apply(null, R.hold.v), Math.max.apply(null, R.reb.v)) * 1.08;
+    }
+    compute();
+    document.getElementById("dr-new").addEventListener("click", () => { seed += 1; compute(); prog = 0; cv.redraw(); });
+    document.getElementById("dr-play").addEventListener("click", () => { prog = 0; cv.redraw(); });
+    const cv = MB.canvas("#dr-cv", (ctx, w, h) => {
+      const P = MB.palette(), K = Math.floor(prog), inner = h - 14 - 40 - 30, h1 = Math.round(inner * 0.56), h2 = inner - h1;
+      const b1 = { x: 58, y: 14, w: w - 76, h: h1 }, b2 = { x: 58, y: 14 + h1 + 30, w: w - 76, h: h2 };
+      const sl = (arr) => { const o = []; for (let k = 0; k <= K; k++) o.push([k / 12, arr[k]]); return o; };
+      MB.chart(ctx, b1, { x: [0, 30], y: [0, yMax], xTicks: [], yFmt: MB.wonAxis, yLabel: "계좌",
+        series: [{ data: sl(R.hold.v), color: P.accent2, width: 2 }, { data: sl(R.reb.v), color: P.accent, width: 2 }] });
+      const c2 = MB.chart(ctx, b2, { x: [0, 30], y: [0.4, 1], yTicks: [0.4, 0.55, 0.7, 0.85, 1], yFmt: (v) => Math.round(v * 100) + "%", xFmt: (v) => v + "년", yLabel: "주식 비중",
+        hlines: [{ y: 0.7, color: P.faint, label: "목표 70%" }],
+        series: [{ data: sl(R.reb.wt), color: P.accent, width: 1.6 }, { data: sl(R.hold.wt), color: P.accent2, width: 2.2 }] });
+      ctx.save(); ctx.beginPath(); ctx.rect(b2.x, b2.y, b2.w, b2.h); ctx.clip();
+      ctx.beginPath(); ctx.moveTo(c2.X(0), c2.Y(0.7));
+      for (let k = 0; k <= K; k++) ctx.lineTo(c2.X(k / 12), c2.Y(R.hold.wt[k]));
+      ctx.lineTo(c2.X(K / 12), c2.Y(0.7)); ctx.closePath();
+      ctx.fillStyle = P.accent2; ctx.globalAlpha = 0.18; ctx.fill(); ctx.restore();
+      const yr = (K / 12).toFixed(0);
+      txt(ctx, P, yr + "년째", b1.x + 8, b1.y + 16, { mono: true, color: P.dim });
+      const ddK = (v) => MN.maxDrawdown(v.slice(0, K + 1));
+      MB.stat("dr-o-w", tone(R.hold.wt[K] > 0.8 ? "warn-t" : "", pc(R.hold.wt[K], 0)));
+      MB.stat("dr-o-v", MB.won(R.reb.v[K], { short: true }) + " · " + MB.won(R.hold.v[K], { short: true }));
+      MB.stat("dr-o-dd", "−" + pc(ddK(R.reb.v), 0) + " · −" + pc(ddK(R.hold.v), 0));
+      MB.stat("dr-o-n", R.reb.ev.filter((k) => k <= K).length + "회");
+    }, { get height() { return hostW("dr-cv") < 520 ? 400 : 420; } });
+    MB.loop(cv.canvas, (dt) => { if (prog >= 360) return; prog = Math.min(360, prog + dt * 90); cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 7. 리밸런싱 보너스 */
+  (function () {
+    let D = null, prog = 120, hold = 0;
+    const amp = MB.range("bn-a", (v) => "+" + Math.round(v * 100) + "% / −" + Math.round((1 - 1 / (1 + v)) * 100) + "%", () => { compute(); prog = 0; });
+    const freq = MB.seg("bn-f", () => { compute(); prog = 0; });
+    function compute() {
+      const a = Math.log(1 + amp()), f = Number(freq()), p = [], hv = [], rv = [], ev = [];
+      let s = 0.5, c = 0.5;
+      for (let k = 0; k <= 120; k++) {
+        p.push(Math.exp(a * Math.sin((TAU * k) / 24)));
+        if (k > 0) {
+          s *= p[k] / p[k - 1];
+          if (k % f === 0) { const t = s + c, tr = s - t / 2; if (Math.abs(tr) > 1e-6) ev.push({ k, sell: tr > 0 }); s = c = t / 2; }
+        }
+        hv.push(0.5 * p[k] + 0.5); rv.push(s + c);
+      }
+      D = { p, hv, rv, ev, lo: Math.min.apply(null, p) * 0.95, hi: Math.max(Math.max.apply(null, p), Math.max.apply(null, rv)) * 1.04 };
+    }
+    compute();
+    const cv = MB.canvas("#bn-cv", (ctx, w, h) => {
+      const P = MB.palette(), K = Math.floor(prog), sl = (arr) => arr.slice(0, K + 1).map((v, k) => [k / 12, v]);
+      const c = MB.chart(ctx, null, { x: [0, 10], y: [D.lo, D.hi], xFmt: (v) => v + "년", yFmt: (v) => v.toFixed(2), xLabel: "시간", yLabel: "가치 (시작 = 1)",
+        hlines: [{ y: 1, color: P.faint }],
+        series: [{ data: sl(D.p), color: P.dim, width: 1.5 }, { data: sl(D.hv), color: P.accent2, width: 2 }, { data: sl(D.rv), color: P.accent, width: 3 }] });
+      D.ev.forEach((e) => {
+        if (e.k > K) return;
+        const x = c.X(e.k / 12), y = c.Y(D.p[e.k]);
+        ctx.fillStyle = e.sell ? P.bad : P.ok; ctx.beginPath();
+        if (e.sell) { ctx.moveTo(x - 5, y - 11); ctx.lineTo(x + 5, y - 11); ctx.lineTo(x, y - 3); }
+        else { ctx.moveTo(x - 5, y + 11); ctx.lineTo(x + 5, y + 11); ctx.lineTo(x, y + 3); }
+        ctx.fill();
+      });
+      const lx = c.box.x + 10, ly = c.box.y + 14;
+      [["주가", P.dim], ["반반 방치", P.accent2], ["반반 리밸런싱", P.accent]].forEach(([s, cc], i) => {
+        ctx.fillStyle = cc; ctx.fillRect(lx, ly + i * 17 - 2, 14, 3);
+        txt(ctx, P, s, lx + 20, ly + i * 17, { color: P.dim, size: 11, base: "middle" });
+      });
+      MB.stat("bn-o-p", D.p[K].toFixed(3));
+      MB.stat("bn-o-h", D.hv[K].toFixed(3));
+      MB.stat("bn-o-r", D.rv[K].toFixed(3));
+      const b = D.rv[K] - D.hv[K];
+      MB.stat("bn-o-b", tone(b > 0.0005 ? "ok-t" : "", (b >= 0 ? "+" : "−") + Math.abs(b * 100).toFixed(1) + "%p"));
+    }, { aspect: 0.55, minHeight: 280, maxHeight: 360 });
+    MB.loop(cv.canvas, (dt) => {
+      if (prog < 120) { prog = Math.min(120, prog + dt * 30); cv.redraw(); hold = 0; }
+      else { hold += dt; if (hold > 2.2) { prog = 0; hold = 0; } }
+    });
+  })();
+
+  /* ---------------------------------------------------------- 8. 방치·연 1회·밴드 400경로 */
+  (function () {
+    const n = 400;
+    const S = MN.paths({ mu: A.stock.mu, sigma: A.stock.sigma, years: 30, steps: 12, n, seed: 21 });
+    const B = MN.paths({ mu: A.bond.mu, sigma: A.bond.sigma, years: 30, steps: 12, n, seed: 4021 });
+    const bw = MB.range("bd-w", (v) => "±" + v + "%p", () => { compute(); cv.redraw(); });
+    const cst = MB.range("bd-c", (v) => v.toFixed(2) + "%", () => { compute(); cv.redraw(); });
+    let R = null, yMax = 1;
+    const v = new Float64Array(361);
+    function strat(kind, band, cost) {
+      const fin = [], dd = [], tr = [];
+      for (let p = 0; p < n; p++) {
+        let s = 7e6, b = 3e6, t0 = 0; v[0] = 1e7;
+        const Sp = S[p], Bp = B[p];
+        for (let k = 1; k <= 360; k++) {
+          s *= Sp[k] / Sp[k - 1]; b *= Bp[k] / Bp[k - 1];
+          const t = s + b, w = s / t;
+          if ((kind === 1 && k % 12 === 0) || (kind === 2 && Math.abs(w - 0.7) > band)) {
+            const x = Math.abs(s - 0.7 * t), t2 = t - 2 * x * cost; s = 0.7 * t2; b = 0.3 * t2; t0++;
+          }
+          v[k] = s + b;
+        }
+        fin.push(v[360]); dd.push(MN.maxDrawdown(v)); tr.push(t0);
+      }
+      fin.sort((a, b) => a - b);
+      const avg = (a) => a.reduce((x, y) => x + y, 0) / a.length;
+      return { p10: fin[Math.floor(n * 0.1)], p50: fin[Math.floor(n * 0.5)], p90: fin[Math.floor(n * 0.9)], dd: avg(dd), tr: avg(tr) };
+    }
+    function compute() {
+      const band = bw() / 100, cost = cst() / 100;
+      R = [strat(0, band, cost), strat(1, band, cost), strat(2, band, cost)];
+      yMax = Math.max(yMax, R[0].p90 * 1.08);
+    }
+    compute();
+    const LAB = ["방치", "연 1회", "밴드"];
+    const cv = MB.canvas("#bd-cv", (ctx, w, h) => {
+      const P = MB.palette(), narrow = w < 520, cc = [P.accent2, P.accent, P.blue];
+      const b1 = narrow ? { x: 58, y: 44, w: w - 76, h: 170 } : { x: 58, y: 44, w: w * 0.58 - 70, h: h - 44 - 46 };
+      const b2 = narrow ? { x: 58, y: 44 + 170 + 70, w: w - 76, h: h - 44 - 170 - 70 - 30 } : { x: w * 0.58 + 50, y: 44, w: w * 0.42 - 70, h: h - 44 - 46 };
+      const c = MB.chart(ctx, b1, { x: [0, 3], y: [0, yMax], xTicks: [], yFmt: MB.wonAxis, yLabel: "30년 뒤 금액" });
+      txt(ctx, P, narrow ? "30년 뒤 금액 범위 (숫자는 중앙값)" : "30년 뒤 금액: 하위 10% ~ 상위 10% (숫자는 중앙값)", 16, 14, { color: P.dim, size: 12, base: "middle" });
+      R.forEach((r, i) => {
+        const x = c.X(i + 0.5), bwid = Math.min(46, b1.w / 6);
+        ctx.fillStyle = cc[i]; ctx.globalAlpha = 0.3; ctx.fillRect(x - bwid / 2, c.Y(r.p90), bwid, c.Y(r.p10) - c.Y(r.p90)); ctx.globalAlpha = 1;
+        ctx.strokeStyle = cc[i]; ctx.lineWidth = 2; ctx.strokeRect(x - bwid / 2, c.Y(r.p90), bwid, c.Y(r.p10) - c.Y(r.p90));
+        ctx.lineWidth = 3.5; ctx.beginPath(); ctx.moveTo(x - bwid / 2 - 4, c.Y(r.p50)); ctx.lineTo(x + bwid / 2 + 4, c.Y(r.p50)); ctx.stroke();
+        txt(ctx, P, MB.wonAxis(r.p50), x, c.Y(r.p90) - 6, { mono: true, size: 11, color: P.text, align: "center" });
+        txt(ctx, P, LAB[i], x, b1.y + b1.h + 8, { align: "center", base: "top", color: P.dim });
+      });
+      txt(ctx, P, "평균 최대 낙폭", narrow ? 16 : b2.x - 40, b2.y - 24, { color: P.dim, size: 12, base: "middle" });
+      MB.bars(ctx, b2, { labels: LAB, stacks: [{ data: R.map((r) => r.dd), color: (i) => cc[i] }], y: [0, 0.45], yFmt: (v) => Math.round(v * 100) + "%", valueFmt: (v) => "−" + Math.round(v * 100) + "%", gap: 0.4 });
+      MB.stat("bd-o-n", "30회 · " + R[2].tr.toFixed(1) + "회");
+      MB.stat("bd-o-dd", R.map((r) => "−" + Math.round(r.dd * 100) + "%").join(" · "));
+      MB.stat("bd-o-m", R.map((r) => MB.wonAxis(r.p50)).join(" · "));
+    }, { get height() { return hostW("bd-cv") < 520 ? 470 : 330; } });
+  })();
+
+  /* ---------------------------------------------------------- 9. 인적 자본 */
+  (function () {
+    const HG = MN.HG, Y = 33, g = MN.grow({ start: 0, monthly: 1e6, rate: 0.05, years: Y, raise: 0.03 });
+    const hc = [], fc = [];
+    for (let y = 0; y <= Y; y++) {
+      let s = 0; for (let t = y; t < Y; t++) s += (HG.salary * Math.pow(1 + HG.raise, t) * 0.85) / Math.pow(1.035, t - y + 1);
+      hc.push(s); fc.push(g[y].value);
+    }
+    let age = 30, G = null;
+    const job = MB.seg("hc-job", () => cv.redraw());
+    const tgt = MB.range("hc-t", (v) => Math.round(v * 100) + "%", () => cv.redraw());
+    const frac = (y) => {
+      const bf = Number(job()), T = tgt(), H = hc[y], Fv = fc[y];
+      const need = T * (H + Fv) - H * (1 - bf);
+      if (Fv < 1e5) return need > 0 ? 1 : 0;
+      return MB.clamp(need / Fv, 0, 1);
+    };
+    const cv = MB.canvas("#hc-cv", (ctx, w, h) => {
+      const P = MB.palette(), inner = h - 14 - 46 - 30, h1 = Math.round(inner * 0.5), h2 = inner - h1;
+      const b1 = { x: 58, y: 14, w: w - 76, h: h1 }, b2 = { x: 58, y: 14 + h1 + 30, w: w - 76, h: h2 };
+      const top = Math.max.apply(null, hc.map((v, i) => v + fc[i])) * 1.08;
+      const c1 = MB.chart(ctx, b1, { x: [27, 60], y: [0, top], xTicks: [], yFmt: MB.wonAxis, yLabel: "자본" });
+      ctx.save(); ctx.beginPath(); ctx.rect(b1.x, b1.y, b1.w, b1.h); ctx.clip();
+      const area = (lo, hi, color) => {
+        ctx.beginPath();
+        for (let y = 0; y <= Y; y++) { const x = c1.X(27 + y), v = hi(y); y ? ctx.lineTo(x, c1.Y(v)) : ctx.moveTo(x, c1.Y(v)); }
+        for (let y = Y; y >= 0; y--) ctx.lineTo(c1.X(27 + y), c1.Y(lo(y)));
+        ctx.closePath(); ctx.fillStyle = color; ctx.globalAlpha = 0.35; ctx.fill(); ctx.globalAlpha = 1;
+      };
+      area(() => 0, (y) => fc[y], P.accent);
+      area((y) => fc[y], (y) => fc[y] + hc[y], P.accent2);
+      ctx.restore();
+      txt(ctx, P, "인적 자본", c1.X(29), c1.Y(hc[2] * 0.55), { color: P.accent2, weight: 700 });
+      txt(ctx, P, "금융 자본", c1.X(55), c1.Y(fc[28] * 0.4), { color: P.accent, weight: 700, align: "right" });
+      const ser = [], rule = [];
+      for (let y = 0; y <= Y; y++) { ser.push([27 + y, frac(y)]); rule.push([27 + y, (100 - 27 - y) / 100]); }
+      const c2 = MB.chart(ctx, b2, { x: [27, 60], y: [0, 1], yTicks: [0, 0.5, 1], yFmt: (v) => Math.round(v * 100) + "%", xFmt: (v) => v + "세", yLabel: "주식 비중",
+        series: [{ data: rule, color: P.faint, width: 1.5, dash: [5, 4] }, { data: ser, color: P.accent, width: 3 }] });
+      txt(ctx, P, "100 − 나이", c2.X(58), c2.Y(0.42) + 14, { color: P.faint, size: 11, align: "right" });
+      G = c2;
+      const yi = age - 27, X = c2.X(age);
+      ctx.strokeStyle = P.text; ctx.setLineDash([4, 3]); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(X, b1.y); ctx.lineTo(X, b2.y + b2.h); ctx.stroke(); ctx.setLineDash([]);
+      knob(ctx, X, c2.Y(frac(yi)), P, 7);
+      MB.stat("hc-o-a", age + "세");
+      MB.stat("hc-o-c", MB.wonAxis(hc[yi]) + " · " + MB.wonAxis(fc[yi]));
+      MB.stat("hc-o-w", pc(frac(yi), 0));
+      MB.stat("hc-o-r", (100 - age) + "%");
+    }, { get height() { return hostW("hc-cv") < 520 ? 400 : 420; } });
+    MB.drag(cv.canvas, { move(x) { if (!G) return; age = MB.clamp(Math.round(27 + ((x - G.box.x) / G.box.w) * 33), 27, 60); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 10. 글라이드 패스 그리기 */
+  (function () {
+    const Y = 33, n = 400, ga = MN.gauss(77), Zs = new Float64Array(n * Y), Zb = new Float64Array(n * Y);
+    for (let i = 0; i < n * Y; i++) { Zs[i] = ga(); Zb[i] = 0.1 * Zs[i] + Math.sqrt(0.99) * ga(); }
+    const ls = Math.log(1 + A.stock.mu) - 0.5 * A.stock.sigma * A.stock.sigma, lb = Math.log(1 + A.bond.mu) - 0.5 * A.bond.sigma * A.bond.sigma;
+    const gp = new Array(Y + 1);
+    const PRE = {
+      "gl-p100": (a) => (100 - a) / 100, "gl-p110": (a) => (110 - a) / 100, "gl-p70": () => 0.7,
+      "gl-tdf": (a) => (a <= 40 ? 0.9 : 0.9 - ((a - 40) / 20) * 0.5), "gl-p100s": () => 1,
+    };
+    const setPre = (f) => { for (let y = 0; y <= Y; y++) gp[y] = MB.clamp(f(27 + y), 0, 1); };
+    setPre(PRE["gl-p110"]);
+    let R = null, G = null, last = null;
+    function sim() {
+      const paths = [], hit = [];
+      for (let p = 0; p < n; p++) {
+        const a = new Float64Array(Y + 1); let bal = 0, bad = false;
+        for (let y = 0; y < Y; y++) {
+          bal += 1.2e7 * Math.pow(1.03, y);
+          const w = gp[y], i = p * Y + y;
+          const r = w * (Math.exp(ls + A.stock.sigma * Zs[i]) - 1) + (1 - w) * (Math.exp(lb + A.bond.sigma * Zb[i]) - 1);
+          if (27 + y >= 55 && r <= -0.2) bad = true;
+          bal *= 1 + r; a[y + 1] = bal;
+        }
+        paths.push(a); hit.push(bad);
+      }
+      return { b: MN.bands(paths, [10, 50, 90]), dd: hit.filter(Boolean).length / n };
+    }
+    const save = gp.slice(); setPre(PRE["gl-p100s"]); const yTop = sim().b.p90[Y] * 1.05; for (let y = 0; y <= Y; y++) gp[y] = save[y];
+    R = sim();
+    Object.keys(PRE).forEach((id) => document.getElementById(id).addEventListener("click", () => { setPre(PRE[id]); R = sim(); cv.redraw(); }));
+    const cv = MB.canvas("#gl-cv", (ctx, w, h) => {
+      const P = MB.palette(), inner = h - 14 - 46 - 30, h1 = Math.round(inner * 0.45), h2 = inner - h1;
+      const b1 = { x: 58, y: 14, w: w - 76, h: h1 }, b2 = { x: 58, y: 14 + h1 + 30, w: w - 76, h: h2 };
+      const gpS = gp.map((v, y) => [27 + y, v]);
+      const c1 = MB.chart(ctx, b1, { x: [27, 60], y: [0, 1], xTicks: [], yTicks: [0, 0.5, 1], yFmt: (v) => Math.round(v * 100) + "%", yLabel: "주식 비중",
+        series: [{ data: [[27, 0.73], [60, 0.4]], color: P.faint, width: 1.2, dash: [5, 4] }, { data: gpS, color: P.accent, width: 3, fill: P.accent + "22" }] });
+      G = c1;
+      txt(ctx, P, "100 − 나이", c1.X(59), c1.Y(0.41) + 14, { color: P.faint, size: 11, align: "right" });
+      const lo = [], md = [], hi = [];
+      for (let y = 0; y <= Y; y++) { lo.push([27 + y, R.b.p10[y]]); md.push([27 + y, R.b.p50[y]]); hi.push([27 + y, R.b.p90[y]]); }
+      const c2 = MB.chart(ctx, b2, { x: [27, 60], y: [0, yTop], yFmt: MB.wonAxis, xFmt: (v) => v + "세", yLabel: "잔고" });
+      ctx.save(); ctx.beginPath(); ctx.rect(b2.x, b2.y, b2.w, b2.h); ctx.clip();
+      ctx.beginPath(); hi.forEach(([x, v], i) => (i ? ctx.lineTo(c2.X(x), c2.Y(v)) : ctx.moveTo(c2.X(x), c2.Y(v))));
+      for (let i = lo.length - 1; i >= 0; i--) ctx.lineTo(c2.X(lo[i][0]), c2.Y(lo[i][1]));
+      ctx.closePath(); ctx.fillStyle = P.accent; ctx.globalAlpha = 0.16; ctx.fill(); ctx.globalAlpha = 1;
+      ctx.strokeStyle = P.accent; ctx.lineWidth = 2.5; ctx.beginPath(); md.forEach(([x, v], i) => (i ? ctx.lineTo(c2.X(x), c2.Y(v)) : ctx.moveTo(c2.X(x), c2.Y(v)))); ctx.stroke();
+      ctx.lineWidth = 1.2; ctx.setLineDash([4, 3]); ctx.beginPath(); lo.forEach(([x, v], i) => (i ? ctx.lineTo(c2.X(x), c2.Y(v)) : ctx.moveTo(c2.X(x), c2.Y(v)))); ctx.stroke(); ctx.setLineDash([]);
+      ctx.restore();
+      ctx.fillStyle = P.bad; ctx.globalAlpha = 0.08; ctx.fillRect(c2.X(55), b2.y, c2.X(60) - c2.X(55), b2.h); ctx.globalAlpha = 1;
+      txt(ctx, P, "은퇴 직전 5년", c2.X(55) - 6, b2.y + 14, { color: P.bad, size: 11, align: "right" });
+      MB.stat("gl-o-m", MB.won(R.b.p50[Y], { short: true }));
+      MB.stat("gl-o-lo", MB.won(R.b.p10[Y], { short: true }));
+      MB.stat("gl-o-dd", tone(R.dd > 0.15 ? "bad-t" : R.dd > 0.05 ? "warn-t" : "ok-t", pc(R.dd, 0)));
+      MB.stat("gl-o-avg", pc(gp.slice(0, Y).reduce((s, v) => s + v, 0) / Y, 0));
+    }, { get height() { return hostW("gl-cv") < 520 ? 420 : 440; } });
+    MB.drag(cv.canvas, {
+      start() { last = null; },
+      move(x, y) {
+        if (!G) return;
+        const b = G.box, ag = MB.clamp(Math.round(27 + ((x - b.x) / b.w) * 33), 27, 60) - 27, v = MB.clamp((b.y + b.h - y) / b.h, 0, 1);
+        if (last && last.ag !== ag) { const s = Math.sign(ag - last.ag); for (let k = last.ag; k !== ag; k += s) gp[k] = last.v + ((v - last.v) * (k - last.ag)) / (ag - last.ag); }
+        gp[ag] = Math.round(v * 100) / 100; last = { ag, v };
+        R = sim(); cv.redraw();
+      },
+      end() { last = null; },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 11. 감내 낙폭 */
+  (function () {
+    let tol = 0.15, G = null;
+    const sc = MB.seg("dd-sc", () => cv.redraw());
+    const amt = MB.range("dd-amt", (v) => MB.won(v), () => cv.redraw());
+    const loss = (w) => {
+      const k = sc();
+      if (k === "gfc") return w * -0.4 + (1 - w) * 0.05;
+      if (k === "inf") return w * -0.18 + (1 - w) * -0.13;
+      const p = MN.portfolio({ stock: w, bond: 1 - w }); return p.mu - 2 * p.sigma;
+    };
+    const cv = MB.canvas("#dd-cv", (ctx, w, h) => {
+      const P = MB.palette(), data = [];
+      for (let i = 0; i <= 100; i++) data.push([i / 100, loss(i / 100)]);
+      let wm = -1; for (let i = 100; i >= 0; i--) if (data[i][1] >= -tol - 1e-9) { wm = i / 100; break; }
+      const pct = (v) => Math.round(v * 100) + "%";
+      const c = MB.chart(ctx, null, { x: [0, 1], y: [-0.45, 0.1], xFmt: pct, yFmt: (v) => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(Math.round(v * 100)) + "%", xLabel: "주식 비중 (나머지는 채권)", yLabel: "그해 손익",
+        hlines: [{ y: 0, color: P.axis, dash: [] }],
+        series: [{ data, color: P.dim, width: 2 }, { data: data.filter((d) => d[1] >= -tol - 1e-9), color: P.ok, width: 3.5 }] });
+      G = { box: c.box, x0: 0, x1: 1, y0: -0.45, y1: 0.1 };
+      const ty = c.Y(-tol);
+      ctx.fillStyle = P.bad; ctx.globalAlpha = 0.08; ctx.fillRect(c.box.x, ty, c.box.w, c.box.y + c.box.h - ty); ctx.globalAlpha = 1;
+      ctx.strokeStyle = P.bad; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(c.box.x, ty); ctx.lineTo(c.box.x + c.box.w, ty); ctx.stroke();
+      txt(ctx, P, "견딜 수 있는 선 −" + pc(tol, 1), c.box.x + 8, ty + 16, { color: P.bad, weight: 700, size: 12 });
+      knob(ctx, c.box.x + c.box.w - 14, ty, P, 7, P.bad);
+      if (wm >= 0) {
+        const x = c.X(wm), y = c.Y(loss(wm));
+        ctx.strokeStyle = P.ok; ctx.setLineDash([4, 3]); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x, c.box.y + c.box.h); ctx.stroke(); ctx.setLineDash([]);
+        ctx.fillStyle = P.ok; ctx.beginPath(); ctx.arc(x, y, 6, 0, TAU); ctx.fill();
+        txt(ctx, P, "주식 " + pct(wm), x + (wm > 0.75 ? -8 : 8), y - 10, { color: P.ok, weight: 700, align: wm > 0.75 ? "right" : "left" });
+      }
+      const pf = wm >= 0 ? MN.portfolio({ stock: wm, bond: 1 - wm }) : null;
+      MB.stat("dd-o-t", "−" + pc(tol, 1));
+      MB.stat("dd-o-w", wm >= 0 ? "주식 " + pct(wm) : tone("bad-t", "없음 (채권도 넘는다)"));
+      MB.stat("dd-o-l", wm >= 0 ? (loss(wm) < 0 ? tone("bad-t", "−" + MB.won(-loss(wm) * amt())) : tone("ok-t", "+" + MB.won(loss(wm) * amt()))) : tone("bad-t", "−" + MB.won(-loss(0) * amt()) + " (채권 100%)"));
+      MB.stat("dd-o-mu", pf ? pc(pf.mu, 2) : "—");
+    }, { aspect: 0.6, minHeight: 300, maxHeight: 380 });
+    MB.drag(cv.canvas, { move(x, y) { if (!G) return; const v = inv(G, x, y)[1]; tol = MB.clamp(Math.round(-v * 200) / 200, 0.02, 0.44); cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 12. 해외 분산과 환율 */
+  (function () {
+    const K = A.kr, S = A.stock, rKS = MN.corr("kr", "stock"), sF = 0.08, rSF = -0.3, rKF = -0.4, hedgeCost = 0.005;
+    const M = {
+      open: { mu: S.mu, v: S.sigma * S.sigma + sF * sF + 2 * rSF * S.sigma * sF, cov: rKS * K.sigma * S.sigma + rKF * K.sigma * sF },
+      hedge: { mu: S.mu - hedgeCost, v: S.sigma * S.sigma, cov: rKS * K.sigma * S.sigma },
+    };
+    const at = (m, w) => { const o = M[m]; return { mu: (1 - w) * K.mu + w * o.mu, sigma: Math.sqrt((1 - w) * (1 - w) * K.sigma * K.sigma + w * w * o.v + 2 * w * (1 - w) * o.cov) }; };
+    let G = null;
+    const wG = MB.range("fx-w", (v) => v + "%", () => cv.redraw());
+    const hd = MB.seg("fx-h", () => cv.redraw());
+    const cv = MB.canvas("#fx-cv", (ctx, w, h) => {
+      const P = MB.palette(), m = hd(), x = wG() / 100, cur = at(m, x);
+      const curve = (k) => { const o = []; for (let i = 0; i <= 100; i++) o.push([i / 100, at(k, i / 100).sigma]); return o; };
+      const pct = (v) => Math.round(v * 100) + "%";
+      const c = MB.chart(ctx, null, { x: [0, 1], y: [0.14, 0.23], xFmt: pct, yFmt: pct, xLabel: "주식 중 해외 비중", yLabel: "변동성 σ (원화)",
+        series: [
+          { data: curve("hedge"), color: m === "hedge" ? P.blue : P.faint, width: m === "hedge" ? 3 : 1.5 },
+          { data: curve("open"), color: m === "open" ? P.accent : P.faint, width: m === "open" ? 3 : 1.5 },
+        ] });
+      G = c;
+      txt(ctx, P, "환노출", c.X(0.5), c.Y(at("open", 0.5).sigma) + 20, { color: m === "open" ? P.accent : P.faint, weight: 700, align: "right" });
+      txt(ctx, P, "환헤지", c.X(0.5), c.Y(at("hedge", 0.5).sigma) - 12, { color: m === "hedge" ? P.blue : P.faint, weight: 700 });
+      knob(ctx, c.X(x), c.Y(cur.sigma), P, 7, m === "open" ? P.accent : P.blue);
+      MB.stat("fx-o-mu", pc(cur.mu, 2));
+      MB.stat("fx-o-sd", pc(cur.sigma, 2));
+      MB.stat("fx-o-d", tone(cur.sigma < K.sigma - 1e-9 ? "ok-t" : "", (cur.sigma < K.sigma - 1e-9 ? "−" : "") + pc(Math.abs(K.sigma - cur.sigma), 1) + "p"));
+    }, { aspect: 0.58, minHeight: 280, maxHeight: 360 });
+    MB.drag(cv.canvas, { move(x) { if (!G) return; wG.set(MB.clamp(Math.round((((x - G.box.x) / G.box.w) * 100) / 5) * 5, 0, 100)); } });
+  })();
+})();
+
+</script>
+</body>
+</html>

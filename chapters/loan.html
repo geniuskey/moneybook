@@ -1,0 +1,1264 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and MoneyBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "대출 상환을 직접 펼쳐 본다. 원리금균등·원금균등·만기일시의 이자와 원금 구성, 금리 1%p의 무게, 변동금리 경로, 중도상환과 기간 연장의 대가, DSR·LTV 한도, 빚을 갚을지 굴릴지의 판단을 시뮬레이터로 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대출 상환의 구조 · MoneyBook</title>
+<meta name="description" content="대출 상환을 직접 펼쳐 본다. 원리금균등·원금균등·만기일시의 이자와 원금 구성, 금리 1%p의 무게, 변동금리 경로, 중도상환과 기간 연장의 대가, DSR·LTV 한도, 빚을 갚을지 굴릴지의 판단을 시뮬레이터로 익힌다.">
+<link rel="canonical" href="https://moneybook.euiyun.com/chapters/loan.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0b8a63">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MoneyBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="대출 상환의 구조 · MoneyBook">
+<meta property="og:description" content="대출 상환을 직접 펼쳐 본다. 원리금균등·원금균등·만기일시의 이자와 원금 구성, 금리 1%p의 무게, 변동금리 경로, 중도상환과 기간 연장의 대가, DSR·LTV 한도, 빚을 갚을지 굴릴지의 판단을 시뮬레이터로 익힌다.">
+<meta property="og:url" content="https://moneybook.euiyun.com/chapters/loan.html">
+<meta property="og:image" content="https://moneybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://moneybook.euiyun.com/chapters/loan.html#chapter","name":"대출 상환의 구조","headline":"대출 상환의 구조 · MoneyBook","description":"대출 상환을 직접 펼쳐 본다. 원리금균등·원금균등·만기일시의 이자와 원금 구성, 금리 1%p의 무게, 변동금리 경로, 중도상환과 기간 연장의 대가, DSR·LTV 한도, 빚을 갚을지 굴릴지의 판단을 시뮬레이터로 익힌다.","url":"https://moneybook.euiyun.com/chapters/loan.html","position":10,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://moneybook.euiyun.com/og.png","dateModified":"2026-10-03","isPartOf":{"@type":"Book","@id":"https://moneybook.euiyun.com/#book","name":"MoneyBook · 살아가는 데 필요한 돈 교과서","url":"https://moneybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MoneyBook","item":"https://moneybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"10. 대출 상환의 구조","item":"https://moneybook.euiyun.com/chapters/loan.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/money.js"></script>
+<!--head:end-->
+</head>
+<body data-chapter="loan">
+<style>#sim-sched .hint, #sim-why .hint, #sim-three .hint, #sim-onepct .hint, #sim-path .hint, #sim-prepay .hint, #sim-term .hint, #sim-dsr .hint { top: 6px; bottom: auto; }</style>
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 10</div>
+    <h1>대출 상환의 구조</h1>
+    <p class="lead">대출은 미래의 소득을 오늘로 당겨 쓰는 계약이다. 계약서에는 금리 한 줄이 적혀 있지만, 실제로 얼마를 내게 될지는 금리만으로 정해지지 않는다. 어떤 방식으로 갚는지, 몇 년에 걸쳐 갚는지, 금리가 도중에 바뀌는지, 중간에 목돈을 넣는지에 따라 같은 3억원이 1억 8천만원의 이자가 되기도 하고 3억 6천만원의 이자가 되기도 한다. 이 장은 상환 스케줄을 한 달씩 펼쳐 보며 그 차이가 어디서 생기는지 확인한다.</p>
+    <ul class="objectives">
+      <li>원리금균등·원금균등·만기일시(거치) 상환에서 매달 내는 돈의 이자·원금 구성이 어떻게 변하는지 설명한다.</li>
+      <li>초반 상환액의 대부분이 이자인 이유를 "이자는 남은 잔액에 붙는다"는 한 문장으로 설명한다.</li>
+      <li>고정·변동·혼합 금리의 차이와 금리 1%p가 30년 동안 만드는 이자 차이를 계산한다.</li>
+      <li>중도상환에서 기간 단축과 월 납입 감소를 비교하고, 대출 기간을 늘릴 때의 대가를 읽는다.</li>
+      <li>DSR·LTV가 대출 한도를 어떻게 정하는지 이해하고, 빚을 갚을지 투자할지 판단하는 기준을 세운다.</li>
+    </ul>
+  </header>
+
+  <section id="price">
+    <h2>이자는 남은 잔액에 붙는다</h2>
+    <p>1,000만원을 연 6%로 빌렸다고 하자. 한 달 이자는 1,000만원 × 6% ÷ 12 = 5만원이다. 이번 달에 원금 100만원을 갚으면 다음 달 잔액은 900만원이 되고, 이자는 4만 5천원으로 줄어든다. 대출 상환의 모든 계산은 이 한 줄에서 출발한다. <b>이번 달 이자 = 지난달 남은 잔액 × 월 이율.</b> 이자는 처음 빌린 돈이 아니라 <b>아직 갚지 않은 돈</b>에 붙는다.</p>
+    <p>그러면 남는 질문은 하나다. 매달 원금을 얼마씩 갚느냐. 여기에 따라 상환 방식이 갈린다. 은행에서 고르는 대표적인 방식은 세 가지다.</p>
+    <ul>
+      <li><span class="term">원리금균등상환</span><span class="en">(Annuity / Level payment)</span>: 원금과 이자를 합친 금액이 매달 같다. 처음엔 이자가 크고 원금이 작으며, 갈수록 반대가 된다. 주택담보대출과 학자금 대출에서 가장 흔하다.</li>
+      <li><span class="term">원금균등상환</span><span class="en">(Linear / Equal principal)</span>: 원금을 매달 같은 금액씩 갚는다. 잔액이 일정하게 줄어 이자도 일정하게 줄고, 매달 내는 돈은 점점 작아진다. 첫 달 부담이 가장 크다.</li>
+      <li><span class="term">만기일시상환</span><span class="en">(Bullet)</span>: 만기까지 이자만 내다가 마지막 달에 원금 전부를 한 번에 갚는다. 신용대출과 전세자금대출에서 흔하다. 매달 부담은 가장 작지만 잔액이 줄지 않아 이자는 가장 많다.</li>
+    </ul>
+    <p>여기에 <span class="term">거치 기간</span><span class="en">(Grace period)</span>이 붙기도 한다. 처음 몇 년은 이자만 내고 원금은 그 뒤부터 갚는 방식이다. 거치 기간 동안은 만기일시와 같고, 이후에는 원리금균등이나 원금균등으로 바뀐다.</p>
+
+    <figure class="diagram">
+      <div class="fig-row">
+        <svg viewBox="0 0 240 200" role="img" aria-label="원리금균등: 매달 같은 높이의 막대, 아래쪽 이자 부분이 점점 줄고 위쪽 원금 부분이 늘어난다">
+          <text class="lbl-b" x="20" y="20">원리금균등</text>
+          <text class="lbl-dim" x="20" y="40">매달 같은 돈, 구성만 바뀐다</text>
+          <g transform="translate(0,10)">
+          <rect class="f-bad" x="22" y="94" width="13" height="76"/><rect class="f-acc" x="22" y="74" width="13" height="20"/><rect class="f-bad" x="39.5" y="107" width="13" height="63"/><rect class="f-acc" x="39.5" y="74" width="13" height="33"/><rect class="f-bad" x="57" y="117" width="13" height="53"/><rect class="f-acc" x="57" y="74" width="13" height="43"/><rect class="f-bad" x="74.5" y="125" width="13" height="45"/><rect class="f-acc" x="74.5" y="74" width="13" height="51"/><rect class="f-bad" x="92" y="132" width="13" height="38"/><rect class="f-acc" x="92" y="74" width="13" height="58"/><rect class="f-bad" x="109.5" y="138" width="13" height="32"/><rect class="f-acc" x="109.5" y="74" width="13" height="64"/><rect class="f-bad" x="127" y="143" width="13" height="27"/><rect class="f-acc" x="127" y="74" width="13" height="69"/><rect class="f-bad" x="144.5" y="147" width="13" height="23"/><rect class="f-acc" x="144.5" y="74" width="13" height="73"/><rect class="f-bad" x="162" y="150" width="13" height="20"/><rect class="f-acc" x="162" y="74" width="13" height="76"/><rect class="f-bad" x="179.5" y="152" width="13" height="18"/><rect class="f-acc" x="179.5" y="74" width="13" height="78"/><rect class="f-bad" x="197" y="154" width="13" height="16"/><rect class="f-acc" x="197" y="74" width="13" height="80"/><rect class="f-bad" x="214.5" y="156" width="13" height="14"/><rect class="f-acc" x="214.5" y="74" width="13" height="82"/>
+          <line class="s-axis" x1="16" y1="170" x2="232" y2="170"/>
+          </g>
+        </svg>
+        <svg viewBox="0 0 240 200" role="img" aria-label="원금균등: 원금 부분은 매달 같고 이자 부분이 줄어 막대가 점점 낮아진다">
+          <text class="lbl-b" x="20" y="20">원금균등</text>
+          <text class="lbl-dim" x="20" y="40">원금은 같게, 납입액은 줄어든다</text>
+          <g transform="translate(0,10)">
+          <rect class="f-bad" x="22" y="104" width="13" height="66"/><rect class="f-acc" x="22" y="66" width="13" height="38"/><rect class="f-bad" x="39.5" y="109" width="13" height="61"/><rect class="f-acc" x="39.5" y="71" width="13" height="38"/><rect class="f-bad" x="57" y="114" width="13" height="56"/><rect class="f-acc" x="57" y="76" width="13" height="38"/><rect class="f-bad" x="74.5" y="119" width="13" height="51"/><rect class="f-acc" x="74.5" y="81" width="13" height="38"/><rect class="f-bad" x="92" y="125" width="13" height="45"/><rect class="f-acc" x="92" y="87" width="13" height="38"/><rect class="f-bad" x="109.5" y="130" width="13" height="40"/><rect class="f-acc" x="109.5" y="92" width="13" height="38"/><rect class="f-bad" x="127" y="135" width="13" height="35"/><rect class="f-acc" x="127" y="97" width="13" height="38"/><rect class="f-bad" x="144.5" y="140" width="13" height="30"/><rect class="f-acc" x="144.5" y="102" width="13" height="38"/><rect class="f-bad" x="162" y="145" width="13" height="25"/><rect class="f-acc" x="162" y="107" width="13" height="38"/><rect class="f-bad" x="179.5" y="150" width="13" height="20"/><rect class="f-acc" x="179.5" y="112" width="13" height="38"/><rect class="f-bad" x="197" y="156" width="13" height="14"/><rect class="f-acc" x="197" y="118" width="13" height="38"/><rect class="f-bad" x="214.5" y="161" width="13" height="9"/><rect class="f-acc" x="214.5" y="123" width="13" height="38"/>
+          <line class="s-axis" x1="16" y1="170" x2="232" y2="170"/>
+          </g>
+        </svg>
+        <svg viewBox="0 0 240 200" role="img" aria-label="만기일시: 매달 이자만 낮게 내다가 마지막 달에 원금 전부를 한꺼번에 낸다">
+          <text class="lbl-b" x="20" y="20">만기일시</text>
+          <text class="lbl-dim" x="20" y="40">이자만 내다가 끝에 한꺼번에</text>
+          <g transform="translate(0,10)">
+          <rect class="f-bad" x="22" y="144" width="13" height="26"/><rect class="f-bad" x="39.5" y="144" width="13" height="26"/><rect class="f-bad" x="57" y="144" width="13" height="26"/><rect class="f-bad" x="74.5" y="144" width="13" height="26"/><rect class="f-bad" x="92" y="144" width="13" height="26"/><rect class="f-bad" x="109.5" y="144" width="13" height="26"/><rect class="f-bad" x="127" y="144" width="13" height="26"/><rect class="f-bad" x="144.5" y="144" width="13" height="26"/><rect class="f-bad" x="162" y="144" width="13" height="26"/><rect class="f-bad" x="179.5" y="144" width="13" height="26"/><rect class="f-bad" x="197" y="144" width="13" height="26"/><rect class="f-bad" x="214.5" y="144" width="13" height="26"/><rect class="f-acc" x="214.5" y="58" width="13" height="86"/>
+          <line class="s-axis" x1="16" y1="170" x2="232" y2="170"/>
+          <text class="lbl-dim" x="206" y="80" text-anchor="end">원금 전부</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption><b>세 가지 상환 방식의 모양.</b> 막대 하나가 한 달에 내는 돈이다. 아래 빨간 부분이 이자, 위 녹색 부분이 원금이다. 세 방식 모두 "이자 = 잔액 × 월 이율"이라는 같은 규칙을 따르고, 원금을 언제 갚느냐만 다르다. 원금을 늦게 갚을수록 잔액이 오래 남아 이자가 커진다.</figcaption>
+    </figure>
+
+    <p>원리금균등 상환액은 "매달 같은 돈 \(M\)을 \(n\)번 내서, 그 현재가치가 빌린 돈 \(P\)와 같아지게" 정한 값이다. <a href="interest.html">4장</a>의 연금(年金) 현재가치 공식을 거꾸로 푼 것이다.</p>
+    <div class="formula">$$M = P\,\frac{r}{1-(1+r)^{-n}}$$<div class="where">\(P\): 빌린 돈, \(r\): 월 이율(연이율 ÷ 12), \(n\): 상환 개월 수. 3억원, 연 4%, 30년이면 \(r = 0.00333\), \(n = 360\)이고 \(M\)은 약 143만 2천원이다.</div></div>
+  </section>
+
+  <section id="schedule">
+    <h2>상환 스케줄을 한 달씩 펼치기</h2>
+    <p>아래 막대는 한 달에 하나씩, 대출이 끝날 때까지 매달 내는 돈이다. 빨간 부분이 이자, 녹색 부분이 원금이다. 방식을 바꿔 보고, 막대 위에 마우스를 올리거나(휴대폰에서는 눌러서) 그 달에 낸 돈의 내역을 확인한다.</p>
+
+    <div class="sim" id="sim-sched">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>상환 스케줄: 매달 내는 돈의 이자와 원금</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sc-cv"></canvas><span class="hint">막대 위를 짚어 회차 내역을 본다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="sc-type"><button data-value="annuity" class="on">원리금균등</button><button data-value="linear">원금균등</button><button data-value="bullet">만기일시</button><button data-value="grace">거치 2년</button></div>
+          <label class="ctrl"><span>빌린 돈 <output id="sc-p-out"></output></span><input type="range" id="sc-p" min="10000000" max="500000000" step="10000000" value="300000000"></label>
+          <label class="ctrl"><span>연 금리 <output id="sc-r-out"></output></span><input type="range" id="sc-r" min="1" max="10" step="0.1" value="4"></label>
+          <label class="ctrl"><span>기간 <output id="sc-n-out"></output></span><input type="range" id="sc-n" min="5" max="40" step="1" value="30"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>이자</span><span><i style="background:var(--accent)"></i>원금</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">첫 달 납입</span><span class="v" id="sc-o1">—</span></div>
+        <div class="stat"><span class="k">가장 큰 달 납입</span><span class="v" id="sc-o2">—</span></div>
+        <div class="stat"><span class="k">총이자</span><span class="v" id="sc-o3">—</span></div>
+        <div class="stat"><span class="k">총 납입 ÷ 빌린 돈</span><span class="v" id="sc-o4">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 원리금균등에서 첫 막대와 마지막 막대의 빨간 부분을 비교한다. 높이는 같은데 구성이 뒤집혀 있다. ② 원금균등으로 바꾼다. 녹색 부분은 매달 같고 막대가 오른쪽으로 갈수록 낮아진다. ③ 만기일시로 바꾼다. 막대가 낮지만 30년 내내 빨갛고, 마지막 달에 원금 전부가 한꺼번에 솟는다. ④ 거치 2년을 고른다. 처음 24개월은 이자만 낸다. (거치 2년은 전체 기간 안에 포함된다. 월 단위 계산이며 실제 은행은 일 단위로 이자를 셈해 몇백 원 다를 수 있다.)</div>
+    </div>
+
+    <p>3억원을 연 4%로 30년 빌리면 원리금균등 상환액은 매달 1,432,246원이다. 첫 달 이 돈 가운데 이자가 100만원, 원금은 432,246원뿐이다. 30년 동안 낸 이자를 모두 더하면 약 2억 1,561만원으로, 빌린 돈의 70%를 넘는다. 금리를 8%로 올려 보면 총 납입이 빌린 돈의 2.6배를 넘는다. 오래 빌리는 큰돈에서는 금리와 기간이 원금만큼 중요해진다.</p>
+  </section>
+
+  <section id="why">
+    <h2>왜 초반엔 이자가 대부분인가</h2>
+    <p>원리금균등은 매달 같은 돈을 내는데, 첫해에는 낸 돈의 약 69%가 이자로 나간다(3억원, 연 4%, 30년). 은행이 이자를 먼저 챙기도록 짠 것처럼 보이지만, 사실은 앞에서 본 한 줄의 결과일 뿐이다. 처음에는 잔액이 가장 크니 이자가 가장 크다. 같은 금액에서 이자를 빼고 남은 만큼만 원금이 줄어든다. 원금이 조금 줄면 다음 달 이자가 조금 줄고, 그만큼 원금 몫이 조금 커진다. 이 되먹임이 처음엔 느리게, 끝으로 갈수록 빠르게 돈다.</p>
+    <p>재생 버튼을 누르면 30년이 15초 동안 흘러간다. 왼쪽은 남은 잔액, 오른쪽 막대는 그 달에 낸 돈의 구성이다. 그래프를 끌어 원하는 시점으로 옮길 수도 있다.</p>
+
+    <div class="sim" id="sim-why">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>30년이 흐르는 동안: 잔액과 한 달 상환액의 구성</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="wy-cv"></canvas><span class="hint">그래프를 끌어 시점을 옮긴다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>연 금리 <output id="wy-r-out"></output></span><input type="range" id="wy-r" min="1" max="10" step="0.1" value="4"></label>
+          <div class="btn-row"><button class="btn primary" id="wy-play">멈춤</button><button class="btn" id="wy-re">처음부터</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">시점</span><span class="v" id="wy-o1">—</span></div>
+        <div class="stat"><span class="k">이번 달 이자 비중</span><span class="v" id="wy-o2">—</span></div>
+        <div class="stat"><span class="k">남은 잔액</span><span class="v" id="wy-o3">—</span></div>
+        <div class="stat"><span class="k">지금까지 낸 이자</span><span class="v" id="wy-o4">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 잔액 곡선이 처음엔 완만하고 끝으로 갈수록 가팔라지는 것을 본다. ② 이자 비중이 50% 아래로 내려가는 시점을 찾는다. 연 4%에서는 153회차, 약 12년 9개월째다. ③ 금리를 8%로 올리고 다시 재생한다. 그 시점이 257회차, 21년이 넘어서야 온다. ④ 15년 지점(180회차)에서 잔액을 읽는다. 기간의 절반이 지났는데 원금은 3분의 1 남짓 줄었을 뿐이다. (3억원, 30년 원리금균등)</div>
+    </div>
+
+    <p>연 4%, 30년 대출의 15년 지점에서 남은 잔액은 약 1억 9,363만원이다. 절반의 시간이 지나도 원금은 35%밖에 줄지 않는다. 이 사실은 두 가지를 알려 준다. 첫째, 대출 초기에 집을 팔거나 대출을 갈아타면 생각보다 많은 빚이 남아 있다. 둘째, <b>중도상환은 이를수록 효과가 크다.</b> 잔액이 클 때 원금을 줄이면 남은 수백 달의 이자가 함께 줄기 때문이다. 이것은 뒤에서 직접 확인한다.</p>
+    <div class="callout tip"><strong>은행이 손해 보는 것도, 내가 손해 보는 것도 아니다</strong>
+      원리금균등에서 초반 이자가 많은 것은 초반에 빌린 돈이 많기 때문이다. 어느 달이든 이자는 정확히 "그 달 잔액 × 월 이율"이다. 숨은 수수료나 선이자는 없다. 이자를 덜 내는 길은 원금을 더 빨리 줄이는 것 하나뿐이다.</div>
+  </section>
+
+  <section id="compare">
+    <h2>세 방식의 잔액과 총이자</h2>
+    <p>세 방식을 한 그래프에 겹쳐 본다. 잔액 곡선 아래 넓이가 클수록 이자를 오래, 많이 낸다. 세로 점선을 끌어 같은 시점에 세 방식이 어디에 있는지 비교한다.</p>
+
+    <div class="sim" id="sim-three">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>원리금균등 · 원금균등 · 만기일시 겹쳐 보기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="th-cv"></canvas><span class="hint">세로 점선을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="th-view"><button data-value="bal" class="on">남은 잔액</button><button data-value="int">누적 이자</button><button data-value="paid">누적 납입</button></div>
+          <label class="ctrl"><span>연 금리 <output id="th-r-out"></output></span><input type="range" id="th-r" min="1" max="10" step="0.1" value="4"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>원리금균등</span><span><i style="background:var(--accent-2)"></i>원금균등</span><span><i style="background:var(--blue)"></i>만기일시</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">시점</span><span class="v" id="th-o4">—</span></div>
+        <div class="stat"><span class="k">원리금균등</span><span class="v" id="th-o1">—</span></div>
+        <div class="stat"><span class="k">원금균등</span><span class="v" id="th-o2">—</span></div>
+        <div class="stat"><span class="k">만기일시</span><span class="v" id="th-o3">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "남은 잔액"에서 원금균등은 직선, 원리금균등은 위로 볼록한 곡선, 만기일시는 30년 내내 수평선이다. ② "누적 이자"로 바꿔 30년 끝의 높이를 비교한다. ③ "누적 납입"에서 10년 지점을 본다. 원금균등이 가장 많이 냈지만 그만큼 빚도 가장 많이 줄었다. (3억원, 30년)</div>
+    </div>
+
+    <div class="table-wrap"><table>
+      <thead><tr><th>3억원 · 연 4% · 30년</th><th class="num">첫 달</th><th class="num">마지막 달</th><th class="num">총이자</th></tr></thead>
+      <tbody>
+        <tr><td>원리금균등</td><td class="num">1,432,246</td><td class="num">1,432,246</td><td class="num">약 2억 1,561만</td></tr>
+        <tr><td>원금균등</td><td class="num">1,833,333</td><td class="num">836,111</td><td class="num">약 1억 8,050만</td></tr>
+        <tr><td>만기일시</td><td class="num">1,000,000</td><td class="num">301,000,000</td><td class="num">3억 6,000만</td></tr>
+      </tbody>
+    </table></div>
+    <p>총이자만 보면 원금균등이 가장 싸다. 그런데 첫 달 부담이 원리금균등보다 약 40만원 크다. 소득이 시간이 갈수록 늘어나는 사회초년생에게는 처음이 가장 빠듯하므로, 원리금균등의 "처음에 덜 내고 나중에 더 오래 내는" 구조가 오히려 맞을 수 있다. 만기일시는 매달 부담이 가장 작지만 원금이 전혀 줄지 않는다. 만기에 갚을 목돈이 따로 마련되어 있지 않다면, 만기일시는 빚을 미루는 것이지 줄이는 것이 아니다.</p>
+    <div class="callout"><strong>어느 방식이 "좋은" 방식인가</strong>
+      같은 금리라면 세 방식의 차이는 "원금을 언제 갚느냐"뿐이다. 원금을 일찍 갚으면 이자가 줄지만, 그 돈을 다른 데 쓸 기회도 줄어든다. 그래서 총이자가 적다는 것만으로 원금균등이 항상 낫다고 할 수는 없다. 매달 감당할 수 있는 금액, 소득이 늘어날 전망, 손에 남겨 둘 비상금을 함께 본다. 이 판단의 기준은 이 장 뒤쪽 "갚을까, 굴릴까"에서 다시 다룬다.</div>
+  </section>
+
+  <section id="rate">
+    <h2>고정·변동·혼합 금리와 1%p의 무게</h2>
+    <p>대출 금리는 보통 두 부분으로 이루어진다. 은행이 돈을 조달하는 비용을 따르는 <span class="term">기준금리</span><span class="en">(Base rate)</span>와, 은행이 위험과 이윤을 얹는 <span class="term">가산금리</span><span class="en">(Spread)</span>다. 여기서 급여 이체나 카드 사용 같은 조건에 따른 <b>우대금리</b>를 뺀다. 주택담보대출의 기준금리로는 코픽스(COFIX, 은행 자금조달비용지수)나 은행채 금리가 쓰인다. 한국은행 기준금리가 오르면 이 지표들이 따라 오르는 흐름은 <a href="economy.html">5장</a>에서 봤다.</p>
+    <ul>
+      <li><span class="term">고정금리</span><span class="en">(Fixed rate)</span>: 만기까지 금리가 바뀌지 않는다. 앞날이 확실한 대신 처음 금리가 변동금리보다 조금 높은 경우가 많다. 금리 상승의 위험을 은행이 진다.</li>
+      <li><span class="term">변동금리</span><span class="en">(Variable rate)</span>: 보통 6개월이나 1년마다 기준금리를 따라 다시 정해진다. 금리 상승의 위험을 빌린 사람이 진다.</li>
+      <li><span class="term">혼합금리</span><span class="en">(Hybrid rate)</span>: 처음 몇 년(흔히 5년)은 고정, 그 뒤는 변동이다. 은행에서 "고정형"이라 부르는 주택담보대출 상당수가 실제로는 이 형태다.</li>
+    </ul>
+
+    <figure class="diagram">
+      <div class="fig-row">
+        <svg viewBox="0 0 320 220" role="img" aria-label="대출 금리 = 기준금리 + 가산금리 - 우대금리를 쌓은 막대로 표현">
+          <text class="lbl-b" x="16" y="22">대출 금리는 어떻게 정해지나</text>
+          <rect class="f-acc-soft" x="40" y="104" width="64" height="96"/>
+          <text class="lbl" x="72" y="156" text-anchor="middle">기준</text>
+          <rect class="f-acc2-soft" x="40" y="56" width="64" height="48"/>
+          <text class="lbl" x="72" y="85" text-anchor="middle">가산</text>
+          <rect class="f-bad-soft" x="40" y="56" width="64" height="16" stroke-dasharray="3 3"/>
+          <text class="lbl-dim" x="112" y="68">− 우대금리</text>
+          <text class="lbl-dim" x="112" y="90">+ 가산금리(위험·이윤)</text>
+          <text class="lbl-dim" x="112" y="150">기준금리</text>
+          <text class="lbl-dim" x="112" y="168">코픽스·은행채 등</text>
+          <line class="s-axis" x1="30" y1="200" x2="300" y2="200"/>
+          <line class="s-dash" x1="40" y1="72" x2="300" y2="72"/>
+          <text class="lbl-acc" x="300" y="64" text-anchor="end">= 내 금리</text>
+        </svg>
+        <svg viewBox="0 0 320 220" role="img" aria-label="시간에 따른 고정·변동·혼합 금리의 움직임: 고정은 수평, 변동은 오르내림, 혼합은 5년 수평 후 오르내림">
+          <text class="lbl-b" x="16" y="22">시간에 따른 금리</text>
+          <line class="s-axis" x1="30" y1="196" x2="306" y2="196"/>
+          <line class="s-axis" x1="30" y1="40" x2="30" y2="196"/>
+          <path class="s-acc2" d="M30 110 H306"/>
+          <path class="s-acc" d="M30 126 H62 V118 H94 V96 H126 V84 H158 V100 H190 V132 H222 V146 H254 V124 H286 V112 H306"/>
+          <path class="s-bad" d="M30 160 H138 V138 H170 V154 H202 V176 H234 V166 H266 V150 H306" stroke-dasharray="5 3"/>
+          <text class="lbl-acc2" x="306" y="104" text-anchor="end">고정</text>
+          <text class="lbl-acc" x="96" y="88">변동</text>
+          <text class="lbl-bad" x="36" y="152">혼합(5년 고정)</text>
+          <text class="lbl-dim" x="306" y="214" text-anchor="end">시간 →</text>
+        </svg>
+      </div>
+      <figcaption><b>대출 금리의 구성과 세 가지 금리 유형.</b> 왼쪽: 내 금리는 기준금리에 가산금리를 얹고 우대금리를 뺀 값이다. 오른쪽: 고정금리는 끝까지 수평이고, 변동금리는 기준금리를 따라 계단처럼 움직이며, 혼합금리는 처음 몇 년 수평이다가 변동으로 바뀐다. 세 선의 높이는 예시다.</figcaption>
+    </figure>
+
+    <p>금리 1%p는 작아 보인다. 연 4%와 5%의 차이는 "1"이다. 그런데 큰돈을 오래 빌리면 이 1이 원금의 수십 퍼센트가 된다. 아래 그래프에서 손잡이를 끌어 기준 금리를 바꾸면, 주황 띠가 그 금리와 1%p 높은 금리 사이의 차이를 보여 준다.</p>
+
+    <div class="sim" id="sim-onepct">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>금리 1%p가 바꾸는 월 상환액과 총이자</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="op-cv"></canvas><span class="hint">아래 축의 손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>빌린 돈 <output id="op-p-out"></output></span><input type="range" id="op-p" min="50000000" max="600000000" step="10000000" value="300000000"></label>
+          <label class="ctrl"><span>기간 <output id="op-n-out"></output></span><input type="range" id="op-n" min="5" max="40" step="1" value="30"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">금리</span><span class="v" id="op-o1">—</span></div>
+        <div class="stat"><span class="k">월 상환액 차이</span><span class="v" id="op-o2">—</span></div>
+        <div class="stat"><span class="k">총이자 차이</span><span class="v" id="op-o3">—</span></div>
+        <div class="stat"><span class="k">빌린 돈 대비</span><span class="v" id="op-o4">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 4%에 두고 차이를 읽는다. 월 약 17.8만원, 30년 총이자 약 6,416만원이다. ② 기간을 10년으로 줄인다. 같은 1%p인데 총이자 차이가 확 줄어든다. ③ 기간을 40년으로 늘린다. 1%p가 빌린 돈의 30%를 넘는다. (원리금균등, 금리는 기간 내내 고정이라고 가정)</div>
+    </div>
+
+    <p>3억원을 30년 원리금균등으로 빌릴 때, 연 4%면 월 1,432,246원, 연 5%면 월 1,610,465원이다. 한 달에 17만 8천원 차이가 360번 쌓이면 총이자 차이는 약 6,416만원이 된다. 대출을 알아볼 때 0.1~0.2%p의 우대금리를 챙기고, 여러 은행의 금리를 비교하는 수고가 그만한 값어치가 있는 이유다. 반대로 변동금리 대출을 가진 사람에게는 기준금리 1%p 인상이 이만큼의 부담 증가로 돌아온다.</p>
+
+    <h3>변동금리의 경로를 직접 그려 보기</h3>
+    <p>변동금리 대출은 금리가 바뀔 때마다 남은 잔액과 남은 기간으로 상환액을 다시 계산한다. 그래서 앞날의 금리가 어떤 길을 걷느냐에 따라 매달 내는 돈이 달라진다. 위쪽 그래프에 손가락이나 마우스로 금리의 길을 그려 본다. 아래쪽에서 매달 내는 돈이 따라 움직인다. 금색 점선은 같은 기간 고정금리 대출의 상환액이다.</p>
+
+    <div class="sim" id="sim-path">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>금리의 길을 그리면 상환액이 따라간다</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="pa-cv"></canvas><span class="hint">위 그래프에 금리 경로를 그린다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="pa-mode"><button data-value="var" class="on">변동금리</button><button data-value="mix">혼합(5년 고정)</button></div>
+          <label class="ctrl"><span>고정금리 <output id="pa-fix-out"></output></span><input type="range" id="pa-fix" min="2" max="8" step="0.1" value="4.5"></label>
+          <div class="btn-row"><button class="btn sm" id="pa-flat">평탄</button><button class="btn sm" id="pa-up">급등</button><button class="btn sm" id="pa-down">하락</button><button class="btn sm" id="pa-rand">무작위</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>내가 그린 경로</span><span><i style="background:var(--accent-2)"></i>고정금리</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">총이자 (그린 경로)</span><span class="v" id="pa-o1">—</span></div>
+        <div class="stat"><span class="k">총이자 (고정)</span><span class="v" id="pa-o2">—</span></div>
+        <div class="stat"><span class="k">가장 큰 달 납입</span><span class="v" id="pa-o3">—</span></div>
+        <div class="stat"><span class="k">첫 달 대비</span><span class="v" id="pa-o4">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "평탄"에서는 변동 4.0%가 고정 4.5%보다 싸다. ② "급등"을 누른다. 3년째부터 오른 금리가 6년째에 7%가 되면 월 납입이 첫 달보다 30% 넘게 뛴다. ③ "혼합"으로 바꾼다. 처음 5년은 고정이라 급등의 충격이 늦게, 작게 온다. ④ 금리를 직접 10% 가까이 끌어올려 본다. 월 납입이 두 배 가까이 되는 순간이 가계가 무너지는 지점이다. (3억원, 30년 원리금균등. 금리는 1년마다 바뀌고, 바뀔 때마다 남은 잔액과 기간으로 상환액을 다시 계산한다.)</div>
+    </div>
+
+    <p>변동금리를 고를지 고정금리를 고를지는 "금리가 오를까 내릴까"를 맞히는 게임이 아니다. 아무도 30년 금리를 맞히지 못한다. 묻는 것은 <b>금리가 크게 올라도 매달 낼 수 있는가</b>다. 월 납입이 30% 늘어도 생활이 버틴다면 처음 금리가 낮은 변동금리가 합리적일 수 있다. 빠듯하다면 조금 더 내고 확실성을 사는 고정금리나 혼합금리가 안전하다. 고정금리의 금리 차이는 "금리 상승 보험료"라고 보면 된다.</p>
+  </section>
+
+  <section id="prepay">
+    <h2>중도상환: 기간을 줄일까, 월 납입을 줄일까</h2>
+    <p>보너스나 적금 만기로 목돈이 생기면 대출 일부를 미리 갚을 수 있다. 이것이 <span class="term">중도상환</span><span class="en">(Prepayment)</span>이다. 원리금균등 대출에서 중도상환을 하면 은행은 보통 두 가지 중 하나로 남은 스케줄을 다시 짠다.</p>
+    <ul>
+      <li><b>기간 단축</b>: 매달 내는 돈은 그대로 두고, 대출이 일찍 끝난다.</li>
+      <li><b>월 납입 감소</b>: 끝나는 날은 그대로 두고, 매달 내는 돈이 줄어든다.</li>
+    </ul>
+    <p>아래 그래프의 금색 동전을 끌어 목돈을 넣을 시점을 정하고, 금액과 방식을 바꿔 본다. 점선은 중도상환을 하지 않았을 때의 원래 스케줄이다.</p>
+
+    <div class="sim" id="sim-prepay">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>목돈을 언제, 어떻게 넣을까</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="pp-cv"></canvas><span class="hint">동전을 좌우로 끌어 시점을 바꾼다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="pp-mode"><button data-value="short" class="on">기간 단축</button><button data-value="cut">월 납입 감소</button></div>
+          <label class="ctrl"><span>중도상환 금액 <output id="pp-a-out"></output></span><input type="range" id="pp-a" min="0" max="150000000" step="5000000" value="50000000"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">이자 절감</span><span class="v" id="pp-o1">—</span></div>
+        <div class="stat"><span class="k" id="pp-o2k">줄어든 기간</span><span class="v" id="pp-o2">—</span></div>
+        <div class="stat"><span class="k">중도상환수수료</span><span class="v" id="pp-o3">—</span></div>
+        <div class="stat"><span class="k">수수료 뺀 절감</span><span class="v" id="pp-o4">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 5년째(60회차)에 5,000만원, 기간 단축이면 약 6년 10개월이 줄고 이자가 약 6,812만원 줄어든다. ② 같은 조건에서 "월 납입 감소"로 바꾼다. 월 납입은 약 116.8만원이 되지만 이자 절감은 약 2,918만원에 그친다. ③ 동전을 20년째로 옮긴다. 같은 5,000만원인데 절감액이 크게 줄어든다. ④ 동전을 1~2년째로 옮겨 수수료가 붙는 것을 본다. (3억원, 연 4%, 30년 원리금균등. 수수료는 3년 이내 상환 시 상환액 × 0.6% × 남은 기간/3년으로 가정)</div>
+    </div>
+
+    <p>같은 5,000만원을 같은 날 갚았는데 이자 절감이 두 배 넘게 차이 나는 이유는 무엇일까. "월 납입 감소"는 줄어든 잔액을 남은 25년에 고르게 다시 나눈다. 매달 원금을 조금만 갚으니 잔액이 다시 천천히 줄고, 이자도 오래 붙는다. "기간 단축"은 원래대로 매달 143만원을 계속 내므로, 그 안에서 원금 몫이 커져 잔액이 훨씬 빨리 준다. 이자를 줄이는 것이 목표라면 기간 단축이, 매달의 숨통을 틔우는 것이 목표라면 월 납입 감소가 맞다. 월 납입 감소로 줄어든 돈을 저축하지 않고 써 버리면 이자 절감은 적고 빚은 오래 남는다.</p>
+    <div class="callout warn"><strong>중도상환수수료와 제도 값은 바뀐다</strong>
+      많은 대출은 빌린 뒤 일정 기간(보통 3년) 안에 미리 갚으면 <span class="term">중도상환수수료</span><span class="en">(Prepayment fee)</span>를 받는다. 보통 "상환 금액 × 수수료율 × 남은 기간 ÷ 3년"으로 계산해 시간이 갈수록 줄고, 3년이 지나면 없어진다. 2025년부터 은행이 실제 비용만 반영하도록 바뀌어 주택담보대출 기준 약 0.5~0.7%대, 신용대출은 그보다 낮은 수준으로 내려왔다(2026년 기준 대표값, 은행·상품마다 다르다). 한국장학재단의 학자금 대출은 중도상환수수료가 없다. 수수료율과 이 장의 규제 수치는 정책에 따라 자주 바뀌므로, 실제 결정 전에는 대출 약정서와 금융감독원·은행 안내를 확인한다.</div>
+  </section>
+
+  <section id="term">
+    <h2>기간을 늘리면 월 부담은 줄고 이자는 는다</h2>
+    <p>월 상환액이 버거우면 은행은 기간을 늘리자고 제안한다. 20년을 30년으로, 30년을 40년이나 50년으로. 월 부담이 줄어드는 것은 사실이다. 그 대가는 무엇일까. 아래 곡선의 점 하나가 대출 기간 하나다. 가로는 월 상환액, 세로는 총이자다. 손잡이를 곡선을 따라 끌어 본다.</p>
+
+    <div class="sim" id="sim-term">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>대출 기간의 트레이드오프 곡선</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="tm-cv"></canvas><span class="hint">곡선 위 손잡이를 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>연 금리 <output id="tm-r-out"></output></span><input type="range" id="tm-r" min="1" max="10" step="0.1" value="4"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">기간</span><span class="v" id="tm-o1">—</span></div>
+        <div class="stat"><span class="k">월 상환액</span><span class="v" id="tm-o2">—</span></div>
+        <div class="stat"><span class="k">총이자</span><span class="v" id="tm-o3">—</span></div>
+        <div class="stat"><span class="k">5년 더 늘리면 월</span><span class="v" id="tm-o4">—</span></div>
+        <div class="stat"><span class="k">5년 더 늘리면 이자</span><span class="v" id="tm-o5">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 20년에서 30년으로 옮긴다. 월 약 38.6만원이 줄고 이자는 약 7,930만원 는다. ② 30년에서 40년으로 옮긴다. 월은 약 17.8만원밖에 안 주는데 이자는 약 8,622만원 는다. ③ 금리를 8%로 올리고 50년 끝을 본다. 곡선이 빨간 선(이자만 내는 선)에 바짝 붙는다. 기간을 아무리 늘려도 월 상환액은 이자보다 작아질 수 없다. (3억원, 원리금균등)</div>
+    </div>
+
+    <p>곡선은 오른쪽 아래(짧은 기간: 월 부담 큼, 이자 적음)에서 왼쪽 위(긴 기간: 월 부담 작음, 이자 많음)로 휘어 올라간다. 처음 몇 년을 늘릴 때는 월 부담이 크게 줄지만, 기간이 길어질수록 월 부담은 거의 줄지 않고 이자만 쌓인다. 월 상환액에는 바닥이 있기 때문이다. 기간이 무한히 길어도 매달 이자(잔액 × 월 이율)만큼은 내야 한다. 3억원, 연 4%면 그 바닥이 월 100만원이다. 40년, 50년 대출은 그 바닥에 다가가는 대가로 원금보다 큰 이자를 낸다.</p>
+  </section>
+
+  <section id="dsr">
+    <h2>DSR과 LTV: 은행은 얼마까지 빌려 주는가</h2>
+    <p>지금까지는 빌린 다음의 이야기였다. 그 전에, 은행은 얼마까지 빌려 줄까. 한국에서는 두 가지 잣대가 대출 한도를 정한다. 하나는 <b>담보</b>, 하나는 <b>소득</b>이다.</p>
+    <ul>
+      <li><span class="term">LTV</span><span class="en">(Loan To Value, 주택담보대출비율)</span>: 집값 대비 대출 비율의 상한이다. 6억원 집에 LTV 50%가 적용되면 담보만으로는 최대 3억원이다. 지역(규제지역 여부), 보유 주택 수, 생애최초 구입 여부에 따라 약 40~80% 범위에서 달라진다.</li>
+      <li><span class="term">DSR</span><span class="en">(Debt Service Ratio, 총부채원리금상환비율)</span>: 1년 동안 갚아야 하는 <b>모든 대출의 원리금</b>을 연소득으로 나눈 비율이다. 주택담보대출뿐 아니라 신용대출, 자동차 할부, 학자금 대출의 원리금까지 더한다. 2026년 기준 은행권 한도는 약 40%, 2금융권은 약 50%다(총대출이 1억원을 넘는 사람에게 적용).</li>
+    </ul>
+    <div class="formula">$$\mathrm{DSR} = \frac{\text{모든 대출의 연간 원리금 상환액}}{\text{연소득}} \le 40\%$$<div class="where">연소득 3,600만원이면 모든 대출의 원리금을 합쳐 1년에 1,440만원(월 120만원)까지 갚을 수 있는 만큼만 빌릴 수 있다. 일부 대출은 계산 방식이 다르거나 빠지기도 한다.</div></div>
+
+    <figure class="diagram">
+      <div class="fig-row">
+        <svg viewBox="0 0 320 230" role="img" aria-label="LTV: 집값 6억원에 LTV 50%를 곱해 담보 기준 한도 3억원">
+          <text class="lbl-b" x="16" y="22">담보로 본 한도 (LTV)</text>
+          <rect class="f-surface" x="30" y="50" width="110" height="150"/>
+          <rect class="f-acc-soft" x="30" y="125" width="110" height="75"/>
+          <text class="lbl" x="85" y="92" text-anchor="middle">집값 6억</text>
+          <text class="lbl-acc" x="85" y="168" text-anchor="middle">50%</text>
+          <line class="s-dash" x1="140" y1="125" x2="190" y2="125"/>
+          <text class="lbl-dim" x="196" y="118">LTV 상한</text>
+          <text class="lbl-acc" x="196" y="168">최대 3억</text>
+          <text class="lbl-dim" x="196" y="188">집값이 기준</text>
+        </svg>
+        <svg viewBox="0 0 320 230" role="img" aria-label="DSR: 연소득 3,600만원의 40%인 연 1,440만원을 30년 동안 갚을 수 있는 원금은 약 2억 5천만원">
+          <text class="lbl-b" x="16" y="22">소득으로 본 한도 (DSR)</text>
+          <rect class="f-surface" x="30" y="50" width="110" height="150"/>
+          <rect class="f-acc2-soft" x="30" y="140" width="110" height="60"/>
+          <text class="lbl" x="85" y="92" text-anchor="middle">연소득 3,600만</text>
+          <text class="lbl-acc2" x="85" y="176" text-anchor="middle">40%</text>
+          <line class="s-dash" x1="140" y1="140" x2="190" y2="140"/>
+          <text class="lbl-dim" x="196" y="134">연 1,440만 상환</text>
+          <text class="lbl-acc2" x="196" y="168">약 2.5억</text>
+          <text class="lbl-dim" x="196" y="188">연 4% · 30년</text>
+        </svg>
+      </div>
+      <figcaption><b>두 개의 문.</b> 대출 한도는 LTV로 계산한 금액과 DSR로 계산한 금액 가운데 <b>작은 쪽</b>이다. 6억원 집을 사려는 연소득 3,600만원의 사람은 LTV로는 3억원까지 되지만, DSR로는 약 2억 5천만원에서 막힌다. 집값이 비싼 지역일수록, 소득이 낮을수록 DSR이 먼저 문을 닫는다.</figcaption>
+    </figure>
+
+    <p>DSR은 금리와 기간에도 민감하다. 같은 연소득이라도 금리가 높으면 같은 원리금으로 갚을 수 있는 원금이 작아지고, 기간이 길면 커진다. 여기에 <span class="term">스트레스 DSR</span><span class="en">(Stress DSR)</span>이 더해진다. 앞으로 금리가 오를 수 있다고 보고, 한도를 계산할 때만 실제 금리에 가산금리(스트레스 금리)를 더하는 제도다. 2025년 하반기부터 은행권에서 전면 시행되었고, 수도권 주택담보대출 기준 약 1.5%p를 더하는 것이 대표적이다(대출 종류, 지역, 고정금리 기간에 따라 다르고 계속 조정되고 있다). 실제로 내는 금리는 그대로이고, 빌릴 수 있는 한도만 줄어든다.</p>
+
+    <div class="sim" id="sim-dsr">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>DSR 게이지: 내 소득으로 빌릴 수 있는 돈</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ds-cv"></canvas><span class="hint">바늘을 끌어 원하는 대출액을 정한다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>연소득 <output id="ds-inc-out"></output></span><input type="range" id="ds-inc" min="20000000" max="150000000" step="1000000" value="36000000"></label>
+          <label class="ctrl"><span>새 대출 금리 <output id="ds-r-out"></output></span><input type="range" id="ds-r" min="2" max="8" step="0.1" value="4"></label>
+          <label class="ctrl"><span>기존 대출 연 원리금 <output id="ds-oth-out"></output></span><input type="range" id="ds-oth" min="0" max="24000000" step="500000" value="0"></label>
+          <div class="seg" id="ds-n"><button data-value="120">10년</button><button data-value="240">20년</button><button data-value="360" class="on">30년</button><button data-value="480">40년</button></div>
+          <label class="check"><input type="checkbox" id="ds-st"> 스트레스 금리 +1.5%p</label>
+          <div class="btn-row"><button class="btn" id="ds-max">한도까지 채우기</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--warn)"></i>기존 대출</span><span><i style="background:var(--accent)"></i>새 대출</span><span><i style="background:var(--bad)"></i>한도 초과</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">최대 한도 (DSR 40%)</span><span class="v" id="ds-o1">—</span></div>
+        <div class="stat"><span class="k">원하는 대출</span><span class="v" id="ds-o2">—</span></div>
+        <div class="stat"><span class="k">DSR</span><span class="v" id="ds-o3">—</span></div>
+        <div class="stat"><span class="k">판정</span><span class="v" id="ds-o4">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "한도까지 채우기"를 누른다. 연소득 3,600만원, 4%, 30년이면 약 2억 5,135만원이다. ② 스트레스 금리를 켠다. 같은 사람의 한도가 약 2억 1,135만원으로 4,000만원 줄어든다. ③ 기존 대출 연 원리금을 600만원으로 올린다. 신용대출이나 자동차 할부 하나가 주택 대출 한도를 얼마나 깎는지 본다. ④ 기간을 10년으로 줄인다. (원리금균등 기준 단순 모델. 실제 DSR 산정은 대출 종류별 만기 가정 등이 달라 차이가 있다.)</div>
+    </div>
+
+    <p>DSR 40%는 "은행이 이만큼까지는 빌려 준다"는 상한이지, "이만큼 빌려도 괜찮다"는 기준이 아니다. 세전 연소득의 40%는 세후 실수령액으로 보면 절반 가까이가 된다. 연봉 3,600만원의 월 실수령은 약 265.6만원(<a href="income.html">6장</a>)인데, DSR 40%를 꽉 채우면 매달 120만원이 원리금으로 나간다. 남은 145만원으로 생활비와 저축을 해야 한다. 한도는 은행의 위험 관리 숫자이고, 내 가계의 적정선은 <a href="budget.html">7장</a>의 예산에서 정한다.</p>
+  </section>
+
+  <section id="repay-or-invest">
+    <h2>갚을까, 굴릴까</h2>
+    <p>여윳돈 1,000만원이 생겼다. 대출을 갚을까, 투자할까. 이 질문의 핵심은 단순하다. <b>대출을 갚는 것은 대출 금리만큼의 수익을 확실하게 얻는 것과 같다.</b> 연 4.5% 대출을 1,000만원 갚으면 1년에 45만원의 이자가 사라진다. 세금도 없고, 위험도 없다. 그러니 비교 대상은 "세후 기대수익률"이고, 투자에는 흔들림이 따라온다는 점까지 함께 저울에 올려야 한다.</p>
+    <p>아래는 같은 1,000만원으로 대출을 갚은 경우(금색 선, 확정)와 투자한 경우(녹색 부채꼴, 600가지 가능한 미래)를 비교한다. 오른쪽 막대는 기간 끝에서 투자 결과가 어떻게 흩어지는지 보여 준다. 빨간 막대는 대출을 갚았을 때보다 못한 결과다.</p>
+
+    <div class="sim" id="sim-vs">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>대출 상환(확정) vs 투자(불확실)</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="vs-cv"></canvas></div>
+        <div class="sim-controls">
+          <div class="seg" id="vs-asset"><button data-value="cash">예금</button><button data-value="bond">채권</button><button data-value="stock" class="on">세계 주식</button></div>
+          <label class="ctrl"><span>대출 금리 <output id="vs-lr-out"></output></span><input type="range" id="vs-lr" min="1" max="10" step="0.1" value="4.5"></label>
+          <label class="ctrl"><span>기간 <output id="vs-y-out"></output></span><input type="range" id="vs-y" min="1" max="20" step="1" value="10"></label>
+          <label class="check"><input type="checkbox" id="vs-tax" checked> 수익에 세금 15.4% 반영</label>
+          <div class="btn-row"><button class="btn" id="vs-seed">다른 미래 뽑기</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent-2)"></i>대출 상환(확정)</span><span><i style="background:var(--accent)"></i>투자 중앙값</span><span><i style="background:var(--accent);opacity:.35;height:8px"></i>투자 10~90% 범위</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">갚았을 때 (확정)</span><span class="v" id="vs-o1">—</span></div>
+        <div class="stat"><span class="k">굴렸을 때 중앙값</span><span class="v" id="vs-o2">—</span></div>
+        <div class="stat"><span class="k">갚기보다 못할 확률</span><span class="v" id="vs-o3">—</span></div>
+        <div class="stat"><span class="k">굴렸을 때 하위 10%</span><span class="v" id="vs-o4">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "예금"을 고른다. 대출 금리 4.5%보다 예금의 세후 수익이 낮아 거의 언제나 갚는 쪽이 낫다. ② 대출 금리를 1.7%로 내린다. 이번엔 예금이 이긴다. ③ "세계 주식"에서 기간을 1년과 20년으로 바꿔 본다. 중앙값은 갚기보다 높지만, 갚기보다 못할 확률이 상당히 남는다. ④ "다른 미래 뽑기"로 부채꼴이 바뀌는 것을 본다. (수익률은 <code>MN.ASSETS</code>의 교육용 가정이며 과거 수익률은 미래를 보장하지 않는다. 세금은 이자소득세율로 단순화했다. 갚은 쪽은 아낀 이자가 대출 금리로 복리로 쌓인다고 본다.)</div>
+    </div>
+
+    <p>판단의 순서는 이렇다.</p>
+    <ol>
+      <li><b>금리가 높은 빚부터 갚는다.</b> 카드 리볼빙(<a href="credit.html">9장</a>)이나 연 10%를 넘는 신용대출을 갚는 것은 어떤 투자보다 확실한 고수익이다.</li>
+      <li><b>비상금은 갚기 전에 남긴다.</b> 빚을 갚은 돈은 다시 꺼내 쓸 수 없다. 급한 일이 생겨 다시 빌리면 더 높은 금리를 내게 된다. 필수지출 3~6개월치(<a href="saving.html">8장</a>)는 손에 둔다.</li>
+      <li><b>대출 금리가 예금의 세후 금리보다 낮다면</b>(정책 학자금 대출처럼) 서둘러 갚을 이유가 약하다. 저축이 이긴다.</li>
+      <li><b>그 사이 구간</b>(대출 금리 3~6%)에서는 확실한 대출 금리와 불확실한 기대수익을 저울질한다. 같은 기대수익이라면 확실한 쪽의 가치가 더 크다. 하락장에서 투자 손실과 대출 이자가 동시에 나가는 상황을 견딜 수 있는지가 기준이다.</li>
+    </ol>
+  </section>
+
+  <section id="case">
+    <h2>한결의 학자금 대출</h2>
+    <p>한결은 1,200만원의 학자금 대출을 연 1.7%, 10년 원리금균등으로 갚고 있다. 세 가지 방식으로 바꿔 계산하면 다음과 같다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>1,200만원 · 연 1.7% · 10년</th><th class="num">첫 달</th><th class="num">마지막 달</th><th class="num">총이자</th></tr></thead>
+      <tbody>
+        <tr><td>원리금균등 (한결의 현재)</td><td class="num">108,811</td><td class="num">108,811</td><td class="num">1,057,364</td></tr>
+        <tr><td>원금균등</td><td class="num">117,000</td><td class="num">100,142</td><td class="num">1,028,500</td></tr>
+        <tr><td>만기일시</td><td class="num">17,000</td><td class="num">12,017,000</td><td class="num">2,040,000</td></tr>
+        <tr><td>거치 1년 + 원리금균등 9년</td><td class="num">17,000</td><td class="num">119,906</td><td class="num">1,153,881</td></tr>
+      </tbody>
+    </table></div>
+    <p>원금균등으로 바꿔도 10년 동안 아끼는 이자는 3만원 남짓이다. 금리가 1.7%로 낮아서 방식에 따른 차이가 작다. 그러면 한결이 매달 남는 돈의 일부를 학자금에 더 넣어 빨리 갚는 것은 어떨까. 아래에서 매달 추가 상환액과 저축의 세후 이율을 바꿔 두 길을 비교한다. 두 경우 모두 매달 같은 돈(정규 상환 + 추가 금액)을 쓴다. "갚기"는 그 돈을 대출에 먼저 넣고 다 갚은 뒤부터 저축하고, "모으기"는 정규 상환만 하고 나머지를 저축한다.</p>
+
+    <div class="sim" id="sim-hg">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>한결: 학자금을 빨리 갚을까, 그 돈을 모을까</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="hg-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>매달 추가로 쓰는 돈 <output id="hg-x-out"></output></span><input type="range" id="hg-x" min="0" max="200000" step="10000" value="100000"></label>
+          <label class="ctrl"><span>저축 세후 이율 <output id="hg-s-out"></output></span><input type="range" id="hg-s" min="0.5" max="5" step="0.1" value="2.5"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent-2)"></i>갚기 먼저: 통장</span><span><i style="background:var(--accent)"></i>모으기 먼저: 통장</span><span>점선: 같은 색의 남은 학자금</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">갚기: 완납 시점</span><span class="v" id="hg-o1">—</span></div>
+        <div class="stat"><span class="k">10년 뒤 순자산 (갚기)</span><span class="v" id="hg-o2">—</span></div>
+        <div class="stat"><span class="k">10년 뒤 순자산 (모으기)</span><span class="v" id="hg-o3">—</span></div>
+        <div class="stat"><span class="k">모으기 − 갚기</span><span class="v" id="hg-o4">—</span></div>
+        <div class="stat"><span class="k">2년 뒤 통장 (갚기 / 모으기)</span><span class="v" id="hg-o5">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(추가 10만원, 저축 2.5%)에서 10년 뒤 모으기가 약 27만원 앞선다. ② 저축 이율을 1.7%로 내린다. 두 길이 거의 같아진다. 대출 금리와 저축 금리가 같으면 어느 쪽이든 결과가 같다. ③ 2년 뒤 통장을 본다. 갚기 쪽은 완납 전까지 통장이 비어 있다. 이 돈이 비상금이 될 수 있느냐가 숫자보다 큰 차이다. (실선은 통장 잔액, 점선은 남은 학자금이다. 순자산 = 통장 잔액 − 학자금 잔액. 매달 같은 금액을 쓴다고 가정하고, 저축은 월 복리로 계산했다.)</div>
+    </div>
+
+    <div class="casefile">
+      <div class="tag"><b>LEDGER 한결</b><span>한결의 가계부 · 10장</span></div>
+      <h4>학자금 1,200만원: 서두르지 않고, 비상금부터</h4>
+      <p>한결의 학자금은 원리금균등으로 매달 <span class="won">108,811원</span>, 10년 동안 이자 합계 약 <span class="won">105.7만원</span>이다. 원금균등으로 바꾸면 이자가 약 3만원 줄지만 첫 달 부담이 8천원 남짓 늘고, 만기일시로 바꾸면 이자가 204만원으로 두 배 가까이 된다. 지금 방식이 무난하다.</p>
+      <p>매달 10만원을 더 넣으면 5년 만에 다 갚고 이자를 약 53만원 아낀다. 하지만 같은 10만원을 세후 2.5%로 모으면 10년 뒤 순자산이 오히려 약 27만원 많고, 무엇보다 그 사이 통장에 꺼내 쓸 수 있는 돈이 남는다. 금리 1.7%는 예금의 세후 금리보다 낮다. 그래서 한결은 학자금은 정해진 대로만 갚고, 남는 돈은 <a href="saving.html">8장</a>에서 정한 비상금 600만원과 저축에 먼저 쓰기로 한다. 학자금은 중도상환수수료가 없으므로, 나중에 금리가 높은 다른 빚이 없고 비상금이 충분할 때 언제든 미리 갚을 수 있다.</p>
+      <p>DSR로 보면 한결의 학자금 연 원리금은 약 <span class="won">130.6만원</span>, 연봉 3,600만원의 <b>약 3.6%</b>다. 이 학자금을 안고 연 4%, 30년 원리금균등으로 새로 빌린다면 은행권 DSR 40% 한도는 약 <span class="won">2억 2,856만원</span>, 스트레스 금리 1.5%p를 더하면 약 <span class="won">1억 9,218만원</span>이다. 빌릴 수 있다는 것과 갚을 수 있다는 것은 다르다. 이 한도로 월 120만원 가까이를 원리금에 쓰면 월 실수령 265.6만원의 절반이 사라진다.</p>
+      <div class="clue">
+        <div><b>이 장에서 정한 것</b>학자금은 원리금균등 그대로, 추가 상환 없이 매달 108,811원. 여윳돈은 비상금과 저축이 먼저.</div>
+        <div><b>아직 남은 문제</b>월세 60만원과 보증금 1,000만원. 전세대출을 받아 이사하면 DSR과 이자 부담은 어떻게 바뀌는가.</div>
+        <div><b>다음 단계</b><a href="housing.html">11장</a>: 월세·전세·매매를 같은 저울에 올린다.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>이번 달 이자는 "지난달 남은 잔액 × 월 이율"이다. 이자를 줄이는 길은 원금을 빨리 줄이는 것 하나뿐이다.</li>
+      <li>원리금균등은 매달 같은 돈을 내고 처음엔 이자 비중이 크다. 원금균등은 첫 부담이 크고 총이자가 가장 적다. 만기일시는 매달 부담이 작지만 원금이 줄지 않아 총이자가 가장 많다.</li>
+      <li>3억원·30년이면 금리 1%p(4%→5%)가 월 약 17.8만원, 총이자 약 6,416만원의 차이를 만든다. 변동금리를 고를 때는 금리가 올라도 감당할 수 있는지를 묻는다.</li>
+      <li>중도상환은 이를수록, 그리고 기간 단축일수록 이자를 많이 줄인다. 월 납입 감소는 매달의 여유를 사는 대신 절감액이 작다. 3년 이내라면 중도상환수수료를 뺀다.</li>
+      <li>기간을 늘리면 월 부담은 줄지만 이자 바닥(잔액 × 월 이율)에 가까워질수록 이자만 늘어난다.</li>
+      <li>대출 한도는 LTV(집값 기준)와 DSR(모든 대출 원리금 ÷ 연소득, 은행권 약 40%) 가운데 작은 쪽이다. 스트레스 DSR은 한도 계산에만 금리를 얹는다. 규제 수치는 2026년 기준이며 자주 바뀐다.</li>
+      <li>빚을 갚는 것은 대출 금리만큼의 확정 수익이다. 높은 금리의 빚부터 갚고, 비상금은 남기고, 대출 금리가 세후 예금 금리보다 낮으면 서두르지 않는다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>1. 원리금균등 상환에서 첫 달 상환액의 대부분이 이자인 이유로 가장 알맞은 것은?</p>
+        <div class="opts">
+          <button class="opt">은행이 이자를 먼저 받도록 선이자를 붙이기 때문이다.</button>
+          <button class="opt" data-correct>이자는 남은 잔액에 붙는데, 첫 달 잔액이 가장 크기 때문이다.</button>
+          <button class="opt">첫해에는 가산금리가 더 높게 적용되기 때문이다.</button>
+          <button class="opt">원리금균등은 원금을 마지막에 한꺼번에 갚는 방식이기 때문이다.</button>
+        </div>
+        <div class="quiz-exp">매달 이자는 정확히 "그 달 잔액 × 월 이율"이다. 처음엔 잔액이 가장 커서 같은 상환액 가운데 이자 몫이 크고, 원금이 줄어들수록 이자 몫이 줄어든다. 숨은 선이자는 없다. 원금을 마지막에 한꺼번에 갚는 것은 만기일시 상환이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>2. 3억원을 30년 원리금균등으로 빌릴 때 금리가 연 4%에서 5%로 오르면, 30년 총이자는 대략 얼마나 늘어나는가?</p>
+        <div class="opts">
+          <button class="opt">약 300만원 (3억원의 1%)</button>
+          <button class="opt">약 1,800만원</button>
+          <button class="opt" data-correct>약 6,400만원</button>
+          <button class="opt">약 3억원</button>
+        </div>
+        <div class="quiz-exp">월 상환액이 1,432,246원에서 1,610,465원으로 약 17.8만원 오르고, 이것이 360번 쌓여 총이자 차이가 약 6,416만원이 된다. 1%p는 "1년에 원금의 1%"가 아니라 남은 잔액 전체에 30년 동안 붙는 차이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>3. 원리금균등 대출 5년째에 목돈 5,000만원으로 중도상환을 한다. 같은 금액일 때 이자를 더 많이 줄이는 방법은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>매달 내는 돈은 그대로 두고 기간을 단축한다.</button>
+          <button class="opt">기간은 그대로 두고 매달 내는 돈을 줄인다.</button>
+          <button class="opt">두 방법의 이자 절감액은 항상 같다.</button>
+          <button class="opt">목돈을 넣는 시점을 최대한 늦춘다.</button>
+        </div>
+        <div class="quiz-exp">기간 단축은 원래 상환액을 계속 내므로 원금 몫이 커져 잔액이 빨리 준다. 3억원·연 4%·30년 예시에서 기간 단축은 약 6,812만원, 월 납입 감소는 약 2,918만원의 이자를 줄였다. 중도상환은 잔액이 클 때, 즉 이를수록 효과가 크다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>4. 연소득 5,000만원인 사람이 이미 신용대출 원리금으로 1년에 600만원을 갚고 있다. 은행권 DSR 한도 40%에서 새 대출에 쓸 수 있는 연간 원리금은 최대 얼마인가?</p>
+        <div class="opts">
+          <button class="opt">2,000만원</button>
+          <button class="opt">600만원</button>
+          <button class="opt">2,600만원</button>
+          <button class="opt" data-correct>1,400만원</button>
+        </div>
+        <div class="quiz-exp">DSR은 모든 대출의 원리금을 더해 계산한다. 연소득의 40%인 2,000만원에서 기존 대출 원리금 600만원을 빼면 새 대출에는 1년에 1,400만원까지 쓸 수 있다. 스트레스 DSR이 적용되면 같은 1,400만원으로 빌릴 수 있는 원금이 더 작아진다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  const wonF = (x) => Math.round(x).toLocaleString("ko-KR") + "원";
+  const ym = (m) => { m = Math.round(m); const y = Math.floor(m / 12), r = m % 12; return y && r ? y + "년 " + r + "개월" : y ? y + "년" : r + "개월"; };
+  const signWon = (x, o) => (x >= 0 ? "+" : "−") + MB.won(Math.abs(x), o);
+  function rgba(c, a) {
+    c = (c || "").trim();
+    if (c[0] === "#") {
+      let h = c.slice(1);
+      if (h.length === 3) h = h.split("").map((x) => x + x).join("");
+      const n = parseInt(h.slice(0, 6), 16);
+      return "rgba(" + ((n >> 16) & 255) + "," + ((n >> 8) & 255) + "," + (n & 255) + "," + a + ")";
+    }
+    return c;
+  }
+  function handle(ctx, x, y, col, r) {
+    const p = MB.palette();
+    r = r || 8;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fillStyle = p.bg; ctx.fill();
+    ctx.lineWidth = 2.5; ctx.strokeStyle = col; ctx.stroke();
+    ctx.beginPath(); ctx.arc(x, y, r * 0.38, 0, Math.PI * 2);
+    ctx.fillStyle = col; ctx.fill();
+    ctx.restore();
+  }
+  function tip(ctx, x, y, lines, W, H) {
+    const p = MB.palette();
+    ctx.save();
+    ctx.font = MB.font(12, false, 700);
+    const tw = Math.max(...lines.map((l) => ctx.measureText(l[0]).width)) + 20, th = lines.length * 17 + 10;
+    let tx = x + 12;
+    if (tx + tw > W - 4) tx = x - 12 - tw;
+    tx = Math.max(4, tx);
+    const ty = MB.clamp(y - th / 2, 4, Math.max(4, H - th - 4));
+    ctx.fillStyle = p.surface; ctx.strokeStyle = p.border; ctx.lineWidth = 1;
+    ctx.fillRect(tx, ty, tw, th); ctx.strokeRect(tx + 0.5, ty + 0.5, tw - 1, th - 1);
+    ctx.textAlign = "left"; ctx.textBaseline = "top";
+    lines.forEach((l, i) => { ctx.fillStyle = l[1] || p.text; ctx.font = MB.font(12, false, i ? 400 : 700); ctx.fillText(l[0], tx + 10, ty + 6 + i * 17); });
+    ctx.restore();
+  }
+  function yearTicks(N) {
+    const Y = N / 12, s = Y <= 8 ? 1 : Y <= 16 ? 2 : Y <= 40 ? 5 : 10, out = [];
+    for (let y = 0; y <= Y + 1e-9; y += s) out.push(y * 12);
+    return out;
+  }
+  const mTicks = (bw) => (bw < 320 ? [0, 120, 240, 360] : [0, 60, 120, 180, 240, 300, 360]);
+  const yTicks = (bw) => (bw < 320 ? [0, 10, 20, 30] : [0, 5, 10, 15, 20, 25, 30]);
+  function panelTitle(ctx, text, x, y) {
+    ctx.save();
+    ctx.fillStyle = MB.palette().dim; ctx.font = MB.font(12, false, 700);
+    ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+    ctx.fillText(text, x, y);
+    ctx.restore();
+  }
+
+  /* ---------------------------------------------------------- 1. 상환 스케줄 */
+  (function () {
+    const st = { hover: null, box: null, N: 360, L: null };
+    let cv;
+    const up = () => { cv.redraw(); stats(); };
+    const type = MB.seg("sc-type", up);
+    const prin = MB.range("sc-p", (v) => MB.won(v), up);
+    const rate = MB.range("sc-r", (v) => v.toFixed(1) + "%", up);
+    const years = MB.range("sc-n", (v) => v + "년", up);
+    const calc = () => {
+      const t = type(), n = years() * 12, r = rate() / 100;
+      return t === "grace" ? MN.loan(prin(), r, n - 24, "annuity", { grace: 24 }) : MN.loan(prin(), r, n, t);
+    };
+    cv = MB.canvas("#sc-cv", (ctx, w, h) => {
+      const p = MB.palette(), L = (st.L = calc()), rows = L.rows, N = (st.N = rows.length), t = type();
+      const cap = t === "bullet" ? rows[0].pay * 3.2 : L.max * 1.1;
+      const box = (st.box = { x: 58, y: 30, w: w - 58 - 14, h: h - 30 - 30 });
+      const c = MB.chart(ctx, box, { x: [0, N], y: [0, cap], yFmt: MB.wonAxis, xTicks: yearTicks(N), xFmt: (m) => m / 12 + "년" });
+      const bw = box.w / N, gap = bw > 4 ? 1 : 0;
+      for (let i = 0; i < N; i++) {
+        const r = rows[i], x = box.x + i * bw, ww = Math.max(0.7, bw - gap);
+        ctx.globalAlpha = st.hover != null && st.hover !== i ? 0.5 : 1;
+        const yi = c.Y(Math.min(r.interest, cap)), yp = c.Y(Math.min(r.pay, cap));
+        ctx.fillStyle = p.bad; ctx.fillRect(x, yi, ww, c.Y(0) - yi);
+        ctx.fillStyle = p.accent; ctx.fillRect(x, yp, ww, yi - yp);
+      }
+      ctx.globalAlpha = 1;
+      const big = rows.findIndex((r) => r.pay > cap);
+      if (big >= 0) {
+        ctx.fillStyle = p.text; ctx.font = MB.font(12, false, 700); ctx.textAlign = "right"; ctx.textBaseline = "top";
+        ctx.fillText("마지막 달 " + MB.won(rows[big].pay) + " ↑", box.x + box.w - 8, box.y + 4);
+      }
+      if (st.hover != null && rows[st.hover]) {
+        const r = rows[st.hover], cx = box.x + (st.hover + 0.5) * bw;
+        ctx.strokeStyle = p.text; ctx.lineWidth = 1; ctx.setLineDash([3, 3]);
+        ctx.beginPath(); ctx.moveTo(cx, box.y); ctx.lineTo(cx, box.y + box.h); ctx.stroke(); ctx.setLineDash([]);
+        tip(ctx, cx, box.y + box.h * 0.4, [
+          [r.m + "회차 · " + Math.ceil(r.m / 12) + "년 차"],
+          ["납입 " + wonF(r.pay)],
+          ["이자 " + wonF(r.interest), p.bad],
+          ["원금 " + wonF(r.principal), p.accent],
+          ["남은 잔액 " + MB.won(r.balance)],
+        ], w, h);
+      }
+    }, { aspect: 0.52, minHeight: 260, maxHeight: 380 });
+    const setH = (x) => {
+      const b = st.box; if (!b) return;
+      const i = Math.floor((x - b.x) / (b.w / st.N));
+      st.hover = i >= 0 && i < st.N ? i : null;
+      cv.redraw();
+    };
+    MB.drag(cv.canvas, { move: setH, hover: setH });
+    cv.canvas.addEventListener("pointerleave", (e) => { if (e.pointerType === "mouse") { st.hover = null; cv.redraw(); } });
+    function stats() {
+      const L = st.L;
+      MB.stat("sc-o1", wonF(L.rows[0].pay));
+      MB.stat("sc-o2", MB.won(L.max));
+      MB.stat("sc-o3", MB.won(L.totalInterest));
+      MB.stat("sc-o4", (L.totalPay / prin()).toFixed(2) + "배");
+    }
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 2. 왜 초반엔 이자가 대부분인가 */
+  (function () {
+    const P0 = 3e8, N = 360;
+    const st = { m: 1, play: true, box: null, lw: 0 };
+    let L, cum, cv;
+    const calc = () => { L = MN.loan(P0, rate() / 100, N); let s = 0; cum = L.rows.map((r) => (s += r.interest)); };
+    const rate = MB.range("wy-r", (v) => v.toFixed(1) + "%", () => { calc(); cv.redraw(); stats(); });
+    calc();
+    const btn = document.getElementById("wy-play");
+    const setBtn = () => { btn.textContent = st.play ? "멈춤" : "재생"; };
+    btn.addEventListener("click", () => { if (st.m >= N) st.m = 1; st.play = !st.play; setBtn(); });
+    document.getElementById("wy-re").addEventListener("click", () => { st.m = 1; st.play = true; setBtn(); cv.redraw(); stats(); });
+    cv = MB.canvas("#wy-cv", (ctx, w, h) => {
+      const p = MB.palette(), k = MB.clamp(Math.round(st.m), 1, N), row = L.rows[k - 1];
+      const lw = (st.lw = Math.round(w * (w < 520 ? 0.62 : 0.68)));
+      const box = (st.box = { x: 54, y: 34, w: lw - 54 - 8, h: h - 34 - 30 });
+      const full = [[0, P0]].concat(L.rows.map((r) => [r.m, r.balance]));
+      MB.chart(ctx, box, {
+        x: [0, N], y: [0, P0], yFmt: MB.wonAxis, xTicks: mTicks(box.w), xFmt: (m) => m / 12 + "년",
+        series: [{ data: full, color: rgba(p.dim, 0.35), width: 1.5 }, { data: full.slice(0, k + 1), color: p.accent, width: 2.5, fill: rgba(p.accent, 0.12) }],
+        points: [{ x: k, y: row.balance, color: p.accent, r: 5 }],
+      });
+      ctx.save(); ctx.fillStyle = p.dim; ctx.font = MB.font(12, false, 700); ctx.textAlign = "right"; ctx.textBaseline = "top";
+      ctx.fillText("남은 잔액", box.x + box.w - 4, box.y + 4);
+      ctx.fillStyle = p.accent; ctx.font = MB.font(12, true, 700); ctx.fillText(MB.won(row.balance), box.x + box.w - 4, box.y + 21); ctx.restore();
+      const rx = lw + 12, rw = w - rx - 8, top = 72, bot = h - 30, H = bot - top;
+      const bwid = Math.max(26, Math.min(54, rw * 0.34));
+      const hi = (H * row.interest) / row.pay;
+      ctx.fillStyle = p.bad; ctx.fillRect(rx, bot - hi, bwid, hi);
+      ctx.fillStyle = p.accent; ctx.fillRect(rx, top, bwid, H - hi);
+      ctx.fillStyle = p.text; ctx.font = MB.font(12, false, 700); ctx.textAlign = "left"; ctx.textBaseline = "top";
+      ctx.fillText(k + "회차 납입", rx, 32);
+      ctx.font = MB.font(12, true); ctx.fillStyle = p.dim;
+      ctx.fillText(MB.won(row.pay, { digits: 1 }), rx, 49);
+      const lx = rx + bwid + 7;
+      let yP = MB.clamp(top + (H - hi) / 2, top + 14, bot - 14), yI = MB.clamp(bot - hi / 2, top + 14, bot - 14);
+      if (yI - yP < 36) { const mid = (yI + yP) / 2; yP = mid - 18; yI = mid + 18; }
+      const lab = (y, name, v, col) => {
+        ctx.textBaseline = "bottom"; ctx.fillStyle = p.dim; ctx.font = MB.font(11); ctx.fillText(name, lx, y);
+        ctx.textBaseline = "top"; ctx.fillStyle = col; ctx.font = MB.font(12, true, 700); ctx.fillText(MB.won(v, { digits: 1 }), lx, y + 1);
+      };
+      lab(yP, "원금", row.principal, p.accent);
+      lab(yI, "이자 " + Math.round((row.interest / row.pay) * 100) + "%", row.interest, p.bad);
+    }, { aspect: 0.48, minHeight: 270, maxHeight: 360 });
+    MB.drag(cv.canvas, {
+      move(x) {
+        const b = st.box; if (!b || x > st.lw) return;
+        st.m = MB.clamp(Math.round(MB.map(x, b.x, b.x + b.w, 0, N)), 1, N);
+        st.play = false; setBtn(); cv.redraw(); stats();
+      },
+    });
+    function stats() {
+      const k = MB.clamp(Math.round(st.m), 1, N), r = L.rows[k - 1];
+      MB.stat("wy-o1", k + "회차 <small>" + ym(k) + "</small>");
+      MB.stat("wy-o2", MB.pct(r.interest / r.pay, 0));
+      MB.stat("wy-o3", MB.won(r.balance));
+      MB.stat("wy-o4", MB.won(cum[k - 1]));
+    }
+    stats();
+    MB.loop(cv.canvas, (dt) => {
+      if (!st.play) return;
+      st.m = Math.min(N, st.m + dt * 24);
+      if (st.m >= N) { st.play = false; setBtn(); }
+      cv.redraw(); stats();
+    });
+  })();
+
+  /* ---------------------------------------------------------- 3. 세 방식 겹쳐 보기 */
+  (function () {
+    const P0 = 3e8, N = 360, names = ["원리금균등", "원금균등", "만기일시"];
+    const st = { cur: 120, box: null };
+    let S, cv;
+    const up = () => { cv.redraw(); stats(); };
+    const view = MB.seg("th-view", up);
+    const rate = MB.range("th-r", (v) => v.toFixed(1) + "%", () => { calc(); up(); });
+    function calc() {
+      const r = rate() / 100;
+      S = ["annuity", "linear", "bullet"].map((t) => {
+        const L = MN.loan(P0, r, N, t);
+        let ci = 0, cp = 0;
+        const o = { bal: [[0, P0]], int: [[0, 0]], paid: [[0, 0]] };
+        L.rows.forEach((x) => { ci += x.interest; cp += x.pay; o.bal.push([x.m, x.balance]); o.int.push([x.m, ci]); o.paid.push([x.m, cp]); });
+        return o;
+      });
+    }
+    calc();
+    cv = MB.canvas("#th-cv", (ctx, w, h) => {
+      const p = MB.palette(), v = view(), C = [p.accent, p.accent2, p.blue];
+      const ymax = v === "bal" ? P0 * 1.04 : Math.max(...S.map((s) => s[v][N][1])) * 1.05;
+      const box = (st.box = { x: 58, y: 30, w: w - 58 - 14, h: h - 30 - 30 });
+      const c = MB.chart(ctx, box, {
+        x: [0, N], y: [0, ymax], yFmt: MB.wonAxis, xTicks: mTicks(box.w), xFmt: (m) => m / 12 + "년",
+        series: S.map((s, i) => ({ data: s[v], color: C[i], width: 2.4 })),
+        vlines: [{ x: st.cur, color: p.text, dash: [3, 3] }],
+        points: S.map((s, i) => ({ x: st.cur, y: s[v][st.cur][1], color: C[i], r: 4.5 })),
+      });
+      handle(ctx, c.X(st.cur), box.y + box.h, p.text, 7);
+    }, { aspect: 0.5, minHeight: 250, maxHeight: 360 });
+    MB.drag(cv.canvas, {
+      move(x) { const b = st.box; if (!b) return; st.cur = MB.clamp(Math.round(MB.map(x, b.x, b.x + b.w, 0, N)), 1, N); up(); },
+    });
+    function stats() {
+      const v = view();
+      ["th-o1", "th-o2", "th-o3"].forEach((id, i) => MB.stat(id, MB.won(S[i][v][st.cur][1])));
+      MB.stat("th-o4", ym(st.cur));
+    }
+    stats();
+    void names;
+  })();
+
+  /* ---------------------------------------------------------- 4. 금리 1%p */
+  (function () {
+    const st = { r: 4, box: null };
+    let cv;
+    const up = () => { cv.redraw(); stats(); };
+    const prin = MB.range("op-p", (v) => MB.won(v), up);
+    const yrs = MB.range("op-n", (v) => v + "년", up);
+    const pay = (r) => MN.pmt(prin(), r / 1200, yrs() * 12);
+    const ti = (r) => pay(r) * yrs() * 12 - prin();
+    cv = MB.canvas("#op-cv", (ctx, w, h) => {
+      const p = MB.palette(), top = 40, gapMid = 40, bot = 30, hp = (h - top - bot - gapMid) / 2;
+      const b1 = { x: 62, y: top, w: w - 62 - 14, h: hp }, b2 = (st.box = { x: 62, y: top + hp + gapMid, w: w - 62 - 14, h: hp });
+      const xs = []; for (let r = 1; r <= 9.0001; r += 0.1) xs.push(r);
+      const r0 = st.r, r1 = r0 + 1, band = [{ x0: r0, x1: r1, color: rgba(p.warn, 0.18) }];
+      const c1 = MB.chart(ctx, b1, { x: [1, 9], y: [0, pay(9) * 1.1], yFmt: MB.wonAxis, xFmt: () => "", bands: band,
+        series: [{ data: xs.map((r) => [r, pay(r)]), color: p.accent, width: 2.4 }],
+        points: [{ x: r0, y: pay(r0), color: p.accent, r: 5 }, { x: r1, y: pay(r1), color: p.bad, r: 5 }] });
+      const c2 = MB.chart(ctx, b2, { x: [1, 9], y: [0, ti(9) * 1.1], yFmt: MB.wonAxis, xFmt: (v) => v + "%", bands: band,
+        series: [{ data: xs.map((r) => [r, ti(r)]), color: p.bad, width: 2.4 }],
+        points: [{ x: r0, y: ti(r0), color: p.accent, r: 5 }, { x: r1, y: ti(r1), color: p.bad, r: 5 }] });
+      panelTitle(ctx, "월 상환액", b1.x, b1.y - 6);
+      panelTitle(ctx, "총이자", b2.x, b2.y - 6);
+      ctx.save();
+      ctx.font = MB.font(12, true, 700); ctx.fillStyle = p.bad; ctx.textBaseline = "middle";
+      const lbl = (c, a, b, s) => {
+        const x = c.X(r1) + 9, y = (c.Y(a) + c.Y(b)) / 2;
+        const txt = "+" + s, wt = ctx.measureText(txt).width;
+        ctx.textAlign = x + wt > w - 4 ? "right" : "left";
+        ctx.fillText(txt, ctx.textAlign === "right" ? c.X(r0) - 9 : x, y);
+      };
+      lbl(c1, pay(r0), pay(r1), MB.won(pay(r1) - pay(r0), { digits: 1 }));
+      lbl(c2, ti(r0), ti(r1), MB.won(ti(r1) - ti(r0)));
+      ctx.restore();
+      handle(ctx, c2.X(r0), b2.y + b2.h, p.text, 8);
+    }, { aspect: 0.62, minHeight: 340, maxHeight: 430 });
+    MB.drag(cv.canvas, {
+      move(x) { const b = st.box; if (!b) return; st.r = MB.clamp(Math.round(MB.map(x, b.x, b.x + b.w, 1, 9) * 10) / 10, 1, 8); up(); },
+    });
+    function stats() {
+      const r0 = st.r, r1 = r0 + 1;
+      MB.stat("op-o1", r0.toFixed(1) + "% → " + r1.toFixed(1) + "%");
+      MB.stat("op-o2", "+" + wonF(pay(r1) - pay(r0)));
+      MB.stat("op-o3", "+" + MB.won(ti(r1) - ti(r0)));
+      MB.stat("op-o4", MB.pct((ti(r1) - ti(r0)) / prin(), 1));
+    }
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 5. 변동금리 경로 그리기 */
+  (function () {
+    const P0 = 3e8, Y = 30;
+    let rates = new Array(Y).fill(4), seed = 3, cv, R;
+    const st = { b1: null, last: null, on: false };
+    const up = () => { calc(); cv.redraw(); stats(); };
+    const mode = MB.seg("pa-mode", up);
+    const fix = MB.range("pa-fix", (v) => v.toFixed(1) + "%", up);
+    const presets = {
+      flat: () => { rates = rates.map(() => 4); },
+      up: () => { rates = rates.map((_, i) => (i < 2 ? 4 : Math.min(7, 4 + (i - 1) * 0.75))); },
+      down: () => { rates = rates.map((_, i) => (i < 2 ? 4 : Math.max(2.5, 4 - (i - 1) * 0.4))); },
+      rand: () => { const g = MB.randnSeeded(seed++); let r = 4; rates = rates.map((_, i) => { if (i) r = MB.clamp(r + g() * 0.6, 1.5, 9); return Math.round(r * 10) / 10; }); },
+    };
+    Object.keys(presets).forEach((k) => document.getElementById("pa-" + k).addEventListener("click", () => { presets[k](); up(); }));
+    function calc() {
+      const f = fix() / 100, mix = mode() === "mix";
+      R = {
+        v: MN.loan(P0, f, Y * 12, "annuity", { rates: (m) => (mix && m <= 60 ? f : rates[Math.min(Y - 1, Math.floor((m - 1) / 12))] / 100) }),
+        f: MN.loan(P0, f, Y * 12),
+      };
+    }
+    calc();
+    cv = MB.canvas("#pa-cv", (ctx, w, h) => {
+      const p = MB.palette(), mix = mode() === "mix", F = fix();
+      const top = 40, gap = 44, bot = 30, Ht = h - top - gap - bot, h1 = Ht * 0.48;
+      const b1 = (st.b1 = { x: 58, y: top, w: w - 58 - 14, h: h1 }), b2 = { x: 58, y: top + h1 + gap, w: w - 58 - 14, h: Ht - h1 };
+      const eff = rates.map((r, i) => (mix && i < 5 ? F : r));
+      const step = []; eff.forEach((r, i) => { step.push([i, r]); step.push([i + 1, r]); });
+      const ghost = []; if (mix) for (let i = 0; i < 5; i++) { ghost.push([i, rates[i]]); ghost.push([i + 1, rates[i]]); }
+      const xt = yTicks(b1.w);
+      const c1 = MB.chart(ctx, b1, {
+        x: [0, Y], y: [0, 10], yTicks: [0, 2, 4, 6, 8, 10], yFmt: (v) => v + "%", xTicks: xt, xFmt: () => "",
+        bands: mix ? [{ x0: 0, x1: 5, color: rgba(p.accent2, 0.13) }] : [],
+        series: [{ data: ghost, color: rgba(p.accent, 0.35), width: 1.5, dash: [3, 3] }, { data: step, color: p.accent, width: 2.4 }],
+        hlines: [{ y: F, color: p.accent2, label: "고정 " + F.toFixed(1) + "%" }],
+      });
+      ctx.save();
+      eff.forEach((r, i) => {
+        if (mix && i < 5) return;
+        ctx.beginPath(); ctx.arc(c1.X(i + 0.5), c1.Y(r), 3.2, 0, Math.PI * 2);
+        ctx.fillStyle = p.bg; ctx.fill(); ctx.lineWidth = 1.5; ctx.strokeStyle = p.accent; ctx.stroke();
+      });
+      ctx.restore();
+      panelTitle(ctx, mix ? "금리 경로 (처음 5년은 고정)" : "금리 경로", b1.x, b1.y - 6);
+      const stepPay = (rows) => { const d = []; rows.forEach((r) => { d.push([(r.m - 1) / 12, r.pay]); d.push([r.m / 12, r.pay]); }); return d; };
+      const vmax = Math.max(R.v.max, R.f.max) * 1.15;
+      MB.chart(ctx, b2, {
+        x: [0, Y], y: [0, vmax], yFmt: MB.wonAxis, xTicks: xt, xFmt: (v) => v + "년",
+        series: [{ data: stepPay(R.f.rows), color: p.accent2, width: 2, dash: [6, 4] }, { data: stepPay(R.v.rows), color: p.accent, width: 2.4, fill: rgba(p.accent, 0.1) }],
+      });
+      panelTitle(ctx, "매달 내는 돈", b2.x, b2.y - 6);
+    }, { aspect: 0.66, minHeight: 380, maxHeight: 460 });
+    const paint = (x, y) => {
+      const b = st.b1, i = MB.clamp(Math.floor(((x - b.x) / b.w) * Y), 0, Y - 1);
+      const v = MB.clamp(Math.round(MB.map(y, b.y + b.h, b.y, 0, 10) * 10) / 10, 0.5, 10);
+      if (st.last) {
+        const [li, lv] = st.last, s = Math.sign(i - li);
+        for (let j = li; j !== i; j += s) rates[j] = Math.round((lv + ((v - lv) * (j - li)) / (i - li)) * 10) / 10;
+      }
+      rates[i] = v; st.last = [i, v];
+      up();
+    };
+    MB.drag(cv.canvas, {
+      start(x, y) { const b = st.b1; st.last = null; st.on = !!b && y <= b.y + b.h + 14; },
+      move(x, y) { if (st.on) paint(x, y); },
+      end() { st.last = null; st.on = false; },
+    });
+    function stats() {
+      MB.stat("pa-o1", MB.won(R.v.totalInterest));
+      MB.stat("pa-o2", MB.won(R.f.totalInterest));
+      MB.stat("pa-o3", MB.won(R.v.max, { digits: 1 }));
+      const g = R.v.max / R.v.first - 1;
+      MB.stat("pa-o4", g > 0.005 ? '<span class="bad-t">+' + MB.pct(g, 0) + "</span>" : "변동 없음");
+    }
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 6. 중도상환 */
+  (function () {
+    const P0 = 3e8, r = 0.04, N = 360, FEE = 0.006;
+    const st = { m0: 60, box: null };
+    let cv;
+    const up = () => { cv.redraw(); stats(); };
+    const amt = MB.range("pp-a", (v) => MB.won(v), up);
+    const mode = MB.seg("pp-mode", up);
+    const base = MN.loan(P0, r, N);
+    function shortSched(P, rr, n, m0, A) {
+      const pay = MN.pmt(P, rr / 12, n), rows = [];
+      let b = P;
+      for (let m = 1; b > 1 && m <= n; m++) {
+        const i = (b * rr) / 12;
+        let pr = Math.min(b, pay - i);
+        if (m === m0) pr = Math.min(b, pr + A);
+        b -= pr;
+        rows.push({ m, pay: i + pr, interest: i, principal: pr, balance: Math.max(0, b) });
+      }
+      return { rows, totalInterest: rows.reduce((s, x) => s + x.interest, 0) };
+    }
+    const calc = () => (mode() === "short" ? shortSched(P0, r, N, st.m0, amt()) : MN.loan(P0, r, N, "annuity", { extra: { [st.m0]: amt() } }));
+    let L = calc();
+    cv = MB.canvas("#pp-cv", (ctx, w, h) => {
+      const p = MB.palette(), m0 = st.m0, A = amt();
+      L = calc();
+      const top = 40, gap = 42, bot = 30, Ht = h - top - gap - bot, h1 = Ht * 0.62;
+      const b1 = (st.box = { x: 58, y: top, w: w - 58 - 14, h: h1 }), b2 = { x: 58, y: top + h1 + gap, w: w - 58 - 14, h: Ht - h1 };
+      const xt = mTicks(b1.w);
+      const toBal = (rows) => [[0, P0]].concat(rows.map((x) => [x.m, x.balance]));
+      const end = L.rows.length;
+      const c1 = MB.chart(ctx, b1, {
+        x: [0, N], y: [0, P0 * 1.08], yFmt: MB.wonAxis, xTicks: xt, xFmt: () => "",
+        series: [{ data: toBal(base.rows), color: p.dim, width: 1.5, dash: [5, 4] }, { data: toBal(L.rows), color: p.accent, width: 2.5, fill: rgba(p.accent, 0.1) }],
+        vlines: end < N ? [{ x: end, color: p.accent, label: "완납" }] : [],
+      });
+      panelTitle(ctx, "남은 원금", b1.x, b1.y - 6);
+      const row = L.rows[m0 - 1];
+      if (row && A > 0) {
+        const before = row.balance + row.principal, x = c1.X(m0);
+        ctx.save();
+        ctx.strokeStyle = p.accent2; ctx.lineWidth = 2.5;
+        ctx.beginPath(); ctx.moveTo(x, c1.Y(before)); ctx.lineTo(x, c1.Y(row.balance)); ctx.stroke();
+        ctx.restore();
+      }
+      const cy = c1.Y(row ? row.balance + row.principal : P0) - 16;
+      const cx = c1.X(m0);
+      ctx.save();
+      ctx.beginPath(); ctx.arc(cx, Math.max(b1.y + 10, cy), 10, 0, Math.PI * 2);
+      ctx.fillStyle = p.accent2; ctx.fill();
+      ctx.lineWidth = 2; ctx.strokeStyle = p.bg; ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, Math.max(b1.y + 10, cy), 5, 0, Math.PI * 2); ctx.lineWidth = 1.5; ctx.strokeStyle = p.bg; ctx.stroke();
+      ctx.fillStyle = p.text; ctx.font = MB.font(12, false, 700); ctx.textBaseline = "middle";
+      const label = ym(m0) + "째 " + MB.won(A);
+      ctx.textAlign = cx + 16 + ctx.measureText(label).width > w - 4 ? "right" : "left";
+      ctx.fillText(label, ctx.textAlign === "right" ? cx - 16 : cx + 16, Math.max(b1.y + 10, cy));
+      ctx.restore();
+      const payData = (rows, m0x, Ax) => {
+        const d = [];
+        rows.forEach((x, i) => {
+          let v = x.pay;
+          if (x.m === m0x && Ax > 0) v = i > 0 ? rows[i - 1].pay : base.first;
+          d.push([x.m - 1, v]); d.push([x.m, v]);
+        });
+        return d;
+      };
+      MB.chart(ctx, b2, {
+        x: [0, N], y: [0, base.first * 1.35], yFmt: MB.wonAxis, xTicks: xt, xFmt: (m) => m / 12 + "년",
+        series: [{ data: payData(base.rows, -1, 0), color: p.dim, width: 1.5, dash: [5, 4] }, { data: payData(L.rows, m0, A), color: p.accent, width: 2.4 }],
+      });
+      panelTitle(ctx, "매달 내는 돈", b2.x, b2.y - 6);
+    }, { aspect: 0.62, minHeight: 360, maxHeight: 440 });
+    MB.drag(cv.canvas, {
+      move(x) { const b = st.box; if (!b) return; st.m0 = MB.clamp(Math.round(MB.map(x, b.x, b.x + b.w, 0, N)), 1, N - 1); up(); },
+    });
+    function stats() {
+      const A = amt(), m0 = st.m0;
+      const saved = base.totalInterest - L.totalInterest;
+      const fee = A * FEE * Math.max(0, 36 - m0) / 36;
+      MB.stat("pp-o1", MB.won(saved));
+      if (mode() === "short") {
+        document.getElementById("pp-o2k").textContent = "줄어든 기간";
+        const d = N - L.rows.length;
+        MB.stat("pp-o2", d > 0 ? ym(d) : "없음");
+      } else {
+        document.getElementById("pp-o2k").textContent = "새 월 납입";
+        const nx = L.rows[m0];
+        MB.stat("pp-o2", nx ? wonF(nx.pay) : "완납");
+      }
+      MB.stat("pp-o3", fee > 0 ? '<span class="warn-t">' + wonF(fee) + "</span>" : "없음 <small>(3년 경과)</small>");
+      MB.stat("pp-o4", MB.won(saved - fee));
+    }
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 7. 기간 트레이드오프 */
+  (function () {
+    const P0 = 3e8;
+    const st = { y: 30, pts: null };
+    let cv;
+    const up = () => { cv.redraw(); stats(); };
+    const rate = MB.range("tm-r", (v) => v.toFixed(1) + "%", up);
+    const f = (y) => { const n = y * 12, pay = MN.pmt(P0, rate() / 1200, n); return { pay, ti: pay * n - P0 }; };
+    cv = MB.canvas("#tm-cv", (ctx, w, h) => {
+      const p = MB.palette(), ys = [];
+      for (let y = 5; y <= 50; y++) ys.push(y);
+      const D = ys.map((y) => { const o = f(y); return [o.pay, o.ti]; });
+      const floor = (P0 * rate()) / 1200;
+      const x0 = Math.min(floor, D[D.length - 1][0]) * 0.85, x1 = D[0][0] * 1.05;
+      const box = { x: 66, y: 30, w: w - 66 - 16, h: h - 30 - 50 };
+      const c = MB.chart(ctx, box, {
+        x: [x0, x1], y: [0, D[D.length - 1][1] * 1.12], xFmt: MB.wonAxis, yFmt: MB.wonAxis, xLabel: "월 상환액", yLabel: "총이자",
+        series: [{ data: D, color: p.accent, width: 2.5 }],
+        vlines: [{ x: floor, color: p.bad }],
+      });
+      ctx.save(); ctx.fillStyle = p.bad; ctx.font = MB.font(12, false, 700); ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+      ctx.fillText("이자만 내는 선", c.X(floor) + 6, box.y + box.h - 6); ctx.restore();
+      st.pts = ys.map((y, i) => [c.X(D[i][0]), c.Y(D[i][1]), y]);
+      ctx.save();
+      ctx.font = MB.font(11, true); ctx.fillStyle = p.dim;
+      [5, 10, 20, 30, 40, 50].forEach((y) => {
+        const [px, py] = st.pts[y - 5];
+        ctx.beginPath(); ctx.arc(px, py, 3, 0, Math.PI * 2); ctx.fill();
+        ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+        ctx.fillText(y + "년", px + 6, py - 4);
+      });
+      ctx.restore();
+      const [hx, hy] = st.pts[st.y - 5];
+      ctx.save();
+      ctx.strokeStyle = rgba(p.accent2, 0.7); ctx.setLineDash([3, 3]); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(hx, hy); ctx.lineTo(hx, box.y + box.h); ctx.moveTo(hx, hy); ctx.lineTo(box.x, hy); ctx.stroke();
+      ctx.restore();
+      handle(ctx, hx, hy, p.accent2, 9);
+    }, { aspect: 0.55, minHeight: 280, maxHeight: 400 });
+    MB.drag(cv.canvas, {
+      move(x, y) {
+        if (!st.pts) return;
+        let best = st.y, bd = Infinity;
+        st.pts.forEach(([px, py, yy]) => { const d = (px - x) * (px - x) + (py - y) * (py - y); if (d < bd) { bd = d; best = yy; } });
+        if (best !== st.y) { st.y = best; up(); }
+      },
+    });
+    function stats() {
+      const o = f(st.y);
+      MB.stat("tm-o1", st.y + "년");
+      MB.stat("tm-o2", wonF(o.pay));
+      MB.stat("tm-o3", MB.won(o.ti));
+      if (st.y <= 45) {
+        const o2 = f(st.y + 5);
+        MB.stat("tm-o4", '<span class="ok-t">−' + MB.won(o.pay - o2.pay, { digits: 1 }) + "</span>");
+        MB.stat("tm-o5", '<span class="bad-t">+' + MB.won(o2.ti - o.ti) + "</span>");
+      } else { MB.stat("tm-o4", "—"); MB.stat("tm-o5", "—"); }
+    }
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 8. DSR 게이지 */
+  (function () {
+    const MAXD = 0.8;
+    const st = { want: 1.5e8, g: null };
+    let cv;
+    const up = () => { cv.redraw(); stats(); };
+    const inc = MB.range("ds-inc", (v) => MB.won(v), up);
+    const rate = MB.range("ds-r", (v) => v.toFixed(1) + "%", up);
+    const oth = MB.range("ds-oth", (v) => MB.won(v), up);
+    const term = MB.seg("ds-n", up);
+    const stress = document.getElementById("ds-st");
+    stress.addEventListener("change", up);
+    const rc = () => rate() / 100 + (stress.checked ? 0.015 : 0);
+    const n = () => Number(term());
+    const maxL = () => MN.maxLoan(inc(), rc(), n(), MN.KR.dsr, oth());
+    const dsrOf = (want) => (oth() + MN.pmt(want, rc() / 12, n()) * 12 * (want > 0 ? 1 : 0)) / inc();
+    document.getElementById("ds-max").addEventListener("click", () => { st.want = Math.floor(maxL() / 1e6) * 1e6; up(); });
+    const ang = (d) => Math.PI + (MB.clamp(d, 0, MAXD) / MAXD) * Math.PI;
+    cv = MB.canvas("#ds-cv", (ctx, w, h) => {
+      const p = MB.palette();
+      const R = Math.max(60, Math.min(w * 0.36, h - 74)), cx = w / 2, cy = h - 34, T = Math.max(14, R * 0.17);
+      st.g = { cx, cy, R };
+      const dO = oth() / inc(), d = dsrOf(st.want), over = d > MN.KR.dsr + 1e-9;
+      ctx.save();
+      ctx.lineCap = "butt"; ctx.lineWidth = T;
+      ctx.strokeStyle = rgba(p.dim, 0.16);
+      ctx.beginPath(); ctx.arc(cx, cy, R, Math.PI, 2 * Math.PI); ctx.stroke();
+      if (dO > 0) { ctx.strokeStyle = p.warn; ctx.beginPath(); ctx.arc(cx, cy, R, ang(0), ang(dO)); ctx.stroke(); }
+      if (d > dO) {
+        ctx.strokeStyle = over ? p.bad : p.accent;
+        ctx.beginPath(); ctx.arc(cx, cy, R, ang(dO), ang(Math.min(d, MN.KR.dsr))); ctx.stroke();
+        if (over) { ctx.strokeStyle = p.bad; ctx.beginPath(); ctx.arc(cx, cy, R, ang(Math.max(dO, MN.KR.dsr)), ang(d)); ctx.stroke(); }
+      }
+      ctx.lineWidth = 1;
+      ctx.font = MB.font(11, true); ctx.fillStyle = p.dim; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      [0, 0.2, 0.4, 0.6, 0.8].forEach((t) => {
+        const a = ang(t), rr = R + T / 2 + 13;
+        ctx.fillText(Math.round(t * 100) + "%", cx + Math.cos(a) * rr, cy + Math.sin(a) * rr);
+      });
+      [[MN.KR.dsr, p.text, 2.5], [0.5, p.faint, 1.5]].forEach(([t, col, lw]) => {
+        const a = ang(t);
+        ctx.strokeStyle = col; ctx.lineWidth = lw;
+        ctx.beginPath(); ctx.moveTo(cx + Math.cos(a) * (R - T / 2 - 5), cy + Math.sin(a) * (R - T / 2 - 5)); ctx.lineTo(cx + Math.cos(a) * (R + T / 2 + 4), cy + Math.sin(a) * (R + T / 2 + 4)); ctx.stroke();
+      });
+      const a = ang(d), tip0 = R - T / 2 - 8;
+      ctx.strokeStyle = p.text; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(a) * tip0, cy + Math.sin(a) * tip0); ctx.stroke();
+      ctx.fillStyle = p.text; ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI * 2); ctx.fill();
+      ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+      ctx.fillStyle = over ? p.bad : p.text; ctx.font = MB.font(Math.max(18, Math.min(28, R * 0.24)), true, 700);
+      ctx.fillText(MB.pct(d, 1), cx, cy - R * 0.36);
+      ctx.fillStyle = p.dim; ctx.font = MB.font(12);
+      ctx.fillText("DSR · 한도 " + MB.pct(MN.KR.dsr, 0), cx, cy - R * 0.36 + 18);
+      ctx.textBaseline = "top";
+      ctx.fillText("원하는 대출 " + MB.won(st.want) + " · 월 " + MB.won(MN.pmt(st.want, rate() / 1200, n()), { digits: 1 }), cx, cy + 10);
+      ctx.restore();
+      handle(ctx, cx + Math.cos(a) * R, cy + Math.sin(a) * R, over ? p.bad : p.accent, 9);
+    }, { aspect: 0.52, minHeight: 250, maxHeight: 330 });
+    MB.drag(cv.canvas, {
+      move(x, y) {
+        const g = st.g; if (!g) return;
+        let a = Math.atan2(y - g.cy, x - g.cx);
+        if (a > 0) a = x < g.cx ? -Math.PI : 0;
+        const d = ((a + Math.PI) / Math.PI) * MAXD;
+        const room = Math.max(0, d * inc() - oth()) / 12;
+        st.want = Math.round(MN.pv(rc() / 12, n(), room) / 1e6) * 1e6;
+        up();
+      },
+    });
+    function stats() {
+      const m = maxL(), d = dsrOf(st.want);
+      MB.stat("ds-o1", MB.won(m));
+      MB.stat("ds-o2", MB.won(st.want));
+      MB.stat("ds-o3", MB.pct(d, 1));
+      MB.stat("ds-o4", d <= MN.KR.dsr + 1e-9 ? '<span class="ok-t">가능</span>' : '<span class="bad-t">한도 초과</span>');
+    }
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 9. 갚을까 굴릴까 */
+  (function () {
+    const L0 = 1e7;
+    let seed = 11, R, cv;
+    const up = () => { calc(); cv.redraw(); stats(); };
+    const asset = MB.seg("vs-asset", up);
+    const lr = MB.range("vs-lr", (v) => v.toFixed(1) + "%", up);
+    const yrs = MB.range("vs-y", (v) => v + "년", up);
+    const tax = document.getElementById("vs-tax");
+    tax.addEventListener("change", up);
+    document.getElementById("vs-seed").addEventListener("click", () => { seed++; up(); });
+    function calc() {
+      const a = MN.ASSETS[asset()], Y = yrs(), t = tax.checked ? MN.KR.interestTax : 0;
+      const adj = (v) => { const x = L0 * v; return x > L0 ? L0 + (x - L0) * (1 - t) : x; };
+      const paths = MN.paths({ mu: a.mu, sigma: a.sigma, years: Y, steps: 12, n: 600, seed }).map((pa) => Array.from(pa, adj));
+      const B = MN.bands(paths), N = paths[0].length, fin = paths.map((pa) => pa[N - 1]);
+      const Afin = L0 * Math.pow(1 + lr() / 100, Y);
+      R = { B, fin, Afin, below: fin.filter((v) => v < Afin).length / fin.length, Y, N };
+    }
+    calc();
+    cv = MB.canvas("#vs-cv", (ctx, w, h) => {
+      const p = MB.palette(), N = R.N, Y = R.Y, B = R.B;
+      const lo = Math.min(Math.min(...B.p10), L0) * 0.92, hi = Math.max(B.p90[N - 1], R.Afin) * 1.08;
+      const fw = Math.round(w * 0.72);
+      const box = { x: 58, y: 26, w: fw - 58 - 4, h: h - 26 - 30 };
+      const xt = []; const s = Y <= 5 ? 1 : Y <= 10 ? 2 : 5; for (let y = 0; y <= Y; y += s) xt.push(y);
+      const c = MB.chart(ctx, box, { x: [0, Y], y: [lo, hi], yFmt: MB.wonAxis, xTicks: xt, xFmt: (v) => v + "년", hlines: [{ y: L0, color: p.faint }] });
+      const X = (k) => c.X(k / 12);
+      ctx.save();
+      ctx.beginPath(); ctx.rect(box.x, box.y, box.w + 1, box.h); ctx.clip();
+      const area = (a, b, col) => {
+        ctx.beginPath();
+        for (let k = 0; k < N; k++) ctx.lineTo(X(k), c.Y(a[k]));
+        for (let k = N - 1; k >= 0; k--) ctx.lineTo(X(k), c.Y(b[k]));
+        ctx.closePath(); ctx.fillStyle = col; ctx.fill();
+      };
+      area(B.p10, B.p90, rgba(p.accent, 0.14));
+      area(B.p25, B.p75, rgba(p.accent, 0.2));
+      const line = (fn, col, lw, dash) => {
+        ctx.beginPath(); ctx.setLineDash(dash || []);
+        for (let k = 0; k < N; k++) ctx.lineTo(X(k), c.Y(fn(k)));
+        ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.stroke(); ctx.setLineDash([]);
+      };
+      line((k) => B.p50[k], p.accent, 2.4);
+      line((k) => L0 * Math.pow(1 + lr() / 100, k / 12), p.accent2, 2.6);
+      ctx.restore();
+      const hx = fw + 4, hw = w - hx - 8, nb = 30, cnt = new Array(nb).fill(0);
+      R.fin.forEach((v) => { const i = Math.floor(((v - lo) / (hi - lo)) * nb); if (i >= 0 && i < nb) cnt[i]++; });
+      const mc = Math.max(...cnt, 1);
+      ctx.save();
+      for (let i = 0; i < nb; i++) {
+        if (!cnt[i]) continue;
+        const v0 = lo + ((hi - lo) * i) / nb, v1 = lo + ((hi - lo) * (i + 1)) / nb;
+        const y0 = c.Y(v1), y1 = c.Y(v0);
+        ctx.fillStyle = (v0 + v1) / 2 < R.Afin ? rgba(p.bad, 0.6) : rgba(p.ok, 0.6);
+        ctx.fillRect(hx, y0 + 0.5, (cnt[i] / mc) * hw, Math.max(1, y1 - y0 - 1));
+      }
+      ctx.strokeStyle = p.accent2; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.moveTo(hx - 4, c.Y(R.Afin)); ctx.lineTo(w - 6, c.Y(R.Afin)); ctx.stroke();
+      ctx.fillStyle = p.dim; ctx.font = MB.font(11); ctx.textAlign = "left"; ctx.textBaseline = "top";
+      ctx.fillText(Y + "년 뒤 분포", hx, 4);
+      ctx.restore();
+    }, { aspect: 0.55, minHeight: 270, maxHeight: 380 });
+    function stats() {
+      MB.stat("vs-o1", MB.won(R.Afin));
+      MB.stat("vs-o2", MB.won(R.B.p50[R.N - 1]));
+      MB.stat("vs-o3", MB.pct(R.below, 0));
+      MB.stat("vs-o4", MB.won(R.B.p10[R.N - 1]));
+    }
+    stats();
+  })();
+
+  /* ---------------------------------------------------------- 10. 한결: 갚기 vs 모으기 */
+  (function () {
+    const P0 = MN.HG.studentLoan, LR = MN.HG.studentRate, NM = MN.HG.studentMonths;
+    const PAY = MN.pmt(P0, LR / 12, NM);
+    let cv, R;
+    const up = () => { calc(); cv.redraw(); stats(); };
+    const ex = MB.range("hg-x", (v) => MB.won(v), up);
+    const sr = MB.range("hg-s", (v) => v.toFixed(1) + "%", up);
+    function calc() {
+      const extra = ex(), rs = MN.monthly(sr() / 100), budget = PAY + extra;
+      let b = P0, s = 0, pm = 0, b2 = P0, s2 = 0, a24 = 0, c24 = 0;
+      const A = [[0, 0]], B = [[0, 0]], AL = [[0, P0]], BL = [[0, P0]];
+      for (let m = 1; m <= NM; m++) {
+        s *= 1 + rs;
+        if (b > 1) {
+          const i = (b * LR) / 12, pz = Math.min(budget, b + i);
+          b = b + i - pz; s += budget - pz;
+          if (b <= 1) { b = 0; if (!pm) pm = m; }
+        } else s += budget;
+        s2 *= 1 + rs;
+        b2 = Math.max(0, b2 + (b2 * LR) / 12 - PAY); s2 += extra;
+        A.push([m, s]); B.push([m, s2]); AL.push([m, b]); BL.push([m, b2]);
+        if (m === 24) { a24 = s; c24 = s2; }
+      }
+      R = { A, B, AL, BL, pm: pm || NM, a: s - b, b: s2 - b2, sa: s, sb: s2, a24, c24 };
+    }
+    calc();
+    cv = MB.canvas("#hg-cv", (ctx, w, h) => {
+      const p = MB.palette();
+      const hi = Math.max(R.sa, R.sb, P0) * 1.1;
+      const box = { x: 58, y: 16, w: w - 58 - 14, h: h - 16 - 30 };
+      MB.chart(ctx, box, {
+        x: [0, NM], y: [0, hi], yFmt: MB.wonAxis, xTicks: [0, 24, 48, 72, 96, 120], xFmt: (m) => m / 12 + "년",
+        vlines: ex() > 0 ? [{ x: R.pm, color: p.accent2, label: "갚기 완납" }] : [],
+        series: [
+          { data: R.AL, color: rgba(p.accent2, 0.75), width: 1.5, dash: [3, 3] },
+          { data: R.BL, color: rgba(p.accent, 0.75), width: 1.5, dash: [3, 3] },
+          { data: R.A, color: p.accent2, width: 2.6 },
+          { data: R.B, color: p.accent, width: 2.6 },
+        ],
+        points: [{ x: NM, y: R.sa, color: p.accent2, r: 4.5 }, { x: NM, y: R.sb, color: p.accent, r: 4.5 }],
+      });
+    }, { aspect: 0.5, minHeight: 250, maxHeight: 340 });
+    function stats() {
+      MB.stat("hg-o1", ex() > 0 ? ym(R.pm) : "10년 <small>(추가 없음)</small>");
+      MB.stat("hg-o2", MB.won(R.a));
+      MB.stat("hg-o3", MB.won(R.b));
+      const d = R.b - R.a;
+      MB.stat("hg-o4", '<span class="' + (d >= 0 ? "ok-t" : "bad-t") + '">' + signWon(d) + "</span>");
+      MB.stat("hg-o5", MB.won(R.a24) + " / " + MB.won(R.c24));
+    }
+    stats();
+  })();
+})();
+</script>
+</body>
+</html>

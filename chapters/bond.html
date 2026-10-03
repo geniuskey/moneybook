@@ -1,0 +1,1089 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and MoneyBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "채권은 빌려준 돈의 증서다. 현금흐름의 현재가치로 가격을 매기고, 금리와 가격의 시소, 만기수익률, 듀레이션과 볼록성, 신용 스프레드, 수익률 곡선을 직접 끌어 보며 익힌다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>채권 · MoneyBook</title>
+<meta name="description" content="채권은 빌려준 돈의 증서다. 현금흐름의 현재가치로 가격을 매기고, 금리와 가격의 시소, 만기수익률, 듀레이션과 볼록성, 신용 스프레드, 수익률 곡선을 직접 끌어 보며 익힌다.">
+<link rel="canonical" href="https://moneybook.euiyun.com/chapters/bond.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0b8a63">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MoneyBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="채권 · MoneyBook">
+<meta property="og:description" content="채권은 빌려준 돈의 증서다. 현금흐름의 현재가치로 가격을 매기고, 금리와 가격의 시소, 만기수익률, 듀레이션과 볼록성, 신용 스프레드, 수익률 곡선을 직접 끌어 보며 익힌다.">
+<meta property="og:url" content="https://moneybook.euiyun.com/chapters/bond.html">
+<meta property="og:image" content="https://moneybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://moneybook.euiyun.com/chapters/bond.html#chapter","name":"채권","headline":"채권 · MoneyBook","description":"채권은 빌려준 돈의 증서다. 현금흐름의 현재가치로 가격을 매기고, 금리와 가격의 시소, 만기수익률, 듀레이션과 볼록성, 신용 스프레드, 수익률 곡선을 직접 끌어 보며 익힌다.","url":"https://moneybook.euiyun.com/chapters/bond.html","position":14,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://moneybook.euiyun.com/og.png","dateModified":"2026-10-03","isPartOf":{"@type":"Book","@id":"https://moneybook.euiyun.com/#book","name":"MoneyBook · 살아가는 데 필요한 돈 교과서","url":"https://moneybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MoneyBook","item":"https://moneybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"14. 채권","item":"https://moneybook.euiyun.com/chapters/bond.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/money.js"></script>
+<!--head:end-->
+<style>
+  #sim-ss .hint, #sim-yt .hint, #sim-pp .hint, #sim-rp .hint { top: 8px; bottom: auto; }
+  figure.diagram.compact svg { max-width: 560px; margin: 0 auto; }
+  .table-wrap table.wide-t { min-width: 600px; }
+</style>
+</head>
+<body data-chapter="bond">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 14</div>
+    <h1>채권</h1>
+    <p class="lead">예금은 은행에 돈을 맡기는 일이고, 채권은 정부나 회사에 직접 돈을 빌려주고 증서를 받는 일이다. 약속된 이자와 원금이 정해져 있는데도 채권값은 매일 오르내린다. 그 이유는 단 하나, 시장금리다. 이 장에서는 현금흐름을 그려 놓고 금리를 움직여 가며 채권값이 왜, 얼마나 흔들리는지 직접 확인한다.</p>
+    <ul class="objectives">
+      <li>채권의 네 요소(액면가·표면금리·만기·발행자)로 현금흐름을 그리고, 그 현재가치를 더해 가격을 계산한다.</li>
+      <li>시장금리가 오르면 이미 나온 채권값이 내리는 이유와 만기수익률, 할인채·할증채를 설명한다.</li>
+      <li>듀레이션을 현금흐름의 무게중심이자 금리 민감도로 읽고, 장기채가 더 크게 흔들리는 이유와 볼록성을 말한다.</li>
+      <li>신용 위험과 스프레드, 수익률 곡선, 주식과의 관계를 이해하고, 예금과 채권의 차이를 구분한다.</li>
+    </ul>
+  </header>
+
+  <section id="what">
+    <h2>채권은 빌려준 돈의 증서다</h2>
+    <p>정부가 도로를 놓거나 회사가 공장을 지으려면 큰돈이 필요하다. 은행에서 빌릴 수도 있지만, 많은 사람에게서 조금씩 직접 빌릴 수도 있다. 이때 "언제까지 얼마의 이자를 주고, 언제 원금을 돌려주겠다"는 약속을 적은 증서가 <span class="term">채권</span><span class="en">(Bond)</span>이다. 채권을 산다는 것은 그 발행자에게 돈을 빌려주고 증서를 받는다는 뜻이다.</p>
+    <p>증서에는 네 가지가 적혀 있다.</p>
+    <ul>
+      <li><span class="term">액면가</span><span class="en">(Face value)</span>: 만기에 돌려받는 원금. 이 장에서는 계산하기 쉽게 10,000원으로 둔다.</li>
+      <li><span class="term">표면금리</span><span class="en">(Coupon rate)</span>: 액면가에 대해 해마다 주기로 한 이자율. 3%면 해마다 300원을 받는다. 이 이자를 <b>쿠폰</b>이라 부른다. 옛날 채권 증서에 이자 교환권(쿠폰)이 붙어 있어서 한 장씩 오려 이자를 받았던 데서 나온 이름이다.</li>
+      <li><span class="term">만기</span><span class="en">(Maturity)</span>: 원금을 돌려받는 날. 1년짜리도, 30년짜리도 있다.</li>
+      <li><span class="term">발행자</span><span class="en">(Issuer)</span>: 돈을 빌린 쪽. 누가 빌렸느냐가 돈을 떼일 위험을 정한다.</li>
+    </ul>
+
+    <figure class="diagram compact">
+      <svg viewBox="0 0 420 400" role="img" aria-label="채권의 구조: 투자자가 지금 돈을 빌려주고, 발행자는 해마다 이자와 만기에 원금을 돌려준다">
+        <defs><marker id="bd-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="130" y="10" width="160" height="64" rx="12" class="f-acc-soft"/>
+        <text x="210" y="38" text-anchor="middle" class="lbl-b">투자자</text>
+        <text x="210" y="60" text-anchor="middle" class="lbl-dim">나 · 펀드 · 은행</text>
+        <rect x="130" y="326" width="160" height="64" rx="12" class="f-acc2-soft"/>
+        <text x="210" y="354" text-anchor="middle" class="lbl-b">발행자</text>
+        <text x="210" y="376" text-anchor="middle" class="lbl-dim">정부 · 지자체 · 회사</text>
+        <rect x="120" y="108" width="180" height="182" rx="6" class="f-elev"/>
+        <rect x="127" y="115" width="166" height="168" rx="4" class="s-dash"/>
+        <text x="210" y="142" text-anchor="middle" class="lbl-b">채권 증서</text>
+        <text x="136" y="176" class="lbl-dim">액면가</text><text x="284" y="176" text-anchor="end" class="t-mono">10,000</text>
+        <text x="136" y="204" class="lbl-dim">표면금리</text><text x="284" y="204" text-anchor="end" class="t-mono">3%/yr</text>
+        <text x="136" y="232" class="lbl-dim">만기</text><text x="284" y="232" text-anchor="end" class="t-mono">5 yr</text>
+        <text x="136" y="260" class="lbl-dim">발행자</text><text x="284" y="260" text-anchor="end" class="lbl-dim">○○</text>
+        <path d="M130 42 C10 42 10 358 130 358" class="s-line" marker-end="url(#bd-ar)"/>
+        <text x="50" y="182" class="lbl">지금</text>
+        <text x="50" y="202" class="lbl">10,000원</text>
+        <text x="50" y="222" class="lbl">빌려준다</text>
+        <path d="M290 358 C410 358 410 42 290 42" class="s-ok" marker-end="url(#bd-ar)"/>
+        <text x="304" y="168" class="lbl-acc">해마다</text>
+        <text x="304" y="188" class="lbl-acc">300원씩</text>
+        <text x="304" y="226" class="lbl-acc">5년 뒤</text>
+        <text x="304" y="246" class="lbl-acc">원금</text>
+        <text x="304" y="266" class="lbl-acc">10,000원</text>
+      </svg>
+      <figcaption><b>그림 1. 채권의 구조.</b> 투자자는 지금 돈을 내고 증서를 받는다. 발행자는 증서에 적힌 대로 해마다 쿠폰을 주고 만기에 액면가를 돌려준다. 증서는 만기 전에도 다른 사람에게 팔 수 있다.</figcaption>
+    </figure>
+
+    <p>누가 빌렸느냐에 따라 채권 이름이 달라진다. 돈을 떼일 걱정이 적은 발행자일수록 이자를 적게 줘도 빌릴 수 있다.</p>
+    <div class="table-wrap"><table class="wide-t">
+      <thead><tr><th>종류</th><th>발행자</th><th>떼일 위험</th><th>금리 수준(상대)</th></tr></thead>
+      <tbody>
+        <tr><td>국채(국고채)</td><td>정부</td><td>가장 낮다(자기 나라 돈으로 갚는다)</td><td>가장 낮다</td></tr>
+        <tr><td>지방채</td><td>지방자치단체</td><td>낮다</td><td>국채보다 조금 높다</td></tr>
+        <tr><td>특수채(공사채)</td><td>공기업, 공공기관</td><td>낮다</td><td>국채보다 조금 높다</td></tr>
+        <tr><td>금융채</td><td>은행, 카드사 등 금융회사</td><td>회사마다 다르다</td><td>중간</td></tr>
+        <tr><td>회사채</td><td>일반 기업</td><td>신용등급에 따라 크게 다르다</td><td>높다(위험만큼)</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>가격 = 미래 현금흐름의 현재가치</h3>
+    <p><a href="interest.html">4장</a>에서 1년 뒤의 1만 원은 지금의 1만 원보다 덜 가치 있다는 것을 봤다. 지금 돈을 연 \(y\)로 굴릴 수 있다면, \(t\)년 뒤에 받을 돈 \(C\)의 현재가치는 \(C/(1+y)^t\)다. 채권은 정해진 날짜에 정해진 돈을 주는 약속의 묶음이므로, 그 값은 각 약속의 현재가치를 모두 더한 것이다.</p>
+    <div class="formula">$$P = \sum_{t=1}^{n} \frac{C}{(1+y)^t} + \frac{F}{(1+y)^n}$$<div class="where">\(P\): 채권 가격, \(C\): 해마다 받는 쿠폰(액면가 × 표면금리), \(F\): 액면가, \(n\): 만기까지 남은 햇수, \(y\): 지금 시장에서 비슷한 채권에 요구하는 금리(할인율)</div></div>
+    <p>아래 그림의 점선 막대는 받을 돈 그대로이고, 색칠한 막대는 그 돈을 지금 가치로 할인한 것이다. 할인된 막대들이 왼쪽 '지금' 칸으로 흘러가 쌓인 높이가 채권 가격이다. 시장금리를 올리고, 만기를 늘려 본다.</p>
+
+    <div class="sim" id="sim-cf">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>현금흐름 타임라인: 미래의 돈을 지금으로 끌어오기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cf-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>표면금리 <output id="cf-c-out"></output></span><input type="range" id="cf-c" min="0" max="8" step="0.5" value="3"></label>
+          <label class="ctrl"><span>시장금리(할인율) <output id="cf-y-out"></output></span><input type="range" id="cf-y" min="0" max="10" step="0.25" value="4"></label>
+          <label class="ctrl"><span>만기 <output id="cf-n-out"></output></span><input type="range" id="cf-n" min="1" max="30" step="1" value="5"></label>
+          <div class="btn-row"><button class="btn" id="cf-re">할인 다시 보기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">채권 가격</span><span class="v" id="cf-o-p">—</span></div>
+        <div class="stat"><span class="k">받을 돈 합계</span><span class="v" id="cf-o-s">—</span></div>
+        <div class="stat"><span class="k">할인으로 줄어든 몫</span><span class="v" id="cf-o-d">—</span></div>
+        <div class="stat"><span class="k">구분</span><span class="v" id="cf-o-k">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 표면금리와 시장금리를 둘 다 3%로 맞춘다. 가격이 정확히 액면가 10,000원이 된다. ② 시장금리를 0%로 내린다. 할인이 사라져 가격이 받을 돈 합계와 같아진다. ③ 시장금리 6%에서 만기를 30년으로 늘린다. 먼 미래의 원금 막대가 거의 사라지도록 줄어든다. (연 1회 이자, 모든 기간에 같은 할인율을 쓰는 단순 모델)</div>
+    </div>
+
+    <p>표면금리와 시장금리가 같으면 가격은 액면가와 같다. 시장금리가 표면금리보다 높으면 미래의 돈을 더 세게 깎으므로 가격은 액면가 아래로, 낮으면 위로 간다. 먼 미래의 돈일수록 할인이 여러 번 겹치므로, 만기가 긴 채권은 할인율의 작은 변화에도 가격이 크게 달라진다. 이 장의 나머지는 모두 이 두 문장에서 나온다.</p>
+  </section>
+
+  <section id="seesaw">
+    <h2>금리가 오르면 채권값이 내린다</h2>
+    <p>한결의 친구가 작년에 표면금리 3%, 만기 5년인 채권을 10,000원에 샀다고 하자. 그런데 올해 시장금리가 5%로 올라, 새로 나오는 5년짜리 채권은 해마다 500원을 준다. 친구가 지금 채권을 팔려고 하면 누가 300원짜리 채권을 10,000원에 사겠는가. 사는 사람은 새 채권과 똑같이 연 5%를 벌 수 있는 값까지만 내려고 한다. 그 값은 앞의 공식에 \(y = 5\%\)를 넣은 9,134원이다. 해마다 덜 받는 200원 다섯 번을 5%로 할인한 만큼(약 866원) 싸져야 거래가 된다.</p>
+    <p>이것이 <b>금리와 채권 가격의 시소</b>다. 증서에 적힌 쿠폰은 바뀌지 않으므로, 시장이 요구하는 수익률이 바뀌면 그 수익률을 맞추기 위해 가격이 움직인다. 아래 시소의 왼쪽 끝(시장금리)을 위아래로 끌어 본다. 오른쪽 팔의 길이는 채권의 만기에 따라 달라진다.</p>
+
+    <div class="sim" id="sim-ss">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>금리–가격 시소: 만기가 길수록 팔이 길다</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ss-cv"></canvas><span class="hint">왼쪽 끝을 위아래로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="ctrl"><span>내 채권의 만기(표면금리 3%)</span>
+            <div class="seg" id="ss-n"><button data-value="1">1년</button><button data-value="5">5년</button><button data-value="10" class="on">10년</button><button data-value="30">30년</button></div></div>
+          <div class="btn-row"><button class="btn" id="ss-re">금리 3%로 되돌리기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">시장금리</span><span class="v" id="ss-o-y">—</span></div>
+        <div class="stat"><span class="k">내 채권의 값</span><span class="v" id="ss-o-p">—</span></div>
+        <div class="stat"><span class="k">산 값 대비</span><span class="v" id="ss-o-c">—</span></div>
+        <div class="stat"><span class="k">수정 듀레이션</span><span class="v" id="ss-o-d">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 10년 채권에서 금리를 4%로 올린다. 값이 약 8.1% 내린다. ② 같은 1%p를 1년 채권과 30년 채권에서 비교한다. 1년짜리는 1% 남짓, 30년짜리는 17% 넘게 움직인다. ③ 금리를 2%로 내린다. 시소가 반대로 기울어 값이 액면가 위로 올라간다. (오른쪽 팔의 길이는 수정 듀레이션에 비례하도록 그렸다. 실제 가격은 아래 숫자로 읽는다.)</div>
+    </div>
+
+    <p>같은 1%p의 금리 변화인데 1년 채권은 값이 1% 남짓, 30년 채권은 17% 넘게 움직였다. 1년 채권은 1년 뒤면 원금을 돌려받아 새 금리로 다시 굴리면 되니, 덜 받는 기간이 1년뿐이다. 30년 채권은 30년 동안 시장보다 적은 쿠폰에 묶인다. 그 손해를 한꺼번에 가격에 반영하니 크게 떨어진다. 시소의 팔 길이, 곧 금리 민감도를 재는 자가 뒤에서 볼 <b>듀레이션</b>이다.</p>
+    <div class="callout tip">
+      <strong>만기까지 들고 있으면?</strong>
+      발행자가 부도나지 않는 한, 만기까지 보유하면 증서에 적힌 쿠폰과 원금을 그대로 받는다. 중간의 가격 하락은 "지금 팔면 그 값"이라는 평가손일 뿐이다. 다만 그동안 더 높은 금리를 받을 기회를 놓친 것은 사실이므로, 손해가 사라지는 것이 아니라 "덜 번 것"으로 모양만 바뀐다.
+    </div>
+  </section>
+
+  <section id="ytm">
+    <h2>만기수익률과 할인채·할증채</h2>
+    <p>채권을 시장에서 사면 값이 액면가와 다를 때가 많다. 그러면 표면금리만 봐서는 실제로 몇 %를 버는지 알 수 없다. 지금 가격을 내고 만기까지 들고 있으면서 받는 모든 현금흐름을 고려한 연 수익률을 <span class="term">만기수익률</span><span class="en">(Yield to maturity, YTM)</span>이라 한다. 앞 공식에서 가격 \(P\)를 알고 \(y\)를 거꾸로 푼 값이다. 뉴스에서 "국고채 10년물 금리가 올랐다"고 할 때의 금리가 바로 이 만기수익률이다.</p>
+    <p>아래 그림의 가격 막대 위쪽 손잡이를 끌어 채권을 싸게, 또는 비싸게 사 본다. 세 가지 수익률이 어떻게 갈라지는지 본다.</p>
+
+    <div class="sim" id="sim-yt">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>값을 끌면 만기수익률이 풀린다</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="yt-cv"></canvas><span class="hint">가격 막대를 위아래로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>표면금리 <output id="yt-c-out"></output></span><input type="range" id="yt-c" min="0" max="8" step="0.5" value="3"></label>
+          <label class="ctrl"><span>남은 만기 <output id="yt-n-out"></output></span><input type="range" id="yt-n" min="1" max="20" step="1" value="5"></label>
+          <div class="btn-row"><button class="btn" id="yt-re">액면가로</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">사는 값</span><span class="v" id="yt-o-p">—</span></div>
+        <div class="stat"><span class="k">경상수익률(쿠폰÷값)</span><span class="v" id="yt-o-c">—</span></div>
+        <div class="stat"><span class="k">만기수익률</span><span class="v" id="yt-o-y">—</span></div>
+        <div class="stat"><span class="k">구분</span><span class="v" id="yt-o-k">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 값을 9,000원으로 내린다. 만기에 10,000원을 받으니 1,000원의 차익이 더해져 만기수익률이 표면금리보다 높아진다. ② 표면금리를 0%로 둔다. 쿠폰이 없는 채권은 오로지 싸게 사서 액면가를 받는 차익으로만 번다. ③ 같은 값 9,000원에서 만기를 1년과 20년으로 바꿔 본다. 차익 1,000원을 1년에 버느냐 20년에 나눠 버느냐에 따라 만기수익률이 크게 달라진다. (만기수익률은 받은 쿠폰을 같은 금리로 다시 굴린다고 가정한다)</div>
+    </div>
+
+    <p>값과 금리 사이의 관계는 세 경우로 정리된다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>이름</th><th>조건</th><th>가격</th><th>만기까지 가격은</th></tr></thead>
+      <tbody>
+        <tr><td><span class="term">할인채</span><span class="en">(Discount bond)</span></td><td>표면금리 &lt; 만기수익률</td><td>액면가보다 낮다</td><td>액면가를 향해 올라간다</td></tr>
+        <tr><td>액면채(Par bond)</td><td>표면금리 = 만기수익률</td><td>액면가와 같다</td><td>그대로</td></tr>
+        <tr><td><span class="term">할증채</span><span class="en">(Premium bond)</span></td><td>표면금리 &gt; 만기수익률</td><td>액면가보다 높다</td><td>액면가를 향해 내려간다</td></tr>
+      </tbody>
+    </table></div>
+    <p>쿠폰이 아예 없는 채권을 <b>무이표채</b>(제로쿠폰채)라 하고, 액면가보다 싸게 팔아 차익으로 이자를 대신한다. 할인채라는 말을 이 무이표채만 가리키는 데 쓰기도 한다. 할증채는 비싸게 샀지만 그만큼 쿠폰을 많이 받으므로 손해가 아니다. 만기에 액면가만 돌려받아 생기는 차손을 높은 쿠폰이 메운다.</p>
+    <p>시장금리가 그대로라면 할인채든 할증채든 만기가 가까워질수록 값이 액면가로 끌려간다. 만기 날에는 누구나 액면가를 받으니 그 전날 값도 액면가에 가까울 수밖에 없다. 아래에서 시간 손잡이를 끌거나 재생해 본다.</p>
+
+    <div class="sim" id="sim-pp">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>만기가 다가오면 값이 액면가로 모인다</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="pp-cv"></canvas><span class="hint">시간 손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>시장금리(그대로 유지) <output id="pp-y-out"></output></span><input type="range" id="pp-y" min="1" max="6" step="0.25" value="3"></label>
+          <div class="btn-row"><button class="btn primary" id="pp-go">10년 재생</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">남은 만기</span><span class="v" id="pp-o-t">—</span></div>
+        <div class="stat"><span class="k">표면 1% 채권</span><span class="v" id="pp-o-1">—</span></div>
+        <div class="stat"><span class="k">표면 3% 채권</span><span class="v" id="pp-o-3">—</span></div>
+        <div class="stat"><span class="k">표면 5% 채권</span><span class="v" id="pp-o-5">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 시장금리 3%에서 재생한다. 1% 채권은 올라가고 5% 채권은 내려가며 셋이 10년 뒤 한 점에서 만난다. ② 시장금리를 1%로 내린다. 세 채권 모두 할증채가 된다. ③ 시장금리를 6%로 올린다. 이번에는 모두 할인채다. (만기 10년, 연 1회 이자, 해마다 이자를 받은 직후의 값)</div>
+    </div>
+    <p>할증채의 값이 해마다 조금씩 내려가는 것은 손실이 아니라, 미리 많이 받은 쿠폰이 원금에서 빠져나가는 모습이다. 쿠폰과 가격 변화를 합한 연 수익은 세 채권 모두 시장금리와 같다.</p>
+  </section>
+
+  <section id="duration">
+    <h2>듀레이션: 현금흐름의 무게중심</h2>
+    <p>만기 10년 채권이라도 돈을 10년 뒤에 한꺼번에 받는 것은 아니다. 해마다 쿠폰이 들어오므로, 돈이 "평균적으로" 들어오는 시점은 10년보다 앞이다. 각 현금흐름의 현재가치를 무게로 삼아 시점을 평균한 값을 <span class="term">듀레이션</span><span class="en">(Macaulay duration)</span>이라 한다.</p>
+    <div class="formula">$$D = \frac{1}{P}\sum_{t=1}^{n} t \cdot \mathrm{PV}_t$$<div class="where">\(D\): 매콜리 듀레이션(년), \(\mathrm{PV}_t\): \(t\)년째 받는 돈의 현재가치, \(P\): 가격(\(\mathrm{PV}_t\)의 합)</div></div>
+    <p>무게를 시점에 곱해 평균했으니, 타임라인 위에 현재가치만큼의 추를 올려놓았을 때 <b>균형이 잡히는 받침점</b>이 듀레이션이다. 아래 그림에서 받침점을 끌어 판이 수평이 되는 곳을 찾아본다. 그다음 쿠폰을 키우거나 0으로 줄여 받침점이 어디로 가는지 본다.</p>
+
+    <div class="sim" id="sim-fc">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>듀레이션 받침점: 현재가치의 무게중심 찾기</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="fc-cv"></canvas><span class="hint">받침점을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>표면금리 <output id="fc-c-out"></output></span><input type="range" id="fc-c" min="0" max="10" step="0.5" value="3"></label>
+          <label class="ctrl"><span>만기 <output id="fc-n-out"></output></span><input type="range" id="fc-n" min="1" max="30" step="1" value="10"></label>
+          <div class="btn-row"><button class="btn primary" id="fc-go">균형점 찾기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">받침점</span><span class="v" id="fc-o-f">—</span></div>
+        <div class="stat"><span class="k">매콜리 듀레이션</span><span class="v" id="fc-o-d">—</span></div>
+        <div class="stat"><span class="k">수정 듀레이션</span><span class="v" id="fc-o-m">—</span></div>
+        <div class="stat"><span class="k">판의 상태</span><span class="v" id="fc-o-s">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 표면 3%·만기 10년에서 균형점을 찾는다. 약 8.8년이다. ② 표면금리를 0%로 내린다. 추가 만기 한 곳에만 남아 받침점이 정확히 10년, 곧 만기와 같아진다. ③ 표면금리를 10%로 올린다. 앞쪽 추가 무거워져 받침점이 앞으로 당겨진다. (시장금리 3%로 할인한 현재가치를 추의 높이로 그렸다)</div>
+    </div>
+
+    <p>쿠폰이 없는 채권은 듀레이션이 만기와 같고, 쿠폰이 클수록 돈을 일찍 많이 받으니 듀레이션이 짧아진다. 만기가 길어지면 듀레이션도 길어지지만 만기만큼 늘지는 않는다. 표면 3% 30년 채권의 듀레이션은 약 20년이다.</p>
+
+    <h3>무게중심이 곧 금리 민감도다</h3>
+    <p>듀레이션이 쓸모 있는 진짜 이유는 따로 있다. 가격 공식을 금리로 미분하면 각 항에서 시점 \(t\)가 앞으로 나온다. 정리하면 금리가 조금 변할 때 가격이 변하는 비율이 듀레이션에 비례한다.</p>
+    <div class="formula">$$\frac{\Delta P}{P} \approx -D_{\mathrm{mod}}\,\Delta y + \tfrac{1}{2}\,\mathrm{Cvx}\,(\Delta y)^2$$<div class="where">\(D_{\mathrm{mod}} = D/(1+y)\): 수정 듀레이션,\(\Delta y\): 금리 변화(1%p = 0.01), \(\mathrm{Cvx}\): 볼록성. 첫 항이 직선 근사, 둘째 항이 휘어진 만큼의 보정이다.</div></div>
+    <p>수정 듀레이션이 8.5인 채권은 금리가 1%p 오르면 값이 약 8.5% 내리고, 0.5%p 오르면 약 4.25% 내린다. 아래 그림은 시장금리에 따른 가격 곡선이다. 곡선 위의 점을 좌우로 끌어 지금 금리를 바꾸면 그 점에서 그은 접선의 기울기가 수정 듀레이션이다.</p>
+
+    <div class="sim" id="sim-rp">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>금리–가격 곡선과 듀레이션 접선</h3></div>
+      <div class="legend"><span><i style="background:var(--text-dim)"></i>1년</span><span><i style="background:var(--accent)"></i>5년</span><span><i style="background:var(--accent-2)"></i>10년</span><span><i style="background:var(--bad)"></i>30년</span><span>(모두 표면금리 3%)</span></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="rp-cv"></canvas><span class="hint">곡선 위 점을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="ctrl"><span>접선을 그을 채권</span>
+            <div class="seg" id="rp-f"><button data-value="1">1년</button><button data-value="5">5년</button><button data-value="10" class="on">10년</button><button data-value="30">30년</button></div></div>
+          <label class="check"><input type="checkbox" id="rp-t" checked> 듀레이션 접선</label>
+          <label class="check"><input type="checkbox" id="rp-c" checked> 금리 +1%p 비교</label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">가격</span><span class="v" id="rp-o-p">—</span></div>
+        <div class="stat"><span class="k">수정 듀레이션</span><span class="v" id="rp-o-d">—</span></div>
+        <div class="stat"><span class="k">+1%p 접선 추정</span><span class="v" id="rp-o-e">—</span></div>
+        <div class="stat"><span class="k">+1%p 실제</span><span class="v" id="rp-o-u">—</span></div>
+        <div class="stat"><span class="k">−1%p 실제</span><span class="v" id="rp-o-n">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 10년 채권, 금리 3%에서 접선 추정(−8.5%)과 실제(−8.1%)를 비교한다. 실제 하락이 조금 작다. ② 30년 채권으로 바꾼다. 곡선이 훨씬 가파르고 휘어 있어 추정과 실제의 차이가 2%p를 넘는다. ③ 금리를 −1%p 내렸을 때(+22.4%)와 +1%p 올렸을 때(−17.3%)를 비교한다. 같은 폭인데 오를 때 더 많이 오른다. (표면금리 3%, 연 1회 이자)</div>
+    </div>
+
+    <p>곡선은 아래로 볼록하다. 그래서 접선(듀레이션 근사)은 늘 실제 가격보다 아래에 있다. 금리가 오를 때는 실제 손실이 추정보다 작고, 내릴 때는 실제 이익이 추정보다 크다. 이 휘어진 정도를 <span class="term">볼록성</span><span class="en">(Convexity)</span>이라 한다. 볼록성은 만기가 길수록 커서, 30년 채권은 금리가 1%p 내리면 약 22.4% 오르지만 1%p 오르면 약 17.3%만 내린다.</p>
+    <div class="callout deep">
+      <strong>볼록성 항을 넣으면</strong>
+      30년 채권(표면 3%, 금리 3%)은 수정 듀레이션 19.6, 볼록성 약 507이다. 금리 +1%p에서 직선 근사는 −19.6%, 볼록성 항 \(\tfrac12 \times 507 \times 0.01^2 \approx +2.5\%\)를 더하면 −17.1%로 실제 −17.3%에 거의 붙는다. 금리 변화가 작을 때는 듀레이션 하나로 충분하고, 변화가 크거나 만기가 길 때 볼록성이 필요하다.
+    </div>
+  </section>
+
+  <section id="horizon">
+    <h2>금리가 오르면 손해만 보는가</h2>
+    <p>금리가 오르면 채권값이 바로 내린다. 하지만 이야기는 거기서 끝나지 않는다. 그 뒤로 받는 쿠폰을 이제는 더 높은 금리로 다시 굴릴 수 있다. 가격에서 잃은 것을 재투자 이자로 조금씩 되찾는다. 아래 그림은 표면금리 3% 채권을 액면가에 산 직후 금리가 한 번 뛰었을 때, 금리가 그대로였을 경우와 비교한 내 재산(남은 채권 값 + 받아서 굴린 쿠폰)의 차이다.</p>
+
+    <div class="sim" id="sim-hz">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>가격 손실과 재투자 이익의 줄다리기</h3></div>
+      <div class="legend"><span><i style="background:var(--bad)"></i>금리가 오른 경우(내리면 초록)</span><span><i style="background:var(--text-faint)"></i>같은 폭 반대 방향(점선)</span><span><i style="background:var(--accent-2)"></i>듀레이션</span></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="hz-cv"></canvas><span class="hint">시간 손잡이를 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>산 직후 금리 변화 <output id="hz-d-out"></output></span><input type="range" id="hz-d" min="-3" max="3" step="0.25" value="2"></label>
+          <div class="ctrl"><span>채권 만기</span>
+            <div class="seg" id="hz-n"><button data-value="5">5년</button><button data-value="10" class="on">10년</button><button data-value="30">30년</button></div></div>
+          <div class="btn-row"><button class="btn primary" id="hz-go">시간 재생</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">산 직후 평가손익</span><span class="v" id="hz-o-0">—</span></div>
+        <div class="stat"><span class="k">손잡이 시점의 차이</span><span class="v" id="hz-o-h">—</span></div>
+        <div class="stat"><span class="k">차이가 0이 되는 때</span><span class="v" id="hz-o-x">—</span></div>
+        <div class="stat"><span class="k">모인 쿠폰(재투자 포함)</span><span class="v" id="hz-o-c">—</span></div>
+        <div class="stat"><span class="k">남은 채권 값</span><span class="v" id="hz-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 10년 채권, 금리 +2%p. 산 직후 약 −15%에서 시작한 선이 9년쯤 0을 지난다. 점선(듀레이션) 근처다. ② 금리를 −2%p로 바꾼다. 처음엔 이익이지만 낮은 금리로 재투자하느라 같은 무렵 이익이 사라진다. ③ 30년 채권으로 바꾼다. 회복에 약 19년이 걸린다. (금리가 한 번 변한 뒤 그대로 유지되고, 모든 만기의 금리가 같이 움직인다고 가정)</div>
+    </div>
+    <p>금리가 오르든 내리든 두 효과는 서로 반대 방향이고, 듀레이션 무렵에서 거의 정확히 상쇄된다. 그래서 <b>돈을 쓸 시점과 듀레이션을 맞추면</b> 그 사이 금리가 한 번 크게 변해도 그 시점의 재산은 거의 변하지 않는다. 연금 기금이나 보험사가 미래에 줄 돈과 채권의 듀레이션을 맞추는 이유다. 반대로 듀레이션이 쓸 시점보다 훨씬 길면 금리 상승 때 손실을 회복하기 전에 채권을 팔아야 한다.</p>
+  </section>
+
+  <section id="credit">
+    <h2>신용 위험과 스프레드</h2>
+    <p>지금까지는 약속이 반드시 지켜진다고 가정했다. 회사채는 그렇지 않다. 회사가 어려워져 이자나 원금을 제때 못 주는 것을 <span class="term">부도</span><span class="en">(Default)</span>라 하고, 그럴 가능성을 <span class="term">신용 위험</span><span class="en">(Credit risk)</span>이라 한다. 부도가 나도 보통 한 푼도 못 받는 것은 아니다. 회사 재산을 정리해 일부를 돌려받는데, 그 비율을 <b>회수율</b>이라 한다.</p>
+    <p>신용평가회사는 발행자가 빚을 갚을 능력을 등급으로 매긴다. 등급이 낮을수록 투자자는 같은 만기의 국채보다 금리를 더 얹어 달라고 요구한다. 이 얹어 주는 금리를 <span class="term">신용 스프레드</span><span class="en">(Credit spread)</span>라 한다.</p>
+
+    <figure class="diagram compact">
+      <svg viewBox="0 0 420 330" role="img" aria-label="신용등급 사다리: 등급이 낮을수록 부도 위험과 스프레드가 커지고, BBB와 BB 사이에서 투자등급과 투기등급이 나뉜다">
+        <text x="10" y="24" class="lbl-b">등급</text>
+        <text x="96" y="24" class="lbl-dim">국채 위에 얹는 스프레드(예시)</text>
+        <text x="10" y="60" class="lbl">AAA</text><rect x="96" y="46" width="18" height="20" rx="4" class="f-acc-soft"/>
+        <text x="10" y="92" class="lbl">AA</text><rect x="96" y="78" width="30" height="20" rx="4" class="f-acc-soft"/>
+        <text x="10" y="124" class="lbl">A</text><rect x="96" y="110" width="50" height="20" rx="4" class="f-acc-soft"/>
+        <text x="10" y="156" class="lbl">BBB</text><rect x="96" y="142" width="88" height="20" rx="4" class="f-acc-soft"/>
+        <line x1="6" y1="180" x2="414" y2="180" class="s-dash"/>
+        <text x="410" y="172" text-anchor="end" class="lbl-acc">투자등급 ↑</text>
+        <text x="410" y="200" text-anchor="end" class="lbl-bad">투기등급 ↓</text>
+        <text x="10" y="222" class="lbl">BB</text><rect x="96" y="208" width="150" height="20" rx="4" class="f-warn-soft"/>
+        <text x="10" y="254" class="lbl">B</text><rect x="96" y="240" width="220" height="20" rx="4" class="f-warn-soft"/>
+        <text x="10" y="286" class="lbl">CCC 이하</text><rect x="96" y="272" width="314" height="20" rx="4" class="f-bad-soft"/>
+        <text x="10" y="320" class="lbl-dim">아래로 갈수록 부도 확률과 요구 금리가 커진다</text>
+      </svg>
+      <figcaption><b>그림 2. 신용등급과 스프레드.</b> 막대 길이는 개념을 보여 주는 예시이며 실제 수치가 아니다. 실제 스프레드는 경기와 시장 분위기에 따라 늘었다 줄었다 하고, 위기 때는 낮은 등급의 스프레드가 크게 벌어진다.</figcaption>
+    </figure>
+
+    <p>그러면 스프레드는 얼마나 받아야 공정한가. 부도 확률이 연 \(p\), 회수율이 \(R\)이면 부도로 평균적으로 잃는 몫은 해마다 약 \(p(1-R)\)이다. 스프레드가 이보다 커야 국채보다 기대수익이 높다. 아래에서 100개의 회사채를 10년 동안 굴려 본다. 동전 하나가 채권 하나다.</p>
+
+    <div class="sim" id="sim-cr">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>회사채 100개를 10년 굴리기: 스프레드 대 부도</h3></div>
+      <div class="legend"><span><i style="background:var(--text-dim)"></i>국채 3%(점선)</span><span><i style="background:var(--accent-2)"></i>회사채 기대값</span><span><i style="background:var(--accent)"></i>이번 실험</span><span><i style="background:var(--bad)"></i>부도(채운 몫 = 회수율)</span></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="cr-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>스프레드(국채 3% 위에) <output id="cr-s-out"></output></span><input type="range" id="cr-s" min="0" max="8" step="0.25" value="2"></label>
+          <label class="ctrl"><span>연 부도 확률 <output id="cr-p-out"></output></span><input type="range" id="cr-p" min="0" max="10" step="0.25" value="2"></label>
+          <label class="ctrl"><span>회수율 <output id="cr-r-out"></output></span><input type="range" id="cr-r" min="0" max="80" step="5" value="40"></label>
+          <div class="btn-row"><button class="btn primary" id="cr-go">10년 굴리기</button><button class="btn" id="cr-re">처음으로</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">기대수익률(연)</span><span class="v" id="cr-o-e">—</span></div>
+        <div class="stat"><span class="k">국채 대비</span><span class="v" id="cr-o-x">—</span></div>
+        <div class="stat"><span class="k">손익분기 스프레드</span><span class="v" id="cr-o-b">—</span></div>
+        <div class="stat"><span class="k">이번 10년 실현(연)</span><span class="v" id="cr-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 기본값(스프레드 2%p, 부도 2%, 회수 40%)에서 여러 번 굴린다. 평균적으로는 국채보다 연 0.7%p쯤 더 벌지만, 판마다 결과가 꽤 다르다. ② 스프레드를 1%p로 줄인다. 손익분기(약 1.3%p)보다 작아 기대수익이 국채보다 낮아진다. ③ 부도 확률 10%, 회수율 0%로 민다. 높은 쿠폰이 원금 손실을 감당하지 못한다. (부도는 해마다 독립적으로 일어나고, 받은 돈은 국채 금리 3%로 다시 굴린다고 가정한 교육용 모델)</div>
+    </div>
+    <p>기본값에서 기대수익률은 연 약 3.7%로 국채 3%보다 높지만, 손익분기 스프레드는 약 1.3%p다. 받는 스프레드 2%p 가운데 약 1.3%p는 평균적인 부도 손실을 메우는 데 쓰이고, 나머지가 위험을 지는 대가다. 실제로는 부도가 경기 침체기에 한꺼번에 몰려 일어나므로 이 모델보다 결과의 폭이 훨씬 넓다. 높은 금리를 주는 채권에는 그만한 이유가 있다.</p>
+    <div class="callout warn">
+      <strong>고금리 채권 광고를 볼 때</strong>
+      "연 8% 확정 이자" 같은 채권은 그 금리가 왜 국채보다 5%p나 높은지부터 묻는다. 대개 발행자의 신용등급이 낮거나, 만기 전에 팔기 어렵거나, 원금 손실 조건이 붙어 있다. 채권은 예금이 아니므로 발행자가 부도나면 원금을 잃을 수 있다.
+    </div>
+  </section>
+
+  <section id="curve">
+    <h2>수익률 곡선</h2>
+    <p>같은 정부가 발행한 국채라도 만기에 따라 금리가 다르다. 만기를 가로축, 만기수익률을 세로축에 놓고 이은 선을 <span class="term">수익률 곡선</span><span class="en">(Yield curve)</span>이라 한다. 평소에는 오른쪽이 높다. 돈을 오래 묶을수록, 그리고 앞에서 본 것처럼 장기채일수록 금리 변화에 값이 크게 흔들리므로 그 대가(기간 프리미엄)를 더 받기 때문이다.</p>
+    <p>곡선의 모양은 시장이 앞으로의 금리를 어떻게 예상하는지도 담고 있다. 장기 금리는 대략 "앞으로 이어질 단기 금리들의 평균 + 기간 프리미엄"이다. 시장이 머지않아 기준금리가 내려갈 것이라 예상하면 장기 금리가 단기 금리보다 낮아져 곡선이 뒤집힌다. 아래 점들을 끌어 곡선 모양을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-yc">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>수익률 곡선 끌기: 정상, 평탄, 역전</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="yc-cv"></canvas><span class="hint">점을 위아래로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="ctrl"><span>모양 예시</span>
+            <div class="seg" id="yc-p"><button data-value="normal" class="on">정상</button><button data-value="flat">평탄</button><button data-value="inv">역전</button></div></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">3개월</span><span class="v" id="yc-o-s">—</span></div>
+        <div class="stat"><span class="k">2년</span><span class="v" id="yc-o-2">—</span></div>
+        <div class="stat"><span class="k">10년</span><span class="v" id="yc-o-l">—</span></div>
+        <div class="stat"><span class="k">장단기 차이(10년−2년)</span><span class="v" id="yc-o-d">—</span></div>
+        <div class="stat"><span class="k">모양</span><span class="v" id="yc-o-k">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① '역전'을 누른다. 짧은 만기의 금리가 긴 만기보다 높다. ② 2년 점만 위로 끌어 10년보다 높게 만든다. 장단기 차이가 음수로 바뀐다. ③ 모든 점을 비슷한 높이로 맞춰 평탄한 곡선을 만든다. (가로축은 짧은 만기가 잘 보이도록 제곱근 눈금이다. 숫자는 교육용 예시)</div>
+    </div>
+    <p>수익률 곡선의 역전은 시장이 앞으로 경기가 식어 금리가 내려갈 것이라 본다는 신호로 읽혀 왔고, 실제로 여러 차례 경기 침체에 앞서 나타났다. 하지만 역전 뒤 침체까지의 시차는 들쭉날쭉하고, 역전이 있었는데 침체가 오지 않은 때도 있다. 곡선은 예언이 아니라 시장 참여자들의 예상과 위험 대가가 섞인 사진이다. 경기와 기준금리의 관계는 <a href="economy.html">5장</a>에서 다뤘다.</p>
+  </section>
+
+  <section id="stockbond">
+    <h2>채권과 주식: 안전판의 조건</h2>
+    <p>채권을 갖는 큰 이유 하나는 주식과 함께 들었을 때 전체의 흔들림을 줄이는 것이다. <a href="risk.html">12장</a>에서 본 분산 효과는 두 자산이 덜 같이 움직일수록, 곧 <span class="term">상관계수</span><span class="en">(Correlation)</span>가 낮을수록 크다. 경기가 나빠지면 주가가 떨어지고, 중앙은행이 금리를 내리면 채권값은 오른다. 이럴 때 채권은 주식의 손실을 일부 메우는 안전판이 된다.</p>
+    <p>그런데 상관계수가 늘 음수인 것은 아니다. 물가가 크게 올라 중앙은행이 금리를 급히 올릴 때는 금리 상승이 채권값과 주가를 함께 끌어내린다. 2022년에 세계 주식과 채권이 한 해에 같이 크게 떨어진 것이 그 예다. 아래에서 상관계수를 바꿔 가며 해마다의 수익률 점들이 어떻게 흩어지는지, 그리고 섞은 결과의 흔들림이 어떻게 바뀌는지 본다.</p>
+
+    <div class="sim" id="sim-sb">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>상관계수가 바꾸는 분산 효과</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sb-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>주식–채권 상관계수 <output id="sb-r-out"></output></span><input type="range" id="sb-r" min="-0.8" max="0.8" step="0.05" value="0.1"></label>
+          <label class="ctrl"><span>채권 비중 <output id="sb-w-out"></output></span><input type="range" id="sb-w" min="0" max="100" step="5" value="40"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">기대수익률(연)</span><span class="v" id="sb-o-m">—</span></div>
+        <div class="stat"><span class="k">변동성(연)</span><span class="v" id="sb-o-s">—</span></div>
+        <div class="stat"><span class="k">상관 1일 때 변동성</span><span class="v" id="sb-o-n">—</span></div>
+        <div class="stat"><span class="k">함께 떨어진 해(40년 중)</span><span class="v" id="sb-o-b">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 상관계수를 −0.4로 내린다. 왼쪽 점들이 오른쪽 아래로 기울고, 주식이 떨어진 해(왼쪽 절반)에 채권이 오른 점이 많아진다. ② 상관계수를 +0.6으로 올린다. 함께 떨어지는 해(빨간 점)가 늘고, 오른쪽 곡선이 직선에 가까워져 분산 효과가 줄어든다. ③ 채권 비중을 0에서 100까지 움직이며 오른쪽 점이 곡선 위를 따라가는 것을 본다. (주식 기대 7.5%·변동성 16%, 채권 기대 3.5%·변동성 6%의 교육용 가정, 40년치 가상 수익률. 과거나 미래의 실제 수익률이 아니다)</div>
+    </div>
+    <p>주식 60·채권 40을 예로 들면, 상관계수 0.1에서 변동성은 약 10.1%, −0.4이면 약 8.9%, 0.5이면 약 11.0%다. 기대수익률은 상관계수와 관계없이 5.9%로 같다. 같은 수익에 흔들림을 얼마나 덜 겪느냐가 상관계수에 달려 있다. 그래서 안전판으로서의 채권은 신용 위험이 낮은 국채일 때, 그리고 물가가 안정된 시기일 때 가장 잘 작동한다. 비중을 어떻게 정하는지는 <a href="portfolio.html">16장</a>에서 다룬다.</p>
+  </section>
+
+  <section id="howto">
+    <h2>개인이 채권에 투자하는 방법</h2>
+    <p>개인이 채권을 갖는 길은 크게 둘이다. 개별 채권을 직접 사서 만기까지 들고 있거나, 여러 채권을 묶어 둔 채권형 펀드나 ETF를 사는 것이다.</p>
+
+    <figure class="diagram compact">
+      <svg viewBox="0 0 420 380" role="img" aria-label="개인이 채권에 투자하는 두 경로: 개별 채권 직접 매수와 채권형 펀드·ETF">
+        <defs><marker id="bd-ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="150" y="8" width="120" height="58" rx="12" class="f-acc-soft"/>
+        <text x="210" y="34" text-anchor="middle" class="lbl-b">나</text>
+        <text x="210" y="55" text-anchor="middle" class="lbl-dim">증권 계좌</text>
+        <path d="M170 66 C150 90 105 86 105 110" class="s-line" marker-end="url(#bd-ar2)"/>
+        <path d="M250 66 C270 90 315 86 315 110" class="s-line" marker-end="url(#bd-ar2)"/>
+        <rect x="8" y="114" width="194" height="96" rx="10" class="f-elev"/>
+        <text x="20" y="142" class="lbl-b">직접 매수</text>
+        <text x="20" y="168" class="lbl-dim">거래소·증권사에서</text>
+        <text x="20" y="190" class="lbl-dim">개별 채권을 산다</text>
+        <rect x="218" y="114" width="194" height="96" rx="10" class="f-elev"/>
+        <text x="230" y="142" class="lbl-b">채권형 펀드·ETF</text>
+        <text x="230" y="168" class="lbl-dim">운용사가 여러 채권을</text>
+        <text x="230" y="190" class="lbl-dim">묶어 사고판다(보수)</text>
+        <path d="M105 210 L105 246" class="s-line" marker-end="url(#bd-ar2)"/>
+        <path d="M315 210 L315 246" class="s-line" marker-end="url(#bd-ar2)"/>
+        <rect x="8" y="250" width="194" height="120" rx="10" class="f-ok-soft"/>
+        <text x="20" y="278" class="lbl">만기가 정해져 있다</text>
+        <text x="20" y="304" class="lbl-dim">끝까지 들고 있으면</text>
+        <text x="20" y="326" class="lbl-dim">약속된 쿠폰과 원금</text>
+        <text x="20" y="348" class="lbl-dim">(부도가 없다면)</text>
+        <rect x="218" y="250" width="194" height="120" rx="10" class="f-warn-soft"/>
+        <text x="230" y="278" class="lbl">만기가 계속 굴러간다</text>
+        <text x="230" y="304" class="lbl-dim">듀레이션이 거의</text>
+        <text x="230" y="326" class="lbl-dim">일정하게 유지되어</text>
+        <text x="230" y="348" class="lbl-dim">"끝"이 없다</text>
+      </svg>
+      <figcaption><b>그림 3. 채권을 갖는 두 경로.</b> 직접 산 채권은 시간이 지나면 듀레이션이 줄어들어 만기에 0이 된다. 채권형 펀드·ETF는 만기가 다가온 채권을 팔고 새 채권을 사며 대체로 비슷한 듀레이션을 유지하므로, 금리 상승기의 평가손이 "만기 날 저절로 회복"되지 않고 재투자 이자로 서서히 회복된다.</figcaption>
+    </figure>
+
+    <p>직접 매수는 소액으로도 가능하지만 종목마다 거래가 드물어 원하는 때 원하는 값에 팔기 어려울 수 있다(유동성 위험). 정부가 개인만 살 수 있게 따로 파는 <b>개인투자용 국채</b>도 있다(2024년 도입, 만기까지 보유하는 조건과 세제 혜택이 붙는다. 조건은 해마다 바뀔 수 있다). 채권형 펀드·ETF는 여러 채권에 나눠 담아 한 발행자의 부도 위험을 줄이고 언제든 사고팔기 쉽지만, 보수를 내고 만기가 없다. 상품 구조와 보수 비교는 <a href="fund.html">15장</a>에서 이어진다.</p>
+
+    <h3>예금과 채권은 무엇이 다른가</h3>
+    <p>둘 다 "돈을 빌려주고 이자를 받는다"는 점에서 닮았지만, 위험이 생기는 자리가 다르다.</p>
+    <div class="table-wrap"><table class="wide-t">
+      <thead><tr><th></th><th>정기예금</th><th>채권(직접 보유)</th><th>채권형 펀드·ETF</th></tr></thead>
+      <tbody>
+        <tr><td>원금 보호</td><td>예금자 보호 1인·1금융회사당 원리금 1억원까지(2026년 기준)</td><td>없다. 발행자 신용에 달렸다</td><td>없다</td></tr>
+        <tr><td>만기 전에 돈을 빼면</td><td>중도해지 이율(낮다)을 받지만 원금은 그대로</td><td>시장에 판다. 금리가 올랐으면 손해, 내렸으면 이익</td><td>그날의 기준가로 판다(금리에 따라 오르내림)</td></tr>
+        <tr><td>금리가 오르면</td><td>이미 든 예금은 그대로, 다음 예금부터 높은 금리</td><td>값이 내린다. 만기까지 들면 약속대로 받는다</td><td>값이 내리고, 재투자 이자로 서서히 회복</td></tr>
+        <tr><td>이자 과세</td><td>이자소득세 15.4%</td><td>쿠폰 이자에 15.4%, 매매차익은 대체로 비과세</td><td>상품 구조에 따라 다르다</td></tr>
+      </tbody>
+    </table></div>
+    <p>예금은 은행이 받은 돈의 위험을 대신 지고, 나는 정해진 이자를 받는다. 채권은 그 위험(발행자 신용과 금리 변화)을 내가 직접 진다. 예금자 보호와 비상금은 <a href="saving.html">8장</a>에서 다뤘다. 당장 쓸 수도 있는 돈이라면 값이 흔들리는 장기채보다 예금이나 만기가 짧은 상품이 맞는다.</p>
+    <div class="callout warn">
+      <strong>세법과 제도는 해마다 바뀐다</strong>
+      이 장의 과세 방식(이자소득세 15.4%, 개인의 일반 채권 매매차익 비과세 등)과 예금자 보호 한도는 2026년 기준의 대표값이다. 금융소득이 연 2,000만원을 넘으면 종합과세 대상이 되는 등 개인 상황에 따라서도 달라진다. 실제로 투자하기 전에 그해의 제도를 확인한다. 이 장은 특정 상품을 권하지 않는다.
+    </div>
+  </section>
+
+  <section id="hangyeol">
+    <h2>한결의 안전판</h2>
+    <p>한결은 <a href="risk.html">12장</a>에서 견딜 수 있는 낙폭을 정했고, <a href="stock.html">13장</a>에서 한 종목 몰빵과 지수를 견줘 봤다. 이제 흔들림을 줄여 줄 채권 몫을 생각한다. 1,000만원을 표면금리 3%, 만기수익률 3%인 국채에 넣는다고 하고 만기만 바꿔, 금리가 1%p 움직일 때 평가손익을 엔진(<code>MN.bond</code>)으로 계산했다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>만기</th><th class="num">수정 듀레이션</th><th class="num">금리 +1%p</th><th class="num">금리 −1%p</th><th class="num">세후 연 이자</th></tr></thead>
+      <tbody>
+        <tr><td>3년</td><td class="num">2.83</td><td class="num"><span class="won minus">−27.8만원</span></td><td class="num"><span class="won plus">+28.8만원</span></td><td class="num">25.4만원</td></tr>
+        <tr><td>10년</td><td class="num">8.53</td><td class="num"><span class="won minus">−81.1만원</span></td><td class="num"><span class="won plus">+89.8만원</span></td><td class="num">25.4만원</td></tr>
+        <tr><td>30년</td><td class="num">19.60</td><td class="num"><span class="won minus">−172.9만원</span></td><td class="num"><span class="won plus">+224.0만원</span></td><td class="num">25.4만원</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="casefile">
+      <div class="tag"><b>LEDGER 한결</b><span>한결의 가계부 · 14장</span></div>
+      <h4>같은 1,000만원, 만기에 따라 흔들림이 일곱 배 차이</h4>
+      <p>세 채권은 해마다 받는 이자(세후 약 25.4만원)가 같다. 다른 것은 금리가 움직일 때의 흔들림뿐이다. 금리가 1%p 오르면 3년 국채는 약 28만원, 30년 국채는 약 173만원이 평가손으로 찍힌다. 듀레이션이 그 차이를 거의 그대로 설명한다(2.83 대 19.60).</p>
+      <p>한결이 채권에 바라는 것은 높은 수익이 아니라 <b>주식이 크게 빠질 때 버텨 주는 안전판</b>이다. 경기 침체로 주가가 떨어지고 금리가 1%p 내리면 10년 국채 1,000만원은 약 90만원 오른다. 그래서 한결은 채권 몫을 신용 위험이 낮은 국채 위주로 보고, 만기는 너무 길지 않게 둔다. 안전판 자체가 주식만큼 흔들리면 안전판이 아니기 때문이다. 한편 <a href="housing.html">11장</a>에서 본 몇 년 뒤의 이사처럼 쓸 날짜가 정해진 돈은 그 날짜에 맞는 짧은 만기에 둔다. 듀레이션을 쓸 시점에 맞추면 그 사이 금리가 변해도 그날의 금액이 거의 흔들리지 않는다.</p>
+      <div class="clue">
+        <div><b>이 장에서 정한 것</b>채권 몫은 국채 위주, 만기는 쓸 시점과 감내 낙폭에 맞춘다. 금리 1%p당 손익 ≈ 수정 듀레이션 %.</div>
+        <div><b>아직 남은 문제</b>2022년처럼 주식과 채권이 함께 떨어지는 해에는 안전판이 약해진다. 주식과 채권을 몇 대 몇으로 둘지도 정하지 않았다.</div>
+        <div><b>다음 단계</b>채권을 직접 살지, 펀드·ETF로 살지. 보수 차이가 30년에 얼마인지(15장), 비중은 16장에서.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>채권은 빌려준 돈의 증서다. 액면가·표면금리·만기·발행자가 현금흐름을 정하고, 가격은 그 현금흐름을 시장금리로 할인한 현재가치의 합이다.</li>
+      <li>쿠폰은 고정되어 있으므로 시장금리가 오르면 이미 나온 채권값이 내리고, 내리면 오른다. 표면금리 &lt; 만기수익률이면 할인채, &gt;이면 할증채이며 둘 다 만기가 다가오면 액면가로 모인다.</li>
+      <li>만기수익률은 지금 값에 사서 만기까지 들고 있을 때의 연 수익률이다. 뉴스의 "채권 금리"가 이것이다.</li>
+      <li>듀레이션은 현재가치를 무게로 한 현금흐름의 무게중심이자 금리 민감도다. 가격 변화율 ≈ −수정 듀레이션 × 금리 변화. 만기가 길고 쿠폰이 작을수록 듀레이션이 길어 더 크게 흔들린다.</li>
+      <li>가격–금리 곡선은 아래로 볼록해서(볼록성) 금리가 내릴 때 오르는 폭이 오를 때 내리는 폭보다 크다.</li>
+      <li>금리 상승의 가격 손실은 높아진 재투자 이자로 회복되며, 듀레이션 무렵에 거의 상쇄된다. 쓸 시점과 듀레이션을 맞추면 금리 위험을 줄일 수 있다.</li>
+      <li>회사채의 스프레드는 부도 손실(약 부도 확률 × (1 − 회수율))과 위험 대가를 함께 담는다. 높은 금리에는 이유가 있다.</li>
+      <li>채권은 예금자 보호 대상이 아니고 만기 전에 팔면 값이 금리에 따라 달라진다. 주식과의 상관계수가 낮을 때 안전판 역할을 하지만, 상관계수가 늘 음수인 것은 아니다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>Q1. 표면금리 3%, 만기 5년 채권을 액면가에 샀다. 다음 날 시장금리가 5%로 올랐다. 이 채권의 값은?</p>
+        <div class="opts">
+          <button class="opt">쿠폰이 그대로이니 값도 액면가 그대로다.</button>
+          <button class="opt" data-correct>액면가보다 낮아진다. 새 채권과 같은 5%를 벌 수 있는 값까지 내려가야 팔린다.</button>
+          <button class="opt">금리가 올랐으니 이자도 많아져 값이 오른다.</button>
+          <button class="opt">만기 5년 뒤에만 값이 바뀐다.</button>
+        </div>
+        <div class="quiz-exp">증서의 쿠폰 300원은 바뀌지 않으므로, 시장이 요구하는 수익률 5%를 맞추려면 가격이 내려가야 한다. 계산하면 약 9,134원이다. 만기까지 들고 있으면 약속대로 받지만, 지금 팔면 그 값이다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>Q2. 수정 듀레이션이 8.5인 채권이 있다. 시장금리가 0.5%p 오르면 값은 대략 얼마나 변하는가?</p>
+        <div class="opts">
+          <button class="opt">약 0.5% 내린다.</button>
+          <button class="opt">약 8.5% 내린다.</button>
+          <button class="opt" data-correct>약 4.25% 내린다.</button>
+          <button class="opt">약 4.25% 오른다.</button>
+        </div>
+        <div class="quiz-exp">가격 변화율 ≈ −수정 듀레이션 × 금리 변화 = −8.5 × 0.5% = −4.25%. 볼록성 때문에 실제 하락은 이보다 조금 작다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>Q3. 쿠폰이 없는(무이표) 만기 10년 채권의 매콜리 듀레이션은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>10년. 현금흐름이 만기 한 번뿐이라 무게중심이 만기와 같다.</button>
+          <button class="opt">5년. 만기의 절반이다.</button>
+          <button class="opt">0년. 이자가 없으니 금리에 민감하지 않다.</button>
+          <button class="opt">시장금리에 따라 10년보다 훨씬 길어진다.</button>
+        </div>
+        <div class="quiz-exp">추가 한 곳(10년)에만 있으니 받침점도 10년이다. 쿠폰이 있으면 앞쪽에 추가 생겨 듀레이션이 만기보다 짧아진다. 같은 만기라면 무이표채가 금리에 가장 민감하다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>Q4. 정기예금과 채권(직접 보유)의 차이로 옳은 것은?</p>
+        <div class="opts">
+          <button class="opt">채권도 예금처럼 1억원까지 예금자 보호를 받는다.</button>
+          <button class="opt">예금도 금리가 오르면 이미 든 예금의 원금이 줄어든다.</button>
+          <button class="opt">국채든 회사채든 만기 전에 팔면 언제나 산 값을 돌려받는다.</button>
+          <button class="opt" data-correct>채권은 예금자 보호 대상이 아니고, 만기 전에 팔면 그때의 시장금리에 따라 값이 산 값보다 높거나 낮을 수 있다.</button>
+        </div>
+        <div class="quiz-exp">예금은 중도해지해도 원금은 그대로이고 예금자 보호를 받는다. 채권은 발행자 신용 위험을 직접 지고, 만기 전 매도 가격이 금리에 따라 달라진다. 만기까지 들고 있고 부도가 없으면 약속된 현금흐름을 받는다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const wn = (x) => (x < 0 ? "−" : "") + Math.round(Math.abs(x)).toLocaleString("ko-KR") + "<small>원</small>";
+  const wt = (x) => Math.round(x).toLocaleString("ko-KR") + "원";
+  const pc = (x, d) => (x * 100).toFixed(d == null ? 2 : d) + "%";
+  const sp = (x, d) => (x > 0.00005 ? "+" : x < -0.00005 ? "−" : "") + Math.abs(x * 100).toFixed(d == null ? 2 : d) + "%";
+  const tone = (cls, s) => '<span class="' + cls + '">' + s + "</span>";
+  const signTone = (x, s) => tone(x > 0.00005 ? "ok-t" : x < -0.00005 ? "bad-t" : "", s);
+  function knob(ctx, x, y, P, r) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = "#fff"; ctx.stroke();
+    ctx.restore();
+  }
+  const kindOf = (price) => (Math.abs(price - 1e4) < 0.5 ? "액면채" : price < 1e4 ? tone("warn-t", "할인채") : tone("ok-t", "할증채"));
+  const bond = (c, y, n) => MN.bond({ face: 1e4, coupon: c, ytm: y, years: n });
+  const yrTicks = (n) => { const st = n <= 10 ? 1 : n <= 20 ? 5 : 10, o = []; for (let v = 0; v <= n; v += st) o.push(v); return o; };
+
+  /* ---------------------------------------------------------- 1. 현금흐름 타임라인 */
+  (function () {
+    let cv = null, disp = [], T = 0, F = null;
+    const re = () => cv && cv.redraw();
+    const C = MB.range("cf-c", (v) => v.toFixed(1) + "%", re);
+    const Y = MB.range("cf-y", (v) => v.toFixed(2) + "%", re);
+    const N = MB.range("cf-n", (v) => v + "년", re);
+    const yfmt = (v) => (v >= 1e4 ? +(v / 1e4).toFixed(1) + "만" : v.toLocaleString("ko-KR"));
+    cv = MB.canvas("#cf-cv", (ctx, w, h) => {
+      const P = MB.palette(), n = N(), b = bond(C() / 100, Y() / 100, n), f = b.flows;
+      F = f;
+      while (disp.length < n) disp.push(f[disp.length].cf);
+      disp.length = n;
+      const sumCF = f.reduce((s, q) => s + q.cf, 0);
+      const box = { x: 54, y: 30, w: w - 66, h: h - 64 };
+      const c = MB.chart(ctx, box, { x: [-0.9, n + 0.7], y: [0, sumCF * 1.1], xTicks: yrTicks(n), xFmt: (v) => (v === 0 ? "지금" : v + "년"), yFmt: yfmt });
+      const slot = box.w / (n + 1.6), bw = Math.max(3, Math.min(30, slot * 0.62));
+      ctx.save();
+      ctx.strokeStyle = P.faint; ctx.setLineDash([5, 4]); ctx.beginPath(); ctx.moveTo(box.x, c.Y(1e4)); ctx.lineTo(box.x + box.w, c.Y(1e4)); ctx.stroke(); ctx.setLineDash([]);
+      let stack = 0;
+      const pbw = Math.min(46, bw * 1.6), px0 = c.X(0);
+      for (let k = 0; k < n; k++) {
+        const q = f[k], x = c.X(q.t), cpn = q.cf - (k === n - 1 ? 1e4 : 0), d = disp[k], fr = q.cf > 0 ? cpn / q.cf : 0;
+        ctx.setLineDash([3, 3]); ctx.strokeStyle = P.dim; ctx.lineWidth = 1;
+        ctx.strokeRect(x - bw / 2, c.Y(q.cf), bw, c.Y(0) - c.Y(q.cf)); ctx.setLineDash([]);
+        ctx.fillStyle = P.accent; ctx.fillRect(x - bw / 2, c.Y(d * fr), bw, c.Y(0) - c.Y(d * fr));
+        if (fr < 1) { ctx.fillStyle = P.accent2; ctx.fillRect(x - bw / 2, c.Y(d), bw, c.Y(d * fr) - c.Y(d)); }
+        ctx.fillStyle = P.accent; ctx.fillRect(px0 - pbw / 2, c.Y(stack + d * fr), pbw, c.Y(stack) - c.Y(stack + d * fr));
+        if (fr < 1) { ctx.fillStyle = P.accent2; ctx.fillRect(px0 - pbw / 2, c.Y(stack + d), pbw, c.Y(stack + d * fr) - c.Y(stack + d)); }
+        stack += d;
+        if (n <= 10 && bw >= 20) {
+          ctx.fillStyle = P.dim; ctx.font = MB.font(10, true); ctx.textAlign = "center"; ctx.textBaseline = "bottom";
+          ctx.fillText("×" + Math.pow(1 + Y() / 100, -q.t).toFixed(2), x, c.Y(Math.max(q.cf, d)) - 3);
+        }
+      }
+      ctx.strokeStyle = P.dim; ctx.setLineDash([3, 3]); ctx.strokeRect(px0 - pbw / 2, c.Y(sumCF), pbw, c.Y(0) - c.Y(sumCF)); ctx.setLineDash([]);
+      for (let k = 0; k < n; k++) {
+        const q = f[k], ph = (T * 0.28 + k * 0.618) % 1;
+        const x = MB.lerp(c.X(q.t), px0, ph), yy = MB.lerp(c.Y(disp[k]), c.Y(stack), ph) - Math.sin(ph * Math.PI) * 26;
+        ctx.globalAlpha = 0.7 * (1 - ph); ctx.fillStyle = k === n - 1 ? P.accent2 : P.accent;
+        ctx.beginPath(); ctx.arc(x, yy, k === n - 1 ? 4 : 2.5, 0, TAU); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = P.text; ctx.font = MB.font(12, false, 700); ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+      ctx.fillText("가격 " + wt(stack), px0 - pbw / 2, Math.min(c.Y(stack), c.Y(sumCF)) - 5);
+      ctx.fillStyle = P.dim; ctx.font = MB.font(11); ctx.textAlign = "left";
+      ctx.fillText("액면 10,000원", px0 + pbw / 2 + 6, c.Y(1e4) - 3);
+      ctx.restore();
+      MB.stat("cf-o-p", wn(b.price));
+      MB.stat("cf-o-s", wn(sumCF));
+      MB.stat("cf-o-d", wn(sumCF - b.price));
+      MB.stat("cf-o-k", kindOf(b.price));
+    }, { aspect: 0.55, minHeight: 280, maxHeight: 380 });
+    document.getElementById("cf-re").addEventListener("click", () => { if (F) disp = F.map((q) => q.cf); });
+    MB.loop(cv.canvas, (dt) => {
+      T += dt;
+      if (F) { const k = 1 - Math.exp(-dt * 2.2); for (let i = 0; i < disp.length && i < F.length; i++) disp[i] += (F[i].pv - disp[i]) * k; }
+      cv.redraw();
+    });
+  })();
+
+  /* ---------------------------------------------------------- 2. 시소 */
+  (function () {
+    const base = 0.03;
+    let y = base, th = 0, G = null;
+    const Nn = MB.seg("ss-n", () => cv.redraw());
+    const tgt = () => MB.clamp((y - base) * 7, -0.4, 0.4);
+    const cv = MB.canvas("#ss-cv", (ctx, w, h) => {
+      const P = MB.palette(), n = +Nn(), b0 = bond(base, base, n), b = bond(base, y, n), D = b0.modDuration;
+      const px = Math.round(w * 0.34), py = Math.round(h * 0.44);
+      const La = Math.min(w * 0.26, 180), Rb = (w - px - 50) * (0.1 + 0.9 * Math.min(1, D / 19.6));
+      G = { px, py, La };
+      const cs = Math.cos(th), sn = Math.sin(th);
+      const Lx = px - La * cs, Ly = py - La * sn, Rx = px + Rb * cs, Ry = py + Rb * sn;
+      ctx.save();
+      ctx.strokeStyle = P.faint; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(8, py); ctx.lineTo(w - 8, py); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = P.dim; ctx.beginPath(); ctx.moveTo(px, py + 5); ctx.lineTo(px - 18, py + 44); ctx.lineTo(px + 18, py + 44); ctx.closePath(); ctx.fill();
+      ctx.strokeStyle = P.axis; ctx.beginPath(); ctx.moveTo(px - 60, py + 44); ctx.lineTo(px + 60, py + 44); ctx.stroke();
+      ctx.save(); ctx.translate(px, py); ctx.rotate(th);
+      ctx.fillStyle = P.surface; ctx.strokeStyle = P.dim; ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.rect(-La, -5, La + Rb, 10); ctx.fill(); ctx.stroke();
+      ctx.restore();
+      ctx.fillStyle = P.text; ctx.beginPath(); ctx.arc(px, py, 4, 0, TAU); ctx.fill();
+      const ch = b.price / 1e4 - 1, col = ch < -1e-6 ? P.bad : ch > 1e-6 ? P.ok : P.dim;
+      if (Math.abs(Ry - py) > 6) {
+        ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(Rx, py); ctx.lineTo(Rx, Ry + (Ry > py ? -24 : 0)); ctx.stroke();
+      }
+      const bwid = w < 480 ? 74 : 92, bh = 38, bx = MB.clamp(Rx, bwid / 2 + 4, w - bwid / 2 - 4);
+      ctx.fillStyle = P.bg; ctx.strokeStyle = col; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.rect(bx - bwid / 2, Ry - bh - 4, bwid, bh); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = P.dim; ctx.font = MB.font(11); ctx.textAlign = "center"; ctx.textBaseline = "top";
+      ctx.fillText(n + "년 채권", bx, Ry - bh);
+      ctx.fillStyle = P.text; ctx.font = MB.font(13, true, 700); ctx.fillText(Math.round(b.price).toLocaleString("ko-KR"), bx, Ry - bh + 15);
+      ctx.fillStyle = col; ctx.font = MB.font(12, true, 700); ctx.textBaseline = "top";
+      ctx.fillText(sp(ch, 1), bx, Ry + 4);
+      knob(ctx, Lx, Ly, P, 9);
+      ctx.fillStyle = P.text; ctx.font = MB.font(13, false, 700); ctx.textAlign = "center"; ctx.textBaseline = "bottom";
+      ctx.fillText("금리 " + pc(y, 2), MB.clamp(Lx, 44, w - 44), Ly - 14);
+      ctx.font = MB.font(12); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+      ctx.fillStyle = P.dim; ctx.fillText("내 채권 쿠폰: 매년 300원(3%)", 12, h - 30);
+      ctx.fillStyle = y > base + 1e-9 ? P.bad : y < base - 1e-9 ? P.ok : P.dim;
+      ctx.fillText("새로 나오는 채권 쿠폰: 매년 " + Math.round(y * 1e4).toLocaleString("ko-KR") + "원", 12, h - 11);
+      ctx.restore();
+      MB.stat("ss-o-y", pc(y));
+      MB.stat("ss-o-p", wn(b.price));
+      MB.stat("ss-o-c", signTone(ch, sp(ch)));
+      MB.stat("ss-o-d", b.modDuration.toFixed(2));
+    }, { aspect: 0.56, minHeight: 300, maxHeight: 380 });
+    MB.drag(cv.canvas, {
+      move(x, yy) {
+        if (!G) return;
+        const s = MB.clamp((G.py - yy) / G.La, -0.95, 0.95);
+        y = Math.round(MB.clamp(base + Math.asin(s) / 7, 0.005, 0.08) * 4000) / 4000;
+      },
+    });
+    document.getElementById("ss-re").addEventListener("click", () => { y = base; });
+    MB.loop(cv.canvas, (dt) => { th += (tgt() - th) * (1 - Math.exp(-dt * 6)); cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 3. 만기수익률 */
+  (function () {
+    let Pr = 1e4, G = null, cv = null;
+    const lim = () => {
+      const n = N(), c = C() / 100;
+      return [Math.max(5000, bond(c, 0.15, n).price), Math.min(15000, bond(c, -0.01, n).price)];
+    };
+    const fix = () => { const [a, b] = lim(); Pr = MB.clamp(Pr, a, b); };
+    const re = () => { fix(); cv && cv.redraw(); };
+    const C = MB.range("yt-c", (v) => v.toFixed(1) + "%", re);
+    const N = MB.range("yt-n", (v) => v + "년", re);
+    const ytm = () => { const n = N(), c = C() * 100, fl = [-Pr]; for (let k = 1; k <= n; k++) fl.push(c + (k === n ? 1e4 : 0)); return MN.irr(fl, -0.5, 1); };
+    cv = MB.canvas("#yt-cv", (ctx, w, h) => {
+      const P = MB.palette(), top = 30, bot = h - 34, Yp = (p) => top + ((15000 - p) / 10000) * (bot - top);
+      const bx = w < 480 ? 62 : 84, bw = w < 480 ? 34 : 46;
+      G = { top, bot };
+      const yv = ytm(), cy = C() / 100, cur = (C() * 100) / Pr;
+      ctx.save();
+      ctx.font = MB.font(11, true); ctx.fillStyle = P.dim; ctx.textAlign = "right"; ctx.textBaseline = "middle";
+      [5000, 7500, 10000, 12500, 15000].forEach((p) => { ctx.strokeStyle = P.grid; ctx.beginPath(); ctx.moveTo(bx - bw / 2 - 4, Yp(p)); ctx.lineTo(bx + bw / 2 + 4, Yp(p)); ctx.stroke(); ctx.fillText(p.toLocaleString("ko-KR"), bx - bw / 2 - 8, Yp(p)); });
+      const kind = Math.abs(Pr - 1e4) < 0.5 ? 0 : Pr < 1e4 ? -1 : 1;
+      ctx.fillStyle = kind < 0 ? P.warn : kind > 0 ? P.ok : P.accent; ctx.globalAlpha = 0.85;
+      ctx.fillRect(bx - bw / 2, Yp(Pr), bw, bot - Yp(Pr)); ctx.globalAlpha = 1;
+      ctx.strokeStyle = P.text; ctx.setLineDash([5, 4]); ctx.beginPath(); ctx.moveTo(bx - bw / 2 - 6, Yp(1e4)); ctx.lineTo(bx + bw / 2 + 6, Yp(1e4)); ctx.stroke(); ctx.setLineDash([]);
+      knob(ctx, bx, Yp(Pr), P, 8);
+      ctx.fillStyle = P.text; ctx.font = MB.font(12, false, 700); ctx.textAlign = "center"; ctx.textBaseline = "top";
+      ctx.fillText("사는 값", bx, bot + 8);
+      // 오른쪽 게이지
+      const gx = bx + bw / 2 + 26, gw = w - gx - 16, maxR = 0.12, GX = (r) => gx + (MB.clamp(r, 0, maxR) / maxR) * gw;
+      ctx.font = MB.font(10, true); ctx.fillStyle = P.faint; ctx.textAlign = "center"; ctx.textBaseline = "top";
+      for (let r = 0; r <= maxR + 1e-9; r += 0.02) { ctx.strokeStyle = P.grid; ctx.beginPath(); ctx.moveTo(GX(r), top); ctx.lineTo(GX(r), bot - 8); ctx.stroke(); ctx.fillText(Math.round(r * 100) + "%", GX(r), bot - 6); }
+      const rows = [["표면금리(증서에 적힌 이자율)", cy, P.dim], ["경상수익률(쿠폰 ÷ 값)", cur, P.accent2], ["만기수익률(차익까지 포함)", yv, P.accent]];
+      const rh = (bot - 14 - top) / 3;
+      rows.forEach(([lab, r, col], i) => {
+        const y0 = top + i * rh + 6;
+        ctx.fillStyle = P.text; ctx.font = MB.font(12); ctx.textAlign = "left"; ctx.textBaseline = "top"; ctx.fillText(lab, gx, y0);
+        const by = y0 + 20, bh = Math.min(22, rh - 32);
+        ctx.fillStyle = col; ctx.fillRect(gx, by, Math.max(2, GX(r) - gx), bh);
+        if (r > maxR) { ctx.beginPath(); ctx.moveTo(gx + gw, by - 3); ctx.lineTo(gx + gw + 10, by + bh / 2); ctx.lineTo(gx + gw, by + bh + 3); ctx.fill(); }
+        ctx.fillStyle = P.text; ctx.font = MB.font(12, true, 700); ctx.textBaseline = "middle";
+        const lbx = GX(r) + 6, txt = isFinite(r) ? pc(r) : "—";
+        if (lbx + 50 < gx + gw) { ctx.textAlign = "left"; ctx.fillText(txt, lbx, by + bh / 2); } else { ctx.textAlign = "right"; ctx.fillStyle = P.bg; ctx.fillText(txt, gx + gw - 6, by + bh / 2); }
+      });
+      ctx.restore();
+      MB.stat("yt-o-p", wn(Pr));
+      MB.stat("yt-o-c", pc(cur));
+      MB.stat("yt-o-y", isFinite(yv) ? pc(yv) : "—");
+      MB.stat("yt-o-k", kindOf(Pr));
+    }, { aspect: 0.55, minHeight: 300, maxHeight: 380 });
+    MB.drag(cv.canvas, {
+      move(x, y) {
+        if (!G) return;
+        Pr = Math.round((15000 - ((y - G.top) / (G.bot - G.top)) * 10000) / 10) * 10;
+        fix(); cv.redraw();
+      },
+    });
+    document.getElementById("yt-re").addEventListener("click", () => { Pr = 1e4; fix(); cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 4. 액면가로 모이기 */
+  (function () {
+    let t = 0, play = false, G = null;
+    const CPN = [0.01, 0.03, 0.05];
+    const price = (c, y, rem) => (rem <= 0 ? 1e4 : bond(c, y, rem).price);
+    const Yr = MB.range("pp-y", (v) => v.toFixed(2) + "%", () => cv.redraw());
+    const at = (c, y, tt) => { const a = Math.floor(tt), b = Math.min(10, a + 1), pa = price(c, y, 10 - a), pb = price(c, y, 10 - b); return pa + (pb - pa) * (tt - a); };
+    const cv = MB.canvas("#pp-cv", (ctx, w, h) => {
+      const P = MB.palette(), y = Yr() / 100, cols = [P.blue, P.accent, P.accent2];
+      const lines = CPN.map((c) => { const d = []; for (let k = 0; k <= 10; k++) d.push([k, price(c, y, 10 - k)]); return d; });
+      let lo = Infinity, hi = -Infinity; lines.forEach((d) => d.forEach(([, v]) => { lo = Math.min(lo, v); hi = Math.max(hi, v); }));
+      const pad = Math.max(200, (hi - lo) * 0.12);
+      const box = { x: 62, y: 18, w: w - 78, h: h - 64 };
+      const c = MB.chart(ctx, box, {
+        x: [0, 10], y: [lo - pad, hi + pad], xLabel: "지난 햇수", xFmt: (v) => v + "년", yFmt: (v) => Math.round(v).toLocaleString("ko-KR"),
+        series: lines.map((d, i) => ({ data: d, color: cols[i], width: 2.4 })),
+        hlines: [{ y: 1e4, color: P.faint }],
+        vlines: [{ x: t, color: P.text, dash: [3, 3] }],
+        points: CPN.map((cc, i) => ({ x: t, y: at(cc, y, t), color: cols[i], r: 5 })),
+      });
+      G = c;
+      ctx.font = MB.font(12, false, 700); ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+      CPN.forEach((cc, i) => { ctx.fillStyle = cols[i]; ctx.fillText("표면 " + Math.round(cc * 100) + "%", c.X(0) + 6, c.Y(lines[i][0][1]) - 4); });
+      knob(ctx, c.X(t), box.y + box.h, P, 7);
+      MB.stat("pp-o-t", (10 - t).toFixed(1) + "<small>년</small>");
+      MB.stat("pp-o-1", wn(at(0.01, y, t)));
+      MB.stat("pp-o-3", wn(at(0.03, y, t)));
+      MB.stat("pp-o-5", wn(at(0.05, y, t)));
+    }, { aspect: 0.55, minHeight: 280, maxHeight: 380 });
+    MB.drag(cv.canvas, { start() { play = false; }, move(x) { if (!G) return; t = MB.clamp((x - G.box.x) / G.box.w * 10, 0, 10); cv.redraw(); } });
+    document.getElementById("pp-go").addEventListener("click", () => { t = 0; play = true; });
+    MB.loop(cv.canvas, (dt) => { if (!play) return; t = Math.min(10, t + dt * 1.4); if (t >= 10) play = false; cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 5. 듀레이션 받침점 */
+  (function () {
+    let f = 5, th = 0, G = null, D = 0, goTo = null, cv = null;
+    const re = () => { f = Math.min(f, N()); cv && cv.redraw(); };
+    const C = MB.range("fc-c", (v) => v.toFixed(1) + "%", re);
+    const N = MB.range("fc-n", (v) => v + "년", re);
+    const tgt = () => MB.clamp(((D - f) / N()) * 1.2, -0.1, 0.1);
+    cv = MB.canvas("#fc-cv", (ctx, w, h) => {
+      const P = MB.palette(), n = N(), b = bond(C() / 100, 0.03, n);
+      D = b.duration;
+      const x0 = 30, x1 = w - 26, X = (t) => x0 + (t / n) * (x1 - x0), py = Math.round(h * 0.62), px = X(f);
+      G = { x0, x1, n, py };
+      const maxPV = Math.max(...b.flows.map((q) => q.pv)), hmax = h * 0.34, bw = Math.max(3, Math.min(22, ((x1 - x0) / n) * 0.6));
+      const bal = Math.abs(D - f) < 0.12 * Math.max(1, n / 10);
+      ctx.save();
+      ctx.font = MB.font(11, true); ctx.fillStyle = P.dim; ctx.textAlign = "center"; ctx.textBaseline = "top";
+      ctx.strokeStyle = P.axis; ctx.beginPath(); ctx.moveTo(x0, h - 46); ctx.lineTo(x1, h - 46); ctx.stroke();
+      yrTicks(n).forEach((v) => { ctx.beginPath(); ctx.moveTo(X(v), h - 49); ctx.lineTo(X(v), h - 43); ctx.stroke(); ctx.fillText(v + (v === n ? "년" : ""), X(v), h - 40); });
+      ctx.save(); ctx.translate(px, py); ctx.rotate(th);
+      ctx.fillStyle = P.surface; ctx.strokeStyle = P.dim; ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.rect(x0 - px - 8, 0, x1 - x0 + 16, 7); ctx.fill(); ctx.stroke();
+      b.flows.forEach((q, k) => {
+        const hh = Math.max(2, (q.pv / maxPV) * hmax), bx = X(q.t) - px;
+        ctx.fillStyle = k === n - 1 && C() > 0 ? P.accent2 : k === n - 1 ? P.accent2 : P.accent;
+        if (k === n - 1 && C() > 0) {
+          const cp = (q.pv * (C() * 100)) / q.cf, ch = Math.max(1, (cp / maxPV) * hmax);
+          ctx.fillStyle = P.accent; ctx.fillRect(bx - bw / 2, -ch, bw, ch);
+          ctx.fillStyle = P.accent2; ctx.fillRect(bx - bw / 2, -hh, bw, hh - ch);
+        } else ctx.fillRect(bx - bw / 2, -hh, bw, hh);
+      });
+      ctx.restore();
+      ctx.fillStyle = bal ? P.ok : P.dim;
+      ctx.beginPath(); ctx.moveTo(px, py + 8); ctx.lineTo(px - 16, py + 40); ctx.lineTo(px + 16, py + 40); ctx.closePath(); ctx.fill();
+      knob(ctx, px, py + 30, P, 7);
+      ctx.font = MB.font(13, false, 700); ctx.textAlign = "left"; ctx.textBaseline = "top";
+      ctx.fillStyle = bal ? P.ok : P.text;
+      ctx.fillText(bal ? "균형: 받침점 = 듀레이션" : (D > f ? "오른쪽으로 기운다 → 받침점을 오른쪽으로" : "왼쪽으로 기운다 ← 받침점을 왼쪽으로"), 12, 10);
+      ctx.font = MB.font(11); ctx.fillStyle = P.dim;
+      ctx.fillText("추의 높이 = 그해 받을 돈의 현재가치", 12, 30);
+      ctx.restore();
+      MB.stat("fc-o-f", f.toFixed(2) + "<small>년</small>");
+      MB.stat("fc-o-d", D.toFixed(2) + "<small>년</small>");
+      MB.stat("fc-o-m", b.modDuration.toFixed(2));
+      MB.stat("fc-o-s", bal ? tone("ok-t", "수평") : tone("warn-t", "기울어짐"));
+    }, { aspect: 0.5, minHeight: 290, maxHeight: 370 });
+    MB.drag(cv.canvas, { start() { goTo = null; }, move(x) { if (!G) return; f = Math.round(MB.clamp(((x - G.x0) / (G.x1 - G.x0)) * G.n, 0, G.n) * 20) / 20; } });
+    document.getElementById("fc-go").addEventListener("click", () => { goTo = true; });
+    MB.loop(cv.canvas, (dt) => {
+      if (goTo) { f += (D - f) * (1 - Math.exp(-dt * 3)); if (Math.abs(D - f) < 0.005) { f = D; goTo = null; } }
+      th += (tgt() - th) * (1 - Math.exp(-dt * 4));
+      cv.redraw();
+    });
+  })();
+
+  /* ---------------------------------------------------------- 6. 금리–가격 곡선 */
+  (function () {
+    let y0 = 0.03, G = null;
+    const MAT = [1, 5, 10, 30];
+    const Fm = MB.seg("rp-f", () => cv.redraw());
+    const tanEl = document.getElementById("rp-t"), cmpEl = document.getElementById("rp-c");
+    const pp = (n, y) => bond(0.03, y, n).price / 100;
+    const curves = MAT.map((n) => { const d = []; for (let k = 0; k <= 100; k++) d.push([k / 10, pp(n, k / 1000)]); return d; });
+    const cv = MB.canvas("#rp-cv", (ctx, w, h) => {
+      const P = MB.palette(), cols = [P.dim, P.accent, P.accent2, P.bad], fn = +Fm();
+      const b = bond(0.03, y0, fn), p0 = b.price / 100, Dm = b.modDuration;
+      const series = MAT.map((n, i) => ({ data: curves[i], color: cols[i], width: n === fn ? 3 : 1.4 }));
+      if (tanEl.checked) { const d = []; for (let k = -40; k <= 40; k++) { const yy = y0 + k / 1000; d.push([yy * 100, p0 * (1 - Dm * (yy - y0))]); } series.push({ data: d, color: P.text, width: 1.6, dash: [6, 4] }); }
+      const box = { x: 54, y: 14, w: w - 68, h: h - 60 };
+      const c = MB.chart(ctx, box, { x: [0, 10], y: [40, 200], xLabel: "시장금리(만기수익률)", xFmt: (v) => v + "%", yFmt: (v) => v + "%", series });
+      G = c;
+      ctx.save();
+      if (cmpEl.checked && y0 + 0.01 <= 0.1) {
+        const y1 = y0 + 0.01, act = pp(fn, y1), est = p0 * (1 - Dm * 0.01), X1 = c.X(y1 * 100);
+        ctx.strokeStyle = P.faint; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.moveTo(c.X(y0 * 100), c.Y(p0)); ctx.lineTo(X1, c.Y(p0)); ctx.lineTo(X1, c.Y(Math.min(act, est)) + 0); ctx.stroke(); ctx.setLineDash([]);
+        if (tanEl.checked) {
+          ctx.strokeStyle = P.ok; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(X1, c.Y(act)); ctx.lineTo(X1, c.Y(est)); ctx.stroke();
+          ctx.fillStyle = P.bg; ctx.strokeStyle = P.text; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(X1, c.Y(est), 4, 0, TAU); ctx.fill(); ctx.stroke();
+          if (c.Y(est) - c.Y(act) > 6) { ctx.fillStyle = P.ok; ctx.font = MB.font(12, false, 700); ctx.textAlign = "left"; ctx.textBaseline = "middle"; ctx.fillText("볼록성 덕분", X1 + 8, (c.Y(act) + c.Y(est)) / 2); }
+        }
+        ctx.fillStyle = cols[MAT.indexOf(fn)]; ctx.beginPath(); ctx.arc(X1, c.Y(act), 5, 0, TAU); ctx.fill();
+        ctx.fillStyle = P.dim; ctx.font = MB.font(11); ctx.textAlign = "center"; ctx.textBaseline = "bottom"; ctx.fillText("+1%p", X1, c.Y(p0) - 6);
+      }
+      ctx.restore();
+      knob(ctx, c.X(y0 * 100), c.Y(p0), P, 8);
+      const act = pp(fn, y0 + 0.01) / p0 - 1, dn = y0 - 0.01 >= -0.005 ? pp(fn, y0 - 0.01) / p0 - 1 : NaN;
+      MB.stat("rp-o-p", wn(b.price));
+      MB.stat("rp-o-d", Dm.toFixed(2));
+      MB.stat("rp-o-e", tone("bad-t", sp(-Dm * 0.01)));
+      MB.stat("rp-o-u", tone("bad-t", sp(act)));
+      MB.stat("rp-o-n", isFinite(dn) ? tone("ok-t", sp(dn)) : "—");
+    }, { aspect: 0.6, minHeight: 300, maxHeight: 420 });
+    MB.drag(cv.canvas, { move(x) { if (!G) return; y0 = Math.round(MB.clamp(((x - G.box.x) / G.box.w) * 10, 0.25, 9) * 4) / 400; cv.redraw(); } });
+    tanEl.addEventListener("change", () => cv.redraw());
+    cmpEl.addEventListener("change", () => cv.redraw());
+  })();
+
+  /* ---------------------------------------------------------- 7. 보유 기간 수익 */
+  (function () {
+    const base = 0.03;
+    let H = 0, play = false, G = null;
+    const Dl = MB.range("hz-d", (v) => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(2) + "%p", () => cv.redraw());
+    const Nn = MB.seg("hz-n", () => { H = Math.min(H, +Nn()); cv.redraw(); });
+    const relOf = (Pn, y1, hh) => (Pn * Math.pow(1 + y1, hh)) / (1e4 * Math.pow(1 + base, hh)) - 1;
+    const cv = MB.canvas("#hz-cv", (ctx, w, h) => {
+      const P = MB.palette(), n = +Nn(), d = Dl() / 100, y1 = Math.max(0, base + d), y2 = Math.max(0, base - d);
+      const b1 = bond(base, y1, n), b2 = bond(base, y2, n), D = bond(base, base, n).duration;
+      const s1 = [], s2 = [];
+      for (let k = 0; k <= 200; k++) { const hh = (k / 200) * n; s1.push([hh, relOf(b1.price, y1, hh) * 100]); s2.push([hh, relOf(b2.price, y2, hh) * 100]); }
+      let m = 2; s1.concat(s2).forEach(([, v]) => { m = Math.max(m, Math.abs(v)); });
+      m *= 1.12;
+      const box = { x: 54, y: 16, w: w - 68, h: h - 72 };
+      const col = d > 0 ? P.bad : d < 0 ? P.ok : P.dim;
+      const c = MB.chart(ctx, box, {
+        x: [0, n], y: [-m, m], xFmt: (v) => v + "년", yFmt: (v) => (v > 0 ? "+" : "") + Math.round(v * 10) / 10 + "%",
+        series: [{ data: s2, color: P.faint, width: 1.4, dash: [5, 4] }, { data: s1, color: col, width: 2.8 }],
+        hlines: [{ y: 0, color: P.axis, dash: [], label: "금리가 그대로였을 때" }],
+        vlines: [{ x: D, color: P.accent2, label: "듀레이션 " + D.toFixed(1) + "년" }],
+      });
+      G = c;
+      const rv = relOf(b1.price, y1, H) * 100;
+      ctx.fillStyle = col; ctx.beginPath(); ctx.arc(c.X(H), c.Y(rv), 5.5, 0, TAU); ctx.fill();
+      ctx.strokeStyle = P.text; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.moveTo(c.X(H), box.y); ctx.lineTo(c.X(H), box.y + box.h); ctx.stroke(); ctx.setLineDash([]);
+      knob(ctx, c.X(H), box.y + box.h, P, 7);
+      let pile = 0, rem = 0;
+      b1.flows.forEach((q) => { if (q.t <= H + 1e-9) pile += q.cf * Math.pow(1 + y1, H - q.t); else rem += q.cf * Math.pow(1 + y1, -(q.t - H)); });
+      const r0 = b1.price / 1e4 - 1;
+      MB.stat("hz-o-0", signTone(r0, sp(r0)));
+      MB.stat("hz-o-h", signTone(rv / 100, sp(rv / 100)) + " <small>" + H.toFixed(1) + "년</small>");
+      MB.stat("hz-o-x", Math.abs(d) < 1e-9 ? "—" : (Math.log(1e4 / b1.price) / Math.log((1 + y1) / (1 + base))).toFixed(1) + "<small>년</small>");
+      MB.stat("hz-o-c", wn(pile));
+      MB.stat("hz-o-r", wn(rem));
+    }, { aspect: 0.55, minHeight: 290, maxHeight: 390 });
+    MB.drag(cv.canvas, { start() { play = false; }, move(x) { if (!G) return; H = MB.clamp(((x - G.box.x) / G.box.w) * +Nn(), 0, +Nn()); cv.redraw(); } });
+    document.getElementById("hz-go").addEventListener("click", () => { H = 0; play = true; });
+    MB.loop(cv.canvas, (dt) => { if (!play) return; const n = +Nn(); H = Math.min(n, H + (dt * n) / 7); if (H >= n) play = false; cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 8. 신용 위험 */
+  (function () {
+    const rf = 0.03, NB = 100, YRS = 10;
+    let seed = 7, U = [], yr = 0, run = false, cv = null;
+    const regen = () => { const r = MB.rng(seed); U = []; for (let i = 0; i < NB; i++) { const a = []; for (let t = 0; t < YRS; t++) a.push(r()); U.push(a); } };
+    regen();
+    const re = () => cv && cv.redraw();
+    const S = MB.range("cr-s", (v) => v.toFixed(2) + "%p", re);
+    const Pd = MB.range("cr-p", (v) => v.toFixed(2) + "%", re);
+    const Rr = MB.range("cr-r", (v) => v + "%", re);
+    const defYears = () => { const p = Pd() / 100; return U.map((a) => { for (let t = 0; t < YRS; t++) if (a[t] < p) return t + 1; return null; }); };
+    function paths() {
+      const yv = rf + S() / 100, p = Pd() / 100, R = Rr() / 100, dy = defYears();
+      const gov = [100], ex = [100], rl = [100];
+      let ca = 0, al = 100, cr = 0;
+      for (let t = 1; t <= YRS; t++) {
+        gov.push(100 * Math.pow(1 + rf, t));
+        ca = ca * (1 + rf) + al * ((1 - p) * yv + p * R); al *= 1 - p;
+        if (t === YRS) { ca += al; al = 0; }
+        ex.push(ca + al);
+        cr *= 1 + rf; let alive = 0;
+        dy.forEach((d) => { if (d === t) cr += R; else if (d == null || d > t) { cr += yv; alive++; } });
+        if (t === YRS) { cr += alive; alive = 0; }
+        rl.push(cr + alive);
+      }
+      return { gov, ex, rl, dy };
+    }
+    const narrow = () => document.getElementById("cr-cv").parentElement.clientWidth < 560;
+    cv = MB.canvas("#cr-cv", (ctx, w, h) => {
+      const P = MB.palette(), pt = paths(), R = Rr() / 100, nr = narrow();
+      const side = nr ? Math.min(w - 40, 210) : Math.min(h - 40, w * 0.38);
+      const gx = nr ? (w - side) / 2 : 20, gy = nr ? 26 : (h - side) / 2 + 6, cell = side / 10;
+      ctx.save();
+      ctx.fillStyle = P.dim; ctx.font = MB.font(12); ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+      const yi = Math.floor(yr + 1e-9), dead = pt.dy.filter((d) => d != null && d <= yi).length;
+      ctx.fillText(yi + "년째 · 부도 " + dead + "개 / 100개", gx, gy - 6);
+      pt.dy.forEach((d, i) => {
+        const cx = gx + (i % 10 + 0.5) * cell, cy = gy + (Math.floor(i / 10) + 0.5) * cell, r = cell * 0.36;
+        if (d != null && d <= yi) {
+          ctx.strokeStyle = P.bad; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(cx, cy, r, 0, TAU); ctx.stroke();
+          if (R > 0) { ctx.fillStyle = P.bad; ctx.globalAlpha = 0.6; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + TAU * R); ctx.closePath(); ctx.fill(); ctx.globalAlpha = 1; }
+        } else { ctx.fillStyle = P.accent; ctx.beginPath(); ctx.arc(cx, cy, r, 0, TAU); ctx.fill(); }
+      });
+      const all = pt.gov.concat(pt.ex, pt.rl), lo = Math.min(...all), hi = Math.max(...all);
+      const box = nr ? { x: 52, y: gy + side + 26, w: w - 66, h: h - (gy + side + 26) - 46 } : { x: gx + side + 70, y: 14, w: w - (gx + side + 70) - 14, h: h - 58 };
+      const rl = pt.rl.slice(0, yi + 1).map((v, t) => [t, v]);
+      if (yr > yi && yi < YRS) rl.push([yr, pt.rl[yi] + (pt.rl[yi + 1] - pt.rl[yi]) * (yr - yi)]);
+      MB.chart(ctx, box, {
+        x: [0, YRS], y: [Math.min(95, lo - 5), hi + 8], xLabel: "햇수", yLabel: "처음 100의 가치", yFmt: (v) => Math.round(v),
+        series: [{ data: pt.gov.map((v, t) => [t, v]), color: P.dim, width: 1.6, dash: [5, 4] }, { data: pt.ex.map((v, t) => [t, v]), color: P.accent2, width: 2 }, { data: rl, color: P.accent, width: 2.8 }],
+      });
+      ctx.restore();
+      const yv = rf + S() / 100, p = Pd() / 100, e = (1 - p) * (1 + yv) + p * R - 1, be = (1 + rf - p * R) / (1 - p) - 1 - rf;
+      MB.stat("cr-o-e", pc(e));
+      MB.stat("cr-o-x", signTone(e - rf, (e - rf >= 0 ? "+" : "−") + Math.abs((e - rf) * 100).toFixed(2) + "%p"));
+      MB.stat("cr-o-b", (be * 100).toFixed(2) + "<small>%p</small>");
+      MB.stat("cr-o-r", yr >= YRS ? pc(Math.pow(pt.rl[YRS] / 100, 1 / YRS) - 1) : "—");
+    }, { get height() { return narrow() ? 480 : 330; } });
+    document.getElementById("cr-go").addEventListener("click", () => { seed++; regen(); yr = 0; run = true; });
+    document.getElementById("cr-re").addEventListener("click", () => { yr = 0; run = false; cv.redraw(); });
+    MB.loop(cv.canvas, (dt) => { if (!run) return; yr = Math.min(YRS, yr + dt * 1.6); if (yr >= YRS) run = false; cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 9. 수익률 곡선 */
+  (function () {
+    const T = [0.25, 0.5, 1, 2, 3, 5, 10, 20, 30];
+    const PRE = { normal: [2.55, 2.62, 2.72, 2.88, 3.0, 3.18, 3.45, 3.62, 3.68], flat: [3.25, 3.25, 3.24, 3.22, 3.21, 3.2, 3.2, 3.21, 3.22], inv: [4.25, 4.15, 3.98, 3.72, 3.55, 3.38, 3.22, 3.15, 3.1] };
+    let cur = PRE.normal.slice(), goal = null, G = null, pick = -1;
+    MB.seg("yc-p", (v) => { goal = PRE[v].slice(); });
+    const cv = MB.canvas("#yc-cv", (ctx, w, h) => {
+      const P = MB.palette(), nr = w < 480;
+      const box = { x: 50, y: 20, w: w - 66, h: h - 74 };
+      const tk = (nr ? [0.25, 1, 5, 10, 20, 30] : [0.25, 1, 2, 3, 5, 10, 20, 30]).map(Math.sqrt);
+      const c = MB.chart(ctx, box, { x: [0.3, Math.sqrt(30) + 0.15], y: [0, 6], xLabel: "만기", xTicks: tk, xFmt: (v) => { const t = v * v; return t < 0.9 ? Math.round(t * 12) + "개월" : Math.round(t) + "년"; }, yFmt: (v) => v + "%" });
+      G = c;
+      const pts = T.map((t, i) => [c.X(Math.sqrt(t)), c.Y(cur[i])]);
+      ctx.save();
+      const path = new Path2D();
+      path.moveTo(pts[0][0], pts[0][1]);
+      for (let i = 0; i < pts.length - 1; i++) {
+        const p0 = pts[Math.max(0, i - 1)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(pts.length - 1, i + 2)];
+        path.bezierCurveTo(p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6, p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6, p2[0], p2[1]);
+      }
+      const d = cur[6] - cur[3], col = d > 0.25 ? P.accent : d < -0.1 ? P.bad : P.warn;
+      ctx.strokeStyle = col; ctx.lineWidth = 3; ctx.stroke(path);
+      const area = new Path2D(path); area.lineTo(pts[pts.length - 1][0], box.y + box.h); area.lineTo(pts[0][0], box.y + box.h); area.closePath();
+      ctx.globalAlpha = 0.1; ctx.fillStyle = col; ctx.fill(area); ctx.globalAlpha = 1;
+      pts.forEach(([x, y], i) => {
+        knob(ctx, x, y, P, pick === i ? 8 : 6);
+        if (nr ? i % 2 === 0 || i === 6 : i !== 1) { ctx.fillStyle = P.text; ctx.font = MB.font(11, true); ctx.textAlign = "center"; ctx.textBaseline = "bottom"; ctx.fillText(cur[i].toFixed(2), x, y - 11); }
+      });
+      const name = d > 0.25 ? "정상(우상향)" : d < -0.1 ? "역전(우하향)" : "평탄";
+      ctx.fillStyle = col; ctx.font = MB.font(15, false, 800); ctx.textAlign = "left"; ctx.textBaseline = "top";
+      ctx.fillText(name, box.x + 10, box.y + 4);
+      ctx.restore();
+      MB.stat("yc-o-s", cur[0].toFixed(2) + "%");
+      MB.stat("yc-o-2", cur[3].toFixed(2) + "%");
+      MB.stat("yc-o-l", cur[6].toFixed(2) + "%");
+      MB.stat("yc-o-d", tone(d > 0.25 ? "ok-t" : d < -0.1 ? "bad-t" : "warn-t", (d >= 0 ? "+" : "−") + Math.abs(d).toFixed(2) + "<small>%p</small>"));
+      MB.stat("yc-o-k", name);
+    }, { aspect: 0.55, minHeight: 290, maxHeight: 380 });
+    MB.drag(cv.canvas, {
+      start(x) { if (!G) return; goal = null; let best = 1e9; pick = -1; T.forEach((t, i) => { const dx = Math.abs(G.X(Math.sqrt(t)) - x); if (dx < best) { best = dx; pick = i; } }); },
+      move(x, y) { if (!G || pick < 0) return; cur[pick] = Math.round(MB.clamp(((G.box.y + G.box.h - y) / G.box.h) * 6, 0.1, 5.9) * 100) / 100; cv.redraw(); },
+      end() { pick = -1; cv.redraw(); },
+    });
+    MB.loop(cv.canvas, (dt) => {
+      if (!goal) return;
+      let done = true; const k = 1 - Math.exp(-dt * 6);
+      cur = cur.map((v, i) => { const nv = v + (goal[i] - v) * k; if (Math.abs(goal[i] - nv) > 0.004) done = false; return nv; });
+      if (done) { cur = goal.slice(); goal = null; }
+      cv.redraw();
+    });
+  })();
+
+  /* ---------------------------------------------------------- 10. 주식–채권 상관 */
+  (function () {
+    const S = MN.ASSETS.stock, B = MN.ASSETS.bond, NY = 40;
+    const g = MB.randnSeeded(11), Z = [];
+    for (let i = 0; i < NY; i++) Z.push([g(), g()]);
+    let cv = null;
+    const re = () => cv && cv.redraw();
+    const Rh = MB.range("sb-r", (v) => (v < 0 ? "−" : "") + Math.abs(v).toFixed(2), re);
+    const Wb = MB.range("sb-w", (v) => v + "%", re);
+    const narrow = () => document.getElementById("sb-cv").parentElement.clientWidth < 560;
+    cv = MB.canvas("#sb-cv", (ctx, w, h) => {
+      const P = MB.palette(), rho = Rh(), wb = Wb() / 100, ws = 1 - wb, nr = narrow();
+      let both = 0;
+      const pts = Z.map(([z1, z2]) => {
+        const s = S.mu + S.sigma * z1, b = B.mu + B.sigma * (rho * z1 + Math.sqrt(Math.max(0, 1 - rho * rho)) * z2);
+        const bd = s < 0 && b < 0; if (bd) both++;
+        return { x: s * 100, y: b * 100, r: 3.6, color: bd ? P.bad : s < 0 ? P.ok : P.accent };
+      });
+      const A = nr ? { x: 52, y: 26, w: w - 66, h: h / 2 - 76 } : { x: 52, y: 26, w: w / 2 - 74, h: h - 72 };
+      const Bx = nr ? { x: 52, y: h / 2 + 26, w: w - 66, h: h / 2 - 72 } : { x: w / 2 + 44, y: 26, w: w / 2 - 58, h: h - 72 };
+      const ca = MB.chart(ctx, A, { x: [-40, 55], y: [-16, 22], xLabel: "주식 연 수익률", yLabel: "채권 연 수익률", xFmt: (v) => v + "%", yFmt: (v) => v + "%", xTicks: [-40, -20, 0, 20, 40], yTicks: [-10, 0, 10, 20], points: pts, vlines: [{ x: 0, color: P.axis, dash: [] }], hlines: [{ y: 0, color: P.axis, dash: [] }] });
+      const fr = MN.frontier2(S, B, rho).map((q) => [q.sigma * 100, q.mu * 100]);
+      const sig = Math.sqrt(ws * ws * S.sigma * S.sigma + wb * wb * B.sigma * B.sigma + 2 * ws * wb * rho * S.sigma * B.sigma), mu = ws * S.mu + wb * B.mu;
+      const sig1 = ws * S.sigma + wb * B.sigma;
+      const cb = MB.chart(ctx, Bx, {
+        x: [0, 18], y: [3, 8], xLabel: "변동성(연)", yLabel: "기대수익률(연)", xFmt: (v) => v + "%", yFmt: (v) => v + "%",
+        series: [{ data: [[B.sigma * 100, B.mu * 100], [S.sigma * 100, S.mu * 100]], color: P.faint, width: 1.4, dash: [5, 4] }, { data: fr, color: P.accent, width: 2.6 }],
+        points: [{ x: B.sigma * 100, y: B.mu * 100, color: P.dim, r: 4 }, { x: S.sigma * 100, y: S.mu * 100, color: P.dim, r: 4 }, { x: sig1 * 100, y: mu * 100, color: P.faint, r: 4 }],
+      });
+      ctx.save();
+      ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.textBaseline = "middle";
+      ctx.textAlign = "left"; ctx.fillText("채권 100%", cb.X(B.sigma * 100) + 7, cb.Y(B.mu * 100) + 10);
+      ctx.textAlign = "right"; ctx.fillText("주식 100%", cb.X(S.sigma * 100) - 7, cb.Y(S.mu * 100) - 10);
+      ctx.textAlign = "left"; ctx.font = MB.font(12, false, 700); ctx.fillStyle = P.text; ctx.textBaseline = "bottom";
+      ctx.fillText("해마다의 수익률(가상 40년)", A.x, A.y - 8);
+      ctx.fillText("섞었을 때의 위험과 수익", Bx.x, Bx.y - 8);
+      ctx.restore();
+      knob(ctx, cb.X(sig * 100), cb.Y(mu * 100), P, 7);
+      MB.stat("sb-o-m", pc(mu));
+      MB.stat("sb-o-s", pc(sig));
+      MB.stat("sb-o-n", pc(sig1));
+      MB.stat("sb-o-b", tone(both > 4 ? "bad-t" : "", both + "<small>번</small>"));
+    }, { get height() { return narrow() ? 640 : 340; } });
+  })();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1085 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and MoneyBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "27세부터 90세까지 한 사람의 돈 인생을 직접 설계하고 돌려 본다. 소득·지출·주거·대출·투자·연금·인생 이벤트를 한 화면에서 바꾸고, 결정론과 몬테카를로로 순자산과 성공 확률을 읽고, 미션과 민감도 분석으로 어떤 선택이 가장 큰지 잰다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>인생 시뮬레이터 · MoneyBook</title>
+<meta name="description" content="27세부터 90세까지 한 사람의 돈 인생을 직접 설계하고 돌려 본다. 소득·지출·주거·대출·투자·연금·인생 이벤트를 한 화면에서 바꾸고, 결정론과 몬테카를로로 순자산과 성공 확률을 읽고, 미션과 민감도 분석으로 어떤 선택이 가장 큰지 잰다.">
+<link rel="canonical" href="https://moneybook.euiyun.com/chapters/lab.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0b8a63">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MoneyBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="인생 시뮬레이터 · MoneyBook">
+<meta property="og:description" content="27세부터 90세까지 한 사람의 돈 인생을 직접 설계하고 돌려 본다. 소득·지출·주거·대출·투자·연금·인생 이벤트를 한 화면에서 바꾸고, 결정론과 몬테카를로로 순자산과 성공 확률을 읽고, 미션과 민감도 분석으로 어떤 선택이 가장 큰지 잰다.">
+<meta property="og:url" content="https://moneybook.euiyun.com/chapters/lab.html">
+<meta property="og:image" content="https://moneybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://moneybook.euiyun.com/chapters/lab.html#chapter","name":"인생 시뮬레이터","headline":"인생 시뮬레이터 · MoneyBook","description":"27세부터 90세까지 한 사람의 돈 인생을 직접 설계하고 돌려 본다. 소득·지출·주거·대출·투자·연금·인생 이벤트를 한 화면에서 바꾸고, 결정론과 몬테카를로로 순자산과 성공 확률을 읽고, 미션과 민감도 분석으로 어떤 선택이 가장 큰지 잰다.","url":"https://moneybook.euiyun.com/chapters/lab.html","position":22,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://moneybook.euiyun.com/og.png","dateModified":"2026-10-03","isPartOf":{"@type":"Book","@id":"https://moneybook.euiyun.com/#book","name":"MoneyBook · 살아가는 데 필요한 돈 교과서","url":"https://moneybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MoneyBook","item":"https://moneybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"22. 인생 시뮬레이터","item":"https://moneybook.euiyun.com/chapters/lab.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/money.js"></script>
+<!--head:end-->
+<style>
+  .lab-bar { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--border); background: var(--surface); }
+  .lab-bar .grow { flex: 1; min-width: 4px; }
+  .lab-bar .lab-lbl { font-size: 12px; color: var(--text-faint); font-weight: 700; letter-spacing: .04em; }
+  .lab-grid { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .lab-out { min-width: 0; }
+  .lab-panel { border-top: 1px solid var(--border); min-width: 0; }
+  @media (min-width: 860px) {
+    .lab-grid { grid-template-columns: 290px minmax(0, 1fr); }
+    .lab-panel { order: -1; border-top: 0; border-right: 1px solid var(--border); }
+  }
+  .lab-out .sim-view .hint { top: 6px; bottom: auto; right: 10px; }
+  @media (max-width: 520px) { .lab-out .sim-view .hint { display: none; } }
+  .lab-panel details { border-bottom: 1px solid var(--border); }
+  .lab-panel details:last-child { border-bottom: 0; }
+  .lab-panel summary { list-style: none; cursor: pointer; padding: 11px 16px; display: flex; gap: 10px; align-items: center; }
+  .lab-panel summary::-webkit-details-marker { display: none; }
+  .lab-panel summary::before { content: ""; flex: none; width: 7px; height: 7px; border-right: 2px solid var(--text-dim); border-bottom: 2px solid var(--text-dim); transform: rotate(-45deg); transition: transform .15s; }
+  .lab-panel details[open] summary::before { transform: rotate(45deg); }
+  .lab-panel summary b { font-size: 15px; white-space: nowrap; }
+  .lab-panel summary .sum { margin-left: auto; font-size: 12.5px; color: var(--text-dim); text-align: right; line-height: 1.4; }
+  .lab-panel .grp { padding: 2px 16px 16px; display: grid; gap: 12px; }
+  @media (min-width: 560px) and (max-width: 859px) { .lab-panel .grp { grid-template-columns: 1fr 1fr; } }
+  .lab-panel .sub { font-size: 12.5px; color: var(--text-faint); font-weight: 700; margin-top: 4px; grid-column: 1 / -1; }
+  .lab-panel .rel { font-size: 13px; color: var(--text-dim); grid-column: 1 / -1; margin: 0; line-height: 1.55; }
+  .lab-panel .check { font-size: 13.5px; }
+  .lab-read { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 520px) { .lab-read { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .lab-read .stat { padding: 10px 14px; }
+  .lv { font-size: 17px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; line-height: 1.35; }
+  .lv small { font-size: 12px; color: var(--text-dim); font-weight: 500; }
+  .lab-flags { padding: 8px 16px; font-size: 13.5px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 4px 16px; line-height: 1.5; }
+  .lab-cap { font-size: 12.5px; color: var(--text-dim); padding: 8px 16px 0; font-weight: 700; }
+  .lab-year { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 6px 16px; padding: 8px 16px 14px; border-top: 1px solid var(--border); align-items: center; }
+  @media (max-width: 520px) { .lab-year { grid-template-columns: minmax(0, 1fr); justify-items: center; } }
+  .lab-year .dn { width: 200px; background: var(--canvas-bg); }
+  .lab-year .dn canvas { display: block; width: 100%; }
+  .lab-bs { width: 100%; font-size: 14px; }
+  .lab-bs .hd { font-weight: 700; margin-bottom: 4px; }
+  .lab-bs .row { display: flex; justify-content: space-between; gap: 10px; padding: 3px 0; border-bottom: 1px dotted var(--border); }
+  .lab-bs .row:last-child { border-bottom: 0; }
+  .lab-bs .row i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 7px; }
+  .lab-bs .row span:last-child { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .lab-bs .row.tot { font-weight: 800; border-top: 2px solid var(--text); border-bottom: 0; margin-top: 2px; }
+  .lab-bs .note { font-size: 12.5px; color: var(--text-dim); margin-top: 6px; line-height: 1.5; }
+  .missions { display: grid; gap: 10px; margin: 22px 0; }
+  .mission { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 4px 12px; align-items: start; padding: 14px 16px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-elev); position: relative; }
+  .mission .m-ic { width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--border); display: grid; place-items: center; margin-top: 2px; }
+  .mission .m-ic svg { width: 14px; height: 14px; opacity: 0; }
+  .mission .m-ic path { fill: none; stroke: var(--on-accent); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .mission.done { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--bg-elev)); }
+  .mission.done .m-ic { background: var(--accent); border-color: var(--accent); }
+  .mission.done .m-ic svg { opacity: 1; }
+  .mission h4 { margin: 0; font-size: 16px; line-height: 1.45; }
+  .mission p { margin: 3px 0 0 !important; font-size: 14px; color: var(--text-dim); line-height: 1.55; }
+  .mission .m-st { color: var(--text); font-size: 13.5px; }
+  .mission .btn { align-self: center; white-space: nowrap; }
+  @media (max-width: 560px) { .mission { grid-template-columns: 28px minmax(0, 1fr); } .mission .btn { grid-column: 2; justify-self: start; } }
+  .m-count { display: inline-block; font-size: 13px; font-weight: 700; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 2px 10px; }
+  .tor-note { font-size: 13px; color: var(--text-dim); padding: 0 18px 10px; }
+</style>
+</head>
+<body data-chapter="lab">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 22</div>
+    <h1>인생 시뮬레이터</h1>
+    <p class="lead">지금까지 21개 장에서 돈의 부품을 하나씩 따로 만져 보았다. 월급 명세서, 예산, 비상금, 대출, 전세, 주식과 채권, 보수, 세금, 연금, 은퇴. 이 장은 그 부품을 모두 한 사람의 인생 위에 올려 한꺼번에 돌린다. 연봉이 오르고, 월세에서 전세로 옮기고, 매달 자동이체로 투자하고, 연금이 쌓이고, 어느 날 월급이 멈춘다. 그 사이에 결혼, 아이, 자동차, 실직 같은 일이 끼어든다. 시뮬레이터는 27세부터 90세까지 63년을 한 해씩 계산한다. 기본값은 책 전체를 함께 걸어온 한결이고, 숫자 하나를 바꾸면 곧바로 다른 인생이 된다. 정답을 알려 주는 도구가 아니라 어떤 선택이 얼마나 큰지 크기를 재는 도구다.</p>
+    <ul class="objectives">
+      <li>소득·지출·주거·투자·연금·인생 이벤트가 한 해의 현금흐름과 순자산에서 어떻게 맞물리는지 설명한다.</li>
+      <li>결정론(기대수익) 결과와 몬테카를로 분포를 구분하고, 계획을 성공 확률로 읽는다.</li>
+      <li>오늘 돈(실질)과 명목 금액을 바꿔 보며 수십 년 뒤의 숫자를 바르게 해석한다.</li>
+      <li>민감도 분석으로 내 계획에서 가장 큰 지렛대가 무엇인지 찾는다.</li>
+      <li>미션을 풀며 집 매수, 펀드 보수, 실직, 조기 은퇴 같은 결정의 크기를 직접 잰다.</li>
+    </ul>
+  </header>
+
+  <section id="howto">
+    <h2>한 해를 계산하는 순서</h2>
+    <p>인생 전체를 한 번에 계산하는 공식은 없다. 대신 한 해를 계산하는 규칙을 정하고, 그 규칙을 63번 되풀이한다. <a href="overview.html">1장</a>에서 돈을 <b>흐름</b>(현금흐름)과 <b>저수지</b>(순자산)로 보자고 했다. 시뮬레이터는 해마다 흐름을 계산하고, 그 흐름이 저수지를 얼마나 채우거나 비우는지 기록한다. 아래 그림이 한 해의 순서다.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 440 600" role="img" aria-label="한 해 계산 순서: 연봉에서 실수령, 지출과 상환과 저축을 빼고 남는 돈 처리, 자산 성장, 은퇴 후 인출">
+        <defs><marker id="lab-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="120" y="12" width="200" height="46" rx="10" class="f-acc-soft"/>
+        <text x="220" y="33" text-anchor="middle" class="lbl-b">연봉(세전)</text>
+        <text x="220" y="50" text-anchor="middle" class="lbl-dim">해마다 인상률만큼 오른다</text>
+        <line x1="220" y1="58" x2="220" y2="82" class="s-line" marker-end="url(#lab-ar)"/>
+        <rect x="70" y="84" width="300" height="58" rx="10" class="f-elev"/>
+        <text x="220" y="106" text-anchor="middle" class="lbl-b">실수령 + 세액공제 환급</text>
+        <text x="220" y="126" text-anchor="middle" class="lbl-dim">4대 보험·소득세를 뺀다(6장, 18장)</text>
+        <line x1="215" y1="142" x2="215" y2="166" class="s-line" marker-end="url(#lab-ar)"/>
+        <rect x="14" y="168" width="126" height="62" rx="9" class="f-bad-soft"/>
+        <text x="77" y="192" text-anchor="middle" class="lbl">생활비·이벤트</text>
+        <text x="77" y="212" text-anchor="middle" class="lbl-dim">7장, 19장</text>
+        <rect x="152" y="168" width="126" height="62" rx="9" class="f-warn-soft"/>
+        <text x="215" y="192" text-anchor="middle" class="lbl">주거·대출 상환</text>
+        <text x="215" y="212" text-anchor="middle" class="lbl-dim">10장, 11장</text>
+        <rect x="290" y="168" width="126" height="62" rx="9" class="f-acc2-soft"/>
+        <text x="353" y="192" text-anchor="middle" class="lbl">자동이체 저축</text>
+        <text x="353" y="212" text-anchor="middle" class="lbl-dim">투자·연금 계좌</text>
+        <line x1="220" y1="230" x2="220" y2="256" class="s-line" marker-end="url(#lab-ar)"/>
+        <rect x="70" y="258" width="300" height="58" rx="10" class="f-elev"/>
+        <text x="220" y="281" text-anchor="middle" class="lbl-b">남는 돈(또는 모자란 돈)</text>
+        <text x="220" y="301" text-anchor="middle" class="lbl-dim">비상금 → 투자 → 연금 계좌 → 빚 순서</text>
+        <line x1="220" y1="316" x2="220" y2="340" class="s-line" marker-end="url(#lab-ar)"/>
+        <rect x="70" y="342" width="300" height="58" rx="10" class="f-ok-soft"/>
+        <text x="220" y="365" text-anchor="middle" class="lbl-b">자산이 1년 자란다</text>
+        <text x="220" y="385" text-anchor="middle" class="lbl-dim">주식·채권·현금 수익률 − 보수(15장, 16장)</text>
+        <line x1="220" y1="400" x2="220" y2="424" class="s-line" marker-end="url(#lab-ar)"/>
+        <rect x="70" y="426" width="300" height="58" rx="10" class="f-acc-soft"/>
+        <text x="220" y="449" text-anchor="middle" class="lbl-b">그해 말 재무상태표</text>
+        <text x="220" y="469" text-anchor="middle" class="lbl-dim">자산 − 부채 = 순자산(1장)</text>
+        <path d="M370 455 C 438 455, 438 35, 322 35" class="s-dash" marker-end="url(#lab-ar)"/>
+        <text x="434" y="300" text-anchor="middle" class="lbl-dim" transform="rotate(90 434 300)">다음 해로</text>
+        <rect x="14" y="512" width="412" height="74" rx="10" class="f-surface"/>
+        <text x="220" y="536" text-anchor="middle" class="lbl-b">은퇴한 뒤에는</text>
+        <text x="220" y="557" text-anchor="middle" class="lbl">월급 대신 국민연금 + 자산 인출(20장, 21장)</text>
+        <text x="220" y="576" text-anchor="middle" class="lbl-bad">인출할 자산이 없으면 그해가 '고갈'</text>
+      </svg>
+      <figcaption><b>그림 1. 시뮬레이터의 한 해.</b> 세전 연봉에서 출발해 실수령을 구하고, 쓰고 갚고 자동이체한 뒤 남는 돈을 처리한다. 자산이 1년 자라면 그해 말 재무상태표가 나오고, 그것이 다음 해의 출발점이 된다. 은퇴 뒤에는 월급 자리를 국민연금과 인출이 대신한다.</figcaption>
+    </figure>
+    <p>각 칸은 앞 장에서 이미 만져 본 계산이다. 실수령은 <a href="income.html">6장</a>의 월급 명세서 계산(<code>MN.payroll</code>)을 그대로 쓰고, 연금저축·IRP 세액공제는 <a href="tax.html">18장</a>에서 본 대로 <b>그해 낼 세금(결정세액과 지방소득세)을 넘지 못하게</b> 자른다. 대출 상환액은 <a href="loan.html">10장</a>의 원리금균등 스케줄(<code>MN.loan</code>), 국민연금은 <a href="pension.html">20장</a>의 근사식(<code>MN.nps</code>)으로 계산한다. 주식·채권·현금의 기대수익과 흔들림은 <a href="risk.html">12장</a>부터 써 온 교육용 가정(<code>MN.ASSETS</code>)이다.</p>
+    <p>모자란 해에는 순서가 있다. 집을 사거나 전세 보증금을 올리는 것처럼 계획된 큰돈은 투자 계좌에서 먼저 꺼낸다. 생활비가 모자라면 먼저 비상금(현금)으로 버티고, 현금이 바닥나면 투자 계좌를 판다. 연금 계좌는 55세가 지나야 꺼낼 수 있고, 꺼낼 때 연금소득세(여기서는 4.4%로 단순화)를 뗀다. 그래도 모자라면 일하는 동안에는 연 6% 마이너스 통장을 쓴다고 보고, 은퇴한 뒤라면 그해를 <b>자산 고갈</b>로 기록한다.</p>
+    <div class="callout">
+      <strong>모든 금액 입력은 오늘 돈이다</strong>
+      <p>"월 생활비 94만원", "집값 3억원"은 모두 2026년의 구매력으로 넣는다. 시뮬레이터가 물가만큼 키워서 그해의 명목 금액으로 바꾼다(<a href="inflation.html">3장</a>). 단, 대출 원리금은 계약할 때 정한 명목 금액이 그대로 이어지고, 집값은 물가 대신 따로 정한 상승률로 움직인다. 세율 구간과 보험료 상한은 물가만큼 함께 오른다고 가정했다.</p>
+    </div>
+    <h3>사용법</h3>
+    <ol>
+      <li>위쪽의 <b>프리셋</b>에서 출발점을 고른다. '한결 기본'은 앞 장들에서 한결이 내린 결정을 모아 둔 값이다.</li>
+      <li>입력 묶음(소득, 지출, 주거, 저축·투자, 연금, 이벤트, 물가)을 펼쳐 숫자를 바꾼다. 넓은 화면에서는 왼쪽, 휴대폰에서는 그래프 아래에 있다. 묶음마다 관련 장 링크가 있다.</li>
+      <li>그래프 위를 끌면 <b>나이 커서</b>가 움직이고, 아래에 그해의 재무상태표 도넛이 나온다.</li>
+      <li>그래프 아래 띠의 표식(은퇴, 연금, 전세, 결혼…)을 좌우로 끌면 그 일이 일어나는 나이가 바뀐다.</li>
+      <li><b>결정론 / 몬테카를로</b>, <b>오늘 돈 / 명목</b>을 바꿔 본다. 설정은 주소(URL)에 저장되므로 '링크 복사'로 다른 사람과 나눌 수 있다.</li>
+    </ol>
+    <div class="callout warn">
+      <strong>교육용 모델이다</strong>
+      <p>이 시뮬레이터는 원리를 보여 주기 위한 단순화 모델이다. 수익률은 가정일 뿐 미래를 보장하지 않으며, 특정 상품이나 투자를 권하지 않는다. 세율, 4대 보험 요율, 국민연금 산식, 세액공제 한도는 2026년 기준 대표값이고 해마다 바뀐다. 실제 결정을 앞두고는 그해의 제도를 확인하고 필요하면 전문가와 상의한다.</p>
+    </div>
+  </section>
+
+  <section id="sim">
+    <h2>63년을 한 화면에</h2>
+    <p>먼저 아무것도 바꾸지 말고 '한결 기본'을 본다. 그래프의 색 띠는 그해 말 자산의 구성이다. 파란색이 현금(비상금), 녹색이 투자 계좌, 금색이 연금 계좌(연금저축·IRP·퇴직연금 DC), 회색이 집과 보증금이다. 0 아래 붉은 띠는 부채이고, 굵은 선이 순자산(자산 − 부채)이다. 은퇴 뒤 구간은 옅게 칠해져 있다.</p>
+
+    <div class="sim" id="sim-life">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>인생 시뮬레이터: 한 사람의 돈 63년</h3><span class="m-count" id="m-count-top">미션 0/7</span></div>
+      <div class="lab-bar">
+        <span class="lab-lbl">프리셋</span>
+        <div class="btn-row" id="lab-presets">
+          <button class="btn sm" data-p="hg">한결 기본</button>
+          <button class="btn sm" data-p="buy">일찍 매수</button>
+          <button class="btn sm" data-p="fire">FIRE</button>
+          <button class="btn sm" data-p="zero">저축 0</button>
+        </div>
+        <span class="grow"></span>
+        <div class="seg" id="lab-mode"><button data-value="det" class="on">결정론</button><button data-value="mc">몬테카를로</button></div>
+        <div class="seg" id="lab-unit"><button data-value="real" class="on">오늘 돈</button><button data-value="nom">명목</button></div>
+        <button class="btn sm" id="lab-link">링크 복사</button>
+      </div>
+      <div class="lab-grid">
+        <div class="lab-out">
+          <div class="sim-view"><canvas id="lab-cv"></canvas><span class="hint">커서·표식을 끈다</span></div>
+          <div class="legend" id="lab-legend"></div>
+          <div class="sim-readout lab-read">
+            <div class="stat"><span class="k" id="r-ret-k">은퇴(60세) 순자산</span><span class="lv" id="r-ret">—</span></div>
+            <div class="stat"><span class="k" id="r-end-k">90세 순자산</span><span class="lv" id="r-end">—</span></div>
+            <div class="stat"><span class="k">자산 고갈 나이</span><span class="lv" id="r-dead">—</span></div>
+            <div class="stat"><span class="k">성공 확률(몬테카를로)</span><span class="lv" id="r-succ">—</span></div>
+            <div class="stat"><span class="k">생애 소득세(지방세 포함)</span><span class="lv" id="r-tax">—</span></div>
+            <div class="stat"><span class="k">생애 이자</span><span class="lv" id="r-int">—</span></div>
+          </div>
+          <div class="lab-flags" id="lab-flags"></div>
+          <div class="lab-cap">해마다의 현금흐름(위: 들어온 돈, 아래: 나간 돈)</div>
+          <div class="sim-view"><canvas id="lab-bars"></canvas></div>
+          <div class="legend" id="lab-bars-legend" style="padding-bottom:10px"></div>
+          <div class="lab-year">
+            <div class="dn"><canvas id="lab-donut"></canvas></div>
+            <div class="lab-bs" id="lab-bs"></div>
+          </div>
+        </div>
+
+        <div class="lab-panel">
+          <details open>
+            <summary><b>소득</b><span class="sum" id="sum-inc"></span></summary>
+            <div class="grp">
+              <label class="ctrl"><span>시작 나이 <output id="l-start-out"></output></span><input type="range" id="l-start" min="20" max="50" step="1" value="27"></label>
+              <label class="ctrl"><span>연봉(세전, 오늘 돈) <output id="l-salary-out"></output></span><input type="range" id="l-salary" min="15000000" max="150000000" step="1000000" value="36000000"></label>
+              <label class="ctrl"><span>연봉 인상률(명목) <output id="l-raise-out"></output></span><input type="range" id="l-raise" min="0" max="0.07" step="0.005" value="0.03"></label>
+              <label class="ctrl"><span>은퇴 나이 <output id="l-retire-out"></output></span><input type="range" id="l-retire" min="40" max="75" step="1" value="60"></label>
+              <label class="ctrl"><span>경력 공백 <output id="l-gap-out"></output></span><input type="range" id="l-gap" min="0" max="5" step="1" value="0"></label>
+              <label class="ctrl"><span>공백 시작 나이 <output id="l-gapAge-out"></output></span><input type="range" id="l-gapAge" min="22" max="65" step="1" value="35"></label>
+              <p class="rel">공백 동안은 소득도, 연봉 인상도, 국민연금 가입도 멈춘다. 관련: <a href="income.html">6장 월급 명세서</a> · <a href="tax.html">18장 세금</a></p>
+            </div>
+          </details>
+          <details>
+            <summary><b>지출</b><span class="sum" id="sum-sp"></span></summary>
+            <div class="grp">
+              <label class="ctrl"><span>월 생활비(주거 제외) <output id="l-living-out"></output></span><input type="range" id="l-living" min="300000" max="4000000" step="10000" value="940000"></label>
+              <label class="ctrl"><span>라이프스타일 인플레이션 <output id="l-life-out"></output></span><input type="range" id="l-life" min="-0.01" max="0.04" step="0.0025" value="0.01"></label>
+              <label class="ctrl"><span>은퇴 후 월 생활비(주거 제외) <output id="l-retLiving-out"></output></span><input type="range" id="l-retLiving" min="1000000" max="6000000" step="50000" value="2500000"></label>
+              <div class="ctrl"><span>남는 돈은</span><div class="seg" id="l-left"><button data-value="cash" class="on">현금으로</button><button data-value="invest">투자로</button><button data-value="spend">써 버림</button></div></div>
+              <p class="rel">라이프스타일 인플레이션은 물가 위에 더해 씀씀이가 해마다 커지는 비율이다. 관련: <a href="budget.html">7장 예산</a> · <a href="inflation.html">3장 물가</a></p>
+            </div>
+          </details>
+          <details>
+            <summary><b>주거·대출</b><span class="sum" id="sum-house"></span></summary>
+            <div class="grp">
+              <div class="ctrl"><span>주거 경로</span><div class="seg" id="l-house"><button data-value="rent">월세 유지</button><button data-value="jeonse" class="on">전세 전환</button><button data-value="buy">매수</button></div></div>
+              <label class="ctrl"><span>월세(보증금 1,000만원) <output id="l-rent-out"></output></span><input type="range" id="l-rent" min="200000" max="2000000" step="10000" value="600000"></label>
+              <div class="sub" id="g-j-h">전세</div>
+              <label class="ctrl" data-g="j"><span>전세 전환 나이 <output id="l-jAge-out"></output></span><input type="range" id="l-jAge" min="27" max="65" step="1" value="30"></label>
+              <label class="ctrl" data-g="j"><span>전세 보증금 <output id="l-jAmt-out"></output></span><input type="range" id="l-jAmt" min="50000000" max="600000000" step="10000000" value="200000000"></label>
+              <label class="ctrl" data-g="j"><span>전세대출 <output id="l-jLoan-out"></output></span><input type="range" id="l-jLoan" min="0" max="500000000" step="10000000" value="160000000"></label>
+              <label class="ctrl" data-g="j"><span>전세대출 금리 <output id="l-jRate-out"></output></span><input type="range" id="l-jRate" min="0.02" max="0.08" step="0.0025" value="0.04"></label>
+              <div class="sub" data-g="b">매수</div>
+              <label class="ctrl" data-g="b"><span>매수 나이 <output id="l-bAge-out"></output></span><input type="range" id="l-bAge" min="28" max="70" step="1" value="40"></label>
+              <label class="ctrl" data-g="b"><span>집값(오늘 돈) <output id="l-price-out"></output></span><input type="range" id="l-price" min="100000000" max="2000000000" step="10000000" value="600000000"></label>
+              <label class="ctrl" data-g="b"><span>대출 비율(LTV) <output id="l-ltv-out"></output></span><input type="range" id="l-ltv" min="0" max="0.8" step="0.05" value="0.5"></label>
+              <label class="ctrl" data-g="b"><span>주택담보대출 금리(고정) <output id="l-mRate-out"></output></span><input type="range" id="l-mRate" min="0.02" max="0.08" step="0.0025" value="0.045"></label>
+              <label class="ctrl" data-g="b"><span>대출 기간 <output id="l-term-out"></output></span><input type="range" id="l-term" min="10" max="40" step="5" value="30"></label>
+              <label class="ctrl" data-g="b"><span>집값 상승률(명목) <output id="l-hg-out"></output></span><input type="range" id="l-hg" min="0" max="0.06" step="0.005" value="0.03"></label>
+              <label class="check"><input type="checkbox" id="l-student" checked> 학자금 대출 1,200만원(연 1.7%, 10년 원리금균등)</label>
+              <p class="rel">매수 경로에서 전세 나이가 매수 나이보다 이르면 그 사이는 전세로 산다. 집을 살 때 취득세·중개비 등으로 집값의 2%, 해마다 보유세·수선비로 집값의 0.5%를 쓴다고 가정했다. 관련: <a href="housing.html">11장 집</a> · <a href="loan.html">10장 대출</a> · <a href="credit.html">9장 신용</a></p>
+            </div>
+          </details>
+          <details>
+            <summary><b>저축·투자</b><span class="sum" id="sum-inv"></span></summary>
+            <div class="grp">
+              <label class="ctrl"><span>시작 현금 <output id="l-cash0-out"></output></span><input type="range" id="l-cash0" min="0" max="100000000" step="1000000" value="3000000"></label>
+              <label class="ctrl"><span>비상금 목표(지출 개월 수) <output id="l-emerg-out"></output></span><input type="range" id="l-emerg" min="0" max="12" step="1" value="4"></label>
+              <label class="ctrl"><span>월 투자 자동이체(첫해) <output id="l-save-out"></output></span><input type="range" id="l-save" min="0" max="3000000" step="10000" value="500000"></label>
+              <label class="ctrl"><span>주식 비중 <output id="l-stock-out"></output></span><input type="range" id="l-stock" min="0" max="100" step="5" value="70"></label>
+              <label class="ctrl"><span>채권 비중(나머지는 현금성) <output id="l-bond-out"></output></span><input type="range" id="l-bond" min="0" max="100" step="5" value="30"></label>
+              <label class="ctrl"><span>펀드·ETF 보수(연) <output id="l-fee-out"></output></span><input type="range" id="l-fee" min="0" max="0.02" step="0.001" value="0.001"></label>
+              <label class="check"><input type="checkbox" id="l-rebal" checked> 해마다 리밸런싱</label>
+              <p class="rel">자동이체액은 연봉이 오르는 만큼 함께 늘린다. 관련: <a href="saving.html">8장 저축</a> · <a href="risk.html">12장 위험</a> · <a href="fund.html">15장 펀드·ETF</a> · <a href="portfolio.html">16장 자산배분</a></p>
+            </div>
+          </details>
+          <details>
+            <summary><b>연금</b><span class="sum" id="sum-pen"></span></summary>
+            <div class="grp">
+              <label class="ctrl"><span>국민연금 수령 나이 <output id="l-npsAge-out"></output></span><input type="range" id="l-npsAge" min="60" max="70" step="1" value="65"></label>
+              <label class="ctrl"><span>연금저축·IRP 연 납입(오늘 돈) <output id="l-pc-out"></output></span><input type="range" id="l-pc" min="0" max="18000000" step="500000" value="6000000"></label>
+              <label class="check"><input type="checkbox" id="l-dc" checked> 퇴직연금 DC(회사가 연봉의 1/12을 적립)</label>
+              <p class="rel" id="pen-note"></p>
+              <p class="rel">관련: <a href="pension.html">20장 연금</a> · <a href="tax.html">18장 세금</a> · <a href="retire.html">21장 은퇴</a></p>
+            </div>
+          </details>
+          <details>
+            <summary><b>이벤트</b><span class="sum" id="sum-ev"></span></summary>
+            <div class="grp">
+              <label class="check"><input type="checkbox" id="l-evMarry"> 결혼(비용 3,000만원)</label>
+              <label class="ctrl"><span>결혼 나이 <output id="l-aMarry-out"></output></span><input type="range" id="l-aMarry" min="25" max="60" step="1" value="32"></label>
+              <label class="check"><input type="checkbox" id="l-evChild"> 자녀 1명(22년간 양육·교육비)</label>
+              <label class="ctrl"><span>자녀가 태어나는 나이 <output id="l-aChild-out"></output></span><input type="range" id="l-aChild" min="25" max="50" step="1" value="34"></label>
+              <label class="ctrl"><span>자녀 1명 월 비용 <output id="l-childCost-out"></output></span><input type="range" id="l-childCost" min="300000" max="2000000" step="50000" value="1000000"></label>
+              <label class="check"><input type="checkbox" id="l-evCar"> 차 구입(3,000만원 + 10년간 유지비 연 300만원)</label>
+              <label class="ctrl"><span>차 구입 나이 <output id="l-aCar-out"></output></span><input type="range" id="l-aCar" min="25" max="70" step="1" value="35"></label>
+              <label class="check"><input type="checkbox" id="l-evJob"> 실직 1년(실업급여 약 6개월)</label>
+              <label class="ctrl"><span>실직 나이 <output id="l-aJob-out"></output></span><input type="range" id="l-aJob" min="25" max="64" step="1" value="40"></label>
+              <p class="rel">켜진 이벤트는 그래프 아래 띠에 표식으로 나타나고, 표식을 끌어 나이를 바꿀 수 있다. 관련: <a href="insurance.html">19장 보험</a> · <a href="saving.html">8장 비상금</a> · <a href="behavior.html">17장 심리</a></p>
+            </div>
+          </details>
+          <details>
+            <summary><b>물가·기간</b><span class="sum" id="sum-inf"></span></summary>
+            <div class="grp">
+              <label class="ctrl"><span>물가 상승률 <output id="l-inf-out"></output></span><input type="range" id="l-inf" min="0" max="0.06" step="0.0025" value="0.025"></label>
+              <label class="ctrl"><span>계획 끝 나이 <output id="l-end-out"></output></span><input type="range" id="l-end" min="80" max="100" step="1" value="90"></label>
+              <p class="rel">관련: <a href="inflation.html">3장 물가</a> · <a href="economy.html">5장 경제</a> · <a href="retire.html">21장 은퇴</a></p>
+            </div>
+          </details>
+        </div>
+      </div>
+      <div class="sim-note">해볼 것: ① '오늘 돈'과 '명목'을 오가며 60세 순자산이 몇 배로 달라 보이는지 본다. ② '몬테카를로'로 바꿔 같은 계획의 미래가 얼마나 넓게 퍼지는지 본다. ③ 은퇴 표식을 끌어 55세, 65세로 옮겨 본다. ④ '저축 0' 프리셋에서 빚이 눈덩이처럼 커지는 모습을 본다. (가정: 연 단위 계산, 세율 구간·보험 상한은 물가 연동, 투자 수익에 대한 세금과 은퇴 후 건강보험료는 생략, 집은 팔지 않는다. 교육용 모델이며 투자 권유가 아니다.)</div>
+    </div>
+
+    <p>한결 기본값으로 돌린 결과를 읽어 보자. 결정론 모드는 해마다 정확히 기대수익만큼 번다고 가정한다. 이때 한결의 60세 순자산은 오늘 돈으로 약 <b>9억 3,233만원</b>이고, 그중 약 8억 1,349만원이 현금·투자·연금 계좌처럼 꺼내 쓸 수 있는 자산이다. 나머지는 전세 보증금이다. 33년 동안 국민연금에 가입해(기준소득월액 평균 약 305만원, 오늘 돈) 65세부터 받는 국민연금은 월 약 <b>111만원</b>이다. 결정론으로는 90세까지 한 번도 바닥나지 않는다.</p>
+    <p>그런데 '몬테카를로'로 바꾸면 이야기가 달라진다. 같은 계획으로 300개의 미래를 돌리면 60세 순자산의 중앙값은 약 8억 6,969만원으로 결정론보다 낮고, 하위 10%는 약 6억 3,406만원, 상위 10%는 약 13억 7,494만원이다. 그리고 90세까지 바닥나지 않는 미래는 약 <b>72%</b>다. 결정론 그래프가 매끄럽게 올라간다고 해서 계획이 안전한 것은 아니다. 열 번 중 세 번 가까이는 90세 전에 돈이 떨어진다.</p>
+    <p>60세에 커서를 두고 도넛을 보면 한 가지가 더 눈에 띈다. 현금(비상금)이 오늘 돈 약 1억 3,080만원이나 쌓여 있다. '남는 돈은'을 '현금으로'에 두었기 때문에, 자동이체하고 남은 돈과 세액공제 환급이 33년 동안 파킹통장에 고였다. 현금 수익률(연 2.5%)은 물가와 같아서 실질로는 거의 자라지 않는다. '투자로'로 바꾸면 비상금 목표(지출 4개월치)를 넘는 돈이 해마다 투자 계좌로 옮겨지고, 60세 순자산은 약 10억 511만원, 성공 확률은 약 77%로 오른다. <a href="saving.html">8장</a>에서 비상금의 크기를 정한 이유가 여기 있다. 비상금은 정해진 만큼만 두고, 나머지는 일을 시킨다.</p>
+    <p>현금흐름 막대는 같은 이야기를 해마다 보여 준다. 30세의 긴 막대는 전세 보증금을 마련하느라 투자 계좌에서 꺼낸 돈이고(집·보증금), 60세부터는 녹색 소득이 사라지고 금색 인출이 그 자리를 채운다. 65세에 국민연금이 들어오면 인출이 줄어든다. 막대가 위아래로 짝을 이루지 않는 해에는 회색 '현금에서'나 붉은 '부족(빚)'이 차이를 메운다. 붉은 막대가 보이기 시작하면 계획에 구멍이 났다는 신호다.</p>
+    <p>'명목'으로 바꾸면 같은 60세 순자산이 약 21억원으로 보인다. 33년 동안 물가가 연 2.5%씩 오르면 돈의 단위가 약 2.26배로 늘어나기 때문이다. 먼 미래의 큰 숫자를 볼 때는 늘 '오늘 돈으로 얼마인가'를 먼저 묻는다(<a href="inflation.html">3장</a>).</p>
+  </section>
+
+  <section id="missions">
+    <h2>미션</h2>
+    <p>아래 미션은 위 시뮬레이터의 지금 설정을 그대로 채점한다. 조건을 만족하면 동그라미가 채워진다. '설정 불러오기'는 미션의 출발점을 시뮬레이터에 넣어 준다. 그다음 무엇을 바꿔야 미션을 통과하는지는 직접 찾는다. 정답은 하나가 아니다. <span class="m-count" id="m-count">미션 0/7</span></p>
+    <div class="missions" id="mission-list"></div>
+    <div class="callout tip">
+      <strong>미션을 풀 때의 요령</strong>
+      <p>한 번에 하나만 바꾼다. 무엇을 바꿨을 때 성공 확률이 몇 %p 움직였는지 적어 두면, 다음 절의 민감도 분석이 왜 그렇게 나오는지 손으로 먼저 알게 된다. 몬테카를로 숫자는 입력을 멈추고 잠시 뒤에 다시 계산된다.</p>
+    </div>
+  </section>
+
+  <section id="tornado">
+    <h2>무엇이 가장 크게 움직이나</h2>
+    <p>입력이 서른 개가 넘으면 어디부터 손대야 할지 막막하다. 이럴 때 쓰는 방법이 <span class="term">민감도 분석</span><span class="en">(Sensitivity analysis)</span>이다. 다른 입력은 그대로 두고 하나만 조금 흔들어 결과가 얼마나 변하는지 잰다. 입력마다 막대를 그려 큰 것부터 위에 쌓으면 회오리 모양이 되어서 <span class="term">토네이도 차트</span><span class="en">(Tornado chart)</span>라고 부른다.</p>
+    <p>아래 차트는 위 시뮬레이터의 지금 설정을 기준으로 한다. 녹색 막대는 그 입력을 올렸을 때, 금색 막대는 내렸을 때 순자산(오늘 돈)이 얼마나 변하는지다. 위 시뮬레이터에서 무언가를 바꾸면 이 차트도 따라 바뀐다.</p>
+    <div class="sim" id="sim-tor">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>민감도 토네이도: 입력을 흔들면 순자산이 얼마나 움직이나</h3></div>
+      <div class="lab-bar">
+        <span class="lab-lbl">결과</span>
+        <div class="seg" id="tor-metric"><button data-value="ret" class="on">은퇴 시 순자산</button><button data-value="end">끝 나이 순자산</button></div>
+      </div>
+      <div class="sim-view"><canvas id="tor-cv"></canvas></div>
+      <div class="legend" style="padding-bottom:10px"><span><i style="background:var(--accent)"></i>입력을 올렸을 때</span><span><i style="background:var(--accent-2)"></i>입력을 내렸을 때</span></div>
+      <div class="sim-readout lab-read">
+        <div class="stat"><span class="k">기준값(오늘 돈)</span><span class="lv" id="tor-base">—</span></div>
+        <div class="stat"><span class="k">가장 큰 지렛대</span><span class="lv" id="tor-top">—</span></div>
+        <div class="stat"><span class="k">두 번째</span><span class="lv" id="tor-2nd">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① '은퇴 시 순자산'에서 은퇴 후 생활비 막대가 0인 이유를 생각해 본다. ② '끝 나이 순자산'으로 바꾸면 은퇴 후 생활비와 보수 막대가 얼마나 커지는지 본다. ③ 위 시뮬레이터에서 '매수'로 바꾸면 집값과 대출 금리 막대가 새로 생긴다. (결정론 기준이라 주식 비중을 올리면 늘 좋아 보인다. 그 대가인 흔들림은 몬테카를로에서 확인한다. 물가는 넣지 않았다. 이 모델에서는 물가를 바꿔도 명목 수익률과 인상률이 그대로라서 실질 수익률을 바꾼 것과 같아지기 때문이다.)</div>
+    </div>
+    <p>한결 기본값에서 60세 순자산(오늘 돈 약 9억 3,233만원)을 가장 크게 움직이는 것은 연봉 인상률이다. ±1%p에 약 −2억 300만원에서 +2억 2,300만원까지 움직인다. 인상률 1%p는 작아 보여도 33년 동안 복리로 쌓이면 마지막 연봉이 약 1.4배 차이 나고, 저축액도 연봉을 따라 늘기 때문이다(<a href="interest.html">4장</a>). 그다음이 연봉 수준, 주식 비중, 연금 납입, 은퇴 나이다. 반면 생활비 ±10%는 약 ±5,000만원으로 생각보다 작다. 생활비가 소득의 일부일 뿐이기 때문이다.</p>
+    <p>'끝 나이 순자산'으로 바꾸면 순위가 달라진다. 주식 비중이 맨 위로 올라오고, 보수 막대가 약 4억원 폭으로 길어지며, 0이던 은퇴 후 생활비도 3억원이 넘는 폭으로 생긴다. 30년을 더 복리로 굴리고 30년을 더 쓰기 때문이다. 계획을 고칠 때는 <b>이 표의 맨 위에서부터</b> 손대는 것이 효율적이다. 바꾸기 쉬운지도 함께 본다. 인상률은 마음대로 정할 수 없지만 은퇴 나이, 보수, 은퇴 후 생활비는 스스로 정할 수 있다.</p>
+  </section>
+
+  <section id="scenarios">
+    <h2>네 가지 인생, 엔진의 숫자로</h2>
+    <p>프리셋 네 개를 같은 엔진으로 돌린 결과를 한 표에 모았다. 금액은 모두 오늘 돈이고, 성공 확률은 300개 경로 몬테카를로에서 90세까지 바닥나지 않은 비율이다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>프리셋</th><th class="num">은퇴 시 순자산</th><th class="num">90세 순자산</th><th class="num">고갈 나이</th><th class="num">성공 확률</th><th class="num">생애 이자</th></tr></thead>
+      <tbody>
+        <tr><td>한결 기본(60세 은퇴, 전세)</td><td class="num">9억 3,233만</td><td class="num">9억 5,677만</td><td class="num">없음</td><td class="num">71.7%</td><td class="num">2억 375만</td></tr>
+        <tr><td>일찍 매수(35세, 3억원 집)</td><td class="num">8억 9,739만</td><td class="num">7억 2,989만</td><td class="num">없음</td><td class="num">55.7%</td><td class="num">1억 6,126만</td></tr>
+        <tr><td>FIRE(45세 은퇴)</td><td class="num">8억 3,473만</td><td class="num">11억 6,517만</td><td class="num">없음</td><td class="num">53.7%</td><td class="num">99만</td></tr>
+        <tr><td>저축 0</td><td class="num">3억 3,093만</td><td class="num">−7억 1,729만</td><td class="num">66세</td><td class="num">1.3%</td><td class="num">7억 5,807만</td></tr>
+      </tbody>
+    </table></div>
+    <h3>한결 기본: 전세 이자가 생애 이자의 거의 전부</h3>
+    <p>한결 기본은 결정론으로는 넉넉해 보이지만 성공 확률은 약 72%다. 눈여겨볼 숫자는 생애 이자 약 2억원(오늘 돈)이다. 학자금 이자는 100만원 남짓이고 나머지는 30세부터 90세까지 내는 전세대출 이자다. 전세는 보증금이 자산으로 남는 대신, 대출을 끼면 평생 이자를 낸다. 은퇴한 뒤에도 그 이자와 오르는 보증금은 계속 꺼내 쓸 자산에서 나간다.</p>
+    <h3>일찍 매수: 집은 남지만 현금이 모자란다</h3>
+    <p>35세에 오늘 돈 3억원짜리 집을 대출 60%로 사면, 계약금과 취득 비용을 대느라 투자 계좌가 거의 비고 몇 해 동안 마이너스 통장을 쓴다(시뮬레이터의 경고 문구와 붉은 띠). 대신 대출을 다 갚은 뒤에는 이자가 사라지고, 90세에도 집이라는 큰 자산이 남는다. 그래서 생애 이자는 약 1억 6,126만원으로 한결 기본보다 적다. 문제는 그 집을 쓸 수 없다는 점이다. 이 모델은 집을 팔거나 주택연금으로 바꾸지 않으므로 은퇴 뒤 생활비는 현금·투자·연금 계좌로만 대야 하고, 성공 확률이 약 56%로 떨어진다. 집이 있는 은퇴자에게 주택연금이나 집을 줄여 옮기는 선택이 중요한 이유다(<a href="retire.html">21장</a>).</p>
+    <h3>FIRE: 결정론은 통과, 몬테카를로는 반반</h3>
+    <p><span class="term">FIRE</span><span class="en">(Financial Independence, Retire Early)</span>는 일찍 경제적으로 독립해 은퇴하는 계획이다. 프리셋은 연봉 5,000만원, 월 생활비 80만원, 투자 자동이체 월 150만원, 45세 은퇴를 가정했다. 결정론으로는 90세까지 무사하고 90세 순자산도 크다. 하지만 성공 확률은 약 54%, 동전 던지기다. 은퇴 뒤 45년을 버텨야 하므로 은퇴 직후 몇 해의 수익률(순서 위험)이 결과를 크게 가르고, 국민연금 가입 기간도 18년에 그쳐 연금이 월 약 71만원으로 줄어든다.</p>
+    <h3>저축 0: 무너지는 모습</h3>
+    <p>자동이체를 모두 끊고 남는 돈을 다 쓰며 씀씀이가 해마다 2%씩 커지면, 일하는 동안 이미 지출이 소득을 넘어선다. 국민연금과 퇴직연금만으로 은퇴하면 66세에 꺼낼 자산이 바닥나고, 그 뒤로는 모자란 돈이 연 6% 빚으로 쌓여 90세 순자산이 약 −7억원이 된다. 그래프의 붉은 띠가 아래로 쏟아지는 모습이 <a href="credit.html">9장</a>에서 본 리볼빙의 눈덩이와 같은 모양이다.</p>
+    <div class="formula">$$W_{t+1} = \big(W_t + \underbrace{(\text{실수령} - \text{지출} - \text{상환})}_{\text{그해 저축}}\big)\,(1 + r_t - f)$$<div class="where">\(W_t\): t년 초 금융 자산, \(r_t\): 그해 수익률, \(f\): 보수. 결정론은 \(r_t\)를 기대수익으로 고정하고, 몬테카를로는 해마다 무작위로 뽑는다.</div></div>
+    <div class="callout deep">
+      <strong>왜 결정론이 몬테카를로 중앙값보다 높은가</strong>
+      <p>결정론은 해마다 산술 평균 수익률(주식 7.5%)을 그대로 준다. 그런데 +20%와 −20%를 차례로 겪으면 평균은 0%인데 잔고는 4% 줄어든다. 흔들림이 클수록 실제로 복리가 되는 기하 평균은 산술 평균보다 대략 \(\sigma^2/2\)만큼 낮다(<a href="risk.html">12장</a>). 그래서 같은 가정이라도 몬테카를로의 중앙값 경로는 결정론 선보다 아래에 놓인다. 결정론 선은 '보통의 미래'가 아니라 '평균 수익률이 매년 나오는 운 좋은 미래'에 가깝다.</p>
+    </div>
+    <h3>보수 1.4%p가 은퇴 나이를 바꾼다</h3>
+    <p>미션 3의 숫자를 한결 기본으로 계산하면, 보수 1.5% 펀드로는 성공 확률 80%를 넘기는 가장 이른 은퇴 나이가 66세, 0.1% 인덱스 ETF로는 62세다(150개 경로 기준). <a href="fund.html">15장</a>에서 본 보수 1.4%p의 차이는 결국 <b>4년 더 일해야 하는가</b>의 문제다. 60세에 은퇴한다고 고정하면 성공 확률이 약 72%에서 약 38%로 떨어진다.</p>
+  </section>
+
+  <section id="limits">
+    <h2>이 모델이 모르는 것</h2>
+    <p>모든 모델은 틀린다. 쓸모 있는 모델은 어디서 틀리는지를 알고 쓰는 모델이다. 이 시뮬레이터가 단순화한 것을 적어 둔다.</p>
+    <ul>
+      <li><b>집은 팔지 않는다.</b> 주택연금, 집을 줄여 옮기기, 상속은 넣지 않았다. 매수 경로의 은퇴 성공 확률은 그만큼 보수적이다.</li>
+      <li><b>투자 수익에는 세금을 매기지 않았다.</b> 실제로는 일반 계좌의 배당·이자에 세금이 붙고, ISA와 연금 계좌는 과세를 줄이거나 미룬다(<a href="tax.html">18장</a>). 연금 계좌 인출은 4.4%로 단순화했다.</li>
+      <li><b>은퇴 뒤의 건강보험료, 의료비, 간병비</b>는 '은퇴 후 생활비' 안에 뭉뚱그렸다. 큰 병원비는 따로 오지 않는다.</li>
+      <li><b>배우자의 소득과 연금</b>은 없다. 결혼과 자녀는 비용으로만 들어간다. 맞벌이라면 결과가 크게 달라진다.</li>
+      <li><b>수익률·물가는 해마다 독립적</b>이고 정규분포 근사를 따른다. 실제 시장의 긴 침체, 금리와 물가의 연동, 폭락의 꼬리는 더 거칠다(<a href="economy.html">5장</a>).</li>
+      <li><b>물가를 바꿔도 명목 수익률과 연봉 인상률은 그대로다.</b> 그래서 물가 슬라이더를 올리면 실질 수익률과 실질 인상률을 함께 깎은 것과 같다. 실제로는 물가가 높은 시기에 금리와 임금도 함께 오르는 경향이 있다.</li>
+      <li><b>제도는 바뀐다.</b> 국민연금 산식과 요율, 세율 구간, 세액공제 한도는 2026년 값으로 고정했다. 실제로는 63년 동안 여러 번 바뀐다.</li>
+    </ul>
+    <p>그래서 이 시뮬레이터의 숫자는 "한결은 90세에 9억 5,677만원을 갖는다"는 예언이 아니다. "은퇴를 2년 늦추는 것이 생활비를 10% 줄이는 것보다 크다", "보수 1.4%p는 4년의 노동과 같다"처럼 <b>선택끼리의 크기를 비교하는 자</b>로 쓴다.</p>
+  </section>
+
+  <section id="case">
+    <h2>한결의 마지막 장</h2>
+    <p>책의 첫 장에서 한결은 순자산 100만원과 한 달 53만원의 흐름에서 출발했다. 그 뒤로 한결은 장마다 작은 결정을 하나씩 내렸다. 아래 그림은 그 결정을 돈의 흐름 일곱 단계에 따라 모은 것이다.</p>
+    <figure class="diagram">
+      <svg viewBox="0 0 440 640" role="img" aria-label="한결이 장마다 내린 결정: 벌기, 쓰기, 모으기, 빌리기, 불리기, 지키기, 노후">
+        <line x1="62" y1="30" x2="62" y2="610" class="s-dash"/>
+        <g>
+          <rect x="14" y="20" width="96" height="30" rx="15" class="f-acc"/><text x="62" y="40" text-anchor="middle" class="lbl-b" style="fill:var(--on-accent)">벌기</text>
+          <text x="124" y="33" class="lbl">실수령 265.6만원을 기준으로</text>
+          <text x="124" y="53" class="lbl-dim">6장: 세전 300만원이 아니다</text>
+        </g>
+        <g>
+          <rect x="14" y="100" width="96" height="30" rx="15" class="f-acc"/><text x="62" y="120" text-anchor="middle" class="lbl-b" style="fill:var(--on-accent)">쓰기</text>
+          <text x="124" y="113" class="lbl">월급날 100만원 먼저 자동이체</text>
+          <text x="124" y="133" class="lbl-dim">7장: 선저축 후소비</text>
+        </g>
+        <g>
+          <rect x="14" y="180" width="96" height="30" rx="15" class="f-acc"/><text x="62" y="200" text-anchor="middle" class="lbl-b" style="fill:var(--on-accent)">모으기</text>
+          <text x="124" y="193" class="lbl">비상금 600만원을 파킹통장에</text>
+          <text x="124" y="213" class="lbl-dim">8장: 필수지출 약 4개월</text>
+        </g>
+        <g>
+          <rect x="14" y="260" width="96" height="30" rx="15" class="f-acc"/><text x="62" y="280" text-anchor="middle" class="lbl-b" style="fill:var(--on-accent)">빌리기</text>
+          <text x="124" y="273" class="lbl">카드 한도 150만원, 학자금 그대로</text>
+          <text x="124" y="293" class="lbl">30세 투룸 전세 2억원</text>
+          <text x="124" y="313" class="lbl-dim">9~11장: 대출 1.6억, 반환보증</text>
+        </g>
+        <g>
+          <rect x="14" y="350" width="96" height="30" rx="15" class="f-acc"/><text x="62" y="370" text-anchor="middle" class="lbl-b" style="fill:var(--on-accent)">불리기</text>
+          <text x="124" y="363" class="lbl">견딜 낙폭 −30%, 지수 ETF 0.1%</text>
+          <text x="124" y="383" class="lbl">주식 70 · 채권 30, 연 1회 리밸런싱</text>
+          <text x="124" y="403" class="lbl-dim">12~16장</text>
+        </g>
+        <g>
+          <rect x="14" y="440" width="96" height="30" rx="15" class="f-acc"/><text x="62" y="460" text-anchor="middle" class="lbl-b" style="fill:var(--on-accent)">지키기</text>
+          <text x="124" y="453" class="lbl">"월 3% 보장" 거절, 알림 끄기</text>
+          <text x="124" y="473" class="lbl">연금저축·IRP, 보험 월 4만원</text>
+          <text x="124" y="493" class="lbl-dim">17~19장</text>
+        </g>
+        <g>
+          <rect x="14" y="530" width="96" height="30" rx="15" class="f-acc2"/><text x="62" y="550" text-anchor="middle" class="lbl-b" style="fill:var(--on-accent)">노후</text>
+          <text x="124" y="543" class="lbl">연금 세 겹, 60세 은퇴 목표</text>
+          <text x="124" y="563" class="lbl">가드레일: 나쁜 해엔 생활비 줄이기</text>
+          <text x="124" y="583" class="lbl-dim">20~21장</text>
+        </g>
+        <rect x="124" y="596" width="300" height="34" rx="8" class="f-acc-soft"/>
+        <text x="274" y="618" text-anchor="middle" class="lbl-acc">22장: 이 모든 것을 한 번에 돌린다</text>
+      </svg>
+      <figcaption><b>그림 2. 한결이 지나온 길.</b> 큰 결정 하나가 아니라 장마다 내린 작은 결정이 쌓여 63년의 그래프를 만든다. 시뮬레이터의 '한결 기본'은 이 결정들을 입력으로 옮긴 것이다.</figcaption>
+    </figure>
+    <div class="casefile">
+      <div class="tag"><b>LEDGER 한결</b><span>한결의 가계부 · 22장</span></div>
+      <h4>순자산 100만원에서 60세 9억 3,233만원(오늘 돈)까지, 그리고 72%</h4>
+      <p>한결의 결정을 모두 넣고 27세부터 90세까지 돌렸다. 연봉 3,600만원에서 연 3%씩 오르고, 월 생활비 94만원(주거 제외)으로 시작해 매달 투자 자동이체 50만원과 연금저축·IRP 연 600만원을 넣는다. 첫해 세액공제는 계산상 99만원이지만 결정세액 약 86.5만원을 넘지 못해 86.5만원만 돌아온다(<a href="tax.html">18장</a>의 결론 그대로). 30세에 전세 2억원으로 옮기고, 투자는 주식 70 · 채권 30에 보수 0.1%다.</p>
+      <p>결정론으로 60세 순자산은 오늘 돈 약 9억 3,233만원, 그중 꺼내 쓸 수 있는 자산은 약 8억 1,349만원이다. 65세부터 국민연금 월 약 111만원이 들어온다. 결정론으로는 90세까지 바닥나지 않지만, 300개의 미래 중 약 72%만 끝까지 버틴다. <a href="retire.html">21장</a>에서 예상한 확률보다 조금 낮은데, 이 장은 은퇴 뒤에도 전세대출 이자와 오르는 보증금을 계속 내고, 국민연금 가입을 은퇴 나이까지 33년으로 계산했기 때문이다.</p>
+      <p>한결은 미션을 풀며 세 가지를 확인했다. 은퇴를 62세로 2년 미루면 성공 확률이 약 84%가 된다. 보수를 1.5%로 두었다면 같은 80%를 위해 66세까지 일해야 했다. 40세에 1년 실직하면 성공 확률이 약 64%로 내려가므로, 비상금 목표를 넉넉히 두고 그런 해에는 은퇴 계획을 다시 본다. 반대로 아이를 키우는 비용(월 100만원, 22년)을 넣으면 60세 은퇴는 성공 확률이 약 20%로 무너진다. 가족이 생기면 이 그래프를 다시 그려야 한다.</p>
+      <div class="clue"><div><b>이 장에서 정한 것</b>60세 은퇴 목표는 '노력 목표', 62세는 '안전 목표'로 둔다. 해마다 1월 리밸런싱할 때 이 시뮬레이터를 다시 돌려 숫자를 고친다.</div><div><b>아직 남은 문제</b>결혼, 맞벌이 소득, 내 집 마련 시기, 주택연금은 아직 정하지 않았다. 모두 입력 하나로 결과가 크게 바뀐다.</div><div><b>다음 단계</b>23장 용어집과 종합 퀴즈로 책 전체의 개념을 점검한다. 그다음은 자기 숫자를 넣을 차례다.</div></div>
+    </div>
+    <div class="callout tip">
+      <strong>자기 숫자를 넣는 순서</strong>
+      <p>① 시작 나이와 연봉(세전), 지금 통장에 있는 돈(시작 현금)을 넣는다. 학자금 대출이 없다면 끈다. ② 지난 석 달의 카드·계좌 내역에서 주거비를 뺀 한 달 평균 지출을 구해 월 생활비에 넣는다(<a href="budget.html">7장</a>). ③ 지금 사는 집에 맞춰 주거 경로를 고른다. 이미 전세라면 전세 전환 나이를 지금 나이로 둔다. ④ 매달 실제로 자동이체되는 투자액과 연금 계좌 납입액을 넣는다. 계획이 아니라 실제로 빠져나가는 금액이다. ⑤ 은퇴 후 생활비는 지금 생활비의 70~100% 사이에서 시작해 본다. ⑥ 마지막으로 '몬테카를로'를 켜고 성공 확률을 본 뒤, 토네이도 차트의 맨 위 입력부터 하나씩 고쳐 본다.</p>
+    </div>
+    <p>이제 한결의 숫자를 지우고 자기 숫자를 넣어 볼 차례다. 시작 나이, 연봉, 생활비, 지금 사는 집, 이미 모은 돈을 넣고 미션을 다시 풀어 본다. 무엇이 내 인생의 가장 큰 지렛대인지 토네이도 차트가 말해 준다. 그리고 1년 뒤에 같은 주소로 다시 와서 숫자를 고친다. 계획은 한 번 세우는 것이 아니라 해마다 다시 그리는 것이다.</p>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>인생 전체의 돈은 한 해의 규칙(실수령 → 지출·상환·저축 → 남는 돈 처리 → 자산 성장)을 되풀이해 계산한다. 흐름이 저수지를 채우거나 비운다.</li>
+      <li>먼 미래의 금액은 오늘 돈(실질)으로 읽는다. 물가 2.5%면 33년 뒤 명목 숫자는 약 2.26배로 부풀어 보인다.</li>
+      <li>결정론 결과는 '평균 수익률이 매년 나오는' 낙관적인 한 줄이다. 계획은 몬테카를로의 분포와 성공 확률로 판단한다.</li>
+      <li>민감도 분석으로 지렛대의 크기를 비교한다. 한결에게는 연봉 인상률, 주식 비중, 은퇴 나이, 보수가 생활비 10%보다 훨씬 크다.</li>
+      <li>집은 순자산을 키우지만 꺼내 쓸 수 없는 자산이다. 매수는 계약금과 비상금, 은퇴 후 현금흐름까지 함께 계획해야 한다.</li>
+      <li>모델은 예언이 아니라 선택끼리의 크기를 재는 자다. 제도와 가정은 바뀌므로 해마다 다시 돌린다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>1. 결정론 모드에서 90세까지 자산이 바닥나지 않았다. 이 계획에 대해 가장 정확한 말은?</p>
+        <div class="opts">
+          <button class="opt">90세까지 안전이 보장된다.</button>
+          <button class="opt" data-correct>평균 수익률이 매년 나올 때의 결과일 뿐이므로, 몬테카를로 성공 확률을 함께 봐야 한다.</button>
+          <button class="opt">몬테카를로 중앙값은 항상 결정론보다 높으므로 더 안전하다.</button>
+          <button class="opt">물가를 반영하지 않았으므로 의미가 없다.</button>
+        </div>
+        <div class="quiz-exp">결정론은 해마다 산술 평균 수익률을 그대로 주므로, 흔들림 때문에 생기는 손실(변동성 끌림)과 순서 위험이 빠진다. 한결 기본도 결정론으로는 무사하지만 성공 확률은 약 72%다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>2. 60세 순자산이 명목으로 21억원, 물가 연 2.5%로 33년이 지났다. 오늘 돈으로는 대략 얼마인가?</p>
+        <div class="opts">
+          <button class="opt">약 21억원</button>
+          <button class="opt">약 16억원</button>
+          <button class="opt" data-correct>약 9억 3,000만원</button>
+          <button class="opt">약 4억원</button>
+        </div>
+        <div class="quiz-exp">1.025의 33제곱은 약 2.26이다. 21억 ÷ 2.26 ≈ 9.3억원. 숫자의 단위인 돈 자체가 커졌으므로 실질로 나눠 읽는다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>3. 연봉 3,600만원인 해에 연금저축·IRP에 600만원을 넣었다. 계산상 세액공제는 99만원이지만 결정세액(지방세 포함)이 약 86.5만원이다. 실제로 돌려받는 금액은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>약 86.5만원. 세액공제는 낼 세금을 넘을 수 없다.</button>
+          <button class="opt">99만원. 공제는 납입액에 비례한다.</button>
+          <button class="opt">185.5만원. 두 금액을 더한다.</button>
+          <button class="opt">0원. 공제가 세금보다 크면 무효다.</button>
+        </div>
+        <div class="quiz-exp">18장에서 본 대로 세액공제는 결정세액까지만 깎는다. 시뮬레이터도 해마다 min(공제액, 그해 세금)으로 자른다. 연봉이 오르면 세금이 커져 공제를 온전히 쓰게 된다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>4. 토네이도 차트에서 '은퇴 시 순자산' 기준으로 은퇴 후 생활비 막대의 길이가 0이었다. 이유는?</p>
+        <div class="opts">
+          <button class="opt">은퇴 후 생활비는 중요하지 않기 때문이다.</button>
+          <button class="opt">계산 오류다.</button>
+          <button class="opt">생활비는 물가와 상관없기 때문이다.</button>
+          <button class="opt" data-correct>은퇴 시점까지는 그 돈을 아직 쓰지 않았기 때문이다. 끝 나이 순자산으로 바꾸면 크게 나타난다.</button>
+        </div>
+        <div class="quiz-exp">민감도는 어떤 결과를 재느냐에 따라 달라진다. 은퇴 후 생활비는 은퇴 뒤 수십 년 동안 쌓여 끝 나이 순자산과 성공 확률을 크게 움직인다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+<script>
+(function () {
+  "use strict";
+  /*core*/
+  const DEF = {
+    start: 27, salary: 36e6, raise: 0.03, retire: 60, gap: 0, gapAge: 35,
+    living: 940000, life: 0.01, retLiving: 2.5e6, left: "cash",
+    house: "jeonse", rent: 600000, rentDep: 1e7, jAge: 30, jAmt: 2e8, jLoan: 1.6e8, jRate: 0.04,
+    bAge: 40, price: 6e8, ltv: 0.5, mRate: 0.045, term: 30, hg: 0.03, student: 1,
+    cash0: 3e6, emerg: 4, save: 500000, stock: 70, bond: 30, fee: 0.001, rebal: 1,
+    npsAge: 65, pc: 6e6, dc: 1,
+    evMarry: 0, aMarry: 32, evChild: 0, aChild: 34, childCost: 1e6, evCar: 0, aCar: 35, evJob: 0, aJob: 40,
+    inf: 0.025, end: 90,
+  };
+  const K = { marry: 3e7, car: 3e7, carUp: 3e6, carYears: 10, childYears: 22, buyCost: 0.02, hold: 0.005, debtR: 0.06, penTax: 0.044, penAge: 55, uiCap: 1.98e6, uiMonths: 6, student: 1.2e7 };
+
+  function plan(c) {
+    const N = Math.max(1, c.end - c.start), yrs = [];
+    const pw = (r, n) => Math.pow(1 + r, n);
+    const jAge = Math.max(c.start, c.jAge), bAge = Math.max(c.start, c.bAge);
+    const buyT = c.house === "buy" ? bAge - c.start : Infinity;
+    const jT = c.house === "jeonse" || (c.house === "buy" && jAge < bAge) ? jAge - c.start : Infinity;
+    const jAmtN = c.jAmt * pw(c.inf, jT === Infinity ? 0 : jT), jLoanN = Math.min(c.jLoan, c.jAmt) * pw(c.inf, jT === Infinity ? 0 : jT);
+    const price = buyT < Infinity ? c.price * pw(c.hg, buyT) : 0, mLoan = price * c.ltv;
+    const mort = buyT < N && mLoan > 0 ? MN.loan(mLoan, c.mRate, c.term * 12) : null;
+    const stu = c.student ? MN.loan(K.student, 0.017, 120) : null;
+    const sumRows = (L, t0, t) => { let pay = 0, int = 0, bal = null; if (!L) return { pay, int, bal: 0 }; for (let m = (t - t0) * 12 + 1; m <= (t - t0) * 12 + 12; m++) { const r = L.rows[m - 1]; if (r) { pay += r.pay; int += r.interest; bal = r.balance; } } return { pay, int, bal: bal == null ? 0 : bal }; };
+    const w = [c.stock / 100, c.bond / 100, Math.max(0, 1 - c.stock / 100 - c.bond / 100)];
+    let sNom = c.salary, ny = 0, bsum = 0, dep = c.rentDep, dsr = 0;
+    for (let t = 0; t < N; t++) {
+      const age = c.start + t, F = pw(c.inf, t), retired = age >= c.retire;
+      const inGap = c.gap > 0 && age >= c.gapAge && age < c.gapAge + c.gap;
+      const jobLoss = !!c.evJob && age === c.aJob && !retired && !inGap;
+      const working = !retired && !inGap && !jobLoss;
+      const y = { age, F, net: 0, tax: 0, credit: 0, benefit: 0, nps: 0, living: 0, house: 0, event: 0, loanPay: 0, loanInt: 0, inv: 0, pen: 0, dc: 0, cap: 0, retired, working };
+      if (working) {
+        const sReal = sNom / F, p = MN.payroll(sReal), owed = p.annual.finalTax + p.annual.local;
+        y.net = p.annual.net * F; y.tax = owed * F; y.gross = sNom;
+        if (c.pc > 0) y.credit = Math.min(MN.pensionCredit(c.pc, p.annual.taxable), owed) * F;
+        y.tax -= y.credit;
+        if (age < 60) { ny++; bsum += Math.min(Math.max(sReal / 12 - 200000, MN.KR.npsFloor), MN.KR.npsCap); }
+        y.inv = c.save * 12 * (sNom / c.salary); y.pen = c.pc * F; y.dc = c.dc ? sNom / 12 : 0;
+      } else if (jobLoss) y.benefit = Math.min(0.6 * sNom / F / 12, K.uiCap) * K.uiMonths * F;
+      y.living = (retired ? c.retLiving : c.living * pw(c.life, t)) * 12 * F;
+      if (c.evMarry && age === c.aMarry) y.event += K.marry * F;
+      if (c.evChild && age >= c.aChild && age < c.aChild + K.childYears) y.event += c.childCost * 12 * F;
+      if (c.evCar && age === c.aCar) y.event += K.car * F;
+      if (c.evCar && age >= c.aCar && age < c.aCar + K.carYears) y.event += K.carUp * F;
+      let tgt;
+      if (t >= buyT) {
+        if (t === buyT) { y.cap += dep - (jT < buyT ? jLoanN : 0) - price * (1 - c.ltv) - price * K.buyCost; dep = 0; if (y.gross) dsr = (mort ? (mort.rows.slice(0, 12).reduce((s, r) => s + r.pay, 0)) : 0) / y.gross; }
+        y.houseVal = price * pw(c.hg, t + 1 - buyT); y.house = price * pw(c.hg, t - buyT) * K.hold;
+        const m = sumRows(mort, buyT, t); y.loanPay += m.pay; y.loanInt += m.int; y.mort = m.bal; y.jl = 0; tgt = 0;
+      } else if (t >= jT) {
+        if (t === jT) y.cap += jLoanN;
+        tgt = jAmtN * pw(c.inf, t - jT); y.loanPay += jLoanN * c.jRate; y.loanInt += jLoanN * c.jRate; y.jl = jLoanN; y.houseVal = 0; y.mort = 0;
+      } else { tgt = c.rentDep * F; y.house = c.rent * 12 * F; y.jl = 0; y.houseVal = 0; y.mort = 0; }
+      y.cap -= tgt - dep; dep = tgt; y.dep = dep;
+      const s = sumRows(stu, 0, t); y.loanPay += s.pay; y.loanInt += s.int; y.stu = s.bal;
+      yrs.push(y);
+      if (working) sNom *= 1 + c.raise;
+    }
+    const npsM = ny ? MN.nps(bsum / ny, ny) * MN.npsAgeFactor(clampN(c.npsAge - 65, -5, 5)) : 0;
+    yrs.forEach((y) => {
+      if (y.age >= c.npsAge) y.nps = npsM * 12 * y.F;
+      y.cash = y.net + y.benefit + y.credit + y.nps - y.living - y.house - y.event - y.loanPay - y.inv - y.pen + y.cap;
+    });
+    return { c, N, yrs, w, npsM, npsYears: ny, npsB: ny ? bsum / ny : 0, price, mLoan, dsr, buyT, jT };
+  }
+  function clampN(x, a, b) { return Math.min(b, Math.max(a, x)); }
+
+  function run(P, ret) {
+    const c = P.c, w = P.w, fee = c.fee, A = MN.ASSETS;
+    let workWd = 0, cash = c.cash0, inv = [0, 0, 0], pen = [0, 0, 0], dead = null, workDebt = false, minCash = Infinity, interest = 0, taxW = 0;
+    const st = [snap(0, P.yrs[0], true)], flow = [];
+    function sum(b) { return b[0] + b[1] + b[2]; }
+    function take(b, x) { const s = sum(b); if (s <= 0) return 0; const k = Math.min(1, x / s); for (let i = 0; i < 3; i++) b[i] -= b[i] * k; return s * k; }
+    function snap(t, y, first) {
+      const dep = first ? c.rentDep : y.dep, hv = first ? 0 : y.houseVal, mort = first ? 0 : y.mort, stu = first ? (c.student ? K.student : 0) : y.stu, jl = first ? 0 : y.jl;
+      const cpos = Math.max(0, cash), cneg = Math.max(0, -cash), iv = sum(inv), pv = sum(pen);
+      return { age: c.start + t, cash: cpos, inv: iv, pen: pv, home: dep + hv, debt: mort + stu + jl + cneg, short: cneg, nw: cpos + iv + pv + dep + hv - mort - stu - jl - cneg };
+    }
+    for (let t = 0; t < P.N; t++) {
+      const y = P.yrs[t], age = y.age;
+      let wd = 0, wdTax = 0, sweep = 0, spent = 0;
+      if (y.cap < 0) { const a = take(inv, -y.cap); cash += a; wd += a; }
+      cash += y.cash;
+      for (let i = 0; i < 3; i++) { inv[i] += y.inv * w[i]; pen[i] += (y.pen + y.dc) * w[i]; }
+      const tgt = c.emerg * (y.living + y.house + y.loanPay) / 12, floor = y.retired ? tgt : 0;
+      if (cash > tgt) { if (c.left !== "cash") { sweep = cash - tgt; cash = tgt; if (c.left === "invest") for (let i = 0; i < 3; i++) inv[i] += sweep * w[i]; else spent = sweep; } }
+      else if (cash < floor) {
+        const a = take(inv, floor - cash); cash += a; wd += a;
+        if (cash < floor && age >= K.penAge) { const g = take(pen, (floor - cash) / (1 - K.penTax)); cash += g * (1 - K.penTax); wd += g; wdTax += g * K.penTax; }
+        if (cash < -1) { if (y.retired) { if (dead == null) dead = age; } else workDebt = true; }
+      }
+      if (!y.retired) workWd += wd - (y.cap < 0 ? Math.min(wd, -y.cap) : 0);
+      taxW += wdTax;
+      if (!y.retired && t >= P.buyT) minCash = Math.min(minCash, cash / Math.max(1, (y.living + y.house + y.loanPay) / 12));
+      const debtInt = cash < 0 ? -cash * K.debtR : 0; interest += debtInt;
+      cash *= cash >= 0 ? 1 + A.cash.mu : 1 + K.debtR;
+      const r = ret(t);
+      for (let i = 0; i < 3; i++) { inv[i] *= 1 + r[i] - fee; pen[i] *= 1 + r[i] - fee; }
+      if (c.rebal) [inv, pen].forEach((b) => { const s = sum(b); for (let i = 0; i < 3; i++) b[i] = s * w[i]; });
+      flow.push({ wd, wdTax, debtInt, sweep: spent ? 0 : sweep, spent });
+      st.push(snap(t + 1, y));
+    }
+    return { st, flow, dead, workDebt, workWd, minCash, interest, taxW };
+  }
+  const detRet = () => { const A = MN.ASSETS, r = [A.stock.mu, A.bond.mu, A.cash.mu]; return () => r; };
+  function mcRet(seed, N) {
+    const g = MN.gauss(seed), A = MN.ASSETS, rho = MN.corr("stock", "bond"), q = Math.sqrt(1 - rho * rho);
+    const ls = Math.log(1 + A.stock.mu) - 0.5 * A.stock.sigma * A.stock.sigma, lb = Math.log(1 + A.bond.mu) - 0.5 * A.bond.sigma * A.bond.sigma;
+    const rs = [];
+    for (let t = 0; t < N; t++) { const z1 = g(), z2 = rho * z1 + q * g(); rs.push([Math.exp(ls + A.stock.sigma * z1) - 1, Math.exp(lb + A.bond.sigma * z2) - 1, A.cash.mu]); }
+    return (t) => rs[t];
+  }
+  function simulate(c) {
+    const P = plan(c), R = run(P, detRet());
+    const taxY = P.yrs.map((y, i) => y.tax + R.flow[i].wdTax), intY = P.yrs.map((y, i) => y.loanInt + R.flow[i].debtInt);
+    return { P, R, taxY, intY, at: (age) => R.st[clampN(age - c.start, 0, R.st.length - 1)] };
+  }
+  function monteCarlo(c, n) {
+    const P = plan(c), paths = [], deadAt = [];
+    let ok = 0;
+    for (let p = 0; p < n; p++) {
+      const R = run(P, mcRet(1000 + p * 7919, P.N));
+      const a = new Float64Array(R.st.length);
+      R.st.forEach((s, i) => (a[i] = s.nw));
+      paths.push(a); deadAt.push(R.dead);
+      if (R.dead == null) ok++;
+    }
+    return { success: ok / n, bands: MN.bands(paths, [10, 50, 90]), deadAt };
+  }
+  /*core*/
+
+  const $ = (id) => document.getElementById(id);
+  const cfg = Object.assign({}, DEF);
+  const PRESETS = {
+    hg: {},
+    buy: { house: "buy", jAge: 30, bAge: 35, price: 3e8, ltv: 0.6, save: 2e5, pc: 3e6 },
+    fire: { salary: 5e7, save: 1.5e6, living: 8e5, life: 0, retire: 45, stock: 80, bond: 20, retLiving: 2e6, house: "rent" },
+    zero: { save: 0, pc: 0, life: 0.02, left: "spend" },
+  };
+  const FMT = {
+    age: (v) => v + "세", won: (v) => MB.won(v), pct: (v) => MB.pct(v, 2), pctS: (v) => (v > 0 ? "+" : "") + MB.pct(v, 2),
+    pct0: (v) => Math.round(v * 100) + "%", yr: (v) => (v ? v + "년" : "없음"), yr2: (v) => v + "년", mo: (v) => v + "개월", p100: (v) => v + "%",
+  };
+  const RANGES = { start: "age", salary: "won", raise: "pct", retire: "age", gap: "yr", gapAge: "age", living: "won", life: "pctS", retLiving: "won",
+    rent: "won", jAge: "age", jAmt: "won", jLoan: "won", jRate: "pct", bAge: "age", price: "won", ltv: "pct0", mRate: "pct", term: "yr2", hg: "pct",
+    cash0: "won", emerg: "mo", save: "won", stock: "p100", bond: "p100", fee: "pct", npsAge: "age", pc: "won",
+    aMarry: "age", aChild: "age", childCost: "won", aCar: "age", aJob: "age", inf: "pct", end: "age" };
+  const CHECKS = ["student", "rebal", "dc", "evMarry", "evChild", "evCar", "evJob"];
+  let batch = false, S = null, MC = null, mcKey = "", cursor = 60, L = null, dragging = null;
+  const keyOf = (c) => JSON.stringify(c);
+  const ctl = {};
+  Object.keys(RANGES).forEach((k) => {
+    ctl[k] = MB.range("l-" + k, FMT[RANGES[k]], (v) => {
+      if (batch) return;
+      cfg[k] = v;
+      if (k === "stock" && cfg.stock + cfg.bond > 100) { cfg.bond = 100 - cfg.stock; batch = true; ctl.bond.set(cfg.bond); batch = false; }
+      if (k === "bond" && cfg.stock + cfg.bond > 100) { cfg.stock = 100 - cfg.bond; batch = true; ctl.stock.set(cfg.stock); batch = false; }
+      changed();
+    });
+  });
+  CHECKS.forEach((k) => $("l-" + k).addEventListener("change", (e) => { cfg[k] = e.target.checked ? 1 : 0; changed(); }));
+  const segHouse = MB.seg("l-house", (v) => { cfg.house = v; changed(); });
+  const segLeft = MB.seg("l-left", (v) => { cfg.left = v; changed(); });
+  const mode = MB.seg("lab-mode", () => { if (mode() === "mc" && mcKey !== keyOf(cfg)) heavy(); drawAll(); });
+  const unit = MB.seg("lab-unit", () => drawAll());
+
+  function setAll(o) {
+    Object.keys(cfg).forEach((k) => delete cfg[k]);
+    Object.assign(cfg, DEF, o);
+    batch = true;
+    Object.keys(RANGES).forEach((k) => ctl[k].set(cfg[k]));
+    CHECKS.forEach((k) => ($("l-" + k).checked = !!cfg[k]));
+    segHouse.set(cfg.house, false); segLeft.set(cfg.left, false);
+    batch = false;
+  }
+  function readHash() {
+    const h = location.hash;
+    if (!h.startsWith("#cfg:")) return null;
+    const o = {};
+    try {
+      new URLSearchParams(h.slice(5)).forEach((v, k) => {
+        if (!(k in DEF)) return;
+        if (typeof DEF[k] === "string") { if (["rent", "jeonse", "buy", "cash", "invest", "spend"].includes(v)) o[k] = v; }
+        else if (isFinite(+v)) o[k] = +v;
+      });
+    } catch (e) { return null; }
+    return o;
+  }
+  const writeHash = MB.debounce(() => {
+    const p = new URLSearchParams();
+    Object.keys(DEF).forEach((k) => { if (cfg[k] !== DEF[k]) p.set(k, cfg[k]); });
+    try { history.replaceState(null, "", location.pathname + location.search + "#cfg:" + p.toString()); } catch (e) {}
+  }, 300);
+
+  const won = (v) => MB.won(v);
+  const isReal = () => unit() === "real";
+  const fAt = (i) => Math.pow(1 + cfg.inf, i);
+  const conv = (v, i) => (isReal() ? v / fAt(i) : v);
+
+  function markers() {
+    const c = cfg, m = [{ k: "retire", lab: "은퇴", age: c.retire, col: "accent" }, { k: "npsAge", lab: "연금", age: c.npsAge, col: "accent2" }];
+    if (c.house === "jeonse" || (c.house === "buy" && c.jAge < c.bAge)) m.push({ k: "jAge", lab: "전세", age: c.jAge, col: "dim" });
+    if (c.house === "buy") m.push({ k: "bAge", lab: "매수", age: c.bAge, col: "dim" });
+    if (c.gap > 0) m.push({ k: "gapAge", lab: "공백", age: c.gapAge, col: "warn" });
+    if (c.evMarry) m.push({ k: "aMarry", lab: "결혼", age: c.aMarry, col: "warn" });
+    if (c.evChild) m.push({ k: "aChild", lab: "자녀", age: c.aChild, col: "warn" });
+    if (c.evCar) m.push({ k: "aCar", lab: "차", age: c.aCar, col: "warn" });
+    if (c.evJob) m.push({ k: "aJob", lab: "실직", age: c.aJob, col: "bad" });
+    return m.filter((x) => x.age >= c.start && x.age <= c.end);
+  }
+
+  function drawMain(ctx, w, h) {
+    if (!S) return;
+    const P = MB.palette(), c = cfg, st = S.R.st, n = st.length;
+    const colOf = { accent: P.accent, accent2: P.accent2, dim: P.dim, warn: P.warn, bad: P.bad };
+    const bx = 56, bw = w - bx - 14, span = Math.max(1, c.end - c.start);
+    const X = (a) => bx + ((a - c.start) / span) * bw;
+    ctx.font = MB.font(11, false, 600);
+    const mk = markers().map((m) => Object.assign(m, { x: X(m.age), tw: ctx.measureText(m.lab).width + 14 })).sort((a, b) => a.x - b.x);
+    const laneEnd = [];
+    mk.forEach((m) => {
+      m.left = MB.clamp(m.x - m.tw / 2, 2, w - m.tw - 2);
+      let l = 0; while (laneEnd[l] != null && laneEnd[l] > m.left - 4) l++;
+      m.lane = l; laneEnd[l] = m.left + m.tw;
+    });
+    const laneH = 20, lanes = Math.max(1, laneEnd.length);
+    const box = { x: bx, y: 14, w: bw, h: h - 14 - 26 - lanes * laneH - 8 };
+    const mc = mode() === "mc" && MC && mcKey === keyOf(cfg) ? MC : null;
+    let top = 1, bot = 0;
+    const pos = st.map((s, i) => conv(s.cash + s.inv + s.pen + s.home, i));
+    st.forEach((s, i) => { top = Math.max(top, pos[i]); bot = Math.min(bot, -conv(s.debt, i)); });
+    let b10, b50, b90;
+    if (mc) {
+      b10 = MC.bands.p10.map((v, i) => conv(v, i)); b50 = MC.bands.p50.map((v, i) => conv(v, i)); b90 = MC.bands.p90.map((v, i) => conv(v, i));
+      const m50 = Math.max(...b50), m90 = Math.max(...b90);
+      top = Math.max(top, m50 * 1.1, Math.min(m90, Math.max(top, m50) * 1.8));
+      bot = Math.min(bot, Math.min(...b10));
+    }
+    top *= 1.08; bot = Math.max(bot * 1.08, -top * 1.4);
+    const xt = []; for (let a = Math.ceil(c.start / 10) * 10; a <= c.end; a += 10) xt.push(a);
+    const ch = MB.chart(ctx, box, { x: [c.start, c.start + span], y: [bot, top], yFmt: MB.wonAxis, xTicks: xt, xFmt: (v) => String(v) });
+    ctx.save(); ctx.beginPath(); ctx.rect(box.x, box.y, box.w, box.h); ctx.clip();
+    ctx.globalAlpha = 0.5; ctx.fillStyle = MB.color("accent-soft"); ctx.fillRect(X(c.retire), box.y, box.x + box.w - X(c.retire), box.h); ctx.globalAlpha = 1;
+    const XA = (i) => X(c.start + i);
+    const poly = (lo, hi, col, alpha) => {
+      ctx.beginPath();
+      for (let i = 0; i < n; i++) i ? ctx.lineTo(XA(i), ch.Y(hi[i])) : ctx.moveTo(XA(i), ch.Y(hi[i]));
+      for (let i = n - 1; i >= 0; i--) ctx.lineTo(XA(i), ch.Y(lo[i]));
+      ctx.closePath(); ctx.globalAlpha = alpha; ctx.fillStyle = col; ctx.fill(); ctx.globalAlpha = 1;
+    };
+    const nw = st.map((s, i) => conv(s.nw, i));
+    if (!mc) {
+      let base = new Array(n).fill(0);
+      [["cash", P.blue], ["inv", P.accent], ["pen", P.accent2], ["home", P.faint]].forEach(([k, col]) => {
+        const t2 = base.map((b, i) => b + conv(st[i][k], i)); poly(base, t2, col, 0.78); base = t2;
+      });
+      poly(new Array(n).fill(0), st.map((s, i) => -conv(s.debt, i)), P.bad, 0.7);
+    } else {
+      poly(b10, b90, P.accent, 0.2);
+      ctx.strokeStyle = P.accent; ctx.lineWidth = 2.5; ctx.beginPath();
+      b50.forEach((v, i) => (i ? ctx.lineTo(XA(i), ch.Y(v)) : ctx.moveTo(XA(i), ch.Y(v)))); ctx.stroke();
+      ctx.setLineDash([5, 4]);
+    }
+    ctx.strokeStyle = P.text; ctx.lineWidth = mc ? 1.5 : 2; ctx.beginPath();
+    nw.forEach((v, i) => (i ? ctx.lineTo(XA(i), ch.Y(v)) : ctx.moveTo(XA(i), ch.Y(v)))); ctx.stroke(); ctx.setLineDash([]);
+    if (bot < 0) { ctx.strokeStyle = P.axis; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(box.x, ch.Y(0)); ctx.lineTo(box.x + box.w, ch.Y(0)); ctx.stroke(); }
+    ctx.restore();
+    ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.textAlign = "left"; ctx.textBaseline = "top";
+    if (X(c.retire) < box.x + box.w - 40) ctx.fillText("은퇴 후", X(c.retire) + 5, box.y + 4);
+    ctx.textAlign = "right"; ctx.fillText("나이", box.x + box.w, box.y + box.h + 20);
+    if (S.R.dead != null) {
+      const x = X(S.R.dead); ctx.strokeStyle = P.bad; ctx.setLineDash([4, 3]); ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(x, box.y); ctx.lineTo(x, box.y + box.h); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = P.bad; ctx.font = MB.font(12, false, 700); ctx.textAlign = x > box.x + box.w - 80 ? "right" : "left"; ctx.textBaseline = "top";
+      ctx.fillText("고갈 " + S.R.dead + "세", x + (ctx.textAlign === "right" ? -5 : 5), box.y + 20);
+    }
+    const cx = X(cursor), ci = cursor - c.start;
+    ctx.strokeStyle = P.text; ctx.globalAlpha = 0.55; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(cx, box.y); ctx.lineTo(cx, box.y + box.h); ctx.stroke(); ctx.globalAlpha = 1;
+    if (st[ci]) { ctx.fillStyle = P.text; ctx.beginPath(); ctx.arc(cx, ch.Y(nw[ci]), 4, 0, 7); ctx.fill(); }
+    ctx.fillStyle = MB.color("canvas-bg"); ctx.strokeStyle = P.accent; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(cx, box.y, 6, 0, 7); ctx.fill(); ctx.stroke();
+    const y0 = box.y + box.h + 26;
+    mk.forEach((m) => {
+      const yy = y0 + m.lane * laneH, col = colOf[m.col];
+      ctx.strokeStyle = col; ctx.globalAlpha = 0.6; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(m.x, box.y + box.h); ctx.lineTo(m.x, yy); ctx.stroke(); ctx.globalAlpha = 1;
+      ctx.fillStyle = col; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(m.left, yy, m.tw, 17, 8.5) : ctx.rect(m.left, yy, m.tw, 17); ctx.fill();
+      ctx.fillStyle = MB.color("on-accent"); ctx.font = MB.font(11, false, 600); ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillText(m.lab, m.left + m.tw / 2, yy + 9);
+    });
+    L = { box, mk, y0, laneH, inv: (x) => c.start + ((x - box.x) / box.w) * span };
+  }
+
+  function barsData() {
+    const ys = S.P.yrs, fl = S.R.flow, st = S.R.st, d = { inc: [], wd: [], cash: [], short: [], spend: [], repay: [], save: [], home: [] };
+    ys.forEach((y, i) => {
+      const f = isReal() ? 1 / y.F : 1, r = fl[i];
+      const inc = (y.net + y.benefit + y.credit + y.nps) * f, wd = r.wd * f, spend = -(y.living + y.house + y.event + r.spent) * f;
+      const repay = -(y.loanPay + r.debtInt) * f, save = -(y.inv + y.pen + r.sweep) * f, home = y.cap * f;
+      d.inc.push(inc); d.wd.push(wd); d.spend.push(spend); d.repay.push(repay); d.save.push(save); d.home.push(home);
+      const gap = Math.max(0, -(inc + wd + spend + repay + save + home)), debt = Math.min(gap, Math.max(0, (st[i + 1].short - st[i].short) * f));
+      d.short.push(debt); d.cash.push(gap - debt);
+    });
+    return d;
+  }
+  function drawBars(ctx, w, h) {
+    if (!S) return;
+    const P = MB.palette(), d = barsData(), n = d.inc.length;
+    const mags = d.inc.map((_, i) => { let p = 0, m = 0; ["inc", "wd", "cash", "short", "spend", "repay", "save", "home"].forEach((k) => { const v = d[k][i]; if (v > 0) p += v; else m -= v; }); return Math.max(p, m); });
+    const srt = mags.slice().sort((a, b) => a - b), lim = Math.max(1, srt[Math.floor(srt.length * 0.9)] * 1.25);
+    const box = { x: 56, y: 8, w: w - 56 - 14, h: h - 8 - 24 };
+    ctx.save(); ctx.beginPath(); ctx.rect(0, box.y - 1, w, box.h + 2); ctx.clip();
+    MB.bars(ctx, box, {
+      labels: d.inc.map((_, i) => String(cfg.start + i)), y: [-lim, lim], yFmt: MB.wonAxis, gap: 0.15,
+      stacks: [
+        { label: "소득", color: P.ok, data: d.inc }, { label: "인출", color: P.accent2, data: d.wd }, { label: "현금에서", color: P.dim, data: d.cash }, { label: "부족", color: P.red, data: d.short },
+        { label: "집", color: P.faint, data: d.home }, { label: "지출", color: P.warn, data: d.spend }, { label: "상환", color: P.bad, data: d.repay }, { label: "저축", color: P.blue, data: d.save },
+      ],
+    });
+    ctx.restore();
+    const slot = box.w / n, every = Math.ceil(n / (w < 480 ? 7 : 12));
+    ctx.fillStyle = P.dim; ctx.font = MB.font(11); ctx.textAlign = "center"; ctx.textBaseline = "top";
+    for (let i = 0; i < n; i += every) ctx.fillText(String(cfg.start + i), box.x + slot * (i + 0.5), box.y + box.h + 6);
+    ctx.fillStyle = P.text;
+    mags.forEach((m, i) => {
+      if (m <= lim) return;
+      const x = box.x + slot * (i + 0.5); let p = 0, q = 0;
+      ["inc", "wd", "cash", "short", "spend", "repay", "save", "home"].forEach((k) => { const v = d[k][i]; if (v > 0) p += v; else q -= v; });
+      ctx.beginPath();
+      if (p > lim) { ctx.moveTo(x - 4, box.y + 6); ctx.lineTo(x + 4, box.y + 6); ctx.lineTo(x, box.y); }
+      if (q > lim) { const yb = box.y + box.h; ctx.moveTo(x - 4, yb - 6); ctx.lineTo(x + 4, yb - 6); ctx.lineTo(x, yb); }
+      ctx.fill();
+    });
+    const ci = MB.clamp(cursor - cfg.start, 0, n - 1), cx = box.x + slot * (ci + 0.5);
+    ctx.strokeStyle = P.text; ctx.lineWidth = 1; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.moveTo(cx, box.y); ctx.lineTo(cx, box.y + box.h); ctx.stroke(); ctx.setLineDash([]);
+  }
+  function drawDonut(ctx, w, h) {
+    if (!S) return;
+    const P = MB.palette(), i = MB.clamp(cursor - cfg.start, 0, S.R.st.length - 1), s = S.R.st[i];
+    const items = [
+      { label: "현금", value: conv(s.cash, i), color: P.blue }, { label: "투자", value: conv(s.inv, i), color: P.accent },
+      { label: "연금", value: conv(s.pen, i), color: P.accent2 }, { label: "집·보증금", value: conv(s.home, i), color: P.faint },
+      { label: "부채", value: conv(s.debt, i), color: P.bad },
+    ];
+    MB.donut(ctx, w / 2, h / 2, Math.min(w, h) / 2 - 8, items, { inner: 0.6, center: { big: MB.wonAxis(conv(s.nw, i)), small: "순자산" } });
+  }
+  function yearPanel() {
+    const P = MB.palette(), i = MB.clamp(cursor - cfg.start, 0, S.R.st.length - 1), s = S.R.st[i], y = S.P.yrs[Math.min(i, S.P.yrs.length - 1)];
+    const row = (col, k, v) => `<div class="row"><span><i style="background:${col}"></i>${k}</span><span>${won(conv(v, i))}</span></div>`;
+    const f = isReal() ? 1 / y.F : 1;
+    const fl = S.R.flow[Math.min(i, S.R.flow.length - 1)], inflow = (y.net + y.benefit + y.credit + y.nps) * f, out = (y.living + y.house + y.event + y.loanPay) * f;
+    $("lab-bs").innerHTML = `<div class="hd">${cursor}세 재무상태표 <span class="pill">${isReal() ? "오늘 돈" : "명목"}</span></div>` +
+      row(P.blue, "현금(비상금)", s.cash) + row(P.accent, "투자 계좌", s.inv) + row(P.accent2, "연금 계좌", s.pen) + row(P.faint, "집·보증금", s.home) + row(P.bad, "부채", -s.debt) +
+      `<div class="row tot"><span>순자산</span><span>${won(conv(s.nw, i))}</span></div>` +
+      `<div class="note">${cursor}세 한 해: 소득 ${won(inflow)}, 자산 인출 ${won(fl.wd * f)}, 생활·주거·상환으로 나간 돈 ${won(out)}${y.retired ? " · 은퇴" : y.working ? "" : " · 소득 공백"}</div>`;
+  }
+
+  function summaries() {
+    const c = cfg, hs = { rent: "월세 " + MB.won(c.rent), jeonse: c.jAge + "세 전세 " + MB.won(c.jAmt), buy: c.bAge + "세 매수 " + MB.won(c.price) };
+    $("sum-inc").textContent = MB.won(c.salary) + " · " + c.retire + "세 은퇴";
+    $("sum-sp").textContent = "월 " + MB.won(c.living) + " → 은퇴 후 " + MB.won(c.retLiving);
+    $("sum-house").textContent = hs[c.house];
+    $("sum-inv").textContent = "월 " + MB.won(c.save) + " · " + c.stock + "/" + c.bond + " · 보수 " + MB.pct(c.fee, 2);
+    $("sum-pen").textContent = c.npsAge + "세 · 연 " + MB.won(c.pc);
+    const ev = [c.evMarry && "결혼", c.evChild && "자녀", c.evCar && "차", c.evJob && "실직"].filter(Boolean);
+    $("sum-ev").textContent = ev.length ? ev.join("·") : "없음";
+    $("sum-inf").textContent = MB.pct(c.inf, 2) + " · " + c.end + "세까지";
+    document.querySelectorAll('[data-g="j"], #g-j-h').forEach((e) => (e.hidden = c.house === "rent"));
+    document.querySelectorAll('[data-g="b"]').forEach((e) => (e.hidden = c.house !== "buy"));
+    const p = MN.payroll(c.salary), owed = p.annual.finalTax + p.annual.local, cr = MN.pensionCredit(c.pc, p.annual.taxable);
+    $("pen-note").innerHTML = `첫해 세액공제: 계산상 ${MB.won(cr)}, 낼 세금 ${MB.won(owed)} → 실제 <b>${MB.won(Math.min(cr, owed))}</b>. 예상 국민연금(${S.P.npsYears}년 가입): 월 약 ${MB.won(S.P.npsM)}(오늘 돈).`;
+  }
+  function readouts() {
+    const c = cfg, st = S.R.st, ri = MB.clamp(c.retire - c.start, 0, st.length - 1), ei = st.length - 1;
+    $("r-ret-k").textContent = "은퇴(" + Math.max(c.start, c.retire) + "세) 순자산";
+    $("r-end-k").textContent = c.end + "세 순자산";
+    $("r-ret").textContent = won(conv(st[ri].nw, ri));
+    $("r-end").innerHTML = `<span class="${st[ei].nw < 0 ? "bad-t" : ""}">${won(conv(st[ei].nw, ei))}</span>`;
+    $("r-dead").innerHTML = S.R.dead != null ? `<span class="bad-t">${S.R.dead}세</span>` : `<span class="ok-t">없음</span> <small>${c.end}세까지</small>`;
+    const sum = (a) => a.reduce((s, v, i) => s + conv(v, i), 0);
+    $("r-tax").textContent = won(sum(S.taxY));
+    $("r-int").textContent = won(sum(S.intY));
+    succText();
+    const fl = [];
+    const fs = st.findIndex((s, i) => s.short > 0 && c.start + i <= c.retire);
+    if (S.R.workDebt && fs >= 0) fl.push(`<span class="bad-t">${c.start + fs - 1}세 무렵 현금이 바닥나 마이너스 통장(연 6%)을 쓴다</span>`);
+    if (S.R.dead != null) fl.push(`<span class="bad-t">${S.R.dead}세에 꺼내 쓸 자산이 바닥난다</span>`);
+    if (c.house === "buy" && S.P.dsr > 0.4) fl.push(`<span class="warn-t">매수 첫해 주담대 DSR ${Math.round(S.P.dsr * 100)}%: 은행 한도 40%를 넘는다</span>`);
+    if (c.retire <= c.start) fl.push(`<span class="warn-t">은퇴 나이가 시작 나이보다 이르다</span>`);
+    if (!fl.length) fl.push(`<span class="ok-t">일하는 동안 빚 없이 굴러가고, ${c.end}세까지 바닥나지 않는다(결정론)</span>`);
+    $("lab-flags").innerHTML = fl.join("");
+  }
+  function succText() {
+    const el = $("r-succ");
+    if (MC && mcKey === keyOf(cfg)) el.innerHTML = `<span class="${MC.success >= 0.8 ? "ok-t" : MC.success < 0.5 ? "bad-t" : "warn-t"}">${(MC.success * 100).toFixed(1)}%</span> <small>${cfg.end}세까지</small>`;
+    else el.innerHTML = `<small>계산 중…</small>`;
+  }
+  function legends() {
+    const it = (c, t) => `<span><i style="background:${c}"></i>${t}</span>`;
+    $("lab-legend").innerHTML = mode() === "mc" ? it("var(--accent)", "중앙값(p50)") + it("color-mix(in srgb, var(--accent) 35%, transparent)", "하위 10%~상위 10%") + it("var(--text)", "결정론 순자산(점선)")
+      : it("var(--blue)", "현금") + it("var(--accent)", "투자") + it("var(--accent-2)", "연금 계좌") + it("var(--text-faint)", "집·보증금") + it("var(--bad)", "부채") + it("var(--text)", "순자산");
+    $("lab-bars-legend").innerHTML = it("var(--ok)", "소득") + it("var(--accent-2)", "인출") + it("var(--text-dim)", "현금에서") + it("var(--red)", "부족(빚)") + it("var(--warn)", "지출") + it("var(--bad)", "상환·이자") + it("var(--blue)", "저축") + it("var(--text-faint)", "집·보증금");
+  }
+
+  function compute() { S = simulate(cfg); cursor = MB.clamp(cursor, cfg.start, cfg.end); }
+  compute();
+  const cvMain = MB.canvas("#lab-cv", drawMain, { get height() { const w = $("lab-cv").parentElement.clientWidth; return w < 560 ? Math.round(w * 0.95) : Math.round(Math.min(400, w * 0.62)); } });
+  const cvBars = MB.canvas("#lab-bars", drawBars, { get height() { return $("lab-bars").parentElement.clientWidth < 560 ? 150 : 170; } });
+  const cvDonut = MB.canvas("#lab-donut", drawDonut, { height: 200 });
+  function drawLight() { cvMain.redraw(); cvBars.redraw(); cvDonut.redraw(); yearPanel(); }
+  function drawAll() { legends(); readouts(); drawLight(); }
+  MB.drag(cvMain.canvas, {
+    start(x, y) {
+      dragging = null; if (!L) return;
+      if (y > L.box.y + L.box.h + 18) {
+        const m = L.mk.find((m) => x >= m.left - 4 && x <= m.left + m.tw + 4 && y >= L.y0 + m.lane * L.laneH - 3 && y <= L.y0 + m.lane * L.laneH + 20);
+        if (m) dragging = m.k;
+      } else dragging = "cursor";
+    },
+    move(x) {
+      if (!dragging || !L) return;
+      const a = Math.round(L.inv(x));
+      if (dragging === "cursor") { const v = MB.clamp(a, cfg.start, cfg.end); if (v !== cursor) { cursor = v; drawLight(); } }
+      else { const el = $("l-" + dragging), v = MB.clamp(a, +el.min, +el.max); if (v !== cfg[dragging]) ctl[dragging].set(v); }
+    },
+    end() { dragging = null; },
+  });
+
+  /* missions */
+  const CHECK = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 8.6l3 3 6.6-7"/></svg>';
+  let early = null, earlyKey = "";
+  function successOf(c, n) { return monteCarlo(c, n).success; }
+  function earliest(c, fee) {
+    const ok = (r) => successOf(Object.assign({}, c, { fee, retire: r }), 150) >= 0.8;
+    let lo = 40, hi = 75;
+    if (!ok(hi)) return null;
+    while (lo < hi) { const m = (lo + hi) >> 1; if (ok(m)) hi = m; else lo = m + 1; }
+    return lo;
+  }
+  const mcOK = (x) => MC && mcKey === keyOf(cfg) && MC.success >= x;
+  const pctS = () => (MC && mcKey === keyOf(cfg) ? (MC.success * 100).toFixed(1) + "%" : "계산 중");
+  const MISSIONS = [
+    { t: "90세까지 버티는 계획: 성공 확률 80% 넘기기", d: "한결 기본은 결정론으로는 무사하지만 몬테카를로 성공 확률은 80%에 못 미친다. 계획 끝 나이를 90세 이상으로 두고 80%를 넘겨 본다.", load: "hg",
+      ok: () => cfg.end >= 90 && mcOK(0.8), st: () => `지금 성공 확률 ${pctS()} (${cfg.end}세까지)` },
+    { t: "집을 사고도 비상금 6개월 유지하기", d: "'매수' 경로에서, 집을 산 해부터 은퇴할 때까지 현금이 늘 지출 6개월치 이상이고 빚 없이 굴러가게 한다.", load: { house: "buy", bAge: 40, price: 5e8, ltv: 0.5, emerg: 6 },
+      ok: () => cfg.house === "buy" && S.P.buyT < S.P.N && !S.R.workDebt && S.R.minCash >= 6 && S.R.dead == null,
+      st: () => cfg.house !== "buy" ? "주거 경로가 '매수'가 아니다" : `매수 후 가장 적었던 현금: 지출 ${isFinite(S.R.minCash) ? Math.max(0, S.R.minCash).toFixed(1) : "—"}개월치${S.R.workDebt ? " · 빚 발생" : ""}` },
+    { t: "보수 1.5% → 0.1%로 은퇴 당기기", d: "보수 1.5%로는 성공 확률 80%를 넘길 수 없는 이른 나이에, 보수를 0.1% 이하로 낮춰 80% 이상으로 은퇴한다.", load: { fee: 0.015 },
+      ok: () => early && cfg.fee <= 0.001 && early.lo != null && (early.hi == null || cfg.retire < early.hi) && mcOK(0.8),
+      st: () => early ? `가장 이른 은퇴(80% 기준): 보수 1.5%면 ${early.hi == null ? "75세에도 미달" : early.hi + "세"}, 0.1%면 ${early.lo == null ? "75세에도 미달" : early.lo + "세"}` : "계산 중" },
+    { t: "40세 1년 실직 버티기", d: "38~42세에 실직 1년을 넣고, 빚 없이 지나가면서 60세 이하 은퇴와 성공 확률 70% 이상을 지킨다.", load: { evJob: 1, aJob: 40 },
+      ok: () => cfg.evJob && cfg.aJob >= 38 && cfg.aJob <= 42 && !S.R.workDebt && cfg.retire <= 60 && mcOK(0.7),
+      st: () => cfg.evJob ? `실직 ${cfg.aJob}세 · 성공 확률 ${pctS()}${S.R.workDebt ? " · 빚 발생" : ""}` : "실직 이벤트가 꺼져 있다" },
+    { t: "50세 전에 은퇴하기(FIRE)", d: "은퇴 나이 50세 이하로 90세까지 결정론에서 바닥나지 않고 성공 확률 60% 이상을 만든다.", load: "fire",
+      ok: () => cfg.retire <= 50 && cfg.end >= 90 && S.R.dead == null && mcOK(0.6), st: () => `은퇴 ${cfg.retire}세 · 성공 확률 ${pctS()}` },
+    { t: "아이를 키우며 60세에 은퇴하기", d: "자녀 이벤트를 켠 채 60세 이하 은퇴, 빚 없는 현역 시절, 성공 확률 70% 이상을 만든다.", load: { evChild: 1, aChild: 33 },
+      ok: () => cfg.evChild && cfg.retire <= 60 && !S.R.workDebt && mcOK(0.7), st: () => cfg.evChild ? `성공 확률 ${pctS()}${S.R.workDebt ? " · 빚 발생" : ""}` : "자녀 이벤트가 꺼져 있다" },
+    { t: "은퇴 전에 주택대출 다 갚기", d: "'매수' 경로로 은퇴하는 해에 주택담보대출 잔액이 0이고, 빚 없이 90세까지 바닥나지 않게 한다.", load: { house: "buy", bAge: 38, price: 4e8, ltv: 0.5, term: 20 },
+      ok: () => cfg.house === "buy" && S.P.buyT < S.P.N && !S.R.workDebt && S.R.dead == null && mortAt(cfg.retire) < 1,
+      st: () => cfg.house !== "buy" ? "주거 경로가 '매수'가 아니다" : `은퇴 때 대출 잔액 ${won(mortAt(cfg.retire))}(명목)` },
+  ];
+  function mortAt(age) { const t = age - cfg.start - 1; const y = S.P.yrs[MB.clamp(t, 0, S.P.yrs.length - 1)]; return t < 0 ? 0 : y.mort || 0; }
+  $("mission-list").innerHTML = MISSIONS.map((m, i) => `<div class="mission" id="ms-${i}"><div class="m-ic">${CHECK}</div><div><h4>${i + 1}. ${m.t}</h4><p>${m.d}</p><p class="m-st" id="ms-${i}-st"></p></div><button class="btn sm" data-m="${i}">설정 불러오기</button></div>`).join("");
+  document.querySelectorAll("#mission-list button").forEach((b) => b.addEventListener("click", () => {
+    const m = MISSIONS[+b.dataset.m];
+    if (typeof m.load === "string") setAll(PRESETS[m.load]); else setAll(Object.assign({}, cfg, m.load));
+    changed();
+    $("sim-life").scrollIntoView({ behavior: "smooth", block: "start" });
+  }));
+  function missions() {
+    let n = 0;
+    MISSIONS.forEach((m, i) => { const ok = !!m.ok(); if (ok) n++; $("ms-" + i).classList.toggle("done", ok); $("ms-" + i + "-st").textContent = m.st(); });
+    $("m-count").textContent = $("m-count-top").textContent = "미션 " + n + "/" + MISSIONS.length;
+  }
+
+  /* tornado */
+  const TF = [
+    ["연봉 ±10%", "연봉", (c, s) => ({ salary: c.salary * (1 + 0.1 * s) })],
+    ["연봉 인상률 ±1%p", "인상률", (c, s) => ({ raise: Math.max(0, c.raise + 0.01 * s) })],
+    ["생활비 ±10%", "생활비", (c, s) => ({ living: c.living * (1 + 0.1 * s) })],
+    ["씀씀이 증가 ±0.5%p", "씀씀이", (c, s) => ({ life: c.life + 0.005 * s })],
+    ["투자 자동이체 ±20%", "자동이체", (c, s) => ({ save: c.save * (1 + 0.2 * s) })],
+    ["연금 납입 ±300만", "연금 납입", (c, s) => ({ pc: Math.max(0, c.pc + 3e6 * s) })],
+    ["주식 비중 ±20%p", "주식 비중", (c, s) => { const st = MB.clamp(c.stock + 20 * s, 0, 100); return { stock: st, bond: Math.min(c.bond, 100 - st) }; }],
+    ["보수 ±0.5%p", "보수", (c, s) => ({ fee: Math.max(0, c.fee + 0.005 * s) })],
+    ["은퇴 나이 ±2년", "은퇴 나이", (c, s) => ({ retire: c.retire + 2 * s })],
+    ["은퇴 후 생활비 ±10%", "은퇴 생활비", (c, s) => ({ retLiving: c.retLiving * (1 + 0.1 * s) })],
+    ["집값 ±20%", "집값", (c, s) => ({ price: c.price * (1 + 0.2 * s) }), "buy"],
+    ["대출 금리 ±1%p", "대출 금리", (c, s) => (c.house === "buy" ? { mRate: Math.max(0.005, c.mRate + 0.01 * s) } : { jRate: Math.max(0.005, c.jRate + 0.01 * s) }), "loan"],
+  ];
+  let TOR = { base: 0, rows: [] };
+  const torMetric = MB.seg("tor-metric", () => { tornado(); cvTor.resize(); });
+  function metric(c) {
+    const R = simulate(c), st = R.R.st;
+    if (torMetric() === "end") { const i = st.length - 1; return st[i].nw / Math.pow(1 + c.inf, i); }
+    const i = MB.clamp(c.retire - c.start, 0, st.length - 1); return st[i].nw / Math.pow(1 + c.inf, i);
+  }
+  function tornado() {
+    const c = cfg, base = metric(c);
+    const rows = TF.filter((f) => !f[3] || (f[3] === "buy" ? c.house === "buy" : c.house !== "rent")).map((f) => {
+      const lo = metric(Object.assign({}, c, f[2](c, -1))) - base, hi = metric(Object.assign({}, c, f[2](c, 1))) - base;
+      return { label: f[0], short: f[1], lo, hi, span: Math.abs(hi - lo) };
+    }).sort((a, b) => b.span - a.span);
+    TOR = { base, rows };
+    $("tor-base").textContent = MB.won(base);
+    $("tor-top").textContent = rows[0] ? rows[0].label : "—";
+    $("tor-2nd").textContent = rows[1] ? rows[1].label : "—";
+  }
+  function drawTor(ctx, w, h) {
+    const P = MB.palette(), rows = TOR.rows, narrow = w < 520, lx = narrow ? 50 : 156, rw = narrow ? 50 : 64, RH = narrow ? 40 : 30;
+    const box = { x: lx, y: 30, w: w - lx - rw, h: rows.length * RH };
+    const maxA = Math.max(1, ...rows.map((r) => Math.max(Math.abs(r.lo), Math.abs(r.hi))));
+    const cx = box.x + box.w / 2, Xv = (v) => cx + (v / maxA) * (box.w / 2 - 4);
+    ctx.fillStyle = P.dim; ctx.font = MB.font(12); ctx.textAlign = "center"; ctx.textBaseline = "top";
+    ctx.fillText("기준 " + MB.wonAxis(TOR.base) + " (오늘 돈)", cx, 8);
+    ctx.strokeStyle = P.axis; ctx.beginPath(); ctx.moveTo(cx, box.y - 4); ctx.lineTo(cx, box.y + box.h); ctx.stroke();
+    const sgn = (v) => (v >= 0 ? "+" : "") + MB.wonAxis(v);
+    rows.forEach((r, i) => {
+      const y = box.y + i * RH + (narrow ? 15 : 5);
+      ctx.fillStyle = P.text; ctx.font = MB.font(narrow ? 12 : 13); ctx.textBaseline = "middle";
+      if (narrow) { ctx.textAlign = "left"; ctx.fillText(r.label, 8, y - 7); }
+      else { ctx.textAlign = "right"; ctx.fillText(r.label, lx - 8, y + 10); }
+      [[r.hi, P.accent], [r.lo, P.accent2]].forEach(([v, col]) => {
+        ctx.fillStyle = col; const x0 = Math.min(cx, Xv(v)), ww = Math.max(1, Math.abs(Xv(v) - cx)); ctx.fillRect(x0, y, ww, narrow ? 16 : 20);
+      });
+      ctx.font = MB.font(10.5, true); ctx.fillStyle = P.dim; ctx.textBaseline = "middle";
+      const right = Math.max(r.hi, r.lo), left = Math.min(r.hi, r.lo);
+      const ym = y + (narrow ? 8 : 10);
+      if (Math.abs(right) > 0.5) { ctx.textAlign = "left"; ctx.fillText(sgn(right), Math.max(cx, Xv(right)) + 4, ym); }
+      if (left < -0.5) { ctx.textAlign = "right"; ctx.fillText(sgn(left), Math.min(cx, Xv(left)) - 4, ym); }
+    });
+  }
+  tornado();
+  const cvTor = MB.canvas("#tor-cv", drawTor, { get height() { return 44 + TOR.rows.length * ($("tor-cv").parentElement.clientWidth < 520 ? 40 : 30); } });
+
+  const heavy = MB.debounce(function () {
+    const k = keyOf(cfg);
+    if (mcKey !== k) { MC = monteCarlo(cfg, 300); mcKey = k; }
+    succText(); if (mode() === "mc") cvMain.redraw();
+    tornado(); cvTor.resize();
+    const ek = keyOf(Object.assign({}, cfg, { fee: 0, retire: 0 }));
+    if (ek !== earlyKey) { early = { hi: earliest(cfg, 0.015), lo: earliest(cfg, 0.001) }; earlyKey = ek; }
+    missions();
+  }, 350);
+  function changed() {
+    if (batch) return;
+    compute(); summaries(); drawAll(); missions(); heavy(); writeHash();
+  }
+  document.querySelectorAll("#lab-presets button").forEach((b) => b.addEventListener("click", () => { setAll(PRESETS[b.dataset.p]); changed(); }));
+  $("lab-link").addEventListener("click", () => {
+    const b = $("lab-link"), done = (t) => { b.textContent = t; setTimeout(() => (b.textContent = "링크 복사"), 1600); };
+    try {
+      writeHash();
+      setTimeout(() => {
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(location.href).then(() => done("복사했다"), () => done("주소창을 복사"));
+        else done("주소창을 복사");
+      }, 350);
+    } catch (e) { done("주소창을 복사"); }
+  });
+
+  const fromHash = readHash();
+  if (fromHash) setAll(Object.assign({}, DEF, fromHash));
+  compute(); summaries(); drawAll(); missions(); heavy();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1299 @@
+<!doctype html>
+<!-- Copyright (c) 2026 geniuskey and MoneyBook contributors.
+     Executable code: MIT (see ../LICENSE-MIT).
+     Text, illustrations, questions and explanations: CC-BY-4.0 (see ../LICENSE.md). -->
+<html lang="ko">
+<head>
+<!--head:start {"desc": "주식은 회사 이익의 지분이다. 가상의 빵집 하나를 따라가며 매출·이익·주당순이익·시가총액, PER·PBR·배당수익률, 배당할인모형으로 본 주가, 호가창과 체결, 지수, 한 종목에 몰빵할 때의 위험과 생존 편향을 시뮬레이터로 만져 본다."}-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>주식 · MoneyBook</title>
+<meta name="description" content="주식은 회사 이익의 지분이다. 가상의 빵집 하나를 따라가며 매출·이익·주당순이익·시가총액, PER·PBR·배당수익률, 배당할인모형으로 본 주가, 호가창과 체결, 지수, 한 종목에 몰빵할 때의 위험과 생존 편향을 시뮬레이터로 만져 본다.">
+<link rel="canonical" href="https://moneybook.euiyun.com/chapters/stock.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0b8a63">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MoneyBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="주식 · MoneyBook">
+<meta property="og:description" content="주식은 회사 이익의 지분이다. 가상의 빵집 하나를 따라가며 매출·이익·주당순이익·시가총액, PER·PBR·배당수익률, 배당할인모형으로 본 주가, 호가창과 체결, 지수, 한 종목에 몰빵할 때의 위험과 생존 편향을 시뮬레이터로 만져 본다.">
+<meta property="og:url" content="https://moneybook.euiyun.com/chapters/stock.html">
+<meta property="og:image" content="https://moneybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://moneybook.euiyun.com/chapters/stock.html#chapter","name":"주식","headline":"주식 · MoneyBook","description":"주식은 회사 이익의 지분이다. 가상의 빵집 하나를 따라가며 매출·이익·주당순이익·시가총액, PER·PBR·배당수익률, 배당할인모형으로 본 주가, 호가창과 체결, 지수, 한 종목에 몰빵할 때의 위험과 생존 편향을 시뮬레이터로 만져 본다.","url":"https://moneybook.euiyun.com/chapters/stock.html","position":13,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"일반 성인","image":"https://moneybook.euiyun.com/og.png","dateModified":"2026-10-03","isPartOf":{"@type":"Book","@id":"https://moneybook.euiyun.com/#book","name":"MoneyBook · 살아가는 데 필요한 돈 교과서","url":"https://moneybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MoneyBook","item":"https://moneybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"13. 주식","item":"https://moneybook.euiyun.com/chapters/stock.html"}]}]}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/common.js"></script>
+<script src="../js/money.js"></script>
+<!--head:end-->
+<style>
+  figure.diagram svg { max-width: 540px; margin: 0 auto; }
+</style>
+</head>
+<body data-chapter="stock">
+<main class="chapter">
+  <header class="chapter-hero">
+    <div class="eyebrow">Chapter 13</div>
+    <h1>주식</h1>
+    <p class="lead">주식 앱을 열면 숫자가 초 단위로 빨갛고 파랗게 바뀐다. 그 숫자만 보면 주식은 오르내리는 가격표처럼 보인다. 하지만 주식 한 주는 어떤 회사의 아주 작은 조각이고, 그 조각에는 회사가 앞으로 벌어들일 이익에 대한 몫이 붙어 있다. 이 장은 가상의 빵집 한 곳을 상장시켜 놓고, 빵이 팔린 돈이 어떻게 주가가 되는지부터 시작한다. 그다음 시장에서 가격이 정해지는 순간을 들여다보고, 마지막으로 한 회사에 돈을 몰아넣는 일이 왜 생각보다 훨씬 위험한지를 스무 명의 가상 투자자로 확인한다.</p>
+    <ul class="objectives">
+      <li>매출 → 순이익 → 주당순이익(EPS) → 배당·재투자로 이어지는 흐름을 따라가고, 시가총액 = 주가 × 주식 수를 계산한다.</li>
+      <li>PER·PBR·배당수익률이 무엇을 재는지, 그리고 '싸다·비싸다'를 이 숫자 하나로 판단할 때의 함정을 안다.</li>
+      <li>주가를 미래 배당의 현재가치로 보는 고든 성장 모형을 쓰고, 성장률과 할인율에 주가가 얼마나 민감한지 확인한다.</li>
+      <li>호가창에서 주문이 체결되는 방식(지정가·시장가), 거래 비용, 상장과 공모, 지수의 뜻을 설명한다.</li>
+      <li>개별 종목의 변동성, 소수 종목에 쏠린 수익, 생존 편향 때문에 한 종목 몰빵이 지수보다 불리한 이유를 말한다.</li>
+    </ul>
+  </header>
+
+  <section id="own">
+    <h2>주식은 회사의 한 조각이다</h2>
+    <p>동네에 빵집 하나가 있다고 하자. 이름은 <b>봄빛베이커리</b>(가상의 회사다). 매장이 열 곳으로 늘어나자 창업자는 새 매장을 낼 돈이 필요해 회사를 100만 개의 조각으로 나눴다. 이 조각 하나가 <span class="term">주식</span><span class="en">(Stock, Share)</span>이다. 주식 한 주를 가진 사람은 회사의 100만분의 1을 가진 <span class="term">주주</span><span class="en">(Shareholder)</span>다. 주주는 회사가 번 이익 가운데 자기 몫을 받을 권리와, 주주총회에서 지분만큼 의결할 권리를 가진다.</p>
+    <p>봄빛베이커리의 한 해를 따라가 보자. 빵과 커피를 팔아 <span class="term">매출</span><span class="en">(Revenue)</span> 100억원을 올렸다. 밀가루·버터 값, 직원 월급, 매장 임대료를 내고 나니 13억원이 남았고(영업이익), 대출 이자와 법인세를 내고 나니 10억원이 남았다. 이 마지막 숫자가 <span class="term">순이익</span><span class="en">(Net income)</span>이다. 주주의 몫은 바로 이 순이익이다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 416" role="img" aria-label="봄빛베이커리의 한 해: 매출 100억에서 비용을 빼면 영업이익, 이자와 세금을 빼면 순이익 10억, 그중 4억은 배당, 6억은 유보">
+        <defs><marker id="sk-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <rect x="40" y="8" width="180" height="58" rx="10" class="f-acc2-soft"/>
+        <text x="130" y="32" text-anchor="middle" class="lbl-b">매출</text>
+        <text x="130" y="55" text-anchor="middle" class="lbl-acc2">100억원</text>
+        <line x1="130" y1="68" x2="130" y2="98" class="s-line" marker-end="url(#sk-ar)"/>
+        <text x="142" y="88" class="lbl-bad">−87억</text>
+        <text x="190" y="88" class="lbl-dim">비용</text>
+        <rect x="40" y="102" width="180" height="58" rx="10" class="f-surface"/>
+        <text x="130" y="126" text-anchor="middle" class="lbl-b">영업이익</text>
+        <text x="130" y="149" text-anchor="middle" class="lbl">13억원</text>
+        <line x1="130" y1="162" x2="130" y2="192" class="s-line" marker-end="url(#sk-ar)"/>
+        <text x="142" y="182" class="lbl-bad">−3억</text>
+        <text x="182" y="182" class="lbl-dim">이자·세금</text>
+        <rect x="40" y="196" width="180" height="58" rx="10" class="f-ok-soft"/>
+        <text x="130" y="220" text-anchor="middle" class="lbl-b">순이익</text>
+        <text x="130" y="243" text-anchor="middle" class="lbl">10억원</text>
+        <text x="250" y="202" class="lbl-dim">주식 100만 주로 나누면</text>
+        <text x="250" y="226" class="lbl-acc">주당순이익 1,000원</text>
+        <text x="250" y="250" class="lbl-dim">그중 주당배당 400원</text>
+        <path d="M115 256C115 276 110 276 110 294" class="s-line" marker-end="url(#sk-ar)"/>
+        <path d="M145 256C145 284 330 270 330 294" class="s-line" marker-end="url(#sk-ar)"/>
+        <rect x="10" y="298" width="200" height="66" rx="10" class="f-acc-soft"/>
+        <text x="110" y="325" text-anchor="middle" class="lbl-b">배당 4억원</text>
+        <text x="110" y="349" text-anchor="middle" class="lbl-dim">주주 통장으로</text>
+        <rect x="230" y="298" width="200" height="66" rx="10" class="f-acc2-soft"/>
+        <text x="330" y="325" text-anchor="middle" class="lbl-b">유보 6억원</text>
+        <text x="330" y="349" text-anchor="middle" class="lbl-dim">새 매장에 재투자</text>
+        <line x1="10" y1="380" x2="430" y2="380" class="s-dash"/>
+        <text x="220" y="404" text-anchor="middle" class="lbl-dim">유보한 돈은 회사 안에 쌓여 주주의 몫(순자산)을 키운다</text>
+      </svg>
+      <figcaption><b>그림 1. 빵이 팔린 돈이 주주에게 오는 길.</b> 매출에서 비용·이자·세금을 빼면 순이익이 남는다. 순이익은 배당으로 주주에게 나눠 주거나, 회사 안에 남겨(유보) 다음 해 이익을 키우는 데 쓴다. 어느 쪽이든 주주의 몫이다.</figcaption>
+    </figure>
+
+    <p>순이익을 주식 수로 나눈 값이 <span class="term">주당순이익</span><span class="en">(EPS, Earnings per share)</span>이다. 봄빛베이커리는 10억원 ÷ 100만 주 = 1,000원이다. 주식 한 주가 1년에 1,000원을 벌어 온다는 뜻이다. 그런데 시장에서 이 주식은 15,000원에 거래된다. 회사 전체의 값, 곧 <span class="term">시가총액</span><span class="en">(Market capitalization)</span>은 주가에 주식 수를 곱한 150억원이다.</p>
+    <div class="formula">$$\text{시가총액} = \text{주가}\times\text{주식 수} = \underbrace{\text{순이익}}_{\text{1년 치 이익}}\times \underbrace{\text{PER}}_{\text{몇 년 치를 주고 사나}}$$<div class="where">PER(주가수익비율) = 주가 ÷ EPS = 시가총액 ÷ 순이익. 봄빛베이커리는 15,000 ÷ 1,000 = 15배</div></div>
+    <p>시가총액 150억원을 순이익 10억원으로 나누면 15다. 시장은 이 회사의 <b>1년 치 이익의 15배</b>를 값으로 쳐 주고 있다. 아래 시뮬레이터에서 매출, 순이익률, 시장이 쳐 주는 배수(PER)를 바꿔 본다. 아래쪽 블록 하나가 1년 치 순이익이고, 블록을 PER개 쌓은 것이 시가총액이다.</p>
+
+    <div class="sim" id="sim-ls">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>빵이 팔린 돈이 주가가 되기까지</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="ls-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>매출 <output id="ls-rev-out"></output></span><input type="range" id="ls-rev" min="40" max="200" step="5" value="100"></label>
+          <label class="ctrl"><span>순이익률 <output id="ls-mg-out"></output></span><input type="range" id="ls-mg" min="-10" max="25" step="0.5" value="10"></label>
+          <label class="ctrl"><span>PER (시장이 쳐 주는 배수) <output id="ls-pe-out"></output></span><input type="range" id="ls-pe" min="4" max="40" step="1" value="15"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">순이익</span><span class="v" id="ls-o-ni">—</span></div>
+        <div class="stat"><span class="k">주당순이익 EPS</span><span class="v" id="ls-o-eps">—</span></div>
+        <div class="stat"><span class="k">시가총액</span><span class="v" id="ls-o-cap">—</span></div>
+        <div class="stat"><span class="k">주가</span><span class="v" id="ls-o-px">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 순이익률만 10% → 12%로 올린다. 매출은 그대로인데 순이익이 20% 늘고 주가도 20% 오른다. ② PER만 15 → 20으로 올린다. 회사는 하나도 달라지지 않았는데 주가가 3분의 1 오른다. 시장의 기대가 바뀐 것이다. ③ 순이익률을 0 아래로 내린다. 적자가 나면 블록이 사라지고 PER로는 값을 매길 수 없다. (주식 수 100만 주, 배당성향 40%로 고정한 가상의 회사)</div>
+    </div>
+
+    <p>주가가 움직이는 길은 두 갈래다. 하나는 <b>이익 자체가 변하는 것</b>(①)이고, 다른 하나는 <b>같은 이익에 시장이 쳐 주는 배수가 변하는 것</b>(②)이다. 뉴스에 나오는 하루하루의 주가 변동은 대부분 ②, 곧 기대의 변화다. 몇십 년에 걸친 주가 상승은 대부분 ①, 곧 이익이 실제로 커진 결과다. 이 구분은 이 장 내내 다시 나온다.</p>
+    <div class="callout">
+      <strong>주주는 회사에 돈을 빌려준 사람이 아니다</strong>
+      예금자와 채권자는 정해진 이자를 먼저 받는다(<a href="bond.html">14장</a>). 주주는 그들에게 줄 것을 모두 주고 <b>남은 것</b>을 가진다. 그래서 회사가 잘되면 몫이 끝없이 커질 수 있지만, 회사가 망하면 채권자에게 다 갚고 남는 것이 없어 주식 값이 0이 된다. 대신 주주의 손실은 투자한 금액을 넘지 않는다(유한책임). 주식이 예금이나 채권보다 기대수익이 높고 흔들림도 큰 이유가 이 '남은 것'이라는 위치다.
+    </div>
+  </section>
+
+  <section id="ratios">
+    <h2>PER·PBR·배당수익률: 무엇을 재는가</h2>
+    <p>주식을 비교할 때 가장 많이 쓰는 숫자 세 개를 봄빛베이커리에 적용해 보자. 회사 장부의 순자산(자산에서 빚을 뺀 것)은 100억원이고, 주주에게 배당으로 주당 400원을 준다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>지표</th><th>계산</th><th class="num">봄빛베이커리</th><th>읽는 법</th></tr></thead>
+      <tbody>
+        <tr><td><span class="term">PER</span><span class="en">(주가수익비율)</span></td><td>주가 ÷ 주당순이익</td><td class="num">15배</td><td>지금 이익이 그대로라면 주가만큼 벌어들이는 데 15년 걸린다. 뒤집은 1/PER = 6.7%가 '이익수익률'이다.</td></tr>
+        <tr><td><span class="term">PBR</span><span class="en">(주가순자산비율)</span></td><td>주가 ÷ 주당순자산</td><td class="num">1.5배</td><td>장부에 적힌 회사 재산(주당 10,000원)보다 1.5배 비싸게 거래된다. 1보다 작으면 장부 가치보다 싸게 팔린다는 뜻이다.</td></tr>
+        <tr><td><span class="term">배당수익률</span><span class="en">(Dividend yield)</span></td><td>주당배당 ÷ 주가</td><td class="num">2.67%</td><td>주가가 그대로일 때 배당만으로 받는 연 수익률. 예금 이자와 달리 약속된 금액이 아니다.</td></tr>
+        <tr><td><span class="term">ROE</span><span class="en">(자기자본이익률)</span></td><td>순이익 ÷ 순자산</td><td class="num">10%</td><td>주주가 맡긴 돈 100원으로 1년에 10원을 번다. PBR ÷ PER와 같다.</td></tr>
+        <tr><td>배당성향</td><td>배당 ÷ 순이익</td><td class="num">40%</td><td>이익의 40%는 나눠 주고 60%는 회사 안에 남겨 재투자한다.</td></tr>
+      </tbody>
+    </table></div>
+    <p>PER이 낮으면 '싸다', 높으면 '비싸다'고 흔히 말한다. 이 말은 <b>앞으로의 이익이 지금과 비슷하다면</b>만 맞다. PER의 분모는 지난해 이익이다. 그런데 주식을 사는 사람이 받을 것은 앞으로의 이익이다. 아래에 같은 15,000원짜리 주식 두 개가 있다. 단단철강(가상)은 경기가 좋았던 작년에 주당 3,000원을 벌어 PER이 5배다. 새싹소프트(가상)는 주당 300원을 벌어 PER이 50배다. 오른쪽 끝 손잡이를 위아래로 끌어 두 회사의 앞으로 5년 이익 성장률을 정해 본다. 그래프는 <b>오늘 가격 그대로</b>일 때 해마다의 PER이다.</p>
+
+    <div class="sim" id="sim-pe">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>PER 착시: 싼 주식과 비싼 주식의 5년 뒤</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="pe-cv"></canvas><span class="hint">5년 뒤 점을 위아래로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>단단철강 이익 성장률(연) <output id="pe-a-out"></output></span><input type="range" id="pe-a" min="-40" max="10" step="1" value="-25"></label>
+          <label class="ctrl"><span>새싹소프트 이익 성장률(연) <output id="pe-b-out"></output></span><input type="range" id="pe-b" min="0" max="50" step="1" value="30"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">단단철강 5년 뒤 PER</span><span class="v" id="pe-o-a">—</span></div>
+        <div class="stat"><span class="k">새싹소프트 5년 뒤 PER</span><span class="v" id="pe-o-b">—</span></div>
+        <div class="stat"><span class="k">5년 뒤 주당순이익</span><span class="v" id="pe-o-e">—</span></div>
+        <div class="stat"><span class="k">판정</span><span class="v" id="pe-o-s">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 처음 값(철강 연 −25%, 소프트 연 +30%)에서 5년 뒤 PER이 뒤집힌다. 오늘 '싼' 주식이 5년 뒤에는 더 비싼 주식이 된다. ② 철강의 이익이 줄지 않는다(0%)고 끌어 본다. 그러면 철강은 정말 싸다. ③ 소프트의 성장률을 10%로 낮춘다. 성장이 기대에 못 미치면 PER 50은 5년 뒤에도 31이다. (가상의 두 회사. 주가는 15,000원으로 고정하고 이익만 바꿨다.)</div>
+    </div>
+
+    <p>PER이 낮다는 것은 시장이 그 회사의 이익이 줄어들 것이라고 보고 있다는 신호일 수 있고, PER이 높다는 것은 큰 성장을 이미 가격에 넣었다는 뜻일 수 있다. 어느 쪽이 맞는지는 미래가 정한다. 그래서 PER은 '싸다·비싸다'의 답이 아니라 <b>시장이 무엇을 기대하고 있는지 읽는 숫자</b>다. 함정이 몇 가지 더 있다.</p>
+    <ul>
+      <li><b>경기의 꼭대기.</b> 철강·화학·해운처럼 경기를 타는 업종은 호황기에 이익이 가장 크고 PER이 가장 낮다. 그때가 오히려 고점인 경우가 많다.</li>
+      <li><b>한 번뿐인 이익.</b> 공장이나 땅을 팔아 생긴 이익도 순이익에 들어간다. 그해 PER은 낮아 보이지만 내년에는 반복되지 않는다.</li>
+      <li><b>적자 회사.</b> 이익이 0이나 음수면 PER은 계산되지 않거나 의미 없는 숫자가 된다.</li>
+      <li><b>PBR 1 미만.</b> 장부 가치보다 싸다는 것은 그 재산이 장부만큼의 이익을 못 낸다는 시장의 판단일 수 있다(ROE가 낮다).</li>
+      <li><b>업종이 다른 회사.</b> 은행과 소프트웨어 회사는 성장 속도와 위험이 달라 PER을 바로 견주기 어렵다.</li>
+    </ul>
+  </section>
+
+  <section id="value">
+    <h2>주가는 미래 이익에 대한 기대다</h2>
+    <p>그렇다면 주식 한 주의 '제값'은 얼마일까. <a href="interest.html">4장</a>에서 미래의 돈은 지금의 돈보다 덜 가치 있다는 것을 봤다. 연 8%를 기대할 수 있다면 1년 뒤의 108원은 지금의 100원과 같다. 주주가 앞으로 받을 것은 해마다의 배당(그리고 회사 안에 쌓인 몫)이다. 그 흐름을 모두 지금 가치로 바꿔 더하면 주식의 값이 된다. 이것이 <span class="term">배당할인모형</span><span class="en">(Dividend discount model)</span>이다.</p>
+    <p>봄빛베이커리가 내년에 주당 400원을 배당하고, 그 배당이 해마다 \(g\)만큼 늘어난다고 하자. 투자자가 이런 주식에 기대하는 수익률(할인율)이 \(r\)이다. 아래는 앞으로 60년 동안의 배당이다. 옅은 선은 실제로 받을 금액, 막대는 그 돈의 지금 가치다. 성장률과 할인율을 움직여 본다.</p>
+
+    <div class="sim" id="sim-dv">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>미래 배당을 오늘의 돈으로 바꾸면</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="dv-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>배당 성장률 g <output id="dv-g-out"></output></span><input type="range" id="dv-g" min="0" max="7" step="0.5" value="5"></label>
+          <label class="ctrl"><span>할인율 r (기대 수익률) <output id="dv-r-out"></output></span><input type="range" id="dv-r" min="5" max="12" step="0.5" value="8"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">모든 배당의 현재가치 합</span><span class="v" id="dv-o-p">—</span></div>
+        <div class="stat"><span class="k">1~10년 배당 몫</span><span class="v" id="dv-o-a">—</span></div>
+        <div class="stat"><span class="k">11~60년 배당 몫</span><span class="v" id="dv-o-b">—</span></div>
+        <div class="stat"><span class="k">61년 이후 몫</span><span class="v" id="dv-o-c">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 처음 값(g 5%, r 8%)에서 첫 10년 동안 받을 배당은 주가의 약 4분의 1밖에 안 된다. 나머지는 10년 넘어 먼 미래에서 온다. ② g를 7%로 올린다. 막대가 오른쪽으로 갈수록 거의 줄지 않고, 61년 이후 몫이 절반을 넘는다. ③ g를 r 이상으로 밀면 합이 끝없이 커진다. (첫해 배당 400원. 아래 띠는 주가를 기간별로 나눈 비율이다.)</div>
+    </div>
+
+    <p>막대를 끝없이 더한 값은 깔끔한 공식으로 정리된다. 성장률이 할인율보다 작다면 등비급수의 합이다.</p>
+    <div class="formula">$$P = \frac{D_1}{1+r} + \frac{D_1(1+g)}{(1+r)^2} + \cdots = \frac{D_1}{r-g}$$<div class="where">\(P\): 오늘의 주가, \(D_1\): 내년 주당배당, \(r\): 할인율(투자자가 요구하는 수익률), \(g\): 배당의 영구 성장률(\(g &lt; r\)). <span class="term">고든 성장 모형</span><span class="en">(Gordon growth model)</span>이라 부른다</div></div>
+    <p>봄빛베이커리에 넣으면 400 ÷ (0.08 − 0.05) = 13,333원이다. 시장 가격 15,000원과 비슷하다. 거꾸로 읽으면, 시장 가격 15,000원은 할인율 8%에서 투자자들이 배당 성장률을 약 5.3%로 보고 있다는 뜻이다(400 ÷ 15,000 = 2.67%, 8% − 2.67% = 5.33%). 분모 \(r-g\)가 작은 숫자라는 데 주목하자. 작은 숫자로 나누면 분모가 조금만 흔들려도 결과가 크게 흔들린다. 아래 그래프의 점을 끌어 성장률을 바꿔 본다.</p>
+
+    <div class="sim" id="sim-gd">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>고든 성장 모형: 성장률이 할인율에 다가가면</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="gd-cv"></canvas><span class="hint">곡선 위의 점을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>할인율 r <output id="gd-r-out"></output></span><input type="range" id="gd-r" min="4" max="12" step="0.5" value="8"></label>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">모형 주가</span><span class="v" id="gd-o-p">—</span></div>
+        <div class="stat"><span class="k">이때의 PER</span><span class="v" id="gd-o-pe">—</span></div>
+        <div class="stat"><span class="k">g가 1%p 더 높으면</span><span class="v" id="gd-o-g">—</span></div>
+        <div class="stat"><span class="k">r이 1%p 더 높으면</span><span class="v" id="gd-o-r">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① g = 5%에서 6%로 1%p만 옮긴다. 주가가 13,333원에서 20,000원으로 50% 뛴다. ② 점을 할인율 바로 앞까지 끈다. 곡선이 수직으로 치솟는다. 성장률이 할인율에 다가가면 모형은 "얼마를 줘도 싸다"고 답한다. 거품이 생기는 계산이다. ③ g = 5%에 두고 할인율을 8% → 9%로 올린다. 금리가 오르면 주가가 25% 떨어진다. (첫해 배당 400원, EPS 1,000원. 성장률이 영원히 일정하다는 단순화 모형이다.)</div>
+    </div>
+
+    <p>이 곡선이 주식시장의 많은 장면을 설명한다. 성장 기대가 큰 회사의 주가는 성장률 추정이 조금만 바뀌어도 크게 출렁인다. 금리가 오르면 투자자가 요구하는 수익률 \(r\)이 올라 주가가 내려가고, 그 충격은 먼 미래의 이익에 기대는 성장주일수록 크다. 그리고 "이번에는 성장이 영원히 빠를 것"이라는 믿음이 퍼지면 \(g\)가 \(r\)에 다가가면서 주가가 이익과 무관하게 치솟는다. 이 모형이 주가를 정확히 맞히는 도구는 아니다. 오히려 <b>주가가 얼마나 기대에 민감한지</b>를 보여 주는 도구다.</p>
+    <div class="callout deep">
+      <strong>성장은 어디서 오는가</strong>
+      이익을 모두 배당으로 나눠 주는 회사는 매장을 늘릴 돈이 없어 이익이 크게 늘기 어렵다. 회사가 남긴 이익(유보)을 ROE만큼 굴린다면 장기 성장률은 대략 \(g \approx \text{ROE}\times(1-\text{배당성향})\)이다. 봄빛베이커리는 10% × 60% = 6%다. 배당을 줄이면 지금 받는 돈은 줄고 성장은 빨라진다. ROE가 할인율보다 높은 회사만 이익을 남겨 재투자하는 것이 주주에게 이득이다.
+    </div>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 262" role="img" aria-label="주식의 총수익은 배당수익률, 이익 성장률, PER 변화의 합이다. 1년 단위로는 PER 변화가 지배하고, 30년 평균으로는 배당과 이익 성장이 대부분이다">
+        <text x="110" y="22" text-anchor="middle" class="lbl-b">어느 한 해</text>
+        <text x="330" y="22" text-anchor="middle" class="lbl-b">30년 연평균</text>
+        <line x1="220" y1="36" x2="220" y2="258" class="s-dash"/>
+        <line x1="26" y1="110" x2="432" y2="110" class="s-axis"/>
+        <text x="22" y="114" text-anchor="end" class="lbl-dim">0%</text>
+        <rect x="30" y="96.5" width="70" height="13.5" class="f-acc"/>
+        <rect x="30" y="71.5" width="70" height="25" class="f-ok"/>
+        <rect x="30" y="110" width="70" height="115" class="f-bad-soft"/>
+        <text x="106" y="108" class="lbl-acc">배당 +2.7%</text>
+        <text x="106" y="88" class="lbl-dim">이익 성장 +5%</text>
+        <text x="106" y="172" class="lbl-bad">PER 변화 −23%</text>
+        <text x="110" y="250" text-anchor="middle" class="lbl-dim">합: 약 −15% (기대가 꺾인 해)</text>
+        <rect x="236" y="96.5" width="70" height="13.5" class="f-acc"/>
+        <rect x="236" y="71.5" width="70" height="25" class="f-ok"/>
+        <rect x="236" y="69.5" width="70" height="2" class="f-warn"/>
+        <text x="312" y="108" class="lbl-acc">배당 +2.7%</text>
+        <text x="312" y="88" class="lbl-dim">이익 성장 +5%</text>
+        <text x="312" y="66" class="lbl-dim">PER 변화 +0.4%</text>
+        <text x="330" y="160" text-anchor="middle" class="lbl-dim">합: 약 +8%</text>
+        <text x="330" y="184" text-anchor="middle" class="lbl-dim">PER이 15에서 17로 올라도</text>
+        <text x="330" y="206" text-anchor="middle" class="lbl-dim">30년에 나누면 연 0.4%</text>
+      </svg>
+      <figcaption><b>그림 2. 주식 수익의 세 갈래.</b> 총수익 ≈ 배당수익률 + 주당순이익 성장률 + PER 변화율. 한 해 단위로는 기대의 변화(PER)가 몇십 %씩 움직여 나머지를 덮는다. 수십 년을 평균하면 PER 변화는 연 0.x%로 작아지고, 배당과 이익 성장이 수익의 대부분을 만든다. (숫자는 봄빛베이커리 가정을 쓴 예시다.)</figcaption>
+    </figure>
+  </section>
+
+  <section id="dividend">
+    <h2>배당: 쓰거나, 다시 심거나</h2>
+    <p>배당을 받으면 두 가지 중 하나를 고를 수 있다. 통장에서 꺼내 쓰거나, 그 돈으로 같은 주식을 더 사서 다시 심거나. 배당 3%는 작아 보이지만 <a href="interest.html">4장</a>의 복리가 여기에도 그대로 작동한다. 국내 주식의 배당에는 배당소득세 15.4%가 원천징수된다는 점도 넣어 둔다(2026년 기준, 연간 금융소득이 2,000만원을 넘으면 종합과세).</p>
+
+    <div class="sim" id="sim-rv">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>배당 재투자 vs 인출: 1,000만원의 30년</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="rv-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>배당수익률 <output id="rv-y-out"></output></span><input type="range" id="rv-y" min="1" max="6" step="0.5" value="3"></label>
+          <label class="ctrl"><span>주가 상승률(연) <output id="rv-g-out"></output></span><input type="range" id="rv-g" min="0" max="8" step="0.5" value="4"></label>
+          <label class="check"><input type="checkbox" id="rv-tax" checked> 배당소득세 15.4%</label>
+          <div class="btn-row"><button class="btn primary" id="rv-go">30년 재생</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>재투자: 주식 가치</span><span><i style="background:var(--accent-2)"></i>인출: 주식 가치</span><span><i style="background:var(--text-faint)"></i>인출: 주식 + 꺼내 쓴 배당 합</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">재투자 30년 뒤</span><span class="v" id="rv-o-a">—</span></div>
+        <div class="stat"><span class="k">인출: 주식 가치</span><span class="v" id="rv-o-b">—</span></div>
+        <div class="stat"><span class="k">인출: 받은 배당 합</span><span class="v" id="rv-o-c">—</span></div>
+        <div class="stat"><span class="k">재투자의 차이</span><span class="v" id="rv-o-d">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 처음 값(배당 3%, 주가 상승 4%, 세금 있음)에서 재투자는 약 6,690만원, 인출은 주식 3,240만원 + 꺼내 쓴 배당 1,420만원이다. 꺼내 쓴 돈까지 합쳐도 재투자에 못 미친다. ② 세금을 끈다. 재투자 결과가 7,600만원대로 커진다. 배당에 매번 붙는 세금도 복리로 쌓인다. ③ 배당을 1%로 줄이고 주가 상승을 6%로 올린다. 총수익이 비슷해도 배당이 적을수록 두 선의 차이가 작다. (해마다 주가 상승률과 배당수익률이 일정하다고 둔 단순 모형)</div>
+    </div>
+
+    <p>"배당을 많이 주는 주식이 좋은 주식"이라는 말은 반만 맞다. 배당을 주는 날 주가는 그만큼 떨어진다(배당락). 회사 금고에 있던 돈이 주주 통장으로 옮겨 갈 뿐이기 때문이다. 배당이 많다고 총수익이 많아지는 것은 아니다. 중요한 것은 배당과 주가 상승을 합친 <b>총수익</b>이고, 받은 배당을 다시 심느냐가 긴 시간 뒤의 차이를 만든다.</p>
+  </section>
+
+  <section id="market">
+    <h2>주식시장은 어떻게 돌아가는가</h2>
+    <p>봄빛베이커리가 처음 주식을 시장에 내놓는 것을 <span class="term">상장</span><span class="en">(Listing, IPO)</span>이라 한다. 거래소의 심사를 통과한 회사가 새 주식을 발행해 일반 투자자에게 파는 것이 <span class="term">공모</span><span class="en">(Public offering)</span>다. 이때 투자자가 낸 돈은 회사로 들어가 새 매장이 된다. 이렇게 회사가 직접 주식을 파는 곳을 발행시장이라 한다.</p>
+    <p>상장한 뒤로는 투자자끼리 주식을 사고판다. 내가 증권 앱에서 봄빛베이커리 10주를 사면, 그 돈은 회사가 아니라 <b>그 주식을 판 다른 투자자</b>에게 간다. 이것이 유통시장이다. 매일의 주가는 유통시장에서 정해지고, 회사의 금고와는 직접 관계가 없다.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 440 346" role="img" aria-label="발행시장에서는 회사가 투자자에게 새 주식을 팔고 돈을 받는다. 유통시장에서는 투자자끼리 거래소를 통해 주식과 돈을 주고받는다">
+        <defs><marker id="sk-ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+        <text x="220" y="22" text-anchor="middle" class="lbl-b">발행시장 (상장·공모)</text>
+        <rect x="10" y="40" width="130" height="64" rx="10" class="f-acc2-soft"/>
+        <text x="75" y="68" text-anchor="middle" class="lbl-b">회사</text>
+        <text x="75" y="90" text-anchor="middle" class="lbl-dim">새 주식 발행</text>
+        <rect x="300" y="40" width="130" height="64" rx="10" class="f-surface"/>
+        <text x="365" y="68" text-anchor="middle" class="lbl-b">투자자</text>
+        <text x="365" y="90" text-anchor="middle" class="lbl-dim">청약</text>
+        <line x1="142" y1="58" x2="296" y2="58" class="s-acc2" marker-end="url(#sk-ar2)"/>
+        <text x="220" y="50" text-anchor="middle" class="lbl-acc2">주식</text>
+        <line x1="298" y1="88" x2="144" y2="88" class="s-ok" marker-end="url(#sk-ar2)"/>
+        <text x="220" y="124" text-anchor="middle" class="lbl-acc">돈 → 회사 금고</text>
+        <text x="220" y="150" text-anchor="middle" class="lbl-dim">회사가 사업 자금을 얻는 순간</text>
+        <line x1="10" y1="170" x2="430" y2="170" class="s-dash"/>
+        <text x="220" y="198" text-anchor="middle" class="lbl-b">유통시장 (매일의 거래)</text>
+        <rect x="10" y="226" width="112" height="64" rx="10" class="f-surface"/>
+        <text x="66" y="254" text-anchor="middle" class="lbl-b">파는 사람</text>
+        <text x="66" y="276" text-anchor="middle" class="lbl-dim">매도 주문</text>
+        <rect x="164" y="214" width="112" height="88" rx="10" class="f-acc-soft"/>
+        <text x="220" y="246" text-anchor="middle" class="lbl-b">거래소</text>
+        <text x="220" y="268" text-anchor="middle" class="lbl-dim">호가창에서</text>
+        <text x="220" y="288" text-anchor="middle" class="lbl-dim">짝을 맞춤</text>
+        <rect x="318" y="226" width="112" height="64" rx="10" class="f-surface"/>
+        <text x="374" y="254" text-anchor="middle" class="lbl-b">사는 사람</text>
+        <text x="374" y="276" text-anchor="middle" class="lbl-dim">매수 주문</text>
+        <line x1="124" y1="242" x2="160" y2="242" class="s-acc2" marker-end="url(#sk-ar2)"/>
+        <line x1="278" y1="242" x2="314" y2="242" class="s-acc2" marker-end="url(#sk-ar2)"/>
+        <line x1="314" y1="274" x2="278" y2="274" class="s-ok" marker-end="url(#sk-ar2)"/>
+        <line x1="160" y1="274" x2="124" y2="274" class="s-ok" marker-end="url(#sk-ar2)"/>
+        <text x="220" y="332" text-anchor="middle" class="lbl-dim">돈은 회사가 아니라 파는 사람에게 간다</text>
+      </svg>
+      <figcaption><b>그림 3. 발행시장과 유통시장.</b> 회사가 주식을 팔아 돈을 얻는 것은 상장·공모나 유상증자 때뿐이다. 그 뒤의 거래는 투자자 사이에서 주식의 주인이 바뀌는 일이다. 그래도 주가는 회사에 중요하다. 다음에 주식을 더 발행할 때의 값이 되고, 경영진의 보상과 회사의 평판을 좌우하기 때문이다.</figcaption>
+    </figure>
+
+    <p>유통시장에서 가격이 정해지는 곳이 <span class="term">호가창</span><span class="en">(Order book)</span>이다. "15,020원이면 팔겠다"는 매도 주문과 "15,000원이면 사겠다"는 매수 주문이 가격별로 줄을 서 있다. 가장 싼 매도 호가와 가장 비싼 매수 호가 사이의 틈이 <span class="term">스프레드</span><span class="en">(Spread)</span>다. 주문에는 두 가지가 있다.</p>
+    <ul>
+      <li><span class="term">지정가 주문</span>: "이 가격 이하로만 사겠다." 맞는 상대가 있으면 바로 체결되고, 없으면 호가창에 줄을 서서 기다린다. 가격은 지키지만 체결이 안 될 수 있다.</li>
+      <li><span class="term">시장가 주문</span>: "가격 상관없이 지금 사겠다." 반대편에 서 있는 가장 좋은 호가부터 차례로 먹어 들어간다. 체결은 확실하지만 수량이 많으면 위쪽 호가까지 올라가 평균 단가가 나빠진다.</li>
+    </ul>
+    <p>아래 호가창에서 주문을 직접 넣어 본다. 가운데 가격 줄을 눌러 지정가를 고르고, 수량을 정해 "주문 넣기"를 누른다. 다른 투자자들의 주문도 쉬지 않고 들어온다.</p>
+
+    <div class="sim" id="sim-ob">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>호가창: 주문이 줄을 서고 체결되는 곳</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="ob-cv"></canvas><span class="hint">가격 줄을 눌러 지정가를 고른다</span></div>
+        <div class="sim-controls">
+          <div class="seg" id="ob-side"><button data-value="buy" class="on">매수</button><button data-value="sell">매도</button></div>
+          <div class="seg" id="ob-type"><button data-value="limit" class="on">지정가</button><button data-value="market">시장가</button></div>
+          <label class="ctrl"><span>수량 <output id="ob-q-out"></output></span><input type="range" id="ob-q" min="10" max="800" step="10" value="100"></label>
+          <label class="check"><input type="checkbox" id="ob-auto" checked> 다른 투자자 주문 계속 들어오기</label>
+          <div class="btn-row"><button class="btn primary" id="ob-go">주문 넣기</button><button class="btn" id="ob-re">처음부터</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">현재가 (마지막 체결)</span><span class="v" id="ob-o-last">—</span></div>
+        <div class="stat"><span class="k">스프레드</span><span class="v" id="ob-o-sp">—</span></div>
+        <div class="stat"><span class="k">내가 고른 지정가</span><span class="v" id="ob-o-sel">—</span></div>
+        <div class="stat"><span class="k">내 주문 체결</span><span class="v" id="ob-o-my">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 최우선 매도호가보다 한 칸 아래 가격을 눌러 지정가 매수 100주를 넣는다. 바로 체결되지 않고 매수 쪽에 줄을 선다(내 주문 표시). 누군가 시장가로 팔면 그때 체결된다. ② 시장가 매수로 바꾸고 수량을 800주로 올려 넣는다. 매도 호가를 여러 칸 먹어 들어가며 평균 체결가가 최우선 호가보다 높아지고, 현재가가 뛴다. ③ 자동 주문을 끄고 시장가 주문을 몇 번 더 넣는다. 반대편 호가가 바닥나면 가격이 크게 미끄러진다. (빨강은 매수, 파랑은 매도. 국내 주식 앱의 관례를 따랐다. 호가 단위 10원, 다른 투자자의 주문은 무작위로 만든 가상의 것이다.)</div>
+    </div>
+
+    <p>호가창을 만져 보면 '주가'의 정체가 보인다. 현재가는 <b>가장 마지막에 체결된 한 건의 가격</b>일 뿐이다. 사려는 사람이 급하면 매도 호가를 먹어 올라가고, 팔려는 사람이 급하면 매수 호가를 먹어 내려간다. 거래가 적은 종목은 호가가 얇아서 작은 주문에도 가격이 크게 움직인다. 한국 거래소는 하루 가격 변동을 전날 종가의 ±30%로 제한한다(가격제한폭).</p>
+
+    <h3>사고팔 때마다 새는 돈</h3>
+    <p>주식을 사고팔면 세 종류의 비용이 든다. 증권사 수수료, 팔 때 내는 세금, 그리고 스프레드와 미끄러짐이다. 마지막 것은 영수증에 찍히지 않지만 앞의 호가창에서 봤듯 실제로 나가는 돈이다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>항목</th><th>언제</th><th class="num">대략의 크기</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>증권사 수수료</td><td>살 때·팔 때</td><td class="num">약 0.01~0.3%</td><td>온라인 거래는 낮고 지점·전화 주문은 높다. 이벤트로 거의 0인 곳도 있다.</td></tr>
+        <tr><td>증권거래세</td><td>팔 때</td><td class="num">약 0.2%</td><td>2026년 기준 국내 상장주식 매도 금액에 붙는다(코스피는 농어촌특별세 포함). 해마다 조정된다.</td></tr>
+        <tr><td>스프레드·미끄러짐</td><td>살 때·팔 때</td><td class="num">0.05%~1% 이상</td><td>거래가 많은 대형주는 작고, 거래가 적은 소형주나 큰 주문은 크다.</td></tr>
+        <tr><td>배당소득세</td><td>배당 받을 때</td><td class="num">15.4%</td><td>배당금에서 원천징수. 금융소득 연 2,000만원 초과분은 종합과세.</td></tr>
+        <tr><td>양도소득세</td><td>팔아서 이익이 날 때</td><td class="num">대주주만</td><td>국내 상장주식은 소액주주의 매매차익이 비과세다. 해외 주식은 연 250만원 넘는 이익에 22%.</td></tr>
+      </tbody>
+    </table></div>
+    <p>한 번 사고팔 때(왕복) 드는 비용을 0.5%라고 해도 작아 보인다. 문제는 횟수다. 1년에 포트폴리오 전체를 네 번 바꾸면 연 2%가 빠진다. 매달 50만원씩 30년 동안 넣는 계좌로 비교해 본다. 매매가 수익률을 높이지도 낮추지도 않는다고 가정한, 순수한 비용의 효과다.</p>
+
+    <div class="sim" id="sim-tc">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>잦은 매매의 30년 비용</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="tc-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>1년에 전부 갈아타는 횟수 <output id="tc-n-out"></output></span><input type="range" id="tc-n" min="0" max="12" step="0.5" value="4"></label>
+          <label class="ctrl"><span>왕복 비용(수수료+세금+스프레드) <output id="tc-c-out"></output></span><input type="range" id="tc-c" min="0.1" max="1.5" step="0.05" value="0.5"></label>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--accent)"></i>사서 그대로 두기</span><span><i style="background:var(--bad)"></i>자주 사고팔기</span><span><i style="background:var(--text-faint)"></i>낸 원금</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">연간 비용</span><span class="v" id="tc-o-f">—</span></div>
+        <div class="stat"><span class="k">그대로 두기 30년</span><span class="v" id="tc-o-a">—</span></div>
+        <div class="stat"><span class="k">자주 사고팔기 30년</span><span class="v" id="tc-o-b">—</span></div>
+        <div class="stat"><span class="k">새어 나간 돈</span><span class="v" id="tc-o-d">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 처음 값(연 4회 × 0.5%)에서 연 비용 2%가 30년 동안 약 2억원을 가져간다. 낸 원금 1억 8,000만원보다 크다. ② 횟수를 1회로 줄인다. 비용이 4분의 1이 되고 차이도 크게 준다. ③ 횟수를 12회(매달)로 올린다. 수익률 7.5% 가운데 6%가 비용으로 사라진다. (월 50만원, 연 7.5% 가정, MN.grow로 계산. 매매로 수익률이 달라지지 않는다고 가정했다.)</div>
+    </div>
+    <div class="callout warn">
+      <strong>세율과 수수료는 해마다 바뀐다</strong>
+      증권거래세율, 배당소득세, 금융소득 종합과세 기준, 해외 주식 양도세 공제액은 세법 개정으로 자주 바뀐다. 이 장의 숫자는 2026년 기준 대표값이므로, 실제로 거래하기 전에는 그해의 세법과 증권사의 수수료를 확인한다. 세금 전반은 <a href="tax.html">18장</a>에서 다룬다.
+    </div>
+  </section>
+
+  <section id="index">
+    <h2>지수: 시장 전체를 숫자 하나로</h2>
+    <p>"오늘 코스피가 1% 올랐다"는 말은 무엇이 1% 올랐다는 걸까. <span class="term">주가지수</span><span class="en">(Stock index)</span>는 많은 회사의 주가를 하나로 묶은 숫자다. <b>KOSPI</b>는 한국거래소 유가증권시장에 상장된 회사 전체를, <b>S&amp;P 500</b>은 미국의 큰 회사 약 500곳을 묶는다. 둘 다 <span class="term">시가총액 가중</span> 방식이다. 시가총액이 큰 회사의 주가가 지수를 더 많이 움직인다. 기준 시점의 시가총액 합을 100(KOSPI는 1980년 1월 4일 = 100)으로 두고, 지금 시가총액 합이 몇 배가 됐는지를 잰다.</p>
+    <p>다섯 회사로 된 작은 시장을 만들어 보자. 막대 위의 손잡이를 끌어 각 회사의 주가를 바꾼다. 아래 띠는 각 회사가 시장에서 차지하는 비중이다.</p>
+
+    <div class="sim" id="sim-ix">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>다섯 회사로 만든 지수</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="ix-cv"></canvas><span class="hint">막대 끝을 위아래로 끈다</span></div>
+        <div class="sim-controls">
+          <div class="btn-row"><button class="btn" id="ix-day">무작위 하루</button><button class="btn" id="ix-bake">봄빛만 2배</button><button class="btn" id="ix-big">큰강만 −10%</button><button class="btn" id="ix-re">처음으로</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">시가총액 가중 지수</span><span class="v" id="ix-o-cap">—</span></div>
+        <div class="stat"><span class="k">동일 가중 지수</span><span class="v" id="ix-o-eq">—</span></div>
+        <div class="stat"><span class="k">주가 단순 평균 지수</span><span class="v" id="ix-o-px">—</span></div>
+        <div class="stat"><span class="k">1위 회사 비중</span><span class="v" id="ix-o-top">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "봄빛만 2배"를 누른다. 봄빛베이커리 주주에게는 대박이지만 시가총액 가중 지수는 0.4%밖에 오르지 않는다. ② "큰강만 −10%"를 누른다. 나머지 네 회사가 그대로여도 지수가 7% 넘게 빠진다. ③ 같은 움직임에서 동일 가중 지수와 주가 단순 평균 지수가 얼마나 다르게 반응하는지 본다. 주가가 높은 회사가 크게 반영되는 주가 평균 방식은 회사 크기와 무관하다. (다섯 회사는 모두 가상이다. 모든 지수의 처음 값은 100)</div>
+    </div>
+
+    <p>실제 지수도 이렇게 몇몇 큰 회사에 쏠려 있다. 그래서 "지수가 올랐는데 내 주식은 내렸다"는 일이 흔하다. 지수를 그대로 따라가는 펀드(인덱스 펀드, ETF)를 사면 회사 수백 곳을 시가총액 비율대로 한꺼번에 사는 셈이 된다. 그 방법과 비용은 <a href="fund.html">15장</a>에서 다룬다. 여기서는 지수가 무엇과 비교하는 잣대인지만 기억하자. 개별 종목을 고르는 일은 결국 <b>이 지수를 이길 수 있느냐</b>의 문제다.</p>
+  </section>
+
+  <section id="single">
+    <h2>한 종목에 모두 걸면</h2>
+    <p>지수 전체는 연 16% 정도 흔들리지만 개별 종목은 그보다 훨씬 크게 흔들린다. 이 책의 교육용 가정(<code>MN.ASSETS</code>)에서 개별 종목의 변동성은 연 40%, 세계 주식 지수는 16%다. 기대수익률은 둘 다 연 7.5%로 똑같이 두었다. 한 회사의 운명은 그 회사만의 사정(신제품 실패, 경영진의 실수, 경쟁자의 등장)에 크게 좌우되는데, 수백 곳을 묶으면 그런 사정들이 서로 상쇄되기 때문이다.</p>
+    <p>기대수익률이 같다면 어느 쪽을 골라도 괜찮을까. 스무 명의 투자자가 같은 시장에서 각자 무작위로 종목을 골라 같은 기간 동안 들고 있었다고 해 보자. 굵은 선이 지수다.</p>
+
+    <div class="sim" id="sim-pk">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>스무 명이 각자 고른 종목</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="pk-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>한 사람이 고르는 종목 수 <output id="pk-n-out"></output></span><input type="range" id="pk-n" min="1" max="30" step="1" value="1"></label>
+          <label class="ctrl"><span>보유 기간 <output id="pk-y-out"></output></span><input type="range" id="pk-y" min="5" max="30" step="1" value="20"></label>
+          <div class="btn-row"><button class="btn primary" id="pk-go">다시 뽑기</button></div>
+        </div>
+      </div>
+      <div class="legend"><span><i style="background:var(--text)"></i>지수</span><span><i style="background:var(--ok)"></i>지수를 이긴 사람</span><span><i style="background:var(--bad)"></i>지수에 진 사람</span></div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">지수를 이긴 사람</span><span class="v" id="pk-o-w">—</span></div>
+        <div class="stat"><span class="k">지수 결과</span><span class="v" id="pk-o-i">—</span></div>
+        <div class="stat"><span class="k">20명 중앙값</span><span class="v" id="pk-o-m">—</span></div>
+        <div class="stat"><span class="k">원금을 잃은 사람</span><span class="v" id="pk-o-l">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 종목 1개로 "다시 뽑기"를 여러 번 누른다. 대개 스무 명 중 열 명 넘게 지수에 지고, 몇 명은 원금을 크게 잃고, 한두 명이 지수를 크게 앞선다. ② 종목 수를 5, 10, 30으로 늘린다. 선들이 지수 쪽으로 모여들고 원금을 잃는 사람이 사라진다. ③ 보유 기간을 늘린다. 한 종목만 든 사람들의 차이는 시간이 갈수록 오히려 벌어진다. (모든 종목의 기대수익률은 지수와 같은 연 7.5%, 변동성 40%. 종목 = 시장 움직임 + 회사 고유의 움직임. 매달 같은 비율로 다시 맞춘다고 가정)</div>
+    </div>
+
+    <p>기대수익률이 같은데 왜 대부분이 지는가. 평균과 중앙값이 다르기 때문이다. <a href="risk.html">12장</a>에서 본 것처럼, 50% 떨어지면 100% 올라야 본전이 된다. 흔들림이 클수록 복리로 쌓인 결과는 소수의 큰 승자와 다수의 패자로 갈라진다. 연 7.5%를 기대하는 같은 주식이라도 변동성이 40%면 전형적인(중앙값) 결과는 해마다 약 0.8%씩 줄어드는 것이고, 16%면 해마다 약 6%씩 늘어나는 것이다. 평균은 몇 안 되는 대박이 끌어올린다. 그 몇 명에 내가 들어갈 확률은 낮다.</p>
+    <p>이 쏠림을 시장 전체에서 보면 더 극단적이다. 500개 종목을 같은 조건으로 굴린 뒤 이익이 큰 순서대로 세운다. 막대 하나가 한 종목의 결과(배수, 로그 눈금)이고, 곡선은 왼쪽부터 더해 간 이익이 시장 전체 순이익의 몇 %인지다. 세로선을 끌어 상위 몇 %를 볼지 정한다.</p>
+
+    <div class="sim" id="sim-sk">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>소수 종목이 시장 수익을 만든다</h3></div>
+      <div class="sim-body">
+        <div class="sim-view"><canvas id="sk-cv"></canvas><span class="hint">세로선을 좌우로 끈다</span></div>
+        <div class="sim-controls">
+          <label class="ctrl"><span>기간 <output id="sk-y-out"></output></span><input type="range" id="sk-y" min="1" max="30" step="1" value="20"></label>
+          <div class="btn-row"><button class="btn" id="sk-go">새로 뽑기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">선택한 상위 종목이 만든 몫</span><span class="v" id="sk-o-s">—</span></div>
+        <div class="stat"><span class="k">원금을 잃은 종목</span><span class="v" id="sk-o-l">—</span></div>
+        <div class="stat"><span class="k">중앙값 종목</span><span class="v" id="sk-o-m">—</span></div>
+        <div class="stat"><span class="k">평균 (= 모두 산 사람)</span><span class="v" id="sk-o-a">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① 처음 값(20년, 상위 4%)에서 상위 20종목이 시장 전체 순이익의 약 3분의 2를 만든다. 세로선을 오른쪽으로 끌어 곡선이 100%에 닿는 곳을 찾는다. 상위 15~20% 남짓이면 시장 전체의 이익을 다 채운다. ② 그 뒤로 곡선은 100%를 조금 넘었다가 다시 내려온다. 내려오는 구간이 원금을 잃은 종목들이고, 절반 넘는 종목이 여기에 있다. ③ 기간을 1년과 30년으로 바꿔 본다. 1년 뒤에는 대부분 0.5~2배 사이에 모여 있지만, 30년 뒤에는 위아래 끝이 수백 배씩 벌어지고 중앙값 종목은 원금 아래로 내려간다. 시간이 쏠림을 키운다. (종목마다 기대수익률 7.5%, 변동성 40%로 같은 조건. 결과의 차이는 순전히 운이다.)</div>
+    </div>
+
+    <p>실제 시장에서도 비슷한 모습이 관찰된다. 1926~2016년 미국 상장 주식을 조사한 한 연구는 전체 종목의 절반 이상이 같은 기간 단기 국채보다 못한 수익을 냈고, 시장 전체가 만든 초과 이익은 상위 4% 남짓한 종목이 거의 다 만들었다고 보고했다. 지수를 사는 사람은 그 4%를 반드시 갖고 있다. 한 종목을 고르는 사람은 그 4%를 고를 수 있느냐에 모든 것을 건다.</p>
+
+    <h3>사라진 회사는 보이지 않는다</h3>
+    <p>"주식은 장기로 들고 있으면 결국 오른다"는 말을 들으면 지금 시장에 있는 유명한 회사들의 긴 주가 그래프가 떠오른다. 그런데 그 그래프에는 중간에 망하거나 상장폐지된 회사가 없다. 살아남은 것만 보고 결론을 내리는 착각을 <span class="term">생존 편향</span><span class="en">(Survivorship bias)</span>이라 한다. 100개의 회사가 20년을 지나는 동안 무슨 일이 생기는지 재생해 본다. 주가가 처음의 20% 아래로 떨어진 회사는 상장폐지되어 투자금이 0이 된다고 하자.</p>
+
+    <div class="sim" id="sim-sv">
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>생존 편향: 지워진 회사를 다시 넣으면</h3></div>
+      <div class="sim-body side">
+        <div class="sim-view"><canvas id="sv-cv"></canvas></div>
+        <div class="sim-controls">
+          <label class="check"><input type="checkbox" id="sv-hide"> 사라진 회사 지우기</label>
+          <div class="btn-row"><button class="btn primary" id="sv-go">20년 재생</button><button class="btn" id="sv-new">새로 뽑기</button></div>
+        </div>
+      </div>
+      <div class="sim-readout">
+        <div class="stat"><span class="k">살아남은 회사</span><span class="v" id="sv-o-n">—</span></div>
+        <div class="stat"><span class="k">100곳 모두의 연평균</span><span class="v" id="sv-o-a">—</span></div>
+        <div class="stat"><span class="k">살아남은 곳만의 연평균</span><span class="v" id="sv-o-s">—</span></div>
+        <div class="stat"><span class="k">착시의 크기</span><span class="v" id="sv-o-d">—</span></div>
+      </div>
+      <div class="sim-note">해볼 것: ① "20년 재생"을 누르고 회사가 하나씩 사라지는 것을 본다. ② 끝난 뒤 "사라진 회사 지우기"를 켠다. 평균 그래프에서 살아남은 회사만의 평균(점선)이 실제 평균보다 한참 위에 있다. 이것이 오늘 시장을 보며 과거를 평가할 때 생기는 착시다. ③ "새로 뽑기"로 몇 번 반복해도 살아남은 곳의 평균이 늘 더 높다. (종목마다 기대수익률 7.5%, 변동성 40%. 처음의 20% 아래로 떨어지면 상장폐지되어 0이 된다고 둔 단순 모형)</div>
+    </div>
+
+    <p>생존 편향은 종목에만 있는 게 아니다. "이 방법으로 10배 벌었다"는 성공담, 수익률 상위 펀드 목록, 주식 고수의 이야기 모두 같은 방식으로 걸러진 표본이다. 같은 방법으로 돈을 잃은 사람은 책을 쓰지 않는다. 남은 것만 보면 위험은 늘 실제보다 작아 보인다.</p>
+    <div class="callout warn">
+      <strong>과거 수익률은 미래를 보장하지 않는다</strong>
+      이 장의 기대수익률·변동성은 과거 자료를 반올림한 교육용 가정이다. 실제 주식시장은 수년 동안 손실이 이어지기도 하고, 이 모형보다 큰 폭락이 오기도 한다. 이 책은 특정 종목이나 상품을 추천하지 않는다. 이 장의 회사는 모두 가상이다.
+    </div>
+  </section>
+
+  <section id="case">
+    <h2>한결의 선택: 동료가 권한 한 종목</h2>
+    <p>한결은 <a href="budget.html">7장</a>에서 짠 예산대로 매달 저축을 이어 왔고, <a href="risk.html">12장</a>에서 자기가 견딜 수 있는 낙폭을 정했다. 그 무렵 회사 동료가 한 종목을 권한다. "이 회사는 무조건 큰다. PER이 50이라 비싸 보여도 성장주라 괜찮아. 나는 모은 돈 전부 넣었어." 한결이 모은 돈 가운데 1,000만원을 10년 동안 넣는다고 하고, 그 종목 하나와 지수 전체를 비교해 본다. 둘 다 기대수익률은 연 7.5%로 같게 두고, 변동성만 이 책의 가정대로 40%와 16%로 다르게 둔다.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>1,000만원, 10년 뒤</th><th class="num">한 종목 (변동성 40%)</th><th class="num">지수 (변동성 16%)</th></tr></thead>
+      <tbody>
+        <tr><td>평균</td><td class="num">약 2,040만원</td><td class="num">약 2,060만원</td></tr>
+        <tr><td>중앙값 (전형적인 결과)</td><td class="num">약 910만원</td><td class="num">약 1,820만원</td></tr>
+        <tr><td>나쁜 쪽 10%</td><td class="num">약 180만원 이하</td><td class="num">약 950만원 이하</td></tr>
+        <tr><td>좋은 쪽 10%</td><td class="num">약 4,630만원 이상</td><td class="num">약 3,470만원 이상</td></tr>
+        <tr><td>원금 손실 확률</td><td class="num">약 53%</td><td class="num">약 12%</td></tr>
+        <tr><td>반토막 이하 확률</td><td class="num">약 32%</td><td class="num">약 0.5%</td></tr>
+        <tr><td>한 종목이 지수를 이길 확률</td><td class="num" colspan="2">약 28%</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="casefile">
+      <div class="tag"><b>LEDGER 한결</b><span>한결의 가계부 · 13장</span></div>
+      <h4>평균은 같아도, 한결이 사는 인생은 한 번뿐이다</h4>
+      <p>두 선택의 평균은 약 2,000만원으로 거의 같다. 하지만 한 종목에 넣으면 10년 뒤 원금을 잃을 확률이 절반을 넘고, 셋 중 하나는 반토막 이하가 된다. 평균을 끌어올리는 것은 열에 한 번쯤 오는 4,600만원 이상의 대박이다. 지수는 대박이 없는 대신 열에 아홉은 950만원 이상을 지킨다. 변동성 40%는 12장에서 한결이 정한 감내 낙폭을 쉽게 넘는다. 동료가 말한 PER 50도 따져 봤다. 10년 뒤 이 회사가 PER 15 정도의 평범한 회사로 평가받는다면, 주가가 지금 자리를 지키기만 하려 해도 이익이 10년 동안 해마다 약 12.8%씩 늘어야 한다. '비싸다'는 이 기대를 이미 가격에 넣었다는 뜻이다.</p>
+      <p>한결은 몰빵하지 않기로 했다. 그 종목이 오를지 내릴지는 아무도 모른다. 한결이 정한 것은 <b>한 회사의 운명에 저축 전체를 묶지 않는다</b>는 원칙이다.</p>
+      <div class="clue">
+        <div><b>이 장에서 정한 것</b>주식 투자는 시장 전체(지수)를 기본으로 한다. 개별 종목은 해도 잃어도 되는 작은 금액으로만, 전체의 일부로만.</div>
+        <div><b>아직 남은 문제</b>주식만 들면 지수도 연 16%씩 흔들린다. 흔들림을 받쳐 줄 다른 자산이 필요하다.</div>
+        <div><b>다음 단계</b>금리가 오르면 값이 떨어지는 또 다른 증서, 채권(<a href="bond.html">14장</a>).</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="keypoints" id="summary">
+    <h2>핵심 정리</h2>
+    <ol>
+      <li>주식은 회사의 소유권 조각이다. 주주는 채권자에게 줄 것을 다 주고 남은 순이익을 가진다. 시가총액 = 주가 × 주식 수 = 순이익 × PER이다.</li>
+      <li>주가는 이익이 변해서, 또는 같은 이익에 시장이 쳐 주는 배수(PER)가 변해서 움직인다. 단기 변동은 대부분 기대(PER)의 변화이고, 장기 수익은 대부분 배당과 이익 성장이다.</li>
+      <li>PER은 지난 이익에 대한 가격이다. 낮은 PER은 이익 감소에 대한 시장의 예상일 수 있고, 높은 PER은 큰 성장을 이미 가격에 넣었다는 뜻이다. PBR, 배당수익률도 함께 보되 업종과 경기를 감안한다.</li>
+      <li>고든 성장 모형 \(P = D_1/(r-g)\)에서 주가는 성장률과 할인율의 차이에 반비례한다. 그 차이가 작을수록 주가는 기대의 작은 변화에도 크게 흔들리고, \(g\)가 \(r\)에 다가가면 모형이 무너진다. 금리가 오르면 주가는 내려간다.</li>
+      <li>배당을 재투자하면 복리가 작동한다. 배당이 많다고 총수익이 높은 것은 아니며, 배당에는 15.4% 세금이 붙는다.</li>
+      <li>주가는 호가창에서 가장 마지막에 체결된 가격이다. 지정가는 가격을, 시장가는 체결을 지킨다. 수수료·거래세·스프레드는 매매 횟수만큼 쌓여 장기 수익을 크게 깎는다.</li>
+      <li>KOSPI, S&amp;P 500 같은 지수는 시가총액 가중이라 큰 회사가 지수를 주로 움직인다. 지수는 종목 선택의 성과를 재는 잣대다.</li>
+      <li>개별 종목은 지수보다 훨씬 크게 흔들려, 기대수익이 같아도 전형적인 결과(중앙값)는 지수보다 나쁘다. 시장 수익은 소수 종목에 쏠려 있고, 살아남은 회사만 보면 위험이 실제보다 작아 보인다(생존 편향). 분산은 대박을 포기하는 대신 몰락을 피하는 장치다.</li>
+    </ol>
+  </section>
+
+  <section class="quiz-sec" id="quiz">
+    <h2>확인 퀴즈</h2>
+    <div class="quiz">
+      <div class="quiz-q">
+        <p>주가가 20,000원이고 발행 주식이 500만 주, 순이익이 50억원인 회사가 있다. 시가총액과 PER은?</p>
+        <div class="opts">
+          <button class="opt">시가총액 100억원, PER 2배</button>
+          <button class="opt">시가총액 1,000억원, PER 2배</button>
+          <button class="opt" data-correct>시가총액 1,000억원, PER 20배</button>
+          <button class="opt">시가총액 1조원, PER 200배</button>
+        </div>
+        <div class="quiz-exp">시가총액 = 20,000원 × 500만 주 = 1,000억원. PER = 시가총액 ÷ 순이익 = 1,000억 ÷ 50억 = 20배다. 주당으로 보면 EPS = 50억 ÷ 500만 = 1,000원, PER = 20,000 ÷ 1,000 = 20배로 같다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>PER 5배인 A 회사와 PER 40배인 B 회사가 있다. 다음 중 옳은 설명은?</p>
+        <div class="opts">
+          <button class="opt" data-correct>PER은 현재 가격을 지난 이익으로 나눈 값이라, 이익이 크게 줄어들 회사라면 PER 5배라도 비싼 주식일 수 있다.</button>
+          <button class="opt">A는 B보다 8배 싸므로 A를 사는 것이 항상 유리하다.</button>
+          <button class="opt">PER이 높으면 그 회사의 이익도 높다.</button>
+          <button class="opt">PER은 배당수익률과 같은 뜻이다.</button>
+        </div>
+        <div class="quiz-exp">주식을 산 사람이 받는 것은 앞으로의 이익이다. 경기 꼭대기의 업종이나 한 번뿐인 이익이 낀 회사는 PER이 낮아 보여도 이익이 줄면서 PER이 올라간다. 반대로 높은 PER은 시장이 큰 성장을 기대한다는 뜻이고, 그 기대가 맞으면 비싸지 않을 수도 있다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>내년 배당이 주당 500원, 할인율이 8%, 배당 성장률이 6%인 주식이 있다. 고든 성장 모형으로 성장률 기대가 7%로 1%p 오르면 모형 주가는 어떻게 되는가?</p>
+        <div class="opts">
+          <button class="opt">약 1% 오른다</button>
+          <button class="opt">약 14% 오른다</button>
+          <button class="opt">변하지 않는다</button>
+          <button class="opt" data-correct>25,000원에서 50,000원으로 두 배가 된다</button>
+        </div>
+        <div class="quiz-exp">\(P = D_1/(r-g)\)이므로 500 ÷ (0.08 − 0.06) = 25,000원에서 500 ÷ (0.08 − 0.07) = 50,000원이 된다. 분모 \(r-g\)가 2%에서 1%로 절반이 되기 때문이다. 성장률이 할인율에 가까울수록 기대의 작은 변화가 주가를 크게 흔든다.</div>
+      </div>
+      <div class="quiz-q">
+        <p>기대수익률이 똑같이 연 7.5%인 개별 종목(변동성 40%)과 지수(변동성 16%)가 있다. 20명이 각자 한 종목씩 골라 20년을 보유하면 대부분이 지수보다 못한 결과를 얻는다. 가장 알맞은 이유는?</p>
+        <div class="opts">
+          <button class="opt">개별 종목의 기대수익률이 지수보다 낮기 때문이다.</button>
+          <button class="opt" data-correct>변동성이 크면 복리로 쌓인 결과가 소수의 큰 승자와 다수의 패자로 갈라져, 평균은 같아도 중앙값이 크게 낮아지기 때문이다.</button>
+          <button class="opt">개별 종목은 배당을 주지 않기 때문이다.</button>
+          <button class="opt">지수는 손실이 나지 않기 때문이다.</button>
+        </div>
+        <div class="quiz-exp">50% 떨어지면 100% 올라야 본전이듯, 흔들림은 복리 성장을 깎는다. 연 7.5%를 기대해도 변동성 40%면 중앙값은 해마다 약 0.8%씩 줄고, 16%면 약 6%씩 는다. 평균은 몇 안 되는 대박 종목이 끌어올리므로 같지만, 전형적인 투자자는 지수에 진다. 지수도 손실이 날 수 있다.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  const TAU = Math.PI * 2;
+  const narrow = (id) => document.getElementById(id).parentElement.clientWidth < 560;
+  const tone = (cls, s) => '<span class="' + cls + '">' + s + "</span>";
+  const wonP = (x) => (x < 0 ? "−" : "") + Math.round(Math.abs(x)).toLocaleString("ko-KR") + "원";
+  const pctS = (x, d) => (x > 0 ? "+" : x < 0 ? "−" : "") + MB.pct(Math.abs(x), d == null ? 1 : d);
+  function knob(ctx, x, y, P, r, col) {
+    r = r || 7;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(x, y, r + 3, 0, TAU); ctx.fillStyle = P.bg; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fillStyle = col || P.accent; ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = "#fff"; ctx.stroke();
+    ctx.restore();
+  }
+  function rrect(ctx, x, y, w, h, r) {
+    r = Math.min(r, Math.abs(w) / 2, Math.abs(h) / 2);
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  const S = MN.ASSETS.single, M = MN.ASSETS.stock;
+
+  /* ---------------------------------------------------------- 1. 손익 → 주가 */
+  (function () {
+    const SH = 1e6, PAYOUT = 0.4;
+    const cur = { rev: 100e8, mg: 0.1, pe: 15 };
+    const tgt = () => ({ rev: REV() * 1e8, mg: MG() / 100, pe: PE() });
+    const upd = () => {
+      const t = tgt(), ni = t.rev * t.mg;
+      MB.stat("ls-o-ni", tone(ni >= 0 ? "ok-t" : "bad-t", MB.won(ni)));
+      MB.stat("ls-o-eps", wonP(ni / SH));
+      MB.stat("ls-o-cap", ni > 0 ? MB.won(ni * t.pe) : tone("bad-t", "PER로 못 매김"));
+      MB.stat("ls-o-px", ni > 0 ? wonP((ni * t.pe) / SH) : "—");
+    };
+    const REV = MB.range("ls-rev", (v) => v + "억원", upd);
+    const MG = MB.range("ls-mg", (v) => v + "%", upd);
+    const PE = MB.range("ls-pe", (v) => v + "배", upd);
+    const cv = MB.canvas("#ls-cv", (ctx, w, h) => {
+      const P = MB.palette(), pad = 14, lw = 62, bx = pad + lw, bwMax = w - bx - pad;
+      const sx = bwMax / 230e8;
+      const rev = cur.rev, ni = rev * cur.mg, cost = rev - ni;
+      ctx.textBaseline = "middle";
+      const label = (t, y) => { ctx.font = MB.font(13, false, 600); ctx.fillStyle = P.text; ctx.textAlign = "left"; ctx.fillText(t, pad, y); };
+      const inBar = (t, x, y, wd, col) => {
+        ctx.font = MB.font(12); const tw = ctx.measureText(t).width;
+        if (tw + 10 < wd) { ctx.fillStyle = "#fff"; ctx.textAlign = "left"; ctx.fillText(t, x + 6, y); }
+        else { ctx.fillStyle = col || P.text; ctx.textAlign = "left"; ctx.fillText(t, x + wd + 6, y); }
+      };
+      const bh = 26;
+      // 매출
+      let y = 14;
+      label("매출", y + bh / 2);
+      ctx.fillStyle = P.accent2; rrect(ctx, bx, y, rev * sx, bh, 4); ctx.fill();
+      inBar("매출 " + MB.won(rev), bx, y + bh / 2, rev * sx);
+      // 비용 + 이익
+      y = 50;
+      label("나눠 보면", y + bh / 2);
+      ctx.globalAlpha = 0.55; ctx.fillStyle = P.bad; rrect(ctx, bx, y, Math.min(cost, 230e8) * sx, bh, 4); ctx.fill(); ctx.globalAlpha = 1;
+      if (ni >= 0) {
+        ctx.fillStyle = P.ok; ctx.fillRect(bx + cost * sx, y, Math.max(1, ni * sx), bh);
+        ctx.font = MB.font(12); ctx.fillStyle = "#fff"; ctx.textAlign = "left";
+        if (cost * sx > 90) ctx.fillText("비용 " + MB.won(cost), bx + 6, y + bh / 2);
+        ctx.fillStyle = P.ok; ctx.textAlign = "right";
+        ctx.fillText("순이익 " + MB.won(ni), Math.min(w - pad, bx + rev * sx + 2), y + bh + 11);
+      } else {
+        ctx.fillStyle = P.bad; ctx.fillRect(bx + rev * sx, y, -ni * sx, bh);
+        ctx.font = MB.font(12); ctx.fillStyle = "#fff"; ctx.textAlign = "left";
+        if (rev * sx > 90) ctx.fillText("비용 " + MB.won(cost), bx + 6, y + bh / 2);
+        ctx.fillStyle = P.bad; ctx.textAlign = "right"; ctx.fillText("적자 " + MB.won(-ni), w - pad, y + bh + 11);
+      }
+      // 배당 / 유보
+      y = 100;
+      label("순이익", y + bh / 2);
+      if (ni > 0) {
+        const sc = bwMax / Math.max(ni, 50e8 * 0.25);
+        const dv = ni * PAYOUT;
+        ctx.fillStyle = P.accent; rrect(ctx, bx, y, dv * sc, bh, 4); ctx.fill();
+        ctx.globalAlpha = 0.45; ctx.fillStyle = P.accent2; ctx.fillRect(bx + dv * sc, y, (ni - dv) * sc, bh); ctx.globalAlpha = 1;
+        ctx.font = MB.font(12); ctx.textAlign = "left";
+        ctx.fillStyle = "#fff"; if (dv * sc > 80) ctx.fillText("배당 " + MB.won(dv), bx + 6, y + bh / 2);
+        ctx.fillStyle = P.text; if ((ni - dv) * sc > 80) ctx.fillText("유보 " + MB.won(ni - dv), bx + dv * sc + 6, y + bh / 2);
+        ctx.fillStyle = P.dim; ctx.textAlign = "right"; ctx.fillText("(이 줄만 확대)", w - pad, y - 7);
+      } else {
+        ctx.font = MB.font(12); ctx.fillStyle = P.dim; ctx.textAlign = "left"; ctx.fillText("나눠 줄 이익이 없다", bx, y + bh / 2);
+      }
+      // 블록
+      y = 150;
+      ctx.strokeStyle = P.border; ctx.beginPath(); ctx.moveTo(pad, y - 8); ctx.lineTo(w - pad, y - 8); ctx.stroke();
+      ctx.font = MB.font(13, false, 600); ctx.fillStyle = P.text; ctx.textAlign = "left"; ctx.textBaseline = "top";
+      const per = cur.pe, gap = 6, bs = Math.min(30, (w - 2 * pad - 9 * gap) / 10);
+      if (ni > 0) {
+        const cap = ni * per;
+        ctx.fillText("시가총액 = 1년 치 순이익 블록 × " + Math.round(per) + "개", pad, y);
+        ctx.font = MB.font(13); ctx.fillStyle = P.text;
+        ctx.fillText("= " + MB.won(cap) + "  ÷ 100만 주  = 주가 " + wonP(cap / SH), pad, y + 22);
+        ctx.fillStyle = P.dim; ctx.font = MB.font(12);
+        ctx.fillText("이익수익률 1/PER = " + MB.pct(1 / per, 1), pad, y + 42);
+        const y0 = y + 66, n = Math.ceil(per - 1e-6);
+        for (let i = 0; i < n; i++) {
+          const bxk = pad + (i % 10) * (bs + gap), byk = y0 + Math.floor(i / 10) * (bs + gap), f = Math.min(1, per - i);
+          ctx.strokeStyle = P.ok; ctx.globalAlpha = 0.5; ctx.strokeRect(bxk + 0.5, byk + 0.5, bs - 1, bs - 1); ctx.globalAlpha = 1;
+          ctx.fillStyle = P.ok; ctx.globalAlpha = 0.75; ctx.fillRect(bxk + 1, byk + 1, (bs - 2) * f, bs - 2); ctx.globalAlpha = 1;
+        }
+      } else {
+        ctx.fillStyle = P.bad; ctx.fillText("적자: 쌓을 이익 블록이 없다", pad, y);
+        ctx.font = MB.font(12); ctx.fillStyle = P.dim;
+        ctx.fillText("이때 주가는 '언제 다시 이익을 낼까'에 대한 기대와", pad, y + 26);
+        ctx.fillText("회사가 가진 재산(PBR)으로 매겨진다.", pad, y + 44);
+      }
+    }, { get height() { return narrow("ls-cv") ? 360 : 380; } });
+    MB.loop(document.getElementById("sim-ls"), () => {
+      const t = tgt(); let moved = false;
+      for (const k of ["rev", "mg", "pe"]) {
+        const d = t[k] - cur[k];
+        if (Math.abs(d) > Math.abs(t[k]) * 1e-4 + 1e-6) { cur[k] += d * 0.2; moved = true; } else if (cur[k] !== t[k]) { cur[k] = t[k]; moved = true; }
+      }
+      if (moved) cv.redraw();
+    });
+    upd();
+  })();
+
+  /* ---------------------------------------------------------- 2. PER 착시 */
+  (function () {
+    const PX = 15000, E0 = { a: 3000, b: 300 };
+    let G = null;
+    const GA = MB.range("pe-a", (v) => (v > 0 ? "+" : "") + v + "%", () => cv.redraw());
+    const GB = MB.range("pe-b", (v) => "+" + v + "%", () => cv.redraw());
+    const per = (k, t) => PX / (E0[k] * Math.pow(1 + (k === "a" ? GA() : GB()) / 100, t));
+    const cv = MB.canvas("#pe-cv", (ctx, w, h) => {
+      const P = MB.palette(), nar = w < 520;
+      const box = { x: 58, y: 18, w: w - 58 - (nar ? 74 : 120), h: h - 18 - 62 };
+      const sA = [], sB = [];
+      for (let i = 0; i <= 50; i++) { const t = i / 10; sA.push([t, per("a", t)]); sB.push([t, per("b", t)]); }
+      const c = MB.chart(ctx, box, { x: [0, 5], y: [2, 100], logY: true, yTicks: [2, 5, 10, 20, 50, 100], yFmt: (v) => v + "배", xFmt: (v) => v + "년",
+        xTicks: [0, 1, 2, 3, 4, 5], xLabel: "지금부터 (주가 15,000원 고정)", yLabel: "PER",
+        series: [{ data: sA, color: P.accent2, width: 2.6 }, { data: sB, color: P.accent, width: 2.6 }],
+        hlines: [{ y: 15, color: P.faint, label: nar ? "" : "15배" }] });
+      G = c;
+      const clampY = (v) => MB.clamp(v, 2, 100);
+      const ya = c.Y(clampY(per("a", 5))), yb = c.Y(clampY(per("b", 5)));
+      knob(ctx, c.X(5), ya, P, 8, P.accent2); knob(ctx, c.X(5), yb, P, 8, P.accent);
+      ctx.font = MB.font(12, false, 600); ctx.textAlign = "left"; ctx.textBaseline = "middle";
+      const lx = c.X(5) + 14;
+      let la = ya, lb = yb; if (Math.abs(la - lb) < 30) { if (la < lb) { la -= 15 - (lb - la) / 2; lb += 15 - (lb - la) / 2; } else { lb -= 15 - (la - lb) / 2; la += 15 - (la - lb) / 2; } }
+      ctx.fillStyle = P.accent2; ctx.fillText(nar ? "철강" : "단단철강", lx, la - 8); ctx.font = MB.font(12, true); ctx.fillText(per("a", 5).toFixed(1) + "배", lx, la + 8);
+      ctx.font = MB.font(12, false, 600); ctx.fillStyle = P.accent; ctx.fillText(nar ? "소프트" : "새싹소프트", lx, lb - 8); ctx.font = MB.font(12, true); ctx.fillText(per("b", 5).toFixed(1) + "배", lx, lb + 8);
+      ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+      ctx.textBaseline = "top"; ctx.fillText("철강 PER 5", c.X(0) + 6, c.Y(5) + 5); ctx.textBaseline = "bottom"; ctx.fillText("소프트 PER 50", c.X(0) + 6, c.Y(50) - 5);
+      const a5 = per("a", 5), b5 = per("b", 5);
+      MB.stat("pe-o-a", a5.toFixed(1) + "<small>배</small>");
+      MB.stat("pe-o-b", b5.toFixed(1) + "<small>배</small>");
+      MB.stat("pe-o-e", wonP(PX / a5) + " / " + wonP(PX / b5));
+      MB.stat("pe-o-s", a5 > b5 ? tone("bad-t", "싼 쪽이 뒤집힘") : tone("ok-t", "철강이 여전히 쌈"));
+    }, { get height() { return narrow("pe-cv") ? 316 : 336; } });
+    let which = "a";
+    MB.drag(cv.canvas, {
+      start(x, y) { if (!G) return; const ya = G.Y(MB.clamp(per("a", 5), 2, 100)), yb = G.Y(MB.clamp(per("b", 5), 2, 100)); which = Math.abs(y - ya) <= Math.abs(y - yb) ? "a" : "b"; },
+      move(x, y) {
+        if (!G) return;
+        const b = G.box, f = MB.clamp((b.y + b.h - y) / b.h, 0, 1), v = Math.pow(10, Math.log10(2) + f * (Math.log10(100) - Math.log10(2)));
+        const g = Math.pow(PX / E0[which] / v, 1 / 5) - 1;
+        if (which === "a") GA.set(MB.clamp(Math.round(g * 100), -40, 10)); else GB.set(MB.clamp(Math.round(g * 100), 0, 50));
+      },
+    });
+  })();
+
+  /* ---------------------------------------------------------- 3. 미래 배당의 현재가치 */
+  (function () {
+    const D1 = 400, N = 60;
+    const GG = MB.range("dv-g", (v) => v.toFixed(1) + "%", () => cv.redraw());
+    const RR = MB.range("dv-r", (v) => v.toFixed(1) + "%", () => cv.redraw());
+    const cv = MB.canvas("#dv-cv", (ctx, w, h) => {
+      const P = MB.palette(), g = GG() / 100, r = RR() / 100;
+      const box = { x: 52, y: 16, w: w - 52 - 14, h: h - 16 - 96 };
+      const c = MB.chart(ctx, box, { x: [0.5, N + 0.5], y: [0, 600], xTicks: [1, 10, 20, 30, 40, 50, 60], xFmt: (v) => v + "년", yFmt: (v) => v + "원", yTicks: [0, 200, 400, 600] });
+      const cols = (t) => (t <= 10 ? P.accent : t <= 30 ? P.accent2 : P.warn);
+      const bw = box.w / N * 0.72;
+      const nom = [];
+      let s10 = 0, s60 = 0;
+      for (let t = 1; t <= N; t++) {
+        const d = D1 * Math.pow(1 + g, t - 1), pv = d / Math.pow(1 + r, t);
+        if (t <= 10) s10 += pv; s60 += pv;
+        nom.push([t, d]);
+        ctx.fillStyle = cols(t); ctx.globalAlpha = 0.85;
+        ctx.fillRect(c.X(t) - bw / 2, c.Y(pv), bw, c.Y(0) - c.Y(pv)); ctx.globalAlpha = 1;
+      }
+      ctx.save(); ctx.beginPath(); ctx.rect(box.x, box.y, box.w, box.h); ctx.clip();
+      ctx.strokeStyle = P.faint; ctx.lineWidth = 1.6; ctx.setLineDash([4, 3]); ctx.beginPath();
+      nom.forEach(([t, d], i) => (i ? ctx.lineTo(c.X(t), c.Y(d)) : ctx.moveTo(c.X(t), c.Y(d)))); ctx.stroke(); ctx.setLineDash([]); ctx.restore();
+      ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.textAlign = "right"; ctx.textBaseline = "top";
+      ctx.fillText("점선: 실제로 받을 배당  ·  막대: 오늘 가치", box.x + box.w, box.y + 2);
+      // 띠
+      const inf = g >= r, total = inf ? Infinity : D1 / (r - g);
+      const parts = inf ? null : [[s10, P.accent, "1~10년"], [s60 - s10, P.accent2, "11~60년"], [total - s60, P.warn, "61년~"]];
+      const sy = h - 52, sh = 22, sx0 = 14, sw = w - 28;
+      ctx.font = MB.font(12, false, 600); ctx.fillStyle = P.text; ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+      ctx.fillText(inf ? "주가 = 무한대 (g ≥ r: 모형이 무너진다)" : "주가 " + wonP(total) + "를 기간별로 나누면", sx0, sy - 6);
+      if (inf) {
+        ctx.fillStyle = P.bad; ctx.globalAlpha = 0.25; ctx.fillRect(sx0, sy, sw, sh); ctx.globalAlpha = 1;
+        ctx.font = MB.font(12); ctx.fillStyle = P.bad; ctx.textBaseline = "middle"; ctx.fillText("먼 미래일수록 오히려 더 큰 값이 끝없이 더해진다", sx0 + 8, sy + sh / 2);
+      } else {
+        let x = sx0;
+        parts.forEach(([v, col, lab]) => {
+          const ww = (v / total) * sw;
+          ctx.fillStyle = col; ctx.globalAlpha = 0.85; ctx.fillRect(x, sy, ww, sh); ctx.globalAlpha = 1;
+          ctx.font = MB.font(11, false, 600); ctx.fillStyle = "#fff"; ctx.textBaseline = "middle"; ctx.textAlign = "center";
+          const txt = Math.round((v / total) * 100) + "%";
+          if (ww > 34) ctx.fillText(txt, x + ww / 2, sy + sh / 2);
+          ctx.fillStyle = P.dim; ctx.font = MB.font(11); ctx.textBaseline = "top";
+          if (ww > 46) ctx.fillText(lab, x + ww / 2, sy + sh + 4);
+          x += ww;
+        });
+      }
+      MB.stat("dv-o-p", inf ? tone("bad-t", "∞") : wonP(total));
+      MB.stat("dv-o-a", wonP(s10) + (inf ? "" : " <small>" + Math.round((s10 / total) * 100) + "%</small>"));
+      MB.stat("dv-o-b", wonP(s60 - s10) + (inf ? "" : " <small>" + Math.round(((s60 - s10) / total) * 100) + "%</small>"));
+      MB.stat("dv-o-c", inf ? tone("bad-t", "∞") : wonP(total - s60) + " <small>" + Math.round(((total - s60) / total) * 100) + "%</small>");
+    }, { get height() { return narrow("dv-cv") ? 320 : 340; } });
+  })();
+
+  /* ---------------------------------------------------------- 4. 고든 성장 모형 */
+  (function () {
+    const D1 = 400, EPS = 1000, YMAX = 60000;
+    let g = 5, G = null;
+    const RR = MB.range("gd-r", (v) => v.toFixed(1) + "%", () => cv.redraw());
+    const price = (gg, r) => (gg >= r ? Infinity : D1 / ((r - gg) / 100));
+    const cv = MB.canvas("#gd-cv", (ctx, w, h) => {
+      const P = MB.palette(), r = RR();
+      const box = { x: 58, y: 18, w: w - 58 - 18, h: h - 18 - 62 };
+      const curve = [];
+      for (let x = -2; x < r - 0.01; x += 0.02) curve.push([x, price(x, r)]);
+      curve.push([r - 0.005, price(r - 0.005, r)]);
+      const c = MB.chart(ctx, box, { x: [-2, 12], y: [0, YMAX], xFmt: (v) => v + "%", yFmt: MB.wonAxis, xLabel: "배당 성장률 g", yLabel: "모형 주가",
+        series: [{ data: curve, color: P.accent, width: 2.6 }],
+        vlines: [{ x: r, color: P.bad, label: "할인율 r = " + r + "%" }],
+        hlines: [{ y: 15000, color: P.accent2, label: "시장 가격 15,000원" }] });
+      G = c;
+      ctx.fillStyle = P.bad; ctx.globalAlpha = 0.07; ctx.fillRect(c.X(r), box.y, c.X(12) - c.X(r), box.h); ctx.globalAlpha = 1;
+      ctx.font = MB.font(12); ctx.fillStyle = P.bad; ctx.textAlign = "left"; ctx.textBaseline = "top";
+      if (c.X(12) - c.X(r) > 110) ctx.fillText("g ≥ r: 값이 없다", c.X(r) + 6, box.y + 22);
+      const p = price(g, r), py = isFinite(p) ? c.Y(Math.min(p, YMAX)) : box.y;
+      if (isFinite(p) && p > YMAX) { ctx.fillStyle = P.bad; ctx.textAlign = "center"; ctx.textBaseline = "top"; ctx.font = MB.font(12, false, 600); ctx.fillText("↑ " + MB.wonAxis(p), c.X(g), py + 12); }
+      knob(ctx, c.X(g), py, P, 8, isFinite(p) ? P.accent : P.bad);
+      const fmtD = (q) => (!isFinite(p) || !isFinite(q) ? (isFinite(q) ? wonP(q) : tone("bad-t", "∞")) : wonP(q) + " <small>" + pctS(q / p - 1, 0) + "</small>");
+      MB.stat("gd-o-p", isFinite(p) ? wonP(p) : tone("bad-t", "∞ (무너짐)"));
+      MB.stat("gd-o-pe", isFinite(p) ? (p / EPS).toFixed(1) + "<small>배</small>" : "—");
+      MB.stat("gd-o-g", fmtD(price(g + 1, r)));
+      MB.stat("gd-o-r", fmtD(price(g, r + 1)));
+    }, { get height() { return narrow("gd-cv") ? 316 : 354; } });
+    MB.drag(cv.canvas, { move(x) { if (!G) return; const b = G.box; g = Math.round(MB.clamp(-2 + ((x - b.x) / b.w) * 14, -2, 12) * 10) / 10; cv.redraw(); } });
+  })();
+
+  /* ---------------------------------------------------------- 5. 배당 재투자 vs 인출 */
+  (function () {
+    const START = 1e7, Y = 30;
+    let shown = Y;
+    const YY = MB.range("rv-y", (v) => v.toFixed(1) + "%", () => cv.redraw());
+    const GG = MB.range("rv-g", (v) => v.toFixed(1) + "%", () => cv.redraw());
+    const tax = document.getElementById("rv-tax");
+    tax.addEventListener("change", () => cv.redraw());
+    function sim() {
+      const y = YY() / 100, g = GG() / 100, t = tax.checked ? MN.KR.interestTax : 0;
+      let V = START, W = START, C = 0;
+      const a = [[0, V]], b = [[0, W]], c = [[0, W]];
+      for (let k = 1; k <= Y; k++) { V = V * (1 + g) + y * (1 - t) * V; C += y * (1 - t) * W; W *= 1 + g; a.push([k, V]); b.push([k, W]); c.push([k, W + C]); }
+      return { a, b, c, V, W, C };
+    }
+    const cv = MB.canvas("#rv-cv", (ctx, w, h) => {
+      const P = MB.palette(), s = sim(), n = Math.floor(shown);
+      const top = Math.max(2e7, s.V * 1.08);
+      const cut = (arr) => arr.slice(0, n + 1);
+      const box = { x: 58, y: 16, w: w - 58 - 16, h: h - 16 - 46 };
+      MB.chart(ctx, box, { x: [0, Y], y: [0, top], yFmt: MB.wonAxis, xFmt: (v) => v + "년",
+        series: [{ data: cut(s.c), color: P.faint, width: 2, dash: [5, 4] }, { data: cut(s.b), color: P.accent2, width: 2.4 }, { data: cut(s.a), color: P.accent, width: 2.8 }],
+        hlines: [{ y: START, color: P.faint, label: "처음 1,000만원" }] });
+      MB.stat("rv-o-a", MB.won(s.V));
+      MB.stat("rv-o-b", MB.won(s.W));
+      MB.stat("rv-o-c", MB.won(s.C));
+      MB.stat("rv-o-d", tone("ok-t", "+" + MB.won(s.V - s.W - s.C)));
+    }, { aspect: 0.6, minHeight: 260, maxHeight: 340 });
+    let playing = false;
+    const loop = MB.loop(document.getElementById("sim-rv"), (dt) => {
+      if (!playing) return;
+      shown = Math.min(Y, shown + dt * 10);
+      if (shown >= Y) playing = false;
+      cv.redraw();
+    });
+    document.getElementById("rv-go").addEventListener("click", () => { shown = 0; playing = true; loop.start(); });
+  })();
+
+  /* ---------------------------------------------------------- 6. 호가창 */
+  (function () {
+    const TICK = 10, ROWS = 12;
+    const rnd = MB.rng(13);
+    let book, last, trades, chips, flashes, my, sel = 15000, timer = 0, center = 15000;
+    function reset() {
+      book = { bid: new Map(), ask: new Map() };
+      last = 15000; center = 15000; trades = []; chips = []; flashes = new Map();
+      my = { filled: 0, cost: 0, rest: 0, lastQ: 0, lastAvg: NaN, lastLeft: 0, lastType: "" };
+      for (let i = 0; i < 8; i++) { add("ask", 15010 + i * TICK, (5 + Math.floor(rnd() * 25)) * 10); add("bid", 15000 - i * TICK, (5 + Math.floor(rnd() * 25)) * 10); }
+    }
+    function add(side, p, q, mine) { const m = book[side]; if (!m.has(p)) m.set(p, []); m.get(p).push({ q, mine: !!mine }); }
+    const lvl = (side, p) => { const a = book[side].get(p); return a ? a.reduce((s, o) => s + o.q, 0) : 0; };
+    const mineAt = (side, p) => { const a = book[side].get(p); return a ? a.reduce((s, o) => s + (o.mine ? o.q : 0), 0) : 0; };
+    function best(side) {
+      let b = NaN;
+      book[side].forEach((arr, p) => { if (!arr.length) return; if (isNaN(b) || (side === "bid" ? p > b : p < b)) b = p; });
+      return b;
+    }
+    function exec(o) {
+      const opp = o.side === "buy" ? "ask" : "bid";
+      let q = o.q, got = 0, cost = 0;
+      while (q > 0) {
+        const bp = best(opp);
+        if (isNaN(bp)) break;
+        if (o.type === "limit" && (o.side === "buy" ? bp > o.p : bp < o.p)) break;
+        const queue = book[opp].get(bp);
+        let filledHere = 0;
+        while (q > 0 && queue.length) {
+          const r = queue[0], f = Math.min(q, r.q);
+          r.q -= f; q -= f; got += f; cost += f * bp; filledHere += f;
+          if (r.mine) { my.filled += f; my.cost += f * bp; my.rest -= f; }
+          if (r.q <= 0) queue.shift();
+        }
+        if (!queue.length) book[opp].delete(bp);
+        trades.unshift({ p: bp, q: filledHere, side: o.side, mine: !!o.mine });
+        last = bp; flashes.set(bp, 1);
+      }
+      if (trades.length > 30) trades.length = 30;
+      if (o.mine) { my.filled += got; my.cost += cost; my.lastQ = got; my.lastAvg = got ? cost / got : NaN; my.lastLeft = q; my.lastType = o.type; }
+      if (q > 0 && o.type === "limit") { add(o.side === "buy" ? "bid" : "ask", o.p, q, o.mine); if (o.mine) my.rest += q; }
+    }
+    function autoOrder() {
+      const bb = best("bid"), ba = best("ask");
+      const tot = (sd) => { let t = 0; book[sd].forEach((arr) => arr.forEach((o) => (t += o.q))); return t; };
+      const thinA = tot("ask") < 500, thinB = tot("bid") < 500;
+      const side = thinA && !thinB ? "sell" : thinB && !thinA ? "buy" : rnd() < 0.5 ? "buy" : "sell", q = (1 + Math.floor(rnd() * 15)) * 10;
+      if (!thinA && !thinB && rnd() < 0.24) return { side, type: "market", q };
+      const k = Math.floor(rnd() * 5) - (rnd() < 0.12 && !thinA && !thinB ? 1 : 0);
+      const p = side === "buy" ? (isNaN(bb) ? (isNaN(ba) ? last : ba - TICK) : bb) - k * TICK : (isNaN(ba) ? (isNaN(bb) ? last : bb + TICK) : ba) + k * TICK;
+      return { side, type: "limit", p, q };
+    }
+    function tidy() {
+      ["bid", "ask"].forEach((side) => {
+        book[side].forEach((arr, p) => {
+          if (Math.abs(p - last) > 8 * TICK) { for (let i = arr.length - 1; i >= 0; i--) if (!arr[i].mine && rnd() < 0.08) arr.splice(i, 1); }
+          if (!arr.length) book[side].delete(p);
+        });
+      });
+    }
+    let L = null;
+    const rowY = (p) => L.top + ((center + 6 * TICK - p) / TICK) * L.rh;
+    function send(o) {
+      if (!L) { exec(o); return; }
+      const target = o.type === "market" ? (o.side === "buy" ? best("ask") : best("bid")) : o.p;
+      const ty = isNaN(target) ? rowY(center) : MB.clamp(rowY(target), L.top, L.top + (ROWS - 1) * L.rh) + L.rh / 2;
+      const fromX = o.side === "buy" ? L.x + L.w + 30 : L.x - 30;
+      chips.push({ o, x0: fromX, y0: ty, x1: L.x + L.w / 2, y1: ty, t: 0 });
+    }
+    const SIDE = MB.seg("ob-side", () => {});
+    const TYPE = MB.seg("ob-type", () => {});
+    const Q = MB.range("ob-q", (v) => v + "주", () => {});
+    const autoEl = document.getElementById("ob-auto");
+    reset();
+    const cv = MB.canvas("#ob-cv", (ctx, w, h) => {
+      const P = MB.palette(), nar = narrow("ob-cv"), pad = 12;
+      const lw = nar ? w - 2 * pad : Math.round(w * 0.6);
+      const rh = nar ? 22 : 24, top = 34;
+      L = { x: pad, w: lw, top, rh };
+      const bb = best("bid"), ba = best("ask");
+      // 화면 중심: 현재가를 천천히 따라간다
+      const colA = { x: L.x, w: lw * 0.37 }, colP = { x: L.x + lw * 0.37, w: lw * 0.26 }, colB = { x: L.x + lw * 0.63, w: lw * 0.37 };
+      ctx.font = MB.font(12, false, 600); ctx.textBaseline = "middle"; ctx.textAlign = "center";
+      ctx.fillStyle = P.blue; ctx.fillText("매도 잔량", colA.x + colA.w / 2, 16);
+      ctx.fillStyle = P.dim; ctx.fillText("가격", colP.x + colP.w / 2, 16);
+      ctx.fillStyle = P.red; ctx.fillText("매수 잔량", colB.x + colB.w / 2, 16);
+      let maxQ = 300;
+      for (let i = 0; i < ROWS; i++) { const p = center + (6 - i) * TICK; maxQ = Math.max(maxQ, lvl("ask", p), lvl("bid", p)); }
+      for (let i = 0; i < ROWS; i++) {
+        const p = center + (6 - i) * TICK, y = top + i * rh;
+        const isAsk = !isNaN(ba) && p >= ba, isBid = !isNaN(bb) && p <= bb;
+        ctx.fillStyle = isAsk ? P.blue : isBid ? P.red : P.surface;
+        ctx.globalAlpha = isAsk || isBid ? 0.07 : 0.6; ctx.fillRect(L.x, y, lw, rh - 1); ctx.globalAlpha = 1;
+        const fl = flashes.get(p);
+        if (fl) { ctx.fillStyle = P.warn; ctx.globalAlpha = 0.45 * fl; ctx.fillRect(L.x, y, lw, rh - 1); ctx.globalAlpha = 1; }
+        const qa = lvl("ask", p), qb = lvl("bid", p);
+        if (qa) {
+          const bw = (qa / maxQ) * (colA.w - 8);
+          ctx.fillStyle = P.blue; ctx.globalAlpha = 0.35; ctx.fillRect(colA.x + colA.w - bw, y + 3, bw, rh - 7); ctx.globalAlpha = 1;
+          ctx.fillStyle = P.text; ctx.font = MB.font(12, true); ctx.textAlign = "right"; ctx.fillText(qa.toLocaleString("ko-KR"), colA.x + colA.w - 6, y + rh / 2);
+          const mq = mineAt("ask", p);
+          if (mq) { ctx.fillStyle = P.accent; ctx.font = MB.font(11, false, 700); ctx.textAlign = "left"; ctx.fillText("내 " + mq, colA.x + 4, y + rh / 2); }
+        }
+        if (qb) {
+          const bw = (qb / maxQ) * (colB.w - 8);
+          ctx.fillStyle = P.red; ctx.globalAlpha = 0.35; ctx.fillRect(colB.x, y + 3, bw, rh - 7); ctx.globalAlpha = 1;
+          ctx.fillStyle = P.text; ctx.font = MB.font(12, true); ctx.textAlign = "left"; ctx.fillText(qb.toLocaleString("ko-KR"), colB.x + 6, y + rh / 2);
+          const mq = mineAt("bid", p);
+          if (mq) { ctx.fillStyle = P.accent; ctx.font = MB.font(11, false, 700); ctx.textAlign = "right"; ctx.fillText("내 " + mq, colB.x + colB.w - 4, y + rh / 2); }
+        }
+        ctx.font = MB.font(12, true, p === last ? 700 : 400); ctx.textAlign = "center";
+        ctx.fillStyle = isAsk ? P.blue : isBid ? P.red : P.dim;
+        ctx.fillText(p.toLocaleString("ko-KR"), colP.x + colP.w / 2, y + rh / 2);
+        if (p === last) { ctx.strokeStyle = P.text; ctx.lineWidth = 1.5; ctx.strokeRect(colP.x + 3, y + 1.5, colP.w - 6, rh - 4); }
+        if (p === sel && TYPE() === "limit") { ctx.strokeStyle = P.accent; ctx.lineWidth = 2; ctx.setLineDash([4, 3]); ctx.strokeRect(L.x + 1, y + 1, lw - 2, rh - 3); ctx.setLineDash([]); }
+      }
+      ctx.strokeStyle = P.border; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(colP.x, top); ctx.lineTo(colP.x, top + ROWS * rh); ctx.moveTo(colB.x, top); ctx.lineTo(colB.x, top + ROWS * rh); ctx.stroke();
+      // 날아오는 주문
+      chips.forEach((c) => {
+        const e = 1 - Math.pow(1 - Math.min(1, c.t), 3), x = MB.lerp(c.x0, c.x1, e), y = c.y0;
+        const lab = (c.o.type === "market" ? "시장가 " : "") + c.o.q;
+        ctx.font = MB.font(11, false, 700); const tw = ctx.measureText(lab).width + 12;
+        ctx.fillStyle = c.o.side === "buy" ? P.red : P.blue; ctx.globalAlpha = 0.92;
+        rrect(ctx, x - tw / 2, y - 9, tw, 18, 9); ctx.fill(); ctx.globalAlpha = 1;
+        if (c.o.mine) { ctx.strokeStyle = P.accent; ctx.lineWidth = 2.5; ctx.stroke(); }
+        ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(lab, x, y);
+      });
+      // 체결 내역
+      const T = nar ? { x: pad, y: top + ROWS * rh + 18, w: w - 2 * pad, n: 7 } : { x: L.x + lw + 22, y: top - 18, w: w - (L.x + lw + 22) - pad, n: 13 };
+      ctx.font = MB.font(12, false, 600); ctx.fillStyle = P.dim; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+      ctx.fillText("체결 내역 (최근 위)", T.x, T.y + 10);
+      trades.slice(0, T.n).forEach((t, i) => {
+        const y = T.y + 32 + i * 21;
+        ctx.globalAlpha = i === 0 ? 1 : Math.max(0.35, 1 - i * 0.05);
+        ctx.font = MB.font(12, true, t.mine ? 700 : 400); ctx.fillStyle = t.side === "buy" ? P.red : P.blue; ctx.textAlign = "left";
+        ctx.fillText(t.p.toLocaleString("ko-KR"), T.x, y);
+        ctx.textAlign = "right"; ctx.fillText(t.q + "주", T.x + Math.min(T.w, 150), y);
+        if (t.mine) { ctx.font = MB.font(11, false, 700); ctx.fillStyle = P.accent; ctx.textAlign = "left"; ctx.fillText("내 주문", T.x + Math.min(T.w, 150) + 8, y); }
+        ctx.globalAlpha = 1;
+      });
+      if (!trades.length) { ctx.font = MB.font(12); ctx.fillStyle = P.faint; ctx.textAlign = "left"; ctx.fillText("아직 체결 없음", T.x, T.y + 32); }
+      MB.stat("ob-o-last", wonP(last));
+      MB.stat("ob-o-sp", isNaN(ba) || isNaN(bb) ? tone("bad-t", "한쪽 호가 없음") : (ba - bb) + "원 <small>" + ((ba - bb) / TICK) + "칸</small>");
+      MB.stat("ob-o-sel", TYPE() === "limit" ? wonP(sel) : "<small>시장가</small>");
+      let myTxt = my.filled ? my.filled + "주 <small>평균 " + Math.round(my.cost / my.filled).toLocaleString("ko-KR") + "원</small>" : "0주";
+      if (my.rest > 0) myTxt += " <small>· 대기 " + my.rest + "주</small>";
+      if (my.lastType === "market" && my.lastLeft > 0) myTxt += " <small>· " + my.lastLeft + "주는 상대 호가가 없어 취소</small>";
+      MB.stat("ob-o-my", myTxt);
+    }, { get height() { return narrow("ob-cv") ? 34 + ROWS * 22 + 190 : 34 + ROWS * 24 + 14; } });
+    MB.loop(document.getElementById("sim-ob"), (dt) => {
+      if (autoEl.checked) {
+        timer -= dt;
+        if (timer <= 0) { send(autoOrder()); timer = 0.45 + rnd() * 0.6; if (rnd() < 0.3) tidy(); }
+      }
+      chips.forEach((c) => (c.t += dt / 0.45));
+      const done = chips.filter((c) => c.t >= 1);
+      chips = chips.filter((c) => c.t < 1);
+      done.forEach((c) => exec(c.o));
+      flashes.forEach((v, k) => { const nv = v - dt * 1.6; if (nv <= 0) flashes.delete(k); else flashes.set(k, nv); });
+      const bb = best("bid"), ba = best("ask");
+      const mid = !isNaN(bb) && !isNaN(ba) ? (bb + ba) / 2 : !isNaN(bb) ? bb + 2 * TICK : !isNaN(ba) ? ba - 2 * TICK : last;
+      const tgt = Math.round(mid / TICK) * TICK;
+      if (Math.abs(tgt - center) >= 3 * TICK) center = tgt;
+      cv.redraw();
+    });
+    MB.drag(cv.canvas, { start(x, y) { if (!L) return; const i = Math.floor((y - L.top) / L.rh); if (i >= 0 && i < ROWS && x <= L.x + L.w) { sel = center + (6 - i) * TICK; if (TYPE() !== "limit") TYPE.set("limit"); cv.redraw(); } } });
+    document.getElementById("ob-go").addEventListener("click", () => {
+      send({ side: SIDE(), type: TYPE(), p: sel, q: Q(), mine: true });
+    });
+    document.getElementById("ob-re").addEventListener("click", () => { reset(); sel = 15000; cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 7. 거래 비용 */
+  (function () {
+    const MON = 5e5, RATE = 0.075, Y = 30;
+    const NN = MB.range("tc-n", (v) => v.toFixed(1) + "회", () => cv.redraw());
+    const CC = MB.range("tc-c", (v) => v.toFixed(2) + "%", () => cv.redraw());
+    const cv = MB.canvas("#tc-cv", (ctx, w, h) => {
+      const P = MB.palette(), fee = (NN() * CC()) / 100;
+      const a = MN.grow({ monthly: MON, rate: RATE, years: Y }), b = MN.grow({ monthly: MON, rate: RATE, years: Y, fee });
+      const box = { x: 58, y: 16, w: w - 58 - 16, h: h - 16 - 46 };
+      const c = MB.chart(ctx, box, { x: [0, Y], y: [0, a[Y].value * 1.05], yFmt: MB.wonAxis, xFmt: (v) => v + "년",
+        series: [{ data: a.map((r) => [r.year, r.contrib]), color: P.faint, width: 1.6, dash: [5, 4] },
+          { data: a.map((r) => [r.year, r.value]), color: P.accent, width: 2.6 },
+          { data: b.map((r) => [r.year, r.value]), color: P.bad, width: 2.6 }] });
+      ctx.fillStyle = P.bad; ctx.globalAlpha = 0.12; ctx.beginPath();
+      a.forEach((r, i) => (i ? ctx.lineTo(c.X(r.year), c.Y(r.value)) : ctx.moveTo(c.X(r.year), c.Y(r.value))));
+      for (let i = b.length - 1; i >= 0; i--) ctx.lineTo(c.X(b[i].year), c.Y(b[i].value));
+      ctx.closePath(); ctx.fill(); ctx.globalAlpha = 1;
+      const d = a[Y].value - b[Y].value;
+      ctx.font = MB.font(12, false, 600); ctx.fillStyle = P.bad; ctx.textAlign = "right"; ctx.textBaseline = "middle";
+      const yl = Math.round(Y * 0.8);
+      if (d > a[Y].value * 0.06) { ctx.textAlign = "right"; ctx.fillText("비용으로 샌 돈", c.X(yl) - 10, c.Y(a[yl].value) - 22); ctx.fillText(MB.won(d), c.X(yl) - 10, c.Y(a[yl].value) - 6); }
+      MB.stat("tc-o-f", MB.pct(fee, 2));
+      MB.stat("tc-o-a", MB.won(a[Y].value));
+      MB.stat("tc-o-b", MB.won(b[Y].value));
+      MB.stat("tc-o-d", tone(d > 0 ? "bad-t" : "", "−" + MB.won(d)));
+    }, { aspect: 0.6, minHeight: 260, maxHeight: 340 });
+  })();
+
+  /* ---------------------------------------------------------- 8. 지수 */
+  (function () {
+    const CO = [
+      { name: "큰강전자", short: "큰강", sh: 5e7, p0: 60000 },
+      { name: "푸른물류", short: "푸른", sh: 2e7, p0: 25000 },
+      { name: "달빛게임", short: "달빛", sh: 1e7, p0: 40000 },
+      { name: "새벽바이오", short: "새벽", sh: 5e6, p0: 30000 },
+      { name: "봄빛베이커리", short: "봄빛", sh: 1e6, p0: 15000 },
+    ];
+    let chg = [0, 0, 0, 0, 0], G = null, act = -1;
+    const LO = -0.8, HI = 2;
+    const rnd = MB.rng(41);
+    const cv = MB.canvas("#ix-cv", (ctx, w, h) => {
+      const P = MB.palette(), pad = 14, nar = w < 520;
+      const top = 30, bot = h - 112, cw = (w - 2 * pad) / CO.length;
+      const Y = (v) => top + ((HI - v) / (HI - LO)) * (bot - top);
+      G = { pad, cw, Y, top, bot };
+      ctx.strokeStyle = P.grid; ctx.lineWidth = 1; ctx.font = MB.font(11, true); ctx.fillStyle = P.dim; ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+      [-0.5, 0.5, 1, 1.5, 2].forEach((v) => { ctx.beginPath(); ctx.moveTo(pad, Y(v)); ctx.lineTo(w - pad, Y(v)); ctx.stroke(); });
+      ctx.fillText("+200%", pad + 2, Y(2) + 14); ctx.fillText("+100%", pad + 2, Y(1) - 1); ctx.fillText("−50%", pad + 2, Y(-0.5) - 1);
+      ctx.strokeStyle = P.axis; ctx.beginPath(); ctx.moveTo(pad, Y(0)); ctx.lineTo(w - pad, Y(0)); ctx.stroke();
+      const caps = CO.map((c, i) => c.sh * c.p0 * (1 + chg[i])), tot = caps.reduce((s, v) => s + v, 0);
+      const cols = [P.accent, P.accent2, P.warn, P.blue, P.ok];
+      CO.forEach((c, i) => {
+        const cx = pad + cw * (i + 0.5), bw = Math.min(46, cw * 0.5), v = chg[i];
+        ctx.fillStyle = v >= 0 ? P.red : P.blue; ctx.globalAlpha = 0.75;
+        if (v) ctx.fillRect(cx - bw / 2, Math.min(Y(0), Y(v)), bw, Math.abs(Y(v) - Y(0))); ctx.globalAlpha = 1;
+        knob(ctx, cx, Y(v), P, act === i ? 9 : 7, cols[i]);
+        ctx.font = MB.font(12, true, 600); ctx.fillStyle = v > 0 ? P.red : v < 0 ? P.blue : P.dim; ctx.textAlign = "center";
+        ctx.textBaseline = v >= 0 ? "bottom" : "top";
+        ctx.fillText(pctS(v, 0), cx, v >= 0 ? Y(v) - 12 : Y(v) + 12);
+        ctx.font = MB.font(12, false, 600); ctx.fillStyle = P.text; ctx.textBaseline = "top";
+        ctx.fillText(nar ? c.short : c.name, cx, bot + 6);
+        ctx.font = MB.font(11, true); ctx.fillStyle = P.dim;
+        ctx.fillText(Math.round(c.p0 * (1 + v)).toLocaleString("ko-KR"), cx, bot + 22);
+      });
+      // 비중 띠
+      const sy = h - 62, sh = 22;
+      ctx.font = MB.font(11); ctx.fillStyle = P.dim; ctx.textAlign = "left"; ctx.textBaseline = "bottom"; ctx.fillText("시가총액 비중", pad, sy - 3);
+      let x = pad;
+      caps.forEach((cp, i) => {
+        const ww = (cp / tot) * (w - 2 * pad);
+        ctx.fillStyle = cols[i]; ctx.globalAlpha = 0.85; ctx.fillRect(x, sy, Math.max(0.5, ww), sh); ctx.globalAlpha = 1;
+        ctx.fillStyle = "#fff"; ctx.font = MB.font(11, false, 700); ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        const lab = (nar ? CO[i].short : CO[i].name) + " " + Math.round((cp / tot) * 100) + "%";
+        if (ctx.measureText(lab).width + 8 < ww) ctx.fillText(lab, x + ww / 2, sy + sh / 2);
+        else if (ww > 30) ctx.fillText(Math.round((cp / tot) * 100) + "%", x + ww / 2, sy + sh / 2);
+        x += ww;
+      });
+      const tot0 = CO.reduce((s, c) => s + c.sh * c.p0, 0);
+      const capIx = (100 * tot) / tot0, eqIx = 100 * (1 + chg.reduce((s, v) => s + v, 0) / CO.length);
+      const pxIx = (100 * CO.reduce((s, c, i) => s + c.p0 * (1 + chg[i]), 0)) / CO.reduce((s, c) => s + c.p0, 0);
+      const f = (v) => v.toFixed(2) + " <small>" + pctS(v / 100 - 1, 1) + "</small>";
+      MB.stat("ix-o-cap", f(capIx)); MB.stat("ix-o-eq", f(eqIx)); MB.stat("ix-o-px", f(pxIx));
+      let ti = 0; caps.forEach((v, i) => { if (v > caps[ti]) ti = i; });
+      MB.stat("ix-o-top", CO[ti].short + " " + MB.pct(caps[ti] / tot, 1));
+    }, { get height() { return narrow("ix-cv") ? 370 : 390; } });
+    MB.drag(cv.canvas, {
+      start(x) { if (!G) return; act = MB.clamp(Math.floor((x - G.pad) / G.cw), 0, CO.length - 1); },
+      move(x, y) { if (!G || act < 0) return; const v = HI - ((y - G.top) / (G.bot - G.top)) * (HI - LO); chg[act] = Math.round(MB.clamp(v, LO, HI) * 100) / 100; cv.redraw(); },
+      end() { act = -1; cv.redraw(); },
+    });
+    document.getElementById("ix-day").addEventListener("click", () => { chg = chg.map((v) => MB.clamp(Math.round(((1 + v) * Math.exp(0.025 * Math.sqrt(-2 * Math.log(rnd() + 1e-9)) * Math.cos(TAU * rnd())) - 1) * 1000) / 1000, LO, HI)); cv.redraw(); });
+    document.getElementById("ix-bake").addEventListener("click", () => { chg = [0, 0, 0, 0, 1]; cv.redraw(); });
+    document.getElementById("ix-big").addEventListener("click", () => { chg = [-0.1, 0, 0, 0, 0]; cv.redraw(); });
+    document.getElementById("ix-re").addEventListener("click", () => { chg = [0, 0, 0, 0, 0]; cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 9. 스무 명의 종목 고르기 */
+  (function () {
+    const NP = 20, NS = 30, YM = 30, MO = YM * 12;
+    const si = Math.sqrt(S.sigma * S.sigma - M.sigma * M.sigma);
+    const lm = (Math.log(1 + M.mu) - 0.5 * M.sigma * M.sigma) / 12, vm = M.sigma / Math.sqrt(12);
+    const li = (-0.5 * si * si) / 12, vi = si / Math.sqrt(12);
+    let seed = 4, mkt, idio, reveal = MO;
+    function gen() {
+      const g = MN.gauss(seed * 7919 + 1);
+      mkt = new Float64Array(MO + 1); mkt[0] = 1;
+      for (let k = 1; k <= MO; k++) mkt[k] = mkt[k - 1] * Math.exp(lm + vm * g());
+      idio = [];
+      for (let p = 0; p < NP; p++) { const row = []; for (let s = 0; s < NS; s++) { const a = new Float64Array(MO); for (let k = 0; k < MO; k++) a[k] = Math.exp(li + vi * g()); row.push(a); } idio.push(row); }
+    }
+    function person(p, n, months) {
+      const out = new Float64Array(months + 1); out[0] = 1;
+      for (let k = 1; k <= months; k++) { let s = 0; for (let j = 0; j < n; j++) s += idio[p][j][k - 1]; out[k] = out[k - 1] * (mkt[k] / mkt[k - 1]) * (s / n); }
+      return out;
+    }
+    gen();
+    const NN = MB.range("pk-n", (v) => v + "개", () => cv.redraw());
+    const YY = MB.range("pk-y", (v) => v + "년", () => { reveal = YY() * 12; cv.redraw(); });
+    const cv = MB.canvas("#pk-cv", (ctx, w, h) => {
+      const P = MB.palette(), n = NN(), yrs = YY(), mos = yrs * 12, shownM = Math.min(mos, Math.floor(reveal));
+      const box = { x: 52, y: 14, w: w - 52 - 18, h: h - 14 - 46 };
+      const paths = []; for (let p = 0; p < NP; p++) paths.push(person(p, n, mos));
+      const iFin = mkt[mos];
+      const series = paths.map((a) => {
+        const d = []; for (let k = 0; k <= shownM; k += 3) d.push([k / 12, Math.max(0.03, a[k])]);
+        if (shownM % 3) d.push([shownM / 12, Math.max(0.03, a[shownM])]);
+        return { data: d, color: a[mos] > iFin ? P.ok : P.bad, width: 1.3 };
+      });
+      const id = []; for (let k = 0; k <= shownM; k += 3) id.push([k / 12, mkt[k]]);
+      const c = MB.chart(ctx, box, { x: [0, yrs], y: [0.05, 100], logY: true, yTicks: [0.1, 0.3, 1, 3, 10, 30, 100], yFmt: (v) => v + "배", xFmt: (v) => v + "년",
+        series: series.concat([{ data: id, color: P.text, width: 3.4 }]), hlines: [{ y: 1, color: P.faint, label: "원금" }] });
+      ctx.globalAlpha = 1;
+      if (shownM >= mos) {
+        paths.forEach((a) => { const v = MB.clamp(a[mos], 0.05, 100); ctx.fillStyle = a[mos] > iFin ? P.ok : P.bad; ctx.beginPath(); ctx.arc(c.X(yrs), c.Y(v), 3.2, 0, TAU); ctx.fill(); });
+        knob(ctx, c.X(yrs), c.Y(MB.clamp(iFin, 0.05, 100)), P, 6, P.text);
+      }
+      const fins = paths.map((a) => a[mos]).sort((x, y) => x - y);
+      const wins = fins.filter((v) => v > iFin).length, loss = fins.filter((v) => v < 1).length;
+      const med = (fins[9] + fins[10]) / 2;
+      MB.stat("pk-o-w", tone(wins < 10 ? "bad-t" : "ok-t", wins + "<small> / 20명</small>"));
+      MB.stat("pk-o-i", iFin.toFixed(2) + "<small>배</small>");
+      MB.stat("pk-o-m", tone(med < iFin ? "bad-t" : "ok-t", med.toFixed(2) + "<small>배</small>"));
+      MB.stat("pk-o-l", loss + "<small>명 · 최저 " + fins[0].toFixed(2) + "배</small>");
+    }, { aspect: 0.62, minHeight: 280, maxHeight: 380 });
+    MB.loop(document.getElementById("sim-pk"), (dt) => {
+      const mos = YY() * 12;
+      if (reveal < mos) { reveal = Math.min(mos, reveal + dt * mos / 2.2); cv.redraw(); }
+    });
+    document.getElementById("pk-go").addEventListener("click", () => { seed++; gen(); reveal = 0; cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 10. 왜도: 소수 종목의 몫 */
+  (function () {
+    const N = 500, YM = 30;
+    let seed = 11, paths, pick = 0.04, G = null;
+    const gen = () => { paths = MN.paths({ mu: S.mu, sigma: S.sigma, years: YM, steps: 1, n: N, seed }); };
+    gen();
+    const YY = MB.range("sk-y", (v) => v + "년", () => cv.redraw());
+    const cv = MB.canvas("#sk-cv", (ctx, w, h) => {
+      const P = MB.palette(), T = YY();
+      const v = paths.map((a) => a[T]).sort((x, y) => y - x);
+      const gains = v.map((x) => x - 1), net = gains.reduce((s, x) => s + x, 0);
+      const box = { x: 52, y: 16, w: w - 52 - 50, h: h - 16 - 62 };
+      const c = MB.chart(ctx, box, { x: [0, N], y: [0.01, 1000], logY: true, yTicks: [0.01, 0.1, 1, 10, 100, 1000], yFmt: (x) => x + "배", xTicks: [0, 100, 200, 300, 400, 500], xFmt: (x) => Math.round(x / 5) + "%",
+        xLabel: "종목 (이익이 큰 순서, 상위 몇 %)" });
+      G = c;
+      const bw = box.w / N, y1 = c.Y(1);
+      for (let i = 0; i < N; i++) {
+        const yy = c.Y(MB.clamp(v[i], 0.01, 1000));
+        ctx.fillStyle = v[i] >= 1 ? P.ok : P.bad; ctx.globalAlpha = i < pick * N ? 0.95 : 0.5;
+        ctx.fillRect(box.x + i * bw, Math.min(y1, yy), Math.max(1, bw), Math.max(1, Math.abs(yy - y1)));
+      }
+      ctx.globalAlpha = 1;
+      // 누적 몫 곡선 (오른쪽 축)
+      let cum = 0, mx = 1; const cs = [];
+      for (let i = 0; i < N; i++) { cum += gains[i]; cs.push(cum / net); mx = Math.max(mx, cum / net); }
+      const top = Math.ceil(mx * 2) / 2, RY = (s) => box.y + box.h - (s / top) * box.h;
+      if (net > 0) {
+        ctx.strokeStyle = P.accent2; ctx.lineWidth = 2.4; ctx.beginPath();
+        cs.forEach((s, i) => (i ? ctx.lineTo(box.x + (i + 1) * bw, RY(s)) : ctx.moveTo(box.x + bw, RY(s)))); ctx.stroke();
+        ctx.font = MB.font(11, true); ctx.fillStyle = P.accent2; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+        for (let s = 0; s <= top + 1e-9; s += top > 2 ? 1 : 0.5) ctx.fillText(Math.round(s * 100) + "%", box.x + box.w + 6, RY(s));
+        ctx.setLineDash([3, 3]); ctx.strokeStyle = P.accent2; ctx.globalAlpha = 0.5; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(box.x, RY(1)); ctx.lineTo(box.x + box.w, RY(1)); ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
+      }
+      const k = Math.max(1, Math.round(pick * N)), xk = box.x + k * bw;
+      ctx.strokeStyle = P.text; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(xk, box.y); ctx.lineTo(xk, box.y + box.h); ctx.stroke();
+      knob(ctx, xk, box.y + 12, P, 7);
+      ctx.font = MB.font(12, false, 600); ctx.fillStyle = P.text; ctx.textAlign = xk > box.x + box.w * 0.6 ? "right" : "left"; ctx.textBaseline = "top";
+      ctx.fillText("상위 " + MB.pct(k / N, 1) + " (" + k + "종목)", xk + (ctx.textAlign === "left" ? 12 : -12), box.y + 24);
+      const share = net > 0 ? cs[k - 1] : NaN;
+      const loss = v.filter((x) => x < 1).length / N, med = (v[N / 2 - 1] + v[N / 2]) / 2, avg = v.reduce((s, x) => s + x, 0) / N;
+      MB.stat("sk-o-s", net > 0 ? MB.pct(share, 0) + " <small>전체 순이익 대비</small>" : "—");
+      MB.stat("sk-o-l", MB.pct(loss, 0));
+      MB.stat("sk-o-m", med.toFixed(2) + "<small>배</small>");
+      MB.stat("sk-o-a", avg.toFixed(2) + "<small>배</small>");
+    }, { aspect: 0.55, minHeight: 300, maxHeight: 396 });
+    MB.drag(cv.canvas, { move(x) { if (!G) return; const b = G.box; pick = MB.clamp((x - b.x) / b.w, 1 / N, 1); cv.redraw(); } });
+    document.getElementById("sk-go").addEventListener("click", () => { seed++; gen(); cv.redraw(); });
+  })();
+
+  /* ---------------------------------------------------------- 11. 생존 편향 */
+  (function () {
+    const N = 100, Y = 20, CUT = 0.2;
+    let seed = 5, vals, deadAt, t = Y, playing = false;
+    const hide = document.getElementById("sv-hide");
+    function gen() {
+      const ps = MN.paths({ mu: S.mu, sigma: S.sigma, years: Y, steps: 1, n: N, seed });
+      vals = []; deadAt = [];
+      ps.forEach((a) => {
+        let d = null; const v = new Float64Array(Y + 1);
+        for (let k = 0; k <= Y; k++) { if (d == null && a[k] < CUT) d = k; v[k] = d != null ? 0 : a[k]; }
+        vals.push(v); deadAt.push(d);
+      });
+    }
+    gen();
+    function avgs(k) {
+      let all = 0, sv = 0, ns = 0;
+      for (let i = 0; i < N; i++) { all += vals[i][k]; if (deadAt[i] == null || deadAt[i] > k) { sv += vals[i][k]; ns++; } }
+      return { all: all / N, surv: ns ? sv / ns : 0, ns };
+    }
+    hide.addEventListener("change", () => cv.redraw());
+    const cv = MB.canvas("#sv-cv", (ctx, w, h) => {
+      const P = MB.palette(), nar = narrow("sv-cv"), k = Math.floor(t), pad = 12;
+      const gw = nar ? w - 2 * pad : Math.min(w * 0.48, h - 2 * pad), cell = gw / 10;
+      for (let i = 0; i < N; i++) {
+        const x = pad + (i % 10) * cell, y = pad + Math.floor(i / 10) * cell, dead = deadAt[i] != null && deadAt[i] <= k;
+        if (dead) {
+          if (hide.checked) continue;
+          ctx.strokeStyle = P.faint; ctx.setLineDash([2, 2]); ctx.lineWidth = 1; ctx.strokeRect(x + 2.5, y + 2.5, cell - 5, cell - 5); ctx.setLineDash([]);
+          ctx.strokeStyle = P.bad; ctx.globalAlpha = 0.6; ctx.beginPath(); ctx.moveTo(x + 6, y + 6); ctx.lineTo(x + cell - 6, y + cell - 6); ctx.moveTo(x + cell - 6, y + 6); ctx.lineTo(x + 6, y + cell - 6); ctx.stroke(); ctx.globalAlpha = 1;
+          continue;
+        }
+        const v = vals[i][k], lg = Math.log(Math.max(v, 1e-3));
+        ctx.fillStyle = v >= 1 ? P.ok : P.bad; ctx.globalAlpha = MB.clamp(0.18 + Math.abs(lg) / 2.5, 0.18, 0.95);
+        rrect(ctx, x + 2, y + 2, cell - 4, cell - 4, 3); ctx.fill(); ctx.globalAlpha = 1;
+        if (cell > 30) { ctx.font = MB.font(10, true); ctx.fillStyle = P.text; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(v >= 10 ? Math.round(v) : v.toFixed(1), x + cell / 2, y + cell / 2); }
+      }
+      // 평균 곡선
+      const box = nar ? { x: 50, y: pad + gw + 20, w: w - 50 - 16, h: h - (pad + gw + 20) - 40 } : { x: pad + gw + 60, y: pad + 4, w: w - (pad + gw + 60) - 16, h: h - pad - 44 };
+      const A = [], B = []; let mx = 2;
+      for (let j = 0; j <= Y; j++) { const s = avgs(j); mx = Math.max(mx, s.all, s.surv); if (j <= k) { A.push([j, s.all]); B.push([j, s.surv]); } }
+      const ser = [{ data: A, color: P.accent2, width: 2.6 }];
+      if (hide.checked) ser.push({ data: B, color: P.bad, width: 2.6, dash: [6, 4] });
+      MB.chart(ctx, box, { x: [0, Y], y: [0, Math.ceil(mx)], xFmt: (v) => v + "년", yFmt: (v) => v + "배", series: ser, hlines: [{ y: 1, color: P.faint }] });
+      ctx.font = MB.font(11); ctx.textAlign = "left"; ctx.textBaseline = "top";
+      ctx.fillStyle = P.accent2; ctx.fillText("실제 평균 (사라진 곳 포함)", box.x + 6, box.y + 2);
+      if (hide.checked) { ctx.fillStyle = P.bad; ctx.fillText("살아남은 곳만의 평균", box.x + 6, box.y + 18); }
+      const s = avgs(k), ann = (m) => (k > 0 && m > 0 ? Math.pow(m, 1 / k) - 1 : NaN);
+      MB.stat("sv-o-n", s.ns + "<small> / 100곳 · " + k + "년째</small>");
+      MB.stat("sv-o-a", k ? pctS(ann(s.all), 1) : "—");
+      MB.stat("sv-o-s", k ? pctS(ann(s.surv), 1) : "—");
+      MB.stat("sv-o-d", k ? tone("bad-t", "+" + ((ann(s.surv) - ann(s.all)) * 100).toFixed(1) + "%p") : "—");
+    }, { get height() { return narrow("sv-cv") ? 600 : 330; } });
+    const loop = MB.loop(document.getElementById("sim-sv"), (dt) => {
+      if (!playing) return;
+      t = Math.min(Y, t + dt * 2.5); if (t >= Y) playing = false;
+      cv.redraw();
+    });
+    document.getElementById("sv-go").addEventListener("click", () => { t = 0; playing = true; loop.start(); });
+    document.getElementById("sv-new").addEventListener("click", () => { seed++; gen(); t = Y; playing = false; cv.redraw(); });
+  })();
+})();
+</script>
+</body>
+</html>
