@@ -1,0 +1,10 @@
+{
+  "id": "moneybook",
+  "title": "MoneyBook",
+  "description": "물가와 복리에서 월급 명세서, 예산, 저축, 신용과 대출, 집, 주식·채권·ETF, 자산배분, 세금, 보험, 연금과 은퇴까지. 한결의 가계부와 인생 시뮬레이터를 따라 숫자를 직접 바꾸며 돈의 흐름을 배웁니다.",
+  "url": "https://moneybook.euiyun.com/",
+  "repo": "https://github.com/geniuskey/moneybook",
+  "field": "money",
+  "status": "published",
+  "domain": "moneybook.euiyun.com"
+}
