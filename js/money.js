@@ -18,8 +18,10 @@
     workHoursMonth: 209,         // 주 40시간 + 주휴 → 월 환산 시간
     nps: 0.0475,                 // 국민연금 근로자 몫(총 9.5%, 2026~ 매년 0.5%p 인상해 13%까지)
     npsTotal: 0.095,
-    npsCap: 6370000,             // 기준소득월액 상한(약)
-    npsFloor: 400000,            // 기준소득월액 하한(약)
+    npsCap: 6590000,             // 2026-07-01~2027-06-30 기준소득월액 상한
+    npsFloor: 410000,            // 같은 기간 기준소득월액 하한
+    npsCapFirstHalf: 6370000,    // 2026년 1~6월 상한
+    npsFloorFirstHalf: 400000,   // 2026년 1~6월 하한
     npsA: 3190000,               // A값: 가입자 전체 평균소득월액(약)
     npsCoef: 1.29,               // 소득대체율 43% 기준 계수
     health: 0.03595,             // 건강보험 근로자 몫(총 7.19%)
@@ -55,7 +57,12 @@
   /* ------------------------------------------------------------ 기본 수학 */
   MN.round = (x, unit = 1) => Math.round(x / unit) * unit;
   /** 10원 미만 절사(급여 공제액 관행) */
-  MN.floor10 = (x) => Math.floor(x / 10) * 10;
+  MN.floor10 = (x) => {
+    const scaled = x / 10, nearest = Math.round(scaled);
+    const tolerance = 2 * Number.EPSILON * Math.max(1, Math.abs(scaled));
+    // Only snap floating-point representation noise at an exact 10-won boundary.
+    return Math.floor(Math.abs(scaled - nearest) <= tolerance ? nearest : scaled) * 10;
+  };
   /** 연 → 월 실효 이율: (1+r)^(1/12)-1 */
   MN.monthly = (r) => Math.pow(1 + r, 1 / 12) - 1;
   /** 실질 이율 */
@@ -149,10 +156,13 @@
     else lim = Math.max(200000, 500000 - (g - 1.2e8) * 0.5);
     return Math.min(c, lim);
   };
-  /** 4대 보험(월, 근로자 몫). base: 비과세를 뺀 월 보수 */
-  MN.insurance = function (base) {
+  /** 4대 보험(월, 근로자 몫). month: 2026년 적용 월, 기본값은 하반기(7월). */
+  MN.insurance = function (base, { month = 7 } = {}) {
+    if (!Number.isInteger(month) || month < 1 || month > 12) throw new RangeError("month must be a month in 2026 (1–12)");
     const K = MN.KR;
-    const nps = MN.floor10(Math.min(Math.max(base, K.npsFloor), K.npsCap) * K.nps);
+    const floor = month <= 6 ? K.npsFloorFirstHalf : K.npsFloor;
+    const cap = month <= 6 ? K.npsCapFirstHalf : K.npsCap;
+    const nps = MN.floor10(Math.min(Math.max(base, floor), cap) * K.nps);
     const health = MN.floor10(base * K.health);
     const ltc = MN.floor10(health * K.ltc);
     const emp = MN.floor10(base * K.emp);
@@ -160,6 +170,7 @@
   };
   /**
    * 연봉 → 월 실수령액(단순화한 연간 정산 기준. 실제 원천징수는 간이세액표라 몇천 원 다르다).
+   * month는 2026년 적용 월(기본 7월). 연간 금액은 해당 월 조건을 12개월로 환산한 근사다.
    *   MN.payroll(36e6, { nontax: 200000(월 비과세 식대), family: 1(본인 포함 공제 인원), extraDeduction(연 추가 소득공제), extraCredit(연 추가 세액공제) })
    *   → { monthly:{gross, nontax, nps, health, ltc, emp, tax, local, deductions, net},
    *       annual:{gross, taxable, earnedDed, earnedIncome, base, calcTax, credit, finalTax, local, net},
@@ -168,7 +179,7 @@
   MN.payroll = function (salary, o = {}) {
     const nontax = o.nontax == null ? 200000 : o.nontax, family = o.family || 1;
     const grossM = salary / 12, baseM = Math.max(0, grossM - nontax);
-    const ins = MN.insurance(baseM);
+    const ins = MN.insurance(baseM, { month: o.month == null ? 7 : o.month });
     const taxable = baseM * 12;
     const earnedDed = MN.earnedDeduction(taxable);
     const earnedIncome = taxable - earnedDed;
