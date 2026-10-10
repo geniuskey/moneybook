@@ -34,3 +34,19 @@ assert.equal(MN.payroll(86.4e6, { month: 1 }).monthly.nps, MN.insurance(7e6, { m
 assert.throws(() => MN.insurance(1e6, { month: 13 }), /month/);
 assert.throws(() => MN.insurance(1e6, { month: 0 }), /month/);
 console.log('Passed: 20000 integer-rate cases, payroll example, pension month boundaries.');
+
+// Pension bases discard sub-1000-won income before clamping; LTC uses NHIS's ratio.
+let insuranceCases = 0;
+for (const month of [1, 7]) for (let base = 100001; base <= 9000000; base += 7919) {
+  const actual = MN.insurance(base, { month });
+  const pensionBase = Math.min(Math.max(Math.floor(base / 1000) * 1000, month === 1 ? 400000 : 410000), month === 1 ? 6370000 : 6590000);
+  const pension = Number(BigInt(pensionBase) * 475n / 100000n) * 10;
+  const health = Number(BigInt(base) * 3595n / 1000000n) * 10;
+  const ltc = Number(BigInt(health) * 9448n / 719000n) * 10;
+  const emp = Number(BigInt(base) * 9n / 10000n) * 10;
+  assert.equal(actual.nps, pension); assert.equal(actual.health, health); assert.equal(actual.ltc, ltc); assert.equal(actual.emp, emp);
+  assert.equal(actual.total, pension + health + ltc + emp); insuranceCases++;
+}
+assert.equal(MN.insurance(2800999).nps, 133000);
+assert.equal(MN.insurance(125000).ltc, 590);
+console.log({ insuranceCases });

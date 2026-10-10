@@ -25,7 +25,7 @@
     npsA: 3190000,               // A값: 가입자 전체 평균소득월액(약)
     npsCoef: 1.29,               // 소득대체율 43% 기준 계수
     health: 0.03595,             // 건강보험 근로자 몫(총 7.19%)
-    ltc: 0.1314,                 // 장기요양보험: 건강보험료의 13.14%
+    ltc: 0.9448 / 7.19,          // 장기요양보험: 공식 산식 비율(표시 약 13.14%)
     emp: 0.009,                  // 고용보험 근로자 몫
     brackets: [                  // 종합소득세 과세표준 구간 [상한, 세율]
       [14e6, 0.06], [50e6, 0.15], [88e6, 0.24], [150e6, 0.35],
@@ -162,7 +162,7 @@
     const K = MN.KR;
     const floor = month <= 6 ? K.npsFloorFirstHalf : K.npsFloor;
     const cap = month <= 6 ? K.npsCapFirstHalf : K.npsCap;
-    const nps = MN.floor10(Math.min(Math.max(base, floor), cap) * K.nps);
+    const nps = MN.floor10(Math.min(Math.max(Math.floor(base / 1000) * 1000, floor), cap) * K.nps);
     const health = MN.floor10(base * K.health);
     const ltc = MN.floor10(health * K.ltc);
     const emp = MN.floor10(base * K.emp);
